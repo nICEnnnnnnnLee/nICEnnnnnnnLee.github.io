@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8;"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Github Release下载统计</title>
+<script src="https://libs.baidu.com/jquery/1.2.3/jquery.min.js"></script>
+
+<script>
+function queryDownload(){
+    var user = $("#user").val(); //默认"nICEnnnnnnnLee";
+    var repo = $("#repo").val(); //默认"BilibiliDown";
+    var url = "https://api.github.com/repos/" + user + "/" + repo + "/releases";
+    console.log(url);
+    $.ajax({
+            url: url,
+            type: "GET",
+            success: function (data) {
+                var json = eval(data);
+                var totalCnt = 0;
+                var txtContentDetail = "";
+                for(var i = 0; i < json.length; i++){
+                    var releaseId = json[i].id;
+                    var releaseName = json[i].name;
+                    var assets = json[i].assets;
+                    txtContentDetail += "\n" + releaseName + " / " + releaseId; //release版本/id：
+                    for(var j = 0; j < assets.length; j++){
+                        var assetName = assets[j].name;
+                        var assetCnt = assets[j].download_count;
+                        totalCnt += assetCnt;
+                        txtContentDetail += "\n\t" + assetName + " 下载次数: " + assetCnt;
+                    }
+                }
+                var txtContent = "总附件下载次数为： " + totalCnt;
+                //console.log(txtContent);
+                //console.log(txtContentDetail);
+                $("#result").html(txtContent + txtContentDetail);
+                alert("查询成功！");
+            },
+            error: function (data) {
+                //console.log(data);
+                alert("查询api失败");
+            },
+            charset: "utf-8",						
+            type: "get",
+            //dataType: "jsonp",
+            cache: !0,
+    });
+}
+
+$(document).ready(function(){
+    $("#btnQuery").click(function(){
+        queryDownload();
+    });
+    queryDownload();
+});
+</script>
+<style>
+.all_an_1 {
+    border: 1px solid #12afff;
+    background-repeat: no-repeat;
+
+    cursor: pointer;
+    height: 23px;
+    padding-top: 0;
+    padding-right: 5px;
+    padding-bottom: 0;
+    padding-left: 5px;
+    margin: 3px;
+    -moz-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+</style>
+</head>
+<body style="text-align:center;background: url(/sources/pics/FPyBWV.gif);">
+
+<h3>Github Release下载统计</h3>
+
+<!--  正则表达式 -->
+<div>
+<form class="well form-inline">
+    <div class="input-prepend">
+    <span>User</span><input type="text" id="user" value="nICEnnnnnnnLee" class="input-xlarge" ></input>
+    <span>Repo</span><input type="text" id="repo" value="BilibiliDown" class="input-xlarge" ></input>
+    </div>
+    <input id="btnQuery" class="all_an_1" type="button" value="查询" />
+</form>
+ </div>
+ 
+ <!--  结果 -->
+<div style="display:block;float:top;margin:0 auto">
+<textarea id="result" rows="10" cols="50" readonly="readonly" >
+
+</textarea>
+</div>
+</body>
+</html>

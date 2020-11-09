@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>知识库 零宽度字符隐写</title>
+    <meta name="description" content="如何将消息隐藏在文本中">
+
+    <meta property="og:url" content="https://nicelee.top/blog/2020/05/30/steganography/">
+    <meta property="og:site_name" content="NiceLee的博客">
+    <meta property="og:title" content="知识库 零宽度字符隐写">
+    <meta property="og:description" content="如何将消息隐藏在文本中">
+    <meta property="og:image" content="https://nicelee.top/favicon.ico?">
+    <meta property="og:image:type" content="image/x-icon">
+    
+    <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="stylesheet" href="/css/font-awesome.min.css ">
+    <link rel="stylesheet" href="/css/font-ali.css?v=1.2 ">
+    <link rel="stylesheet" href="/css/main.css?v=1.1 ">
+    <link rel="canonical" href="https://nicelee.top/blog/2020/05/30/steganography/">
+    <link rel="alternate" type="application/rss+xml" title="NiceLeeのBlog" href="https://nicelee.top/feed.xml ">
+
+	
+
+    <script>
+    // 百度统计代码
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?11f780e4e4ccd4e99b101eac776e93e4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+</head>
+
+    <link rel="stylesheet" href="/sources/live2d/css/live2d.css" />
+  <body>
+	
+		
+		<script type="text/javascript" src="/js/ribbon.min.js "></script>
+		
+	
+	
+    <header id="top">
+    <div class="wrapper">
+        <a href="/" class="brand awsome-font">NiceLeeのBlog</a>
+        <small>用爱发电 bilibili~</small>
+        <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
+        <nav id="headerNav">
+            <ul>
+				<li onclick="showdiv()" >
+                    <a href="#">
+                    <i class="fa fa-search">搜索</i>
+                    </a>
+                </li>
+                <li>
+                    
+                    <a href="/">
+                    
+                        <i class="fa fa-home"></i>主页
+                    </a>
+                </li>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <a href="/archive/">
+                        
+                            <i class="fa fa-archive"></i>归档
+                        </a>
+                    </li>
+                
+                    
+                    <li>
+                        <a href="/ilikemusic/">
+                        
+                            <i class="fa fa-music"></i>音乐
+                        </a>
+                    </li>
+                
+                    
+                    <li>
+                        <a href="/collect/">
+                        
+                            <i class="fa fa-bookmark"></i>收藏
+                        </a>
+                    </li>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <a href="/timeline/">
+                        
+                            <i class="fa fa-clock-o"></i>时间轴
+                        </a>
+                    </li>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <a href="/about/">
+                        
+                            <i class="fa fa-info-circle"></i>关于
+                        </a>
+                    </li>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                				
+				
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+        <div class="page clearfix" post>
+    <div class="left">
+        <h1>知识库 零宽度字符隐写</h1>
+        <div class="label">
+
+            <div class="label-card">
+                <i class="fa fa-calendar"></i>2020-05-30
+            </div>
+
+            <div class="label-card">
+                <i class="fa fa-user"></i>nIceLee
+                
+            </div>
+            <div class="label-card">
+                <p>阅读：<span id="busuanzi_value_page_pv1"></span></p>
+            </div>
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+            
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+            </div>
+
+            <div class="label-card">
+            
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <!--a href="/tag/#%E9%9A%90%E5%86%99" title="Tag: 隐写" rel="tag">隐写</a-->
+        <a href="/tag/#隐写" title="Tag: 隐写" rel="tag">隐写</a>&nbsp;
+    
+        <!--a href="/tag/#%E7%BC%96%E7%A0%81" title="Tag: 编码" rel="tag">编码</a-->
+        <a href="/tag/#编码" title="Tag: 编码" rel="tag">编码</a>&nbsp;
+    
+        <!--a href="/tag/#%E8%A7%A3%E7%A0%81" title="Tag: 解码" rel="tag">解码</a-->
+        <a href="/tag/#解码" title="Tag: 解码" rel="tag">解码</a>
+    
+  
+
+</span>
+
+            </div>
+
+        </div>
+        <hr>
+        <article itemscope itemtype="http://schema.org/BlogPosting">
+        <ul id="markdown-toc">
+  <li><a href="#某种在线实现" id="markdown-toc-某种在线实现">某种在线实现</a></li>
+  <li><a href="#参考" id="markdown-toc-参考">参考</a></li>
+  <li><a href="#不可见字符" id="markdown-toc-不可见字符">不可见字符</a></li>
+  <li><a href="#编码与解码" id="markdown-toc-编码与解码">编码与解码</a></li>
+  <li><a href="#一种js实现" id="markdown-toc-一种js实现">一种js实现</a></li>
+</ul>
+<p>如何将消息隐藏在文本中</p>
+
+<h2 id="某种在线实现">某种在线实现</h2>
+<p>如果你不了解本文要说的是什么的话，可以先去玩一玩。<br />
+<a href="https://offdev.net/demos/zwsp-steg-js">https://offdev.net/demos/zwsp-steg-js</a></p>
+
+<h2 id="参考">参考</h2>
+<ul>
+  <li><a href="https://copyfuture.com/blogs-details/202005050057504880g42vhusurz0a12">什么是零宽度字符，以及零宽度字符在JavaScript的应用</a></li>
+  <li><a href="https://lazzzaro.github.io/2020/05/24/misc-%E9%9B%B6%E5%AE%BD%E5%BA%A6%E5%AD%97%E7%AC%A6%E9%9A%90%E5%86%99/">零宽度字符隐写</a></li>
+</ul>
+
+<h2 id="不可见字符">不可见字符</h2>
+<p>有那么一些字符，它们是不可见的，也就是说，你在阅读时根本就发现不了。比如说：</p>
+<ul>
+  <li>零宽度空格(\u200b)<br />
+用于可能需要换行处</li>
+  <li>零宽度非连接符(\u200c)<br />
+放在电子文本的两个字符之间，抑制本来会发生的连字，而是以这两个字符原本的字形来绘制。</li>
+  <li>零宽度连接符(\u200d)<br />
+放在某些需要复杂排版语言（如阿拉伯语、印地语）的两个字符之间，使得这两个本不会发生连字的字符产生了连字效果。</li>
+  <li>从左至右书写标记(\u200e)<br />
+一种控制字符，用于计算机的双向文稿排版中。</li>
+  <li>从右至左书写标记(\u200f)<br />
+一种控制字符，用于计算机的双向文稿排版中。</li>
+  <li>字节顺序标记(\ufeff)<br />
+常被用来当做标示文件是以UTF-8、UTF-16或UTF-32编码的标记。<br />
+等等。</li>
+</ul>
+
+<h2 id="编码与解码">编码与解码</h2>
+<p>向一段字符里面加入若干不可见字符是不影响阅读的。<br />
+那么，如何将不可见字符编码为我们想要的东西，进而达到隐秘地传递信息的用途呢？<br />
+我们可以参考<a href="/blog/2018/12/12/base64-encode/">Base64的编码原理</a>。<br />
+这里只要将原来的<code class="highlighter-rouge">abcd...ABCD...</code>等字典换位不可见字符集就行了。通过切换字符集内容、大小和顺序，你甚至可以定制各种不同的加解密方法。</p>
+
+<h2 id="一种js实现">一种js实现</h2>
+<ul>
+  <li>设定字典
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>setUseChars('\u200c\u200d\u202c\ufeff');
+</code></pre></div>    </div>
+  </li>
+  <li>调用加解密
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var encrypt = this.encodeText('明文内容', '隐藏内容');
+var decrypt = this.decodeText(encrypt);
+console.log(decrypt.originalText);
+console.log(decrypt.hiddenText);
+</code></pre></div>    </div>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="cm">/**
+   *  Zero-Width Unicode Character Steganography
+   *  Copyright (c) 2015-2016 Kei Misawa
+   *  This software is released under the MIT License.
+   *  http://opensource.org/licenses/mit-license.php
+   */</span>
+  <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">exports</span><span class="p">){</span>
+    <span class="s1">'use strict'</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">chars</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="kd">var</span> <span class="nx">radix</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">codelengthText</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">codelengthBinary</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="cm">/**
+      Set characters of coded hidden text(zero width characters)
+      args: string of zero width characters
+      return: null
+     */</span>
+    <span class="kd">var</span> <span class="nx">setUseChars</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">newchars</span><span class="p">){</span>
+      <span class="k">if</span><span class="p">(</span><span class="nx">newchars</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">){</span>
+        <span class="nx">chars</span> <span class="o">=</span> <span class="nx">newchars</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+        <span class="nx">radix</span> <span class="o">=</span> <span class="nx">chars</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+        <span class="nx">codelengthText</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">ceil</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">65536</span><span class="p">)</span> <span class="o">/</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">radix</span><span class="p">));</span>
+        <span class="nx">codelengthBinary</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">ceil</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">256</span><span class="p">)</span> <span class="o">/</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">radix</span><span class="p">));</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="p">};</span>
+    <span class="cm">/**
+      Text Encoder
+      args:
+        text: original text to be embedded (String)
+        data: text to be hidden (String)
+      return: unicode stego text
+     */</span>
+    <span class="nx">exports</span><span class="p">.</span><span class="nx">encodeText</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">text1</span><span class="p">,</span> <span class="nx">text2</span><span class="p">){</span>
+      <span class="k">return</span> <span class="nx">combine_shuffle_string</span><span class="p">(</span><span class="nx">text1</span><span class="p">,</span> <span class="nx">encode_to_zerowidth_characters_text</span><span class="p">(</span><span class="nx">text2</span><span class="p">),</span> <span class="nx">codelengthText</span><span class="p">);</span>
+    <span class="p">};</span>
+    <span class="cm">/**
+      Binary Encoder
+      args:
+        text: original text to be embedded (String)
+        data: data to be hidden (Uint8Array)
+      return: unicode stego text
+     */</span>
+    <span class="kd">var</span> <span class="nx">encodeBinary</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">text</span><span class="p">,</span> <span class="nx">data</span><span class="p">){</span>
+      <span class="k">return</span> <span class="nx">combine_shuffle_string</span><span class="p">(</span><span class="nx">text</span><span class="p">,</span> <span class="nx">encode_to_zerowidth_characters_binary</span><span class="p">(</span><span class="nx">data</span><span class="p">),</span> <span class="nx">codelengthBinary</span><span class="p">);</span>
+    <span class="p">};</span>
+      
+    <span class="cm">/**
+      Text Decoder
+      args: unicode text with steganography (String)
+      return: JavaScript Object {
+        originalText: original text (String),
+        hiddenText: hidden data (String)
+      }
+     */</span>
+    <span class="nx">exports</span><span class="p">.</span><span class="nx">decodeText</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">text</span><span class="p">){</span>
+      <span class="kd">var</span> <span class="nx">splitted</span> <span class="o">=</span> <span class="nx">split_zerowidth_characters</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
+        
+      <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">'originalText'</span><span class="p">:</span> <span class="nx">splitted</span><span class="p">.</span><span class="nx">originalText</span><span class="p">,</span>
+        <span class="s1">'hiddenText'</span><span class="p">:</span> <span class="nx">decode_from_zero_width_characters_text</span><span class="p">(</span><span class="nx">splitted</span><span class="p">.</span><span class="nx">hiddenText</span><span class="p">,</span> <span class="nx">codelengthText</span><span class="p">)</span>
+      <span class="p">};</span>
+    <span class="p">};</span>
+    <span class="cm">/**
+      Binary Decoder
+      args: unicode text with steganography (String)
+      return: JavaScript Object {
+        originalText: original text (String),
+        hiddenData: hidden data (Uint8Array)
+      }
+     */</span>
+    <span class="kd">var</span> <span class="nx">decodeBinary</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">text</span><span class="p">){</span>
+      <span class="kd">var</span> <span class="nx">splitted</span> <span class="o">=</span> <span class="nx">split_zerowidth_characters</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
+        
+      <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">'originalText'</span><span class="p">:</span> <span class="nx">splitted</span><span class="p">.</span><span class="nx">originalText</span><span class="p">,</span>
+        <span class="s1">'hiddenData'</span><span class="p">:</span> <span class="nx">decode_from_zero_width_characters_binary</span><span class="p">(</span><span class="nx">splitted</span><span class="p">.</span><span class="nx">hiddenText</span><span class="p">)</span>
+      <span class="p">};</span>
+    <span class="p">};</span>
+      
+    <span class="nx">setUseChars</span><span class="p">(</span><span class="s1">'</span><span class="err">\</span><span class="s1">u200c</span><span class="err">\</span><span class="s1">u200d</span><span class="err">\</span><span class="s1">u202c</span><span class="err">\</span><span class="s1">ufeff'</span><span class="p">);</span>
+      
+    <span class="nx">exports</span><span class="p">.</span><span class="nx">unicodeSteganographer</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">encodeText</span><span class="p">:</span> <span class="nx">encodeText</span><span class="p">,</span>
+      <span class="na">decodeText</span><span class="p">:</span> <span class="nx">decodeText</span><span class="p">,</span>
+      <span class="na">encodeBinary</span><span class="p">:</span> <span class="nx">encodeBinary</span><span class="p">,</span>
+      <span class="na">decodeBinary</span><span class="p">:</span> <span class="nx">decodeBinary</span><span class="p">,</span>
+      <span class="na">setUseChars</span><span class="p">:</span> <span class="nx">setUseChars</span>
+    <span class="p">};</span>
+      
+    <span class="cm">/**
+      Internal Functions
+    */</span>
+    <span class="kd">var</span> <span class="nx">encode_to_zerowidth_characters_text</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">str1</span><span class="p">){</span>
+      <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">(</span><span class="nx">str1</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+      <span class="kd">var</span> <span class="nx">base</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+      <span class="kd">var</span> <span class="nx">i</span><span class="p">;</span>
+      <span class="kd">var</span> <span class="nx">c</span><span class="p">;</span>
+      <span class="kd">var</span> <span class="nx">d</span><span class="p">;</span>
+      <span class="kd">var</span> <span class="nx">r</span><span class="p">;</span>
+        
+      <span class="c1">//var base = '0'.repeat(codelength); // IE not support this method</span>
+      <span class="k">for</span><span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">codelengthText</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="nx">base</span> <span class="o">+=</span> <span class="s1">'0'</span><span class="p">;</span>
+      <span class="p">}</span>
+        
+      <span class="k">for</span><span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">str1</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="nx">c</span> <span class="o">=</span> <span class="nx">str1</span><span class="p">.</span><span class="nx">charCodeAt</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+        <span class="nx">d</span> <span class="o">=</span> <span class="nx">c</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="nx">radix</span><span class="p">);</span>
+          
+        <span class="nx">result</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="nx">base</span> <span class="o">+</span> <span class="nx">d</span><span class="p">).</span><span class="nx">substr</span><span class="p">(</span><span class="o">-</span><span class="nx">codelengthText</span><span class="p">);</span>
+      <span class="p">}</span>
+        
+      <span class="nx">r</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+        
+      <span class="k">for</span><span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">radix</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="nx">r</span> <span class="o">=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="s1">'g'</span><span class="p">),</span> <span class="nx">chars</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+      <span class="p">}</span>
+        
+      <span class="k">return</span> <span class="nx">r</span><span class="p">;</span>
+    <span class="p">};</span>
+    <span class="kd">var</span> <span class="nx">encode_to_zerowidth_characters_binary</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">u8ary</span><span class="p">){</span>
+      <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">(</span><span class="nx">u8ary</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+      <span class="kd">var</span> <span class="nx">base</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+      <span class="kd">var</span> <span class="nx">i</span><span class="p">;</span>
+      <span class="kd">var</span> <span class="nx">c</span><span class="p">;</span>
+      <span class="kd">var</span> <span class="nx">d</span><span class="p">;</span>
+      <span class="kd">var</span> <span class="nx">r</span><span class="p">;</span>
+        
+      <span class="k">for</span><span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">codelengthBinary</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="nx">base</span> <span class="o">+=</span> <span class="s1">'0'</span><span class="p">;</span>
+      <span class="p">}</span>
+        
+      <span class="k">for</span><span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">u8ary</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="nx">d</span> <span class="o">=</span> <span class="nx">u8ary</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">toString</span><span class="p">(</span><span class="nx">radix</span><span class="p">);</span>
+        <span class="nx">result</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="nx">base</span> <span class="o">+</span> <span class="nx">d</span><span class="p">).</span><span class="nx">substr</span><span class="p">(</span><span class="o">-</span><span class="nx">codelengthBinary</span><span class="p">);</span>
+      <span class="p">}</span>
+        
+      <span class="nx">r</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+        
+      <span class="k">for</span><span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">radix</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="nx">r</span> <span class="o">=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="s1">'g'</span><span class="p">),</span> <span class="nx">chars</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+      <span class="p">}</span>
+        
+      <span class="k">return</span> <span class="nx">r</span><span class="p">;</span>
+    <span class="p">};</span>
+    <span class="kd">var</span> <span class="nx">combine_shuffle_string</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">str1</span><span class="p">,</span> <span class="nx">str2</span><span class="p">,</span> <span class="nx">codelength</span><span class="p">){</span>
+      <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="p">[];</span>
+      <span class="kd">var</span> <span class="nx">c0</span> <span class="o">=</span> <span class="nx">str1</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="sr">/</span><span class="se">([\u</span><span class="sr">0000-</span><span class="se">\u</span><span class="sr">002F</span><span class="se">\u</span><span class="sr">003A-</span><span class="se">\u</span><span class="sr">0040</span><span class="se">\u</span><span class="sr">005b-</span><span class="se">\u</span><span class="sr">0060</span><span class="se">\u</span><span class="sr">007b-</span><span class="se">\u</span><span class="sr">007f</span><span class="se">])</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">0030-</span><span class="se">\u</span><span class="sr">0039</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">0041-</span><span class="se">\u</span><span class="sr">005a</span><span class="se">\u</span><span class="sr">0061-</span><span class="se">\u</span><span class="sr">007a</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">0080-</span><span class="se">\u</span><span class="sr">00FF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">0100-</span><span class="se">\u</span><span class="sr">017F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">0180-</span><span class="se">\u</span><span class="sr">024F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">0250-</span><span class="se">\u</span><span class="sr">02AF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">02B0-</span><span class="se">\u</span><span class="sr">02FF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">0300-</span><span class="se">\u</span><span class="sr">036F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">0370-</span><span class="se">\u</span><span class="sr">03FF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">0400-</span><span class="se">\u</span><span class="sr">04FF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">0500-</span><span class="se">\u</span><span class="sr">052F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">0530-</span><span class="se">\u</span><span class="sr">058F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">0590-</span><span class="se">\u</span><span class="sr">05FF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">0600-</span><span class="se">\u</span><span class="sr">06FF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">0700-</span><span class="se">\u</span><span class="sr">074F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">0750-</span><span class="se">\u</span><span class="sr">077F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">0780-</span><span class="se">\u</span><span class="sr">07BF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">07C0-</span><span class="se">\u</span><span class="sr">07FF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">0800-</span><span class="se">\u</span><span class="sr">083F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">0840-</span><span class="se">\u</span><span class="sr">085F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">08A0-</span><span class="se">\u</span><span class="sr">08FF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">0900-</span><span class="se">\u</span><span class="sr">097F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">0980-</span><span class="se">\u</span><span class="sr">09FF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">0A00-</span><span class="se">\u</span><span class="sr">0A7F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">0A80-</span><span class="se">\u</span><span class="sr">0AFF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">0B00-</span><span class="se">\u</span><span class="sr">0B7F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">0B80-</span><span class="se">\u</span><span class="sr">0BFF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">0C00-</span><span class="se">\u</span><span class="sr">0C7F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">0C80-</span><span class="se">\u</span><span class="sr">0CFF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">0D00-</span><span class="se">\u</span><span class="sr">0D7F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">0D80-</span><span class="se">\u</span><span class="sr">0DFF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">0E00-</span><span class="se">\u</span><span class="sr">0E7F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">0E80-</span><span class="se">\u</span><span class="sr">0EFF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">0F00-</span><span class="se">\u</span><span class="sr">0FFF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">1000-</span><span class="se">\u</span><span class="sr">109F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">10A0-</span><span class="se">\u</span><span class="sr">10FF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">1100-</span><span class="se">\u</span><span class="sr">11FF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">1200-</span><span class="se">\u</span><span class="sr">137F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">1380-</span><span class="se">\u</span><span class="sr">139F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">13A0-</span><span class="se">\u</span><span class="sr">13FF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">1400-</span><span class="se">\u</span><span class="sr">167F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">1680-</span><span class="se">\u</span><span class="sr">169F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">16A0-</span><span class="se">\u</span><span class="sr">16FF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">1700-</span><span class="se">\u</span><span class="sr">171F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">1720-</span><span class="se">\u</span><span class="sr">173F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">1740-</span><span class="se">\u</span><span class="sr">175F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">1760-</span><span class="se">\u</span><span class="sr">177F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">1780-</span><span class="se">\u</span><span class="sr">17FF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">1800-</span><span class="se">\u</span><span class="sr">18AF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">18B0-</span><span class="se">\u</span><span class="sr">18FF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">1900-</span><span class="se">\u</span><span class="sr">194F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">1950-</span><span class="se">\u</span><span class="sr">197F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">1980-</span><span class="se">\u</span><span class="sr">19DF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">19E0-</span><span class="se">\u</span><span class="sr">19FF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">1A00-</span><span class="se">\u</span><span class="sr">1A1F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">1A20-</span><span class="se">\u</span><span class="sr">1AAF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">1AB0-</span><span class="se">\u</span><span class="sr">1AFF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">1B00-</span><span class="se">\u</span><span class="sr">1B7F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">1B80-</span><span class="se">\u</span><span class="sr">1BBF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">1BC0-</span><span class="se">\u</span><span class="sr">1BFF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">1C00-</span><span class="se">\u</span><span class="sr">1C4F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">1C50-</span><span class="se">\u</span><span class="sr">1C7F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">1CC0-</span><span class="se">\u</span><span class="sr">1CCF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">1CD0-</span><span class="se">\u</span><span class="sr">1CFF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">1D00-</span><span class="se">\u</span><span class="sr">1D7F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">1D80-</span><span class="se">\u</span><span class="sr">1DBF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">1DC0-</span><span class="se">\u</span><span class="sr">1DFF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">1E00-</span><span class="se">\u</span><span class="sr">1EFF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">1F00-</span><span class="se">\u</span><span class="sr">1FFF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">2000-</span><span class="se">\u</span><span class="sr">206F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">2070-</span><span class="se">\u</span><span class="sr">209F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">20A0-</span><span class="se">\u</span><span class="sr">20CF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">20D0-</span><span class="se">\u</span><span class="sr">20FF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">2100-</span><span class="se">\u</span><span class="sr">214F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">2150-</span><span class="se">\u</span><span class="sr">218F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">2190-</span><span class="se">\u</span><span class="sr">21FF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">2200-</span><span class="se">\u</span><span class="sr">22FF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">2300-</span><span class="se">\u</span><span class="sr">23FF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">2400-</span><span class="se">\u</span><span class="sr">243F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">2440-</span><span class="se">\u</span><span class="sr">245F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">2460-</span><span class="se">\u</span><span class="sr">24FF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">2500-</span><span class="se">\u</span><span class="sr">257F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">2580-</span><span class="se">\u</span><span class="sr">259F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">25A0-</span><span class="se">\u</span><span class="sr">25FF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">2600-</span><span class="se">\u</span><span class="sr">26FF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">2700-</span><span class="se">\u</span><span class="sr">27BF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">27C0-</span><span class="se">\u</span><span class="sr">27EF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">27F0-</span><span class="se">\u</span><span class="sr">27FF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">2800-</span><span class="se">\u</span><span class="sr">28FF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">2900-</span><span class="se">\u</span><span class="sr">297F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">2980-</span><span class="se">\u</span><span class="sr">29FF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">2A00-</span><span class="se">\u</span><span class="sr">2AFF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">2B00-</span><span class="se">\u</span><span class="sr">2BFF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">2C00-</span><span class="se">\u</span><span class="sr">2C5F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">2C60-</span><span class="se">\u</span><span class="sr">2C7F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">2C80-</span><span class="se">\u</span><span class="sr">2CFF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">2D00-</span><span class="se">\u</span><span class="sr">2D2F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">2D30-</span><span class="se">\u</span><span class="sr">2D7F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">2D80-</span><span class="se">\u</span><span class="sr">2DDF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">2DE0-</span><span class="se">\u</span><span class="sr">2DFF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">2E00-</span><span class="se">\u</span><span class="sr">2E7F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">2E80-</span><span class="se">\u</span><span class="sr">2EFF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">2F00-</span><span class="se">\u</span><span class="sr">2FDF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">2FF0-</span><span class="se">\u</span><span class="sr">2FFF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">3000-</span><span class="se">\u</span><span class="sr">303F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">3040-</span><span class="se">\u</span><span class="sr">309F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">30A0-</span><span class="se">\u</span><span class="sr">30FF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">3100-</span><span class="se">\u</span><span class="sr">312F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">3130-</span><span class="se">\u</span><span class="sr">318F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">3190-</span><span class="se">\u</span><span class="sr">319F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">31A0-</span><span class="se">\u</span><span class="sr">31BF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">31C0-</span><span class="se">\u</span><span class="sr">31EF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">31F0-</span><span class="se">\u</span><span class="sr">31FF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">3200-</span><span class="se">\u</span><span class="sr">32FF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">3300-</span><span class="se">\u</span><span class="sr">33FF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">3400-</span><span class="se">\u</span><span class="sr">4DBF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">4DC0-</span><span class="se">\u</span><span class="sr">4DFF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">4E00-</span><span class="se">\u</span><span class="sr">9FFF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">A000-</span><span class="se">\u</span><span class="sr">A48F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">A490-</span><span class="se">\u</span><span class="sr">A4CF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">A4D0-</span><span class="se">\u</span><span class="sr">A4FF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">A500-</span><span class="se">\u</span><span class="sr">A63F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">A640-</span><span class="se">\u</span><span class="sr">A69F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">A6A0-</span><span class="se">\u</span><span class="sr">A6FF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">A700-</span><span class="se">\u</span><span class="sr">A71F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">A720-</span><span class="se">\u</span><span class="sr">A7FF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">A800-</span><span class="se">\u</span><span class="sr">A82F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">A830-</span><span class="se">\u</span><span class="sr">A83F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">A840-</span><span class="se">\u</span><span class="sr">A87F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">A880-</span><span class="se">\u</span><span class="sr">A8DF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">A8E0-</span><span class="se">\u</span><span class="sr">A8FF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">A900-</span><span class="se">\u</span><span class="sr">A92F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">A930-</span><span class="se">\u</span><span class="sr">A95F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">A960-</span><span class="se">\u</span><span class="sr">A97F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">A980-</span><span class="se">\u</span><span class="sr">A9DF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">A9E0-</span><span class="se">\u</span><span class="sr">A9FF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">AA00-</span><span class="se">\u</span><span class="sr">AA5F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">AA60-</span><span class="se">\u</span><span class="sr">AA7F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">AA80-</span><span class="se">\u</span><span class="sr">AADF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">AAE0-</span><span class="se">\u</span><span class="sr">AAFF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">AB00-</span><span class="se">\u</span><span class="sr">AB2F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">AB30-</span><span class="se">\u</span><span class="sr">AB6F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">AB70-</span><span class="se">\u</span><span class="sr">ABBF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">ABC0-</span><span class="se">\u</span><span class="sr">ABFF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">AC00-</span><span class="se">\u</span><span class="sr">D7AF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">D7B0-</span><span class="se">\u</span><span class="sr">D7FF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">D800-</span><span class="se">\u</span><span class="sr">DFFF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">E000-</span><span class="se">\u</span><span class="sr">F8FF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">F900-</span><span class="se">\u</span><span class="sr">FAFF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">FB00-</span><span class="se">\u</span><span class="sr">FB4F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">FB50-</span><span class="se">\u</span><span class="sr">FDFF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">FE00-</span><span class="se">\u</span><span class="sr">FE0F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">FE10-</span><span class="se">\u</span><span class="sr">FE1F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">FE20-</span><span class="se">\u</span><span class="sr">FE2F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">FE30-</span><span class="se">\u</span><span class="sr">FE4F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">FE50-</span><span class="se">\u</span><span class="sr">FE6F</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">FE70-</span><span class="se">\u</span><span class="sr">FEFF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">FF00-</span><span class="se">\u</span><span class="sr">FFEF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">|</span><span class="se">([\u</span><span class="sr">FFF0-</span><span class="se">\u</span><span class="sr">FFFF</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">/g</span><span class="p">);</span>
+      <span class="kd">var</span> <span class="nx">c1</span> <span class="o">=</span> <span class="p">[];</span>
+      <span class="kd">var</span> <span class="nx">i</span><span class="p">;</span>
+      <span class="kd">var</span> <span class="nx">j</span><span class="p">;</span>
+      <span class="k">for</span><span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">c0</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">((</span><span class="k">typeof</span> <span class="nx">c0</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">!==</span> <span class="s1">'undefined'</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">c0</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">!==</span> <span class="s1">''</span><span class="p">)){</span>
+          <span class="nx">c1</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">c0</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+      <span class="kd">var</span> <span class="nx">c2</span> <span class="o">=</span> <span class="nx">str2</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="s1">'(.{'</span> <span class="o">+</span> <span class="nx">codelength</span> <span class="o">+</span> <span class="s1">'})'</span><span class="p">,</span> <span class="s1">'g'</span><span class="p">));</span>
+      <span class="kd">var</span> <span class="nx">ratio</span> <span class="o">=</span> <span class="nx">c1</span><span class="p">.</span><span class="nx">length</span> <span class="o">/</span> <span class="p">(</span><span class="nx">c1</span><span class="p">.</span><span class="nx">length</span> <span class="o">+</span> <span class="nx">c2</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+        
+      <span class="cm">/* slow
+      while((c1.length &gt; 0) &amp;&amp; (c2.length &gt; 0)){
+        if(Math.random() &lt;= ratio){
+          result.push(c1.shift());
+        }else{
+          result.push(c2.shift());
+        }
+      }*/</span>
+      <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="k">while</span><span class="p">((</span><span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">c1</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">j</span> <span class="o">&lt;</span> <span class="nx">c2</span><span class="p">.</span><span class="nx">length</span><span class="p">)){</span>
+        <span class="k">if</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="nx">ratio</span><span class="p">){</span>
+          <span class="nx">result</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">c1</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+          <span class="nx">i</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+          <span class="nx">result</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">c2</span><span class="p">[</span><span class="nx">j</span><span class="p">]);</span>
+          <span class="nx">j</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+      <span class="nx">c1</span> <span class="o">=</span> <span class="nx">c1</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+      <span class="nx">c2</span> <span class="o">=</span> <span class="nx">c2</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="nx">j</span><span class="p">);</span>
+        
+      <span class="nx">result</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">c1</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">c2</span><span class="p">);</span>
+        
+      <span class="k">return</span> <span class="nx">result</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+    <span class="p">};</span>
+    <span class="kd">var</span> <span class="nx">split_zerowidth_characters</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">str1</span><span class="p">){</span>
+      <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="p">{};</span>
+      <span class="nx">result</span><span class="p">.</span><span class="nx">originalText</span> <span class="o">=</span> <span class="nx">str1</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="s1">'['</span> <span class="o">+</span> <span class="nx">chars</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span> <span class="o">+</span> <span class="s1">']'</span><span class="p">,</span> <span class="s1">'g'</span><span class="p">),</span> <span class="s1">''</span><span class="p">);</span>
+      <span class="nx">result</span><span class="p">.</span><span class="nx">hiddenText</span> <span class="o">=</span> <span class="nx">str1</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="s1">'[^'</span> <span class="o">+</span> <span class="nx">chars</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span> <span class="o">+</span> <span class="s1">']'</span><span class="p">,</span> <span class="s1">'g'</span><span class="p">),</span> <span class="s1">''</span><span class="p">);</span>
+        
+      <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+    <span class="p">};</span>
+    <span class="kd">var</span> <span class="nx">decode_from_zero_width_characters_text</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">str1</span><span class="p">){</span>
+      <span class="kd">var</span> <span class="nx">r</span> <span class="o">=</span> <span class="nx">str1</span><span class="p">;</span>
+      <span class="kd">var</span> <span class="nx">i</span><span class="p">;</span>
+      <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="p">[];</span>
+      <span class="k">for</span><span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">radix</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="nx">r</span> <span class="o">=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="nx">chars</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span> <span class="s1">'g'</span><span class="p">),</span> <span class="nx">i</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="k">for</span><span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">r</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="nx">codelengthText</span><span class="p">){</span>
+        <span class="nx">result</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">(</span><span class="nb">parseInt</span><span class="p">(</span><span class="nx">r</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">codelengthText</span><span class="p">),</span> <span class="nx">radix</span><span class="p">)));</span>
+      <span class="p">}</span>
+        
+      <span class="k">return</span> <span class="nx">result</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+    <span class="p">};</span>
+    <span class="kd">var</span> <span class="nx">decode_from_zero_width_characters_binary</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">str1</span><span class="p">){</span>
+      <span class="kd">var</span> <span class="nx">r</span> <span class="o">=</span> <span class="nx">str1</span><span class="p">;</span>
+      <span class="kd">var</span> <span class="nx">i</span><span class="p">;</span>
+      <span class="kd">var</span> <span class="nx">j</span><span class="p">;</span>
+      <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Uint8Array</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">ceil</span><span class="p">(</span><span class="nx">str1</span><span class="p">.</span><span class="nx">length</span> <span class="o">/</span> <span class="nx">codelengthBinary</span><span class="p">));</span>
+        
+      <span class="k">for</span><span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">radix</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="nx">r</span> <span class="o">=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="nx">chars</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span> <span class="s1">'g'</span><span class="p">),</span> <span class="nx">i</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="k">for</span><span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">r</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="nx">codelengthBinary</span><span class="p">,</span> <span class="nx">j</span><span class="o">++</span><span class="p">){</span>
+        <span class="nx">result</span><span class="p">[</span><span class="nx">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">r</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">codelengthBinary</span><span class="p">),</span> <span class="nx">radix</span><span class="p">);</span>
+      <span class="p">}</span>
+        
+      <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+    <span class="p">};</span>
+      
+    <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="p">})(</span><span class="k">this</span><span class="p">);</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+        </article>
+        <hr>
+
+        
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+        
+
+        <div class="post-recent">
+    <div class="pre">
+        
+        <p><strong>上一篇</strong> <a href="/blog/2020/05/27/js-fun/">关于某些常见js结构的半吊子理解</a></p>
+        
+    </div>
+    <div class="nex">
+
+        
+        <p><strong>下一篇</strong> <a href="/blog/2020/06/09/python-qq-send/">Python 使用分享接口实现QQ信息发送(一)</a></p>
+        
+    </div>
+</div>
+
+
+        <!-- <h2 id="comments">评论</h2>  
+        
+
+
+
+ -->
+
+
+    </div>
+    <button class="anchor"><i class="fa fa-anchor"></i></button>
+    <div class="right">
+        <div class="wrap">
+
+            <!-- Content -->
+            <div class="side content">
+                <div>
+                    内容
+                </div>
+                <ul id="content-side" class="content-ul">
+                    
+                    <!-- <li><a href="#comments">评论</a></li> -->
+                </ul>
+            </div>
+			
+            <!-- 其他div框放到这里 -->
+            <!-- <div class="side">bbbb</div> -->
+        </div>
+    </div>
+</div>
+<script>
+/**
+ * target _blank
+ */
+(function() {
+    var aTags = document.querySelectorAll('article a:not([id])')
+    for (var i = 0; i < aTags.length; i++) {
+        aTags[i].setAttribute('target', '_blank')
+    }
+
+}());
+</script>
+<script src="/js/pageContent.js " charset="utf-8"></script>
+
+
+    <footer class="site-footer">
+
+
+    <div class="wrapper">
+        <p class="description">
+             这是一个缺爱的博客(๑‾ ꇴ ‾๑)！ 
+        </p>
+        <p class="contact">
+            联系我: 
+            <a href="https://github.com/nICEnnnnnnnLee" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
+            <a href="mailto:lijia0732@sina.com" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>  
+            <a href="https://weibo.com/blackhigh" title="Weibo"><i class="fa fa-weibo" aria-hidden="true"></i></a>       
+			<span onclick="copyToClipboard('https://nicelee.top/feed.xml')"><a href="#">订阅我<i class="fa fa-gg"></i></a></span>
+        </p>
+        <p>
+            总pv:<span id="busuanzi_value_site_pv"></span>，uv:<span id="busuanzi_value_site_uv"></span>，本页pv:<span id="busuanzi_value_page_pv"></span>
+        </p>
+        <p class="power">
+            <span>
+            有用链接：
+                <a href="http://www.bejson.com/">BeJSON</a> &nbsp;&nbsp;
+                <a href="http://site.ip138.com/">IP或域名查询</a> &nbsp;&nbsp;
+                <a href="http://ping.chinaz.com/">各地ping</a> &nbsp;&nbsp;
+                <a href="https://tool.lu/">在线工具</a> &nbsp;&nbsp; 
+                <a href="https://www.aliyun.com/">阿里云</a> &nbsp;&nbsp; 
+                <a href="http://patorjk.com/software/taag/">Text转FIGlet</a> &nbsp;&nbsp; 
+                <a href="https://mx-model.ga/">Live2D 模型资源</a> &nbsp;&nbsp;
+
+            </span>
+        </p>
+        <p class="power">
+            <span>
+            除非另有注明，否则本网站上的内容可按 <a href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议许可</a> 或更新版本使用。
+            </span>
+        </p>
+        <p class="power">
+            <span>
+                建站声明详见 <a href="/about/#关于个人博客">[关于]</a>. <a href="/sitemap.xml">[站点地图]</a>. 
+            </span>
+            
+        </p>
+        <p class="power beian">
+        </p>
+		<p class="power">
+            <span>
+                Site powered by <a href="https://jekyllrb.com/">Jekyll</a>.
+            </span>
+            <span>
+                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
+            </span>
+        </p>
+        
+		
+    </div>
+</footer>
+
+
+<!-- mask start -->
+<div id="searchBg"></div>
+<div id="searchDiv">
+	<input id="searchContent" type="text" onkeypress="if(event.keyCode==13) { search();return false;}" value=""/></input>
+    <div id="searchBtn" onclick="search();" /><i class="fa fa-search"></i></div>
+	<span onclick="hidediv();" class="close"></span>
+</div>
+<!-- mask end -->
+<!-- live2d begin -->
+<div id="landlord">
+    <div class="message" style="opacity:0"></div>
+    <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+    <div class="hide-button">隐藏</div>
+</div>
+<!-- live2d end -->
+<script type='text/javascript' src='/js/jquery.min.js '></script>
+<script type='text/javascript'>
+function search(){	
+	var str = document.getElementById("searchContent").value;
+	//console.log(str);
+	setLocalStorage("blogSearchKey",str);
+	hidediv();
+	window.location.href="/archive/";
+}
+function showdiv() {
+	//alert("调用了showdiv()函数");
+	document.getElementById("searchBg").style.display ="block";
+	document.getElementById("searchDiv").style.display ="block";
+
+	//$('body').css("overflow", "hidden");
+	document.getElementsByTagName('body')[0].setAttribute("overflow", "hidden");
+}
+function hidediv() {
+	document.getElementById("searchBg").style.display = 'none';
+	document.getElementById("searchDiv").style.display = 'none';
+	//$('body').css("overflow", "auto");
+	document.getElementsByTagName('body')[0].setAttribute("overflow", "hidden");
+}
+////////////////////////////useful function //////////////////////////////////////
+//写cookies
+function setLocalStorage(name,value)
+{
+	localStorage.setItem(name, JSON.stringify(value));
+}
+//读cookies
+function getLocalStorage(name)
+{
+	return JSON.parse(localStorage.getItem(name));
+}
+//删cookies
+function delLocalStorage(name)
+{
+	localStorage.setItem(name, JSON.stringify(""));
+}
+function copyToClipboard (text) {
+    if(text.indexOf('-') !== -1) {
+        var arr = text.split('-');
+        text = arr[0] + arr[1];
+    }
+    var textArea = document.createElement("textarea");
+      textArea.style.position = 'fixed';
+      textArea.style.top = '0';
+      textArea.style.left = '0';
+      textArea.style.width = '2em';
+      textArea.style.height = '2em';
+      textArea.style.padding = '0';
+      textArea.style.border = 'none';
+      textArea.style.outline = 'none';
+      textArea.style.boxShadow = 'none';
+      textArea.style.background = 'transparent';
+      textArea.value = text;
+      document.body.appendChild(textArea);
+      textArea.select();
+	//alert("调用了复制剪贴板函数");
+      try {
+        var successful = document.execCommand('copy');
+        var msg = successful ? 'Rss源已成功复制到剪贴板' : 'RSS源为:https://nicelee.top/feed.xml';
+		//alert(msg);
+		showTips(msg);
+      } catch (err) {
+		//console.log(err);
+        //alert('该浏览器不支持点击复制到剪贴板');
+		showTips('RSS源为:https://nicelee.top/feed.xml');
+      }
+
+      document.body.removeChild(textArea);
+}
+/*
+<!--  版权维护  -->
+function addLink() {
+//alert("!!!");
+    var body_element = document.body;
+    var selection;
+    selection = window.getSelection();
+    if((selection + "").indexOf("/feed.xml") != -1){
+        return;
+    }
+	if(selection == ""){
+		return;
+	}
+    var locationHref=document.location.href;
+    var appendLink="\r\n------------------------------\r\n 原文出自[ NiceLee的个人博客 ] 转载请保留原文链接: <a href='"+locationHref+"'>"+locationHref+"</a>";
+    if (window.clipboardData) { // Internet Explorer
+        //console.log("调用原生函数");
+        var copytext = selection + appendLink;
+        window.clipboardData.setData ("Text", copytext);
+        return false;
+    } else {
+        //console.log("复杂的套路");
+        var copytext = selection + appendLink;
+        var newdiv = document.createElement('div');
+        newdiv.style.position='absolute';
+        newdiv.style.left='-99999px';
+        body_element.appendChild(newdiv);
+        newdiv.innerHTML = "<pre>" +copytext + "</pre>";
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function() {
+        	body_element.removeChild(newdiv);
+        },0);
+    }
+}
+document.oncopy = addLink;
+*/
+
+//contetn为要显示的内容  
+function showTips( content ){  
+	//alert("调用了复制提示消息函数");
+	//alert("内容为"+ content);
+    //窗口的宽度  
+	//alert(content);
+	var width = 250;
+	var x  = $(window).width()/2 - width/2;	
+	var y = $(window).height()/2 -20;
+	var $i = $("<span/>").text(content);
+	$i.css({
+		"z-index": 999999999999999999999999999,
+		"top": y,
+		"left": x,
+		"position": "absolute",
+		"font-weight": "bold",
+		'padding'   : '3px 5px',  
+		'background': '#8FBC8F',  
+		'font-size' : 12 + 'px',  
+		'margin'    : '0 auto',  
+		'text-align': 'center',  
+		'width'     : width + 'px',  
+		'height'    : 'auto',  
+		'color'     : '#fff'
+	});
+	$("body").append($i);
+	$i.animate({
+		"opacity": 0
+	},
+	3000,
+	function() {
+		//console.log($i.css());
+		$i.remove();
+		//alert('');
+	});
+}     
+</script>
+
+<!-- 窗口失去焦点 -- 别走啊 -->
+<!-- 窗口获得焦点 -- 恢复 -->
+<!-- console 打印figlet-->
+<script>
+var titleOnFocus = document.title;
+var titleOnBlur = "...(*￣０￣)ノ[别走啊…]";
+window.onfocus =function(){
+    document.title = titleOnFocus;
+    //console.log(titleOnFocus);
+}
+window.onblur = function(){
+    document.title = titleOnBlur;
+    //console.log(titleOnBlur);
+}
+
+var figlet = "\n" +
+"        _          _            _               \n" +
+"       (_)        | |          | |              \n" +
+"  _ __  _  ___ ___| | ___  ___ | |_ ___  _ __   \n" +
+" | '_ \\| |/ __/ _ \\ |/ _ \\/ _ \\| __/ _ \\| '_ \\  \n" +
+" | | | | | (_|  __/ |  __/  __/| || (_) | |_) | \n" +
+" |_| |_|_|\\___\\___|_|\\___|\\___(_)__\\___/| .__/  \n" +
+"                                        | |     \n" +
+"                                        |_|     \n" ;
+console.log(figlet);
+console.log("%c小改改爆个照呗\n hentai女个装呗", "color:red;font-size: 50px;font-weight:bold;");
+
+/* 防hentai
+document.onkeydown=function(){
+    var e = window.event||arguments[0];
+    if(e.keyCode==123){
+    	alert('请尊重劳动成果！');
+            return false;
+    }else if((e.ctrlKey)&&(e.shiftKey)&&(e.keyCode==73)){
+    	alert('请尊重劳动成果！');
+            return false;
+    }else if((e.ctrlKey)&&(e.keyCode==85)){
+            alert('请尊重劳动成果！');
+            return false;
+    }else if((e.ctrlKey)&&(e.keyCode==83)){
+           alert('请尊重劳动成果！');
+           return false;
+    }
+}
+document.oncontextmenu=function(){
+	alert('请尊重劳动成果！');
+    return false;
+}*/
+</script>
+
+<!-- live2d Begin-->
+<script type="text/javascript">
+    var message_Path = '/sources/live2d/'
+    var home_Path = 'https://nicelee.top/'
+</script>
+<script type="text/javascript" src="/sources/live2d/js/live2d.js"></script>
+<script type="text/javascript" src="/sources/live2d/js/message.js"></script>
+<script type="text/javascript">
+    var modelList = ["kesshouban_v2", "tia", "wanko", "index", "kanna", "koharu", "umaru", 
+	"22.closet.default.v2", 
+	"22.closet.2018.bls-summer", 
+	"22.closet.2019.summer", 
+	"33.closet.2016.xmas", 
+	"33.closet.2017.tomo-bukatsu", 
+	"33.closet.2018.bls-summer", 
+	"33.closet.2018.bls-winter", 
+	"33.closet.default.v2" ];    
+    var model = modelList[12]; 
+    // kesshouban_v2 血小板
+    // tia  小改改
+    // wanko 小狗狗 
+    // index 魔禁-茵蒂克丝
+    // kanna 康娜龙
+    // koharu 卡哇伊的Q版模型
+    // umaru 干物妹小埋 带声音
+    // 22 哔哩哔哩22娘
+    // 22.v2 哔哩哔哩22娘
+    console.log("live2d模型(小部分)来自官网: http://www.live2d.com/usermanual/cubism2_cn/samples.html");
+    console.log("live2d模型(大部分)来自梦象: https://mx-model.ga/");
+    if( window.document.body.offsetWidth >= 666){
+        loadlive2d("live2d", "/sources/live2d/model/"+ model +"/model.json");
+    }else{
+        //loadlive2d("live2d", "/sources/live2d/model/tia/model_tiny.json");
+        loadlive2d("live2d", "/sources/live2d/model/"+ model +"/model_tiny.json");
+    }
+</script>
+<!-- live2d End-->
+
+<script type="text/javascript">
+	var a_idx = 0;
+	jQuery(document).ready(function($) {
+		$("body").click(function(e) {
+			var a = new Array("大吉大利，今晚吃鸡！", "惊不惊喜，意不意外", "还有这种操作？", "小猪佩奇身上纹，掌声送给社会人", "确认过眼神", "皮一下，很开心", "很好很强大", "C位出道", "你若盛开，清风自来", "如果帅也是一种罪，那我已罪无可赦", "别看资料 ，看聊效！", "感动吗，不敢动", "打call", "我是你的超级英雄");
+			var $i = $("<span/>").text(a[a_idx]);
+			a_idx = (a_idx + 1) % a.length;
+			var x = e.pageX,
+			y = e.pageY;
+			$i.css({
+				"z-index": 999999999999999999999999999,
+				"top": y - 20,
+				"left": x,
+				"position": "absolute",
+				"font-weight": "bold",
+				"color": "#dd3333"
+			});
+			$("body").append($i);
+			$i.animate({
+				"top": y - 180,
+				"opacity": 0
+			},
+			1500,
+			function() {
+				$i.remove();
+				//alert('');
+			});
+		});
+	});
+</script>
+
+
+<script async src="/js/busuanzi.pure.mini.js "></script>
+
+
+    <div class="back-to-top">
+    <a href="#top" data-scroll>
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+    <script src="/js/main.js " charset="utf-8"></script>
+    <script src="/js/smooth-scroll.min.js " charset="utf-8"></script>
+    <script type="text/javascript">
+      smoothScroll.init({
+        speed: 500, // Integer. How fast to complete the scroll in milliseconds
+        easing: 'easeInOutCubic', // Easing pattern to use
+        offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
+      });
+      // 为了底部内容不被遮住
+      $(document).ready(function () {
+        resizeBody();
+      });
+      window.onresize = resizeBody;
+      function resizeBody(){
+        //console.log("resizing Body...");
+        if (window.innerWidth <= 770) {
+            var totalHeight = $("header#top").height() + $(".page.clearfix").height() + $("footer.site-footer").height() +80;
+            document.body.style.height = totalHeight + "px";
+        }else{
+            document.body.style.height = "auto";
+        }
+      }
+    </script>
+	
+	
+    <!-- <script src=" /js/scroll.min.js " charset="utf-8"></script> -->
+  </body>
+
+</html>

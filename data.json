@@ -1,0 +1,1040 @@
+{
+	"code" : 0 ,
+	"data" : [
+	{
+		"title" : "【ReadMe】微信运动作弊的操作指引(春雨)",
+		"tags" : "微信运动",
+		"url" : "/blog/2020/10/31/weixin-step-counter-cheater-6/"
+		"brief" : "服务器快到期，如无意外可能转静态托管了。那么一些功能实现起来就会有些麻烦，是时候考虑一下移动端实现了。乐心不能第三方同步，那么只能回退到春雨了。"
+	},
+    
+	{
+		"title" : "【ReadMe】微信运动作弊的操作指引(乐心)",
+		"tags" : "微信运动",
+		"url" : "/blog/2020/09/11/weixin-step-counter-cheater-5/"
+		"brief" : "服务器快到期，如无意外可能转静态托管了。那么一些功能实现起来就会有些麻烦，是时候考虑一下移动端实现了。更新：需要绑定乐心手环才能实现第三方数据同步"
+	},
+    
+	{
+		"title" : "微信运动的作弊方法(再续)",
+		"tags" : "微信运动",
+		"url" : "/blog/2020/09/09/weixin-step-counter-cheater-4/"
+		"brief" : "春雨计步器这几天不能用了，于是只能换个羊毛薅。搜了一下，乐心运动感觉还行。不多说，原理也是关注公众号的形式。"
+	},
+    
+	{
+		"title" : "Java 真香！如何给Gif添加对白(七)",
+		"tags" : "Java",
+		"url" : "/blog/2020/06/17/java-add-text-to-gif-7/"
+		"brief" : "根据调试好的参数，以没有对话的GIF为模板，加上自定义对话，生成GIF"
+	},
+    
+	{
+		"title" : "Java 真香！如何给Gif添加对白(六)",
+		"tags" : "Java",
+		"url" : "/blog/2020/06/17/java-add-text-to-gif-6/"
+		"brief" : "调试：对话的文字应当摆放到图像的哪个位置"
+	},
+    
+	{
+		"title" : "Java 真香！如何给Gif添加对白(五)",
+		"tags" : "Java",
+		"url" : "/blog/2020/06/17/java-add-text-to-gif-5/"
+		"brief" : "如何分离有对话的GIF，并记录相应对话和帧数。"
+	},
+    
+	{
+		"title" : "Java 真香！如何给Gif添加对白(四)",
+		"tags" : "Java",
+		"url" : "/blog/2020/06/15/java-add-text-to-gif-4/"
+		"brief" : "如何获取GIF素材。"
+	},
+    
+	{
+		"title" : "Java 真香！如何给Gif添加对白(三)",
+		"tags" : "Java",
+		"url" : "/blog/2020/06/15/java-add-text-to-gif-3/"
+		"brief" : "如何将多帧图像按照恒定帧率生成GIF。"
+	},
+    
+	{
+		"title" : "Java 真香！如何给Gif添加对白(二)",
+		"tags" : "Java",
+		"url" : "/blog/2020/06/14/java-add-text-to-gif-2/"
+		"brief" : "如何对单帧图像进行处理。"
+	},
+    
+	{
+		"title" : "Java 真香！如何给Gif添加对白(一)",
+		"tags" : "Java",
+		"url" : "/blog/2020/06/14/java-add-text-to-gif/"
+		"brief" : "王境则·真香.gif、谁赞成谁反对.gif、为所欲为.gif…网络上有很多搞笑的gif图片，里面的对白还是可以自定义的。想搞这个想了很久了，最近终于把它实现了。"
+	},
+    
+	{
+		"title" : "Java 如何简便地实现host更改功能",
+		"tags" : "Java",
+		"url" : "/blog/2020/06/13/java-host/"
+		"brief" : "一直以来，指定解析某些特定域名为特定IP，要实现这个功能，我一直的思路是搞个代理。HTTP代理倒是无所谓，反正是明文传输，拿到什么转什么，将代理直接设为要绑定的IP即可。但是HTTPS请求不行，多了CONNECT消息建立隧道这一步，于是乎只能自己建立一个代理。这样效率实际上是非常低下的。那么有什么更好的办法呢？最近偶然碰到了一个功能实现，让系统的host的修改在现有的java应用中立即生效，于是有了新的想法。"
+	},
+    
+	{
+		"title" : "Python 使用分享接口实现QQ信息发送(四)",
+		"tags" : "Python",
+		"url" : "/blog/2020/06/10/python-qq-send-4/"
+		"brief" : "接上一篇"
+	},
+    
+	{
+		"title" : "Python 使用分享接口实现QQ信息发送(三)",
+		"tags" : "Python",
+		"url" : "/blog/2020/06/09/python-qq-send-3/"
+		"brief" : "接上一篇"
+	},
+    
+	{
+		"title" : "Python 使用分享接口实现QQ信息发送(二)",
+		"tags" : "Python",
+		"url" : "/blog/2020/06/09/python-qq-send-2/"
+		"brief" : "接上一篇"
+	},
+    
+	{
+		"title" : "Python 使用分享接口实现QQ信息发送(一)",
+		"tags" : "Python",
+		"url" : "/blog/2020/06/09/python-qq-send/"
+		"brief" : "腾讯早早地关闭了WebQQ的接口，使得通过HTTP请求的方式发送消息成为了奢望。在这之后，基本上类似的实现都是基于PC端或app端的协议逆向。比如酷Q、mirai。在这之上进行的二次开发其实都比较重，有时候仅仅只是需要偶尔或者定时发个通知消息，却需要干一大堆事情，这就很烦。还有前段时间，腾讯开放了HOOK机器人测试接口，结果没多久就没了。。。无语了"
+	},
+    
+	{
+		"title" : "知识库 零宽度字符隐写",
+		"tags" : "隐写_编码_解码",
+		"url" : "/blog/2020/05/30/steganography/"
+		"brief" : "如何将消息隐藏在文本中"
+	},
+    
+	{
+		"title" : "关于某些常见js结构的半吊子理解",
+		"tags" : "JavaScript",
+		"url" : "/blog/2020/05/27/js-fun/"
+		"brief" : "老是碰见这些类型，是时候理顺一下思路了。(function(){…}())(function(){…})()!function(){…}()"
+	},
+    
+	{
+		"title" : "Java 关于类加载器ClassLoader的有趣实验(二)",
+		"tags" : "Java",
+		"url" : "/blog/2020/05/24/java-classloader/"
+		"brief" : "关于热加载的一种尝试。"
+	},
+    
+	{
+		"title" : "DNS污染、解决方案以及自动化",
+		"tags" : "Github_python",
+		"url" : "/blog/2020/05/23/github-workflow-2/"
+		"brief" : "最近在捣鼓逆向的同时沉迷于GithubWorkflow，总想利用它来整点骚东西，遂有此文。"
+	},
+    
+	{
+		"title" : "Python 使用scrapy框架记录GithubRepo的Star情况",
+		"tags" : "Python_scrapy",
+		"url" : "/blog/2020/04/14/python-scrapy/"
+		"brief" : "虽说不用框架自己手撸也行，但达不到学习了解scrapy的目的。先定一个小目标，再在实际使用中学习吧。"
+	},
+    
+	{
+		"title" : "使用jdk的jlink工具生成精简jre",
+		"tags" : "Java",
+		"url" : "/blog/2020/04/10/java-jlink/"
+		"brief" : "使用jdk的jlink工具生成精简jre"
+	},
+    
+	{
+		"title" : "一次GitHub Action自动化发布集成部署",
+		"tags" : "Java",
+		"url" : "/blog/2020/04/08/github-workflow/"
+		"brief" : "一直发布release都是手动编译打包再上传，捣鼓了一下，可以解放了。。"
+	},
+    
+	{
+		"title" : "Maven 如何通过HTTP链接的方式下载jar包",
+		"tags" : "Java",
+		"url" : "/blog/2020/03/24/maven-download/"
+		"brief" : "马克"
+	},
+    
+	{
+		"title" : "杂七杂八 无题",
+		"tags" : "闲话",
+		"url" : "/blog/2020/03/14/little-talk-5/"
+		"brief" : "囧"
+	},
+    
+	{
+		"title" : "Flutter 一个总结(四)",
+		"tags" : "flutter_dart",
+		"url" : "/blog/2020/02/20/flutter-show-me-the-code/"
+		"brief" : "Showmethecode."
+	},
+    
+	{
+		"title" : "Flutter 关于本地内置Host(三)",
+		"tags" : "flutter_dart",
+		"url" : "/blog/2020/02/18/flutter-http-proxy-3/"
+		"brief" : "如何在程序内实现内置的host.mark如何用dart实现HTTPS代理.mark"
+	},
+    
+	{
+		"title" : "Flutter 关于图片的二三事(二)",
+		"tags" : "flutter_dart",
+		"url" : "/blog/2020/02/17/flutter-image-2/"
+		"brief" : "如何刷新图片.mark"
+	},
+    
+	{
+		"title" : "Flutter 关于图片的二三事(一)",
+		"tags" : "flutter_dart",
+		"url" : "/blog/2020/02/16/flutter-image-1/"
+		"brief" : "南+上偶然发现了一个宝藏，微漫…发现是用Flutter做的，效果还不错。然后偶然有了一个idea，想用它来做一个平时浏览并下载图片的app。因为批量下载是没有灵魂的，而有什么事情总是要到PC端审阅再下载是一件很麻烦的事情。燃烧的大收藏家之魂。。。为了搞这个整整单机了相当长的一段时间，有很多事情都顾不得了…"
+	},
+    
+	{
+		"title" : "一次Windows下FFmpeg的编译尝试",
+		"tags" : "黑科技",
+		"url" : "/blog/2020/02/06/windows-ffmpeg-compile/"
+		"brief" : "这几天一直捣鼓这个，configure/make了无数次，花了这么多功夫，总得记录一下。以Win1064位系统为例。"
+	},
+    
+	{
+		"title" : "Java 关于类加载器ClassLoader的有趣实验",
+		"tags" : "Java",
+		"url" : "/blog/2020/02/03/java-classloader/"
+		"brief" : "做个笔记，马克一下。"
+	},
+    
+	{
+		"title" : "Python 一次package分发记录",
+		"tags" : "Python",
+		"url" : "/blog/2020/01/19/python-distribution/"
+		"brief" : "感觉还是Python用的人比较多，至少入门简单，使用也方便。现在，我要发布一个Python应用，包名you-live，console命令you-live。记录一下整个过程。"
+	},
+    
+	{
+		"title" : "【ReadMe】使用NinjaV4 微信运动作弊的操作指引",
+		"tags" : "微信运动",
+		"url" : "/blog/2020/01/18/weixin-step-counter-cheater-3/"
+		"brief" : "原理比较简单，是直接模拟春雨计步器往服务器提交请求，但操作起来稍微有点复杂。相比于修改本地的步数的好处是不用考虑app本身上传步数的逻辑，再也不怕步数不及时或者出现头一天的步数啦。"
+	},
+    
+	{
+		"title" : "微信运动的作弊方法(续)",
+		"tags" : "微信运动",
+		"url" : "/blog/2019/12/07/weixin-step-counter-cheater-2/"
+		"brief" : "本来一直HOOK的华为运动健康的，无奈最近似乎出了点问题，遂退回了春雨计步器。但这就有点问题，一是微信步数似乎没法与手机步数实时同步；二是有时会同步到昨天的历史步数。这就很烦。现在尝试解决一下这些问题。"
+	},
+    
+	{
+		"title" : "Java 动态代理与字节码",
+		"tags" : "Java",
+		"url" : "/blog/2019/11/08/java-bytecode/"
+		"brief" : "做个笔记，马克一下。"
+	},
+    
+	{
+		"title" : "一次PPT制作视频的简单尝试(3)",
+		"tags" : "黑科技",
+		"url" : "/blog/2019/10/08/ppt-video-3/"
+		"brief" : "集合了许多包含有拟声词的歌曲（3）。"
+	},
+    
+	{
+		"title" : "一次人工申请Let's Encrypt的SSL证书的尝试",
+		"tags" : "知识库",
+		"url" : "/blog/2019/10/07/https-cert/"
+		"brief" : "一直都是用的阿里云的免费的证书…最近有了这个需求，于是搜了一下，但是网上各种脚本各种自动化操作，稍不注意就会卡壳，然后就没有然后了。。。就我感觉，还是了解一下如何人工申请一次证书，回头再去一键吧囧。"
+	},
+    
+	{
+		"title" : "一次PPT制作视频的简单尝试(2)",
+		"tags" : "黑科技",
+		"url" : "/blog/2019/10/05/ppt-video-2/"
+		"brief" : "集合了许多包含有拟声词的歌曲（2）。"
+	},
+    
+	{
+		"title" : "一次PPT制作视频的简单尝试",
+		"tags" : "黑科技",
+		"url" : "/blog/2019/10/04/ppt-video/"
+		"brief" : "集合了许多包含有拟声词的歌曲。"
+	},
+    
+	{
+		"title" : "一个弱鸡应用的诞生(4)-总结",
+		"tags" : "Java_Android",
+		"url" : "/blog/2019/09/17/android-linux-8/"
+		"brief" : "最初要做的是随时随地获取家里Wifi连接的设备状态，也就是有几台终端在线。随着程序逐渐搭建完毕，顺手又加了一个远程控制手机录制直播的idea(因为功能早就做过附加工作量不大嗯哼)。程序dex包已经编译好，接下来讲讲怎么部署环境吧。"
+	},
+    
+	{
+		"title" : "一个弱鸡应用的诞生(3)-Github建个Repo当云端",
+		"tags" : "Java_Android",
+		"url" : "/blog/2019/09/13/android-linux-7/"
+		"brief" : "前面已经分析，没有公网IP，外面要和家里相互联系，只能靠云服务器了，但这和不要钱、稳定有一定矛盾。想了一下，主要还是在公网要有一个地方，程序主体能够上报状态、获取信息。结合云端建图床的经验，在Github建个Repo，约定好上传、获取状态用的url位置，ok。"
+	},
+    
+	{
+		"title" : "一个弱鸡应用的诞生(2)-处理都在Controller的弱鸡服务器",
+		"tags" : "Java_Android",
+		"url" : "/blog/2019/09/09/android-linux-6/"
+		"brief" : "前面已经分析了，要实现的是一个JavaWeb应用。但由于是dalvikvm环境，服务器需要自己去搭建。再加上想向可拓展方面靠，于是仿SpringBoot，一个处理都在Controller的弱鸡服务器诞生了(其实是想吹爆的，可惜不够强。"
+	},
+    
+	{
+		"title" : "一个弱鸡应用的诞生(1)-想法与思路",
+		"tags" : "Java_Android",
+		"url" : "/blog/2019/09/08/android-linux-5/"
+		"brief" : "其实一直都有个想法，人在外面远程控制/监控家里的某些情况，比如开灯、开空调啥的。最初的想法是DIY路由器，但是电信的路由不敢妄动，再买个路由套路由就没啥意思了。转又想到搞个ARM板算了，最后灵光一闪，有现成的旧手机为啥不用呢。配置也不见得低,价钱比较起来也要对得起用户是吧。关键是裸机开飞行、一直熄屏，耗电量也不见得高到哪里去。于是就有了这番折腾。"
+	},
+    
+	{
+		"title" : "旧手机废物利用(4)-Termux：Tasker定时调用任务",
+		"tags" : "Java_Android",
+		"url" : "/blog/2019/09/08/android-linux-4/"
+		"brief" : "在熄屏状态下，Termux定时功能并不能很好地执行。一个解决方案是触发器由第三方APPTask担当，调用Termux的脚本即可。"
+	},
+    
+	{
+		"title" : "旧手机废物利用(3)-Termux：打造个人编程环境和注意事项",
+		"tags" : "Java_Android",
+		"url" : "/blog/2019/09/07/android-linux-3/"
+		"brief" : "前面已经准备好远程的相关工作，这就相当于嫖了一台云端Linux裸机。接下来想要真正做事情的话，还是得老老实实搭好环境。"
+	},
+    
+	{
+		"title" : "旧手机废物利用(2)-Termux：强者一个SSH就够，弱鸡才要十个",
+		"tags" : "Java_Android",
+		"url" : "/blog/2019/09/06/android-linux-2/"
+		"brief" : "手机端限于硬件，即使环境配置啥都OK，日常开发处理等其实仍应在PC端。所以，把手机当作触不可及的云端服务器，SSH服务很重要。"
+	},
+    
+	{
+		"title" : "旧手机废物利用(1)-shell环境运行Java工程",
+		"tags" : "Java_Android",
+		"url" : "/blog/2019/09/05/android-linux-1-adb-shell/"
+		"brief" : "最近尝试将旧的手机当Linux跑起来，跑一些自己写的Python/Java小程序。Android是基于Linux内核的操作系统，因为Java用的比较多，先写个demo，看看可不可行"
+	},
+    
+	{
+		"title" : "薅个图床 - 基于GitHub API的文件创建与更新",
+		"tags" : "Java",
+		"url" : "/blog/2019/08/27/github-uploader/"
+		"brief" : "听说新浪有了防盗链，羊毛党想再薅个免费的图床。图床有两个要求，能够方便的上传图片，同时对应的图片链接能显示在不同网站。Github就不错，上传文件肯定没问题；同时因为本身就提供自定义域名的Pages服务，想必不会对Referer标签有限制。要是访问速度再快点简直完美。"
+	},
+    
+	{
+		"title" : "Acfun接口(六) - UP主视频获取",
+		"tags" : "Java_html_爬虫_AcFun",
+		"url" : "/blog/2019/08/07/java-spider-acfun-down-6/"
+		"brief" : "做个笔记，UP主上传的视频应该如何下载(๑•̀ㅂ•́)و✧"
+	},
+    
+	{
+		"title" : "Acfun接口(五) - 个人收藏视频获取",
+		"tags" : "Java_html_爬虫_AcFun",
+		"url" : "/blog/2019/08/07/java-spider-acfun-down-5/"
+		"brief" : "做个笔记，个人收藏的视频应该如何下载(๑•̀ㅂ•́)و✧"
+	},
+    
+	{
+		"title" : "Acfun接口(四) - 模拟扫码登录",
+		"tags" : "Java_html_爬虫_AcFun",
+		"url" : "/blog/2019/08/02/java-spider-acfun-down-4/"
+		"brief" : "做个笔记，A站登录Cookie应该如何获取(๑•̀ㅂ•́)و✧"
+	},
+    
+	{
+		"title" : "Acfun接口(三) - 番剧合集下载",
+		"tags" : "Java_html_爬虫_AcFun",
+		"url" : "/blog/2019/08/02/java-spider-acfun-down-3/"
+		"brief" : "做个笔记，A站bangumi应该如何下载(๑•̀ㅂ•́)و✧"
+	},
+    
+	{
+		"title" : "Acfun接口(二) - 番剧单集下载",
+		"tags" : "Java_html_爬虫_AcFun",
+		"url" : "/blog/2019/07/28/java-spider-acfun-down-2/"
+		"brief" : "做个笔记，A站bangumi应该如何下载(๑•̀ㅂ•́)و✧"
+	},
+    
+	{
+		"title" : "Acfun接口(一) - 普通视频下载",
+		"tags" : "Java_html_爬虫_AcFun",
+		"url" : "/blog/2019/07/24/java-spider-acfun-down/"
+		"brief" : "做个笔记，A站普通视频应该如何下载(๑•̀ㅂ•́)و✧"
+	},
+    
+	{
+		"title" : "科普+笔记向 怎样获取视频的播放链接",
+		"tags" : "爬虫",
+		"url" : "/blog/2019/06/03/h5-spider/"
+		"brief" : "        只有一个浏览器，如何快速从打开的网页里面抠出正在播放的视频源?"
+	},
+    
+	{
+		"title" : "QQ音乐 个人收藏列表获取",
+		"tags" : "Java",
+		"url" : "/blog/2019/05/24/get-qqmusic-4/"
+		"brief" : "        之前尝试过搜索关键词来获取QQ音乐信息+音乐直链。自己试过自建喜欢的音乐列表，并为此花费了较多功夫，也解决了几个小问题。(只是技术交流学习，以后就撤掉了😳        例如，由于播放链接有时效性，故而保存的时候仅保留id，播放的时候根据id来自动获取直链。        又比如，由于是静态网页，直接写死了HTML，新增更改十分费力。现在把歌曲内容信息和展示分开来，直接修改保存json即可。        但还是有些麻烦，每新增N首曲目需要搜索歌名-&gt;打印信息-&gt;修改json文件xN，不太方便。于是，我就想能不能直接更进一步，再爬一下个人的收藏夹"
+	},
+    
+	{
+		"title" : "SpringBoot 踩坑记录(九)- Mybatis 整合笔记",
+		"tags" : "SpringBoot_踩坑",
+		"url" : "/blog/2019/05/20/spring-boot-mybatis/"
+		"brief" : "        无论是自己搭也好，用Mybatis或Hibernate也好，本质上只是一个工具，用来‘擦除’那些繁琐的重复的try…catch…finally…，让开发变得更高效更简洁(SpringAOP牛b。        当人们发觉这东西好用，更多人用了后，如何用这个东西反而变得比其它更重要。要说这些东西没出现之前就没有解决办法么，当然不。        相信以前走类似的路子的肯定有，也一定有过自己做插件直接自动批量生成SQL数据库业务代码的，而且还不少，效率并不一定比现在低。        但是随着新人不断涌入，有些东西门槛更低，更易上手，交付起来也不见得慢，于是便成了主流(开源大法好。        这似乎看上去是对新手友好，其实该补的课早晚还是要补。当菜鸟变成老菜鸟，当更新更好的工具出现，老菜鸟如果不能有深度的挖掘学习，思考与新菜鸟相比的优势时，除了一堆过时的东西，大概就只剩下经验了吧。        以下纪录SpringBoot整合Mybatis的笔记(闲话太多"
+	},
+    
+	{
+		"title" : "Java FLV文件结构分析 与 直播流录制问题处理",
+		"tags" : "Java_flv",
+		"url" : "/blog/2019/05/16/java-live-record-flv/"
+		"brief" : "最近做了一下B站的直播录制，发现下载的flv文件播放时视频时长有点问题，于是深入了解了一下，在此做些记录。"
+	},
+    
+	{
+		"title" : "关于Maven 的笔记",
+		"tags" : "Java",
+		"url" : "/blog/2019/05/06/maven-starter/"
+		"brief" : "马克"
+	},
+    
+	{
+		"title" : "踩坑才是进步的源动力(可能",
+		"tags" : "Java_闲话",
+		"url" : "/blog/2019/04/19/whatever/"
+		"brief" : "有些工具很棒，有些设计很酷，有些知识很有用。会用，熟悉，亦或者别人问起来也能说出个一二三四来，正儿八经测试或许还能拿高分。但是没用果然，课上学的不是自己的，自己能用也不算会，只有踩过坑趟过雷才别有风味(用词大雾(๑•̀ㅂ•́)و✧"
+	},
+    
+	{
+		"title" : "可能感兴趣的东西 Mark一下",
+		"tags" : "Java_gif",
+		"url" : "/blog/2019/04/11/notes/"
+		"brief" : "发现了一些可能感兴趣的东西，先记着，有空可以尝试一下。"
+	},
+    
+	{
+		"title" : "干粮无毒草の小说(持续更新)",
+		"tags" : "娱乐_小说",
+		"url" : "/blog/2019/04/01/novel-3/"
+		"brief" : "自高二看的第一本网络小说起，到如今有些年头了。看小说已经养成了习惯，遇到喜欢的甚至会不管不顾白天+晚上熬夜修仙也要看完。我也不知道为什么。到如今，有的小说只记得个名字，别说剧情，连主角名称都忘了，有的甚至书名都已经不记得了。在这里，记录一部分曾经看过的小说。"
+	},
+    
+	{
+		"title" : "N种微信运动的作弊方法",
+		"tags" : "微信运动",
+		"url" : "/blog/2019/03/22/weixin-step-counter-cheater/"
+		"brief" : "关于微信运动步数作弊的思考，发现新世界系列😳"
+	},
+    
+	{
+		"title" : "杂七杂八 不知道要说什么",
+		"tags" : "闲话",
+		"url" : "/blog/2019/03/14/little-talk-4/"
+		"brief" : "但是，很烦就要说出来😭"
+	},
+    
+	{
+		"title" : "一种伪装微博位置的方法",
+		"tags" : "微博",
+		"url" : "/blog/2019/03/13/weibo-location/"
+		"brief" : "此方法不需要使用第三方appmockGPS模拟位置，直接在微博发文内容后加上一段内容即可。话说几年前就发现了这个有趣的东西，发现到现在也没有改动😳"
+	},
+    
+	{
+		"title" : "强推 《隐形守护者》",
+		"tags" : "娱乐_小说",
+		"url" : "/blog/2019/03/13/game-the-invisible-guardian/"
+		"brief" : "偶然的机会，看到有主播玩《隐形守护者》这款游戏，后来又搜了一些相关视频，当了回云玩家。虽然不怎么玩游戏了，还是补了张票。剧情很棒，角色颜值在线，让人笑过也哭过，难得的红色题材。"
+	},
+    
+	{
+		"title" : "一种备份Android手机app到PC端的办法",
+		"tags" : "Android",
+		"url" : "/blog/2019/03/12/android-package/"
+		"brief" : "该方法基于adbshell,理论上适用于所有机型."
+	},
+    
+	{
+		"title" : "杂七杂八 败犬の狂吠",
+		"tags" : "闲话",
+		"url" : "/blog/2019/03/10/little-talk-3/"
+		"brief" : "好吧，我承认我很失败。(｡ŏ_ŏ)"
+	},
+    
+	{
+		"title" : "Java 爬虫练习-bilibili视频下载 索引",
+		"tags" : "Java_html_爬虫_bilibili",
+		"url" : "/blog/2019/03/02/java-spider-bilibili-down-index/"
+		"brief" : "B站视频下载至此已经没啥好拓展的了，即使将来变更似乎也没啥好特别记录的(๑•̀ㅂ•́)و✧下面来回顾一下，每篇当时是怎么想的，都具体干了些什么，鱼渔兼得。"
+	},
+    
+	{
+		"title" : "Java 爬虫练习-bilibili视频下载 (六)",
+		"tags" : "Java_html_爬虫_bilibili",
+		"url" : "/blog/2019/03/02/java-spider-bilibili-down-6/"
+		"brief" : "现在要做的就是增加对HTML5播放源的下载支持(๑•̀ㅂ•́)و✧"
+	},
+    
+	{
+		"title" : "Java 爬虫练习-bilibili视频下载 (五)",
+		"tags" : "Java_html_爬虫_bilibili",
+		"url" : "/blog/2019/03/02/java-spider-bilibili-down-5/"
+		"brief" : "其实之前到(四)，整个框架，包括下载、登录等功能已经基本完成，可以结束了。但是，自己用着感觉不是很爽，下载异常后，整个视频都要重新下；而且前面HTML5的播放源没搞定一直是块心病，Flash将死未死这么多年，搞定这一块也是防患于未然。是时候再搞一波事情了(๑•̀ㅂ•́)و✧"
+	},
+    
+	{
+		"title" : "阿里云CentOS Nginx 关于HTTPS设置的二三事",
+		"tags" : "Linux_Nginx",
+		"url" : "/blog/2019/02/22/linux-nginx-http-to-https/"
+		"brief" : "先说下标题，适用于Linux，不论CentOS/Debian/Ubuntu等等，纯粹是因为第一台主机在阿里双十一剁手，选的是CentOS，从此入坑。。。虽然说是个小破站，也没啥好加密的，但拿来练练手也是可以的。"
+	},
+    
+	{
+		"title" : "知识库 Nginx内置变量 [转]",
+		"tags" : "Linux_Nginx",
+		"url" : "/blog/2019/02/18/nginx-params/"
+		"brief" : "Nginx内置变量，备用"
+	},
+    
+	{
+		"title" : "瞎扯 关于预设立场与思维实验",
+		"tags" : "娱乐",
+		"url" : "/blog/2019/02/16/nothing/"
+		"brief" : "“你好笨哦~”“我真傻，真的。”"
+	},
+    
+	{
+		"title" : "干粮无毒草の小说2",
+		"tags" : "娱乐_小说",
+		"url" : "/blog/2019/02/16/novel-2/"
+		"brief" : "自高二看的第一本网络小说起，到如今有些年头了。看小说已经养成了习惯，遇到喜欢的甚至会不管不顾白天+晚上熬夜修仙也要看完。我也不知道为什么。到如今，有的小说只记得个名字，别说剧情，连主角名称都忘了，有的甚至书名都已经不记得了。在这里，记录一部分曾经看过的小说。"
+	},
+    
+	{
+		"title" : "杂七杂八 不吐不快",
+		"tags" : "闲话",
+		"url" : "/blog/2019/02/14/little-talk-2/"
+		"brief" : "沟通需要成本，sigh."
+	},
+    
+	{
+		"title" : "Android PureHost - 类似PC端Host功能的实现",
+		"tags" : "Java_Android",
+		"url" : "/blog/2019/02/14/java-android-vpnservice-pure-host/"
+		"brief" : "最近捣鼓了一阵Android提供的VPNService这个api，以及各种IP/TCP/UDP/DNS/HTTP协议，搞了这么久，最后以这个app作为收尾吧😄"
+	},
+    
+	{
+		"title" : "Java 本地TCPServer Demo",
+		"tags" : "Java_SocketChannel",
+		"url" : "/blog/2019/02/14/java-socket-channel/"
+		"brief" : "本文在上篇的基础上独立而来，可以看作是VpnService中TCPServer的简单实现，也可以单独出来看作JavaNIO的一个Demo。"
+	},
+    
+	{
+		"title" : "Android VpnService初探",
+		"tags" : "Java_Android",
+		"url" : "/blog/2019/02/14/java-android-vpnservice/"
+		"brief" : "发现网络上关于AndroidVpnService的巴啦啦很多，但没有一个能够简单的能够实现抓包全部ip报文，然后不影响正常使用的关于VpnService的Demo，都是只考虑拦截不考虑正常功能的也是醉了…"
+	},
+    
+	{
+		"title" : "Java 本地DNS服务器Demo",
+		"tags" : "Java_DNS",
+		"url" : "/blog/2019/02/14/java-local-dns-server/"
+		"brief" : "本以为Android手机就和Linux一样改Host会比较方便，然而发现权限是个问题，很大的问题。有了这个契机，正好捣鼓一下Android提供的VPNService这个api，直接本地拦截DNS报文，然后根据host污染掉再直接回复。当然，这篇文章作为前置，跟Android没半毛钱关系，只单纯的涉及DNS协议。"
+	},
+    
+	{
+		"title" : "Java Http/Https代理Demo （下）",
+		"tags" : "Java_Http_代理",
+		"url" : "/blog/2019/02/13/java-proxy-http-server-2/"
+		"brief" : "上一篇实现了中间人代理Http服务，接下来完成隧道方式代理Https请求。"
+	},
+    
+	{
+		"title" : "Java Http/Https代理Demo （上）",
+		"tags" : "Java_Http_代理",
+		"url" : "/blog/2019/02/13/java-proxy-http-server/"
+		"brief" : "上一篇对整个http协议有个大致的了解，是时候进一步尝试做一下代理了。"
+	},
+    
+	{
+		"title" : "Java Http文件服务器Demo",
+		"tags" : "Java_Http",
+		"url" : "/blog/2019/02/12/java-file-http-server/"
+		"brief" : "有些东西学起来当时嗯嗯哦就过去了，听着还像是那回事儿，人问起来也能答出个五六七八，但真要理解，还真得自己上手摆弄一遍。不把原理弄清楚了，哪怕知道怎么个操作法儿，实际上心里还是特别虚。把基础弄明白了，哪怕发展再快，万变不离其宗，还能蹦跶出什么来。再说个题外话，《计算机网络》这门课这是门神课，可惜可惜。。。"
+	},
+    
+	{
+		"title" : "杂七杂八 - 新春大杂烩",
+		"tags" : "闲话",
+		"url" : "/blog/2019/02/11/java-todo/"
+		"brief" : "春节就这样差不多了，本来想就着这个假期做些事情的，结果天天在拜年，在别人家里也不好干些什么，真成了低头族手机党了。先Mark一下最近干了些啥，回头再好好整理一下，权当做个总结。"
+	},
+    
+	{
+		"title" : "Java 爬虫练习-bilibili视频下载 (四)",
+		"tags" : "Java_html_爬虫_bilibili",
+		"url" : "/blog/2019/01/24/java-spider-bilibili-down-4/"
+		"brief" : "之前PC端Flv格式的视频下载基本上是搞定了，但登录的Cookies获取是个问题。本文记录模拟登录的相关思考。"
+	},
+    
+	{
+		"title" : "Java 爬虫练习-bilibili视频下载 (三)",
+		"tags" : "Java_html_爬虫_bilibili",
+		"url" : "/blog/2019/01/24/java-spider-bilibili-down-3/"
+		"brief" : "之前PC端Flv格式的视频下载算是有了能下载的办法，但是分辨率的选择仍旧是个问题。本文记录定位API的相关思考。"
+	},
+    
+	{
+		"title" : "Java 爬虫练习-bilibili视频下载 (二)",
+		"tags" : "Java_html_爬虫_bilibili",
+		"url" : "/blog/2019/01/23/java-spider-bilibili-down-2/"
+		"brief" : "之前移动Web访问得到的哔哩哔哩链接视频清晰度不是很好，这个需要改进。本文记录做过的思考与尝试。"
+	},
+    
+	{
+		"title" : "Java 爬虫练习-bilibili视频下载 (一)",
+		"tags" : "Java_html_爬虫_bilibili",
+		"url" : "/blog/2019/01/22/java-spider-bilibili-down/"
+		"brief" : "之前做浏览器插件的时候，发现有部分网站视频链接下载提取不了，有很多都是像m3u8这种分开来下一段一段.ts的，这种也还好解决，只是不想把单纯的下载链接提取插件复杂化，也就没有后续展开。之后不记得怎么的就扯到B站的视频上，初步看下来分成了很多.m4s文件（有部分不是），对这个不是很了解。看了下浏览器后台，httpheaders一直在变，尝试合并后也并不能播放，初步判断下载M4S文件并合并转码为MP4要花很多功夫，先试试看其它办法，这个以后有时间再试着弄。先来说一下我的解决思路，算是马克一下，以后再遇到问题看看能不能找些灵感。"
+	},
+    
+	{
+		"title" : "前端 FireFox扩展插件实践 - 网页视频下载器",
+		"tags" : "浏览器扩展_JavaScript_HTML_前端",
+		"url" : "/blog/2019/01/18/firefox-web-extentions/"
+		"brief" : "浏览器扩展是个很好用的东西，像Chrome好用的插件就特别多。可惜找了半天手机端支持的只有火狐，因为都是使用的统一的WebExtensionsAPI，转Chrome也不太费事，尝试着做了一下。"
+	},
+    
+	{
+		"title" : "阿里云CentOS Nginx 定时切割日志",
+		"tags" : "Linux_Nginx",
+		"url" : "/blog/2019/01/16/linux-log-split/"
+		"brief" : "先说下标题，适用于Linux，不论CentOS/Debian/Ubuntu等等，纯粹是因为第一台主机在阿里双十一剁手，选的是CentOS，从此入坑。。。Nginx日志越来越大了，非常不方便查看和分析，因而有定时分割日志的需求。"
+	},
+    
+	{
+		"title" : "瞎扯 傻与蠢与笨(～￣(OO)￣)ブ",
+		"tags" : "娱乐",
+		"url" : "/blog/2019/01/16/stupid/"
+		"brief" : "“你好笨哦~”“我真傻，真的。”"
+	},
+    
+	{
+		"title" : "Java 从jar包中读取资源文件",
+		"tags" : "Java",
+		"url" : "/blog/2019/01/15/java-resources/"
+		"brief" : "由于某些需要，把资源打包进了jar包。那么如何从jar包里面加载相应资源呢？我们可以使用ClassLoader来加载"
+	},
+    
+	{
+		"title" : "知识库 透明代理、匿名代理、混淆代理、高匿代理 [转]",
+		"tags" : "HttpProxy_代理_透明代理_匿名代理",
+		"url" : "/blog/2019/01/10/http-proxy-anonymous-transparent/"
+		"brief" : "透明代理、匿名代理、混淆代理、高匿代理这4种代理，主要是在代理服务器端的配置不同，导致其向目标地址发送请求时，REMOTE_ADDR，HTTP_VIA，HTTP_X_FORWARDED_FOR三个变量不同。"
+	},
+    
+	{
+		"title" : "Java 线程池笔记",
+		"tags" : "Java_线程池",
+		"url" : "/blog/2019/01/10/java-thread-excutor/"
+		"brief" : "Java线程池笔记"
+	},
+    
+	{
+		"title" : "Java Http代理设置",
+		"tags" : "Java_HttpProxy_HtmlUnit_爬虫",
+		"url" : "/blog/2019/01/07/http-proxy/"
+		"brief" : "在做爬虫的时候，同一ip频繁抓取有很大可能会被识别，然后被ban。因而，使用代理是很有必要的。"
+	},
+    
+	{
+		"title" : "Java 浅谈常见设计模式(一) 单例模式",
+		"tags" : "Java",
+		"url" : "/blog/2019/01/01/java-design/"
+		"brief" : ""
+	},
+    
+	{
+		"title" : "Java System.setProperty设置代理 [转]",
+		"tags" : "Java_代理",
+		"url" : "/blog/2019/01/01/java-proxy/"
+		"brief" : "因为需要涉及到这块，Mark一下。使用System.setProperty设置相应属性后，HttpURLConnection可以不用做任何额外操作，是一种非常方便快捷的方式。"
+	},
+    
+	{
+		"title" : "杂七杂八 有点要说的话",
+		"tags" : "闲话",
+		"url" : "/blog/2018/12/19/little-talk/"
+		"brief" : "StayHungry,StayFoolish."
+	},
+    
+	{
+		"title" : "SpringBoot 踩坑记录(八)- 部署分离依赖lib和配置",
+		"tags" : "SpringBoot_踩坑",
+		"url" : "/blog/2018/12/18/spring-boot-maven-lib/"
+		"brief" : "发布springboot项目的时候，自己的代码其实只有几M，但相应的依赖包就有50+M。很无奈啊，精简依赖项是一个方面；把这些依赖分离出来，不需要每次部署也很重要。这样每次升级，基本上只要更新自己的代码即可。"
+	},
+    
+	{
+		"title" : "SpringBoot 踩坑记录(七)- http状态码",
+		"tags" : "SpringBoot_踩坑_http状态码_Nginx_缓存",
+		"url" : "/blog/2018/12/18/spring-boot-http-status/"
+		"brief" : "在Nginx端反向代理使用了缓存，由此引出了一个较为严重的问题，最新的文章不能及时更新，本文讨论的该问题的解决思路。"
+	},
+    
+	{
+		"title" : "Nginx 内置缓存Proxy_cache",
+		"tags" : "Nginx_缓存_反向代理",
+		"url" : "/blog/2018/12/16/nginx-cache/"
+		"brief" : "用Nginx反向代理其它服务器，有些静态资源可以直接缓存，没必要再次去查询一遍，减少后端请求的同时加快响应时间。"
+	},
+    
+	{
+		"title" : "Nginx 配置身份验证 http_auth_basic_module",
+		"tags" : "Nginx_身份验证",
+		"url" : "/blog/2018/12/16/nginx-httpd/"
+		"brief" : "实现用户名和密码验证访问,可以直接使用Nginx的http_auth_basic_module模块。"
+	},
+    
+	{
+		"title" : "一种访问被DNS劫持/污染的域名的解决办法",
+		"tags" : "DNS_DNS污染_DNS劫持_hosts",
+		"url" : "/blog/2018/12/16/dns-host/"
+		"brief" : "最近在学DNS方面的东西，一直在思考这个问题。假定某域名xxx.com被DNS污染了，应该怎么办呢？"
+	},
+    
+	{
+		"title" : "[资源备份] 下载站点备份",
+		"tags" : "电影_bt下载",
+		"url" : "/blog/2018/12/16/bt-resources/"
+		"brief" : "虽然说由于网速的提升，现在电视、电影很多都是在线观看了。对于搜集控来说，还是有那么一部分BT的死忠粉的。"
+	},
+    
+	{
+		"title" : "Java 获取真实客户端ip",
+		"tags" : "Java_ip",
+		"url" : "/blog/2018/12/15/request-ip/"
+		"brief" : "一般的Http请求跑到最终的处理端时都经过(多级)反向的代理，通过方法getRemoteAddr()得不到客户端真实IP，必须要经过一定处理。下面做个转载备份。"
+	},
+    
+	{
+		"title" : "Thunder等下载地址链接的互相转换",
+		"tags" : "工具_下载链接_迅雷连接_快车链接",
+		"url" : "/blog/2018/12/15/link-convert/"
+		"brief" : "本文就各种下载链接的编码原理及转换详细说明一下，明白以后就可以用迅雷下载快车、旋风专用地址的软件啦。"
+	},
+    
+	{
+		"title" : "SpringBoot 踩坑记录(六)- 返回String带双引号问题",
+		"tags" : "SpringBoot_踩坑_String",
+		"url" : "/blog/2018/12/14/spring-boot-string/"
+		"brief" : "本文记录SpringBoot学习中遇到的问题。使用fastJson对出参做处理，会将String类型自动增加双引号字符串。若仅仅想返回String内容，可以在WebConfig里面增加转换器。"
+	},
+    
+	{
+		"title" : "SpringBoot 踩坑记录(五)- 返回json的几种方式",
+		"tags" : "SpringBoot_踩坑_注解_Annotation_json",
+		"url" : "/blog/2018/12/14/spring-boot-json-annotation/"
+		"brief" : "本文记录SpringBoot学习中遇到的问题。前文提及了操控注解@Controller等的控制返回类型,现在给出返回json的三种实现方式"
+	},
+    
+	{
+		"title" : "知识库 纯真IP数据库格式详解 [转]",
+		"tags" : "SpringBoot_踩坑_String",
+		"url" : "/blog/2018/12/13/ipdatabase/"
+		"brief" : "纯真版IP数据库，优点是记录多，查询速度快，它只用一个文件QQWry.dat就包含了所有记录，方便嵌入到其他程序中，也方便升级。缺点是你想要编辑它却是比较麻烦的。"
+	},
+    
+	{
+		"title" : "知识库 Base64编码原理",
+		"tags" : "Base64_编码_解码",
+		"url" : "/blog/2018/12/12/base64-encode/"
+		"brief" : "介绍一下Base64的相关内容，花几分钟时间就可以彻底理解它。文章下边贴了一个Base64的编解码器，方便阅读文章的同时来实验。"
+	},
+    
+	{
+		"title" : "Jekyll 站点地图的生成",
+		"tags" : "Jekyll_sitemap_SEO_站点地图",
+		"url" : "/blog/2018/12/11/jekyll-sitemap/"
+		"brief" : "这几天考虑把网站推到搜索引擎，也不考虑推广啥的，但不说别的，至少要搜索域名至少也得出现个链接呗。"
+	},
+    
+	{
+		"title" : "知识库 VPS虚拟化架构简介",
+		"tags" : "知识库_Linux_VPS_虚拟化架构",
+		"url" : "/blog/2018/12/10/vps-virt/"
+		"brief" : "选择VPS产品的时候一定要注意虚拟化架构，因为不同的虚拟化架构对操作系统是Linux还是Windows会有较大的性能损失差异！"
+	},
+    
+	{
+		"title" : "知识库 VPS主机性能和速度测试",
+		"tags" : "知识库_Linux_VPS_性能测试",
+		"url" : "/blog/2018/12/10/vps-test/"
+		"brief" : "购买VPS前主要是使用一些网络测试工具如ping、tracert、WinMTR之类的工具进行测试，确定VPS所走线路的好坏。购买后主要测试VPS的性能。下面主要介绍一下常用的工具："
+	},
+    
+	{
+		"title" : "Putty 免密自动登录设置",
+		"tags" : "知识库_Linux_Putty",
+		"url" : "/blog/2018/12/09/putty/"
+		"brief" : "虽然XShell等工具越来越流行，但是小巧的Putty仍然有一定作用。Putty出于安全考虑，不愿去保存密码，这点很烦。以下是一种解决办法。"
+	},
+    
+	{
+		"title" : "知识库 Linux vi编辑器",
+		"tags" : "知识库_Linux_vi_编辑器",
+		"url" : "/blog/2018/12/09/vi/"
+		"brief" : "vi编辑器是所有Unix及Linux系统下标准的编辑器，它的强大不逊色于任何最新的文本编辑器，这里只是简单地介绍一下它的用法和一小部分指令。"
+	},
+    
+	{
+		"title" : "知识库 Centos yum源配置",
+		"tags" : "知识库_Linux_CentOS",
+		"url" : "/blog/2018/12/09/yum/"
+		"brief" : "有时候不用自己下载安装包再安装,直接使用yum可以省去很多功夫"
+	},
+    
+	{
+		"title" : "前端 两个PDF预览API",
+		"tags" : "JavaScript_HTML",
+		"url" : "/blog/2018/12/06/html-pdf/"
+		"brief" : "收藏两款可用的在线PDF预览神器，pdfobject、pdf.js。"
+	},
+    
+	{
+		"title" : "吐槽",
+		"tags" : "吐槽",
+		"url" : "/blog/2018/12/04/work-tucao/"
+		"brief" : "谨以此文纪念我的第一份工作。基于保密需要，有各种省略"
+	},
+    
+	{
+		"title" : "Thymeleaf 模板表达式",
+		"tags" : "Thymeleaf",
+		"url" : "/blog/2018/12/01/thymeleaf/"
+		"brief" : "markThymeleaf模板表达式"
+	},
+    
+	{
+		"title" : "干粮无毒草の小说",
+		"tags" : "娱乐_小说",
+		"url" : "/blog/2018/11/30/novel/"
+		"brief" : "自高二看的第一本网络小说起，到如今有些年头了。看小说已经养成了习惯，遇到喜欢的甚至会不管不顾白天+晚上熬夜修仙也要看完。我也不知道为什么。到如今，有的小说只记得个名字，别说剧情，连主角名称都忘了，有的甚至书名都已经不记得了。在这里，记录一部分曾经看过的小说。"
+	},
+    
+	{
+		"title" : "Java 爬虫练习-历史上的今天",
+		"tags" : "Java_html_爬虫",
+		"url" : "/blog/2018/11/24/java-spider-history-on-today/"
+		"brief" : "最近碰到了一个很有趣的玩意儿-历史上的今天，于是想尝试做一下，贴一下思路和大概步骤。"
+	},
+    
+	{
+		"title" : "Windows下为右键菜单减负",
+		"tags" : "Windows_注册表_Regedit",
+		"url" : "/blog/2018/11/22/win-regedit-right-click-menu/"
+		"brief" : "随着安装软件的不断增多，右键菜单也越来越长，臃肿不堪。这样，本来以快捷菜单自居的右键菜单使用起来反而并不快捷。本文记录一些注册表中关于右键菜单的位置。"
+	},
+    
+	{
+		"title" : "SpringBoot 踩坑记录(五)- Thymeleaf th:replace/include路径问题",
+		"tags" : "SpringBoot_踩坑_Thymeleaf_replace_标签",
+		"url" : "/blog/2018/11/22/spring-boot-thymeleaf-path/"
+		"brief" : "本文记录SpringBoot学习中遇到的问题。因为网页有许多地方老是重复同一坨代码，看着很不舒服，所以想办法把他们公共部分提取出来。在Windows下用Thymeleafth:replace标签用的好好的，调试也完全没有问题，结果部署到服务器上后，就出现error了，百思不得其解。"
+	},
+    
+	{
+		"title" : "RSS 一种小众的信息获取方式介绍",
+		"tags" : "追更神器_RSS",
+		"url" : "/blog/2018/11/20/awsome-rss/"
+		"brief" : "即使在RSS最火的时候，你也许也仅仅是听说过它。大多数人从没有了解过它。是的，这是一款神器，但就和本文毫无吸引力的标题一样，各网站专业拗口的解释让很多人望而却步。也许对于网站流量的分流使得各门户不重视甚至阻碍它的发展。渐渐的，RSS成了冷门的东西。但如果说这是一款方便看新闻、追小说、追各种up主更新等一系列操作的神器，也许你会更感兴趣。"
+	},
+    
+	{
+		"title" : "VBS 一些超简单、超有趣的VBS小应用",
+		"tags" : "Windows_VBS",
+		"url" : "/blog/2018/11/18/win-vbs/"
+		"brief" : "VBS是微软支持的一种脚本语言。因为非专业人员用的电脑系统还是Widows较多，所以下面的VBS小应用在平常我们用的电脑上直接用就行，不需要前置什么乱七八糟的安装环境。。什么，我没讲明白？？直接打开txt文本，复制代码，改下文件名称，程序就能跑起来啦O(∩_∩)O"
+	},
+    
+	{
+		"title" : "踩坑记录 - 在服务器上搭建Git仓库",
+		"tags" : "Linux_git_PowerShell",
+		"url" : "/blog/2018/11/13/linux-git-repo/"
+		"brief" : "之前在部署WebHook的时候就有一个想法:有没有必要通过git提交到第三方,然后由第三方的钩子触发事件发送请求给服务器,让服务器pull代码?这里写下我的思考和实际操作,以及操作里面的坑。(╯□╰)其实也不算是坑，只是脑筋没转过弯来。。"
+	},
+    
+	{
+		"title" : "Win10 Shift+右键还原打开cmd命令窗口",
+		"tags" : "Windows_cmd_PowerShell",
+		"url" : "/blog/2018/11/11/win10-regedit-cmd/"
+		"brief" : "在Win10系统上Shift+鼠标右键，在此处打开命令窗口的快捷方式没有了。从此只能win+R然后cmd再然后cd到当前目录。用久了以后真的是很烦很烦，不得已百度了一下，贴一下方法。"
+	},
+    
+	{
+		"title" : "SpringBoot 踩坑记录(四)- 注解@Controller及@RestController",
+		"tags" : "SpringBoot_踩坑_注解_Annotation",
+		"url" : "/blog/2018/11/09/spring-boot-thymeleaf-json-annotation/"
+		"brief" : "本文记录SpringBoot学习中遇到的问题。网页访问还是内容请求接口的处理方式？注解告诉你。"
+	},
+    
+	{
+		"title" : "SpringBoot 踩坑记录(三)- JPA H2数据库运行结束后自动删除",
+		"tags" : "SpringBoot_踩坑_JPA",
+		"url" : "/blog/2018/11/09/spring-boot-note-jpa-h2/"
+		"brief" : "本文记录SpringBoot学习中遇到的问题。使用嵌入式数据库H2时，虽然没有使用内存模式，但是每次调试运行结束后data都会自动删除。需要更改property配置。"
+	},
+    
+	{
+		"title" : "SpringBoot 踩坑记录(二)- JPA 新建实体类报错",
+		"tags" : "SpringBoot_踩坑_JPA",
+		"url" : "/blog/2018/11/08/spring-boot-note-jpa-sql/"
+		"brief" : "本文记录SpringBoot学习中遇到的问题。虽然编译没有提示错误，但由于import包错误导致JPA运行出错。"
+	},
+    
+	{
+		"title" : "SpringBoot 踩坑记录(一)- maven 国内镜像",
+		"tags" : "SpringBoot_踩坑_maven_镜像",
+		"url" : "/blog/2018/11/08/spring-boot-note-maven-mirror/"
+		"brief" : "本文记录SpringBoot学习中遇到的问题。从官网上下载导入了helloWorld的demo，结果在SpringToolSuitez中打开，一直报错，mavenupdate也没法解决。最后更换了国内的阿里云镜像，成功解决。"
+	},
+    
+	{
+		"title" : "阿里云CentOS 部署静态博客",
+		"tags" : "云服务器_建站_php_博客_jekyll_git_webhook",
+		"url" : "/blog/2018/11/06/blog-to-my-site/"
+		"brief" : "本文档介绍如何从Coding.net上将Jekyll编写的静态博客移植到阿里云服务器，并设置WebHook自动更新"
+	},
+    
+	{
+		"title" : "阿里云CentOS Git的安装与使用",
+		"tags" : "云服务器_建站_php",
+		"url" : "/blog/2018/11/05/git/"
+		"brief" : "本文档介绍如何在CentOS下安装Git的运行环境"
+	},
+    
+	{
+		"title" : "阿里云CentOS Php部署",
+		"tags" : "云服务器_建站_php",
+		"url" : "/blog/2018/11/05/php/"
+		"brief" : "本文档介绍如何在CentOS下安装php的运行环境"
+	},
+    
+	{
+		"title" : "阿里云CentOS Nginx部署",
+		"tags" : "云服务器_建站",
+		"url" : "/blog/2018/11/05/nginx/"
+		"brief" : "Nginx(“enginex”)是一款是由俄罗斯的程序设计师IgorSysoev所开发高性能的Web和反向代理服务器，也是一个IMAP/POP3/SMTP代理服务器。在高连接并发的情况下，Nginx是Apache服务器不错的替代品。"
+	},
+    
+	{
+		"title" : "阿里云CentOS JDK + Tomcat部署",
+		"tags" : "云服务器_建站",
+		"url" : "/blog/2018/11/05/jdk_tomacat/"
+		"brief" : "本文档介绍如何使用一台基本配置的云服务器ECS实例部署Javaweb项目。"
+	},
+    
+	{
+		"title" : "阿里云CentOS FTP部署",
+		"tags" : "云服务器_建站_FTP",
+		"url" : "/blog/2018/11/05/ftp/"
+		"brief" : "本文介绍在CentOS64位操作系统下,如何搭建并配置服务器端的FTP环境。这里采用的是vsftpd来搭建FTP环境。vsftpd是Linux下的一款小巧轻快、安全易用的FTP服务器软件，是一款在各个Linux发行版中最受推崇的FTP服务器软件。"
+	},
+    
+	{
+		"title" : "Java Annotation 注解的初步使用",
+		"tags" : "Java_Annotation",
+		"url" : "/blog/2018/11/02/java-annotation/"
+		"brief" : "你是否注意到,junit中的测试函数上方,总会有个‘@Test’?或者在用JavaWeb时,总会有许许多多的@?删掉或者没配置好会导致项目整个功能失常？@Testpublicvoidtest(){...}这些都是注解在起着作用。"
+	},
+    
+	{
+		"title" : "Java poi操作Excel踩坑记录",
+		"tags" : "Java_poi_Excel",
+		"url" : "/blog/2018/10/28/java-excel-poi/"
+		"brief" : "最近想将数据保存到Excel文件中，一件很简单的事情，结果遇到了坑。。。最新的Excel文件操作会原来的数据给覆盖掉！！囧了个囧，这种坑我也不想的"
+	},
+    
+	{
+		"title" : "Java htmlUnit动态爬取页面实例",
+		"tags" : "JavaScript_Java_前端调试",
+		"url" : "/blog/2018/10/28/get-qqmusic-3/"
+		"brief" : "接上上篇博文,当时使用jsoup爬的页面是最初的纯静态页面,现用htmlUnit重新加以实现"
+	},
+    
+	{
+		"title" : "Java jsonp异域获取QQ音乐链接",
+		"tags" : "JavaScript_Java_前端调试",
+		"url" : "/blog/2018/10/28/get-qqmusic-2/"
+		"brief" : "接上一篇博文,当时真是脑子没转过弯来,QQ音乐网页版的信息查询请求直接就是异域的。也就是说，服务器那边是允许不同域名之间的http请求的。认识到这一点,稍微了解一下jsonp,接下来的工作就好做了."
+	},
+    
+	{
+		"title" : "Java 一个入门的网络爬虫用例",
+		"tags" : "Java_JavaScript",
+		"url" : "/blog/2018/10/25/get-qqmusic/"
+		"brief" : "背景博客首页的QQ音乐链接又双叒叕失效了,很烦。加上最近碰到了一个很有意思的网站-刘志进实验室。有个想法，我能不能自己实现这样一个类似的功能，通过关键词从QQ音乐获取歌曲信息，然后直接在生成页面。"
+	},
+    
+	{
+		"title" : "前端 一个网站背景水印图片插件",
+		"tags" : "JavaScript_HTML_CSS_前端",
+		"url" : "/blog/2018/10/24/ali-mask-background/"
+		"brief" : "alimask是一个使用canvas生成类似阿里巴巴内部网站水印图片的JavaScript库。Onlinedemohere."
+	},
+    
+	{
+		"title" : "前端 一个网页粒子背景插件 -Canvas-nest.js",
+		"tags" : "JavaScript_HTML_CSS_前端",
+		"url" : "/blog/2018/10/23/canvas-nest/"
+		"brief" : "一个基于html5canvas绘制的网页背景效果。"
+	},
+    
+	{
+		"title" : "《纪念刘和珍君》",
+		"tags" : "闲话",
+		"url" : "/blog/2018/10/23/luxun/"
+		"brief" : "鲁迅镇楼。附原文，共赏之。"
+	},
+    
+	{
+		"title" : "前端 一个简单的音乐播放器",
+		"tags" : "JavaScript_HTML_CSS",
+		"url" : "/blog/2018/10/23/music-player/"
+		"brief" : "APlayer.js迷你音乐播放器插件是一款小型的网页音乐播放器代码，支持歌词滚动，带播放进度条和声音控制，暂停播放等功能。话不多说,先上效果图:"
+	},
+    
+	{
+		"title" : "这是nIceLee的第二篇文章",
+		"tags" : "测试_html",
+		"url" : "/blog/2018/10/22/test-keyWord/"
+		"brief" : "目的：目的：写这篇文章的目的主要是为了测试markDown格式以及摘要显示"
+	},
+    
+	{
+		"title" : "这是nIceLee的第一篇文章",
+		"tags" : "测试_html",
+		"url" : "/blog/2018/10/22/helloWorld/"
+		"brief" : "第一段第二段"
+	},
+    
+	{
+		"title" : "Web App 相关技术",
+		"tags" : "JavaScript_HTML_CSS_Sass_移动端_XSS_AMD_requireJS_CommonJS_性能优化_WebApp",
+		"url" : "/blog/2015/06/17/web-app/"
+		"brief" : "这是一篇主题作者的文章,保留以作纪念.往前推2到3年，前端工程师还在忧心忡忡地想，移动互联网时代下，前端是不是没有生存空间了。但今天一看，在我们团队，前端工程师超过一半的工作都是在做移动端的Web或者APP的开发。移动Web或者APP在技术本质上是和做桌面端Web没有本质区别，但是移动端的坑那是非常的多，通过学习这部分内容，让你成为一名桌面移动通吃的前端开发工程师。"
+	}
+    ]
+}

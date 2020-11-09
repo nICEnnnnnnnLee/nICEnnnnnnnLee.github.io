@@ -1,0 +1,63 @@
+<pre>
+## REST接口
+----------------------------
++ /historytoday/{mon}/{day}                     历史上的今天
++ /feedupdate/all                               更新所有小说Feed
++ /feedupdate/single/{index}                    更新单个小说Feed
++ /ip/query/{ipQuery}/                          查询ip地址
++ /ip/open                                      打开ip功能
++ /ip/close                                     关闭ip功能(ip地址库更新时需要)
++ /ip/header                                    返回Header(json)
++ /novel/config ?cookieStatic=                  设置Cookie参数(已舍弃)
++ /novel/create ?url=                           新增小说
++ /novel/update ?name= &amp;nid=                    更新小说(最小间隔6min)
++ /novel/closeBook ?nid=                        设为全本
++ /proxy/http ?proxyHost= &amp;proxyPort=           设置http代理
++ /proxy/https ?proxyHost= &amp;proxyPort=          设置https代理
++ /proxy/close                                  关闭代理
++ /proxy/test ?proxyHost= &amp;proxyPort=           有效性测试
++ /proxy/testHide ?proxyHost= &amp;proxyPort=       匿名性测试
++ /proxy/getProxyRest/{0,1,2} ?page=            获取免费代理(有效过滤后)
++ /proxy/getProxyAllRest/{0,1,2} ?page=         获取免费代理
++ /sitelink/spider/gentask ?link=https://m.nvshens.com/girl/22162/album/        建立下载任务
++ /sitelink/spider/run ?link=hhttps://m.nvshens.com/girl/22899/  (link可以为空) 开始下载任务
++ /sitelink/spider/query ?link=https://m.nvshens.com/girl/22162/album/      查询状态
+:16888 下载图片访问
+:8082  数据库访问(需要开防火墙)
+:8090  webHook
+
+## 网页地址
+----------------------------
++ /ip                                           查看当前访问ip\地址
++ /sitelink                                     视频地址转换(多站合一)
+    + /kuaishou  ?shareLink=
+    + /douyin  ?shareLink=
+    + /weibo  ?shareLink=
+    + /miaopai  ?shareLink=
+    + ...
+
++ /music                                        QQ音乐直链获取首页
++ /music/query ?content=                        QQ音乐直链获取结果页
++ /novel/configs                                小说参数设置页(舍弃)
++ /novel                                        小说首页
++ /novel/index                                  小说首页
++ /novel/searchNew                              搜索添加小说页面
++ /novel/search                                 查找小说页面
++ /novel/add ?bookName=                         搜索添加小说结果页面(在笔趣阁查找新小说)
++ /novel/searchnovel ?keys=                     查找小说结果页面
++ /novel/{bookId}/{chpterId}                    小说章节阅读
++ /novel/read ?index= &amp;p=                       小说详情/目录页 (index为bookId,p为分页页码)
++ /feed/{bookId}.xml                            小说订阅RSS
++ /feed.xml                                     网站订阅
++ /sources/files                                下载的文件记录
++ /sources/ssr/                                 SSR链接生成与解析
++ /sources/link-convert/                        下载地址链接转换工具
++ /sources/ssr-sub/                             SSR订阅生成与解析(Base64转换工具)
++ /sources/ssr-sub.txt                          SSR订阅地址
++ /resume_2018/                                 简历
++ /resume_2018_pc/                              简历(PC)
++ /proxy                                        代理设置
++ /proxy/getProxy/{0,1,2}   ?page=              获取免费代理(有效过滤后)
++ /proxy/getProxyAll/{0,1,2}   ?page=           获取免费代理
++ /ip/headers                                   Header读取
+</pre>

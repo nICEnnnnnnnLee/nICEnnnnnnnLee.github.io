@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Acfun接口(一) - 普通视频下载</title>
+    <meta name="description" content="  做个笔记，A站普通视频应该如何下载(๑•̀ㅂ•́)و✧">
+
+    <meta property="og:url" content="https://nicelee.top/blog/2019/07/24/java-spider-acfun-down/">
+    <meta property="og:site_name" content="NiceLee的博客">
+    <meta property="og:title" content="Acfun接口(一) - 普通视频下载">
+    <meta property="og:description" content="  做个笔记，A站普通视频应该如何下载(๑•̀ㅂ•́)و✧">
+    <meta property="og:image" content="https://nicelee.top/favicon.ico?">
+    <meta property="og:image:type" content="image/x-icon">
+    
+    <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="stylesheet" href="/css/font-awesome.min.css ">
+    <link rel="stylesheet" href="/css/font-ali.css?v=1.2 ">
+    <link rel="stylesheet" href="/css/main.css?v=1.1 ">
+    <link rel="canonical" href="https://nicelee.top/blog/2019/07/24/java-spider-acfun-down/">
+    <link rel="alternate" type="application/rss+xml" title="NiceLeeのBlog" href="https://nicelee.top/feed.xml ">
+
+	
+
+    <script>
+    // 百度统计代码
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?11f780e4e4ccd4e99b101eac776e93e4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+</head>
+
+    <link rel="stylesheet" href="/sources/live2d/css/live2d.css" />
+  <body>
+	
+		
+		<script type="text/javascript" src="/js/ribbon.min.js "></script>
+		
+	
+	
+    <header id="top">
+    <div class="wrapper">
+        <a href="/" class="brand awsome-font">NiceLeeのBlog</a>
+        <small>用爱发电 bilibili~</small>
+        <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
+        <nav id="headerNav">
+            <ul>
+				<li onclick="showdiv()" >
+                    <a href="#">
+                    <i class="fa fa-search">搜索</i>
+                    </a>
+                </li>
+                <li>
+                    
+                    <a href="/">
+                    
+                        <i class="fa fa-home"></i>主页
+                    </a>
+                </li>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <a href="/archive/">
+                        
+                            <i class="fa fa-archive"></i>归档
+                        </a>
+                    </li>
+                
+                    
+                    <li>
+                        <a href="/ilikemusic/">
+                        
+                            <i class="fa fa-music"></i>音乐
+                        </a>
+                    </li>
+                
+                    
+                    <li>
+                        <a href="/collect/">
+                        
+                            <i class="fa fa-bookmark"></i>收藏
+                        </a>
+                    </li>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <a href="/timeline/">
+                        
+                            <i class="fa fa-clock-o"></i>时间轴
+                        </a>
+                    </li>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <a href="/about/">
+                        
+                            <i class="fa fa-info-circle"></i>关于
+                        </a>
+                    </li>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                				
+				
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+        <div class="page clearfix" post>
+    <div class="left">
+        <h1>Acfun接口(一) - 普通视频下载</h1>
+        <div class="label">
+
+            <div class="label-card">
+                <i class="fa fa-calendar"></i>2019-07-24
+            </div>
+
+            <div class="label-card">
+                <i class="fa fa-user"></i>nIceLee
+                
+            </div>
+            <div class="label-card">
+                <p>阅读：<span id="busuanzi_value_page_pv1"></span></p>
+            </div>
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+            
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+            </div>
+
+            <div class="label-card">
+            
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
+    
+        <!--a href="/tag/#html" title="Tag: html" rel="tag">html</a-->
+        <a href="/tag/#html" title="Tag: html" rel="tag">html</a>&nbsp;
+    
+        <!--a href="/tag/#%E7%88%AC%E8%99%AB" title="Tag: 爬虫" rel="tag">爬虫</a-->
+        <a href="/tag/#爬虫" title="Tag: 爬虫" rel="tag">爬虫</a>&nbsp;
+    
+        <!--a href="/tag/#AcFun" title="Tag: AcFun" rel="tag">AcFun</a-->
+        <a href="/tag/#AcFun" title="Tag: AcFun" rel="tag">AcFun</a>
+    
+  
+
+</span>
+
+            </div>
+
+        </div>
+        <hr>
+        <article itemscope itemtype="http://schema.org/BlogPosting">
+        <ul id="markdown-toc">
+  <li><a href="#要做的事情" id="markdown-toc-要做的事情">要做的事情</a></li>
+  <li><a href="#已知网址如何获取下载链接" id="markdown-toc-已知网址如何获取下载链接">已知网址如何获取下载链接</a>    <ul>
+      <li><a href="#网址示例" id="markdown-toc-网址示例">网址示例</a></li>
+      <li><a href="#访问网址抠出有着视频信息的json出来" id="markdown-toc-访问网址抠出有着视频信息的json出来">访问网址，抠出有着视频信息的json出来</a></li>
+    </ul>
+  </li>
+  <li><a href="#当视频有多p该怎么办" id="markdown-toc-当视频有多p该怎么办">当视频有多P该怎么办？</a>    <ul>
+      <li><a href="#已知网址" id="markdown-toc-已知网址">已知网址</a></li>
+      <li><a href="#已知ac号和具体id" id="markdown-toc-已知ac号和具体id">已知ac号和具体id</a></li>
+    </ul>
+  </li>
+</ul>
+<blockquote>
+  <p>做个笔记，A站普通视频应该如何下载(๑•̀ㅂ•́)و✧</p>
+</blockquote>
+
+<h2 id="要做的事情">要做的事情</h2>
+<ul>
+  <li>已知网址如何获取下载链接(指定清晰度)</li>
+  <li>当视频有多P该怎么办？</li>
+</ul>
+
+<h2 id="已知网址如何获取下载链接">已知网址如何获取下载链接</h2>
+<h3 id="网址示例">网址示例</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://www.acfun.cn/v/ac10763950
+</code></pre></div></div>
+
+<h3 id="访问网址抠出有着视频信息的json出来">访问网址，抠出有着视频信息的json出来</h3>
+<ul>
+  <li>正则表达式示例：
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Pattern pVideoInfo = Pattern.compile("window\\.videoInfo ?= ?(.*);[ \n]+window\\.addEventListener");
+</code></pre></div>    </div>
+  </li>
+  <li>结果示例：
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "currentVideoId": 10602737,
+  "bananaCountShow": "149",
+  "stowCount": 52,
+  "stowCountShow": "52",
+  "channel": {
+      "parentId": 58,
+      "parentName": "音乐",
+      "name": "原创·翻唱",
+      "id": 136
+  },
+  "description": "今后我与自己流浪（电影《哪吒之魔童降世》片尾曲）&lt;br/&gt;作词/作曲/编曲：王子&lt;br/&gt;音乐监制：王竞&lt;br/&gt;原唱：张碧晨&lt;br/&gt;这首歌在电影最后一出来我就觉得超级好听，终于还是产出来了，还有很多不足的地方，希望大家听个开心多多包涵(● ◡ ●)",
+  "title": "【小司pyon翻唱】今后我与自己流浪《哪吒之魔童降世》",
+  "hasHotComment": false,
+  "result": 0,
+  "danmakuCount": 6,
+  "videoList": [{
+      "priority": 0,
+      "danmakuCount": 6,
+      "visibleType": 1,
+      "durationMillis": 277291,
+      "title": "今后我与自己流浪",
+      "sizeType": 1,
+      "danmakuCountShow": "6",
+      "fileName": "我的影片.mp4",
+      "id": "10602737"
+  }],
+  "isThrowBanana": false,
+  "viewCount": 3411,
+  "bananaCount": 149,
+  "currentVideoInfo": {
+      "priority": 0,
+      "ksPlayJson": "{\"version\":\"1.0\",\"type\":\"hls\",\"adaptationSet\":{\"representation\":[{\"url\":\"https://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/uZm31oV3x30D-H_-amj4ygKEdPCKbJVeThCfIfMwZRHQ4-ueDqeIbBeD1iFeIVV5.m3u8?sign=7551dd4d58883c671ea0171b1a0af3d2&amp;t=1566764624&amp;us=913591811\",\"bandwidth\":510400,\"codecs\":\"avc1.64001e,mp4a.40.2\",\"width\":640,\"height\":360,\"frameRate\":0.0,\"baseUrl\":\"\",\"backupUrl\":[\"https://ali-video.acfun.cn/mediacloud/acfun/acfun_video/segment/uZm31oV3x30D-H_-amj4ygKEdPCKbJVeThCfIfMwZRHQ4-ueDqeIbBeD1iFeIVV5.m3u8?auth_key=1566762824-1943673789-0-ebd317756048c7cdeffcf6c75b4d2b7a\"],\"m3u8\":\"#EXTM3U\\n#EXT-X-VERSION:4\\n#EXT-X-TARGETDURATION:6\\n#EXT-X-MEDIA-SEQUENCE:0\\n#EXTINF:5.091478,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/EOSwDBpAdVptMzFvVjN4MzBELUhfLWFtajR5Z0tFZFBDS2JKVmVUaENmSWZNd1pSSFE0LXVlRHFlSWJCZUQxaUZlSVZWNQ.ts?sign=9dc498f2ff5171f2841437628fa4f02e&amp;t=1566764624&amp;us=1708279712\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/COSwDBCUpwkaQHVabTMxb1YzeDMwRC1IXy1hbWo0eWdLRWRQQ0tiSlZlVGhDZklmTXdaUkhRNC11ZURxZUliQmVEMWlGZUlWVjU.ts?sign=e6b77c7a7711a0e95e651278b2b6cb71&amp;t=1566764624&amp;us=1043730178\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CPjXFRDYxwgaQHVabTMxb1YzeDMwRC1IXy1hbWo0eWdLRWRQQ0tiSlZlVGhDZklmTXdaUkhRNC11ZURxZUliQmVEMWlGZUlWVjU.ts?sign=300ea6caa897548c3df56cb050b23be7&amp;t=1566764624&amp;us=2041917288\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CNCfHhDwvggaQHVabTMxb1YzeDMwRC1IXy1hbWo0eWdLRWRQQ0tiSlZlVGhDZklmTXdaUkhRNC11ZURxZUliQmVEMWlGZUlWVjU.ts?sign=c56df0b8782f237157f8db46c01aa04d&amp;t=1566764624&amp;us=176991747\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CMDeJhCcxggaQHVabTMxb1YzeDMwRC1IXy1hbWo0eWdLRWRQQ0tiSlZlVGhDZklmTXdaUkhRNC11ZURxZUliQmVEMWlGZUlWVjU.ts?sign=510589a6b0cf063b0ff77e6d4a24e4ed&amp;t=1566764624&amp;us=505253108\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CNykLxC8uggaQHVabTMxb1YzeDMwRC1IXy1hbWo0eWdLRWRQQ0tiSlZlVGhDZklmTXdaUkhRNC11ZURxZUliQmVEMWlGZUlWVjU.ts?sign=2a346c9f7259ad7901c43689c40861fc&amp;t=1566764624&amp;us=337214701\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CJjfNxCkwwgaQHVabTMxb1YzeDMwRC1IXy1hbWo0eWdLRWRQQ0tiSlZlVGhDZklmTXdaUkhRNC11ZURxZUliQmVEMWlGZUlWVjU.ts?sign=fb7b70f145ee27b8a7ebf817657c27e8&amp;t=1566764624&amp;us=1618814558\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CLyiQBDowQgaQHVabTMxb1YzeDMwRC1IXy1hbWo0eWdLRWRQQ0tiSlZlVGhDZklmTXdaUkhRNC11ZURxZUliQmVEMWlGZUlWVjU.ts?sign=fe0a7de7d6221167c803d87fb664713d&amp;t=1566764624&amp;us=154997568\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CKTkSBCcxggaQHVabTMxb1YzeDMwRC1IXy1hbWo0eWdLRWRQQ0tiSlZlVGhDZklmTXdaUkhRNC11ZURxZUliQmVEMWlGZUlWVjU.ts?sign=a4c15c2ddf5e3ea2ced081f0e0b43526&amp;t=1566764624&amp;us=1641460667\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CMCqURDInggaQHVabTMxb1YzeDMwRC1IXy1hbWo0eWdLRWRQQ0tiSlZlVGhDZklmTXdaUkhRNC11ZURxZUliQmVEMWlGZUlWVjU.ts?sign=6d355cde3b74b1ca84418c45153f905e&amp;t=1566764624&amp;us=902736501\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CIjJWRCMzAgaQHVabTMxb1YzeDMwRC1IXy1hbWo0eWdLRWRQQ0tiSlZlVGhDZklmTXdaUkhRNC11ZURxZUliQmVEMWlGZUlWVjU.ts?sign=85cd3c0dce9fa01f071579a8cada51f2&amp;t=1566764624&amp;us=496471444\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CJSVYhDk2ggaQHVabTMxb1YzeDMwRC1IXy1hbWo0eWdLRWRQQ0tiSlZlVGhDZklmTXdaUkhRNC11ZURxZUliQmVEMWlGZUlWVjU.ts?sign=94e8068ae42d32e816b1e78637355318&amp;t=1566764624&amp;us=1954254025\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CPjvahDQyggaQHVabTMxb1YzeDMwRC1IXy1hbWo0eWdLRWRQQ0tiSlZlVGhDZklmTXdaUkhRNC11ZURxZUliQmVEMWlGZUlWVjU.ts?sign=46531284b7e6e43f24ffa920ed2c02f0&amp;t=1566764624&amp;us=496592947\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CMi6cxCAuQgaQHVabTMxb1YzeDMwRC1IXy1hbWo0eWdLRWRQQ0tiSlZlVGhDZklmTXdaUkhRNC11ZURxZUliQmVEMWlGZUlWVjU.ts?sign=4db3990d7f52c7d0944e283d8591a176&amp;t=1566764624&amp;us=1326254901\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CMjzexC8uggaQHVabTMxb1YzeDMwRC1IXy1hbWo0eWdLRWRQQ0tiSlZlVGhDZklmTXdaUkhRNC11ZURxZUliQmVEMWlGZUlWVjU.ts?sign=56112b8afc5ffb6e0d91710bc8ffb51d&amp;t=1566764624&amp;us=1704095458\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CISuhAEQ4MQIGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHlnS0VkUENLYkpWZVRoQ2ZJZk13WlJIUTQtdWVEcWVJYkJlRDFpRmVJVlY1.ts?sign=41f154cf90d519a53194d2a923bf8789&amp;t=1566764624&amp;us=1139205011\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/COTyjAEQnMYIGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHlnS0VkUENLYkpWZVRoQ2ZJZk13WlJIUTQtdWVEcWVJYkJlRDFpRmVJVlY1.ts?sign=06912da60cdf2039cc615ca24c682202&amp;t=1566764624&amp;us=797202371\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CIC5lQEQ7NcIGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHlnS0VkUENLYkpWZVRoQ2ZJZk13WlJIUTQtdWVEcWVJYkJlRDFpRmVJVlY1.ts?sign=cc9668ff2bfb194e01fecb6ae2497833&amp;t=1566764624&amp;us=1752151549\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/COyQngEQ2McIGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHlnS0VkUENLYkpWZVRoQ2ZJZk13WlJIUTQtdWVEcWVJYkJlRDFpRmVJVlY1.ts?sign=30c98671f37b44acd24df173d4d284ab&amp;t=1566764624&amp;us=465479921\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CMTYpgEQ_NEIGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHlnS0VkUENLYkpWZVRoQ2ZJZk13WlJIUTQtdWVEcWVJYkJlRDFpRmVJVlY1.ts?sign=3851efe8695e523796b160d19184d1a7&amp;t=1566764624&amp;us=1537771333\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CMCqrwEQoNwIGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHlnS0VkUENLYkpWZVRoQ2ZJZk13WlJIUTQtdWVEcWVJYkJlRDFpRmVJVlY1.ts?sign=394a162e24e0d2f2c398c76f1c12ec73&amp;t=1566764624&amp;us=1024514980\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/COCGuAEQ7NcIGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHlnS0VkUENLYkpWZVRoQ2ZJZk13WlJIUTQtdWVEcWVJYkJlRDFpRmVJVlY1.ts?sign=35538076255166bb1507581748d941e6&amp;t=1566764624&amp;us=1488577979\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CMzewAEQ1LEIGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHlnS0VkUENLYkpWZVRoQ2ZJZk13WlJIUTQtdWVEcWVJYkJlRDFpRmVJVlY1.ts?sign=9de146180850496475eac727e80c250e&amp;t=1566764624&amp;us=1067636736\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CKCQyQEQiLYIGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHlnS0VkUENLYkpWZVRoQ2ZJZk13WlJIUTQtdWVEcWVJYkJlRDFpRmVJVlY1.ts?sign=559c2d9b242f8a55f6d39a86f24de0d2&amp;t=1566764624&amp;us=1693616175\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CKjG0QEQ3K4IGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHlnS0VkUENLYkpWZVRoQ2ZJZk13WlJIUTQtdWVEcWVJYkJlRDFpRmVJVlY1.ts?sign=454212fe3b3ea3ca44420c5d1ab7b584&amp;t=1566764624&amp;us=2098529110\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CIT12QEQxLcIGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHlnS0VkUENLYkpWZVRoQ2ZJZk13WlJIUTQtdWVEcWVJYkJlRDFpRmVJVlY1.ts?sign=d6929bc7ca48f582582f6cdbbb99e9f5&amp;t=1566764624&amp;us=149446418\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CMis4gEQrMAIGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHlnS0VkUENLYkpWZVRoQ2ZJZk13WlJIUTQtdWVEcWVJYkJlRDFpRmVJVlY1.ts?sign=e6482ec7b0d97ac704465b512f700614&amp;t=1566764624&amp;us=947361968\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CPTs6gEQ_NEIGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHlnS0VkUENLYkpWZVRoQ2ZJZk13WlJIUTQtdWVEcWVJYkJlRDFpRmVJVlY1.ts?sign=a3e1b311b2d5866cb1938b513e0414da&amp;t=1566764624&amp;us=167458549\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CPC-8wEQsNYIGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHlnS0VkUENLYkpWZVRoQ2ZJZk13WlJIUTQtdWVEcWVJYkJlRDFpRmVJVlY1.ts?sign=69a77fcca60ee414352d205ca3cab7e3&amp;t=1566764624&amp;us=294248150\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CKCV_AEQkOIIGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHlnS0VkUENLYkpWZVRoQ2ZJZk13WlJIUTQtdWVEcWVJYkJlRDFpRmVJVlY1.ts?sign=38a50af7d0021fec724ec6987c52a36c&amp;t=1566764624&amp;us=1189857460\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CLD3hAIQ4MQIGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHlnS0VkUENLYkpWZVRoQ2ZJZk13WlJIUTQtdWVEcWVJYkJlRDFpRmVJVlY1.ts?sign=a4f72d62222ebcf1c9b0590afd75b330&amp;t=1566764624&amp;us=133359229\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CJC8jQIQ9NQIGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHlnS0VkUENLYkpWZVRoQ2ZJZk13WlJIUTQtdWVEcWVJYkJlRDFpRmVJVlY1.ts?sign=c7837ccfb735d78e2b6f1ec3cdecdd82&amp;t=1566764624&amp;us=1328617642\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CISRlgIQjMwIGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHlnS0VkUENLYkpWZVRoQ2ZJZk13WlJIUTQtdWVEcWVJYkJlRDFpRmVJVlY1.ts?sign=b515a89e825008968eb8b5606e5fa33d&amp;t=1566764624&amp;us=782625967\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CJDdngIQwNAIGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHlnS0VkUENLYkpWZVRoQ2ZJZk13WlJIUTQtdWVEcWVJYkJlRDFpRmVJVlY1.ts?sign=987d9d15f056c86db5e024afea2803a5&amp;t=1566764624&amp;us=2038758027\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CNCtpwIQ9NQIGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHlnS0VkUENLYkpWZVRoQ2ZJZk13WlJIUTQtdWVEcWVJYkJlRDFpRmVJVlY1.ts?sign=fae7c25e3293b79efa9732f8a4557b9c&amp;t=1566764624&amp;us=619197786\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CMSCsAIQlMkIGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHlnS0VkUENLYkpWZVRoQ2ZJZk13WlJIUTQtdWVEcWVJYkJlRDFpRmVJVlY1.ts?sign=c6bbeee7d23c3991ae47fb1e4f3bb3dd&amp;t=1566764624&amp;us=473514177\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CNjLuAIQ3N0IGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHlnS0VkUENLYkpWZVRoQ2ZJZk13WlJIUTQtdWVEcWVJYkJlRDFpRmVJVlY1.ts?sign=cb0f658c96796c4f9a859811274406de&amp;t=1566764624&amp;us=1894615630\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CLSpwQIQmN8IGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHlnS0VkUENLYkpWZVRoQ2ZJZk13WlJIUTQtdWVEcWVJYkJlRDFpRmVJVlY1.ts?sign=9f4926c147dab83257e83b8b11f32c86&amp;t=1566764624&amp;us=12352538\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CMyIygIQ_NEIGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHlnS0VkUENLYkpWZVRoQ2ZJZk13WlJIUTQtdWVEcWVJYkJlRDFpRmVJVlY1.ts?sign=42e7c56e3e86045f917dd08e169b0b90&amp;t=1566764624&amp;us=397046287\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CMja0gIQyM0IGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHlnS0VkUENLYkpWZVRoQ2ZJZk13WlJIUTQtdWVEcWVJYkJlRDFpRmVJVlY1.ts?sign=a19add4856d3d9015f7f1a18bab5a79e&amp;t=1566764624&amp;us=1111590152\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CJCo2wIQoNwIGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHlnS0VkUENLYkpWZVRoQ2ZJZk13WlJIUTQtdWVEcWVJYkJlRDFpRmVJVlY1.ts?sign=eb483da1cdee1a5443ecdc261d46251d&amp;t=1566764624&amp;us=241936539\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CLCE5AIQmN8IGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHlnS0VkUENLYkpWZVRoQ2ZJZk13WlJIUTQtdWVEcWVJYkJlRDFpRmVJVlY1.ts?sign=f006f0c2cc81933f808c8c6bbda540fe&amp;t=1566764624&amp;us=2008821452\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CMjj7AIQgLkIGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHlnS0VkUENLYkpWZVRoQ2ZJZk13WlJIUTQtdWVEcWVJYkJlRDFpRmVJVlY1.ts?sign=4402c37d48770a82a1d2e4abc15c26fb&amp;t=1566764624&amp;us=204010973\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CMic9QIQkLMIGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHlnS0VkUENLYkpWZVRoQ2ZJZk13WlJIUTQtdWVEcWVJYkJlRDFpRmVJVlY1.ts?sign=1cb220504eae46141c4fcb6be9a9ae47&amp;t=1566764624&amp;us=355245253\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CNjP_QIQlMkIGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHlnS0VkUENLYkpWZVRoQ2ZJZk13WlJIUTQtdWVEcWVJYkJlRDFpRmVJVlY1.ts?sign=2b1b9c331e99bb8b51647387977f53bf&amp;t=1566764624&amp;us=1367829248\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/COyYhgMQpMMIGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHlnS0VkUENLYkpWZVRoQ2ZJZk13WlJIUTQtdWVEcWVJYkJlRDFpRmVJVlY1.ts?sign=d6c9b38638afacbfaaad9d7a29ca1cff&amp;t=1566764624&amp;us=991895193\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CJDcjgMQlMkIGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHlnS0VkUENLYkpWZVRoQ2ZJZk13WlJIUTQtdWVEcWVJYkJlRDFpRmVJVlY1.ts?sign=ee2b32c1920a92d2a31af3c61169fefb&amp;t=1566764624&amp;us=1104025908\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CKSllwMQ6MEIGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHlnS0VkUENLYkpWZVRoQ2ZJZk13WlJIUTQtdWVEcWVJYkJlRDFpRmVJVlY1.ts?sign=f2f15821796126d7b2e5c308f5a443f2&amp;t=1566764624&amp;us=1081106078\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CIznnwMQ4MQIGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHlnS0VkUENLYkpWZVRoQ2ZJZk13WlJIUTQtdWVEcWVJYkJlRDFpRmVJVlY1.ts?sign=96bde8f7f89c0314122e9440c925931b&amp;t=1566764624&amp;us=395899800\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/COyrqAMQ7KgIGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHlnS0VkUENLYkpWZVRoQ2ZJZk13WlJIUTQtdWVEcWVJYkJlRDFpRmVJVlY1.ts?sign=dd49f8971cff7c74adc768828e1c5b7a&amp;t=1566764624&amp;us=229977786\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CNjUsAMQzLQIGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHlnS0VkUENLYkpWZVRoQ2ZJZk13WlJIUTQtdWVEcWVJYkJlRDFpRmVJVlY1.ts?sign=7ecc87aa25f20e8752112d5b7409dbfe&amp;t=1566764624&amp;us=1826926558\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CKSJuQMQ9KUIGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHlnS0VkUENLYkpWZVRoQ2ZJZk13WlJIUTQtdWVEcWVJYkJlRDFpRmVJVlY1.ts?sign=4971136c1fddad70eccdd22c60afb1ca&amp;t=1566764624&amp;us=1590705978\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CJivwQMQgLkIGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHlnS0VkUENLYkpWZVRoQ2ZJZk13WlJIUTQtdWVEcWVJYkJlRDFpRmVJVlY1.ts?sign=bb1280ab9a698518cc366dc9874b7410&amp;t=1566764624&amp;us=613644927\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CJjoyQMQoPYKGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHlnS0VkUENLYkpWZVRoQ2ZJZk13WlJIUTQtdWVEcWVJYkJlRDFpRmVJVlY1.ts?sign=f28bac375581bf15b926ae38049c4d1a&amp;t=1566764624&amp;us=247027433\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CLje1AMQ7JsHGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHlnS0VkUENLYkpWZVRoQ2ZJZk13WlJIUTQtdWVEcWVJYkJlRDFpRmVJVlY1.ts?sign=f2e73ea32a3bafb657e461a28eab53cc&amp;t=1566764624&amp;us=2101639569\\n#EXTINF:2.291667,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CKT62wMQ4KUCGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHlnS0VkUENLYkpWZVRoQ2ZJZk13WlJIUTQtdWVEcWVJYkJlRDFpRmVJVlY1.ts?sign=c3798a3a6562252bff9e05c53ccb1e24&amp;t=1566764624&amp;us=1271183342\\n#EXT-X-ENDLIST\\n\"},{\"url\":\"https://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/uZm31oV3x30D-H_-amj4ymHvERzJO0uTDgUsgNrs5dnkG8P2mvjJnmzaq6eAOxCA.m3u8?sign=a54bb0c45d9f438925cfba470beb3c44&amp;t=1566764624&amp;us=858195917\",\"bandwidth\":1095600,\"codecs\":\"avc1.64001f,mp4a.40.2\",\"width\":960,\"height\":540,\"frameRate\":0.0,\"baseUrl\":\"\",\"backupUrl\":[\"https://ali-video.acfun.cn/mediacloud/acfun/acfun_video/segment/uZm31oV3x30D-H_-amj4ymHvERzJO0uTDgUsgNrs5dnkG8P2mvjJnmzaq6eAOxCA.m3u8?auth_key=1566762824-956341390-0-e8852de4b04a8cf2f0ecfc0c47c9949f\"],\"m3u8\":\"#EXTM3U\\n#EXT-X-VERSION:4\\n#EXT-X-TARGETDURATION:6\\n#EXT-X-MEDIA-SEQUENCE:0\\n#EXTINF:5.091478,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/EPSfFhpAdVptMzFvVjN4MzBELUhfLWFtajR5bUh2RVJ6Sk8wdVREZ1VzZ05yczVkbmtHOFAybXZqSm5temFxNmVBT3hDQQ.ts?sign=86620ca824ce8ef318922ef259e2ecd2&amp;t=1566764624&amp;us=1790820831\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CPSfFhCU7RIaQHVabTMxb1YzeDMwRC1IXy1hbWo0eW1IdkVSekpPMHVURGdVc2dOcnM1ZG5rRzhQMm12akpubXphcTZlQU94Q0E.ts?sign=45d0bf6d37c4a9b6b87874dee567569f&amp;t=1566764624&amp;us=1525438486\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CIiNKRDo7Q8aQHVabTMxb1YzeDMwRC1IXy1hbWo0eW1IdkVSekpPMHVURGdVc2dOcnM1ZG5rRzhQMm12akpubXphcTZlQU94Q0E.ts?sign=aaf355e7bee7f5d49dc456529fdd87aa&amp;t=1566764624&amp;us=1044211594\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CPD6OBDQ6Q4aQHVabTMxb1YzeDMwRC1IXy1hbWo0eW1IdkVSekpPMHVURGdVc2dOcnM1ZG5rRzhQMm12akpubXphcTZlQU94Q0E.ts?sign=eb0caa6684ef017c695bcb626fa6d1f6&amp;t=1566764624&amp;us=1557486144\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CMDkRxDsxw4aQHVabTMxb1YzeDMwRC1IXy1hbWo0eW1IdkVSekpPMHVURGdVc2dOcnM1ZG5rRzhQMm12akpubXphcTZlQU94Q0E.ts?sign=5cbb2a617acc61ed2a6a810ce86649c4&amp;t=1566764624&amp;us=1515167653\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CKysVhCo6w0aQHVabTMxb1YzeDMwRC1IXy1hbWo0eW1IdkVSekpPMHVURGdVc2dOcnM1ZG5rRzhQMm12akpubXphcTZlQU94Q0E.ts?sign=6d15373bca7de743be55625766becee2&amp;t=1566764624&amp;us=93928727\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CNSXZBCA-g0aQHVabTMxb1YzeDMwRC1IXy1hbWo0eW1IdkVSekpPMHVURGdVc2dOcnM1ZG5rRzhQMm12akpubXphcTZlQU94Q0E.ts?sign=c9e7e0ffd13aa3a2abb91d347304c009&amp;t=1566764624&amp;us=2060810563\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CNSRchDs6Q0aQHVabTMxb1YzeDMwRC1IXy1hbWo0eW1IdkVSekpPMHVURGdVc2dOcnM1ZG5rRzhQMm12akpubXphcTZlQU94Q0E.ts?sign=f33d9d238ce5ab44a78ec069329db3cf&amp;t=1566764624&amp;us=1756158176\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CMD7fxDg1g0aQHVabTMxb1YzeDMwRC1IXy1hbWo0eW1IdkVSekpPMHVURGdVc2dOcnM1ZG5rRzhQMm12akpubXphcTZlQU94Q0E.ts?sign=e230be3fbb3d507ac026f7ea7fb05574&amp;t=1566764624&amp;us=1389996175\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CKDSjQEQmJMNGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=6179992a1de800a62bbb5c9db2bcbb85&amp;t=1566764624&amp;us=571040620\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CLjlmgEQ6NMNGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=48817631ca303eabb77967e0586f07e1&amp;t=1566764624&amp;us=2037713025\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CKC5qAEQ9OYNGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=0617a575588df51f7302dbdbc5c24c37&amp;t=1566764624&amp;us=752045048\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CJSgtgEQwOINGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=0987f2210ce940f3d35f9bb8daa5234f&amp;t=1566764624&amp;us=1473399323\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CNSCxAEQ5L0NGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=573cfab125f5bfa3b08c5d451904d8f8&amp;t=1566764624&amp;us=485558601\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CLjA0QEQqLwNGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=568b33e09218bd77e525ea16c2d627f0&amp;t=1566764624&amp;us=1921914708\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/COD83gEQ3MANGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=65f07cc73c8a7c0073c0e501689db267&amp;t=1566764624&amp;us=1064134908\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CLy97AEQ4NYNGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=cb663ebd7037b6d056fb039b7d6b5699&amp;t=1566764624&amp;us=881738706\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CJyU-gEQkPQNGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=50a62f9481636a317cacba89b7d93d82&amp;t=1566764624&amp;us=692510630\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CKyIiAIQ3O8NGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=dead8936cbb84078671d859c40744852&amp;t=1566764624&amp;us=60596271\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CIj4lQIQ7OkNGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=fe57a81a7fa6d136366cf0b1c20f625d&amp;t=1566764624&amp;us=797821254\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CPThowIQ6IIOGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=556c3adeaeee441c6ea6505ab2edb0d5&amp;t=1566764624&amp;us=1525972072\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CNzksQIQ1PINGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=3da5b70869c1197b6a13f0f30a73c860&amp;t=1566764624&amp;us=1121824558\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CLDXvwIQsLkNGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=ce5ee8095aea2690114c6d36a0468914&amp;t=1566764624&amp;us=1475808462\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/COCQzQIQ0K0NGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=aced0daa78dca9ab9d9de73c1921535b&amp;t=1566764624&amp;us=844587516\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CLC-2gIQ8KENGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=f8fc685078dec1553bd09ab31c00876a&amp;t=1566764624&amp;us=1549595718\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CKDg5wIQnKkNGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=921faf2eb956255fcaa1275e767203b3&amp;t=1566764624&amp;us=314002430\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CLyJ9QIQxMkNGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=2879b2f6b203518e82801eadc8329a39&amp;t=1566764624&amp;us=1537650527\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CIDTggMQzPUNGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=449b373e54a124935c06159c877841e9&amp;t=1566764624&amp;us=1046520645\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CMzIkAMQkPQNGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=c3edb9c92bb91a46784c1f0366dd74f6&amp;t=1566764624&amp;us=1211374751\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CNy8ngMQ4IUOGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=6a72a824e868d4f8fa0101d96a6446ae&amp;t=1566764624&amp;us=671980420\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CLzCrAMQ5OwNGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=f368e8be1219622eaeddb1a42f1bcfdd&amp;t=1566764624&amp;us=779274894\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CKCvugMQtP4NGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=26fc933bbc0d1b5c39cf2860e7b8dfc2&amp;t=1566764624&amp;us=1911047685\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CNStyAMQhOENGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=1cf6cf3e63b688cf9222625613d10a50&amp;t=1566764624&amp;us=1550758791\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CNiO1gMQ7OkNGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=822c6c0f71eb3e63c8f09f1fb7c59860&amp;t=1566764624&amp;us=2102653918\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CMT44wMQ1PINGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=f17607b54250ff45027c54ebbd548689&amp;t=1566764624&amp;us=1093644176\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CJjr8QMQwOINGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=982215bf322ed9da64492440750f3ab7&amp;t=1566764624&amp;us=1790518624\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CNjN_wMQrIEOGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=ecec4bfe780b20e804f076e0a7de6703&amp;t=1566764624&amp;us=1380632152\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CITPjQQQyI4OGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=fbbc871ff22dff97224c62cd609ef54d&amp;t=1566764624&amp;us=49951684\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CMzdmwQQzPUNGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=555cb0e0bcc00b5d145c616c2de8acf2&amp;t=1566764624&amp;us=522650065\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CJjTqQQQjN4NGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=18441ea628debe7c06f23c40373bc02f&amp;t=1566764624&amp;us=454459094\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CKSxtwQQ9JUOGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=25e5fdd7593a98a3c421c754fe13c3a2&amp;t=1566764624&amp;us=713586229\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CJjHxQQQ6IIOGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=e837697b5dc0f10cf2d21ee1394178c7&amp;t=1566764624&amp;us=1527803128\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CIDK0wQQiMgNGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=c827e23d691abc08d6ac41318df0f9f3&amp;t=1566764624&amp;us=604931230\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CIiS4QQQ6KQNGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=56c73ee5df6d1ae1b17f60a18c8c2e46&amp;t=1566764624&amp;us=508180227\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CPC27gQQkMUNGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=2d96573910e421864201e357ad280d42&amp;t=1566764624&amp;us=1915097191\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CID8-wQQ-M0NGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=02b63b3f75226fe2540eebd751eea997&amp;t=1566764624&amp;us=1951558729\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CPjJiQUQ0NwNGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=108c92208c6c3f4cf08c731d334796f5&amp;t=1566764624&amp;us=1653078649\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CMimlwUQnNgNGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=c79053ecb335c63900c167dfb54a9b57&amp;t=1566764624&amp;us=1504164799\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/COT-pAUQ1MMNGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=e1ea5f561e7ed6819bf81bba749d7eb8&amp;t=1566764624&amp;us=1519781794\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CLjCsgUQuLYNGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=14617eb2d9fd36266db88948e230ad1a&amp;t=1566764624&amp;us=808160220\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CPD4vwUQpKYNGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=86f58ae2f4b53fa642b61989a5edb138&amp;t=1566764624&amp;us=1186369196\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CJSfzQUQgJwNGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=8bc6c54567500970f39d2c0e6fd28454&amp;t=1566764624&amp;us=1905758420\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CJS72gUQxJoNGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=821b7906f46c875a4a59b62561875882&amp;t=1566764624&amp;us=660555630\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CNjV5wUQzJQUGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=1d07fa4dfe65da879349a2acfebc45fb&amp;t=1566764624&amp;us=18771736\\n#EXTINF:5.0,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CKTq-wUQ-LMLGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=5f96e913c5661aa703440b6a63d859e2&amp;t=1566764624&amp;us=512108196\\n#EXTINF:2.291667,\\nhttps://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/CJyehwYQ1PACGkB1Wm0zMW9WM3gzMEQtSF8tYW1qNHltSHZFUnpKTzB1VERnVXNnTnJzNWRua0c4UDJtdmpKbm16YXE2ZUFPeENB.ts?sign=be3040e336874f8f86aad8810e7a817d&amp;t=1566764624&amp;us=1577376386\\n#EXT-X-ENDLIST\\n\"}]}}",
+      "danmakuCount": 6,
+      "visibleType": 1,
+      "durationMillis": 277291,
+      "title": "今后我与自己流浪",
+      "sizeType": 1,
+      "danmakuCountShow": "6",
+      "fileName": "我的影片.mp4",
+      "playInfos": [{
+          "format": 2,
+          "quality": 1000,
+          "size": 0,
+          "width": 960,
+          "height": 540,
+          "fps": 0,
+          "cdnUrls": [{
+              "url": "https://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/uZm31oV3x30D-H_-amj4yiLyAkManwALxZ-CVX4P6B1jjSy4XsfI-F-_ZLVoNboX.m3u8?sign=a6be208853b693534850f0451ee3261d&amp;t=1566764624&amp;us=885041455",
+              "freeTrafficCdn": false
+          }, {
+              "url": "https://ali-video.acfun.cn/mediacloud/acfun/acfun_video/segment/uZm31oV3x30D-H_-amj4yiLyAkManwALxZ-CVX4P6B1jjSy4XsfI-F-_ZLVoNboX.m3u8?auth_key=1566762824-138297401-0-2fc80f0aed46fccd2d1e36f53d19b8b1",
+              "freeTrafficCdn": false
+          }],
+          "playUrls": ["https://tx-video.acfun.cn/mediacloud/acfun/acfun_video/segment/uZm31oV3x30D-H_-amj4yiLyAkManwALxZ-CVX4P6B1jjSy4XsfI-F-_ZLVoNboX.m3u8?sign=a6be208853b693534850f0451ee3261d&amp;t=1566764624&amp;us=885041455", "https://ali-video.acfun.cn/mediacloud/acfun/acfun_video/segment/uZm31oV3x30D-H_-amj4yiLyAkManwALxZ-CVX4P6B1jjSy4XsfI-F-_ZLVoNboX.m3u8?auth_key=1566762824-138297401-0-2fc80f0aed46fccd2d1e36f53d19b8b1"]
+      }],
+      "id": "10602737"
+  },
+  "coverCdnUrls": [{
+      "url": "https://tx-free-imgs.acfun.cn/Fke4rZy9wuh9EosZxMcE-evcxP62",
+      "freeTrafficCdn": true
+  }, {
+      "url": "https://imgs.aixifan.com/Fke4rZy9wuh9EosZxMcE-evcxP62",
+      "freeTrafficCdn": false
+  }],
+  "viewCountShow": "3,411",
+  "dougaId": "10763950",
+  "isRewardSupportted": true,
+  "commentCountShow": "11",
+  "host-name": "hb2-acfun-kcs153.aliyun",
+  "commentCount": 11,
+  "tagList": [{
+      "name": "张碧晨",
+      "id": "41711"
+  }, {
+      "name": "哪吒降世魔童",
+      "id": "50137"
+  }, {
+      "name": "哪吒",
+      "id": "7216"
+  }, {
+      "name": "翻唱",
+      "id": "58"
+  }],
+  "coverUrl": "https://tx-free-imgs.acfun.cn/Fke4rZy9wuh9EosZxMcE-evcxP62",
+  "danmakuCountShow": "6",
+  "createTimeMillis": 1566129537000,
+  "createTime": "2019-8-18",
+  "superUbb": true,
+  "shareUrl": "https://m.acfun.cn/v/?ac=10763950",
+  "user": {
+      "headUrl": "https://tx-free-imgs.acfun.cn/Fr6SVOHhtvuJV9b68c_UmUj0zlmf?imageslim",
+      "avatarFrame": 0,
+      "contributeCount": "3",
+      "gender": -1,
+      "sexTrend": -1,
+      "followingCount": "2",
+      "isFollowing": false,
+      "fanCount": "127",
+      "followingCountValue": 2,
+      "fanCountValue": 127,
+      "contributeCountValue": 3,
+      "headCdnUrls": [{
+          "url": "https://tx-free-imgs.acfun.cn/Fr6SVOHhtvuJV9b68c_UmUj0zlmf?imageslim",
+          "freeTrafficCdn": true
+      }, {
+          "url": "https://imgs.aixifan.com/Fr6SVOHhtvuJV9b68c_UmUj0zlmf?imageslim",
+          "freeTrafficCdn": false
+      }],
+      "name": "小司pyon",
+      "signature": "大家好&amp;#40;◍˃̶ᗜ˂̶◍&amp;#41;✩微博@小司pyon，ins：meruru_dayo",
+      "id": "19577454"
+  },
+  "isFavorite": false
+}
+</code></pre></div>    </div>
+  </li>
+  <li>最后得到结果数组：
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>json.currentVideoInfo.ksPlayJson..adaptationSet.representation[]
+ps: ..代表需要进行一次string转json操作
+</code></pre></div>    </div>
+    <p>该数组元素包含视频清晰度(bandwidth、codecs、width、height)以及对应下载链接m3u8<code class="highlighter-rouge">url</code></p>
+  </li>
+</ul>
+
+<h2 id="当视频有多p该怎么办">当视频有多P该怎么办？</h2>
+<h3 id="已知网址">已知网址</h3>
+<p>ac10187843的第3个视频，操作和第一个视频一致</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://www.acfun.cn/v/ac10187843_3
+</code></pre></div></div>
+<h3 id="已知ac号和具体id">已知ac号和具体id</h3>
+<p>以<code class="highlighter-rouge">ac10187818</code>的<code class="highlighter-rouge">10205818</code>为例</p>
+<ul>
+  <li>直接访问ac号对应页面
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://www.acfun.cn/v/ac10187818
+</code></pre></div>    </div>
+  </li>
+  <li>抠出对应网址
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data-href='/v/ac10187818_5' title="05" data-id='10205818'
+</code></pre></div>    </div>
+  </li>
+  <li>按照网址已知进行处理</li>
+</ul>
+
+        </article>
+        <hr>
+
+        
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <h2 id="similar_posts">相似文章</h2>
+                        <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2020/06/17/java-add-text-to-gif-7/">Java 真香！如何给Gif添加对白(七)
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2020/06/17/java-add-text-to-gif-6/">Java 真香！如何给Gif添加对白(六)
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2020/06/17/java-add-text-to-gif-5/">Java 真香！如何给Gif添加对白(五)
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2020/06/15/java-add-text-to-gif-4/">Java 真香！如何给Gif添加对白(四)
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2020/06/15/java-add-text-to-gif-3/">Java 真香！如何给Gif添加对白(三)
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2020/06/14/java-add-text-to-gif-2/">Java 真香！如何给Gif添加对白(二)
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+        
+            </ul>
+        
+
+        <div class="post-recent">
+    <div class="pre">
+        
+        <p><strong>上一篇</strong> <a href="/blog/2019/06/03/h5-spider/">科普+笔记向 怎样获取视频的播放链接</a></p>
+        
+    </div>
+    <div class="nex">
+
+        
+        <p><strong>下一篇</strong> <a href="/blog/2019/07/28/java-spider-acfun-down-2/">Acfun接口(二) - 番剧单集下载</a></p>
+        
+    </div>
+</div>
+
+
+        <!-- <h2 id="comments">评论</h2>  
+        
+
+
+
+ -->
+
+
+    </div>
+    <button class="anchor"><i class="fa fa-anchor"></i></button>
+    <div class="right">
+        <div class="wrap">
+
+            <!-- Content -->
+            <div class="side content">
+                <div>
+                    内容
+                </div>
+                <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#similar_posts">相似文章</a></li>
+                    
+                    <!-- <li><a href="#comments">评论</a></li> -->
+                </ul>
+            </div>
+			
+            <!-- 其他div框放到这里 -->
+            <!-- <div class="side">bbbb</div> -->
+        </div>
+    </div>
+</div>
+<script>
+/**
+ * target _blank
+ */
+(function() {
+    var aTags = document.querySelectorAll('article a:not([id])')
+    for (var i = 0; i < aTags.length; i++) {
+        aTags[i].setAttribute('target', '_blank')
+    }
+
+}());
+</script>
+<script src="/js/pageContent.js " charset="utf-8"></script>
+
+
+    <footer class="site-footer">
+
+
+    <div class="wrapper">
+        <p class="description">
+             这是一个缺爱的博客(๑‾ ꇴ ‾๑)！ 
+        </p>
+        <p class="contact">
+            联系我: 
+            <a href="https://github.com/nICEnnnnnnnLee" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
+            <a href="mailto:lijia0732@sina.com" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>  
+            <a href="https://weibo.com/blackhigh" title="Weibo"><i class="fa fa-weibo" aria-hidden="true"></i></a>       
+			<span onclick="copyToClipboard('https://nicelee.top/feed.xml')"><a href="#">订阅我<i class="fa fa-gg"></i></a></span>
+        </p>
+        <p>
+            总pv:<span id="busuanzi_value_site_pv"></span>，uv:<span id="busuanzi_value_site_uv"></span>，本页pv:<span id="busuanzi_value_page_pv"></span>
+        </p>
+        <p class="power">
+            <span>
+            有用链接：
+                <a href="http://www.bejson.com/">BeJSON</a> &nbsp;&nbsp;
+                <a href="http://site.ip138.com/">IP或域名查询</a> &nbsp;&nbsp;
+                <a href="http://ping.chinaz.com/">各地ping</a> &nbsp;&nbsp;
+                <a href="https://tool.lu/">在线工具</a> &nbsp;&nbsp; 
+                <a href="https://www.aliyun.com/">阿里云</a> &nbsp;&nbsp; 
+                <a href="http://patorjk.com/software/taag/">Text转FIGlet</a> &nbsp;&nbsp; 
+                <a href="https://mx-model.ga/">Live2D 模型资源</a> &nbsp;&nbsp;
+
+            </span>
+        </p>
+        <p class="power">
+            <span>
+            除非另有注明，否则本网站上的内容可按 <a href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议许可</a> 或更新版本使用。
+            </span>
+        </p>
+        <p class="power">
+            <span>
+                建站声明详见 <a href="/about/#关于个人博客">[关于]</a>. <a href="/sitemap.xml">[站点地图]</a>. 
+            </span>
+            
+        </p>
+        <p class="power beian">
+        </p>
+		<p class="power">
+            <span>
+                Site powered by <a href="https://jekyllrb.com/">Jekyll</a>.
+            </span>
+            <span>
+                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
+            </span>
+        </p>
+        
+		
+    </div>
+</footer>
+
+
+<!-- mask start -->
+<div id="searchBg"></div>
+<div id="searchDiv">
+	<input id="searchContent" type="text" onkeypress="if(event.keyCode==13) { search();return false;}" value=""/></input>
+    <div id="searchBtn" onclick="search();" /><i class="fa fa-search"></i></div>
+	<span onclick="hidediv();" class="close"></span>
+</div>
+<!-- mask end -->
+<!-- live2d begin -->
+<div id="landlord">
+    <div class="message" style="opacity:0"></div>
+    <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+    <div class="hide-button">隐藏</div>
+</div>
+<!-- live2d end -->
+<script type='text/javascript' src='/js/jquery.min.js '></script>
+<script type='text/javascript'>
+function search(){	
+	var str = document.getElementById("searchContent").value;
+	//console.log(str);
+	setLocalStorage("blogSearchKey",str);
+	hidediv();
+	window.location.href="/archive/";
+}
+function showdiv() {
+	//alert("调用了showdiv()函数");
+	document.getElementById("searchBg").style.display ="block";
+	document.getElementById("searchDiv").style.display ="block";
+
+	//$('body').css("overflow", "hidden");
+	document.getElementsByTagName('body')[0].setAttribute("overflow", "hidden");
+}
+function hidediv() {
+	document.getElementById("searchBg").style.display = 'none';
+	document.getElementById("searchDiv").style.display = 'none';
+	//$('body').css("overflow", "auto");
+	document.getElementsByTagName('body')[0].setAttribute("overflow", "hidden");
+}
+////////////////////////////useful function //////////////////////////////////////
+//写cookies
+function setLocalStorage(name,value)
+{
+	localStorage.setItem(name, JSON.stringify(value));
+}
+//读cookies
+function getLocalStorage(name)
+{
+	return JSON.parse(localStorage.getItem(name));
+}
+//删cookies
+function delLocalStorage(name)
+{
+	localStorage.setItem(name, JSON.stringify(""));
+}
+function copyToClipboard (text) {
+    if(text.indexOf('-') !== -1) {
+        var arr = text.split('-');
+        text = arr[0] + arr[1];
+    }
+    var textArea = document.createElement("textarea");
+      textArea.style.position = 'fixed';
+      textArea.style.top = '0';
+      textArea.style.left = '0';
+      textArea.style.width = '2em';
+      textArea.style.height = '2em';
+      textArea.style.padding = '0';
+      textArea.style.border = 'none';
+      textArea.style.outline = 'none';
+      textArea.style.boxShadow = 'none';
+      textArea.style.background = 'transparent';
+      textArea.value = text;
+      document.body.appendChild(textArea);
+      textArea.select();
+	//alert("调用了复制剪贴板函数");
+      try {
+        var successful = document.execCommand('copy');
+        var msg = successful ? 'Rss源已成功复制到剪贴板' : 'RSS源为:https://nicelee.top/feed.xml';
+		//alert(msg);
+		showTips(msg);
+      } catch (err) {
+		//console.log(err);
+        //alert('该浏览器不支持点击复制到剪贴板');
+		showTips('RSS源为:https://nicelee.top/feed.xml');
+      }
+
+      document.body.removeChild(textArea);
+}
+/*
+<!--  版权维护  -->
+function addLink() {
+//alert("!!!");
+    var body_element = document.body;
+    var selection;
+    selection = window.getSelection();
+    if((selection + "").indexOf("/feed.xml") != -1){
+        return;
+    }
+	if(selection == ""){
+		return;
+	}
+    var locationHref=document.location.href;
+    var appendLink="\r\n------------------------------\r\n 原文出自[ NiceLee的个人博客 ] 转载请保留原文链接: <a href='"+locationHref+"'>"+locationHref+"</a>";
+    if (window.clipboardData) { // Internet Explorer
+        //console.log("调用原生函数");
+        var copytext = selection + appendLink;
+        window.clipboardData.setData ("Text", copytext);
+        return false;
+    } else {
+        //console.log("复杂的套路");
+        var copytext = selection + appendLink;
+        var newdiv = document.createElement('div');
+        newdiv.style.position='absolute';
+        newdiv.style.left='-99999px';
+        body_element.appendChild(newdiv);
+        newdiv.innerHTML = "<pre>" +copytext + "</pre>";
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function() {
+        	body_element.removeChild(newdiv);
+        },0);
+    }
+}
+document.oncopy = addLink;
+*/
+
+//contetn为要显示的内容  
+function showTips( content ){  
+	//alert("调用了复制提示消息函数");
+	//alert("内容为"+ content);
+    //窗口的宽度  
+	//alert(content);
+	var width = 250;
+	var x  = $(window).width()/2 - width/2;	
+	var y = $(window).height()/2 -20;
+	var $i = $("<span/>").text(content);
+	$i.css({
+		"z-index": 999999999999999999999999999,
+		"top": y,
+		"left": x,
+		"position": "absolute",
+		"font-weight": "bold",
+		'padding'   : '3px 5px',  
+		'background': '#8FBC8F',  
+		'font-size' : 12 + 'px',  
+		'margin'    : '0 auto',  
+		'text-align': 'center',  
+		'width'     : width + 'px',  
+		'height'    : 'auto',  
+		'color'     : '#fff'
+	});
+	$("body").append($i);
+	$i.animate({
+		"opacity": 0
+	},
+	3000,
+	function() {
+		//console.log($i.css());
+		$i.remove();
+		//alert('');
+	});
+}     
+</script>
+
+<!-- 窗口失去焦点 -- 别走啊 -->
+<!-- 窗口获得焦点 -- 恢复 -->
+<!-- console 打印figlet-->
+<script>
+var titleOnFocus = document.title;
+var titleOnBlur = "...(*￣０￣)ノ[别走啊…]";
+window.onfocus =function(){
+    document.title = titleOnFocus;
+    //console.log(titleOnFocus);
+}
+window.onblur = function(){
+    document.title = titleOnBlur;
+    //console.log(titleOnBlur);
+}
+
+var figlet = "\n" +
+"        _          _            _               \n" +
+"       (_)        | |          | |              \n" +
+"  _ __  _  ___ ___| | ___  ___ | |_ ___  _ __   \n" +
+" | '_ \\| |/ __/ _ \\ |/ _ \\/ _ \\| __/ _ \\| '_ \\  \n" +
+" | | | | | (_|  __/ |  __/  __/| || (_) | |_) | \n" +
+" |_| |_|_|\\___\\___|_|\\___|\\___(_)__\\___/| .__/  \n" +
+"                                        | |     \n" +
+"                                        |_|     \n" ;
+console.log(figlet);
+console.log("%c小改改爆个照呗\n hentai女个装呗", "color:red;font-size: 50px;font-weight:bold;");
+
+/* 防hentai
+document.onkeydown=function(){
+    var e = window.event||arguments[0];
+    if(e.keyCode==123){
+    	alert('请尊重劳动成果！');
+            return false;
+    }else if((e.ctrlKey)&&(e.shiftKey)&&(e.keyCode==73)){
+    	alert('请尊重劳动成果！');
+            return false;
+    }else if((e.ctrlKey)&&(e.keyCode==85)){
+            alert('请尊重劳动成果！');
+            return false;
+    }else if((e.ctrlKey)&&(e.keyCode==83)){
+           alert('请尊重劳动成果！');
+           return false;
+    }
+}
+document.oncontextmenu=function(){
+	alert('请尊重劳动成果！');
+    return false;
+}*/
+</script>
+
+<!-- live2d Begin-->
+<script type="text/javascript">
+    var message_Path = '/sources/live2d/'
+    var home_Path = 'https://nicelee.top/'
+</script>
+<script type="text/javascript" src="/sources/live2d/js/live2d.js"></script>
+<script type="text/javascript" src="/sources/live2d/js/message.js"></script>
+<script type="text/javascript">
+    var modelList = ["kesshouban_v2", "tia", "wanko", "index", "kanna", "koharu", "umaru", 
+	"22.closet.default.v2", 
+	"22.closet.2018.bls-summer", 
+	"22.closet.2019.summer", 
+	"33.closet.2016.xmas", 
+	"33.closet.2017.tomo-bukatsu", 
+	"33.closet.2018.bls-summer", 
+	"33.closet.2018.bls-winter", 
+	"33.closet.default.v2" ];    
+    var model = modelList[12]; 
+    // kesshouban_v2 血小板
+    // tia  小改改
+    // wanko 小狗狗 
+    // index 魔禁-茵蒂克丝
+    // kanna 康娜龙
+    // koharu 卡哇伊的Q版模型
+    // umaru 干物妹小埋 带声音
+    // 22 哔哩哔哩22娘
+    // 22.v2 哔哩哔哩22娘
+    console.log("live2d模型(小部分)来自官网: http://www.live2d.com/usermanual/cubism2_cn/samples.html");
+    console.log("live2d模型(大部分)来自梦象: https://mx-model.ga/");
+    if( window.document.body.offsetWidth >= 666){
+        loadlive2d("live2d", "/sources/live2d/model/"+ model +"/model.json");
+    }else{
+        //loadlive2d("live2d", "/sources/live2d/model/tia/model_tiny.json");
+        loadlive2d("live2d", "/sources/live2d/model/"+ model +"/model_tiny.json");
+    }
+</script>
+<!-- live2d End-->
+
+<script type="text/javascript">
+	var a_idx = 0;
+	jQuery(document).ready(function($) {
+		$("body").click(function(e) {
+			var a = new Array("大吉大利，今晚吃鸡！", "惊不惊喜，意不意外", "还有这种操作？", "小猪佩奇身上纹，掌声送给社会人", "确认过眼神", "皮一下，很开心", "很好很强大", "C位出道", "你若盛开，清风自来", "如果帅也是一种罪，那我已罪无可赦", "别看资料 ，看聊效！", "感动吗，不敢动", "打call", "我是你的超级英雄");
+			var $i = $("<span/>").text(a[a_idx]);
+			a_idx = (a_idx + 1) % a.length;
+			var x = e.pageX,
+			y = e.pageY;
+			$i.css({
+				"z-index": 999999999999999999999999999,
+				"top": y - 20,
+				"left": x,
+				"position": "absolute",
+				"font-weight": "bold",
+				"color": "#dd3333"
+			});
+			$("body").append($i);
+			$i.animate({
+				"top": y - 180,
+				"opacity": 0
+			},
+			1500,
+			function() {
+				$i.remove();
+				//alert('');
+			});
+		});
+	});
+</script>
+
+
+<script async src="/js/busuanzi.pure.mini.js "></script>
+
+
+    <div class="back-to-top">
+    <a href="#top" data-scroll>
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+    <script src="/js/main.js " charset="utf-8"></script>
+    <script src="/js/smooth-scroll.min.js " charset="utf-8"></script>
+    <script type="text/javascript">
+      smoothScroll.init({
+        speed: 500, // Integer. How fast to complete the scroll in milliseconds
+        easing: 'easeInOutCubic', // Easing pattern to use
+        offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
+      });
+      // 为了底部内容不被遮住
+      $(document).ready(function () {
+        resizeBody();
+      });
+      window.onresize = resizeBody;
+      function resizeBody(){
+        //console.log("resizing Body...");
+        if (window.innerWidth <= 770) {
+            var totalHeight = $("header#top").height() + $(".page.clearfix").height() + $("footer.site-footer").height() +80;
+            document.body.style.height = totalHeight + "px";
+        }else{
+            document.body.style.height = "auto";
+        }
+      }
+    </script>
+	
+	
+    <!-- <script src=" /js/scroll.min.js " charset="utf-8"></script> -->
+  </body>
+
+</html>

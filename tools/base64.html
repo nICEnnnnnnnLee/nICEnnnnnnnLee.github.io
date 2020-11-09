@@ -1,0 +1,213 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="content-type" content="text/html"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Base64编解码</title>
+<script src="https://libs.baidu.com/jquery/1.2.3/jquery.min.js"></script>
+
+<script>
+/* //1.加密  
+var result = Base.encode('125中文');  //--> "MTI15Lit5paH"
+  
+//2.解密  
+var result2 = Base.decode(result); //--> '125中文'
+*/
+
+~(function(root, factory) {
+  if (typeof define === "function" && define.amd) {
+    define([], factory);
+  } else if (typeof module === "object" && module.exports) {
+    module.exports = factory();
+  } else {
+    root.Base = factory();
+  }
+}(this, function() {
+   'use strict';
+    String.prototype.replaceAll = function(s1,s2){
+        var reg=new RegExp(s1,"g"); //创建正则RegExp对象  
+        return this.replace(reg,s2); 
+    }   
+    String.prototype.getValue = function(key) {  
+        var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)", "i");  
+        var r = this.match(reg);  //获取url中"?"符后的字符串并正则匹配
+        var context = "";  
+        if (r != null)  
+             context = r[2];  
+        reg = null;  
+        r = null;  
+        return context == null || context == "" || context == "undefined" ? "" : context;  
+    }
+    function Base64() {
+        // private property
+        this._keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+    }
+    //public method for encoding
+    Base64.prototype.encode = function (input) {
+        var output = "", chr1, chr2, chr3, enc1, enc2, enc3, enc4, i = 0;
+        input = this._utf8_encode(input);
+        while (i < input.length) {
+            chr1 = input.charCodeAt(i++);
+            chr2 = input.charCodeAt(i++);
+            chr3 = input.charCodeAt(i++);
+            enc1 = chr1 >> 2;
+            enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
+            enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
+            enc4 = chr3 & 63;
+            if (isNaN(chr2)) {
+                enc3 = enc4 = 64;
+            } else if (isNaN(chr3)) {
+                enc4 = 64;
+            }
+            output = output +
+            this._keyStr.charAt(enc1) + this._keyStr.charAt(enc2) +
+            this._keyStr.charAt(enc3) + this._keyStr.charAt(enc4);
+        }
+        console.log(output);
+        //不带padding（没有末尾的等于号）
+        if( output.endsWith("===") ){
+            output = output.substr(0 , output.length - 3 );
+        }else if( output.endsWith("==") ){
+            output = output.substr(0 , output.length - 2 );
+        }else if( output.endsWith("=") ){
+            output = output.substr(0 , output.length - 1 );
+        }
+        console.log(output);
+        // url_safe  Base64 编码
+        //把编码内容中的 + 和 / 分别替换为 – 和 _ 这两个字符
+        output = output.replaceAll("/","_");
+        output = output.replaceAll("\\\+","-");
+        //output = output.replace(/\+/g,"-");     
+        return output;
+    }
+
+    // public method for decoding
+    Base64.prototype.decode = function (input) {
+        // url_safe  Base64 编码
+        //把编码内容中的 + 和 / 分别替换为 – 和 _ 这两个字符
+        //console.log(input);
+        //不带padding（没有末尾的等于号）
+        var left = input.length % 4;
+        if( left !=0 ){
+            for(var cnt=0; cnt< 4-left; cnt++){
+                input += '=';
+            }
+        }
+        input = input.replaceAll("-","\+");
+        input = input.replaceAll("_","/");
+        //console.log(input);
+        var output = "", chr1, chr2, chr3, enc1, enc2, enc3, enc4, i = 0;
+        input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+        while (i < input.length) {
+            enc1 = this._keyStr.indexOf(input.charAt(i++));
+            enc2 = this._keyStr.indexOf(input.charAt(i++));
+            enc3 = this._keyStr.indexOf(input.charAt(i++));
+            enc4 = this._keyStr.indexOf(input.charAt(i++));
+            chr1 = (enc1 << 2) | (enc2 >> 4);
+            chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+            chr3 = ((enc3 & 3) << 6) | enc4;
+            output = output + String.fromCharCode(chr1);
+            if (enc3 != 64) {
+                output = output + String.fromCharCode(chr2);
+            }
+            if (enc4 != 64) {
+                output = output + String.fromCharCode(chr3);
+            }
+        }
+        output = this._utf8_decode(output);   
+        return output;
+    }
+
+    // private method for UTF-8 encoding
+    Base64.prototype._utf8_encode = function (string) {
+        string = string.replace(/\r\n/g,"\n");
+        var utftext = "";
+        for (var n = 0; n < string.length; n++) {
+            var c = string.charCodeAt(n);
+            if (c < 128) {
+                utftext += String.fromCharCode(c);
+            } else if((c > 127) && (c < 2048)) {
+                utftext += String.fromCharCode((c >> 6) | 192);
+                utftext += String.fromCharCode((c & 63) | 128);
+            } else {
+                utftext += String.fromCharCode((c >> 12) | 224);
+                utftext += String.fromCharCode(((c >> 6) & 63) | 128);
+                utftext += String.fromCharCode((c & 63) | 128);
+            }
+    
+        }
+        return utftext;
+    }
+
+    // private method for UTF-8 decoding
+    Base64.prototype._utf8_decode = function (utftext) {
+        var string = "", i = 0, c = 0, c1 = 0, c2 = 0, c3 = 0;
+        while ( i < utftext.length ) {
+            c = utftext.charCodeAt(i);
+            if (c < 128) {
+                string += String.fromCharCode(c);
+                i++;
+            } else if((c > 191) && (c < 224)) {
+                c2 = utftext.charCodeAt(i+1);
+                string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
+                i += 2;
+            } else {
+                c2 = utftext.charCodeAt(i+1);
+                c3 = utftext.charCodeAt(i+2);
+                string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+                i += 3;
+            }
+        }
+        return string;
+    }
+    
+    var Base = new Base64();
+    
+    return Base;
+}));
+</script>	
+<script>
+//base64加密 解密
+function encodeStr(){
+  var src = $("#src").val();
+  
+  $("#dst").val(Base.encode(src));
+}
+function decodeStr(){
+    var dst = $("#dst").val();
+  
+  $("#src").val(Base.decode(dst));
+}
+function reset(){
+    $("#dst").val('');
+    $("#src").val('');
+}
+$(document).ready(function(){
+    encodeStr();
+});
+</script>
+<style>
+</style>
+</head>
+<body style="text-align:center;background: url(/sources/pics/FPyBWV.gif);">
+
+<h3>Base64编解码</h3>
+<div style="display:block">
+<textarea id="src" rows="10" cols="50" >
+1234
+</textarea>
+</div>
+<div><input type="button" id="encodeBtn" onclick=encodeStr() value= "编码"></input> 
+<input type="button" id="decodeBtn" onclick=decodeStr() value= "解码"></input>
+<input type="button" id="resetBtn" onclick=reset() value= "重置"></input>
+ </div>
+<div style="display:block;float:top;margin:0 auto">
+<textarea id="dst" rows="10" cols="50" >
+
+</textarea>
+</div>
+</body>
+</html>

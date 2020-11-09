@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8;"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>在线正则表达式测试</title>
+<script src="https://libs.baidu.com/jquery/1.2.3/jquery.min.js"></script>
+
+<script>
+function makeAMatch(){
+    var text = $("#src").val();
+    var option = "";
+    if($("#optionGlobal").attr("checked")){
+        option += "g";
+    }
+    if($("#optionIgnoreCase").attr("checked")){
+        option += "i";
+    }
+    console.log("模式" + option);
+    var pattern = new RegExp($("#textPattern").val(), option);
+    var results = [];
+    var result;
+    var lastResult;
+    while ((result = pattern.exec(text)) != null)  {
+        console.log(result);
+        if(lastResult && lastResult.index == result.index){
+            break;
+        }
+        results.push(result);
+        lastResult = result;
+    }
+    if( results == [] || results.length == 0){
+        $("#result").html("不匹配");
+    }else{
+        var html = "共" + results.length + "处匹配:\r\n";
+        for(var i = 0; i < results.length; i++){
+            html += "------------\r\n";
+            html += "匹配位置:" + results[i].index + "\r\n";
+            html += "匹配结果:" + results[i][0] + "\r\n";                
+        }
+        console.log(html);
+        $("#result").html(html);
+    }
+}
+$(document).ready(function(){
+
+    $(".spec_pattern").click(function(){
+        $("#textPattern").val($(this).attr("pattern"));
+        makeAMatch();
+    });
+    $("#ss_btn").click(function(){
+        makeAMatch();        
+    });
+});
+</script>
+<style>
+.all_an_1 {
+    border: 1px solid #12afff;
+    background-repeat: no-repeat;
+
+    cursor: pointer;
+    height: 23px;
+    padding-top: 0;
+    padding-right: 5px;
+    padding-bottom: 0;
+    padding-left: 5px;
+    margin: 3px;
+    -moz-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+</style>
+</head>
+<body style="text-align:center;background: url(/sources/pics/FPyBWV.gif);">
+
+<h3>在线正则表达式测试</h3>
+<!--  匹配字符串 -->
+<div style="display:block">
+<textarea id="src" rows="10" cols="50" placeholder="在此输入待匹配文本" >
+</textarea>
+</div>
+
+<!--  正则表达式 -->
+<div>
+<form class="well form-inline">
+    <div class="input-prepend">
+    <span class="add-on">正则表达式</span><input type="text" id="textPattern" placeholder="在此输入正则表达式" class="input-xlarge" ></input>
+    </div>
+    <label class="checkbox"><input type="checkbox" value="global" checked="checked" id="optionGlobal" name="optionGlobl"/>全局搜索</label>
+    <label class="checkbox"><input type="checkbox" value="ignoreCase" id="optionIgnoreCase" name="optionIgnoreCase"/>忽略大小写</label>
+    <input id="ss_btn" class="all_an_1" type="button" value="测试匹配" />
+</form>
+<div style="max-width: 377px;margin: 0 auto; text-align:center;">
+<input class="all_an_1 spec_pattern" type="button" pattern="[\u4e00-\u9fa5]" value="匹配中文字" />
+<input class="all_an_1 spec_pattern" type="button" pattern="[^\x00-\xff]" value="匹配双字节" />
+<input class="all_an_1 spec_pattern" type="button" pattern="\n\s*\r" value="匹配空白行" />
+<input class="all_an_1 spec_pattern" type="button" pattern="^-?[1-9]\d*$" value="匹配全整数" />
+<input class="all_an_1 spec_pattern" type="button" pattern="^[1-9]\d*$" value="匹配正整数" />
+<input class="all_an_1 spec_pattern" type="button" pattern="^-[1-9]\d*$" value="匹配负整数" />
+<input class="all_an_1 spec_pattern" type="button" pattern="^[1-9]\d*|0$" value="配非负整数" />
+<input class="all_an_1 spec_pattern" type="button" pattern="^-[1-9]\d*|0$" value="配非正整数" />
+<input class="all_an_1 spec_pattern" type="button" pattern="^[1-9]\d*\.\d*|0\.\d*[1-9]\d*$" value="配正浮点数" />
+<input class="all_an_1 spec_pattern" type="button" pattern="^-[1-9]\d*\.\d*|-0\.\d*[1-9]\d*$" value="配负浮点数" />
+<input class="all_an_1 spec_pattern" type="button" pattern="[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?" value="匹配E-mail" />
+<input class="all_an_1 spec_pattern" type="button" pattern="[a-zA-z]+://[^\s]*" value="配网址URL" />
+<input class="all_an_1 spec_pattern" type="button" pattern="\d{3}-\d{8}|\d{4}-\{7,8}" value="配国内电话" />
+<input class="all_an_1 spec_pattern" type="button" pattern="[1-9][0-9]{4,}" value="配腾讯QQ号" />
+<input class="all_an_1 spec_pattern" type="button" pattern="[1-9]\d{5}(?!\d)" value="匹配中国邮" />
+<input class="all_an_1 spec_pattern" type="button" pattern="^(\d{6})(\d{4})(\d{2})(\d{2})(\d{3})([0-9]|X)$" value="18位身份证" />
+<input class="all_an_1 spec_pattern" type="button" pattern="([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})-(((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)-(0[1-9]|[12][0-9]|30))|(02-(0[1-9]|[1][0-9]|2[0-8])))" value="匹配(年-月-日)格式日期" />
+
+
+</div>
+ </div>
+ 
+ <!--  结果 -->
+<div style="display:block;float:top;margin:0 auto">
+<textarea id="result" rows="10" cols="50" readonly="readonly" >
+
+</textarea>
+</div>
+</body>
+</html>

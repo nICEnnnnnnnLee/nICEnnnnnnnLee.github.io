@@ -1,0 +1,181 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>随机密码生成器</title>
+<script src="https://libs.baidu.com/jquery/1.2.3/jquery.min.js"></script>
+<script>
+    var diction = "";
+    var xiaoXie = "abcdefghijklmnopqrstuvwxyz";
+    var daXie = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    var shuZi = "0123456789";
+    
+    //生成从minNum到maxNum的随机数
+    function randomNum(minNum,maxNum){ 
+        switch(arguments.length){ 
+            case 1: 
+                return parseInt(Math.random()*(minNum+1),10); 
+            break; 
+            case 2: 
+                return parseInt(Math.random()*(maxNum-minNum+1)+minNum,10); 
+            break; 
+                default: 
+                    return 0; 
+                break; 
+        } 
+    }
+    function genDic(){
+        diction = "";
+        if($("#ss_dx").attr("checked")){
+            diction += daXie;
+        }
+        //console.log(diction);
+        if($("#ss_xx").attr("checked")){
+            diction += xiaoXie;
+        }
+        //console.log(diction);
+        if($("#ss_sz").attr("checked")){
+            diction += shuZi;
+        }
+        //console.log(diction);
+        if($("#ss_value_cb").attr("checked")){
+            diction += $("#ss_value").val();
+        }
+        //console.log(diction);
+        if($("#ss_ff_value_cb").attr("checked")){
+            var illegalChars = $("#ss_ff_value").val();
+            for(var i=0; i<illegalChars.length; i++){
+                diction = diction.replace(illegalChars[i],"");
+            }
+            //console.log("去掉了字符" + illegalChars[i]);
+        }
+        console.log(diction);
+        return diction;
+    }
+    
+    function genPwd(){
+        //字典
+        var diction = genDic();
+        //字典长度
+        var dicLen = diction.length;
+        //密码长度
+        var length = $("#ss_cd ").val();
+        //密码
+        var pwd = "";
+        for(var i=0; i<length; i++){
+            var random = randomNum(dicLen - 1);
+            pwd += diction.charAt(random);
+        }
+        $("#ss_result").html(pwd);
+    }
+	$(document).ready(function() {
+        //初始化长度
+        for(var i=1; i<30; i++){
+            $("#ss_cd").append("<option value='" + i +"'>" + i +"</option>"); 
+        }
+         $("#ss_cd ").val(8);
+
+        //设置切换功能
+        $("#ss_value_cb").click(function(){
+            if($("#ss_value").attr("disabled")){
+                $('#ss_value').removeAttr("disabled");
+            }else{
+                $('#ss_value').attr("disabled", "disabled");
+            }
+        });
+        $("#ss_ff_value_cb").click(function(){
+            if($("#ss_ff_value").attr("disabled")){
+                $('#ss_ff_value').removeAttr("disabled");
+            }else{
+                $('#ss_ff_value').attr("disabled", "disabled");
+            }
+        });
+        //设置生成密码功能
+        $("#ss_btn").click(function(){
+            genPwd();
+        });
+		//genDic();
+        //console.log(diction);
+        
+	});
+</script>
+<style>
+.all_an_1 {
+    border: 1px solid #12afff;
+    background-repeat: no-repeat;
+
+    cursor: pointer;
+    height: 23px;
+    padding-top: 0;
+    padding-right: 5px;
+    padding-bottom: 0;
+    padding-left: 5px;
+    margin: 0;
+    -moz-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+</style>
+</head>
+<body
+	style="text-align: center; background: url(/sources/pics/FPyBWV.gif);">
+
+	<h3>随机密码生成器</h3>
+	<div style="display: block">
+		<table width="95%" style="max-width: 450px;" border="0"
+			cellpadding="0" cellspacing="0" bgcolor="#C5D5C5" align="center">
+			<tr>
+				<td><table width="100%" border="0" cellpadding="8"
+						cellspacing="1">
+						<tr>
+							<td width="25%" bgcolor="#F5F5F5" align="center">所用字符</td>
+							<td width="75%" bgcolor="#FFFFFF" ><span
+								style="display: inline-block"> <input id="ss_dx"
+									name="ss_dx" type="checkbox" checked="checked" /> <label
+									for="ss_dx" >A-Z</label>
+							</span> <span style="display: inline-block"> <input id="ss_xx"
+									name="ss_xx" type="checkbox" checked="checked" /> <label
+									for="ss_xx" >a-z</label>
+							</span> <span style="display: inline-block"> <input id="ss_sz"
+									name="ss_sz" type="checkbox" checked="checked" /> <label
+									for="ss_sz" >0-9</label>
+							</span> <span style="display: inline-block"> <label
+									for="ss_value_cb"><input id="ss_value_cb" type="checkbox" /></label> 
+                                    <input id="ss_value" type="text" value="!@#$%^&*" size="7" disabled="disabled" />
+							</span></td>
+						</tr>
+                        <tr>
+							<td bgcolor="#F5F5F5" align="center">非法字符</td>
+							<td bgcolor="#FFFFFF" > 
+                                <span style="display: inline-block"> <label
+									for="ss_ff_value_cb"><input id="ss_ff_value_cb" type="checkbox" /></label> 
+                                    <input id="ss_ff_value" type="text" value="!@#$%^&*" size="20" disabled="disabled" />
+							</span></td>
+						</tr>
+						<tr>
+							<td bgcolor="#F5F5F5" align="center">密码长度</td>
+							<td bgcolor="#FFFFFF" ><span
+								style="display: inline-block"> <select id="ss_cd"
+									name="ss_cd"></select> <label for="ss_cd"
+									>位</label>
+							</span></td>
+						</tr>
+
+						<tr>
+							<td bgcolor="#F5F5F5" align="center">生成结果</td>
+							<td bgcolor="#FFFFFF" id="ss_result" ></td>
+						</tr>
+					</table></td>
+			</tr>
+		</table>
+        <div align="center">
+        <br /><input id="ss_btn" class="all_an_1" type="button" value="生成密码" />
+        </div>
+	</div>
+</body>
+</html>

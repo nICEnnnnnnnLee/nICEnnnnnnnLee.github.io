@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <meta name="Author" content="kk">
+        <meta name="Keywords" content="kk520">
+        <meta name="Description" content="kkkkp">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+		<link rel="dns-prefetch" href="https://cdn.china8net.cn/">
+        <title>蔡徐坤邀请您微信通话</title>
+        <style>
+			html,body{
+				height: 100%;
+				margin: 0;
+                background-color: #e3e9f5;
+			}
+			#container{
+				height: 100%;
+				background: url('/sources/media/cxk/bg.jpg') no-repeat top center/100% 100%;
+			}
+            #jntm{
+                display: none;
+            }
+
+        	audio,#jntm_music{
+        		display: none;
+        	}
+        </style>
+    </head>
+    <body>
+    	<div id="container">
+            <audio id="wx_music" src="/sources/media/cxk/music.mp3" controls="" loop="" autoplay="true" audio="">
+    	</audio>
+    	</div>
+        <div id="jntm">
+            
+        </div>
+        <!-- <audio controls loop="loop" id="play" autoplay="true">
+            <source src="music.mp3" type="video/mpeg">
+			<source src="music.m4a" type="video/mpeg">
+			<source src="music.ogg" type="video/ogg">
+		</audio> -->
+
+		<script>
+			var ele = document.getElementById("wx_music");
+			ele.addEventListener('canplay',function(){
+				setTimeout(function(){
+					ele.play();
+				},500);
+			})
+            document.getElementById("container").onclick = function(){
+		ele.pause();
+                this.removeChild( ele );
+                this.style.display = "none";
+
+                var jntm = document.getElementById("jntm");
+
+                jntm.style.display = "block";
+
+                jntm.innerHTML = '<iframe id="jntm_music" frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=444267215&auto=1&height=66"></iframe>'+
+                    '<img src="/sources/media/cxk/play.gif" width="100%">';
+            };
+		</script></body></html>

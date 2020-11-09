@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>下标电话号码生成器</title>
+<script src="https://libs.baidu.com/jquery/1.2.3/jquery.min.js"></script>
+<script>
+String.prototype.replaceAll = function(s1,s2){
+　　return this.replace(new RegExp(s1,"gm"),s2);
+}
+function copyToClipboard (text) {
+    var textArea = document.createElement("textarea");
+      textArea.style.position = 'fixed';
+      textArea.style.top = '0';
+      textArea.style.left = '0';
+      textArea.style.width = '2em';
+      textArea.style.height = '2em';
+      textArea.style.padding = '0';
+      textArea.style.border = 'none';
+      textArea.style.outline = 'none';
+      textArea.style.boxShadow = 'none';
+      textArea.style.background = 'transparent';
+      textArea.value = text;
+      document.body.appendChild(textArea);
+      textArea.select();
+	//alert("调用了复制剪贴板函数");
+      try {
+        var successful = document.execCommand('copy');
+        var msg = successful ? '成功复制到剪贴板' : '复制到剪贴板失败';
+		alert(msg);
+      } catch (err) {
+        alert('该浏览器不支持点击复制到剪贴板');
+      }
+
+      document.body.removeChild(textArea);
+}
+    var diction = "℡₁₂₃₄₅₆₇₈₉₀";
+
+
+	$(document).ready(function() {
+        console.log(diction[0]);
+        //生成昵称
+        $('#gen_btn').click(function(){  
+            var origin = $("#ss_value ").val();
+            for(var i = 1; i < 10; i++){
+                origin = origin.replaceAll(i , diction[i]);
+            }
+            origin = origin.replaceAll(0 , diction[10]);
+            origin = diction[0] + origin;
+            $("#ss_result").html(origin);
+　　　　});
+        //复制昵称
+        $('#copy_btn').click(function(){  
+　　　　　　copyToClipboard($("#ss_result").html());
+　　　　});
+	});
+</script>
+<style>
+.all_an_1 {
+    border: 1px solid #12afff;
+    background-repeat: no-repeat;
+
+    cursor: pointer;
+    height: 23px;
+    padding-top: 0;
+    padding-right: 5px;
+    padding-bottom: 0;
+    padding-left: 5px;
+    margin: 0;
+    -moz-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+</style>
+</head>
+<body
+	style="text-align: center; background: url(/sources/pics/FPyBWV.gif);">
+
+	<h3>下标电话号码生成器</h3>
+	<div style="display: block">
+		<table width="95%" style="max-width: 450px;" border="0"
+			cellpadding="0" cellspacing="0" bgcolor="#C5D5C5" align="center">
+			<tr>
+				<td><table width="100%" border="0" cellpadding="8"
+						cellspacing="1">
+						
+                        <tr>
+							<td bgcolor="#F5F5F5" align="center">昵称</td>
+							<td bgcolor="#FFFFFF" > 
+                                <span style="display: inline-block"> 
+                                    <input id="ss_value" type="text" placeholder="请输入您的昵称" size="20" oninput = "value=value.replace(/[^\d]/g,'')" />
+							</span></td>
+						</tr>
+						<tr>
+							<td bgcolor="#F5F5F5" align="center">生成结果</td>
+							<td bgcolor="#FFFFFF" id="ss_result" ></td>
+						</tr>
+					</table></td>
+			</tr>
+		</table>
+        <div align="center">
+        <br />
+        <input id="gen_btn" class="all_an_1" type="button" value="生成" />
+        <input id="copy_btn" class="all_an_1" type="button" value="复制" />        
+        </div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Java 一个入门的网络爬虫用例</title>
+    <meta name="description" content="  背景  博客首页的QQ音乐链接又双叒叕失效了,很烦。加上最近碰到了一个很有意思的网站-刘志进实验室。有个想法，我能不能自己实现这样一个类似的功能，通过关键词从QQ音乐获取歌曲信息，然后直接在生成页面。">
+
+    <meta property="og:url" content="https://nicelee.top/blog/2018/10/25/get-qqmusic/">
+    <meta property="og:site_name" content="NiceLee的博客">
+    <meta property="og:title" content="Java 一个入门的网络爬虫用例">
+    <meta property="og:description" content="  背景  博客首页的QQ音乐链接又双叒叕失效了,很烦。加上最近碰到了一个很有意思的网站-刘志进实验室。有个想法，我能不能自己实现这样一个类似的功能，通过关键词从QQ音乐获取歌曲信息，然后直接在生成页面。">
+    <meta property="og:image" content="https://nicelee.top/favicon.ico?">
+    <meta property="og:image:type" content="image/x-icon">
+    
+    <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="stylesheet" href="/css/font-awesome.min.css ">
+    <link rel="stylesheet" href="/css/font-ali.css?v=1.2 ">
+    <link rel="stylesheet" href="/css/main.css?v=1.1 ">
+    <link rel="canonical" href="https://nicelee.top/blog/2018/10/25/get-qqmusic/">
+    <link rel="alternate" type="application/rss+xml" title="NiceLeeのBlog" href="https://nicelee.top/feed.xml ">
+
+	
+
+    <script>
+    // 百度统计代码
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?11f780e4e4ccd4e99b101eac776e93e4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+</head>
+
+    <link rel="stylesheet" href="/sources/live2d/css/live2d.css" />
+  <body>
+	
+		
+		<script type="text/javascript" src="/js/ribbon.min.js "></script>
+		
+	
+	
+    <header id="top">
+    <div class="wrapper">
+        <a href="/" class="brand awsome-font">NiceLeeのBlog</a>
+        <small>用爱发电 bilibili~</small>
+        <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
+        <nav id="headerNav">
+            <ul>
+				<li onclick="showdiv()" >
+                    <a href="#">
+                    <i class="fa fa-search">搜索</i>
+                    </a>
+                </li>
+                <li>
+                    
+                    <a href="/">
+                    
+                        <i class="fa fa-home"></i>主页
+                    </a>
+                </li>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <a href="/archive/">
+                        
+                            <i class="fa fa-archive"></i>归档
+                        </a>
+                    </li>
+                
+                    
+                    <li>
+                        <a href="/ilikemusic/">
+                        
+                            <i class="fa fa-music"></i>音乐
+                        </a>
+                    </li>
+                
+                    
+                    <li>
+                        <a href="/collect/">
+                        
+                            <i class="fa fa-bookmark"></i>收藏
+                        </a>
+                    </li>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <a href="/timeline/">
+                        
+                            <i class="fa fa-clock-o"></i>时间轴
+                        </a>
+                    </li>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <a href="/about/">
+                        
+                            <i class="fa fa-info-circle"></i>关于
+                        </a>
+                    </li>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                				
+				
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+        <div class="page clearfix" post>
+    <div class="left">
+        <h1>Java 一个入门的网络爬虫用例</h1>
+        <div class="label">
+
+            <div class="label-card">
+                <i class="fa fa-calendar"></i>2018-10-25
+            </div>
+
+            <div class="label-card">
+                <i class="fa fa-user"></i>nIceLee
+                
+            </div>
+            <div class="label-card">
+                <p>阅读：<span id="busuanzi_value_page_pv1"></span></p>
+            </div>
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+            
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+            </div>
+
+            <div class="label-card">
+            
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
+    
+        <!--a href="/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a-->
+        <a href="/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a>
+    
+  
+
+</span>
+
+            </div>
+
+        </div>
+        <hr>
+        <article itemscope itemtype="http://schema.org/BlogPosting">
+        <ul id="markdown-toc">
+  <li><a href="#心路历程" id="markdown-toc-心路历程">心路历程</a>    <ul>
+      <li><a href="#没啥难度" id="markdown-toc-没啥难度"><strong><em>没啥难度。</em></strong></a></li>
+      <li><a href="#换个方式so-easy" id="markdown-toc-换个方式so-easy"><strong><em>换个方式So easy！</em></strong></a></li>
+      <li><a href="#wtf什么鬼" id="markdown-toc-wtf什么鬼"><strong><em>WTF什么鬼？</em></strong></a></li>
+      <li><a href="#再来" id="markdown-toc-再来"><strong><em>再来！！</em></strong></a></li>
+    </ul>
+  </li>
+  <li><a href="#具体实现" id="markdown-toc-具体实现">具体实现</a>    <ul>
+      <li><a href="#根据关键词-搜索得到歌曲信息" id="markdown-toc-根据关键词-搜索得到歌曲信息">根据关键词 搜索得到歌曲信息</a></li>
+      <li><a href="#根据songmid得到-歌曲外链" id="markdown-toc-根据songmid得到-歌曲外链">根据songMid得到 歌曲外链</a></li>
+      <li><a href="#根据songmid得到-歌词" id="markdown-toc-根据songmid得到-歌词">根据songMid得到 歌词</a></li>
+      <li><a href="#根据albummid得到-专辑图片链接" id="markdown-toc-根据albummid得到-专辑图片链接">根据albumMid得到 专辑图片链接</a></li>
+    </ul>
+  </li>
+</ul>
+<blockquote>
+  <p><strong>背景</strong> 
+ 博客首页的QQ音乐链接又双叒叕失效了,很烦。加上最近碰到了一个很有意思的网站-<a href="https://music.liuzhijin.cn/">刘志进实验室</a>。有个想法，我能不能自己实现这样一个类似的功能，通过关键词从QQ音乐获取歌曲信息，然后直接在生成页面。</p>
+</blockquote>
+
+<h2 id="心路历程">心路历程</h2>
+<h3 id="没啥难度"><strong><em>没啥难度。</em></strong></h3>
+<p>– 直接扒网站接口，然后通过js直接请求调用来获取信息，这是我的一开始的想法，没啥难度
+<strong>However</strong> 捣鼓了一段时间，发现单纯的前端静态页面没法实现跨域请求，而QQ音乐那边的配置又没法有配合，这个想法废弃掉了。。。<br />
+ ——————-</p>
+<h3 id="换个方式so-easy"><strong><em>换个方式So easy！</em></strong></h3>
+<p>– 这样不行的话，那么客户端直接爬网页吧，在打开QQ音乐主页进行搜索，然后爬页面结果。语言的话，想用python和java都来一遍，先用java吧。</p>
+
+<p>– 在网上看了很多的开源项目，感觉掌握起来很麻烦诶，我也没那么多需求。我想吧，这只是一个入门级的爬虫，其实更多的只是需要html的解析功能。找了半天，感觉jsoup刚刚够用。如果只是返回xml或json的http请求的话，甚至Java自带的java.net.HttpURLConnection也不是不能考虑。就这样决定了，jsoup！！！</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Document</span> <span class="n">doc</span> <span class="o">=</span> <span class="n">Jsoup</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="n">url</span><span class="o">).</span><span class="na">timeout</span><span class="o">(</span><span class="mi">2000</span><span class="o">).</span><span class="na">get</span><span class="o">();</span>
+</code></pre></div></div>
+<p>参考
+<a href="https://www.cnblogs.com/nick-huang/p/3859353.html">通过java.net.URLConnection发送HTTP请求的方法</a><br />
+ ——————-</p>
+<h3 id="wtf什么鬼"><strong><em>WTF什么鬼？</em></strong></h3>
+<p>愉快的打开QQ音乐的网页，然后搜索关键词 - <strong>战 排骨教主</strong>
+<img src="/sources/archive/2018/10/qqpage.png" alt="" />
+最后发现地址如下：
+<a href="https://y.qq.com/portal/search.html#page=1&amp;searchid=1&amp;remoteplace=txt.yqq.top&amp;t=song&amp;w=%E6%88%98%20%E6%8E%92%E9%AA%A8%E6%95%99%E4%B8%BB">https://y.qq.com/portal/search.html#page=1&amp;searchid=1&amp;remoteplace=txt.yqq.top&amp;t=song&amp;w=%E6%88%98%20%E6%8E%92%E9%AA%A8%E6%95%99%E4%B8%BB</a><br />
+这个地址显然很容易解析，极具规律，那么接下来的工作就简单了…简单了…单了…了…</p>
+
+<p>WTF?! tm爬出来的html和浏览器里面取出来的压根匹配不上，一点有用信息也没有<br />
+ ——————-</p>
+<h3 id="再来"><strong><em>再来！！</em></strong></h3>
+<p><em>两种思路</em>：<br />
+一种不再爬页面html了，直接人工监听获取数据请求的接口，使用http请求获取数据，刚刚好QQ音乐返回的是json格式，很好解决<br />
+-<a href="https://blog.csdn.net/u011343735/article/details/53507569">java爬虫获取动态网页的数据的一种思路</a><br />
+-<a href="https://m.jb51.net/article/146841.htm">浏览器进行js调试</a><br />
+-<a href="https://blog.csdn.net/dietime1943/article/details/79035779?from=timeline">java json解析</a></p>
+
+<p>一种模拟加载html后js的各种行为，然后再爬,这里想要采用的是HtmlUnit + Jsoup框架<br />
+ <a href="https://blog.csdn.net/u011343735/article/details/53507569">使用HtmlUnit + Jsoup解析js动态生成的网页</a></p>
+
+<p>本文选用的是第一种,第二种有时间再尝试<br />
+ ——————-</p>
+<h2 id="具体实现">具体实现</h2>
+
+<h3 id="根据关键词-搜索得到歌曲信息">根据关键词 搜索得到歌曲信息</h3>
+<p>进行以下过程可以获取歌曲信息。
+—- 打开QQ音乐搜索页，搜索关键词 - <strong>战 排骨教主</strong><br />
+按F12，打开Network进行查看，刷新网页复现过程<br />
+我们可以根据Response来Check是否是我们想要的请求<br />
+<img src="/sources/archive/2018/10/songLst.png" alt="" /> 
+点击Headers可以发现我们想要的Request URL。<br />
+<img src="/sources/archive/2018/10/songLst2.png" alt="" /></p>
+
+<p>具体实现如下：</p>
+<ul>
+  <li>生成RequestUrl<br />
+其中p=1 代表分页第一页，n=3代表每页3个数据，w代表关键词
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">private</span> <span class="n">String</span> <span class="nf">genSongLstUrl</span><span class="o">(</span> <span class="n">String</span> <span class="n">keyWord</span> <span class="o">){</span>
+      <span class="k">try</span> <span class="o">{</span>
+          <span class="n">StringBuffer</span> <span class="n">sbUrl</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>
+          <span class="n">sbUrl</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"https://c.y.qq.com/soso/fcgi-bin/client_search_cp?ct=24&amp;qqmusic_ver=1298&amp;new_json=1&amp;t=0&amp;aggr=1&amp;cr=1&amp;p=1&amp;n=3&amp;w="</span><span class="o">);</span>
+          <span class="n">sbUrl</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="na">net</span><span class="o">.</span><span class="na">URLEncoder</span><span class="o">.</span><span class="na">encode</span><span class="o">(</span><span class="n">keyWord</span><span class="o">,</span><span class="s">"utf-8"</span><span class="o">));</span>
+          <span class="k">return</span> <span class="n">sbUrl</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+      <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+          <span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">"Method - querySongLstUrl : keyWord to Url error"</span><span class="o">);</span>
+          <span class="k">return</span> <span class="s">""</span><span class="o">;</span>
+      <span class="o">}</span>
+		
+  <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>发送Http请求
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">private</span> <span class="n">String</span> <span class="nf">getJsonStr</span><span class="o">(</span> <span class="n">String</span> <span class="n">url</span> <span class="o">){</span>
+      <span class="n">Response</span> <span class="n">res</span><span class="o">;</span>
+      <span class="k">try</span> <span class="o">{</span>
+          <span class="n">res</span> <span class="o">=</span> <span class="n">Jsoup</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="n">url</span><span class="o">)</span>
+                  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"Accept"</span><span class="o">,</span> <span class="s">"*/*"</span><span class="o">)</span>
+                  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"Accept-Encoding"</span><span class="o">,</span> <span class="s">"gzip, deflate, sdch, br"</span><span class="o">)</span>
+                  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"Accept-Language"</span><span class="o">,</span><span class="s">"zh-CN,zh;q=0.8"</span><span class="o">)</span>
+                  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"Content-Type"</span><span class="o">,</span> <span class="s">"application/json;charset=UTF-8"</span><span class="o">)</span>
+                  <span class="o">.</span><span class="na">userAgent</span><span class="o">(</span><span class="s">"Mozilla/5.0 (Windows NT 10.0; WOW64)"</span><span class="o">)</span>
+                  <span class="o">.</span><span class="na">referrer</span><span class="o">(</span><span class="s">"https://y.qq.com/portal/player.html"</span><span class="o">)</span>
+                  <span class="o">.</span><span class="na">ignoreContentType</span><span class="o">(</span><span class="kc">true</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+          <span class="n">String</span> <span class="n">jsonStr</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="na">body</span><span class="o">();</span>
+          <span class="c1">//System.out.println(jsonStr);</span>
+          <span class="k">return</span> <span class="n">jsonStr</span><span class="o">;</span>
+      <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+          <span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">"Connect to url: %s response error!\n"</span><span class="o">,</span><span class="n">url</span><span class="o">);</span>
+          <span class="k">return</span> <span class="s">""</span><span class="o">;</span>
+      <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>json解析如下：
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Song</span><span class="o">&gt;</span> <span class="nf">jsonToSongList</span><span class="o">(</span> <span class="n">String</span> <span class="n">jsonStr</span> <span class="o">){</span>
+      <span class="n">jsonStr</span> <span class="o">=</span> <span class="n">jsonStr</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s">"callback("</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
+      <span class="n">jsonStr</span> <span class="o">=</span> <span class="n">jsonStr</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="n">jsonStr</span><span class="o">.</span><span class="na">length</span><span class="o">()-</span><span class="mi">1</span><span class="o">);</span>
+      <span class="c1">//System.out.println(jsonStr);</span>
+      <span class="n">List</span><span class="o">&lt;</span><span class="n">Song</span><span class="o">&gt;</span> <span class="n">lstSong</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+      <span class="n">JSONArray</span> <span class="n">jsonArr</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">(</span><span class="n">jsonStr</span><span class="o">)</span>
+              <span class="o">.</span><span class="na">getJSONObject</span><span class="o">(</span><span class="s">"data"</span><span class="o">)</span>
+              <span class="o">.</span><span class="na">getJSONObject</span><span class="o">(</span><span class="s">"song"</span><span class="o">)</span>
+              <span class="o">.</span><span class="na">getJSONArray</span><span class="o">(</span><span class="s">"list"</span><span class="o">);</span>
+		
+      <span class="c1">//System.out.printf("共有%d个搜索结果:\n------------\n",jsonArr.length());</span>
+      <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">jsonArr</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">i</span><span class="o">++){</span>
+          <span class="c1">//System.out.printf(" 当前第一个歌曲%d信息:\n",i+1);</span>
+          <span class="n">Song</span> <span class="n">song</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Song</span><span class="o">();</span>
+          <span class="n">JSONObject</span> <span class="n">json</span> <span class="o">=</span> <span class="n">jsonArr</span><span class="o">.</span><span class="na">getJSONObject</span><span class="o">(</span><span class="n">i</span><span class="o">);</span><span class="c1">//第i首歌曲</span>
+          <span class="n">song</span><span class="o">.</span><span class="na">mid</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"mid"</span><span class="o">);</span><span class="c1">//title</span>
+          <span class="n">song</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"name"</span><span class="o">);</span><span class="c1">//title</span>
+          <span class="n">song</span><span class="o">.</span><span class="na">singer</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="na">getJSONArray</span><span class="o">(</span><span class="s">"singer"</span><span class="o">)</span>
+                  <span class="o">.</span><span class="na">getJSONObject</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="na">getString</span><span class="o">(</span><span class="s">"name"</span><span class="o">);</span><span class="c1">//title</span>
+          <span class="n">song</span><span class="o">.</span><span class="na">singermid</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="na">getJSONArray</span><span class="o">(</span><span class="s">"singer"</span><span class="o">)</span>
+                  <span class="o">.</span><span class="na">getJSONObject</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="na">getString</span><span class="o">(</span><span class="s">"mid"</span><span class="o">);</span>
+          <span class="n">song</span><span class="o">.</span><span class="na">album</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="na">getJSONObject</span><span class="o">(</span><span class="s">"album"</span><span class="o">).</span><span class="na">getString</span><span class="o">(</span><span class="s">"name"</span><span class="o">);</span>
+          <span class="n">song</span><span class="o">.</span><span class="na">albumMid</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="na">getJSONObject</span><span class="o">(</span><span class="s">"album"</span><span class="o">).</span><span class="na">getString</span><span class="o">(</span><span class="s">"mid"</span><span class="o">);</span>
+          <span class="c1">//System.out.printf("		歌曲mid: %s\n",song.mid);</span>
+          <span class="c1">//System.out.printf("		曲名: %s\n",song.name);</span>
+          <span class="c1">//System.out.printf("		演唱者: %s ,对应mid: %s\n",song.singer,song.mid);</span>
+          <span class="c1">//System.out.printf("		专辑: %s ,对应mid: %s\n",song.album,song.albumMid);</span>
+          <span class="c1">//System.out.printf("------------\n");</span>
+          <span class="n">lstSong</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">song</span><span class="o">);</span>
+      <span class="o">}</span>
+      <span class="k">return</span> <span class="n">lstSong</span><span class="o">;</span>
+  <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="根据songmid得到-歌曲外链">根据songMid得到 歌曲外链</h3>
+<p>—- 打开QQ音乐搜索页，搜索关键词 - <strong>战 排骨教主</strong>，点击播放其中一首歌曲，会弹出另一个页面<br />
+和以上类似，不过监控的是弹出的另一个页面</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="kd">private</span> <span class="n">String</span> <span class="nf">genSongLinkUrl</span><span class="o">(</span> <span class="n">String</span> <span class="n">songMid</span><span class="o">){</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="kd">final</span> <span class="n">String</span> <span class="n">urlHeader</span> <span class="o">=</span> <span class="s">"https://u.y.qq.com/cgi-bin/musicu.fcg?data="</span><span class="o">;</span>
+			<span class="n">String</span> <span class="n">urlData</span> <span class="o">=</span> <span class="s">"{\"req_0\":{\"module\":\"vkey.GetVkeyServer\",\"method\":\"CgiGetVkey\",\"param\":{\"guid\":\"2857186708\",\"songmid\":[\"%s\"],\"songtype\":[0],\"uin\":\"0\",\"loginflag\":1,\"platform\":\"20\"}},\"comm\":{\"uin\":0,\"format\":\"json\",\"ct\":20,\"cv\":0}}"</span><span class="o">;</span>
+			<span class="n">urlData</span> <span class="o">=</span> <span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="n">urlData</span><span class="o">,</span> <span class="n">songMid</span><span class="o">);</span>
+			<span class="n">urlData</span> <span class="o">=</span> <span class="n">java</span><span class="o">.</span><span class="na">net</span><span class="o">.</span><span class="na">URLEncoder</span><span class="o">.</span><span class="na">encode</span><span class="o">(</span><span class="n">urlData</span><span class="o">,</span><span class="s">"utf-8"</span><span class="o">);</span>
+			<span class="k">return</span> <span class="n">urlHeader</span> <span class="o">+</span> <span class="n">urlData</span><span class="o">;</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">UnsupportedEncodingException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">"Method - querySongLstUrl : keyWord to Url error"</span><span class="o">);</span>
+			<span class="k">return</span> <span class="s">""</span><span class="o">;</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+</code></pre></div></div>
+<h3 id="根据songmid得到-歌词">根据songMid得到 歌词</h3>
+<p>—- 打开QQ音乐搜索页，搜索关键词 - <strong>战 排骨教主</strong>，点击播放其中一首歌曲，会弹出另一个页面<br />
+和以上类似，不过监控的是弹出的另一个页面</p>
+
+<p>需要注意的是，Refer需要设置https://y.qq.com，否则无法成功</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Jsoup</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="n">url</span><span class="o">).</span><span class="na">referrer</span><span class="o">(</span><span class="s">"https://y.qq.com/portal/player.html"</span><span class="o">)</span>
+</code></pre></div></div>
+<p>RequestUrl如下：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">String</span> <span class="n">dstUrl</span> <span class="o">=</span> <span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"https://c.y.qq.com/lyric/fcgi-bin/fcg_query_lyric_new.fcg?callback=MusicJsonCallback_lrc&amp;pcachetime=1540437434727&amp;songmid=%s&amp;g_tk=5381&amp;jsonpCallback=MusicJsonCallback_lrc&amp;loginUin=0&amp;hostUin=0&amp;format=jsonp&amp;inCharset=utf8&amp;outCharset=utf-8&amp;notice=0&amp;platform=yqq&amp;needNewCode=0"</span><span class="o">,</span><span class="n">songMid</span><span class="o">);</span>
+</code></pre></div></div>
+<p>解析需要用到Base64：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="kd">private</span> <span class="n">String</span> <span class="nf">jsonToLyric</span><span class="o">(</span><span class="n">String</span> <span class="n">jsonStr</span><span class="o">){</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">jsonStr</span> <span class="o">=</span> <span class="n">jsonStr</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s">"MusicJsonCallback_lrc("</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
+			<span class="n">jsonStr</span> <span class="o">=</span> <span class="n">jsonStr</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s">"})"</span><span class="o">,</span> <span class="s">"}"</span><span class="o">);</span>
+
+			<span class="n">String</span> <span class="n">lyricOrg</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">(</span><span class="n">jsonStr</span><span class="o">)</span>
+					<span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"lyric"</span><span class="o">);</span>
+			<span class="kd">final</span> <span class="n">Base64</span><span class="o">.</span><span class="na">Decoder</span> <span class="n">decoder</span> <span class="o">=</span> <span class="n">Base64</span><span class="o">.</span><span class="na">getDecoder</span><span class="o">();</span>
+			<span class="c1">//解码</span>
+			<span class="n">String</span> <span class="n">lyric</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="n">decoder</span><span class="o">.</span><span class="na">decode</span><span class="o">(</span><span class="n">lyricOrg</span><span class="o">),</span> <span class="s">"UTF-8"</span><span class="o">);</span>
+			<span class="c1">//System.out.printf("歌词\n%s\n\n",lyric);	</span>
+			<span class="k">return</span> <span class="n">lyric</span><span class="o">;</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span>  <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+			<span class="k">return</span> <span class="s">""</span><span class="o">;</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="根据albummid得到-专辑图片链接">根据albumMid得到 专辑图片链接</h3>
+<p>这个可以直接生成url，没法通过监听http请求实现，具体方法可以参考：<br />
+-<a href="https://m.jb51.net/article/146841.htm">浏览器进行js调试</a></p>
+
+<p>在跑的时候看到有如下js代码：</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">getMidPic</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">t</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">t</span> <span class="o">=</span> <span class="nx">t</span> <span class="o">||</span> <span class="p">{};</span>
+	<span class="kd">var</span> <span class="nx">e</span> <span class="o">=</span> <span class="s2">"//y.gtimg.cn/mediastyle/macmusic_v4/extra/default_cover.png?max_age=31536000"</span>
+	  <span class="p">,</span> <span class="nx">o</span> <span class="o">=</span> <span class="nx">t</span><span class="p">.</span><span class="nx">page</span>
+	  <span class="p">,</span> <span class="nx">n</span> <span class="o">=</span> <span class="nx">t</span><span class="p">.</span><span class="nx">type</span>
+	  <span class="p">,</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">t</span><span class="p">.</span><span class="nx">mid</span><span class="p">;</span>
+	<span class="k">return</span> <span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span> <span class="o">&amp;&amp;</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="mi">150</span> <span class="o">==</span> <span class="nx">n</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">n</span> <span class="o">=</span> <span class="mi">300</span><span class="p">),</span>
+	<span class="p">(</span><span class="mi">68</span> <span class="o">==</span> <span class="nx">n</span> <span class="o">||</span> <span class="mi">90</span> <span class="o">==</span> <span class="nx">n</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">n</span> <span class="o">=</span> <span class="mi">150</span><span class="p">)),</span>
+	<span class="s2">"string"</span> <span class="o">==</span> <span class="k">typeof</span> <span class="nx">i</span> <span class="o">&amp;&amp;</span> <span class="nx">i</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;=</span> <span class="mi">14</span> <span class="p">?</span> <span class="p">(</span><span class="nx">o</span> <span class="o">=</span> <span class="s2">"album"</span> <span class="o">==</span> <span class="nx">o</span> <span class="p">?</span> <span class="s2">"T002"</span> <span class="p">:</span> <span class="s2">"singer"</span> <span class="o">==</span> <span class="nx">o</span> <span class="p">?</span> <span class="s2">"T001"</span> <span class="p">:</span> <span class="nx">o</span><span class="p">,</span>
+	<span class="nx">e</span> <span class="o">=</span> <span class="s2">"//y.gtimg.cn/music/photo_new/"</span> <span class="o">+</span> <span class="nx">o</span> <span class="o">+</span> <span class="s2">"R"</span> <span class="o">+</span> <span class="p">(</span><span class="nx">n</span> <span class="o">||</span> <span class="mi">68</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"x"</span> <span class="o">+</span> <span class="p">(</span><span class="nx">n</span> <span class="o">||</span> <span class="mi">68</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"M000"</span> <span class="o">+</span> <span class="nx">i</span> <span class="o">+</span> <span class="s2">".jpg?max_age=2592000"</span><span class="p">)</span> <span class="p">:</span> <span class="nx">i</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">e</span> <span class="o">=</span> <span class="s2">"//y.gtimg.cn/music/photo/"</span> <span class="o">+</span> <span class="nx">o</span> <span class="o">+</span> <span class="s2">"_"</span> <span class="o">+</span> <span class="p">(</span><span class="nx">n</span> <span class="o">||</span> <span class="mi">68</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"/"</span> <span class="o">+</span> <span class="nx">i</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">+</span> <span class="s2">"/"</span> <span class="o">+</span> <span class="p">(</span><span class="nx">n</span> <span class="o">||</span> <span class="mi">68</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"_"</span> <span class="o">+</span> <span class="nx">o</span> <span class="o">+</span> <span class="s2">"pic_"</span> <span class="o">+</span> <span class="nx">i</span> <span class="o">+</span> <span class="s2">"_0.jpg?max_age=2592000"</span><span class="p">),</span>
+	<span class="nx">e</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>所以能够直接生成：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">String</span> <span class="n">dstUrl</span> <span class="o">=</span> <span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"https://y.gtimg.cn/music/photo_new/T001R300x300M000%s.jpg?max_age=2592000"</span><span class="o">,</span><span class="n">albumMid</span><span class="o">);</span>
+</code></pre></div></div>
+<hr />
+<p>##最后的话<br />
+阿西吧，多做多会，以后不掉坑额(⊙﹏⊙)<br />
+附上<a href="https://gitee.com/NiceLeee/getMusicInfo">代码</a></p>
+
+
+        </article>
+        <hr>
+
+        
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <h2 id="similar_posts">相似文章</h2>
+                        <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2020/06/17/java-add-text-to-gif-7/">Java 真香！如何给Gif添加对白(七)
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2020/06/17/java-add-text-to-gif-6/">Java 真香！如何给Gif添加对白(六)
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2020/06/17/java-add-text-to-gif-5/">Java 真香！如何给Gif添加对白(五)
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2020/06/15/java-add-text-to-gif-4/">Java 真香！如何给Gif添加对白(四)
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2020/06/15/java-add-text-to-gif-3/">Java 真香！如何给Gif添加对白(三)
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2020/06/14/java-add-text-to-gif-2/">Java 真香！如何给Gif添加对白(二)
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+        
+        
+            </ul>
+        
+
+        <div class="post-recent">
+    <div class="pre">
+        
+        <p><strong>上一篇</strong> <a href="/blog/2018/10/24/ali-mask-background/">前端 一个网站背景水印图片插件</a></p>
+        
+    </div>
+    <div class="nex">
+
+        
+        <p><strong>下一篇</strong> <a href="/blog/2018/10/28/get-qqmusic-2/">Java jsonp异域获取QQ音乐链接</a></p>
+        
+    </div>
+</div>
+
+
+        <!-- <h2 id="comments">评论</h2>  
+        
+
+
+
+ -->
+
+
+    </div>
+    <button class="anchor"><i class="fa fa-anchor"></i></button>
+    <div class="right">
+        <div class="wrap">
+
+            <!-- Content -->
+            <div class="side content">
+                <div>
+                    内容
+                </div>
+                <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#similar_posts">相似文章</a></li>
+                    
+                    <!-- <li><a href="#comments">评论</a></li> -->
+                </ul>
+            </div>
+			
+            <!-- 其他div框放到这里 -->
+            <!-- <div class="side">bbbb</div> -->
+        </div>
+    </div>
+</div>
+<script>
+/**
+ * target _blank
+ */
+(function() {
+    var aTags = document.querySelectorAll('article a:not([id])')
+    for (var i = 0; i < aTags.length; i++) {
+        aTags[i].setAttribute('target', '_blank')
+    }
+
+}());
+</script>
+<script src="/js/pageContent.js " charset="utf-8"></script>
+
+
+    <footer class="site-footer">
+
+
+    <div class="wrapper">
+        <p class="description">
+             这是一个缺爱的博客(๑‾ ꇴ ‾๑)！ 
+        </p>
+        <p class="contact">
+            联系我: 
+            <a href="https://github.com/nICEnnnnnnnLee" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
+            <a href="mailto:lijia0732@sina.com" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>  
+            <a href="https://weibo.com/blackhigh" title="Weibo"><i class="fa fa-weibo" aria-hidden="true"></i></a>       
+			<span onclick="copyToClipboard('https://nicelee.top/feed.xml')"><a href="#">订阅我<i class="fa fa-gg"></i></a></span>
+        </p>
+        <p>
+            总pv:<span id="busuanzi_value_site_pv"></span>，uv:<span id="busuanzi_value_site_uv"></span>，本页pv:<span id="busuanzi_value_page_pv"></span>
+        </p>
+        <p class="power">
+            <span>
+            有用链接：
+                <a href="http://www.bejson.com/">BeJSON</a> &nbsp;&nbsp;
+                <a href="http://site.ip138.com/">IP或域名查询</a> &nbsp;&nbsp;
+                <a href="http://ping.chinaz.com/">各地ping</a> &nbsp;&nbsp;
+                <a href="https://tool.lu/">在线工具</a> &nbsp;&nbsp; 
+                <a href="https://www.aliyun.com/">阿里云</a> &nbsp;&nbsp; 
+                <a href="http://patorjk.com/software/taag/">Text转FIGlet</a> &nbsp;&nbsp; 
+                <a href="https://mx-model.ga/">Live2D 模型资源</a> &nbsp;&nbsp;
+
+            </span>
+        </p>
+        <p class="power">
+            <span>
+            除非另有注明，否则本网站上的内容可按 <a href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议许可</a> 或更新版本使用。
+            </span>
+        </p>
+        <p class="power">
+            <span>
+                建站声明详见 <a href="/about/#关于个人博客">[关于]</a>. <a href="/sitemap.xml">[站点地图]</a>. 
+            </span>
+            
+        </p>
+        <p class="power beian">
+        </p>
+		<p class="power">
+            <span>
+                Site powered by <a href="https://jekyllrb.com/">Jekyll</a>.
+            </span>
+            <span>
+                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
+            </span>
+        </p>
+        
+		
+    </div>
+</footer>
+
+
+<!-- mask start -->
+<div id="searchBg"></div>
+<div id="searchDiv">
+	<input id="searchContent" type="text" onkeypress="if(event.keyCode==13) { search();return false;}" value=""/></input>
+    <div id="searchBtn" onclick="search();" /><i class="fa fa-search"></i></div>
+	<span onclick="hidediv();" class="close"></span>
+</div>
+<!-- mask end -->
+<!-- live2d begin -->
+<div id="landlord">
+    <div class="message" style="opacity:0"></div>
+    <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+    <div class="hide-button">隐藏</div>
+</div>
+<!-- live2d end -->
+<script type='text/javascript' src='/js/jquery.min.js '></script>
+<script type='text/javascript'>
+function search(){	
+	var str = document.getElementById("searchContent").value;
+	//console.log(str);
+	setLocalStorage("blogSearchKey",str);
+	hidediv();
+	window.location.href="/archive/";
+}
+function showdiv() {
+	//alert("调用了showdiv()函数");
+	document.getElementById("searchBg").style.display ="block";
+	document.getElementById("searchDiv").style.display ="block";
+
+	//$('body').css("overflow", "hidden");
+	document.getElementsByTagName('body')[0].setAttribute("overflow", "hidden");
+}
+function hidediv() {
+	document.getElementById("searchBg").style.display = 'none';
+	document.getElementById("searchDiv").style.display = 'none';
+	//$('body').css("overflow", "auto");
+	document.getElementsByTagName('body')[0].setAttribute("overflow", "hidden");
+}
+////////////////////////////useful function //////////////////////////////////////
+//写cookies
+function setLocalStorage(name,value)
+{
+	localStorage.setItem(name, JSON.stringify(value));
+}
+//读cookies
+function getLocalStorage(name)
+{
+	return JSON.parse(localStorage.getItem(name));
+}
+//删cookies
+function delLocalStorage(name)
+{
+	localStorage.setItem(name, JSON.stringify(""));
+}
+function copyToClipboard (text) {
+    if(text.indexOf('-') !== -1) {
+        var arr = text.split('-');
+        text = arr[0] + arr[1];
+    }
+    var textArea = document.createElement("textarea");
+      textArea.style.position = 'fixed';
+      textArea.style.top = '0';
+      textArea.style.left = '0';
+      textArea.style.width = '2em';
+      textArea.style.height = '2em';
+      textArea.style.padding = '0';
+      textArea.style.border = 'none';
+      textArea.style.outline = 'none';
+      textArea.style.boxShadow = 'none';
+      textArea.style.background = 'transparent';
+      textArea.value = text;
+      document.body.appendChild(textArea);
+      textArea.select();
+	//alert("调用了复制剪贴板函数");
+      try {
+        var successful = document.execCommand('copy');
+        var msg = successful ? 'Rss源已成功复制到剪贴板' : 'RSS源为:https://nicelee.top/feed.xml';
+		//alert(msg);
+		showTips(msg);
+      } catch (err) {
+		//console.log(err);
+        //alert('该浏览器不支持点击复制到剪贴板');
+		showTips('RSS源为:https://nicelee.top/feed.xml');
+      }
+
+      document.body.removeChild(textArea);
+}
+/*
+<!--  版权维护  -->
+function addLink() {
+//alert("!!!");
+    var body_element = document.body;
+    var selection;
+    selection = window.getSelection();
+    if((selection + "").indexOf("/feed.xml") != -1){
+        return;
+    }
+	if(selection == ""){
+		return;
+	}
+    var locationHref=document.location.href;
+    var appendLink="\r\n------------------------------\r\n 原文出自[ NiceLee的个人博客 ] 转载请保留原文链接: <a href='"+locationHref+"'>"+locationHref+"</a>";
+    if (window.clipboardData) { // Internet Explorer
+        //console.log("调用原生函数");
+        var copytext = selection + appendLink;
+        window.clipboardData.setData ("Text", copytext);
+        return false;
+    } else {
+        //console.log("复杂的套路");
+        var copytext = selection + appendLink;
+        var newdiv = document.createElement('div');
+        newdiv.style.position='absolute';
+        newdiv.style.left='-99999px';
+        body_element.appendChild(newdiv);
+        newdiv.innerHTML = "<pre>" +copytext + "</pre>";
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function() {
+        	body_element.removeChild(newdiv);
+        },0);
+    }
+}
+document.oncopy = addLink;
+*/
+
+//contetn为要显示的内容  
+function showTips( content ){  
+	//alert("调用了复制提示消息函数");
+	//alert("内容为"+ content);
+    //窗口的宽度  
+	//alert(content);
+	var width = 250;
+	var x  = $(window).width()/2 - width/2;	
+	var y = $(window).height()/2 -20;
+	var $i = $("<span/>").text(content);
+	$i.css({
+		"z-index": 999999999999999999999999999,
+		"top": y,
+		"left": x,
+		"position": "absolute",
+		"font-weight": "bold",
+		'padding'   : '3px 5px',  
+		'background': '#8FBC8F',  
+		'font-size' : 12 + 'px',  
+		'margin'    : '0 auto',  
+		'text-align': 'center',  
+		'width'     : width + 'px',  
+		'height'    : 'auto',  
+		'color'     : '#fff'
+	});
+	$("body").append($i);
+	$i.animate({
+		"opacity": 0
+	},
+	3000,
+	function() {
+		//console.log($i.css());
+		$i.remove();
+		//alert('');
+	});
+}     
+</script>
+
+<!-- 窗口失去焦点 -- 别走啊 -->
+<!-- 窗口获得焦点 -- 恢复 -->
+<!-- console 打印figlet-->
+<script>
+var titleOnFocus = document.title;
+var titleOnBlur = "...(*￣０￣)ノ[别走啊…]";
+window.onfocus =function(){
+    document.title = titleOnFocus;
+    //console.log(titleOnFocus);
+}
+window.onblur = function(){
+    document.title = titleOnBlur;
+    //console.log(titleOnBlur);
+}
+
+var figlet = "\n" +
+"        _          _            _               \n" +
+"       (_)        | |          | |              \n" +
+"  _ __  _  ___ ___| | ___  ___ | |_ ___  _ __   \n" +
+" | '_ \\| |/ __/ _ \\ |/ _ \\/ _ \\| __/ _ \\| '_ \\  \n" +
+" | | | | | (_|  __/ |  __/  __/| || (_) | |_) | \n" +
+" |_| |_|_|\\___\\___|_|\\___|\\___(_)__\\___/| .__/  \n" +
+"                                        | |     \n" +
+"                                        |_|     \n" ;
+console.log(figlet);
+console.log("%c小改改爆个照呗\n hentai女个装呗", "color:red;font-size: 50px;font-weight:bold;");
+
+/* 防hentai
+document.onkeydown=function(){
+    var e = window.event||arguments[0];
+    if(e.keyCode==123){
+    	alert('请尊重劳动成果！');
+            return false;
+    }else if((e.ctrlKey)&&(e.shiftKey)&&(e.keyCode==73)){
+    	alert('请尊重劳动成果！');
+            return false;
+    }else if((e.ctrlKey)&&(e.keyCode==85)){
+            alert('请尊重劳动成果！');
+            return false;
+    }else if((e.ctrlKey)&&(e.keyCode==83)){
+           alert('请尊重劳动成果！');
+           return false;
+    }
+}
+document.oncontextmenu=function(){
+	alert('请尊重劳动成果！');
+    return false;
+}*/
+</script>
+
+<!-- live2d Begin-->
+<script type="text/javascript">
+    var message_Path = '/sources/live2d/'
+    var home_Path = 'https://nicelee.top/'
+</script>
+<script type="text/javascript" src="/sources/live2d/js/live2d.js"></script>
+<script type="text/javascript" src="/sources/live2d/js/message.js"></script>
+<script type="text/javascript">
+    var modelList = ["kesshouban_v2", "tia", "wanko", "index", "kanna", "koharu", "umaru", 
+	"22.closet.default.v2", 
+	"22.closet.2018.bls-summer", 
+	"22.closet.2019.summer", 
+	"33.closet.2016.xmas", 
+	"33.closet.2017.tomo-bukatsu", 
+	"33.closet.2018.bls-summer", 
+	"33.closet.2018.bls-winter", 
+	"33.closet.default.v2" ];    
+    var model = modelList[12]; 
+    // kesshouban_v2 血小板
+    // tia  小改改
+    // wanko 小狗狗 
+    // index 魔禁-茵蒂克丝
+    // kanna 康娜龙
+    // koharu 卡哇伊的Q版模型
+    // umaru 干物妹小埋 带声音
+    // 22 哔哩哔哩22娘
+    // 22.v2 哔哩哔哩22娘
+    console.log("live2d模型(小部分)来自官网: http://www.live2d.com/usermanual/cubism2_cn/samples.html");
+    console.log("live2d模型(大部分)来自梦象: https://mx-model.ga/");
+    if( window.document.body.offsetWidth >= 666){
+        loadlive2d("live2d", "/sources/live2d/model/"+ model +"/model.json");
+    }else{
+        //loadlive2d("live2d", "/sources/live2d/model/tia/model_tiny.json");
+        loadlive2d("live2d", "/sources/live2d/model/"+ model +"/model_tiny.json");
+    }
+</script>
+<!-- live2d End-->
+
+<script type="text/javascript">
+	var a_idx = 0;
+	jQuery(document).ready(function($) {
+		$("body").click(function(e) {
+			var a = new Array("大吉大利，今晚吃鸡！", "惊不惊喜，意不意外", "还有这种操作？", "小猪佩奇身上纹，掌声送给社会人", "确认过眼神", "皮一下，很开心", "很好很强大", "C位出道", "你若盛开，清风自来", "如果帅也是一种罪，那我已罪无可赦", "别看资料 ，看聊效！", "感动吗，不敢动", "打call", "我是你的超级英雄");
+			var $i = $("<span/>").text(a[a_idx]);
+			a_idx = (a_idx + 1) % a.length;
+			var x = e.pageX,
+			y = e.pageY;
+			$i.css({
+				"z-index": 999999999999999999999999999,
+				"top": y - 20,
+				"left": x,
+				"position": "absolute",
+				"font-weight": "bold",
+				"color": "#dd3333"
+			});
+			$("body").append($i);
+			$i.animate({
+				"top": y - 180,
+				"opacity": 0
+			},
+			1500,
+			function() {
+				$i.remove();
+				//alert('');
+			});
+		});
+	});
+</script>
+
+
+<script async src="/js/busuanzi.pure.mini.js "></script>
+
+
+    <div class="back-to-top">
+    <a href="#top" data-scroll>
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+    <script src="/js/main.js " charset="utf-8"></script>
+    <script src="/js/smooth-scroll.min.js " charset="utf-8"></script>
+    <script type="text/javascript">
+      smoothScroll.init({
+        speed: 500, // Integer. How fast to complete the scroll in milliseconds
+        easing: 'easeInOutCubic', // Easing pattern to use
+        offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
+      });
+      // 为了底部内容不被遮住
+      $(document).ready(function () {
+        resizeBody();
+      });
+      window.onresize = resizeBody;
+      function resizeBody(){
+        //console.log("resizing Body...");
+        if (window.innerWidth <= 770) {
+            var totalHeight = $("header#top").height() + $(".page.clearfix").height() + $("footer.site-footer").height() +80;
+            document.body.style.height = totalHeight + "px";
+        }else{
+            document.body.style.height = "auto";
+        }
+      }
+    </script>
+	
+	
+    <!-- <script src=" /js/scroll.min.js " charset="utf-8"></script> -->
+  </body>
+
+</html>

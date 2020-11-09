@@ -1,0 +1,37 @@
+
+@font-face {font-family: "iconfont";
+  src: url('../fonts/font-ali/iconfont.eot'); /* IE9*/
+  src: url('../fonts/font-ali/embedded-opentype.eot') format('embedded-opentype'), /* IE6-IE8 */
+  url('../fonts/font-ali/woff.woff') format('woff'), /* chrome, firefox */
+  url('../fonts/font-ali/truetype.ttf') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('../fonts/font-ali/svg.svg') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-zhihu:before { content: "\e634"; }
+
+.icon-daoruzhihu:before { content: "\e61b"; }
+
+/* covered_by_your_graceregular 
+https://www.fontke.com/font/16437787/
+*/
+@font-face {
+  font-family: "covered_by_your_graceregular";
+  src: url("../fonts/coveredbyyourgrace-webfont/coveredbyyourgrace-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/coveredbyyourgrace-webfont/coveredbyyourgrace-webfont.svg#covered_by_your_graceregular") format("svg"), url("../fonts/coveredbyyourgrace-webfont/coveredbyyourgrace-webfont.woff") format("woff"), url("../fonts/coveredbyyourgrace-webfont/coveredbyyourgrace-webfont.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
+.awsome-font {
+    font-size: 18px;
+    font-family: "covered_by_your_graceregular", "MingLiU";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}

@@ -1,0 +1,143 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8;"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://libs.baidu.com/jquery/1.2.3/jquery.min.js"></script>
+
+  <script type="text/javascript">
+  var data1;
+  $(document).ready(function() {
+	
+	// 开启定时任务，时间间隔为30s。
+	 setInterval(function(){
+		getHitokoto();
+	 }, 10000);
+	 
+  });
+	function getHitokoto(){
+		var xhr = getHttpObj();
+        xhr.open("get", "https://hitokoto.jijidown.com/v1/api/hitokoto?maxlength=80", true);
+		xhr.setRequestHeader("Accept", "*/*");
+		xhr.setRequestHeader("Accept-Language", "zh-CN,zh;q=0.8");
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;");//缺少这句，后台无法获取参数
+        xhr.onreadystatechange = function() {
+            //console.log(xhr.responseText);
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                setHitokoto(xhr.responseText);
+            }
+        };
+        var content = "appid=11111&sign=222222222";
+        xhr.send();
+	}
+	function setHitokoto(data){
+		//console.log(data);
+		//data = data.replace("：",":");
+		var hitokoto = JSON.parse(data);
+		//console.log(hitokoto.source);
+		//console.log(hitokoto.hitokoto);
+		var str = hitokoto.hitokoto + "&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;" + hitokoto.source;
+		$(".hitokoto").html(str);
+	}
+	function getHttpObj() {
+		var httpobj = null;
+		try {
+			httpobj = new ActiveXObject("Msxml2.XMLHTTP");
+		}
+		catch (e) {
+			try {
+				httpobj = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			catch (e1) {
+				httpobj = new XMLHttpRequest();
+			}
+		}
+		return httpobj;
+	}
+
+  </script>
+  <style>
+  body{
+	text-align: center;	
+    width: 100%;
+    height: 100%;
+    background-size:cover;
+    background: url(https://piccdn.freejishu.com/images/2018/03/11/qf3cu.jpg) no-repeat;
+	overflow: hidden;
+	background-color: rgba(0,0,0,0.3);
+  }
+  .middle{
+	margin:0 auto;
+	width: 225px;
+	height: 117px;
+	border: solid 1px;
+  }
+  .vertical_middle_main{
+	width: 98%;
+	height: 98%;
+    display: table;
+	font-family: Hiragino Sans GB,Microsoft YaHei,Arial,sans-serif !important;
+    text-align: center;
+    cursor: default;
+    font-size: 14px;
+  }
+  .vertical_middle_box{
+	vertical-align: middle;
+	display: table-cell;
+  }
+  .hitokoto{	
+    text-align: center;
+    cursor: default;
+    font-size: 14px;
+	-webkit-animation-name:glow;/*动画名次*/
+    -webkit-animation-duration:10s;/*动画总长度*/
+    -webkit-animation-iteration-count:infinite;/*动画重复播放次数 ?infinite 无限*/
+    -webkit-animation-timing-function:ease-in;/*动画类型 可选ease, linear, ease-out,ease-in-out和自定义类型cubic-bezier*/
+    -moz-animation-name:glow;
+    -moz-animation-duration:10s;
+    -moz-animation-iteration-count:infinite;
+    -moz-animation-timing-function:ease-in;
+    animation-name:glow;
+	animation-duration:10s;
+	animation-iteration-count:infinite;
+	animation-timing-function:ease-in;
+  }
+   
+  
+  @-webkit-keyframes glow{
+    0%{opacity: 0}
+    25%{opacity: 0.5}
+    50%{opacity: 1}
+    75%{opacity: 0.5}
+    100%{opacity: 0}
+    }
+    @-moz-keyframes glow{
+    0%{opacity: 0}
+    25%{opacity: 0.5}
+    50%{opacity: 1}
+    75%{opacity: 0.5}
+    100%{opacity: 0}
+    }
+    keyframes glow{
+    0%{opacity: 0}
+    25%{opacity: 0.5}
+    50%{opacity: 1}
+    75%{opacity: 0.5}
+    100%{opacity: 0}
+    }
+  </style>
+</head>
+<p>看过这个效果很赞<a href="https://hitokoto.cn/">hitokoto一言</a></p>
+<p> <a href="https://www.bilibilijj.com/">收藏的api来自唧唧</a></p>
+<div class="middle">
+<div class="vertical_middle_main"> 
+	<div class="vertical_middle_box">
+		<div class="hitokoto"> 
+				<a href="https://www.bilibilijj.com/">唧唧</a>
+		</div>
+	</div>
+</div>
+</div>
+</body>
+</html>

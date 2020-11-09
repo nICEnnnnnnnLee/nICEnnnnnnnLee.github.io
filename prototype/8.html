@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8;"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://libs.baidu.com/jquery/1.2.3/jquery.min.js"></script>
+
+  <title>一个pdf预览API</title>
+	
+
+</head>
+<body>
+
+
+<div id="pdf1" style="width:100vw; height:100vh;">It appears you don't have Adobe Reader or PDF support in this web browser. <a href="file:///D:/Workspace/resume.pdf">Click here to download the PDF</a>
+</div>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.1.1/pdfobject.min.js"></script>
+	<script>PDFObject.embed("/sources/archive/resume.pdf", "#pdf1");</script>
+</body>
+</html>

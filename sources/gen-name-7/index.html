@@ -1,0 +1,202 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>心形花型星形字符</title>
+<script src="https://libs.baidu.com/jquery/1.2.3/jquery.min.js"></script>
+<script>
+String.prototype.replaceAll = function(s1,s2){
+　　return this.replace(new RegExp(s1,"gm"),s2);
+}
+function copyToClipboard (text) {
+    var textArea = document.createElement("textarea");
+      textArea.style.position = 'fixed';
+      textArea.style.top = '0';
+      textArea.style.left = '0';
+      textArea.style.width = '2em';
+      textArea.style.height = '2em';
+      textArea.style.padding = '0';
+      textArea.style.border = 'none';
+      textArea.style.outline = 'none';
+      textArea.style.boxShadow = 'none';
+      textArea.style.background = 'transparent';
+      textArea.value = text;
+      document.body.appendChild(textArea);
+      textArea.select();
+	//alert("调用了复制剪贴板函数");
+      try {
+        var successful = document.execCommand('copy');
+        var msg = successful ? '成功复制到剪贴板' : '复制到剪贴板失败';
+		alert(msg);
+      } catch (err) {
+        alert('该浏览器不支持点击复制到剪贴板');
+      }
+
+      document.body.removeChild(textArea);
+}
+    var str = "🇦🇧🇨🇩🇪🇫🇬🇭🇮🇯🇰🇱🇲🇳🇴🇵🇶🇷🇸🇹🇺🇻🇼🇽🇾🇿";
+    var dic = [];
+	$(document).ready(function() {
+        
+        //复制昵称
+        $('.char').click(function(){  
+　　　　　　copyToClipboard($(this).html());
+　　　　});
+	});
+</script>
+<style>
+.char {
+    display: inline-block;
+    line-height: 40px;
+    width: 40px;
+    height: 40px;
+    float: left;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+</style>
+</head>
+<body
+	style="text-align: center; background: url(/sources/pics/FPyBWV.gif);">
+
+	<h3>心形花型星形字符</h3>
+	<div style="display: block">
+		<div class="weui-cells__title">心形图案</div>
+			<div class="weui-cells">
+							<p class="char" data-char="❦">❦</p>	
+							<p class="char" data-char="❧">❧</p>	
+							<p class="char" data-char="☙">☙</p>	
+							<p class="char" data-char="❥">❥</p>	
+							<p class="char" data-char="❣">❣</p>	
+							<p class="char" data-char="♡">♡</p>	
+							<p class="char" data-char="♥">♥</p>	
+							<p class="char" data-char="❤">❤</p>	
+							<p class="char" data-char="➳">➳</p>	
+							<p class="char" data-char="ღ">ღ</p>	
+							<p class="char" data-char="💌">💌</p>	
+							<p class="char" data-char="🏩">🏩</p>	
+							<p class="char" data-char="💓">💓</p>	
+							<p class="char" data-char="💔">💔</p>	
+							<p class="char" data-char="💕">💕</p>	
+							<p class="char" data-char="💖">💖</p>	
+							<p class="char" data-char="💗">💗</p>	
+							<p class="char" data-char="💘">💘</p>	
+							<p class="char" data-char="💙">💙</p>	
+							<p class="char" data-char="💚">💚</p>	
+							<p class="char" data-char="💛">💛</p>	
+							<p class="char" data-char="💜">💜</p>	
+							<p class="char" data-char="💝">💝</p>	
+							<p class="char" data-char="💞">💞</p>	
+							<p class="char" data-char="💟">💟</p>	
+							<p class="char" data-char="💑">💑</p>	
+						</div>
+
+			<div style="clear: both;"></div>
+						<div class="weui-cells__title">花型图案</div>
+			<div class="weui-cells">
+							<p class="char" data-char="⚜">⚜</p>	
+							<p class="char" data-char="✥">✥</p>	
+							<p class="char" data-char="✤">✤</p>	
+							<p class="char" data-char="✻">✻</p>	
+							<p class="char" data-char="✼">✼</p>	
+							<p class="char" data-char="✽">✽</p>	
+							<p class="char" data-char="✾">✾</p>	
+							<p class="char" data-char="❀">❀</p>	
+							<p class="char" data-char="✿">✿</p>	
+							<p class="char" data-char="❁">❁</p>	
+							<p class="char" data-char="❃">❃</p>	
+							<p class="char" data-char="❇">❇</p>	
+							<p class="char" data-char="❈">❈</p>	
+							<p class="char" data-char="❉">❉</p>	
+							<p class="char" data-char="❊">❊</p>	
+							<p class="char" data-char="❋">❋</p>	
+							<p class="char" data-char="⚘">⚘</p>	
+							<p class="char" data-char="⁕">⁕</p>	
+							<p class="char" data-char="ꙮ">ꙮ</p>	
+							<p class="char" data-char="ꕤ">ꕤ</p>	
+							<p class="char" data-char="ꕥ">ꕥ</p>	
+							<p class="char" data-char="☘">☘</p>	
+							<p class="char" data-char="᪥">᪥</p>	
+							<p class="char" data-char="🍀">🍀</p>	
+							<p class="char" data-char="🌼">🌼</p>	
+							<p class="char" data-char="🌻">🌻</p>	
+							<p class="char" data-char="🌺">🌺</p>	
+							<p class="char" data-char="🌹">🌹</p>	
+							<p class="char" data-char="🌸">🌸</p>	
+							<p class="char" data-char="🌷">🌷</p>	
+							<p class="char" data-char="💐">💐</p>	
+						</div>
+
+			<div style="clear: both;"></div>
+						<div class="weui-cells__title">星星图标</div>
+			<div class="weui-cells">
+							<p class="char" data-char="★">★</p>	
+							<p class="char" data-char="☆">☆</p>	
+							<p class="char" data-char="✪">✪</p>	
+							<p class="char" data-char="✫">✫</p>	
+							<p class="char" data-char="✯">✯</p>	
+							<p class="char" data-char="✡">✡</p>	
+							<p class="char" data-char="&#9885;">&#9885;</p>	
+							<p class="char" data-char="&#9913;">&#9913;</p>	
+							<p class="char" data-char="✵">✵</p>	
+							<p class="char" data-char="❉">❉</p>	
+							<p class="char" data-char="❋">❋</p>	
+							<p class="char" data-char="✺">✺</p>	
+							<p class="char" data-char="✹">✹</p>	
+							<p class="char" data-char="✸">✸</p>	
+							<p class="char" data-char="✶">✶</p>	
+							<p class="char" data-char="✷">✷</p>	
+							<p class="char" data-char="✵">✵</p>	
+							<p class="char" data-char="✴">✴</p>	
+							<p class="char" data-char="✳">✳</p>	
+							<p class="char" data-char="✲">✲</p>	
+							<p class="char" data-char="✱">✱</p>	
+							<p class="char" data-char="✧">✧</p>	
+							<p class="char" data-char="✦">✦</p>	
+							<p class="char" data-char="⍟">⍟</p>	
+							<p class="char" data-char="⊛">⊛</p>	
+							<p class="char" data-char="⁕">⁕</p>	
+							<p class="char" data-char="🔯">🔯</p>	
+							<p class="char" data-char="🌠">🌠</p>	
+							<p class="char" data-char="🌟">🌟</p>	
+							<p class="char" data-char="﹡">﹡</p>	
+							<p class="char" data-char="❃">❃</p>	
+							<p class="char" data-char="❂">❂</p>	
+							<p class="char" data-char="✼">✼</p>	
+							<p class="char" data-char="✻">✻</p>	
+							<p class="char" data-char="✰">✰</p>	
+							<p class="char" data-char="⍣">⍣</p>	
+							<p class="char" data-char="✭">✭</p>	
+							<p class="char" data-char="≛">≛</p>	
+							<p class="char" data-char="*">*</p>	
+							<p class="char" data-char="٭">٭</p>	
+						</div>
+
+			<div style="clear: both;"></div>
+						<div class="weui-cells__title">星座图标</div>
+			<div class="weui-cells">
+							<p class="char" data-char="♈">♈</p>	
+							<p class="char" data-char="♉">♉</p>	
+							<p class="char" data-char="♊">♊</p>	
+							<p class="char" data-char="♋">♋</p>	
+							<p class="char" data-char="♌">♌</p>	
+							<p class="char" data-char="♍">♍</p>	
+							<p class="char" data-char="♎">♎</p>	
+							<p class="char" data-char="♏">♏</p>	
+							<p class="char" data-char="♐">♐</p>	
+							<p class="char" data-char="♑">♑</p>	
+							<p class="char" data-char="♒">♒</p>	
+							<p class="char" data-char="♓">♓</p>	
+							<p class="char" data-char="⛎">⛎</p>	
+						</div>
+
+			<div style="clear: both;"></div>
+        <br />
+        </div>
+	</div>
+</body>
+</html>

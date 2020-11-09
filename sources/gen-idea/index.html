@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>随机の想法生成器</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://libs.baidu.com/jquery/1.2.3/jquery.min.js"></script>
+<style type="text/css">
+/*<![CDATA[*/
+* {
+	margin:0;
+	padding:0;
+	border:0;
+}
+body {
+	background-color: #000;
+}
+div.main {
+	height: 104px;
+	margin-top: 220px;
+	margin-left: 10%;
+	margin-right: 10%;
+	background-image: url("/images/bg.png");
+	background-repeat: no-repeat;
+	background-position: bottom right;
+}
+
+p {
+	color: #FFF;
+	height: 81px;
+	padding-bottom: 3px;
+	line-height: 78px;
+	font-size: 78px;
+	font-family: "Microsoft YaHei", "SimHei", "Tahoma", "Simsun";
+	margin-right: 60px;
+	padding: 0 20px 0 20px;
+	text-align: center;
+	border-bottom: #FFF solid 1px;
+}
+@media screen and (max-width:700px) {
+    p {
+        color: #FFF;
+        height: 33px;
+        padding-bottom: 3px;
+        line-height: 30px;
+        font-size: 30px;
+        font-family: "Microsoft YaHei", "SimHei", "Tahoma", "Simsun";
+        margin-right: 0;
+        padding: 0 20px 0 20px;
+        text-align: center;
+        border-bottom: #FFF solid 1px;
+    }
+}
+/*]]>*/
+</style>
+</head>
+
+<body>
+	<div class="main">
+		<p>
+	
+		</p>
+	</div>
+<script>
+//生成从minNum到maxNum的随机数
+function randomNum(minNum,maxNum){ 
+    switch(arguments.length){ 
+        case 1: 
+            return parseInt(Math.random()*(minNum+1),10); 
+        break; 
+        case 2: 
+            return parseInt(Math.random()*(maxNum-minNum+1)+minNum,10); 
+        break; 
+            default: 
+                return 0; 
+            break; 
+    } 
+}
+
+$(document).ready(function() {
+    var ra1 = randomNum(1, 20);
+    var ra2 = randomNum(0, 95);
+    var htmlobj=$.ajax({
+        url:"/sources/data/adj_" + ra1 + ".txt",
+        async:false
+    });
+    var adj = htmlobj.responseText.split(" ")[ra2];
+    console.log(adj);
+    
+    ra1 = randomNum(1, 20);
+    ra2 = randomNum(0, 95);
+    htmlobj=$.ajax({
+        url:"/sources/data/n_" + ra1 + ".txt",
+        async:false
+    });
+    var noun = htmlobj.responseText.split(" ")[ra2];
+    console.log(noun);
+
+    $(".main p").html(adj + "的" + noun);
+});
+</script>
+</body>
+</html>

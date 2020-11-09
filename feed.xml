@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>NiceLeeのBlog</title>
+    <description>NiceLee的个人博客</description>
+    <link>https://nicelee.top/</link>
+    <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Mon, 09 Nov 2020 10:50:07 +0800</pubDate>
+    <lastBuildDate>Mon, 09 Nov 2020 10:50:07 +0800</lastBuildDate>
+    <generator>Jekyll v3.8.4</generator>
+    
+      <item>
+        <title>【ReadMe】微信运动作弊的操作指引(春雨)</title>
+        <description>服务器快到期，如无意外可能转静态托管了。 &lt;br /&gt;
+那么一些功能实现起来就会有些麻烦，是时候考虑一下移动端实现了。    &lt;br /&gt;
+乐心不能第三方同步，那么只能回退到春雨了。
+
+</description>
+        <pubDate>Sat, 31 Oct 2020 11:49:01 +0800</pubDate>
+        <link>https://nicelee.top/blog/2020/10/31/weixin-step-counter-cheater-6/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2020/10/31/weixin-step-counter-cheater-6/</guid>
+        
+        <category>微信运动</category>
+        
+        
+        <category>小技巧</category>
+        
+      </item>
+    
+      <item>
+        <title>【ReadMe】微信运动作弊的操作指引(乐心)</title>
+        <description>服务器快到期，如无意外可能转静态托管了。 &lt;br /&gt;
+那么一些功能实现起来就会有些麻烦，是时候考虑一下移动端实现了。    &lt;br /&gt;
+&lt;strong&gt;更新：需要绑定乐心手环才能实现第三方数据同步&lt;/strong&gt;
+
+</description>
+        <pubDate>Fri, 11 Sep 2020 11:49:01 +0800</pubDate>
+        <link>https://nicelee.top/blog/2020/09/11/weixin-step-counter-cheater-5/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2020/09/11/weixin-step-counter-cheater-5/</guid>
+        
+        <category>微信运动</category>
+        
+        
+        <category>小技巧</category>
+        
+      </item>
+    
+      <item>
+        <title>微信运动的作弊方法(再续)</title>
+        <description>春雨计步器这几天不能用了，于是只能换个羊毛薅。搜了一下，乐心运动感觉还行。&lt;br /&gt;
+不多说，原理也是关注公众号的形式。
+
+</description>
+        <pubDate>Wed, 09 Sep 2020 11:49:01 +0800</pubDate>
+        <link>https://nicelee.top/blog/2020/09/09/weixin-step-counter-cheater-4/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2020/09/09/weixin-step-counter-cheater-4/</guid>
+        
+        <category>微信运动</category>
+        
+        
+        <category>小技巧</category>
+        
+      </item>
+    
+      <item>
+        <title>Java 真香！如何给Gif添加对白(七)</title>
+        <description>根据调试好的参数，以没有对话的GIF为模板，加上自定义对话，生成GIF
+
+</description>
+        <pubDate>Wed, 17 Jun 2020 12:49:01 +0800</pubDate>
+        <link>https://nicelee.top/blog/2020/06/17/java-add-text-to-gif-7/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2020/06/17/java-add-text-to-gif-7/</guid>
+        
+        <category>Java</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
+    
+      <item>
+        <title>Java 真香！如何给Gif添加对白(六)</title>
+        <description>调试：对话的文字应当摆放到图像的哪个位置
+
+</description>
+        <pubDate>Wed, 17 Jun 2020 09:49:01 +0800</pubDate>
+        <link>https://nicelee.top/blog/2020/06/17/java-add-text-to-gif-6/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2020/06/17/java-add-text-to-gif-6/</guid>
+        
+        <category>Java</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
+    
+      <item>
+        <title>Java 真香！如何给Gif添加对白(五)</title>
+        <description>如何分离有对话的GIF，并记录相应对话和帧数。
+
+</description>
+        <pubDate>Wed, 17 Jun 2020 08:49:01 +0800</pubDate>
+        <link>https://nicelee.top/blog/2020/06/17/java-add-text-to-gif-5/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2020/06/17/java-add-text-to-gif-5/</guid>
+        
+        <category>Java</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
+    
+      <item>
+        <title>Java 真香！如何给Gif添加对白(四)</title>
+        <description>如何获取GIF素材。
+
+</description>
+        <pubDate>Mon, 15 Jun 2020 12:49:01 +0800</pubDate>
+        <link>https://nicelee.top/blog/2020/06/15/java-add-text-to-gif-4/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2020/06/15/java-add-text-to-gif-4/</guid>
+        
+        <category>Java</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
+    
+      <item>
+        <title>Java 真香！如何给Gif添加对白(三)</title>
+        <description>如何将多帧图像按照恒定帧率生成GIF。
+
+</description>
+        <pubDate>Mon, 15 Jun 2020 11:49:01 +0800</pubDate>
+        <link>https://nicelee.top/blog/2020/06/15/java-add-text-to-gif-3/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2020/06/15/java-add-text-to-gif-3/</guid>
+        
+        <category>Java</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
+    
+      <item>
+        <title>Java 真香！如何给Gif添加对白(二)</title>
+        <description>如何对单帧图像进行处理。
+
+</description>
+        <pubDate>Sun, 14 Jun 2020 12:49:01 +0800</pubDate>
+        <link>https://nicelee.top/blog/2020/06/14/java-add-text-to-gif-2/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2020/06/14/java-add-text-to-gif-2/</guid>
+        
+        <category>Java</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
+    
+      <item>
+        <title>Java 真香！如何给Gif添加对白(一)</title>
+        <description>&lt;code class=&quot;highlighter-rouge&quot;&gt;王境则·真香.gif&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;谁赞成谁反对.gif&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;为所欲为.gif&lt;/code&gt;…&lt;br /&gt;
+ 网络上有很多搞笑的gif图片，里面的对白还是可以自定义的。 &lt;br /&gt;
+ 想搞这个想了很久了，最近终于把它实现了。
+
+</description>
+        <pubDate>Sun, 14 Jun 2020 11:49:01 +0800</pubDate>
+        <link>https://nicelee.top/blog/2020/06/14/java-add-text-to-gif/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2020/06/14/java-add-text-to-gif/</guid>
+        
+        <category>Java</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
+    
+  </channel>
+</rss>

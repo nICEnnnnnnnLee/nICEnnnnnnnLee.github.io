@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>DNS污染、解决方案以及自动化</title>
+    <meta name="description" content="最近在捣鼓逆向的同时沉迷于Github Workflow，总想利用它来整点骚东西，遂有此文。">
+
+    <meta property="og:url" content="https://nicelee.top/blog/2020/05/23/github-workflow-2/">
+    <meta property="og:site_name" content="NiceLee的博客">
+    <meta property="og:title" content="DNS污染、解决方案以及自动化">
+    <meta property="og:description" content="最近在捣鼓逆向的同时沉迷于Github Workflow，总想利用它来整点骚东西，遂有此文。">
+    <meta property="og:image" content="https://nicelee.top/favicon.ico?">
+    <meta property="og:image:type" content="image/x-icon">
+    
+    <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="stylesheet" href="/css/font-awesome.min.css ">
+    <link rel="stylesheet" href="/css/font-ali.css?v=1.2 ">
+    <link rel="stylesheet" href="/css/main.css?v=1.1 ">
+    <link rel="canonical" href="https://nicelee.top/blog/2020/05/23/github-workflow-2/">
+    <link rel="alternate" type="application/rss+xml" title="NiceLeeのBlog" href="https://nicelee.top/feed.xml ">
+
+	
+
+    <script>
+    // 百度统计代码
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?11f780e4e4ccd4e99b101eac776e93e4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+</head>
+
+    <link rel="stylesheet" href="/sources/live2d/css/live2d.css" />
+  <body>
+	
+		
+		<script type="text/javascript" src="/js/ribbon.min.js "></script>
+		
+	
+	
+    <header id="top">
+    <div class="wrapper">
+        <a href="/" class="brand awsome-font">NiceLeeのBlog</a>
+        <small>用爱发电 bilibili~</small>
+        <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
+        <nav id="headerNav">
+            <ul>
+				<li onclick="showdiv()" >
+                    <a href="#">
+                    <i class="fa fa-search">搜索</i>
+                    </a>
+                </li>
+                <li>
+                    
+                    <a href="/">
+                    
+                        <i class="fa fa-home"></i>主页
+                    </a>
+                </li>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <a href="/archive/">
+                        
+                            <i class="fa fa-archive"></i>归档
+                        </a>
+                    </li>
+                
+                    
+                    <li>
+                        <a href="/ilikemusic/">
+                        
+                            <i class="fa fa-music"></i>音乐
+                        </a>
+                    </li>
+                
+                    
+                    <li>
+                        <a href="/collect/">
+                        
+                            <i class="fa fa-bookmark"></i>收藏
+                        </a>
+                    </li>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <a href="/timeline/">
+                        
+                            <i class="fa fa-clock-o"></i>时间轴
+                        </a>
+                    </li>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <a href="/about/">
+                        
+                            <i class="fa fa-info-circle"></i>关于
+                        </a>
+                    </li>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                				
+				
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+        <div class="page clearfix" post>
+    <div class="left">
+        <h1>DNS污染、解决方案以及自动化</h1>
+        <div class="label">
+
+            <div class="label-card">
+                <i class="fa fa-calendar"></i>2020-05-23
+            </div>
+
+            <div class="label-card">
+                <i class="fa fa-user"></i>nIceLee
+                
+            </div>
+            <div class="label-card">
+                <p>阅读：<span id="busuanzi_value_page_pv1"></span></p>
+            </div>
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+            
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+            </div>
+
+            <div class="label-card">
+            
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <!--a href="/tag/#Github" title="Tag: Github" rel="tag">Github</a-->
+        <a href="/tag/#Github" title="Tag: Github" rel="tag">Github</a>&nbsp;
+    
+        <!--a href="/tag/#python" title="Tag: python" rel="tag">python</a-->
+        <a href="/tag/#python" title="Tag: python" rel="tag">python</a>
+    
+  
+
+</span>
+
+            </div>
+
+        </div>
+        <hr>
+        <article itemscope itemtype="http://schema.org/BlogPosting">
+        <ul id="markdown-toc">
+  <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
+  <li><a href="#问题与思路" id="markdown-toc-问题与思路">问题与思路</a></li>
+  <li><a href="#部署与实现" id="markdown-toc-部署与实现">部署与实现</a></li>
+  <li><a href="#后续" id="markdown-toc-后续">后续</a></li>
+</ul>
+<p>最近在捣鼓逆向的同时沉迷于Github Workflow，总想利用它来整点骚东西，遂有此文。</p>
+
+<h2 id="前言">前言</h2>
+<p>以Windows系统为例，让我们来看一下，假设不换DNS查询服务器，当要访问的一个网站被DNS污染的时候，我们是如何人工解决的。</p>
+<ul>
+  <li>第一步，找一个海外的机器，尝试DNS解析得出ip<br />
+举例，最简单的一个做法，找个工具站ping域名就行。
+    <ul>
+      <li>打开<a href="http://tool.chinaz.com">站长工具</a></li>
+      <li>输入域名，仅勾选海外即可<br />
+  <img src="/sources/archive/2020/05/23-1.foreign.png" alt="" /></li>
+      <li>查询即可得出结果<br />
+  <img src="/sources/archive/2020/05/23-2.foreign-result.png" alt="" /></li>
+    </ul>
+  </li>
+  <li>
+    <p>第二步，更改本机hosts<br />
+编辑<code class="highlighter-rouge">C:\Windows\System32\drivers\etc\hosts</code></p>
+  </li>
+  <li>第三步，刷新缓存
+    <ul>
+      <li><code class="highlighter-rouge">win</code>+<code class="highlighter-rouge">R</code>键打开运行</li>
+      <li>输入<code class="highlighter-rouge">cmd</code>，回车</li>
+      <li>输入<code class="highlighter-rouge">ipconfig /flushdns</code>，回车</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="问题与思路">问题与思路</h2>
+<p>当我有很多域名，每个域名都这么执行第一步，其实也挺麻烦的，该如何实现python的自动化批量操作呢？</p>
+
+<ol>
+  <li>直接DNS查询<br />
+先安装库：
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install dnspython
+</code></pre></div>    </div>
+
+    <p>然后直接上码：</p>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kn">import</span> <span class="nn">dns.resolver</span>
+
+
+ <span class="k">def</span> <span class="nf">get_ip</span><span class="p">(</span><span class="n">domain</span><span class="p">):</span>
+     <span class="n">ip_list</span> <span class="o">=</span> <span class="p">[]</span>
+     <span class="k">try</span><span class="p">:</span>
+         <span class="n">cn</span> <span class="o">=</span> <span class="n">dns</span><span class="o">.</span><span class="n">resolver</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="s">'CNAME'</span><span class="p">)</span>
+         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">cn</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">answer</span><span class="p">:</span>
+             <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">i</span><span class="o">.</span><span class="n">items</span><span class="p">:</span>
+                 <span class="n">cname_domain</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">to_text</span><span class="p">()</span> 
+     <span class="k">except</span><span class="p">:</span>
+         <span class="k">pass</span>
+     <span class="k">else</span><span class="p">:</span>
+         <span class="n">A</span> <span class="o">=</span> <span class="n">dns</span><span class="o">.</span><span class="n">resolver</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">cname_domain</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s">'.'</span><span class="p">),</span> <span class="s">'A'</span><span class="p">)</span>
+         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">A</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">answer</span><span class="p">:</span>
+             <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">i</span><span class="o">.</span><span class="n">items</span><span class="p">:</span>
+                 <span class="n">ip_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">address</span><span class="p">)</span>
+             
+     <span class="k">try</span><span class="p">:</span>
+         <span class="n">A</span> <span class="o">=</span> <span class="n">dns</span><span class="o">.</span><span class="n">resolver</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="s">'A'</span><span class="p">)</span>
+         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">A</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">answer</span><span class="p">:</span>
+             <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">i</span><span class="o">.</span><span class="n">items</span><span class="p">:</span>
+                 <span class="k">print</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+                 <span class="n">ip_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">address</span><span class="p">)</span>
+     <span class="k">except</span><span class="p">:</span>
+         <span class="k">pass</span>
+        
+     <span class="k">if</span> <span class="n">ip_list</span> <span class="o">==</span> <span class="p">[]:</span>
+         <span class="k">return</span> <span class="bp">None</span>
+     <span class="k">else</span><span class="p">:</span>
+         <span class="k">return</span> <span class="n">ip_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>        
+        
+ <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+     <span class="n">ip</span> <span class="o">=</span> <span class="n">get_ip</span><span class="p">(</span><span class="s">'www.baidu.com'</span><span class="p">)</span>
+     <span class="k">print</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
+</code></pre></div>    </div>
+    <p>缺点是需要额外安装库，同时由于DNS查询是UDP发包，单次很容易就抛出异常。</p>
+  </li>
+  <li>
+    <p>直接ping<br />
+调用系统的ping命令，然后从回复获取ip</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kn">import</span> <span class="nn">subprocess</span>
+ <span class="kn">import</span> <span class="nn">re</span>
+ <span class="kn">import</span> <span class="nn">locale</span>
+ <span class="kn">import</span> <span class="nn">platform</span>
+
+
+ <span class="k">def</span> <span class="nf">ping</span><span class="p">(</span><span class="n">domain</span><span class="p">):</span>
+     <span class="n">ip</span> <span class="o">=</span> <span class="p">[]</span>
+     <span class="k">if</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s">"Windows"</span><span class="p">:</span>
+         <span class="n">cmd</span> <span class="o">=</span> <span class="s">u"ping </span><span class="si">%</span><span class="s">s -n 1"</span> <span class="o">%</span> <span class="n">domain</span>
+     <span class="k">else</span><span class="p">:</span>
+         <span class="n">cmd</span> <span class="o">=</span> <span class="s">u"ping </span><span class="si">%</span><span class="s">s -c 1"</span> <span class="o">%</span> <span class="n">domain</span>
+            
+     <span class="n">p</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
+        
+     <span class="n">line</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">locale</span><span class="o">.</span><span class="n">getpreferredencoding</span><span class="p">())</span>
+     <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+         <span class="n">line</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">locale</span><span class="o">.</span><span class="n">getpreferredencoding</span><span class="p">())</span>
+         <span class="k">if</span> <span class="n">ip</span> <span class="o">==</span> <span class="p">[]:</span>
+             <span class="n">ip</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}'</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+     <span class="k">if</span> <span class="n">ip</span> <span class="o">==</span> <span class="p">[]:</span>
+         <span class="k">return</span> <span class="bp">None</span>
+     <span class="k">else</span><span class="p">:</span>
+         <span class="k">return</span> <span class="n">ip</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>     
+        
+ <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+     <span class="n">ip</span> <span class="o">=</span> <span class="n">ping</span><span class="p">(</span><span class="s">'www.baidu.com'</span><span class="p">)</span>
+     <span class="k">print</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
+</code></pre></div>    </div>
+    <p>缺点是系统可能没有ping工具，而安装可能又没有权限。例如github的workflow的Ubuntu虚拟机冇这个功能，安装报错…</p>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> apt-get install iputils-ping
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>巧妙利用socket转换<br />
+直接上码</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">#!/usr/bin/env python
+</span> <span class="c1"># coding:utf-8
+</span>     
+ <span class="kn">import</span> <span class="nn">socket</span>       
+        
+ <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+     <span class="n">ip</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">gethostbyname</span><span class="p">(</span><span class="s">'www.baidu.com'</span><span class="p">)</span>
+     <span class="k">print</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="部署与实现">部署与实现</h2>
+<ul>
+  <li>
+    <p>如何将workflow的运行结果呈现出来，这里有几种思路。<br />
+放到工程本身、放到issue，以及放到release。<br />
+放到工程里面，每次提交都会产生commit，影响正常的数据统计；放到release里面也感觉怪怪的；感觉issue区是个交流展示的好地方。</p>
+  </li>
+  <li>如何触发workflow的工作流，这里有几种思路。
+    <ul>
+      <li>周期性触发 <code class="highlighter-rouge">√</code></li>
+      <li>通过PUSH/PR来人工触发event <code class="highlighter-rouge">X</code> <br />
+  (PUSH需要权限，而PR感觉麻烦，还要fork什么的</li>
+      <li>打开issue <code class="highlighter-rouge">√</code><br />
+  正好结果直接回复到相应issue中</li>
+    </ul>
+  </li>
+  <li>
+    <p>周期性关闭已打开的有label的issue，并新建issue打上标签</p>
+
+    <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="na">name</span><span class="pi">:</span> <span class="s">CreateIssue</span>
+
+  <span class="na">on</span><span class="pi">:</span>
+     <span class="na">schedule</span><span class="pi">:</span> 
+         <span class="pi">-</span> <span class="na">cron</span><span class="pi">:</span> <span class="s1">'</span><span class="s">1</span><span class="nv"> </span><span class="s">0</span><span class="nv"> </span><span class="s">1,16</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*'</span>
+
+  <span class="na">jobs</span><span class="pi">:</span>
+    <span class="na">build</span><span class="pi">:</span>
+
+      <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+           
+      <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v2</span>
+               
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Set up Python 3.8</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/setup-python@v1</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">python-version</span><span class="pi">:</span> <span class="s">3.8</span>
+            
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Generate github hosts</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+          <span class="no">python socket_query.py</span>
+          <span class="no">cat hosts.txt</span>
+     
+        
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Close issues of hosts label</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/github-script@0.4.0</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">github-token</span><span class="pi">:</span> <span class="s">$</span>
+          <span class="na">script</span><span class="pi">:</span> <span class="pi">|</span>
+            <span class="no">let response = await github.issues.listForRepo({</span>
+              <span class="no">owner: context.repo.owner,</span>
+              <span class="no">repo: context.repo.repo,</span>
+              <span class="no">labels: ['host'],</span>
+              <span class="no">state: 'open'</span>
+            <span class="no">});</span>
+            <span class="no">let data = response['data'];</span>
+            <span class="no">  </span>
+            <span class="no">data.forEach(function(issue){</span>
+              <span class="no">var id = issue['number'];</span>
+              <span class="no">github.issues.update({</span>
+                <span class="no">owner: context.repo.owner,</span>
+                <span class="no">repo: context.repo.repo,</span>
+                <span class="no">issue_number: id,</span>
+                <span class="no">state: 'closed'</span>
+              <span class="no">});</span>
+            <span class="no">});</span>
+            <span class="no">  </span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Create issue to show hosts</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/github-script@0.4.0</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">github-token</span><span class="pi">:</span> <span class="s">$</span>
+          <span class="na">script</span><span class="pi">:</span> <span class="pi">|</span>
+            <span class="no">const date = new Date();</span>
+            <span class="no">const year = date.getFullYear().toString();</span>
+            <span class="no">const month = (date.getMonth() + 1).toString();</span>
+            <span class="no">const day = date.getDate().toString();</span>
+            <span class="no">const title = year + '-' + month + '-' + day + ' github hosts';</span>
+            <span class="no">var fs = require("fs");</span>
+            <span class="no">fs.readFile("hosts.txt", 'utf-8', (err, data) =&gt; {</span>
+              <span class="no">github.issues.create({</span>
+                  <span class="no">owner: context.repo.owner,</span>
+                  <span class="no">repo: context.repo.repo,</span>
+                  <span class="no">labels: ['host'],</span>
+                  <span class="no">title: title,</span>
+                  <span class="no">body: data</span>
+              <span class="no">});</span>
+            <span class="no">});</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>用户新建issue后，自动查询并回复</p>
+
+    <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="na">name</span><span class="pi">:</span> <span class="s">ReplyIssueCreate</span>
+
+  <span class="na">on</span><span class="pi">:</span>
+    <span class="na">issues</span><span class="pi">:</span>
+      <span class="na">types</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">opened</span><span class="pi">]</span>
+
+  <span class="na">jobs</span><span class="pi">:</span>
+    <span class="na">permission</span><span class="pi">:</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">permission check</span>
+      <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+      <span class="na">if</span><span class="pi">:</span> <span class="s">github.actor != 'github-actions[bot]'</span>
+      <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">check permission</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+          <span class="no">echo $</span>
+          <span class="no">echo permission pass</span>
+          
+          
+    <span class="na">build</span><span class="pi">:</span>
+      <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+      <span class="na">needs</span><span class="pi">:</span> <span class="s">permission</span>
+      <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v2</span>
+               
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Set up Python 3.8</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/setup-python@v1</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">python-version</span><span class="pi">:</span> <span class="s">3.8</span>
+        
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Generate github hosts</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+          <span class="no">python socket_query.py</span>
+          <span class="no">  </span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/github-script@0.4.0</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">github-token</span><span class="pi">:</span> <span class="s">$</span>
+          <span class="na">script</span><span class="pi">:</span> <span class="pi">|</span>
+            <span class="no">var fs = require("fs");</span>
+            <span class="no">fs.readFile("hosts.txt", 'utf-8', (err, data) =&gt; {</span>
+              <span class="no">github.issues.createComment({</span>
+                  <span class="no">owner: context.repo.owner,</span>
+                  <span class="no">repo: context.repo.repo,</span>
+                  <span class="no">issue_number: context.issue.number,</span>
+                  <span class="no">body: data</span>
+              <span class="no">});</span>
+            <span class="no">});</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="后续">后续</h2>
+<ul>
+  <li><strong><a href="https://github.com/nICEnnnnnnnLee/GithubHost">源码实现</a></strong> ：一个周期性发布Github hosts的项目，如果担心不是最新的，支持issue自动回复–&gt; <a href="https://github.com/nICEnnnnnnnLee/GithubHost">GithubHost</a></li>
+  <li>关于Github Action的其它应用，可以看看这个–&gt; <a href="/blog/2020/04/08/github-workflow/">一次GitHub Action自动化发布集成部署</a></li>
+</ul>
+
+        </article>
+        <hr>
+
+        
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+        
+        
+
+        <div class="post-recent">
+    <div class="pre">
+        
+        <p><strong>上一篇</strong> <a href="/blog/2020/04/14/python-scrapy/">Python 使用scrapy框架记录GithubRepo的Star情况</a></p>
+        
+    </div>
+    <div class="nex">
+
+        
+        <p><strong>下一篇</strong> <a href="/blog/2020/05/24/java-classloader/">Java 关于类加载器ClassLoader的有趣实验(二)</a></p>
+        
+    </div>
+</div>
+
+
+        <!-- <h2 id="comments">评论</h2>  
+        
+
+
+
+ -->
+
+
+    </div>
+    <button class="anchor"><i class="fa fa-anchor"></i></button>
+    <div class="right">
+        <div class="wrap">
+
+            <!-- Content -->
+            <div class="side content">
+                <div>
+                    内容
+                </div>
+                <ul id="content-side" class="content-ul">
+                    
+                    <!-- <li><a href="#comments">评论</a></li> -->
+                </ul>
+            </div>
+			
+            <!-- 其他div框放到这里 -->
+            <!-- <div class="side">bbbb</div> -->
+        </div>
+    </div>
+</div>
+<script>
+/**
+ * target _blank
+ */
+(function() {
+    var aTags = document.querySelectorAll('article a:not([id])')
+    for (var i = 0; i < aTags.length; i++) {
+        aTags[i].setAttribute('target', '_blank')
+    }
+
+}());
+</script>
+<script src="/js/pageContent.js " charset="utf-8"></script>
+
+
+    <footer class="site-footer">
+
+
+    <div class="wrapper">
+        <p class="description">
+             这是一个缺爱的博客(๑‾ ꇴ ‾๑)！ 
+        </p>
+        <p class="contact">
+            联系我: 
+            <a href="https://github.com/nICEnnnnnnnLee" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
+            <a href="mailto:lijia0732@sina.com" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>  
+            <a href="https://weibo.com/blackhigh" title="Weibo"><i class="fa fa-weibo" aria-hidden="true"></i></a>       
+			<span onclick="copyToClipboard('https://nicelee.top/feed.xml')"><a href="#">订阅我<i class="fa fa-gg"></i></a></span>
+        </p>
+        <p>
+            总pv:<span id="busuanzi_value_site_pv"></span>，uv:<span id="busuanzi_value_site_uv"></span>，本页pv:<span id="busuanzi_value_page_pv"></span>
+        </p>
+        <p class="power">
+            <span>
+            有用链接：
+                <a href="http://www.bejson.com/">BeJSON</a> &nbsp;&nbsp;
+                <a href="http://site.ip138.com/">IP或域名查询</a> &nbsp;&nbsp;
+                <a href="http://ping.chinaz.com/">各地ping</a> &nbsp;&nbsp;
+                <a href="https://tool.lu/">在线工具</a> &nbsp;&nbsp; 
+                <a href="https://www.aliyun.com/">阿里云</a> &nbsp;&nbsp; 
+                <a href="http://patorjk.com/software/taag/">Text转FIGlet</a> &nbsp;&nbsp; 
+                <a href="https://mx-model.ga/">Live2D 模型资源</a> &nbsp;&nbsp;
+
+            </span>
+        </p>
+        <p class="power">
+            <span>
+            除非另有注明，否则本网站上的内容可按 <a href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议许可</a> 或更新版本使用。
+            </span>
+        </p>
+        <p class="power">
+            <span>
+                建站声明详见 <a href="/about/#关于个人博客">[关于]</a>. <a href="/sitemap.xml">[站点地图]</a>. 
+            </span>
+            
+        </p>
+        <p class="power beian">
+        </p>
+		<p class="power">
+            <span>
+                Site powered by <a href="https://jekyllrb.com/">Jekyll</a>.
+            </span>
+            <span>
+                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
+            </span>
+        </p>
+        
+		
+    </div>
+</footer>
+
+
+<!-- mask start -->
+<div id="searchBg"></div>
+<div id="searchDiv">
+	<input id="searchContent" type="text" onkeypress="if(event.keyCode==13) { search();return false;}" value=""/></input>
+    <div id="searchBtn" onclick="search();" /><i class="fa fa-search"></i></div>
+	<span onclick="hidediv();" class="close"></span>
+</div>
+<!-- mask end -->
+<!-- live2d begin -->
+<div id="landlord">
+    <div class="message" style="opacity:0"></div>
+    <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+    <div class="hide-button">隐藏</div>
+</div>
+<!-- live2d end -->
+<script type='text/javascript' src='/js/jquery.min.js '></script>
+<script type='text/javascript'>
+function search(){	
+	var str = document.getElementById("searchContent").value;
+	//console.log(str);
+	setLocalStorage("blogSearchKey",str);
+	hidediv();
+	window.location.href="/archive/";
+}
+function showdiv() {
+	//alert("调用了showdiv()函数");
+	document.getElementById("searchBg").style.display ="block";
+	document.getElementById("searchDiv").style.display ="block";
+
+	//$('body').css("overflow", "hidden");
+	document.getElementsByTagName('body')[0].setAttribute("overflow", "hidden");
+}
+function hidediv() {
+	document.getElementById("searchBg").style.display = 'none';
+	document.getElementById("searchDiv").style.display = 'none';
+	//$('body').css("overflow", "auto");
+	document.getElementsByTagName('body')[0].setAttribute("overflow", "hidden");
+}
+////////////////////////////useful function //////////////////////////////////////
+//写cookies
+function setLocalStorage(name,value)
+{
+	localStorage.setItem(name, JSON.stringify(value));
+}
+//读cookies
+function getLocalStorage(name)
+{
+	return JSON.parse(localStorage.getItem(name));
+}
+//删cookies
+function delLocalStorage(name)
+{
+	localStorage.setItem(name, JSON.stringify(""));
+}
+function copyToClipboard (text) {
+    if(text.indexOf('-') !== -1) {
+        var arr = text.split('-');
+        text = arr[0] + arr[1];
+    }
+    var textArea = document.createElement("textarea");
+      textArea.style.position = 'fixed';
+      textArea.style.top = '0';
+      textArea.style.left = '0';
+      textArea.style.width = '2em';
+      textArea.style.height = '2em';
+      textArea.style.padding = '0';
+      textArea.style.border = 'none';
+      textArea.style.outline = 'none';
+      textArea.style.boxShadow = 'none';
+      textArea.style.background = 'transparent';
+      textArea.value = text;
+      document.body.appendChild(textArea);
+      textArea.select();
+	//alert("调用了复制剪贴板函数");
+      try {
+        var successful = document.execCommand('copy');
+        var msg = successful ? 'Rss源已成功复制到剪贴板' : 'RSS源为:https://nicelee.top/feed.xml';
+		//alert(msg);
+		showTips(msg);
+      } catch (err) {
+		//console.log(err);
+        //alert('该浏览器不支持点击复制到剪贴板');
+		showTips('RSS源为:https://nicelee.top/feed.xml');
+      }
+
+      document.body.removeChild(textArea);
+}
+/*
+<!--  版权维护  -->
+function addLink() {
+//alert("!!!");
+    var body_element = document.body;
+    var selection;
+    selection = window.getSelection();
+    if((selection + "").indexOf("/feed.xml") != -1){
+        return;
+    }
+	if(selection == ""){
+		return;
+	}
+    var locationHref=document.location.href;
+    var appendLink="\r\n------------------------------\r\n 原文出自[ NiceLee的个人博客 ] 转载请保留原文链接: <a href='"+locationHref+"'>"+locationHref+"</a>";
+    if (window.clipboardData) { // Internet Explorer
+        //console.log("调用原生函数");
+        var copytext = selection + appendLink;
+        window.clipboardData.setData ("Text", copytext);
+        return false;
+    } else {
+        //console.log("复杂的套路");
+        var copytext = selection + appendLink;
+        var newdiv = document.createElement('div');
+        newdiv.style.position='absolute';
+        newdiv.style.left='-99999px';
+        body_element.appendChild(newdiv);
+        newdiv.innerHTML = "<pre>" +copytext + "</pre>";
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function() {
+        	body_element.removeChild(newdiv);
+        },0);
+    }
+}
+document.oncopy = addLink;
+*/
+
+//contetn为要显示的内容  
+function showTips( content ){  
+	//alert("调用了复制提示消息函数");
+	//alert("内容为"+ content);
+    //窗口的宽度  
+	//alert(content);
+	var width = 250;
+	var x  = $(window).width()/2 - width/2;	
+	var y = $(window).height()/2 -20;
+	var $i = $("<span/>").text(content);
+	$i.css({
+		"z-index": 999999999999999999999999999,
+		"top": y,
+		"left": x,
+		"position": "absolute",
+		"font-weight": "bold",
+		'padding'   : '3px 5px',  
+		'background': '#8FBC8F',  
+		'font-size' : 12 + 'px',  
+		'margin'    : '0 auto',  
+		'text-align': 'center',  
+		'width'     : width + 'px',  
+		'height'    : 'auto',  
+		'color'     : '#fff'
+	});
+	$("body").append($i);
+	$i.animate({
+		"opacity": 0
+	},
+	3000,
+	function() {
+		//console.log($i.css());
+		$i.remove();
+		//alert('');
+	});
+}     
+</script>
+
+<!-- 窗口失去焦点 -- 别走啊 -->
+<!-- 窗口获得焦点 -- 恢复 -->
+<!-- console 打印figlet-->
+<script>
+var titleOnFocus = document.title;
+var titleOnBlur = "...(*￣０￣)ノ[别走啊…]";
+window.onfocus =function(){
+    document.title = titleOnFocus;
+    //console.log(titleOnFocus);
+}
+window.onblur = function(){
+    document.title = titleOnBlur;
+    //console.log(titleOnBlur);
+}
+
+var figlet = "\n" +
+"        _          _            _               \n" +
+"       (_)        | |          | |              \n" +
+"  _ __  _  ___ ___| | ___  ___ | |_ ___  _ __   \n" +
+" | '_ \\| |/ __/ _ \\ |/ _ \\/ _ \\| __/ _ \\| '_ \\  \n" +
+" | | | | | (_|  __/ |  __/  __/| || (_) | |_) | \n" +
+" |_| |_|_|\\___\\___|_|\\___|\\___(_)__\\___/| .__/  \n" +
+"                                        | |     \n" +
+"                                        |_|     \n" ;
+console.log(figlet);
+console.log("%c小改改爆个照呗\n hentai女个装呗", "color:red;font-size: 50px;font-weight:bold;");
+
+/* 防hentai
+document.onkeydown=function(){
+    var e = window.event||arguments[0];
+    if(e.keyCode==123){
+    	alert('请尊重劳动成果！');
+            return false;
+    }else if((e.ctrlKey)&&(e.shiftKey)&&(e.keyCode==73)){
+    	alert('请尊重劳动成果！');
+            return false;
+    }else if((e.ctrlKey)&&(e.keyCode==85)){
+            alert('请尊重劳动成果！');
+            return false;
+    }else if((e.ctrlKey)&&(e.keyCode==83)){
+           alert('请尊重劳动成果！');
+           return false;
+    }
+}
+document.oncontextmenu=function(){
+	alert('请尊重劳动成果！');
+    return false;
+}*/
+</script>
+
+<!-- live2d Begin-->
+<script type="text/javascript">
+    var message_Path = '/sources/live2d/'
+    var home_Path = 'https://nicelee.top/'
+</script>
+<script type="text/javascript" src="/sources/live2d/js/live2d.js"></script>
+<script type="text/javascript" src="/sources/live2d/js/message.js"></script>
+<script type="text/javascript">
+    var modelList = ["kesshouban_v2", "tia", "wanko", "index", "kanna", "koharu", "umaru", 
+	"22.closet.default.v2", 
+	"22.closet.2018.bls-summer", 
+	"22.closet.2019.summer", 
+	"33.closet.2016.xmas", 
+	"33.closet.2017.tomo-bukatsu", 
+	"33.closet.2018.bls-summer", 
+	"33.closet.2018.bls-winter", 
+	"33.closet.default.v2" ];    
+    var model = modelList[12]; 
+    // kesshouban_v2 血小板
+    // tia  小改改
+    // wanko 小狗狗 
+    // index 魔禁-茵蒂克丝
+    // kanna 康娜龙
+    // koharu 卡哇伊的Q版模型
+    // umaru 干物妹小埋 带声音
+    // 22 哔哩哔哩22娘
+    // 22.v2 哔哩哔哩22娘
+    console.log("live2d模型(小部分)来自官网: http://www.live2d.com/usermanual/cubism2_cn/samples.html");
+    console.log("live2d模型(大部分)来自梦象: https://mx-model.ga/");
+    if( window.document.body.offsetWidth >= 666){
+        loadlive2d("live2d", "/sources/live2d/model/"+ model +"/model.json");
+    }else{
+        //loadlive2d("live2d", "/sources/live2d/model/tia/model_tiny.json");
+        loadlive2d("live2d", "/sources/live2d/model/"+ model +"/model_tiny.json");
+    }
+</script>
+<!-- live2d End-->
+
+<script type="text/javascript">
+	var a_idx = 0;
+	jQuery(document).ready(function($) {
+		$("body").click(function(e) {
+			var a = new Array("大吉大利，今晚吃鸡！", "惊不惊喜，意不意外", "还有这种操作？", "小猪佩奇身上纹，掌声送给社会人", "确认过眼神", "皮一下，很开心", "很好很强大", "C位出道", "你若盛开，清风自来", "如果帅也是一种罪，那我已罪无可赦", "别看资料 ，看聊效！", "感动吗，不敢动", "打call", "我是你的超级英雄");
+			var $i = $("<span/>").text(a[a_idx]);
+			a_idx = (a_idx + 1) % a.length;
+			var x = e.pageX,
+			y = e.pageY;
+			$i.css({
+				"z-index": 999999999999999999999999999,
+				"top": y - 20,
+				"left": x,
+				"position": "absolute",
+				"font-weight": "bold",
+				"color": "#dd3333"
+			});
+			$("body").append($i);
+			$i.animate({
+				"top": y - 180,
+				"opacity": 0
+			},
+			1500,
+			function() {
+				$i.remove();
+				//alert('');
+			});
+		});
+	});
+</script>
+
+
+<script async src="/js/busuanzi.pure.mini.js "></script>
+
+
+    <div class="back-to-top">
+    <a href="#top" data-scroll>
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+    <script src="/js/main.js " charset="utf-8"></script>
+    <script src="/js/smooth-scroll.min.js " charset="utf-8"></script>
+    <script type="text/javascript">
+      smoothScroll.init({
+        speed: 500, // Integer. How fast to complete the scroll in milliseconds
+        easing: 'easeInOutCubic', // Easing pattern to use
+        offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
+      });
+      // 为了底部内容不被遮住
+      $(document).ready(function () {
+        resizeBody();
+      });
+      window.onresize = resizeBody;
+      function resizeBody(){
+        //console.log("resizing Body...");
+        if (window.innerWidth <= 770) {
+            var totalHeight = $("header#top").height() + $(".page.clearfix").height() + $("footer.site-footer").height() +80;
+            document.body.style.height = totalHeight + "px";
+        }else{
+            document.body.style.height = "auto";
+        }
+      }
+    </script>
+	
+	
+    <!-- <script src=" /js/scroll.min.js " charset="utf-8"></script> -->
+  </body>
+
+</html>

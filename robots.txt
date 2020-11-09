@@ -1,0 +1,8 @@
+# robots.txt generated at http://tool.chinaz.com/robots/ 
+User-agent: *
+Disallow: /sources/
+Disallow: /css/
+Disallow: /fonts/
+Disallow: /js/
+Disallow: /novel/
+Sitemap: https://nicelee.top/sitemap.xml

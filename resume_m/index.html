@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8;"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>李佳的简历</title>
+	
+
+</head>
+<body style="text-align:center;background: url(/sources/pics/FPyBWV.gif);">
+
+<h3>我的简历</h3>
+<canvas id="the-canvas0" style="margin:0 auto;width:100vw;max-width:892px;display:block"></canvas>
+
+<canvas id="the-canvas1" style="margin:0 auto;width:100vw;max-width:892px;display:block;margin-top: 4px;"></canvas>
+
+<canvas id="the-canvas2" style="margin:0 auto;width:100vw;max-width:892px;display:block;margin-top: 4px;"></canvas>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.943/pdf.js"></script>
+<script>
+function loadPage(page) {
+    console.log('Page loaded');
+    var scale = 1.5;
+    var viewport = page.getViewport(scale);
+    // Prepare canvas using PDF page dimensions
+    //console.log(page);
+    var canvas = document.getElementById('the-canvas' + page.pageIndex);
+    var context = canvas.getContext('2d');
+    canvas.height = viewport.height;
+    canvas.width = viewport.width;
+
+    // Render PDF page into canvas context
+    var renderContext = {
+      canvasContext: context,
+      viewport: viewport
+    };
+    var renderTask = page.render(renderContext);
+    renderTask.then(function () {
+      console.log('Page rendered');
+    });
+}
+// If absolute URL from the remote server is provided, configure the CORS
+// header on that server.
+var url = '/sources/archive/resume_2020.pdf';
+
+// Loaded via <script> tag, create shortcut to access PDF.js exports.
+var pdfjsLib = window['pdfjs-dist/build/pdf'];
+
+// The workerSrc property shall be specified.
+pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.943/pdf.worker.js';
+
+// Asynchronous download of PDF
+var pageNumber;
+var loadingTask = pdfjsLib.getDocument(url);
+loadingTask.promise.then(function(pdf) {
+  console.log('PDF loaded');
+  for(pageNumber = 1; pageNumber < 4; pageNumber++){
+    pdf.getPage(pageNumber).then(loadPage);
+  }
+}, function (reason) {
+  // PDF loading error
+  console.error(reason);
+});
+</script>
+</body>
+</html>

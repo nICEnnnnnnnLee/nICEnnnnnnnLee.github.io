@@ -1,0 +1,27 @@
+{
+	"type":"Live2D Model Setting",
+	"name":"33.v2",
+	"model":"33.v2.moc",
+    "layout":{
+        "center_x":0.0,
+        "center_y":0.0,
+        "width":1.5
+    },
+	"textures":
+	[
+		"textures/texture_00.png",
+		"textures/texture_01.png",
+		"textures/texture_02.png",
+		"textures/texture_03.png"
+	],
+	"motions":
+	{
+		"idle":
+		[
+			{"file":"motions/33.v2.idle-01.mtn" ,"fade_in":2000, "fade_out":2000},
+            {"file":"motions/33.v2.idle-02.mtn" ,"fade_in":2000, "fade_out":2000},
+            {"file":"motions/33.v2.idle-03.mtn" ,"fade_in":2000, "fade_out":2000},
+            {"file":"motions/33.v2.thanking.mtn", "fade_in":2000, "fade_out":2000 }
+		]
+	}
+}
