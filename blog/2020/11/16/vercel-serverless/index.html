@@ -7,13 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Flutter 一个总结(四)</title>
-    <meta name="description" content="Show me the code.">
+    <title>Vercel Serverless使用笔记(Python版)</title>
+    <meta name="description" content="服务器冇得了，只能白嫖了，就这样。">
 
-    <meta property="og:url" content="https://nicelee.top/blog/2020/02/20/flutter-show-me-the-code/">
+    <meta property="og:url" content="https://nicelee.top/blog/2020/11/16/vercel-serverless/">
     <meta property="og:site_name" content="NiceLee的博客">
-    <meta property="og:title" content="Flutter 一个总结(四)">
-    <meta property="og:description" content="Show me the code.">
+    <meta property="og:title" content="Vercel Serverless使用笔记(Python版)">
+    <meta property="og:description" content="服务器冇得了，只能白嫖了，就这样。">
     <meta property="og:image" content="https://nicelee.top/favicon.ico?">
     <meta property="og:image:type" content="image/x-icon">
     
@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="/css/font-awesome.min.css ">
     <link rel="stylesheet" href="/css/font-ali.css?v=1.2 ">
     <link rel="stylesheet" href="/css/main.css?v=1.1 ">
-    <link rel="canonical" href="https://nicelee.top/blog/2020/02/20/flutter-show-me-the-code/">
+    <link rel="canonical" href="https://nicelee.top/blog/2020/11/16/vercel-serverless/">
     <link rel="alternate" type="application/rss+xml" title="NiceLeeのBlog" href="https://nicelee.top/feed.xml ">
 
 	
@@ -266,11 +266,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>Flutter 一个总结(四)</h1>
+        <h1>Vercel Serverless使用笔记(Python版)</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2020-02-20
+                <i class="fa fa-calendar"></i>2020-11-16
             </div>
 
             <div class="label-card">
@@ -310,11 +310,14 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#flutter" title="Tag: flutter" rel="tag">flutter</a-->
-        <a href="/tag/#flutter" title="Tag: flutter" rel="tag">flutter</a>&nbsp;
+        <!--a href="/tag/#Vercel" title="Tag: Vercel" rel="tag">Vercel</a-->
+        <a href="/tag/#Vercel" title="Tag: Vercel" rel="tag">Vercel</a>&nbsp;
     
-        <!--a href="/tag/#dart" title="Tag: dart" rel="tag">dart</a-->
-        <a href="/tag/#dart" title="Tag: dart" rel="tag">dart</a>
+        <!--a href="/tag/#Serverless" title="Tag: Serverless" rel="tag">Serverless</a-->
+        <a href="/tag/#Serverless" title="Tag: Serverless" rel="tag">Serverless</a>&nbsp;
+    
+        <!--a href="/tag/#Python" title="Tag: Python" rel="tag">Python</a-->
+        <a href="/tag/#Python" title="Tag: Python" rel="tag">Python</a>
     
   
 
@@ -326,36 +329,147 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#小结" id="markdown-toc-小结">小结</a></li>
-</ul>
-<p><strong>Show me the code.</strong></p>
-
-<h2 id="小结">小结</h2>
-<ul>
-  <li>让我想想，都实现了什么东西
-    <ul>
-      <li>解析了的几个网站的定制内容(包括搜索)</li>
-      <li>建立下载任务(终极目标)</li>
-      <li>图片缓存(减少网络请求，降低目标压力)</li>
-      <li>图片列表的横向/纵向滑动浏览(增加浏览体验)</li>
-      <li>图片列表的进度拖拽实现(增加浏览体验)</li>
-      <li>图片放大，便于仔细观看审阅(收藏家之魂)</li>
-      <li>简单的标记/收藏功能(收藏家成就达成，与批量下载的贱货全不一样)</li>
-      <li>记录的导入与导出(大收藏家成就预备)</li>
-      <li>app打开的倒计时广告(笑</li>
-      <li>通过本地代理的方式内置hosts访问指定链接(DNS污染完全没必要开别的)</li>
-      <li>文件目录浏览/创建(可以指定保存路径，复杂点可以变成文件管理器)</li>
+  <li><a href="#基础命令" id="markdown-toc-基础命令">基础命令</a>    <ul>
+      <li><a href="#安装" id="markdown-toc-安装">安装</a></li>
+      <li><a href="#使用" id="markdown-toc-使用">使用</a></li>
     </ul>
   </li>
-  <li>演示样例写了个B站鬼畜区最近热门封面浏览与下载😳<br />
-<a href="https://github.com/nICEnnnnnnnLee/NinjaV7/">传送门</a></li>
+  <li><a href="#支持语言" id="markdown-toc-支持语言">支持语言</a></li>
+  <li><a href="#配置" id="markdown-toc-配置">配置</a></li>
+  <li><a href="#简单例子" id="markdown-toc-简单例子">简单例子</a>    <ul>
+      <li><a href="#基于basehttprequesthandler" id="markdown-toc-基于basehttprequesthandler">基于<strong>BaseHTTPRequestHandler</strong></a></li>
+      <li><a href="#基于flask" id="markdown-toc-基于flask">基于<strong>Flask</strong></a></li>
+    </ul>
+  </li>
+  <li><a href="#其它" id="markdown-toc-其它">其它</a>    <ul>
+      <li><a href="#测试地址" id="markdown-toc-测试地址">测试地址</a></li>
+      <li><a href="#示例代码" id="markdown-toc-示例代码">示例代码</a></li>
+    </ul>
+  </li>
+</ul>
+<p>服务器冇得了，只能白嫖了，就这样。</p>
+
+<h2 id="基础命令">基础命令</h2>
+<h3 id="安装">安装</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm i -g vercel             # npm
+yarn global add vercel      # yarn
+</code></pre></div></div>
+
+<h3 id="使用">使用</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vercel init     # 选择一个示例项目（初始化）
+# 可以根据模板初始化创建，不复杂的话也可以自己弄，功能简单的话几个文件就差不多了
+
+cd &lt;PROJECT&gt;    # 进入目录
+vercel dev --debug  # 本地开发测试
+vercel          # 部署到云服务
+vercel -prod    # 部署到云服务生产环境
+</code></pre></div></div>
+
+<h2 id="支持语言">支持语言</h2>
+<ul>
+  <li>官方支持<code class="highlighter-rouge">Node.js</code>、<code class="highlighter-rouge">Go</code>、<code class="highlighter-rouge">Python</code>、<code class="highlighter-rouge">Ruby</code>。</li>
+  <li>社区支持php。在配置里面做好相应配置即可。例如：
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  {
+    "functions": {
+      "api/test.php": {
+        "runtime": "vercel-php@0.1.0"
+      }
+    }
+  }
+</code></pre></div>    </div>
+  </li>
 </ul>
 
-<div style="max-width:300px; margin:0 auto;">
-<video src="/sources/archive/2020/02/flutter_app.mp4" width="100%" controls="controls" autoplay="autoplay" poster="/sources/archive/2020/02/poster.png">
-您的浏览器不支持 video 标签。
-</video>
-</div>
+<h2 id="配置">配置</h2>
+<p>详情可以参考<a href="https://vercel.com/docs/configuration">https://vercel.com/docs/configuration</a>。<br />
+在这里以一个简单的配置<code class="highlighter-rouge">vercel.json</code>为例，解释一下比较有用的参数。</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "version": 2,
+  "builds": [   // 这里需要注意，没有罗列到builds的资源是无法访问或使用的
+    { "src": "*.html", "use": "@vercel/static" },   // 静态资源
+    { "src": "api/*.py", "use": "@vercel/python" }  // 因为是python写的云函数，所以...
+  ],
+  "routes": [
+    { "src": "/", "dest": "/index.html" },          // 这里把主页定位到相应的网页，不然默认会是访问目录
+    { "src": "/api/date", "dest": "/api/date.py" }, // 一个官方的基于BaseHTTPRequestHandler简单例子，返回当前时间  
+    { "src": "/api/ip/(.*)", "dest": "/api/ip_query.py" }, // 一个更加复杂的例子，获取域名对应的ip
+    { "src": "/api/(.*)", "dest": "/api/web.py" },  // 一个基于Flask的简单例子，返回访问的路径和参数
+    { "src": "/(.*)", "status": 404, "dest": "/404.html" } // 把其它的访问路径定位到自定义的404页面
+  ]
+}
+</code></pre></div></div>
+
+<h2 id="简单例子">简单例子</h2>
+<p>这里以Python为例，与上一节的配置相对应。</p>
+
+<h3 id="基于basehttprequesthandler">基于<strong>BaseHTTPRequestHandler</strong></h3>
+<p>date.py</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from http.server import BaseHTTPRequestHandler
+from datetime import datetime
+
+class handler(BaseHTTPRequestHandler):
+
+  def do_GET(self):
+    self.send_response(200)
+    self.send_header('Content-type', 'text/plain')
+    self.end_headers()
+    self.wfile.write(str(datetime.now().strftime('%Y-%m-%d %H:%M:%S')).encode())
+    return
+</code></pre></div></div>
+
+<p>ip_query.py</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from http.server import BaseHTTPRequestHandler, HTTPServer
+import socket
+
+class handler(BaseHTTPRequestHandler):
+
+  def do_GET(self):
+    path = str(self.path)
+    try:
+        domain = path[path.rindex("/")+1:]
+        print(domain)
+        ip = socket.gethostbyname(domain)   
+    except:
+        text = 'path is: %s, \n Error happens\n'%(path)
+    else:
+        text = 'domain is: %s \n ip is: %s\n'%(domain, ip)
+    self.send_response(200)
+    self.send_header('Content-type', 'text/plain')
+    self.end_headers()
+    self.wfile.write(text.encode())
+    return
+
+if __name__ == "__main__":
+    http_server = HTTPServer(('', int(8888)), handler)
+    http_server.serve_forever() 
+</code></pre></div></div>
+
+<h3 id="基于flask">基于<strong>Flask</strong></h3>
+<p>这里需要注意，在requirements.txt中加入依赖flask==1.0.2<br />
+web.py</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from flask import Flask, Response, request
+app = Flask(__name__)
+
+@app.route('/', defaults={'path': ''})
+@app.route('/&lt;path:path&gt;')
+def catch_all(path):
+    print(request.args)
+    key = request.args.get('key')
+    return Response("&lt;h1&gt;Flask&lt;/h1&gt;&lt;p&gt;You visited: /%s&lt;/p&gt;&lt;p&gt;key=%s&lt;/p&gt;" % (path,key), mimetype="text/html")
+    
+if __name__ == "__main__":
+    app.run(debug = True)
+
+</code></pre></div></div>
+
+<h2 id="其它">其它</h2>
+<h3 id="测试地址">测试地址</h3>
+<p><a href="https://test-feql0j31g.vercel.app">https://test-feql0j31g.vercel.app</a><br />
+<a href="https://test-feql0j31g.vercel.app/api/ip/github.com">https://test-feql0j31g.vercel.app/api/ip/github.com</a><br />
+<a href="https://test-feql0j31g.vercel.app/api/test?key=tt123">https://test-feql0j31g.vercel.app/api/test?key=tt123</a></p>
+
+<h3 id="示例代码">示例代码</h3>
+<p><a href="https://github.com/nICEnnnnnnnLee/vercel-serverless-python">https://github.com/nICEnnnnnnnLee/vercel-serverless-python</a></p>
 
         </article>
         <hr>
@@ -369,13 +483,14 @@
                 
                     
                 
-            
-                
-                    
-                
                     
                 
             
+        
+            
+            
+                
+                    
                 
                     
                 
@@ -390,13 +505,6 @@
                 
                     
                 
-            
-        
-            
-            
-                
-                    
-                
                     
                 
             
@@ -405,13 +513,6 @@
             
                 
                     
-                
-                    
-                
-            
-        
-            
-            
                 
                     
                 
@@ -426,13 +527,6 @@
                 
                     
                 
-            
-        
-            
-            
-                
-                    
-                
                     
                 
             
@@ -444,6 +538,8 @@
                 
                     
                 
+                    
+                
             
         
             
@@ -453,10 +549,36 @@
                 
                     
                 
+                    
+                
             
         
             
             
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
                 
                     
                 
@@ -469,13 +591,11 @@
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/blog/2020/02/18/flutter-http-proxy-3/">Flutter 关于本地内置Host(三)</a></p>
+        <p><strong>上一篇</strong> <a href="/blog/2020/10/31/weixin-step-counter-cheater-6/">【ReadMe】微信运动作弊的操作指引(春雨)</a></p>
         
     </div>
     <div class="nex">
 
-        
-        <p><strong>下一篇</strong> <a href="/blog/2020/03/14/little-talk-5/">杂七杂八 无题</a></p>
         
     </div>
 </div>

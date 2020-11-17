@@ -2,6 +2,13 @@
 	"code" : 0 ,
 	"data" : [
 	{
+		"title" : "Vercel Serverless使用笔记(Python版)",
+		"tags" : "Vercel_Serverless_Python",
+		"url" : "/blog/2020/11/16/vercel-serverless/"
+		"brief" : "服务器冇得了，只能白嫖了，就这样。"
+	},
+    
+	{
 		"title" : "【ReadMe】微信运动作弊的操作指引(春雨)",
 		"tags" : "微信运动",
 		"url" : "/blog/2020/10/31/weixin-step-counter-cheater-6/"

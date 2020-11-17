@@ -5,9 +5,29 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 09 Nov 2020 10:50:07 +0800</pubDate>
-    <lastBuildDate>Mon, 09 Nov 2020 10:50:07 +0800</lastBuildDate>
+    <pubDate>Tue, 17 Nov 2020 13:00:03 +0800</pubDate>
+    <lastBuildDate>Tue, 17 Nov 2020 13:00:03 +0800</lastBuildDate>
     <generator>Jekyll v3.8.4</generator>
+    
+      <item>
+        <title>Vercel Serverless使用笔记(Python版)</title>
+        <description>服务器冇得了，只能白嫖了，就这样。
+
+</description>
+        <pubDate>Mon, 16 Nov 2020 11:49:01 +0800</pubDate>
+        <link>https://nicelee.top/blog/2020/11/16/vercel-serverless/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2020/11/16/vercel-serverless/</guid>
+        
+        <category>Vercel</category>
+        
+        <category>Serverless</category>
+        
+        <category>Python</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
     
       <item>
         <title>【ReadMe】微信运动作弊的操作指引(春雨)</title>
@@ -150,24 +170,6 @@
         <pubDate>Sun, 14 Jun 2020 12:49:01 +0800</pubDate>
         <link>https://nicelee.top/blog/2020/06/14/java-add-text-to-gif-2/</link>
         <guid isPermaLink="true">https://nicelee.top/blog/2020/06/14/java-add-text-to-gif-2/</guid>
-        
-        <category>Java</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>Java 真香！如何给Gif添加对白(一)</title>
-        <description>&lt;code class=&quot;highlighter-rouge&quot;&gt;王境则·真香.gif&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;谁赞成谁反对.gif&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;为所欲为.gif&lt;/code&gt;…&lt;br /&gt;
- 网络上有很多搞笑的gif图片，里面的对白还是可以自定义的。 &lt;br /&gt;
- 想搞这个想了很久了，最近终于把它实现了。
-
-</description>
-        <pubDate>Sun, 14 Jun 2020 11:49:01 +0800</pubDate>
-        <link>https://nicelee.top/blog/2020/06/14/java-add-text-to-gif/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2020/06/14/java-add-text-to-gif/</guid>
         
         <category>Java</category>
         
