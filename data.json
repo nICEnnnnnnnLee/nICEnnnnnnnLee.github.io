@@ -2,6 +2,13 @@
 	"code" : 0 ,
 	"data" : [
 	{
+		"title" : "Python 微博位置小尾巴",
+		"tags" : "Python",
+		"url" : "/blog/2020/12/16/python-weibo-location/"
+		"brief" : "如何伪装微博位置前文有讲，但还是挺麻烦的。现在尝试简化一下，配合vercel进行适配。"
+	},
+    
+	{
 		"title" : "Vercel Serverless使用笔记(Python版)",
 		"tags" : "Vercel_Serverless_Python",
 		"url" : "/blog/2020/11/16/vercel-serverless/"
@@ -12,7 +19,7 @@
 		"title" : "【ReadMe】微信运动作弊的操作指引(春雨)",
 		"tags" : "微信运动",
 		"url" : "/blog/2020/10/31/weixin-step-counter-cheater-6/"
-		"brief" : "服务器快到期，如无意外可能转静态托管了。那么一些功能实现起来就会有些麻烦，是时候考虑一下移动端实现了。乐心不能第三方同步，那么只能回退到春雨了。"
+		"brief" : "【已失效】服务器快到期，如无意外可能转静态托管了。那么一些功能实现起来就会有些麻烦，是时候考虑一下移动端实现了。乐心不能第三方同步，那么只能回退到春雨了。"
 	},
     
 	{
@@ -1039,7 +1046,7 @@
     
 	{
 		"title" : "Web App 相关技术",
-		"tags" : "JavaScript_HTML_CSS_Sass_移动端_XSS_AMD_requireJS_CommonJS_性能优化_WebApp",
+		"tags" : "JavaScript_HTML_CSS_WebApp",
 		"url" : "/blog/2015/06/17/web-app/"
 		"brief" : "这是一篇主题作者的文章,保留以作纪念.往前推2到3年，前端工程师还在忧心忡忡地想，移动互联网时代下，前端是不是没有生存空间了。但今天一看，在我们团队，前端工程师超过一半的工作都是在做移动端的Web或者APP的开发。移动Web或者APP在技术本质上是和做桌面端Web没有本质区别，但是移动端的坑那是非常的多，通过学习这部分内容，让你成为一名桌面移动通吃的前端开发工程师。"
 	}
