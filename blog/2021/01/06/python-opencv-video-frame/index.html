@@ -256,6 +256,8 @@
                     
                 
                     
+                
+                    
                 				
 				
             </ul>
@@ -397,7 +399,7 @@
         <span class="k">break</span>
 </code></pre></div></div>
 
-<p>但是，实际上可以认为设置读取帧的位置，没必要一帧一帧的读：</p>
+<p>但是，实际上可以人为设置读取帧的位置，没必要一帧一帧的读：</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#...省略
 </span><span class="n">cutTimes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">600</span><span class="p">,</span><span class="mi">1200</span><span class="p">,</span> <span class="mi">2400</span><span class="p">]</span> <span class="c1">#在第10, 600,1200,2400秒进行截图
 </span><span class="n">cutFrames</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="s">"rate"</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>  <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">cutTimes</span> <span class="p">]</span> 
@@ -421,8 +423,8 @@ pip install pillow  -i https://pypi.tuna.tsinghua.edu.cn/simple
 </code></pre></div></div>
 
 <h2 id="相关代码">相关代码</h2>
-<p>默认是根据时长均匀抽取 <strong>8</strong>张截图，将每张截图重新拉伸为<strong>480</strong>的图像，并且打上时间戳。<br />
-关于可以在<code class="highlighter-rouge">mp4toJpg</code>方法里改改。<br />
+<p>默认是根据时长均匀抽取 <strong>8</strong>张截图，将每张截图重新等比拉伸为宽<strong>480</strong>的图像，并且打上时间戳。<br />
+相关间隔参数可以在<code class="highlighter-rouge">mp4toJpg</code>方法里改改。<br />
 因为是自用，也就没怎么封装了。</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">cv2</span>
@@ -630,6 +632,45 @@ pip install pillow  -i https://pypi.tuna.tsinghua.edu.cn/simple
                         <ul>
                         
                         <li class="relatedPost">
+                            <a href="/blog/2021/02/01/python-decorators/">Python 关于装饰器(以异常重试为例)
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2021/01/01/python-18comic/">Python 某站漫画的佛系随缘下载
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
                             <a href="/blog/2020/12/16/python-weibo-location/">Python 微博位置小尾巴
                             
                             </a>
@@ -699,27 +740,6 @@ pip install pillow  -i https://pypi.tuna.tsinghua.edu.cn/simple
                 
             
         
-            
-            
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-            
-        
         
             </ul>
         
@@ -727,11 +747,13 @@ pip install pillow  -i https://pypi.tuna.tsinghua.edu.cn/simple
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/blog/2020/12/16/python-weibo-location/">Python 微博位置小尾巴</a></p>
+        <p><strong>上一篇</strong> <a href="/blog/2021/01/01/python-18comic/">Python 某站漫画的佛系随缘下载</a></p>
         
     </div>
     <div class="nex">
 
+        
+        <p><strong>下一篇</strong> <a href="/blog/2021/01/15/pic-read-html/">PC端图片阅读的一种方法</a></p>
         
     </div>
 </div>

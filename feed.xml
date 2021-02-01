@@ -5,9 +5,45 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 17 Jan 2021 16:23:53 +0800</pubDate>
-    <lastBuildDate>Sun, 17 Jan 2021 16:23:53 +0800</lastBuildDate>
+    <pubDate>Mon, 01 Feb 2021 14:34:30 +0800</pubDate>
+    <lastBuildDate>Mon, 01 Feb 2021 14:34:30 +0800</lastBuildDate>
     <generator>Jekyll v3.8.4</generator>
+    
+      <item>
+        <title>Python 关于装饰器(以异常重试为例)</title>
+        <description>以抛出异常重试为例。
+
+</description>
+        <pubDate>Mon, 01 Feb 2021 11:49:01 +0800</pubDate>
+        <link>https://nicelee.top/blog/2021/02/01/python-decorators/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/02/01/python-decorators/</guid>
+        
+        <category>Python</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
+    
+      <item>
+        <title>PC端图片阅读的一种方法</title>
+        <description>很多时候有这么个需求，上下两张图片内容连续不可分割，这时需要一张接一张不间断地纵向浏览。(横向同理)&lt;br /&gt;
+有时候还有这么个情况，1.jpg、2.jpg…9.jpg、10.jpg，但看图时的阅读顺序并不是按照我们想象中的来。 &lt;br /&gt;
+比如1.jpg、10.jpg、2.jpg…
+怎么办呢？&lt;br /&gt;
+自己做个html网页，用浏览器来阅读。
+
+</description>
+        <pubDate>Fri, 15 Jan 2021 11:49:01 +0800</pubDate>
+        <link>https://nicelee.top/blog/2021/01/15/pic-read-html/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/01/15/pic-read-html/</guid>
+        
+        <category>html</category>
+        
+        
+        <category>小技巧</category>
+        
+      </item>
     
       <item>
         <title>Python 提取视频截图作预览图</title>
@@ -19,6 +55,23 @@
         <pubDate>Wed, 06 Jan 2021 11:49:01 +0800</pubDate>
         <link>https://nicelee.top/blog/2021/01/06/python-opencv-video-frame/</link>
         <guid isPermaLink="true">https://nicelee.top/blog/2021/01/06/python-opencv-video-frame/</guid>
+        
+        <category>Python</category>
+        
+        
+        <category>代码片段</category>
+        
+      </item>
+    
+      <item>
+        <title>Python 某站漫画的佛系随缘下载</title>
+        <description>啊这。&lt;br /&gt;
+因为本身就可以打包，权当练习。
+
+</description>
+        <pubDate>Fri, 01 Jan 2021 11:49:01 +0800</pubDate>
+        <link>https://nicelee.top/blog/2021/01/01/python-18comic/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/01/01/python-18comic/</guid>
         
         <category>Python</category>
         
@@ -125,54 +178,6 @@
         <pubDate>Wed, 17 Jun 2020 12:49:01 +0800</pubDate>
         <link>https://nicelee.top/blog/2020/06/17/java-add-text-to-gif-7/</link>
         <guid isPermaLink="true">https://nicelee.top/blog/2020/06/17/java-add-text-to-gif-7/</guid>
-        
-        <category>Java</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>Java 真香！如何给Gif添加对白(六)</title>
-        <description>调试：对话的文字应当摆放到图像的哪个位置
-
-</description>
-        <pubDate>Wed, 17 Jun 2020 09:49:01 +0800</pubDate>
-        <link>https://nicelee.top/blog/2020/06/17/java-add-text-to-gif-6/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2020/06/17/java-add-text-to-gif-6/</guid>
-        
-        <category>Java</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>Java 真香！如何给Gif添加对白(五)</title>
-        <description>如何分离有对话的GIF，并记录相应对话和帧数。
-
-</description>
-        <pubDate>Wed, 17 Jun 2020 08:49:01 +0800</pubDate>
-        <link>https://nicelee.top/blog/2020/06/17/java-add-text-to-gif-5/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2020/06/17/java-add-text-to-gif-5/</guid>
-        
-        <category>Java</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>Java 真香！如何给Gif添加对白(四)</title>
-        <description>如何获取GIF素材。
-
-</description>
-        <pubDate>Mon, 15 Jun 2020 12:49:01 +0800</pubDate>
-        <link>https://nicelee.top/blog/2020/06/15/java-add-text-to-gif-4/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2020/06/15/java-add-text-to-gif-4/</guid>
         
         <category>Java</category>
         
