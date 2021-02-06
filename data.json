@@ -2,6 +2,20 @@
 	"code" : 0 ,
 	"data" : [
 	{
+		"title" : "关于 Github graphQL",
+		"tags" : "Python",
+		"url" : "/blog/2021/02/06/github-graphql/"
+		"brief" : "笔记向。"
+	},
+    
+	{
+		"title" : "Python 关于装饰器(以web地址解析为例)",
+		"tags" : "Python",
+		"url" : "/blog/2021/02/02/python-decorators-2/"
+		"brief" : "例如Flask，在处理方法上加一个@app.route('xxx')即可。这是怎么实现的呢？"
+	},
+    
+	{
 		"title" : "Python 关于装饰器(以异常重试为例)",
 		"tags" : "Python",
 		"url" : "/blog/2021/02/01/python-decorators/"
