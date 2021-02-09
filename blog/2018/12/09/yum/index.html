@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,14 +310,14 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#%E7%9F%A5%E8%AF%86%E5%BA%93" title="Tag: 知识库" rel="tag">知识库</a-->
-        <a href="/tag/#知识库" title="Tag: 知识库" rel="tag">知识库</a>&nbsp;
+        <!--a href="/blog/tag/#%E7%9F%A5%E8%AF%86%E5%BA%93" title="Tag: 知识库" rel="tag">知识库</a-->
+        <a href="/blog/tag/#知识库" title="Tag: 知识库" rel="tag">知识库</a>&nbsp;
     
-        <!--a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a-->
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
+        <!--a href="/blog/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a-->
+        <a href="/blog/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
     
-        <!--a href="/tag/#CentOS" title="Tag: CentOS" rel="tag">CentOS</a-->
-        <a href="/tag/#CentOS" title="Tag: CentOS" rel="tag">CentOS</a>
+        <!--a href="/blog/tag/#CentOS" title="Tag: CentOS" rel="tag">CentOS</a-->
+        <a href="/blog/tag/#CentOS" title="Tag: CentOS" rel="tag">CentOS</a>
     
   
 
@@ -340,21 +340,21 @@
 
 <h2 id="常用命令">常用命令</h2>
 <p>yum 主要的一下命令如下:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum search 软件包   搜索软件包
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum search 软件包   搜索软件包
 yum install 软件包   安装软件包
 yum remove 软件包
 yum update  更新系统
 ...
 </code></pre></div></div>
 <h2 id="默认配置">默认配置</h2>
-<p>默认配置路径: <code class="highlighter-rouge">/etc/yum.repos.d/</code>
+<p>默认配置路径: <code class="language-plaintext highlighter-rouge">/etc/yum.repos.d/</code>
 在修改前可以先备份:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /etc/yum.repos.d/
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /etc/yum.repos.d/
 mv CentOS-Base.repo CentOS-Base.repo_bak
 </code></pre></div></div>
 <h2 id="配置示例">配置示例</h2>
 <p>一个yum库（源）的设置一般如下(repo配置中可以设置多个源):</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>name=Description#一个描述，随意。
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>name=Description#一个描述，随意。
 baseurl=#设置资源库的地址，可以写阿里云也可以是自己的yum
     ftp://
     http://
@@ -364,7 +364,7 @@ gpgcheck={1|0}# gpgcheck=1表示检查；可以不检查gpgcheck=0
 gpgkey=#检查的key；如果上面不检查这一行可以不写。
 </code></pre></div></div>
 <p>例如,MySQL数据库的源 :</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[mariadb]
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[mariadb]
 name = MariaDB
 baseurl = http://yum.mariadb.org/10.0/centos6-amd64/
 gpgkey = https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
@@ -374,11 +374,11 @@ gpgcheck=1
 <p>直接取用现成的源,如阿里云(使用前先备份):</p>
 <ol>
   <li>下载阿里云的Centos-6.repo文件
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget -O CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-6.repo
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget -O CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-6.repo
 </code></pre></div>    </div>
   </li>
   <li>重新加载yum
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum clean all
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum clean all
 yum makecache
 </code></pre></div>    </div>
   </li>

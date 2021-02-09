@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,8 +310,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>
     
   
 
@@ -363,8 +363,8 @@
    * @param gif       gif保存路径
    * @param frameRate 帧率
    */</span>
-  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">merge</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">BufferedImage</span><span class="o">&gt;</span> <span class="n">imgs</span><span class="o">,</span> <span class="n">String</span> <span class="n">gif</span><span class="o">,</span> <span class="kt">int</span> <span class="n">frameRate</span><span class="o">)</span> <span class="o">{</span>
-      <span class="n">GIFEncoder</span> <span class="n">encoder</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GIFEncoder</span><span class="o">();</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">merge</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">BufferedImage</span><span class="o">&gt;</span> <span class="n">imgs</span><span class="o">,</span> <span class="nc">String</span> <span class="n">gif</span><span class="o">,</span> <span class="kt">int</span> <span class="n">frameRate</span><span class="o">)</span> <span class="o">{</span>
+      <span class="nc">GIFEncoder</span> <span class="n">encoder</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">GIFEncoder</span><span class="o">();</span>
       <span class="n">encoder</span><span class="o">.</span><span class="na">init</span><span class="o">(</span><span class="n">imgs</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">));</span>
       <span class="n">encoder</span><span class="o">.</span><span class="na">setFrameRate</span><span class="o">(</span><span class="n">frameRate</span><span class="o">);</span>
       <span class="n">encoder</span><span class="o">.</span><span class="na">start</span><span class="o">(</span><span class="n">gif</span><span class="o">);</span>

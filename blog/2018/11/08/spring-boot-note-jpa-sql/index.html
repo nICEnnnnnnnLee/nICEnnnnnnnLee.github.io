@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,14 +310,14 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#SpringBoot" title="Tag: SpringBoot" rel="tag">SpringBoot</a-->
-        <a href="/tag/#SpringBoot" title="Tag: SpringBoot" rel="tag">SpringBoot</a>&nbsp;
+        <!--a href="/blog/tag/#SpringBoot" title="Tag: SpringBoot" rel="tag">SpringBoot</a-->
+        <a href="/blog/tag/#SpringBoot" title="Tag: SpringBoot" rel="tag">SpringBoot</a>&nbsp;
     
-        <!--a href="/tag/#%E8%B8%A9%E5%9D%91" title="Tag: 踩坑" rel="tag">踩坑</a-->
-        <a href="/tag/#踩坑" title="Tag: 踩坑" rel="tag">踩坑</a>&nbsp;
+        <!--a href="/blog/tag/#%E8%B8%A9%E5%9D%91" title="Tag: 踩坑" rel="tag">踩坑</a-->
+        <a href="/blog/tag/#踩坑" title="Tag: 踩坑" rel="tag">踩坑</a>&nbsp;
     
-        <!--a href="/tag/#JPA" title="Tag: JPA" rel="tag">JPA</a-->
-        <a href="/tag/#JPA" title="Tag: JPA" rel="tag">JPA</a>
+        <!--a href="/blog/tag/#JPA" title="Tag: JPA" rel="tag">JPA</a-->
+        <a href="/blog/tag/#JPA" title="Tag: JPA" rel="tag">JPA</a>
     
   
 
@@ -338,15 +338,15 @@
 
 <h2 id="配置settings">配置settings</h2>
 <p>编译没有问题，但运行的时候，新建实体Bean抛出了异常，关键信息如下：<br />
-<code class="highlighter-rouge">Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactoryPrimary' defined in class path resource [xxx.class]: Invocation of init method failed; nested exception is org.hibernate.AnnotationException: No identifier specified for com.nicelee.music.domain.User</code></p>
+<code class="language-plaintext highlighter-rouge">Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactoryPrimary' defined in class path resource [xxx.class]: Invocation of init method failed; nested exception is org.hibernate.AnnotationException: No identifier specified for com.nicelee.music.domain.User</code></p>
 
-<p><code class="highlighter-rouge">Caused by: org.hibernate.AnnotationException: No identifier specified for entity: com.nicelee.music.domain.User</code> <br />
+<p><code class="language-plaintext highlighter-rouge">Caused by: org.hibernate.AnnotationException: No identifier specified for entity: com.nicelee.music.domain.User</code> <br />
 应该是报错的实体类com.nicelee.music.domain.User中没有添加加主键的注解@Id。<br />
 但是我的实体类中明明已经添加了@Id，为什么还会报这个错误呢？</p>
 
-<p>后来检查了很久，发现是我import的包出现了错误，正确的应该是<code class="highlighter-rouge">import javax.persistence.Id </code>，<br />
-而我却导入了<code class="highlighter-rouge">org.springframework.data.annotation.Id</code>。<br />
-这样虽然<code class="highlighter-rouge">@Id</code>在IDE语法检查时不会报错，但并不是我们本来想要的那个功能，因此运行时会报上面但错误。</p>
+<p>后来检查了很久，发现是我import的包出现了错误，正确的应该是<code class="language-plaintext highlighter-rouge">import javax.persistence.Id </code>，<br />
+而我却导入了<code class="language-plaintext highlighter-rouge">org.springframework.data.annotation.Id</code>。<br />
+这样虽然<code class="language-plaintext highlighter-rouge">@Id</code>在IDE语法检查时不会报错，但并不是我们本来想要的那个功能，因此运行时会报上面但错误。</p>
 
 <p>囧( ╯□╰ ))</p>
 

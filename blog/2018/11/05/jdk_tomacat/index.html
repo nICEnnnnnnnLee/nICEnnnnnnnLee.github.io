@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,11 +310,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8" title="Tag: 云服务器" rel="tag">云服务器</a-->
-        <a href="/tag/#云服务器" title="Tag: 云服务器" rel="tag">云服务器</a>&nbsp;
+        <!--a href="/blog/tag/#%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8" title="Tag: 云服务器" rel="tag">云服务器</a-->
+        <a href="/blog/tag/#云服务器" title="Tag: 云服务器" rel="tag">云服务器</a>&nbsp;
     
-        <!--a href="/tag/#%E5%BB%BA%E7%AB%99" title="Tag: 建站" rel="tag">建站</a-->
-        <a href="/tag/#建站" title="Tag: 建站" rel="tag">建站</a>
+        <!--a href="/blog/tag/#%E5%BB%BA%E7%AB%99" title="Tag: 建站" rel="tag">建站</a-->
+        <a href="/blog/tag/#建站" title="Tag: 建站" rel="tag">建站</a>
     
   
 
@@ -347,14 +347,14 @@
   <li>CentOS 系统默认防火墙
 因为阿里云自身有相关的出入网配置,所以可以关闭防火墙<br />
 关闭防火墙：
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl stop firewalld.service
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl stop firewalld.service
 </code></pre></div>    </div>
     <p>关闭防火墙开机自启动功能：</p>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl disable firewalld.service
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl disable firewalld.service
 </code></pre></div>    </div>
 
     <p>也可以在防火墙里添加规则，放行 80、443 或 8080 端口入方向规则。例如:</p>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>firewall-cmd --zone=public --add-port=8080/tcp --permanent
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>firewall-cmd --zone=public --add-port=8080/tcp --permanent
 </code></pre></div>    </div>
 
     <p>进行8080端口开放配置,命令解析如下：<br />
@@ -363,7 +363,7 @@
 --permanent #永久生效，没有此参数设置，重启后会失效。</p>
 
     <p>  重启防火墙，输入命令：</p>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>firewall-cmd --reload
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>firewall-cmd --reload
 </code></pre></div>    </div>
   </li>
   <li>阿里云配置
@@ -372,13 +372,13 @@
 
 <h3 id="创建一般用户-www">创建一般用户 www</h3>
 <p>该用户被用来运行 tomcat</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>useradd www
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>useradd www
 </code></pre></div></div>
 <h3 id="创建网站根目录">创建网站根目录</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir -p /data/wwwroot/default
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir -p /data/wwwroot/default
 </code></pre></div></div>
 <h3 id="新建-tomcat-测试页面">新建 Tomcat 测试页面</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>echo Tomcat test &gt; /data/wwwroot/default/index.jsp   
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>echo Tomcat test &gt; /data/wwwroot/default/index.jsp   
 chown -R www.www /data/wwwroot //将该目录的所有者设置为www(默认操作用户是root)
 </code></pre></div></div>
 
@@ -388,22 +388,22 @@ chown -R www.www /data/wwwroot //将该目录的所有者设置为www(默认操�
 <ol>
   <li>下载 JDK<br />
 可以使用wget下载网上的资源,或者自己下好后通过FTP上传到服务器上面
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget http://mirrors.linuxeye.com/jdk/jdk-8u141-linux-x64.tar.gz
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget http://mirrors.linuxeye.com/jdk/jdk-8u141-linux-x64.tar.gz
 </code></pre></div>    </div>
   </li>
   <li>新建一个目录：
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir /usr/java
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir /usr/java
 </code></pre></div>    </div>
   </li>
   <li>解压 jdk-8u141-linux-x64.tar.gz 到 /usr/java。
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tar xzf jdk-8u141-linux-x64.tar.gz -C /usr/java
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tar xzf jdk-8u141-linux-x64.tar.gz -C /usr/java
 </code></pre></div>    </div>
   </li>
   <li>设置环境变量：<br />
 i.  打开 /etc/profile：vi /etc/profile。<br />
 ii.  按 i 键进入编辑模式。<br />
 iii.  在 /etc/profile 文件中添加以下信息：
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#set java environment
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#set java environment
 export JAVA_HOME=/usr/java/jdk1.8.0_141
 export CLASSPATH=$JAVA_HOME/lib/tools.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib
 export PATH=$JAVA_HOME/bin:$PATH
@@ -411,7 +411,7 @@ export PATH=$JAVA_HOME/bin:$PATH
     <p>iv.  按 Esc 键退出编辑模式，输入 :wq 保存并关闭文件。<br />
 v.  加载环境变量： source /etc/profile。<br />
 vi.  查看 jdk 版本。当出现 jdk 版本信息时，表示 JDK 已经安装成功。</p>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java -version
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java -version
 java version "1.8.0_141"
 Java(TM) SE Runtime Environment (build 1.8.0_141-b15)
 Java HotSpot(TM) 64-Bit Server VM (build 25.141-b15, mixed mode)
@@ -425,20 +425,20 @@ Java HotSpot(TM) 64-Bit Server VM (build 25.141-b15, mixed mode)
 <ol>
   <li>下载 Apache Tomcat<br />
 可以使用wget下载网上的资源,或者自己下好后通过FTP上传到服务器上面
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://mirrors.aliyun.com/apache/tomcat/tomcat-8/v8.5.23/bin/apache-tomcat-8.5.23.tar.gz
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://mirrors.aliyun.com/apache/tomcat/tomcat-8/v8.5.23/bin/apache-tomcat-8.5.23.tar.gz
 </code></pre></div>    </div>
   </li>
   <li>依次运行以下命令解压 apache-tomcat-8.5.23.tar.gz，重命名 Tomcat 目录，并设置用户权限。
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tar xzf apache-tomcat-8.5.23.tar.gz
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tar xzf apache-tomcat-8.5.23.tar.gz
 mv apache-tomcat-8.5.23 /usr/local/tomcat/
 chown -R www.www /usr/local/tomcat/
 </code></pre></div>    </div>
   </li>
   <li>配置 server.xml 文件：<br />
- i.  切换到 <code class="highlighter-rouge">/usr/local/tomcat/conf/</code> 目录：<code class="highlighter-rouge">cd /usr/local/tomcat/conf/</code>。<br />
- ii.  重命名 <code class="highlighter-rouge">server.xml</code> 文件：<code class="highlighter-rouge">mv server.xml server.xml_bk</code>。<br />
- iii.  创建一个新的 <code class="highlighter-rouge">server.xml</code> 文件：<br />
- iv.  运行命令 <code class="highlighter-rouge">vi server.xml</code>。<br />
+ i.  切换到 <code class="language-plaintext highlighter-rouge">/usr/local/tomcat/conf/</code> 目录：<code class="language-plaintext highlighter-rouge">cd /usr/local/tomcat/conf/</code>。<br />
+ ii.  重命名 <code class="language-plaintext highlighter-rouge">server.xml</code> 文件：<code class="language-plaintext highlighter-rouge">mv server.xml server.xml_bk</code>。<br />
+ iii.  创建一个新的 <code class="language-plaintext highlighter-rouge">server.xml</code> 文件：<br />
+ iv.  运行命令 <code class="language-plaintext highlighter-rouge">vi server.xml</code>。<br />
  v.  单击 i 键进入编辑模式。添加以下内容:</li>
 </ol>
 
@@ -485,26 +485,26 @@ chown -R www.www /usr/local/tomcat/
 </code></pre></div></div>
 <ol>
   <li>设置 JVM 内存参数：<br />
-i. 运行命令 <code class="highlighter-rouge">vi /usr/local/tomcat/bin/setenv.sh</code>， 创建 <code class="highlighter-rouge">/usr/local/tomcat/bin/setenv.sh</code>。<br />
+i. 运行命令 <code class="language-plaintext highlighter-rouge">vi /usr/local/tomcat/bin/setenv.sh</code>， 创建 <code class="language-plaintext highlighter-rouge">/usr/local/tomcat/bin/setenv.sh</code>。<br />
 ii. 按 i 键进入编辑模式。<br />
 iii. 添加以下内容：
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>JAVA_OPTS='-Djava.security.egd=file:/dev/./urandom -server -Xms256m -Xmx496m -Dfile.encoding=UTF-8'
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>JAVA_OPTS='-Djava.security.egd=file:/dev/./urandom -server -Xms256m -Xmx496m -Dfile.encoding=UTF-8'
 </code></pre></div>    </div>
     <p>iv.  按 Esc 键退出编辑模式，输入 :wq 保存并退出文件。</p>
   </li>
   <li>设置 Tomcat 自启动脚本。<br />
-i.  下载脚本：<code class="highlighter-rouge">wget https://github.com/lj2007331/oneinstack/raw/master/init.d/Tomcat-init</code> <br />
-ii.  重命名 Tomcat-init：<code class="highlighter-rouge">mv Tomcat-init /etc/init.d/tomcat</code><br />
-iii.  添加执行权限：<code class="highlighter-rouge">chmod +x /etc/init.d/tomcat</code><br />
-iv.  运行以下命令，设置启动脚本 <code class="highlighter-rouge">JAVA_HOME</code>`。
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sed -i 's@^export JAVA_HOME=.*@export JAVA_HOME=/usr/java/jdk1.8.0_141@' /etc/init.d/tomcat
+i.  下载脚本：<code class="language-plaintext highlighter-rouge">wget https://github.com/lj2007331/oneinstack/raw/master/init.d/Tomcat-init</code> <br />
+ii.  重命名 Tomcat-init：<code class="language-plaintext highlighter-rouge">mv Tomcat-init /etc/init.d/tomcat</code><br />
+iii.  添加执行权限：<code class="language-plaintext highlighter-rouge">chmod +x /etc/init.d/tomcat</code><br />
+iv.  运行以下命令，设置启动脚本 <code class="language-plaintext highlighter-rouge">JAVA_HOME</code>`。
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sed -i 's@^export JAVA_HOME=.*@export JAVA_HOME=/usr/java/jdk1.8.0_141@' /etc/init.d/tomcat
 </code></pre></div>    </div>
     <p>v.  设置自启动。</p>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chkconfig --add tomcat
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chkconfig --add tomcat
 chkconfig tomcat on
 </code></pre></div>    </div>
     <p>vi.  启动 Tomcat。</p>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>service tomcat start
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>service tomcat start
 </code></pre></div>    </div>
     <p>vii. 在浏览器地址栏中输入 http://ip:8080 进行访问。出现如图所示页面时表示安装成功。
 <img src="https://s1.ax1x.com/2018/11/06/ioLpO1.png" alt="Tomcat test" /></p>
@@ -516,10 +516,10 @@ chkconfig tomcat on
   <li>Tomcat 默认端口8080访问没有问题, 但是将其改为80后,无法访问.<br />
 <em>解决方案:</em> <br />
 增加ip table表,将外部访问至80的端口导向至8080
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
 </code></pre></div>    </div>
     <p>当需要使用nginx等其它程序,需要将端口恢复默认时,使用以下命令删除route表:</p>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>iptables -t nat -D PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>iptables -t nat -D PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
 </code></pre></div>    </div>
   </li>
 </ul>

@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,11 +310,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
     
-        <!--a href="/tag/#DNS" title="Tag: DNS" rel="tag">DNS</a-->
-        <a href="/tag/#DNS" title="Tag: DNS" rel="tag">DNS</a>
+        <!--a href="/blog/tag/#DNS" title="Tag: DNS" rel="tag">DNS</a-->
+        <a href="/blog/tag/#DNS" title="Tag: DNS" rel="tag">DNS</a>
     
   
 
@@ -357,7 +357,7 @@
 <h2 id="实现">实现</h2>
 
 <p>接收到UDP报文的处理:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>udpSocket.receive(packet);
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>udpSocket.receive(packet);
 
 DnsHeader header = new DnsHeader(receMsgs, 0);
 Short dnsId = header.getID();
@@ -400,7 +400,7 @@ if (!dnsHost.equals(packet.getAddress())) {
 </code></pre></div></div>
 
 <p>构造DNS答复的方法:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public void createDNSResponseToAQuery(DnsPacket dnsPacket, DatagramPacket packet, String ipAddr) {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public void createDNSResponseToAQuery(DnsPacket dnsPacket, DatagramPacket packet, String ipAddr) {
     Question question = dnsPacket.Questions[0];
 
     dnsPacket.Header.setResourceCount((short) 1);

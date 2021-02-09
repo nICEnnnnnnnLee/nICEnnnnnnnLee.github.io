@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,17 +310,17 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
     
-        <!--a href="/tag/#html" title="Tag: html" rel="tag">html</a-->
-        <a href="/tag/#html" title="Tag: html" rel="tag">html</a>&nbsp;
+        <!--a href="/blog/tag/#html" title="Tag: html" rel="tag">html</a-->
+        <a href="/blog/tag/#html" title="Tag: html" rel="tag">html</a>&nbsp;
     
-        <!--a href="/tag/#%E7%88%AC%E8%99%AB" title="Tag: 爬虫" rel="tag">爬虫</a-->
-        <a href="/tag/#爬虫" title="Tag: 爬虫" rel="tag">爬虫</a>&nbsp;
+        <!--a href="/blog/tag/#%E7%88%AC%E8%99%AB" title="Tag: 爬虫" rel="tag">爬虫</a-->
+        <a href="/blog/tag/#爬虫" title="Tag: 爬虫" rel="tag">爬虫</a>&nbsp;
     
-        <!--a href="/tag/#AcFun" title="Tag: AcFun" rel="tag">AcFun</a-->
-        <a href="/tag/#AcFun" title="Tag: AcFun" rel="tag">AcFun</a>
+        <!--a href="/blog/tag/#AcFun" title="Tag: AcFun" rel="tag">AcFun</a-->
+        <a href="/blog/tag/#AcFun" title="Tag: AcFun" rel="tag">AcFun</a>
     
   
 
@@ -356,17 +356,17 @@
 
 <h2 id="已知网址如何获取下载链接">已知网址如何获取下载链接</h2>
 <h3 id="网址示例">网址示例</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://www.acfun.cn/v/ac10763950
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://www.acfun.cn/v/ac10763950
 </code></pre></div></div>
 
 <h3 id="访问网址抠出有着视频信息的json出来">访问网址，抠出有着视频信息的json出来</h3>
 <ul>
   <li>正则表达式示例：
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Pattern pVideoInfo = Pattern.compile("window\\.videoInfo ?= ?(.*);[ \n]+window\\.addEventListener");
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Pattern pVideoInfo = Pattern.compile("window\\.videoInfo ?= ?(.*);[ \n]+window\\.addEventListener");
 </code></pre></div>    </div>
   </li>
   <li>结果示例：
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
   "currentVideoId": 10602737,
   "bananaCountShow": "149",
   "stowCount": 52,
@@ -484,27 +484,27 @@
 </code></pre></div>    </div>
   </li>
   <li>最后得到结果数组：
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>json.currentVideoInfo.ksPlayJson..adaptationSet.representation[]
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>json.currentVideoInfo.ksPlayJson..adaptationSet.representation[]
 ps: ..代表需要进行一次string转json操作
 </code></pre></div>    </div>
-    <p>该数组元素包含视频清晰度(bandwidth、codecs、width、height)以及对应下载链接m3u8<code class="highlighter-rouge">url</code></p>
+    <p>该数组元素包含视频清晰度(bandwidth、codecs、width、height)以及对应下载链接m3u8<code class="language-plaintext highlighter-rouge">url</code></p>
   </li>
 </ul>
 
 <h2 id="当视频有多p该怎么办">当视频有多P该怎么办？</h2>
 <h3 id="已知网址">已知网址</h3>
 <p>ac10187843的第3个视频，操作和第一个视频一致</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://www.acfun.cn/v/ac10187843_3
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://www.acfun.cn/v/ac10187843_3
 </code></pre></div></div>
 <h3 id="已知ac号和具体id">已知ac号和具体id</h3>
-<p>以<code class="highlighter-rouge">ac10187818</code>的<code class="highlighter-rouge">10205818</code>为例</p>
+<p>以<code class="language-plaintext highlighter-rouge">ac10187818</code>的<code class="language-plaintext highlighter-rouge">10205818</code>为例</p>
 <ul>
   <li>直接访问ac号对应页面
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://www.acfun.cn/v/ac10187818
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://www.acfun.cn/v/ac10187818
 </code></pre></div>    </div>
   </li>
   <li>抠出对应网址
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data-href='/v/ac10187818_5' title="05" data-id='10205818'
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data-href='/v/ac10187818_5' title="05" data-id='10205818'
 </code></pre></div>    </div>
   </li>
   <li>按照网址已知进行处理</li>

@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,11 +310,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a-->
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
+        <!--a href="/blog/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a-->
+        <a href="/blog/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
     
-        <!--a href="/tag/#Nginx" title="Tag: Nginx" rel="tag">Nginx</a-->
-        <a href="/tag/#Nginx" title="Tag: Nginx" rel="tag">Nginx</a>
+        <!--a href="/blog/tag/#Nginx" title="Tag: Nginx" rel="tag">Nginx</a-->
+        <a href="/blog/tag/#Nginx" title="Tag: Nginx" rel="tag">Nginx</a>
     
   
 
@@ -336,16 +336,16 @@
 </blockquote>
 
 <h2 id="前言">前言</h2>
-<p>关于<code class="highlighter-rouge">HTTP</code>升级<code class="highlighter-rouge">HTTPS</code>，其实就是多了一层<code class="highlighter-rouge">SSL</code>层“管道”用来加密数据。<br />
+<p>关于<code class="language-plaintext highlighter-rouge">HTTP</code>升级<code class="language-plaintext highlighter-rouge">HTTPS</code>，其实就是多了一层<code class="language-plaintext highlighter-rouge">SSL</code>层“管道”用来加密数据。<br />
 加密需要用到数字证书，这个最好是权威第三方，当然也可以是自己给自己签名，但这样浏览器会有告警提示。所以，一般是出钱去买咯。。。</p>
 <ul>
-  <li>单纯<code class="highlighter-rouge">HTTPS</code>如何配置</li>
-  <li><code class="highlighter-rouge">HTTP</code> 301到<code class="highlighter-rouge">HTTPS</code></li>
+  <li>单纯<code class="language-plaintext highlighter-rouge">HTTPS</code>如何配置</li>
+  <li><code class="language-plaintext highlighter-rouge">HTTP</code> 301到<code class="language-plaintext highlighter-rouge">HTTPS</code></li>
 </ul>
 
 <h2 id="https配置"><strong>HTTPS</strong>配置</h2>
-<p>假设原来在<code class="highlighter-rouge">HTTP</code>中设置如下：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server
+<p>假设原来在<code class="language-plaintext highlighter-rouge">HTTP</code>中设置如下：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server
 {
     listen 80;#监听端口
 
@@ -359,14 +359,14 @@
 }
 </code></pre></div></div>
 
-<p>那么，如果我想<code class="highlighter-rouge">http/https</code>的资源都可以使用的话，<br />
+<p>那么，如果我想<code class="language-plaintext highlighter-rouge">http/https</code>的资源都可以使用的话，<br />
     + 最简单的一个server监听两个端口<br />
     + 一种办法是代理；<br />
-    + 另一种是全盘复制<code class="highlighter-rouge">HTTP</code>的server配置，再稍微修改一下。<br />
+    + 另一种是全盘复制<code class="language-plaintext highlighter-rouge">HTTP</code>的server配置，再稍微修改一下。<br />
 如下：</p>
 <ul>
   <li><strong>Server</strong>监听两个端口
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server {
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server {
   listen    80;
   listen    443 ssl;
   server_name nicelee.top www.nicelee.top blog.nicelee.top;#域名
@@ -378,7 +378,7 @@
   </li>
   <li>代理<br />
 这种方法优点在于配置非常简单，啥也不用考虑，但缺点是绕了一圈，自己代理自己，占用了资源
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server
 {
   listen 443;
   ssl on;
@@ -392,7 +392,7 @@
 }
 </code></pre></div>    </div>
   </li>
-  <li>在<code class="highlighter-rouge">HTTP</code>的server配置上进行修改  <br />
+  <li>在<code class="language-plaintext highlighter-rouge">HTTP</code>的server配置上进行修改  <br />
 这种方法其实也比较简单，但需要注意部分rewrite中的协议设置，可能会导致部分资源无法使用，或出现绕路情况，详情如下：
     <ul>
       <li>预期的状况： 
@@ -400,7 +400,7 @@
       <li>现在的情况：
   <strong>HTTPS 1</strong> -&gt;  <strong>HTTP 2</strong><br />
   在浏览器浏览HTTPS网页时，加载HTTP资源会报错。如果在header里面设置了<br />
-  <code class="highlighter-rouge">&lt;meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"&gt;</code><br />
+  <code class="language-plaintext highlighter-rouge">&lt;meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"&gt;</code><br />
   那么浏览器会升级成HTTPS访问，
   <strong>HTTPS 1</strong> -&gt;  <strong>HTTP 2</strong> -&gt;  <strong>HTTPS 2</strong> <br />
   这样虽然没有增加Nginx的负担，但是需要修改对应的html资源。<br />
@@ -409,7 +409,7 @@
   </li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server
 {
     listen 443;
     ssl on;
@@ -427,10 +427,10 @@
 </code></pre></div></div>
 
 <h2 id="http-301到https"><strong>HTTP</strong> 301到<strong>HTTPS</strong></h2>
-<p>某些情况下，同时提供<code class="highlighter-rouge">HTTP/HTTPS</code>资源（即<code class="highlighter-rouge">HTTP/HTTPS</code>均能访问，且浏览器地址栏均为对应协议）并不是我们想要的。<br />
-为了SEO等，我们需要将<code class="highlighter-rouge">HTTP</code>资源永久重定向到<code class="highlighter-rouge">HTTPS</code>。（尽管这会做出一些牺牲，比如原来的cookies没法在新网页生效）<br />
+<p>某些情况下，同时提供<code class="language-plaintext highlighter-rouge">HTTP/HTTPS</code>资源（即<code class="language-plaintext highlighter-rouge">HTTP/HTTPS</code>均能访问，且浏览器地址栏均为对应协议）并不是我们想要的。<br />
+为了SEO等，我们需要将<code class="language-plaintext highlighter-rouge">HTTP</code>资源永久重定向到<code class="language-plaintext highlighter-rouge">HTTPS</code>。（尽管这会做出一些牺牲，比如原来的cookies没法在新网页生效）<br />
 第一种方法设置比较简单，但是耦合在一起可能会有些问题(如果没有那最好了😄)</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server {
     listen    80;
     listen    443 ssl;
     server_name nicelee.top www.nicelee.top blog.nicelee.top;#域名
@@ -442,15 +442,15 @@
     ......
 }
 </code></pre></div></div>
-<p>上面的后两种方法对应<code class="highlighter-rouge">HTTP</code>端的设置均相同，比较简单，都是301重定向：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server
+<p>上面的后两种方法对应<code class="language-plaintext highlighter-rouge">HTTP</code>端的设置均相同，比较简单，都是301重定向：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server
 {
     listen 80;
     server_name _;#域名
     rewrite ^(.*)$ https://$host$1 permanent;#// 把http的域名请求转成https
 }
 </code></pre></div></div>
-<p>这里需要注意，前面的<code class="highlighter-rouge">代理</code>方法需要将原来的<code class="highlighter-rouge">HTTP</code>设置换个端口，然后<code class="highlighter-rouge">HTTPS</code>代理，然后<code class="highlighter-rouge">HTTP</code>重定向到<code class="highlighter-rouge">HTTPS</code>。</p>
+<p>这里需要注意，前面的<code class="language-plaintext highlighter-rouge">代理</code>方法需要将原来的<code class="language-plaintext highlighter-rouge">HTTP</code>设置换个端口，然后<code class="language-plaintext highlighter-rouge">HTTPS</code>代理，然后<code class="language-plaintext highlighter-rouge">HTTP</code>重定向到<code class="language-plaintext highlighter-rouge">HTTPS</code>。</p>
 
 
         </article>

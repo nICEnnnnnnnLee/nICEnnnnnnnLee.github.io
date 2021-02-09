@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,11 +310,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Nginx" title="Tag: Nginx" rel="tag">Nginx</a-->
-        <a href="/tag/#Nginx" title="Tag: Nginx" rel="tag">Nginx</a>&nbsp;
+        <!--a href="/blog/tag/#Nginx" title="Tag: Nginx" rel="tag">Nginx</a-->
+        <a href="/blog/tag/#Nginx" title="Tag: Nginx" rel="tag">Nginx</a>&nbsp;
     
-        <!--a href="/tag/#%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81" title="Tag: 身份验证" rel="tag">身份验证</a-->
-        <a href="/tag/#身份验证" title="Tag: 身份验证" rel="tag">身份验证</a>
+        <!--a href="/blog/tag/#%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81" title="Tag: 身份验证" rel="tag">身份验证</a-->
+        <a href="/blog/tag/#身份验证" title="Tag: 身份验证" rel="tag">身份验证</a>
     
   
 
@@ -348,17 +348,17 @@
     <ul>
       <li>采用系统函数crypt()加密的密码；可通过htpasswd命令或者openssl passwd命令生成</li>
       <li>通过Apache提供的基于MD5的变种加密算法(apr1)，同样可通过htpasswd 或者openssl passwd命令生成</li>
-      <li>以<code class="highlighter-rouge">{scheme}data</code>格式表示的加密后的密码，RFC 2307中有对该格式的密码标准进行了说明。其中scheme指的是加密算法，nginx支持的scheme有PLAIN, SHA,SSHA算法。</li>
+      <li>以<code class="language-plaintext highlighter-rouge">{scheme}data</code>格式表示的加密后的密码，RFC 2307中有对该格式的密码标准进行了说明。其中scheme指的是加密算法，nginx支持的scheme有PLAIN, SHA,SSHA算法。</li>
     </ul>
   </li>
   <li>密码生成示例：
     <ul>
       <li>安装相关工具
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum install -y httpd-tools 
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum install -y httpd-tools 
 </code></pre></div>        </div>
       </li>
       <li>初次使用生成数据库和用户（之后更新或新增用户去掉-c即可）
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@xxxx:~# htpasswd -c /usr/local/nginxpwd user //数据库路径 以及 用户名
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@xxxx:~# htpasswd -c /usr/local/nginxpwd user //数据库路径 以及 用户名
   New password: *******  //输入认证密码 
   Re-type new password: ********  //再次输入认证密码 
 root@xxxx:~# chmod 755 /usr/local/nginx/passwd    //修改网站认证数据库权限 
@@ -367,7 +367,7 @@ user:$apr1$pVpIZigz$URwphPhvGl9pDarM9phOw/
 </code></pre></div>        </div>
         <h2 id="配置示例">配置示例</h2>
         <p>如下：</p>
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>location / {  
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>location / {  
 auth_basic      "Name of Your Site";  
 auth_basic_user_file /usr/local/nginx/passwd;  
 }

@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,8 +310,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>
     
   
 
@@ -349,7 +349,7 @@
 <h2 id="实现">实现</h2>
 <ul>
   <li>这里讲如何对单帧图片进行处理  <br />
-这里的图像专指<code class="highlighter-rouge">BufferedImage</code>。</li>
+这里的图像专指<code class="language-plaintext highlighter-rouge">BufferedImage</code>。</li>
 </ul>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
@@ -362,9 +362,9 @@
  * @param height
  * @return 裁剪后的图片
  */</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="n">BufferedImage</span> <span class="nf">cut</span><span class="o">(</span><span class="n">BufferedImage</span> <span class="n">img</span><span class="o">,</span> <span class="kt">int</span> <span class="n">offsetX</span><span class="o">,</span> <span class="kt">int</span> <span class="n">offsetY</span><span class="o">,</span> <span class="kt">int</span> <span class="n">width</span><span class="o">,</span> <span class="kt">int</span> <span class="n">height</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">BufferedImage</span> <span class="n">img0</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedImage</span><span class="o">(</span><span class="n">width</span><span class="o">,</span> <span class="n">height</span><span class="o">,</span> <span class="n">BufferedImage</span><span class="o">.</span><span class="na">TYPE_INT_RGB</span><span class="o">);</span>
-    <span class="n">Graphics</span> <span class="n">g</span> <span class="o">=</span> <span class="n">img0</span><span class="o">.</span><span class="na">getGraphics</span><span class="o">();</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="nc">BufferedImage</span> <span class="nf">cut</span><span class="o">(</span><span class="nc">BufferedImage</span> <span class="n">img</span><span class="o">,</span> <span class="kt">int</span> <span class="n">offsetX</span><span class="o">,</span> <span class="kt">int</span> <span class="n">offsetY</span><span class="o">,</span> <span class="kt">int</span> <span class="n">width</span><span class="o">,</span> <span class="kt">int</span> <span class="n">height</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">BufferedImage</span> <span class="n">img0</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedImage</span><span class="o">(</span><span class="n">width</span><span class="o">,</span> <span class="n">height</span><span class="o">,</span> <span class="nc">BufferedImage</span><span class="o">.</span><span class="na">TYPE_INT_RGB</span><span class="o">);</span>
+    <span class="nc">Graphics</span> <span class="n">g</span> <span class="o">=</span> <span class="n">img0</span><span class="o">.</span><span class="na">getGraphics</span><span class="o">();</span>
     <span class="n">g</span><span class="o">.</span><span class="na">drawImage</span><span class="o">(</span><span class="n">img</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">width</span><span class="o">,</span> <span class="n">height</span><span class="o">,</span> <span class="n">offsetX</span><span class="o">,</span> <span class="n">offsetY</span><span class="o">,</span> <span class="n">offsetX</span> <span class="o">+</span> <span class="n">width</span><span class="o">,</span> <span class="n">offsetY</span> <span class="o">+</span> <span class="n">height</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
     <span class="n">g</span><span class="o">.</span><span class="na">dispose</span><span class="o">();</span>
     <span class="k">return</span> <span class="n">img0</span><span class="o">;</span>
@@ -377,11 +377,11 @@
  * @param height
  * @return 处理后的图片
  */</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="n">BufferedImage</span> <span class="nf">resize</span><span class="o">(</span><span class="n">BufferedImage</span> <span class="n">img</span><span class="o">,</span> <span class="kt">int</span> <span class="n">width</span><span class="o">,</span> <span class="kt">int</span> <span class="n">height</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">Image</span> <span class="n">scaled</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="na">getScaledInstance</span><span class="o">(</span><span class="n">width</span> <span class="o">,</span> <span class="n">height</span><span class="o">,</span> <span class="n">Image</span><span class="o">.</span><span class="na">SCALE_DEFAULT</span><span class="o">);</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="nc">BufferedImage</span> <span class="nf">resize</span><span class="o">(</span><span class="nc">BufferedImage</span> <span class="n">img</span><span class="o">,</span> <span class="kt">int</span> <span class="n">width</span><span class="o">,</span> <span class="kt">int</span> <span class="n">height</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Image</span> <span class="n">scaled</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="na">getScaledInstance</span><span class="o">(</span><span class="n">width</span> <span class="o">,</span> <span class="n">height</span><span class="o">,</span> <span class="nc">Image</span><span class="o">.</span><span class="na">SCALE_DEFAULT</span><span class="o">);</span>
     <span class="c1">// 创建一个新的画布，在上面画裁剪后的图</span>
-    <span class="n">BufferedImage</span> <span class="n">img0</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedImage</span><span class="o">(</span><span class="n">width</span><span class="o">,</span> <span class="n">height</span><span class="o">,</span> <span class="n">BufferedImage</span><span class="o">.</span><span class="na">TYPE_INT_RGB</span><span class="o">);</span>
-    <span class="n">Graphics</span> <span class="n">g</span> <span class="o">=</span> <span class="n">img0</span><span class="o">.</span><span class="na">getGraphics</span><span class="o">();</span>
+    <span class="nc">BufferedImage</span> <span class="n">img0</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedImage</span><span class="o">(</span><span class="n">width</span><span class="o">,</span> <span class="n">height</span><span class="o">,</span> <span class="nc">BufferedImage</span><span class="o">.</span><span class="na">TYPE_INT_RGB</span><span class="o">);</span>
+    <span class="nc">Graphics</span> <span class="n">g</span> <span class="o">=</span> <span class="n">img0</span><span class="o">.</span><span class="na">getGraphics</span><span class="o">();</span>
     <span class="n">g</span><span class="o">.</span><span class="na">drawImage</span><span class="o">(</span><span class="n">scaled</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span><span class="kc">null</span><span class="o">);</span>
     <span class="n">g</span><span class="o">.</span><span class="na">dispose</span><span class="o">();</span>
     <span class="k">return</span> <span class="n">img0</span><span class="o">;</span>
@@ -397,11 +397,11 @@
  * @param color
  * @return 处理后的图片
  */</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="n">BufferedImage</span> <span class="nf">addText</span><span class="o">(</span><span class="n">BufferedImage</span> <span class="n">img</span><span class="o">,</span> <span class="n">String</span> <span class="n">text</span><span class="o">,</span> <span class="kt">int</span> <span class="n">offsetX</span><span class="o">,</span> <span class="kt">int</span> <span class="n">OffsetY</span><span class="o">,</span> <span class="n">Font</span> <span class="n">font</span><span class="o">,</span> <span class="n">Color</span> <span class="n">color</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">Graphics</span> <span class="n">g</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="na">getGraphics</span><span class="o">();</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="nc">BufferedImage</span> <span class="nf">addText</span><span class="o">(</span><span class="nc">BufferedImage</span> <span class="n">img</span><span class="o">,</span> <span class="nc">String</span> <span class="n">text</span><span class="o">,</span> <span class="kt">int</span> <span class="n">offsetX</span><span class="o">,</span> <span class="kt">int</span> <span class="nc">OffsetY</span><span class="o">,</span> <span class="nc">Font</span> <span class="n">font</span><span class="o">,</span> <span class="nc">Color</span> <span class="n">color</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Graphics</span> <span class="n">g</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="na">getGraphics</span><span class="o">();</span>
     <span class="n">g</span><span class="o">.</span><span class="na">setFont</span><span class="o">(</span><span class="n">font</span><span class="o">);</span>
     <span class="n">g</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="n">color</span><span class="o">);</span>
-    <span class="n">g</span><span class="o">.</span><span class="na">drawString</span><span class="o">(</span><span class="n">text</span><span class="o">,</span> <span class="n">offsetX</span><span class="o">,</span> <span class="n">OffsetY</span><span class="o">);</span>
+    <span class="n">g</span><span class="o">.</span><span class="na">drawString</span><span class="o">(</span><span class="n">text</span><span class="o">,</span> <span class="n">offsetX</span><span class="o">,</span> <span class="nc">OffsetY</span><span class="o">);</span>
     <span class="n">g</span><span class="o">.</span><span class="na">dispose</span><span class="o">();</span>
     <span class="k">return</span> <span class="n">img</span><span class="o">;</span>
 <span class="o">}</span>
@@ -414,9 +414,9 @@
  * @param OffsetY
  * @return 处理后的图片
  */</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="n">BufferedImage</span> <span class="nf">addText</span><span class="o">(</span><span class="n">BufferedImage</span> <span class="n">img</span><span class="o">,</span> <span class="n">String</span> <span class="n">text</span><span class="o">,</span> <span class="kt">int</span> <span class="n">offsetX</span><span class="o">,</span> <span class="kt">int</span> <span class="n">OffsetY</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">Graphics</span> <span class="n">g</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="na">getGraphics</span><span class="o">();</span>
-    <span class="n">g</span><span class="o">.</span><span class="na">drawString</span><span class="o">(</span><span class="n">text</span><span class="o">,</span> <span class="n">offsetX</span><span class="o">,</span> <span class="n">OffsetY</span><span class="o">);</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="nc">BufferedImage</span> <span class="nf">addText</span><span class="o">(</span><span class="nc">BufferedImage</span> <span class="n">img</span><span class="o">,</span> <span class="nc">String</span> <span class="n">text</span><span class="o">,</span> <span class="kt">int</span> <span class="n">offsetX</span><span class="o">,</span> <span class="kt">int</span> <span class="nc">OffsetY</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Graphics</span> <span class="n">g</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="na">getGraphics</span><span class="o">();</span>
+    <span class="n">g</span><span class="o">.</span><span class="na">drawString</span><span class="o">(</span><span class="n">text</span><span class="o">,</span> <span class="n">offsetX</span><span class="o">,</span> <span class="nc">OffsetY</span><span class="o">);</span>
     <span class="n">g</span><span class="o">.</span><span class="na">dispose</span><span class="o">();</span>
     <span class="k">return</span> <span class="n">img</span><span class="o">;</span>
 <span class="o">}</span>

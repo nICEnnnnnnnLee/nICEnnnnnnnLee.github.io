@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,8 +310,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Thymeleaf" title="Tag: Thymeleaf" rel="tag">Thymeleaf</a-->
-        <a href="/tag/#Thymeleaf" title="Tag: Thymeleaf" rel="tag">Thymeleaf</a>
+        <!--a href="/blog/tag/#Thymeleaf" title="Tag: Thymeleaf" rel="tag">Thymeleaf</a-->
+        <a href="/blog/tag/#Thymeleaf" title="Tag: Thymeleaf" rel="tag">Thymeleaf</a>
     
   
 
@@ -342,7 +342,7 @@
 </blockquote>
 
 <h2 id="日期格式组件提取等">日期格式、组件提取等</h2>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>${#dates.format(date)}
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>${#dates.format(date)}
 ${#dates.arrayFormat(datesArray)}
 ${#dates.listFormat(datesList)}
 ${#dates.setFormat(datesSet)}
@@ -371,7 +371,7 @@ ${#dates.createToday()}
 </code></pre></div></div>
 
 <h2 id="日历">日历</h2>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>${#calendars.format(cal)}
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>${#calendars.format(cal)}
 ${#calendars.arrayFormat(calArray)}
 ${#calendars.listFormat(calList)}
 ${#calendars.setFormat(calSet)}
@@ -400,7 +400,7 @@ ${#calendars.createToday()}
 </code></pre></div></div>
 
 <h2 id="格式化数字对象">格式化数字对象</h2>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>${#numbers.formatInteger(num,3)}
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>${#numbers.formatInteger(num,3)}
 ${#numbers.arrayFormatInteger(numArray,3)}
 ${#numbers.listFormatInteger(numList,3)}
 ${#numbers.setFormatInteger(numSet,3)}
@@ -425,7 +425,7 @@ ${#numbers.sequence(from,to,step)}
 </code></pre></div></div>
 
 <h2 id="字符串处理">字符串处理</h2>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>${#strings.isEmpty(name)}
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>${#strings.isEmpty(name)}
 ${#strings.arrayIsEmpty(nameArr)}
 ${#strings.listIsEmpty(nameList)}
 ${#strings.setIsEmpty(nameSet)}
@@ -471,14 +471,14 @@ ${#strings.concatReplaceNulls(str)}
 </code></pre></div></div>
 
 <h2 id="对象处理">对象处理</h2>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>${#objects.nullSafe(obj,default)}
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>${#objects.nullSafe(obj,default)}
 ${#objects.arrayNullSafe(objArray,default)}
 ${#objects.listNullSafe(objList,default)}
 ${#objects.setNullSafe(objSet,default)}
 </code></pre></div></div>
 
 <h2 id="布尔值相关">布尔值相关</h2>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>${#bools.isTrue(obj)}
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>${#bools.isTrue(obj)}
 ${#bools.arrayIsTrue(objArray)}
 ${#bools.listIsTrue(objList)}
 ${#bools.setIsTrue(objSet)}
@@ -495,7 +495,7 @@ ${#bools.setOr(condSet)}
 </code></pre></div></div>
 
 <h2 id="数组相关">数组相关</h2>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>${#arrays.toArray(object)}
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>${#arrays.toArray(object)}
 ${#arrays.toStringArray(object)}
 ${#arrays.toIntegerArray(object)}
 ${#arrays.toLongArray(object)}
@@ -509,7 +509,7 @@ ${#arrays.containsAll(array, elements)}
 </code></pre></div></div>
 
 <h2 id="list集合相关">list集合相关</h2>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>${#lists.toList(object)}
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>${#lists.toList(object)}
 ${#lists.size(list)}
 ${#lists.isEmpty(list)}
 ${#lists.contains(list, element)}
@@ -519,7 +519,7 @@ ${#lists.sort(list, comparator)}
 </code></pre></div></div>
 
 <h2 id="set集合相关">set集合相关</h2>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>${#sets.toSet(object)}
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>${#sets.toSet(object)}
 ${#sets.size(set)}
 ${#sets.isEmpty(set)}
 ${#sets.contains(set, element)}
@@ -527,7 +527,7 @@ ${#sets.containsAll(set, elements)}
 </code></pre></div></div>
 
 <h2 id="map集合相关">map集合相关</h2>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>${#maps.size(map)}
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>${#maps.size(map)}
 ${#maps.isEmpty(map)}
 ${#maps.containsKey(map, key)}
 ${#maps.containsAllKeys(map, keys)}
@@ -536,14 +536,14 @@ ${#maps.containsAllValues(map, value)}
 </code></pre></div></div>
 
 <h2 id="聚集聚合">聚集，聚合</h2>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>${#aggregates.sum(array)}
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>${#aggregates.sum(array)}
 ${#aggregates.sum(collection)}
 ${#aggregates.avg(array)}
 ${#aggregates.avg(collection)}
 </code></pre></div></div>
 
 <h2 id="获取外部信息内部变量">获取外部信息内部变量</h2>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>${#messages.msg('msgKey')}
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>${#messages.msg('msgKey')}
 ${#messages.msg('msgKey', param1)}
 ${#messages.msg('msgKey', param1, param2)}
 ${#messages.msg('msgKey', param1, param2, param3)}
@@ -562,7 +562,7 @@ ${#messages.setMsgOrNull(messageKeySet)}
 </code></pre></div></div>
 
 <h2 id="处理可能重复的id属性">处理可能重复的id属性</h2>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>${#ids.seq('someId')}
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>${#ids.seq('someId')}
 ${#ids.next('someId')}
 ${#ids.prev('someId')}
 </code></pre></div></div>

@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#小技巧" title="Category: 小技巧" rel="category">小技巧</a>
+        <a href="/blog/category/#小技巧" title="Category: 小技巧" rel="category">小技巧</a>
     
   
 
@@ -310,11 +310,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Windows" title="Tag: Windows" rel="tag">Windows</a-->
-        <a href="/tag/#Windows" title="Tag: Windows" rel="tag">Windows</a>&nbsp;
+        <!--a href="/blog/tag/#Windows" title="Tag: Windows" rel="tag">Windows</a-->
+        <a href="/blog/tag/#Windows" title="Tag: Windows" rel="tag">Windows</a>&nbsp;
     
-        <!--a href="/tag/#VBS" title="Tag: VBS" rel="tag">VBS</a-->
-        <a href="/tag/#VBS" title="Tag: VBS" rel="tag">VBS</a>
+        <!--a href="/blog/tag/#VBS" title="Tag: VBS" rel="tag">VBS</a-->
+        <a href="/blog/tag/#VBS" title="Tag: VBS" rel="tag">VBS</a>
     
   
 
@@ -351,7 +351,7 @@
 <h2 id="二文字转语音">二、文字转语音</h2>
 <ul>
   <li>还是一样保存文本，两行代码搞定
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Set objVoice = CreateObject("SAPI.SpVoice")
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Set objVoice = CreateObject("SAPI.SpVoice")
 objVoice.Speak "你好，我也好"
 </code></pre></div>    </div>
   </li>
@@ -359,7 +359,7 @@ objVoice.Speak "你好，我也好"
     <ul>
       <li>设置朗读速度，取值范围：-10到10，正常为0</li>
       <li>设置朗读音量，取值范围：0到100，正常为100
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Set objVoice = CreateObject("SAPI.SpVoice")
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Set objVoice = CreateObject("SAPI.SpVoice")
 objVoice.Rate = 0 
 objVoice.Volume = 100
 objVoice.Speak "你好，我也好"
@@ -368,7 +368,7 @@ objVoice.Speak "你好，我也好"
     </ul>
   </li>
   <li>另外，还可以将语音保存，以下保存成了Test.wav文件
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Const SSFMCreateForWrite = 3
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Const SSFMCreateForWrite = 3
 strText = "你好，我也好"
 Set objVoice = CreateObject("SAPI.SpVoice")
 Set objFile = CreateObject("SAPI.SpFileStream.1")
@@ -384,7 +384,7 @@ objVoice.Speak strText
 
 <h2 id="三模拟按键">三、模拟按键</h2>
 <p>以下为模拟F5 刷新桌面，再模拟按Alt+F4组合键</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set ws=createobject("wscript.shell") 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set ws=createobject("wscript.shell") 
 ws.sendkeys "{f5}" 
 ws.sleep 2500 
 ws.sendkeys "%{F4}" 
@@ -392,13 +392,13 @@ ws.sendkeys "%{F4}"
 
 <h2 id="四激活窗口">四、激活窗口</h2>
 <p>获取窗口名称即可进行该步操作</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set wsh=createobject("wscript.shell") 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set wsh=createobject("wscript.shell") 
 wsh.AppActivate("窗口名称") 
 </code></pre></div></div>
 
 <h2 id="五运行系统命令">五、运行系统命令</h2>
 <p>举个例子，比如马上关机</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dim WSHshell 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dim WSHshell 
 set WSHshell = wscript.createobject("wscript.shell") 
 WSHshell.run "shutdown -f -s -t 00",0 ,true
 </code></pre></div></div>

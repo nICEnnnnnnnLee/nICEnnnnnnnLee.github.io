@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,11 +310,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
     
-        <!--a href="/tag/#Android" title="Tag: Android" rel="tag">Android</a-->
-        <a href="/tag/#Android" title="Tag: Android" rel="tag">Android</a>
+        <!--a href="/blog/tag/#Android" title="Tag: Android" rel="tag">Android</a-->
+        <a href="/blog/tag/#Android" title="Tag: Android" rel="tag">Android</a>
     
   
 
@@ -360,7 +360,7 @@
     <ul>
       <li>只有本地到外地，或者外地到本地的报文，才会途径虚拟网卡。</li>
       <li>比如说， 本地6666端口，往本地9999端口发送了一个UDP包，其对应的IP报文不会经过虚拟网卡，不要指望读<strong>ParcelFileDescriptor</strong>实例能够得到这份IP报文。</li>
-      <li>比如说， 本地6666端口，往外地<code class="highlighter-rouge">8.8.8.8:53</code>发送了一个UDP包。虚拟网卡收到后，将其目的地改为指向本地<strong>UDPServer</strong>，<code class="highlighter-rouge">6.6.6.6:6666</code>，重新写入虚拟网卡。<br />
+      <li>比如说， 本地6666端口，往外地<code class="language-plaintext highlighter-rouge">8.8.8.8:53</code>发送了一个UDP包。虚拟网卡收到后，将其目的地改为指向本地<strong>UDPServer</strong>，<code class="language-plaintext highlighter-rouge">6.6.6.6:6666</code>，重新写入虚拟网卡。<br />
   但这时本地<strong>UDPServer</strong>并不会收到这个报文，只有将这个IP报文的源地址更改一下，例如由本地ip改为<strong>8.8.8.8</strong>(原目的地址)，这个报文才会被本地<strong>UDPServer</strong>收到。</li>
     </ul>
   </li>
@@ -377,7 +377,7 @@
   <li>关于DNS报文
     <ul>
       <li>似乎如果不在Builder生成时指定DNS服务器，手机本身另有一套机制，使得系统默认的DNS查询不会经过虚拟网卡。如果有需要，不妨再加一条：<br />
-  <code class="highlighter-rouge">builder.addDnsServer("114.114.114.114")</code></li>
+  <code class="language-plaintext highlighter-rouge">builder.addDnsServer("114.114.114.114")</code></li>
     </ul>
   </li>
 </ul>

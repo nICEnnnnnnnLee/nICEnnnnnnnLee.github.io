@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,17 +310,17 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Jekyll" title="Tag: Jekyll" rel="tag">Jekyll</a-->
-        <a href="/tag/#Jekyll" title="Tag: Jekyll" rel="tag">Jekyll</a>&nbsp;
+        <!--a href="/blog/tag/#Jekyll" title="Tag: Jekyll" rel="tag">Jekyll</a-->
+        <a href="/blog/tag/#Jekyll" title="Tag: Jekyll" rel="tag">Jekyll</a>&nbsp;
     
-        <!--a href="/tag/#sitemap" title="Tag: sitemap" rel="tag">sitemap</a-->
-        <a href="/tag/#sitemap" title="Tag: sitemap" rel="tag">sitemap</a>&nbsp;
+        <!--a href="/blog/tag/#sitemap" title="Tag: sitemap" rel="tag">sitemap</a-->
+        <a href="/blog/tag/#sitemap" title="Tag: sitemap" rel="tag">sitemap</a>&nbsp;
     
-        <!--a href="/tag/#SEO" title="Tag: SEO" rel="tag">SEO</a-->
-        <a href="/tag/#SEO" title="Tag: SEO" rel="tag">SEO</a>&nbsp;
+        <!--a href="/blog/tag/#SEO" title="Tag: SEO" rel="tag">SEO</a-->
+        <a href="/blog/tag/#SEO" title="Tag: SEO" rel="tag">SEO</a>&nbsp;
     
-        <!--a href="/tag/#%E7%AB%99%E7%82%B9%E5%9C%B0%E5%9B%BE" title="Tag: 站点地图" rel="tag">站点地图</a-->
-        <a href="/tag/#站点地图" title="Tag: 站点地图" rel="tag">站点地图</a>
+        <!--a href="/blog/tag/#%E7%AB%99%E7%82%B9%E5%9C%B0%E5%9B%BE" title="Tag: 站点地图" rel="tag">站点地图</a-->
+        <a href="/blog/tag/#站点地图" title="Tag: 站点地图" rel="tag">站点地图</a>
     
   
 
@@ -347,8 +347,8 @@
 </blockquote>
 
 <h2 id="预处理">预处理</h2>
-<p>首先，建立<code class="highlighter-rouge">sitemap.xml</code>文件，为了让Jekyll能正确处理，先加入以下部分让其正确识别：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
+<p>首先，建立<code class="language-plaintext highlighter-rouge">sitemap.xml</code>文件，为了让Jekyll能正确处理，先加入以下部分让其正确识别：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
 layout: null
 ---
 </code></pre></div></div>
@@ -365,10 +365,10 @@ layout: null
 </code></pre></div></div>
 <p>其中，</p>
 <ul>
-  <li><code class="highlighter-rouge">loc</code>为超链接</li>
-  <li><code class="highlighter-rouge">lastmod</code>为更新时间，需要符合 ISO 8601 格式，使用liquid时可以直接调用<code class="highlighter-rouge">date_to_xmlschema</code></li>
-  <li><code class="highlighter-rouge">changefreq</code>为更新频率</li>
-  <li><code class="highlighter-rouge">priority</code>为权重</li>
+  <li><code class="language-plaintext highlighter-rouge">loc</code>为超链接</li>
+  <li><code class="language-plaintext highlighter-rouge">lastmod</code>为更新时间，需要符合 ISO 8601 格式，使用liquid时可以直接调用<code class="language-plaintext highlighter-rouge">date_to_xmlschema</code></li>
+  <li><code class="language-plaintext highlighter-rouge">changefreq</code>为更新频率</li>
+  <li><code class="language-plaintext highlighter-rouge">priority</code>为权重</li>
 </ul>
 
 <h2 id="sitemap内容">sitemap内容</h2>

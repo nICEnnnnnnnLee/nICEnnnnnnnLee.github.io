@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,14 +310,14 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
     
-        <!--a href="/tag/#poi" title="Tag: poi" rel="tag">poi</a-->
-        <a href="/tag/#poi" title="Tag: poi" rel="tag">poi</a>&nbsp;
+        <!--a href="/blog/tag/#poi" title="Tag: poi" rel="tag">poi</a-->
+        <a href="/blog/tag/#poi" title="Tag: poi" rel="tag">poi</a>&nbsp;
     
-        <!--a href="/tag/#Excel" title="Tag: Excel" rel="tag">Excel</a-->
-        <a href="/tag/#Excel" title="Tag: Excel" rel="tag">Excel</a>
+        <!--a href="/blog/tag/#Excel" title="Tag: Excel" rel="tag">Excel</a-->
+        <a href="/blog/tag/#Excel" title="Tag: Excel" rel="tag">Excel</a>
     
   
 
@@ -344,16 +344,16 @@
 我就参考的这个<a href="https://www.cnblogs.com/wangyang108/p/6030420.html">https://www.cnblogs.com/wangyang108/p/6030420.html</a> <br />
 下面是一段写Excel表格的方法：</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span>
 <span class="o">{</span>
   <span class="c1">// 创建工作薄</span>
-  <span class="n">HSSFWorkbook</span> <span class="n">workbook</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HSSFWorkbook</span><span class="o">();</span>
+  <span class="nc">HSSFWorkbook</span> <span class="n">workbook</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HSSFWorkbook</span><span class="o">();</span>
   <span class="c1">// 创建工作表</span>
-  <span class="n">HSSFSheet</span> <span class="n">sheet</span> <span class="o">=</span> <span class="n">workbook</span><span class="o">.</span><span class="na">createSheet</span><span class="o">(</span><span class="s">"sheet1"</span><span class="o">);</span>
+  <span class="nc">HSSFSheet</span> <span class="n">sheet</span> <span class="o">=</span> <span class="n">workbook</span><span class="o">.</span><span class="na">createSheet</span><span class="o">(</span><span class="s">"sheet1"</span><span class="o">);</span>
 
   <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">row</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">row</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="o">;</span> <span class="n">row</span><span class="o">++)</span>
   <span class="o">{</span>
-	 <span class="n">HSSFRow</span> <span class="n">rows</span> <span class="o">=</span> <span class="n">sheet</span><span class="o">.</span><span class="na">createRow</span><span class="o">(</span><span class="n">row</span><span class="o">);</span>
+	 <span class="nc">HSSFRow</span> <span class="n">rows</span> <span class="o">=</span> <span class="n">sheet</span><span class="o">.</span><span class="na">createRow</span><span class="o">(</span><span class="n">row</span><span class="o">);</span>
 	 <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">col</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">col</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="o">;</span> <span class="n">col</span><span class="o">++)</span>
 	 <span class="o">{</span>
 		<span class="c1">// 向工作表中添加数据</span>
@@ -361,8 +361,8 @@
 	 <span class="o">}</span>
   <span class="o">}</span>
 
-  <span class="n">File</span> <span class="n">xlsFile</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"poi.xls"</span><span class="o">);</span>
-  <span class="n">FileOutputStream</span> <span class="n">xlsStream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="n">xlsFile</span><span class="o">);</span>
+  <span class="nc">File</span> <span class="n">xlsFile</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="s">"poi.xls"</span><span class="o">);</span>
+  <span class="nc">FileOutputStream</span> <span class="n">xlsStream</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileOutputStream</span><span class="o">(</span><span class="n">xlsFile</span><span class="o">);</span>
   <span class="n">workbook</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">xlsStream</span><span class="o">);</span>
 <span class="o">}</span>
 
@@ -370,30 +370,30 @@
 <h3 id="出现的问题">出现的问题</h3>
 <p>最开始的时候拿来用测试是没有问题的，结果跑了一阵以后发现以前的数据没有了，定位下来是多次对同一Excel文件进行写的操作时数据覆盖了。 <br />
 人懒，在网上找了一下，发现有人和我问题差不多，有人给的建议是在新建文件流时，在后面加一个<strong>append = true</strong>，表示追加，如下。听起来像那么一回事，我也就信了。</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">FileOutputStream</span> <span class="n">xlsStream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="n">xlsFile</span><span class="err">，</span><span class="kc">true</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">FileOutputStream</span> <span class="n">xlsStream</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileOutputStream</span><span class="o">(</span><span class="n">xlsFile</span><span class="err">，</span><span class="kc">true</span><span class="o">);</span>
 </code></pre></div></div>
 <p><strong>然并卵额</strong></p>
 
 <h3 id="问题分析">问题分析</h3>
 <p>事实证明，脑子这东西，还是能用就用，不然会退化哟呵… <br />
 这个问题在于每次我每次创建的与Excel对应的HSSFWorkbook都是完全空白的，然后在此基础上进行的后续一系列修改操作。之后的保存，当然会将原来的覆盖。</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HSSFWorkbook workbook = new HSSFWorkbook();
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HSSFWorkbook workbook = new HSSFWorkbook();
 </code></pre></div></div>
 <p>我不知道目的文件原来是什么状况，我又怎么知道该如何对它进行修改呢？毕竟这又不是规定死了固定内容对应固定位置，那样才能直接将data写进去。 <br />
 所以，在写之前，还必须有载入原有文件这一操作。如下：</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">workbook</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HSSFWorkbook</span><span class="o">();</span>
-<span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="n">fileName</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">workbook</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HSSFWorkbook</span><span class="o">();</span>
+<span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="n">fileName</span><span class="o">);</span>
 <span class="k">try</span> <span class="o">{</span>
-	<span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="n">file</span><span class="o">);</span>
-	<span class="n">workbook</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HSSFWorkbook</span><span class="o">(</span><span class="n">in</span><span class="o">);</span>
+	<span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="n">file</span><span class="o">);</span>
+	<span class="n">workbook</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HSSFWorkbook</span><span class="o">(</span><span class="n">in</span><span class="o">);</span>
 	<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 	
-	<span class="n">out</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="n">file</span><span class="o">);</span>
+	<span class="n">out</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileOutputStream</span><span class="o">(</span><span class="n">file</span><span class="o">);</span>
 	<span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">FileNotFoundException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">FileNotFoundException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 	<span class="n">printf</span><span class="o">(</span><span class="s">"%s :目的文件没有找到!新建一个\n"</span><span class="o">,</span><span class="n">fileName</span><span class="o">);</span>
 	<span class="k">return</span> <span class="nf">createNewExcel</span><span class="o">(</span><span class="n">fileName</span><span class="o">);</span>
-<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 	<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
 	<span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
 <span class="o">}</span>
@@ -415,7 +415,7 @@
 </ul>
 
 <p>根据这个思路，整体代码如下</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">nicelee</span><span class="o">.</span><span class="na">utils</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">nicelee.utils</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">java.io.File</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.io.FileInputStream</span><span class="o">;</span>
@@ -428,28 +428,28 @@
 <span class="kn">import</span> <span class="nn">org.apache.poi.hssf.usermodel.HSSFSheet</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.apache.poi.hssf.usermodel.HSSFWorkbook</span><span class="o">;</span>
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ExcelHelper</span> <span class="kd">extends</span> <span class="n">Log</span><span class="o">{</span>
-	<span class="n">HSSFWorkbook</span> <span class="n">workbook</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ExcelHelper</span> <span class="kd">extends</span> <span class="nc">Log</span><span class="o">{</span>
+	<span class="nc">HSSFWorkbook</span> <span class="n">workbook</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
 	<span class="c1">//HSSFSheet sheet = null;</span>
-	<span class="n">File</span> <span class="n">file</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-	<span class="n">FileOutputStream</span> <span class="n">out</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-	<span class="n">FileInputStream</span> <span class="n">in</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+	<span class="nc">File</span> <span class="n">file</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+	<span class="nc">FileOutputStream</span> <span class="n">out</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+	<span class="nc">FileInputStream</span> <span class="n">in</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
 	<span class="cm">/***
 	 * 新建Excel
 	 * @param fileName
 	 * @return 创建结果
 	 */</span>
-	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">createNewExcel</span><span class="o">(</span><span class="n">String</span> <span class="n">fileName</span><span class="o">){</span>
-		<span class="n">workbook</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HSSFWorkbook</span><span class="o">();</span>
-		<span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="n">fileName</span><span class="o">);</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">createNewExcel</span><span class="o">(</span><span class="nc">String</span> <span class="n">fileName</span><span class="o">){</span>
+		<span class="n">workbook</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HSSFWorkbook</span><span class="o">();</span>
+		<span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="n">fileName</span><span class="o">);</span>
 		<span class="k">try</span> <span class="o">{</span>
-			<span class="n">out</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="n">file</span><span class="o">);</span>
+			<span class="n">out</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileOutputStream</span><span class="o">(</span><span class="n">file</span><span class="o">);</span>
 			<span class="n">workbook</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">out</span><span class="o">);</span>
 			<span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">FileNotFoundException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">FileNotFoundException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 			<span class="n">printf</span><span class="o">(</span><span class="s">"%s :目的文件没有找到!\n"</span><span class="o">,</span><span class="n">fileName</span><span class="o">);</span>
 			<span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
 			<span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
 		<span class="o">}</span>
@@ -459,20 +459,20 @@
 	 * @param fileName
 	 * @return 读取结果
 	 */</span>
-	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">openExcel</span><span class="o">(</span><span class="n">String</span> <span class="n">fileName</span><span class="o">){</span>
-		<span class="n">workbook</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HSSFWorkbook</span><span class="o">();</span>
-		<span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="n">fileName</span><span class="o">);</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">openExcel</span><span class="o">(</span><span class="nc">String</span> <span class="n">fileName</span><span class="o">){</span>
+		<span class="n">workbook</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HSSFWorkbook</span><span class="o">();</span>
+		<span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="n">fileName</span><span class="o">);</span>
 		<span class="k">try</span> <span class="o">{</span>
-			<span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="n">file</span><span class="o">);</span>
-			<span class="n">workbook</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HSSFWorkbook</span><span class="o">(</span><span class="n">in</span><span class="o">);</span>
+			<span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="n">file</span><span class="o">);</span>
+			<span class="n">workbook</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HSSFWorkbook</span><span class="o">(</span><span class="n">in</span><span class="o">);</span>
 			<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 			
-			<span class="n">out</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="n">file</span><span class="o">);</span>
+			<span class="n">out</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileOutputStream</span><span class="o">(</span><span class="n">file</span><span class="o">);</span>
 			<span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">FileNotFoundException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">FileNotFoundException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 			<span class="n">printf</span><span class="o">(</span><span class="s">"%s :目的文件没有找到!新建一个\n"</span><span class="o">,</span><span class="n">fileName</span><span class="o">);</span>
 			<span class="k">return</span> <span class="nf">createNewExcel</span><span class="o">(</span><span class="n">fileName</span><span class="o">);</span>
-		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
 			<span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
 		<span class="o">}</span>
@@ -484,7 +484,7 @@
 		<span class="k">try</span> <span class="o">{</span>
 			<span class="n">workbook</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">out</span><span class="o">);</span>
 			<span class="n">out</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-		<span class="o">}</span>  <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+		<span class="o">}</span>  <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
 		<span class="o">}</span>
 	<span class="o">}</span>
@@ -496,8 +496,8 @@
 	 * @return
 	 */</span>
 	<span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">"deprecation"</span><span class="o">)</span>
-	<span class="kd">private</span> <span class="n">String</span> <span class="nf">getCellValue</span><span class="o">(</span><span class="n">HSSFSheet</span> <span class="n">sheet</span><span class="o">,</span><span class="kt">int</span> <span class="n">row</span><span class="o">,</span><span class="kt">int</span> <span class="n">col</span><span class="o">){</span>
-		<span class="n">HSSFCell</span> <span class="n">cell</span> <span class="o">=</span> <span class="n">getCell</span><span class="o">(</span><span class="n">sheet</span><span class="o">,</span><span class="n">row</span><span class="o">,</span><span class="n">col</span><span class="o">);</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="nf">getCellValue</span><span class="o">(</span><span class="nc">HSSFSheet</span> <span class="n">sheet</span><span class="o">,</span><span class="kt">int</span> <span class="n">row</span><span class="o">,</span><span class="kt">int</span> <span class="n">col</span><span class="o">){</span>
+		<span class="nc">HSSFCell</span> <span class="n">cell</span> <span class="o">=</span> <span class="n">getCell</span><span class="o">(</span><span class="n">sheet</span><span class="o">,</span><span class="n">row</span><span class="o">,</span><span class="n">col</span><span class="o">);</span>
 		<span class="k">return</span> <span class="n">cell</span><span class="o">.</span><span class="na">getStringCellValue</span><span class="o">();</span>
 	<span class="o">}</span>
 	<span class="cm">/**
@@ -507,8 +507,8 @@
 	 * @param col
 	 * @return
 	 */</span>
-	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getCellValue</span><span class="o">(</span><span class="n">String</span> <span class="n">sheetName</span><span class="o">,</span><span class="kt">int</span> <span class="n">row</span><span class="o">,</span><span class="kt">int</span> <span class="n">col</span><span class="o">){</span>
-		<span class="n">HSSFSheet</span> <span class="n">sheet</span> <span class="o">=</span> <span class="n">getSheet</span><span class="o">(</span><span class="n">sheetName</span><span class="o">);</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getCellValue</span><span class="o">(</span><span class="nc">String</span> <span class="n">sheetName</span><span class="o">,</span><span class="kt">int</span> <span class="n">row</span><span class="o">,</span><span class="kt">int</span> <span class="n">col</span><span class="o">){</span>
+		<span class="nc">HSSFSheet</span> <span class="n">sheet</span> <span class="o">=</span> <span class="n">getSheet</span><span class="o">(</span><span class="n">sheetName</span><span class="o">);</span>
 		<span class="k">return</span> <span class="nf">getCellValue</span><span class="o">(</span><span class="n">sheet</span><span class="o">,</span> <span class="n">row</span><span class="o">,</span> <span class="n">col</span><span class="o">);</span>
 	<span class="o">}</span>
 	<span class="cm">/**
@@ -519,8 +519,8 @@
 	 * @param value
 	 * @param isSaveNow(是否马上保存)
 	 */</span>
-	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setCellValue</span><span class="o">(</span><span class="n">String</span> <span class="n">sheetName</span><span class="o">,</span><span class="kt">int</span> <span class="n">row</span><span class="o">,</span><span class="kt">int</span> <span class="n">col</span><span class="o">,</span> <span class="n">String</span> <span class="n">value</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">isSaveNow</span><span class="o">){</span>
-		<span class="n">HSSFSheet</span> <span class="n">sheet</span> <span class="o">=</span> <span class="n">workbook</span><span class="o">.</span><span class="na">getSheet</span><span class="o">(</span><span class="n">sheetName</span><span class="o">);</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setCellValue</span><span class="o">(</span><span class="nc">String</span> <span class="n">sheetName</span><span class="o">,</span><span class="kt">int</span> <span class="n">row</span><span class="o">,</span><span class="kt">int</span> <span class="n">col</span><span class="o">,</span> <span class="nc">String</span> <span class="n">value</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">isSaveNow</span><span class="o">){</span>
+		<span class="nc">HSSFSheet</span> <span class="n">sheet</span> <span class="o">=</span> <span class="n">workbook</span><span class="o">.</span><span class="na">getSheet</span><span class="o">(</span><span class="n">sheetName</span><span class="o">);</span>
 		<span class="n">setCellValue</span><span class="o">(</span><span class="n">sheet</span><span class="o">,</span> <span class="n">row</span><span class="o">,</span> <span class="n">col</span><span class="o">,</span> <span class="n">value</span><span class="o">,</span> <span class="n">isSaveNow</span><span class="o">);</span>
 	<span class="o">}</span>
 	
@@ -532,8 +532,8 @@
 	 * @param value
 	 * 默认在文件关闭时保存
 	 */</span>
-	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setCellValue</span><span class="o">(</span><span class="n">String</span> <span class="n">sheetName</span><span class="o">,</span><span class="kt">int</span> <span class="n">row</span><span class="o">,</span><span class="kt">int</span> <span class="n">col</span><span class="o">,</span> <span class="n">String</span> <span class="n">value</span><span class="o">){</span>
-		<span class="n">HSSFSheet</span> <span class="n">sheet</span> <span class="o">=</span> <span class="n">getSheet</span><span class="o">(</span><span class="n">sheetName</span><span class="o">);</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setCellValue</span><span class="o">(</span><span class="nc">String</span> <span class="n">sheetName</span><span class="o">,</span><span class="kt">int</span> <span class="n">row</span><span class="o">,</span><span class="kt">int</span> <span class="n">col</span><span class="o">,</span> <span class="nc">String</span> <span class="n">value</span><span class="o">){</span>
+		<span class="nc">HSSFSheet</span> <span class="n">sheet</span> <span class="o">=</span> <span class="n">getSheet</span><span class="o">(</span><span class="n">sheetName</span><span class="o">);</span>
 		<span class="kt">boolean</span> <span class="n">isSaveNow</span> <span class="o">=</span><span class="kc">false</span><span class="o">;</span>
 		<span class="n">setCellValue</span><span class="o">(</span><span class="n">sheet</span><span class="o">,</span> <span class="n">row</span><span class="o">,</span> <span class="n">col</span><span class="o">,</span> <span class="n">value</span><span class="o">,</span> <span class="n">isSaveNow</span><span class="o">);</span>
 	<span class="o">}</span>
@@ -546,20 +546,20 @@
 	 * @param isSaveNow(是否马上保存)
 	 */</span>
 	<span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">"deprecation"</span><span class="o">)</span>
-	<span class="kd">private</span> <span class="kt">void</span> <span class="nf">setCellValue</span><span class="o">(</span><span class="n">HSSFSheet</span> <span class="n">sheet</span><span class="o">,</span><span class="kt">int</span> <span class="n">row</span><span class="o">,</span><span class="kt">int</span> <span class="n">col</span><span class="o">,</span> <span class="n">String</span> <span class="n">value</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">isSaveNow</span><span class="o">){</span>
-		<span class="n">HSSFCell</span> <span class="n">cell</span> <span class="o">=</span> <span class="n">getCell</span><span class="o">(</span><span class="n">sheet</span><span class="o">,</span><span class="n">row</span><span class="o">,</span><span class="n">col</span><span class="o">);</span>
+	<span class="kd">private</span> <span class="kt">void</span> <span class="nf">setCellValue</span><span class="o">(</span><span class="nc">HSSFSheet</span> <span class="n">sheet</span><span class="o">,</span><span class="kt">int</span> <span class="n">row</span><span class="o">,</span><span class="kt">int</span> <span class="n">col</span><span class="o">,</span> <span class="nc">String</span> <span class="n">value</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">isSaveNow</span><span class="o">){</span>
+		<span class="nc">HSSFCell</span> <span class="n">cell</span> <span class="o">=</span> <span class="n">getCell</span><span class="o">(</span><span class="n">sheet</span><span class="o">,</span><span class="n">row</span><span class="o">,</span><span class="n">col</span><span class="o">);</span>
 		<span class="n">cell</span><span class="o">.</span><span class="na">setCellValue</span><span class="o">(</span><span class="n">value</span><span class="o">);</span>
 		<span class="k">if</span><span class="o">(</span><span class="n">isSaveNow</span><span class="o">){</span>
 			<span class="k">try</span> <span class="o">{</span>
 				<span class="n">workbook</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">out</span><span class="o">);</span>
-			<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 				<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
 			<span class="o">}</span>
 		<span class="o">}</span>
 	<span class="o">}</span>
 	
-	<span class="n">HSSFSheet</span> <span class="nf">getSheet</span><span class="o">(</span><span class="n">String</span> <span class="n">sheetName</span><span class="o">){</span>
-		<span class="n">HSSFSheet</span> <span class="n">sheet</span> <span class="o">=</span> <span class="n">workbook</span><span class="o">.</span><span class="na">getSheet</span><span class="o">(</span><span class="n">sheetName</span><span class="o">);</span>
+	<span class="nc">HSSFSheet</span> <span class="nf">getSheet</span><span class="o">(</span><span class="nc">String</span> <span class="n">sheetName</span><span class="o">){</span>
+		<span class="nc">HSSFSheet</span> <span class="n">sheet</span> <span class="o">=</span> <span class="n">workbook</span><span class="o">.</span><span class="na">getSheet</span><span class="o">(</span><span class="n">sheetName</span><span class="o">);</span>
 		<span class="k">if</span><span class="o">(</span><span class="n">sheet</span> <span class="o">==</span> <span class="kc">null</span><span class="o">){</span>
 			<span class="n">sheet</span> <span class="o">=</span> <span class="n">workbook</span><span class="o">.</span><span class="na">createSheet</span><span class="o">(</span><span class="n">sheetName</span><span class="o">);</span>
 			<span class="n">printf</span><span class="o">(</span><span class="s">"Sheet - %s创建\n"</span><span class="o">,</span><span class="n">sheetName</span><span class="o">);</span>
@@ -567,14 +567,14 @@
 		<span class="k">return</span> <span class="n">sheet</span><span class="o">;</span>
 	<span class="o">}</span>
 	
-	<span class="n">HSSFCell</span> <span class="nf">getCell</span><span class="o">(</span><span class="n">HSSFSheet</span> <span class="n">sheet</span><span class="o">,</span><span class="kt">int</span> <span class="n">row</span><span class="o">,</span><span class="kt">int</span> <span class="n">col</span><span class="o">){</span>
-		<span class="n">HSSFRow</span> <span class="n">rows</span> <span class="o">=</span> <span class="n">sheet</span><span class="o">.</span><span class="na">getRow</span><span class="o">(</span><span class="n">row</span><span class="o">);</span>
+	<span class="nc">HSSFCell</span> <span class="nf">getCell</span><span class="o">(</span><span class="nc">HSSFSheet</span> <span class="n">sheet</span><span class="o">,</span><span class="kt">int</span> <span class="n">row</span><span class="o">,</span><span class="kt">int</span> <span class="n">col</span><span class="o">){</span>
+		<span class="nc">HSSFRow</span> <span class="n">rows</span> <span class="o">=</span> <span class="n">sheet</span><span class="o">.</span><span class="na">getRow</span><span class="o">(</span><span class="n">row</span><span class="o">);</span>
 		<span class="k">if</span><span class="o">(</span> <span class="n">rows</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">){</span>
 			<span class="n">rows</span> <span class="o">=</span> <span class="n">sheet</span><span class="o">.</span><span class="na">createRow</span><span class="o">(</span><span class="n">row</span><span class="o">);</span>
 			<span class="n">printf</span><span class="o">(</span><span class="s">"第%d行创建\n"</span><span class="o">,</span><span class="n">row</span><span class="o">);</span>
 		<span class="o">}</span>
 		
-		<span class="n">HSSFCell</span> <span class="n">cell</span> <span class="o">=</span> <span class="n">rows</span><span class="o">.</span><span class="na">getCell</span><span class="o">(</span><span class="n">col</span><span class="o">);</span>
+		<span class="nc">HSSFCell</span> <span class="n">cell</span> <span class="o">=</span> <span class="n">rows</span><span class="o">.</span><span class="na">getCell</span><span class="o">(</span><span class="n">col</span><span class="o">);</span>
 		<span class="k">if</span><span class="o">(</span> <span class="n">cell</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">){</span>
 			<span class="n">cell</span> <span class="o">=</span> <span class="n">rows</span><span class="o">.</span><span class="na">createCell</span><span class="o">(</span><span class="n">col</span><span class="o">);</span>
 			<span class="n">printf</span><span class="o">(</span><span class="s">"第%d行,第%d列创建\n"</span><span class="o">,</span><span class="n">row</span><span class="o">,</span><span class="n">col</span><span class="o">);</span>

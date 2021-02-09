@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,8 +310,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>
     
   
 
@@ -330,11 +330,11 @@
 <p>        之前尝试过搜索关键词来获取QQ音乐信息 + 音乐直链。自己试过自建喜欢的音乐列表，并为此花费了较多功夫，也解决了几个小问题。(只是技术交流学习，以后就撤掉了😳<br />
         例如，由于播放链接有时效性，故而保存的时候仅保留id，播放的时候根据id来自动获取直链。<br />
         又比如，由于是静态网页，直接写死了HTML，新增更改十分费力。现在把歌曲内容信息和展示分开来，直接修改保存json即可。 <br />
-        但还是有些麻烦，每新增N首曲目需要 <code class="highlighter-rouge">搜索歌名 -&gt; 打印信息 -&gt; 修改json文件</code> xN，不太方便。于是，我就想能不能直接更进一步，再爬一下个人的收藏夹</p>
+        但还是有些麻烦，每新增N首曲目需要 <code class="language-plaintext highlighter-rouge">搜索歌名 -&gt; 打印信息 -&gt; 修改json文件</code> xN，不太方便。于是，我就想能不能直接更进一步，再爬一下个人的收藏夹</p>
 
 <h2 id="目标">目标</h2>
 <p>获取QQ音乐指定列表的音乐曲目(分页)，并打印输出，格式如下：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
     "title": "A cut in Love (被爱情切割)",
     "author": "줄라이 (July)",
     "pic": "https://y.gtimg.cn/music/photo_new/T002R300x300M000001mrdzu00xMPx.jpg",
@@ -363,7 +363,7 @@
 
 <h2 id="解析">解析</h2>
 <p>在PC Web端登录QQ音乐，发现目标URL如下：(这种工作熟练度上来之后没啥难度…</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://c.y.qq.com/qzone/fcg-bin/fcg_ucc_getcdinfo_byids_cp.fcg?
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://c.y.qq.com/qzone/fcg-bin/fcg_ucc_getcdinfo_byids_cp.fcg?
 type=1
 &amp;json=1
 &amp;utf8=1
@@ -386,7 +386,7 @@ type=1
 &amp;needNewCode=0
 </code></pre></div></div>
 <p>此时，请求头为：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>accept-encoding:gzip, deflate, sdch, br
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>accept-encoding:gzip, deflate, sdch, br
 accept-language:zh-CN,zh;q=0.8
 cookie:略
 origin:https://y.qq.com
@@ -402,7 +402,7 @@ user-agent:略
       <li>URL中<strong>disstid</strong>即列表的id，很重要，因为量较少，所以就自己人工获取吧~</li>
       <li>URL中<strong>song_begin</strong>、<strong>song_num</strong>，分页我就不说了</li>
       <li>URL中<strong>g_tk</strong>、<strong>loginUin</strong>，应该跟登录有关。loginUin为QQ号，g_tk未知。<br />
-  不登录，<code class="highlighter-rouge">g_tk=5381&amp;loginUin=0</code>可以满足需求。</li>
+  不登录，<code class="language-plaintext highlighter-rouge">g_tk=5381&amp;loginUin=0</code>可以满足需求。</li>
       <li>URL中<strong>_</strong>即时间</li>
       <li>HEADER中cookie经测试没有影响</li>
     </ul>
@@ -411,30 +411,30 @@ user-agent:略
 
 <h2 id="实现">实现</h2>
 <p>以前的HtmlUnit等太重了，这里用的是自己封装的URLConnection，意思到了你懂的( ╯□╰ ))</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">printDesignedJson</span><span class="o">(</span><span class="kt">int</span> <span class="n">begin</span><span class="o">,</span> <span class="kt">int</span> <span class="n">size</span><span class="o">,</span> <span class="n">String</span> <span class="n">albumId</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">long</span> <span class="n">time</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
-    <span class="n">String</span> <span class="n">g_tk</span> <span class="o">=</span> <span class="s">"5381"</span><span class="o">;</span> <span class="c1">//与user相对应?</span>
-    <span class="n">String</span> <span class="n">user</span> <span class="o">=</span> <span class="s">"0"</span><span class="o">;</span> <span class="c1">// 未登录，登录后是qq号</span>
-    <span class="n">String</span> <span class="n">url</span> <span class="o">=</span> <span class="s">"https://c.y.qq.com/qzone/fcg-bin/fcg_ucc_getcdinfo_byids_cp.fcg?type=1&amp;json=1&amp;utf8=1&amp;onlysong=1&amp;nosign=1&amp;new_format=1&amp;ctx=1&amp;hostUin=0&amp;format=json&amp;inCharset=utf8&amp;outCharset=utf-8&amp;notice=0&amp;platform=yqq.json&amp;needNewCode=0"</span><span class="o">;</span>
-    <span class="n">url</span> <span class="o">+=</span> <span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"&amp;song_begin=%d&amp;song_num=%d&amp;_=%d&amp;disstid=%s&amp;g_tk=%s&amp;loginUin=%s"</span><span class="o">,</span> <span class="n">begin</span><span class="o">,</span> <span class="n">size</span><span class="o">,</span> <span class="n">time</span><span class="o">,</span> <span class="n">albumId</span><span class="o">,</span> <span class="n">g_tk</span><span class="o">,</span> <span class="n">user</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">printDesignedJson</span><span class="o">(</span><span class="kt">int</span> <span class="n">begin</span><span class="o">,</span> <span class="kt">int</span> <span class="n">size</span><span class="o">,</span> <span class="nc">String</span> <span class="n">albumId</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">long</span> <span class="n">time</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+    <span class="nc">String</span> <span class="n">g_tk</span> <span class="o">=</span> <span class="s">"5381"</span><span class="o">;</span> <span class="c1">//与user相对应?</span>
+    <span class="nc">String</span> <span class="n">user</span> <span class="o">=</span> <span class="s">"0"</span><span class="o">;</span> <span class="c1">// 未登录，登录后是qq号</span>
+    <span class="nc">String</span> <span class="n">url</span> <span class="o">=</span> <span class="s">"https://c.y.qq.com/qzone/fcg-bin/fcg_ucc_getcdinfo_byids_cp.fcg?type=1&amp;json=1&amp;utf8=1&amp;onlysong=1&amp;nosign=1&amp;new_format=1&amp;ctx=1&amp;hostUin=0&amp;format=json&amp;inCharset=utf8&amp;outCharset=utf-8&amp;notice=0&amp;platform=yqq.json&amp;needNewCode=0"</span><span class="o">;</span>
+    <span class="n">url</span> <span class="o">+=</span> <span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"&amp;song_begin=%d&amp;song_num=%d&amp;_=%d&amp;disstid=%s&amp;g_tk=%s&amp;loginUin=%s"</span><span class="o">,</span> <span class="n">begin</span><span class="o">,</span> <span class="n">size</span><span class="o">,</span> <span class="n">time</span><span class="o">,</span> <span class="n">albumId</span><span class="o">,</span> <span class="n">g_tk</span><span class="o">,</span> <span class="n">user</span><span class="o">);</span>
     
     
-    <span class="n">HttpRequestUtil</span> <span class="n">util</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HttpRequestUtil</span><span class="o">();</span>
-    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">header</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
+    <span class="nc">HttpRequestUtil</span> <span class="n">util</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HttpRequestUtil</span><span class="o">();</span>
+    <span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="n">header</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
     <span class="n">header</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"accept"</span><span class="o">,</span> <span class="s">"application/json, text/javascript, */*; q=0.01"</span><span class="o">);</span>
     <span class="n">header</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"accept-language"</span><span class="o">,</span> <span class="s">"zh-CN,zh;q=0.8"</span><span class="o">);</span>
     <span class="n">header</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"origin"</span><span class="o">,</span> <span class="s">"https://y.qq.com"</span><span class="o">);</span>
-    <span class="n">header</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"referer"</span><span class="o">,</span> <span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"https://y.qq.com/n/yqq/playlist/%s.html"</span><span class="o">,</span> <span class="n">albumId</span><span class="o">));</span>
+    <span class="n">header</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"referer"</span><span class="o">,</span> <span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"https://y.qq.com/n/yqq/playlist/%s.html"</span><span class="o">,</span> <span class="n">albumId</span><span class="o">));</span>
     <span class="n">header</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"user-agent"</span><span class="o">,</span> <span class="s">"太长，略"</span><span class="o">);</span>
-    <span class="n">String</span> <span class="n">result</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="na">getContent</span><span class="o">(</span><span class="n">url</span><span class="o">,</span> <span class="n">header</span><span class="o">);</span>
-    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">result</span><span class="o">);</span>
-    <span class="n">JSONArray</span> <span class="n">musicList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">(</span><span class="n">result</span><span class="o">).</span><span class="na">getJSONArray</span><span class="o">(</span><span class="s">"songlist"</span><span class="o">);</span>
+    <span class="nc">String</span> <span class="n">result</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="na">getContent</span><span class="o">(</span><span class="n">url</span><span class="o">,</span> <span class="n">header</span><span class="o">);</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">result</span><span class="o">);</span>
+    <span class="nc">JSONArray</span> <span class="n">musicList</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JSONObject</span><span class="o">(</span><span class="n">result</span><span class="o">).</span><span class="na">getJSONArray</span><span class="o">(</span><span class="s">"songlist"</span><span class="o">);</span>
     
-    <span class="n">StringBuilder</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuilder</span><span class="o">();</span>
+    <span class="nc">StringBuilder</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuilder</span><span class="o">();</span>
     <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">musicList</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="n">JSONObject</span> <span class="n">json</span> <span class="o">=</span> <span class="n">musicList</span><span class="o">.</span><span class="na">getJSONObject</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
-        <span class="n">JSONObject</span> <span class="n">album</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="na">getJSONObject</span><span class="o">(</span><span class="s">"album"</span><span class="o">);</span>
-        <span class="n">String</span> <span class="n">albumPic</span> <span class="o">=</span> <span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"https://y.gtimg.cn/music/photo_new/T002R300x300M000%s.jpg"</span><span class="o">,</span> <span class="n">album</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"mid"</span><span class="o">));</span>
+        <span class="nc">JSONObject</span> <span class="n">json</span> <span class="o">=</span> <span class="n">musicList</span><span class="o">.</span><span class="na">getJSONObject</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+        <span class="nc">JSONObject</span> <span class="n">album</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="na">getJSONObject</span><span class="o">(</span><span class="s">"album"</span><span class="o">);</span>
+        <span class="nc">String</span> <span class="n">albumPic</span> <span class="o">=</span> <span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"https://y.gtimg.cn/music/photo_new/T002R300x300M000%s.jpg"</span><span class="o">,</span> <span class="n">album</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"mid"</span><span class="o">));</span>
         
         <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"{\r\n"</span><span class="o">);</span>
         <span class="n">formatJson</span><span class="o">(</span><span class="n">sb</span><span class="o">,</span> <span class="s">"title"</span><span class="o">,</span> <span class="n">json</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"title"</span><span class="o">),</span> <span class="kc">false</span><span class="o">);</span>
@@ -445,10 +445,10 @@ user-agent:略
         <span class="n">formatJson</span><span class="o">(</span><span class="n">sb</span><span class="o">,</span> <span class="s">"brief"</span><span class="o">,</span> <span class="n">album</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"title"</span><span class="o">)</span> <span class="o">+</span> <span class="s">"-"</span> <span class="o">+</span> <span class="n">album</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"subtitle"</span><span class="o">),</span> <span class="kc">true</span><span class="o">);</span>
         <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"},\r\n"</span><span class="o">);</span>
     <span class="o">}</span>
-    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sb</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sb</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 <span class="o">}</span>
 
-<span class="kd">private</span> <span class="kt">void</span> <span class="nf">formatJson</span><span class="o">(</span><span class="n">StringBuilder</span> <span class="n">sb</span><span class="o">,</span> <span class="n">String</span> <span class="n">key</span><span class="o">,</span> <span class="n">String</span> <span class="n">value</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">isLast</span><span class="o">)</span> <span class="o">{</span>
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">formatJson</span><span class="o">(</span><span class="nc">StringBuilder</span> <span class="n">sb</span><span class="o">,</span> <span class="nc">String</span> <span class="n">key</span><span class="o">,</span> <span class="nc">String</span> <span class="n">value</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">isLast</span><span class="o">)</span> <span class="o">{</span>
     <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"    \""</span><span class="o">)</span>
     <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">key</span><span class="o">)</span>
     <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"\": \""</span><span class="o">)</span>

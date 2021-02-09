@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,8 +310,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>
     
   
 
@@ -328,19 +328,19 @@
 </ul>
 <blockquote>
   <p>由于某些需要，把资源打包进了jar包。那么如何从jar包里面加载相应资源呢？ 
-我们可以使用 <code class="highlighter-rouge">ClassLoader</code>来加载</p>
+我们可以使用 <code class="language-plaintext highlighter-rouge">ClassLoader</code>来加载</p>
 </blockquote>
 
 <h2 id="简单介绍">简单介绍</h2>
 <ul>
-  <li><code class="highlighter-rouge">ClassLoader</code> 是类加载器的抽象类。它可以在运行时动态的获取加载类的运行信息。
+  <li><code class="language-plaintext highlighter-rouge">ClassLoader</code> 是类加载器的抽象类。它可以在运行时动态的获取加载类的运行信息。
     <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//查找具有给定名称的资源，并返回资源的URL对象。资源可以是图像、声音、文本等。</span>
-<span class="kd">public</span> <span class="n">URL</span> <span class="nf">getResource</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> 
+<span class="kd">public</span> <span class="no">URL</span> <span class="nf">getResource</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> 
 <span class="c1">//返回读取指定资源的输入流。</span>
-<span class="kd">public</span> <span class="n">InputStream</span> <span class="nf">getResourceAsStream</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">);</span> 
+<span class="kd">public</span> <span class="nc">InputStream</span> <span class="nf">getResourceAsStream</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">);</span> 
 </code></pre></div>    </div>
   </li>
-  <li><code class="highlighter-rouge">ClassLoader</code>是抽象的，无法实例化对象，需要使用<code class="highlighter-rouge">.getClass()</code>来获取。</li>
+  <li><code class="language-plaintext highlighter-rouge">ClassLoader</code>是抽象的，无法实例化对象，需要使用<code class="language-plaintext highlighter-rouge">.getClass()</code>来获取。</li>
 </ul>
 
 <h2 id="代码示例">代码示例</h2>
@@ -349,12 +349,12 @@
     <p>当前 jar包结构如图：<br />
 <img src="https://s2.ax1x.com/2019/01/15/Fz6B7D.png" alt="" /></p>
   </li>
-  <li>获取<code class="highlighter-rouge">favicon.png</code> 资源代码如下：
+  <li>获取<code class="language-plaintext highlighter-rouge">favicon.png</code> 资源代码如下：
     <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
-  <span class="kd">public</span>  <span class="kt">void</span> <span class="nf">getResource</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">{</span>    
+  <span class="kd">public</span>  <span class="kt">void</span> <span class="nf">getResource</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">IOException</span><span class="o">{</span>    
       <span class="c1">//查找指定资源的URL，其中res.txt仍然开始的bin目录下 </span>
-      <span class="n">URL</span> <span class="n">fileURL</span><span class="o">=</span><span class="k">this</span><span class="o">.</span><span class="na">getClass</span><span class="o">().</span><span class="na">getResource</span><span class="o">(</span><span class="s">"/resources/favicon.png"</span><span class="o">);</span>
-      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">fileURL</span><span class="o">.</span><span class="na">getFile</span><span class="o">());</span>
+      <span class="no">URL</span> <span class="n">fileURL</span><span class="o">=</span><span class="k">this</span><span class="o">.</span><span class="na">getClass</span><span class="o">().</span><span class="na">getResource</span><span class="o">(</span><span class="s">"/resources/favicon.png"</span><span class="o">);</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">fileURL</span><span class="o">.</span><span class="na">getFile</span><span class="o">());</span>
   <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div>    </div>

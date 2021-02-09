@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,11 +310,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#flutter" title="Tag: flutter" rel="tag">flutter</a-->
-        <a href="/tag/#flutter" title="Tag: flutter" rel="tag">flutter</a>&nbsp;
+        <!--a href="/blog/tag/#flutter" title="Tag: flutter" rel="tag">flutter</a-->
+        <a href="/blog/tag/#flutter" title="Tag: flutter" rel="tag">flutter</a>&nbsp;
     
-        <!--a href="/tag/#dart" title="Tag: dart" rel="tag">dart</a-->
-        <a href="/tag/#dart" title="Tag: dart" rel="tag">dart</a>
+        <!--a href="/blog/tag/#dart" title="Tag: dart" rel="tag">dart</a-->
+        <a href="/blog/tag/#dart" title="Tag: dart" rel="tag">dart</a>
     
   
 
@@ -341,7 +341,7 @@
   <a href="https://docs.flutter.io/flutter/painting/imageCache.html">Flutter - imageCache文档</a><br />
   但是有一点问题，这些是从整体描述如何获取内存中图片个数和大小等相关信息，以及怎样设置的。<br />
   要实现我的目的其实很简单，十分粗暴 –&gt; 直接清空所有缓存，图片自然就重新load了。
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ImageCache get imageCache =&gt; PaintingBinding.instance.imageCache;
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ImageCache get imageCache =&gt; PaintingBinding.instance.imageCache;
   imageCache.clear();
 </code></pre></div>    </div>
   </li>

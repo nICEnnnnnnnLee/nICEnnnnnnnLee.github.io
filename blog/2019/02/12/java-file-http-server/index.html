@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,11 +310,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
     
-        <!--a href="/tag/#Http" title="Tag: Http" rel="tag">Http</a-->
-        <a href="/tag/#Http" title="Tag: Http" rel="tag">Http</a>
+        <!--a href="/blog/tag/#Http" title="Tag: Http" rel="tag">Http</a-->
+        <a href="/blog/tag/#Http" title="Tag: Http" rel="tag">Http</a>
     
   
 
@@ -371,7 +371,7 @@
 <h2 id="写在中间">写在中间</h2>
 <h3 id="常见请求回复示例">常见请求/回复示例</h3>
 <p>普通Get请求示例：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET / HTTP/1.1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET / HTTP/1.1
 Host: 127.0.0.1:7778
 Connection: keep-alive
 Pragma: no-cache
@@ -386,8 +386,8 @@ Accept-Language: zh-CN,zh;q=0.8
 </code></pre></div></div>
 
 <p>普通Response 200OK示例：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
-String html = "<span class="nt">&lt;html&gt;&lt;head&gt;&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;</span>测试<span class="nt">&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;</span>";
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+String html = "&lt;html&gt;&lt;head&gt;&lt;title&gt;test&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;测试&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;";
 writer.write("HTTP/1.1 200 OK\r\n");
 writer.write("Date: "+ HttpResource.GMTDateFormat.format(System.currentTimeMillis()));
 writer.write("\r\nContent-Type: text/html; charset=UTF-8\r\n");
@@ -402,12 +402,12 @@ writer.flush();
 <p>客户端访问服务器，服务器关注<strong>Cookies</strong>和<strong>Authorization</strong>标签，</p>
 <ul>
   <li><strong>Cookies</strong>通过，正常处理；</li>
-  <li><strong>Authorization</strong>通过，返回<code class="highlighter-rouge">Set-Cookie</code>新建会话时长有效期的Session cookie，其它正常处理；</li>
-  <li>未通过认证，返回<code class="highlighter-rouge">WWW-Authenticate</code>头域告知需要鉴权</li>
+  <li><strong>Authorization</strong>通过，返回<code class="language-plaintext highlighter-rouge">Set-Cookie</code>新建会话时长有效期的Session cookie，其它正常处理；</li>
+  <li>未通过认证，返回<code class="language-plaintext highlighter-rouge">WWW-Authenticate</code>头域告知需要鉴权</li>
 </ul>
 
 <p>未通过回复示例：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>httpResponse.dataLength = HttpResource.PAGE_401.length;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>httpResponse.dataLength = HttpResource.PAGE_401.length;
 httpResponse.headers.put("WWW-Authenticate", "Basic realm=\"NiceLee's Site\"");
 headerTrans.transferCommonHeader(httpResponse, out);
 
@@ -420,7 +420,7 @@ out.write(HttpResource.PAGE_401);
 </code></pre></div></div>
 
 <p>授权Get请求示例：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /sources HTTP/1.1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /sources HTTP/1.1
 Host: 127.0.0.1:7777
 Connection: keep-alive
 Authorization: Basic YWRtaW46YWRtaW4=
@@ -435,7 +435,7 @@ Accept-Language: zh-CN,zh;q=0.8
 <h3 id="断点续传示例">断点续传示例</h3>
 
 <p>断点续传Get请求示例，重点在<strong>Range</strong>：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /sources/test.mp4 HTTP/1.1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /sources/test.mp4 HTTP/1.1
 Accept:*/*
 Accept-Encoding:identity;q=1, *;q=0
 Accept-Language:zh-CN,zh;q=0.8
@@ -451,7 +451,7 @@ User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like 
 </code></pre></div></div>
 
 <p>断点续传回复示例。若不从头开始，返回206；注意<strong>Content-Range</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 206 Partial Content
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 206 Partial Content
 Accept-Ranges:bytes
 Connection:keep-alive
 Content-Length:1729656
@@ -462,7 +462,7 @@ Last-Modified:Sat, 19 Jan 2019 11:42:33 GMT
 
 </code></pre></div></div>
 <p>部分代码：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>String range;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>String range;
 if ((range = httpRequest.headers.get("range")) != null) {
     // System.out.println("Range Required: " +range);
     Pattern patternFileRange = Pattern.compile("^bytes=([0-9]+)-([0-9]*)$");
@@ -489,7 +489,7 @@ if ((range = httpRequest.headers.get("range")) != null) {
 
 <h3 id="缓存文件校对">缓存文件校对</h3>
 <p>比较简单，直接上码：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>String cacheTime = httpRequest.headers.get("If-Modified-Since");
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>String cacheTime = httpRequest.headers.get("If-Modified-Since");
 //System.out.println("headers 缓存时间: " + cacheTime);
 if (cacheTime != null) {
     try {
@@ -508,7 +508,7 @@ if (cacheTime != null) {
 </code></pre></div></div>
 
 <p>返回304方法：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/**
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/**
  * 若URL对应的文件缓存未过时, 使用该方法返回
  * 
  * @param httpResponse
@@ -533,7 +533,7 @@ public static void doResponseWithFileNoChange(HttpResponse httpResponse, Buffere
 </code></pre></div></div>
 
 <h3 id="chunked方式实现">Chunked方式实现</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/**
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/**
  * 使用Chunked 方式传输文件
  * 
  * @param out  面向客户端的输出流

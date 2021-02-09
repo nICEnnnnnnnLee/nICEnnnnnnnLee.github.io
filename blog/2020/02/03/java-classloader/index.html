@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,8 +310,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>
     
   
 
@@ -326,7 +326,7 @@
   <li><a href="#原理大概" id="markdown-toc-原理大概">原理(大概)</a>    <ul>
       <li><a href="#类加载器的分类" id="markdown-toc-类加载器的分类">类加载器的分类</a></li>
       <li><a href="#类的加载" id="markdown-toc-类的加载">类的加载</a></li>
-      <li><a href="#关于xbootclasspath参数" id="markdown-toc-关于xbootclasspath参数">关于<code class="highlighter-rouge">Xbootclasspath</code>参数</a></li>
+      <li><a href="#关于xbootclasspath参数" id="markdown-toc-关于xbootclasspath参数">关于<code class="language-plaintext highlighter-rouge">Xbootclasspath</code>参数</a></li>
       <li><a href="#自定义类加载器" id="markdown-toc-自定义类加载器">自定义类加载器</a></li>
     </ul>
   </li>
@@ -343,20 +343,20 @@
 <ul>
   <li>启动类加载器(Bootstrap ClassLoader):
     <ul>
-      <li>主要负责加载<code class="highlighter-rouge">&lt;JAVA_HOME&gt;\lib</code>目录，或是-Xbootclasspath参数指定的路径中的类库到虚拟机内存中。</li>
-      <li><code class="highlighter-rouge">System.getProperty("sun.boot.class.path")</code></li>
+      <li>主要负责加载<code class="language-plaintext highlighter-rouge">&lt;JAVA_HOME&gt;\lib</code>目录，或是-Xbootclasspath参数指定的路径中的类库到虚拟机内存中。</li>
+      <li><code class="language-plaintext highlighter-rouge">System.getProperty("sun.boot.class.path")</code></li>
     </ul>
   </li>
   <li>扩展类加载器(Extension ClassLoader):
     <ul>
-      <li>主要负责加载<code class="highlighter-rouge">&lt;JAVA_HOME&gt;\lib\ext</code>目录，或者被java.ext.dirs系统变量所指定的路径中的所有类库。</li>
-      <li><code class="highlighter-rouge">System.getProperty("java.ext.dirs")</code></li>
+      <li>主要负责加载<code class="language-plaintext highlighter-rouge">&lt;JAVA_HOME&gt;\lib\ext</code>目录，或者被java.ext.dirs系统变量所指定的路径中的所有类库。</li>
+      <li><code class="language-plaintext highlighter-rouge">System.getProperty("java.ext.dirs")</code></li>
     </ul>
   </li>
   <li>应用程序类加载器/系统类加载器(Application ClassLoader):
     <ul>
       <li>主要负责加载ClassPath路径上的类库，是默认的类加载器。</li>
-      <li><code class="highlighter-rouge">System.getProperty("java.class.path")</code></li>
+      <li><code class="language-plaintext highlighter-rouge">System.getProperty("java.class.path")</code></li>
     </ul>
   </li>
 </ul>
@@ -370,7 +370,7 @@
   </li>
 </ul>
 
-<h4 id="关于xbootclasspath参数">关于<code class="highlighter-rouge">Xbootclasspath</code>参数</h4>
+<h4 id="关于xbootclasspath参数">关于<code class="language-plaintext highlighter-rouge">Xbootclasspath</code>参数</h4>
 <ul>
   <li>-Xbootclasspath:
     <ul>
@@ -390,31 +390,31 @@
 </ul>
 
 <h4 id="自定义类加载器">自定义类加载器</h4>
-<p>继承自<code class="highlighter-rouge">java.lang.ClassLoader</code>类并覆写对应的方法即可。</p>
+<p>继承自<code class="language-plaintext highlighter-rouge">java.lang.ClassLoader</code>类并覆写对应的方法即可。</p>
 
 <h2 id="有趣的用途大概">有趣的用途(大概)</h2>
 <h4 id="hook某些java应用">Hook某些java应用</h4>
-<p>比如，现在我要hook原生的输出方法<code class="highlighter-rouge">java.io.PrintStream.println()</code>。<br />
+<p>比如，现在我要hook原生的输出方法<code class="language-plaintext highlighter-rouge">java.io.PrintStream.println()</code>。<br />
 当我调用这个方法的时候，会输出hhhhhhh再加上换行符。</p>
 <ul>
   <li>代码框架如下：<br />
 <img src="/sources/archive/2020/02/3-0.src.png" alt="" /></li>
-  <li>对<code class="highlighter-rouge">java.io.PrintStream</code>的改动如下，其它原样复制
+  <li>对<code class="language-plaintext highlighter-rouge">java.io.PrintStream</code>的改动如下，其它原样复制
 <img src="/sources/archive/2020/02/3-1.println.png" alt="" /></li>
   <li>
     <p>入口测试类：</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">package</span> <span class="n">test</span><span class="p">;</span>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  package test;
 
-  <span class="k">public</span> <span class="n">class</span> <span class="n">TestPrint</span> <span class="p">{</span>
+  public class TestPrint {
 
-      <span class="k">public</span> <span class="n">static</span> <span class="n">void</span> <span class="n">main</span><span class="p">(</span><span class="k">String</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
-          <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"----TestPrint begin----"</span><span class="p">);</span>
-          <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">();</span>
-          <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"----TestPrint end----"</span><span class="p">);</span>
-      <span class="p">}</span>
+      public static void main(String[] args) {
+          System.out.println("----TestPrint begin----");
+          System.out.println();
+          System.out.println("----TestPrint end----");
+      }
 
-  <span class="p">}</span>
+  }
 </code></pre></div>    </div>
   </li>
   <li>接下来不多说，直接放结果
@@ -432,7 +432,7 @@
 <ul>
   <li>一个简单的方法是：
     <ul>
-      <li>将提交的题目编译<code class="highlighter-rouge">.class</code>文件到当前ClassPath路径下</li>
+      <li>将提交的题目编译<code class="language-plaintext highlighter-rouge">.class</code>文件到当前ClassPath路径下</li>
       <li>系统类加载器直接加载类</li>
       <li>通过反射调用约定的方法，得到结果</li>
       <li>
@@ -441,23 +441,23 @@
       <li>下面是一个例子：来自<a href="https://blog.csdn.net/zhoufanyang_china/article/details/82767406">java实现动态编译并动态加载</a>
         <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">complierAndRun</span><span class="o">()</span> <span class="o">{</span>
   <span class="k">try</span> <span class="o">{</span>
-      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"user.dir"</span><span class="o">));</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"user.dir"</span><span class="o">));</span>
       <span class="c1">// 动态编译</span>
-      <span class="n">JavaCompiler</span> <span class="n">javac</span> <span class="o">=</span> <span class="n">ToolProvider</span><span class="o">.</span><span class="na">getSystemJavaCompiler</span><span class="o">();</span>
-      <span class="kt">int</span> <span class="n">status</span> <span class="o">=</span> <span class="n">javac</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="s">"-d"</span><span class="o">,</span> <span class="n">System</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"user.dir"</span><span class="o">)</span> <span class="o">+</span> <span class="s">"\\target\\classes"</span><span class="o">,</span> <span class="s">"D:/test/AlTest.java"</span><span class="o">);</span>
+      <span class="nc">JavaCompiler</span> <span class="n">javac</span> <span class="o">=</span> <span class="nc">ToolProvider</span><span class="o">.</span><span class="na">getSystemJavaCompiler</span><span class="o">();</span>
+      <span class="kt">int</span> <span class="n">status</span> <span class="o">=</span> <span class="n">javac</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="s">"-d"</span><span class="o">,</span> <span class="nc">System</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"user.dir"</span><span class="o">)</span> <span class="o">+</span> <span class="s">"\\target\\classes"</span><span class="o">,</span> <span class="s">"D:/test/AlTest.java"</span><span class="o">);</span>
       <span class="k">if</span> <span class="o">(</span><span class="n">status</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
-          <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"没有编译成功！"</span><span class="o">);</span>
+          <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"没有编译成功！"</span><span class="o">);</span>
       <span class="o">}</span>
 
       <span class="c1">// 通过系统类加载器直接加载类</span>
-      <span class="n">Class</span> <span class="n">clz</span> <span class="o">=</span> <span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">"AlTest"</span><span class="o">);</span>
+      <span class="nc">Class</span> <span class="n">clz</span> <span class="o">=</span> <span class="nc">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">"AlTest"</span><span class="o">);</span>
       <span class="c1">// 通过反射动态执行</span>
-      <span class="n">Object</span> <span class="n">o</span> <span class="o">=</span> <span class="n">clz</span><span class="o">.</span><span class="na">newInstance</span><span class="o">();</span>
-      <span class="n">Method</span> <span class="n">method</span> <span class="o">=</span> <span class="n">clz</span><span class="o">.</span><span class="na">getDeclaredMethod</span><span class="o">(</span><span class="s">"sayHello"</span><span class="o">);</span>
+      <span class="nc">Object</span> <span class="n">o</span> <span class="o">=</span> <span class="n">clz</span><span class="o">.</span><span class="na">newInstance</span><span class="o">();</span>
+      <span class="nc">Method</span> <span class="n">method</span> <span class="o">=</span> <span class="n">clz</span><span class="o">.</span><span class="na">getDeclaredMethod</span><span class="o">(</span><span class="s">"sayHello"</span><span class="o">);</span>
       <span class="c1">// method.invoke() :静态方法第一个参数可为null,第二个参数为实际传参</span>
-      <span class="n">String</span> <span class="n">result</span> <span class="o">=</span> <span class="o">(</span><span class="n">String</span><span class="o">)</span> <span class="n">method</span><span class="o">.</span><span class="na">invoke</span><span class="o">(</span><span class="n">o</span><span class="o">);</span>
-      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">result</span><span class="o">);</span>
-  <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+      <span class="nc">String</span> <span class="n">result</span> <span class="o">=</span> <span class="o">(</span><span class="nc">String</span><span class="o">)</span> <span class="n">method</span><span class="o">.</span><span class="na">invoke</span><span class="o">(</span><span class="n">o</span><span class="o">);</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">result</span><span class="o">);</span>
+  <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
       <span class="n">logger</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">"test"</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
   <span class="o">}</span>
   <span class="o">}</span>
@@ -467,30 +467,30 @@
   </li>
   <li>当用户/题目较多时，显然需要再变更一下，稍微再复杂一点：
     <ul>
-      <li>将提交的题目编译<code class="highlighter-rouge">.class</code>文件到指定路径下</li>
+      <li>将提交的题目编译<code class="language-plaintext highlighter-rouge">.class</code>文件到指定路径下</li>
       <li>自定义ClassLoader加载类</li>
       <li>通过反射调用约定的方法，得到结果</li>
       <li>
         <p>比较预期和实际结果，返回响应</p>
       </li>
       <li>下面是大概的要点：
-        <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyClassLoader</span> <span class="kd">extends</span> <span class="n">ClassLoader</span> <span class="o">{</span>   
+        <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyClassLoader</span> <span class="kd">extends</span> <span class="nc">ClassLoader</span> <span class="o">{</span>   
         
-  <span class="kd">protected</span> <span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">findClass</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">ClassNotFoundException</span> <span class="o">{</span>
+  <span class="kd">protected</span> <span class="nc">Class</span><span class="o">&lt;?&gt;</span> <span class="n">findClass</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">ClassNotFoundException</span> <span class="o">{</span>
       <span class="c1">// 读取name对应.class文件到b</span>
       <span class="kt">byte</span><span class="o">[]</span> <span class="n">b</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
       <span class="o">...</span>
       <span class="k">return</span> <span class="nf">defineClass</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">b</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">b</span><span class="o">.</span><span class="na">length</span><span class="o">);</span>
   <span class="o">}</span>
 
-  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
       <span class="o">...</span>
       <span class="k">try</span> <span class="o">{</span>
           <span class="c1">// 重载ClassLoader类</span>
-          <span class="n">MyClassLoader</span> <span class="n">loader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyClassLoader</span><span class="o">();</span>
-          <span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">c</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="na">findClass</span><span class="o">(</span><span class="n">className</span><span class="o">);</span><span class="c1">// 类名字</span>
+          <span class="nc">MyClassLoader</span> <span class="n">loader</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MyClassLoader</span><span class="o">();</span>
+          <span class="nc">Class</span><span class="o">&lt;?&gt;</span> <span class="n">c</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="na">findClass</span><span class="o">(</span><span class="n">className</span><span class="o">);</span><span class="c1">// 类名字</span>
           <span class="n">c</span><span class="o">.</span><span class="na">getMethod</span><span class="o">(</span><span class="n">methodName</span><span class="o">).</span><span class="na">invoke</span><span class="o">(</span><span class="n">c</span><span class="o">.</span><span class="na">newInstance</span><span class="o">());</span><span class="c1">// 方法名字</span>
-      <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+      <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
           <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
       <span class="o">}</span>
   <span class="o">}</span>

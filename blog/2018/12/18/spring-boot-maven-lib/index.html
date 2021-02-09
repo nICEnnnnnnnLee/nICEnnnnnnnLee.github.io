@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,11 +310,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#SpringBoot" title="Tag: SpringBoot" rel="tag">SpringBoot</a-->
-        <a href="/tag/#SpringBoot" title="Tag: SpringBoot" rel="tag">SpringBoot</a>&nbsp;
+        <!--a href="/blog/tag/#SpringBoot" title="Tag: SpringBoot" rel="tag">SpringBoot</a-->
+        <a href="/blog/tag/#SpringBoot" title="Tag: SpringBoot" rel="tag">SpringBoot</a>&nbsp;
     
-        <!--a href="/tag/#%E8%B8%A9%E5%9D%91" title="Tag: 踩坑" rel="tag">踩坑</a-->
-        <a href="/tag/#踩坑" title="Tag: 踩坑" rel="tag">踩坑</a>
+        <!--a href="/blog/tag/#%E8%B8%A9%E5%9D%91" title="Tag: 踩坑" rel="tag">踩坑</a-->
+        <a href="/blog/tag/#踩坑" title="Tag: 踩坑" rel="tag">踩坑</a>
     
   
 
@@ -336,8 +336,8 @@
 </blockquote>
 
 <h2 id="更换maven的jar打包插件">更换maven的jar打包插件</h2>
-<p>默认使用的是<code class="highlighter-rouge">spring-boot-maven-plugin</code>来打包，现替换为<code class="highlighter-rouge">maven-jar-plugin</code></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;plugin&gt;
+<p>默认使用的是<code class="language-plaintext highlighter-rouge">spring-boot-maven-plugin</code>来打包，现替换为<code class="language-plaintext highlighter-rouge">maven-jar-plugin</code></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;plugin&gt;
     &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
     &lt;artifactId&gt;maven-jar-plugin&lt;/artifactId&gt;
     &lt;version&gt;${maven.jar.plugin.version}&lt;/version&gt;
@@ -359,7 +359,7 @@
 </ul>
 
 <h2 id="拷贝依赖到jar外面的lib目录">拷贝依赖到jar外面的lib目录</h2>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;plugin&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;plugin&gt;
     &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
     &lt;artifactId&gt;maven-dependency-plugin&lt;/artifactId&gt;
     &lt;version&gt;${maven.dependency.plugin.version}&lt;/version&gt;
@@ -395,7 +395,7 @@
   <li>配置文件可以是application.properties，也可以是application.yml，但是.yml要注意依赖：</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;dependency&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;dependency&gt;
     &lt;groupId&gt;org.yaml&lt;/groupId&gt;
     &lt;artifactId&gt;snakeyaml&lt;/artifactId&gt;
     &lt;version&gt;1.21&lt;/version&gt;

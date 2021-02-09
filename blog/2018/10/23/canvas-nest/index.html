@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,17 +310,17 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a-->
-        <a href="/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a>&nbsp;
+        <!--a href="/blog/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a-->
+        <a href="/blog/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a>&nbsp;
     
-        <!--a href="/tag/#HTML" title="Tag: HTML" rel="tag">HTML</a-->
-        <a href="/tag/#HTML" title="Tag: HTML" rel="tag">HTML</a>&nbsp;
+        <!--a href="/blog/tag/#HTML" title="Tag: HTML" rel="tag">HTML</a-->
+        <a href="/blog/tag/#HTML" title="Tag: HTML" rel="tag">HTML</a>&nbsp;
     
-        <!--a href="/tag/#CSS" title="Tag: CSS" rel="tag">CSS</a-->
-        <a href="/tag/#CSS" title="Tag: CSS" rel="tag">CSS</a>&nbsp;
+        <!--a href="/blog/tag/#CSS" title="Tag: CSS" rel="tag">CSS</a-->
+        <a href="/blog/tag/#CSS" title="Tag: CSS" rel="tag">CSS</a>&nbsp;
     
-        <!--a href="/tag/#%E5%89%8D%E7%AB%AF" title="Tag: 前端" rel="tag">前端</a-->
-        <a href="/tag/#前端" title="Tag: 前端" rel="tag">前端</a>
+        <!--a href="/blog/tag/#%E5%89%8D%E7%AB%AF" title="Tag: 前端" rel="tag">前端</a-->
+        <a href="/blog/tag/#前端" title="Tag: 前端" rel="tag">前端</a>
     
   
 
@@ -373,12 +373,12 @@ yarn add canvas-nest.js
   <li>快捷使用</li>
 </ul>
 
-<p>将下面的代码插入到 <code class="highlighter-rouge">&lt;body&gt; 和 &lt;/body&gt; 之间</code>.</p>
+<p>将下面的代码插入到 <code class="language-plaintext highlighter-rouge">&lt;body&gt; 和 &lt;/body&gt; 之间</code>.</p>
 
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"dist/canvas-nest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
 </code></pre></div></div>
 
-<p>强烈建议在 <code class="highlighter-rouge">&lt;/body&gt;</code>标签上方. 例如下面的代码结构:</p>
+<p>强烈建议在 <code class="language-plaintext highlighter-rouge">&lt;/body&gt;</code>标签上方. 例如下面的代码结构:</p>
 
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
 <span class="nt">&lt;head&gt;</span>
@@ -392,7 +392,7 @@ yarn add canvas-nest.js
 <span class="nt">&lt;/html&gt;</span>
 </code></pre></div></div>
 
-<p>然后就完成了，打开网页即可看到效果!<code class="highlighter-rouge">请注意不要将代码置于 &lt;head&gt; &lt;/head&gt;里面</code>.</p>
+<p>然后就完成了，打开网页即可看到效果!<code class="language-plaintext highlighter-rouge">请注意不要将代码置于 &lt;head&gt; &lt;/head&gt;里面</code>.</p>
 
 <ul>
   <li>模块化区域绘制（定制开发）</li>
@@ -402,10 +402,10 @@ yarn add canvas-nest.js
 
 <p>并且只有一个 API，使用如下：</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">CanvasNest</span> <span class="k">from</span> <span class="s1">'canvas-nest.js'</span><span class="p">;</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">CanvasNest</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">canvas-nest.js</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">color</span><span class="p">:</span> <span class="s1">'255,0,0'</span><span class="p">,</span>
+  <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">255,0,0</span><span class="dl">'</span><span class="p">,</span>
   <span class="na">count</span><span class="p">:</span> <span class="mi">88</span><span class="p">,</span>
 <span class="p">};</span>
 
@@ -419,10 +419,10 @@ yarn add canvas-nest.js
 <h2 id="配置">配置</h2>
 
 <ul>
-  <li><strong><code class="highlighter-rouge">color</code></strong>: 线条颜色, 默认: <code class="highlighter-rouge">'0,0,0'</code> ；三个数字分别为(R,G,B)，注意用,分割</li>
-  <li><strong><code class="highlighter-rouge">opacity</code></strong>: 线条透明度（0~1）, 默认: <code class="highlighter-rouge">0.5</code></li>
-  <li><strong><code class="highlighter-rouge">count</code></strong>: 线条的总数量, 默认: <code class="highlighter-rouge">150</code></li>
-  <li><strong><code class="highlighter-rouge">zIndex</code></strong>: 背景的z-index属性，css属性用于控制所在层的位置, 默认: <code class="highlighter-rouge">-1</code></li>
+  <li><strong><code class="language-plaintext highlighter-rouge">color</code></strong>: 线条颜色, 默认: <code class="language-plaintext highlighter-rouge">'0,0,0'</code> ；三个数字分别为(R,G,B)，注意用,分割</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">opacity</code></strong>: 线条透明度（0~1）, 默认: <code class="language-plaintext highlighter-rouge">0.5</code></li>
+  <li><strong><code class="language-plaintext highlighter-rouge">count</code></strong>: 线条的总数量, 默认: <code class="language-plaintext highlighter-rouge">150</code></li>
+  <li><strong><code class="language-plaintext highlighter-rouge">zIndex</code></strong>: 背景的z-index属性，css属性用于控制所在层的位置, 默认: <code class="language-plaintext highlighter-rouge">-1</code></li>
 </ul>
 
 <p>Example:</p>
@@ -439,7 +439,7 @@ yarn add canvas-nest.js
 </ul>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
-  <span class="nl">color</span><span class="p">:</span> <span class="s1">'0,0,255'</span><span class="p">,</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">0,0,255</span><span class="dl">'</span><span class="p">,</span>
   <span class="nx">opacity</span><span class="p">:</span> <span class="mf">0.7</span><span class="p">,</span>
   <span class="nx">zIndex</span><span class="p">:</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span>
   <span class="nx">count</span><span class="p">:</span> <span class="mi">99</span><span class="p">,</span>
@@ -451,10 +451,10 @@ yarn add canvas-nest.js
 <h2 id="相关项目">相关项目</h2>
 
 <ul>
-  <li><a href="https://github.com/aTool-org/canvas-nest-for-wp">canvas-nest-for-wp</a>: WP 插件，在插件市场搜索 <code class="highlighter-rouge">canvas-nest</code> 即可安装。</li>
+  <li><a href="https://github.com/aTool-org/canvas-nest-for-wp">canvas-nest-for-wp</a>: WP 插件，在插件市场搜索 <code class="language-plaintext highlighter-rouge">canvas-nest</code> 即可安装。</li>
   <li><a href="https://github.com/ZYSzys/vue-canvas-nest">vue-canvas-nest</a>: VUE 组件包装。</li>
   <li><a href="https://github.com/flyerH/react-canvas-nest">react-canvas-nest</a>: React 组件包装。</li>
-  <li><a href="https://github.com/AShujiao/vscode-nest">canvas-nest-for-vscode</a>: vscode 扩展, 在vscode扩展市场中搜索<code class="highlighter-rouge">nest</code> 即可安装。</li>
+  <li><a href="https://github.com/AShujiao/vscode-nest">canvas-nest-for-vscode</a>: vscode 扩展, 在vscode扩展市场中搜索<code class="language-plaintext highlighter-rouge">nest</code> 即可安装。</li>
 </ul>
 
 <h2 id="使用项目">使用项目</h2>

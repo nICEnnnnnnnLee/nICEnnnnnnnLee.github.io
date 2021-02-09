@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,17 +310,17 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
     
-        <!--a href="/tag/#html" title="Tag: html" rel="tag">html</a-->
-        <a href="/tag/#html" title="Tag: html" rel="tag">html</a>&nbsp;
+        <!--a href="/blog/tag/#html" title="Tag: html" rel="tag">html</a-->
+        <a href="/blog/tag/#html" title="Tag: html" rel="tag">html</a>&nbsp;
     
-        <!--a href="/tag/#%E7%88%AC%E8%99%AB" title="Tag: 爬虫" rel="tag">爬虫</a-->
-        <a href="/tag/#爬虫" title="Tag: 爬虫" rel="tag">爬虫</a>&nbsp;
+        <!--a href="/blog/tag/#%E7%88%AC%E8%99%AB" title="Tag: 爬虫" rel="tag">爬虫</a-->
+        <a href="/blog/tag/#爬虫" title="Tag: 爬虫" rel="tag">爬虫</a>&nbsp;
     
-        <!--a href="/tag/#AcFun" title="Tag: AcFun" rel="tag">AcFun</a-->
-        <a href="/tag/#AcFun" title="Tag: AcFun" rel="tag">AcFun</a>
+        <!--a href="/blog/tag/#AcFun" title="Tag: AcFun" rel="tag">AcFun</a-->
+        <a href="/blog/tag/#AcFun" title="Tag: AcFun" rel="tag">AcFun</a>
     
   
 
@@ -353,20 +353,20 @@
 
 <h2 id="已知网址如何获取下载链接">已知网址如何获取下载链接</h2>
 <h3 id="网址示例">网址示例</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://www.acfun.cn/bangumi/ab5020013_29129_230273
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://www.acfun.cn/bangumi/ab5020013_29129_230273
 </code></pre></div></div>
 
 <h3 id="访问网址得出视频对应的videoid">访问网址，得出视频对应的videoId</h3>
 <p>由正则抠出json，获取videoId</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Pattern pABVideoInfo = Pattern.compile("window.bangumiData ?= ?(.*?});");
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Pattern pABVideoInfo = Pattern.compile("window.bangumiData ?= ?(.*?});");
 </code></pre></div></div>
 <p>json包含有很多信息，其中重要的是json.videoId = 1993966</p>
 
 <h3 id="发起api请求得到m3u8链接">发起API请求，得到m3u8链接</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://www.acfun.cn/rest/pc-direct/play/playInfo/m3u8Auto?videoId={videoId}
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://www.acfun.cn/rest/pc-direct/play/playInfo/m3u8Auto?videoId={videoId}
 </code></pre></div></div>
 <p>结果示例：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
 	"result": 0,
 	"playInfo": {
 		"streams": [{
@@ -388,12 +388,12 @@
 }
 </code></pre></div></div>
 <p>最后得到结果：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>json.playInfo.streams[0].playUrls[0]
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>json.playInfo.streams[0].playUrls[0]
 </code></pre></div></div>
 
 <h2 id="指定清晰度该如何处理">指定清晰度该如何处理</h2>
 <p>上述得到的m3u8链接包含了能提供的各种清晰度，举例如下：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#EXTM3U
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#EXTM3U
 #EXT-X-VERSION:4
 #EXT-X-STREAM-INF:RESOLUTION=640x360,BANDWIDTH=400000,PROGRAM-ID=1,
 https://video.acfun.cn/50cf5b9ba366430693c3624dec1bf42c/9b331055918d44a9b77cd81f09a53cef-5f3a4caeaa6e346b15db81e84538593c-fd.m3u8?auth_key=1566797748-10106955784624d21c380a07b1b683e10eabbbfd666fac0212101p87p143pd96ab50f0ea68a4-acfun-147dc822b41538a290b609698ae493b5

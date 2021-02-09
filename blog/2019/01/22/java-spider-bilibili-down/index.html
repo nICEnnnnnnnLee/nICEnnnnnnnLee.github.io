@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,17 +310,17 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
     
-        <!--a href="/tag/#html" title="Tag: html" rel="tag">html</a-->
-        <a href="/tag/#html" title="Tag: html" rel="tag">html</a>&nbsp;
+        <!--a href="/blog/tag/#html" title="Tag: html" rel="tag">html</a-->
+        <a href="/blog/tag/#html" title="Tag: html" rel="tag">html</a>&nbsp;
     
-        <!--a href="/tag/#%E7%88%AC%E8%99%AB" title="Tag: 爬虫" rel="tag">爬虫</a-->
-        <a href="/tag/#爬虫" title="Tag: 爬虫" rel="tag">爬虫</a>&nbsp;
+        <!--a href="/blog/tag/#%E7%88%AC%E8%99%AB" title="Tag: 爬虫" rel="tag">爬虫</a-->
+        <a href="/blog/tag/#爬虫" title="Tag: 爬虫" rel="tag">爬虫</a>&nbsp;
     
-        <!--a href="/tag/#bilibili" title="Tag: bilibili" rel="tag">bilibili</a-->
-        <a href="/tag/#bilibili" title="Tag: bilibili" rel="tag">bilibili</a>
+        <!--a href="/blog/tag/#bilibili" title="Tag: bilibili" rel="tag">bilibili</a-->
+        <a href="/blog/tag/#bilibili" title="Tag: bilibili" rel="tag">bilibili</a>
     
   
 
@@ -354,17 +354,17 @@
 <p>重点在构造浏览器Header ：User-Agent。如果考虑到爬虫不支持js，可以构造移动端访问链接直接访问。<br />
 例如 头部：</p>
 
-<p><code class="highlighter-rouge">Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Mobile Safari/537.36</code><br />
-例如 链接：  <code class="highlighter-rouge">https://m.bilibili.com/video/av52738.html</code></p>
+<p><code class="language-plaintext highlighter-rouge">Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Mobile Safari/537.36</code><br />
+例如 链接：  <code class="language-plaintext highlighter-rouge">https://m.bilibili.com/video/av52738.html</code></p>
 
 <p>关键代码如下：</p>
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//访问链接设置</span>
-<span class="n">String</span> <span class="n">url</span> <span class="o">=</span> <span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"https://m.bilibili.com/video/%s.html"</span><span class="o">,</span> <span class="n">avId</span><span class="o">);</span>
+<span class="nc">String</span> <span class="n">url</span> <span class="o">=</span> <span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"https://m.bilibili.com/video/%s.html"</span><span class="o">,</span> <span class="n">avId</span><span class="o">);</span>
 
 <span class="cm">/**
  * 该Header配置用于移动端视频下载/网页访问
  */</span>
-<span class="kd">public</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="nf">getBiliMHeaders</span><span class="o">()</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="nf">getBiliMHeaders</span><span class="o">()</span> <span class="o">{</span>
     <span class="n">headerMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"Accept"</span><span class="o">,</span>
             <span class="s">"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"</span><span class="o">);</span>
     <span class="n">headerMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"Accept-Encoding"</span><span class="o">,</span> <span class="s">"gzip, deflate, sdch, br"</span><span class="o">);</span>

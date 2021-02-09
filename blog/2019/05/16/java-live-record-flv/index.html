@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,11 +310,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
     
-        <!--a href="/tag/#flv" title="Tag: flv" rel="tag">flv</a-->
-        <a href="/tag/#flv" title="Tag: flv" rel="tag">flv</a>
+        <!--a href="/blog/tag/#flv" title="Tag: flv" rel="tag">flv</a-->
+        <a href="/blog/tag/#flv" title="Tag: flv" rel="tag">flv</a>
     
   
 
@@ -336,7 +336,7 @@
 
 <h2 id="问题">问题</h2>
 <ul>
-  <li>不想调用<code class="highlighter-rouge">ffmpeg</code>直接拉流，自己直接通过保存二进制视频流的方式录制成FLV文件。<br />
+  <li>不想调用<code class="language-plaintext highlighter-rouge">ffmpeg</code>直接拉流，自己直接通过保存二进制视频流的方式录制成FLV文件。<br />
 下下来之后发现视频的确可以播放，但是长度明显不对。<br />
 <img src="/sources/archive/2019/05/duration.png" alt="" /></li>
 </ul>
@@ -356,7 +356,7 @@
   <li>
     <p>如何遍历每一个Tag？<br />
 整体结构如下：<br />
-<code class="highlighter-rouge">头部(9字节) + 上一个Tag长度(4字节) +  若干个 [ Tag + 上一个Tag长度(4字节) ]</code> <br />
+<code class="language-plaintext highlighter-rouge">头部(9字节) + 上一个Tag长度(4字节) +  若干个 [ Tag + 上一个Tag长度(4字节) ]</code> <br />
 按道理，一个完整的FLV文件，既可以直接从头开始解析，也可以从末尾开始解析</p>
   </li>
   <li>
@@ -365,12 +365,12 @@
   </li>
   <li>
     <p>如何计算直播录制的FLV的视频时长？<br />
-最后一个Tag的时间戳 - 第一个Tag的时间戳（具体获得见<code class="highlighter-rouge">每个tag的通用结构</code>）</p>
+最后一个Tag的时间戳 - 第一个Tag的时间戳（具体获得见<code class="language-plaintext highlighter-rouge">每个tag的通用结构</code>）</p>
   </li>
-  <li>如何修改FLV的<code class="highlighter-rouge">duration</code>字段？
+  <li>如何修改FLV的<code class="language-plaintext highlighter-rouge">duration</code>字段？
     <ol>
-      <li>在找到文件中找到duration对应的位置，特征为<code class="highlighter-rouge">0x08, 0x64 , 0x75 , 0x72 , 0x61 , 0x74 , 0x69 , 0x6f , 0x6e</code><br />
-  0x08 表示后面有8个字节，后面的是<code class="highlighter-rouge">duration</code>对应的ascii码</li>
+      <li>在找到文件中找到duration对应的位置，特征为<code class="language-plaintext highlighter-rouge">0x08, 0x64 , 0x75 , 0x72 , 0x61 , 0x74 , 0x69 , 0x6f , 0x6e</code><br />
+  0x08 表示后面有8个字节，后面的是<code class="language-plaintext highlighter-rouge">duration</code>对应的ascii码</li>
       <li>duration的值紧跟在后面，用9个字节来表示。<br />
   第一个字节为0x00，表示后面跟着double类型，后八个字节为double的值</li>
     </ol>
@@ -421,14 +421,14 @@
 </table>
 
 <ul>
-  <li>修改FLV的<code class="highlighter-rouge">duration</code>字段后，播放器显示的时长仍然不一致？
+  <li>修改FLV的<code class="language-plaintext highlighter-rouge">duration</code>字段后，播放器显示的时长仍然不一致？
     <ul>
-      <li>通过<code class="highlighter-rouge">ffmpeg</code>处理了以后，对比发现，原始的每个tag的timestamp 时间戳都比较大，而最后一个tag的时间戳正好对应的就是播放器显示的时长</li>
+      <li>通过<code class="language-plaintext highlighter-rouge">ffmpeg</code>处理了以后，对比发现，原始的每个tag的timestamp 时间戳都比较大，而最后一个tag的时间戳正好对应的就是播放器显示的时长</li>
       <li>也就是说，现在要<strong>将第一个tag的时间戳置零</strong>， 以后<strong>每一帧分别前移 第一个tag的时间戳 的时间</strong></li>
     </ul>
   </li>
-  <li>尽管播放似乎没问题，<code class="highlighter-rouge">ffmpeg</code>转码会提示:<br />
-<code class="highlighter-rouge">Non-monotonous DTS in output stream 0:0; previous: 0, current: 0; changing to 1. This may result in incorrect timestamps in the output file.</code>
+  <li>尽管播放似乎没问题，<code class="language-plaintext highlighter-rouge">ffmpeg</code>转码会提示:<br />
+<code class="language-plaintext highlighter-rouge">Non-monotonous DTS in output stream 0:0; previous: 0, current: 0; changing to 1. This may result in incorrect timestamps in the output file.</code>
     <ul>
       <li>似乎同一类型的tag的时间戳需要严格递增，前面处理直播录制的文件的时候开头没有弄好，设置了过多的0时间戳，导致该错误</li>
       <li>参考上一点，做些处理，确保时间戳严格递增即可</li>

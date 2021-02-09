@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,14 +310,14 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a-->
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
+        <!--a href="/blog/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a-->
+        <a href="/blog/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
     
-        <!--a href="/tag/#git" title="Tag: git" rel="tag">git</a-->
-        <a href="/tag/#git" title="Tag: git" rel="tag">git</a>&nbsp;
+        <!--a href="/blog/tag/#git" title="Tag: git" rel="tag">git</a-->
+        <a href="/blog/tag/#git" title="Tag: git" rel="tag">git</a>&nbsp;
     
-        <!--a href="/tag/#PowerShell" title="Tag: PowerShell" rel="tag">PowerShell</a-->
-        <a href="/tag/#PowerShell" title="Tag: PowerShell" rel="tag">PowerShell</a>
+        <!--a href="/blog/tag/#PowerShell" title="Tag: PowerShell" rel="tag">PowerShell</a-->
+        <a href="/blog/tag/#PowerShell" title="Tag: PowerShell" rel="tag">PowerShell</a>
     
   
 
@@ -345,7 +345,7 @@
 
 <p>对于这种情况，频繁使用FTP上传是不现实的，因为修改的只是部分，但我也不能精确确认需要上传修改的哪些文件，那么为了保证功能，每次上传肯定有未被修改的多的冗余。</p>
 
-<p>还有一种办法， 就是使用文件同步，这里写一下关键词 <code class="highlighter-rouge">Rsync（remote synchronize）</code>。因为有其它解决方案，不太想新增功能，先mark一下，有需要再用。</p>
+<p>还有一种办法， 就是使用文件同步，这里写一下关键词 <code class="language-plaintext highlighter-rouge">Rsync（remote synchronize）</code>。因为有其它解决方案，不太想新增功能，先mark一下，有需要再用。</p>
 
 <p>另一种方法，就是使用SVN或Git。 将Github或码云等平台作为中转是一个不错的选择，而且这些网站本身自身也有静态页面托管服务，可以做一个备份。 如果不想公开源码，也可以选择Coding.net 等其它平台。有时间还是想用SpringBoot自己将博客从零搭建一下试试。<br />
 话不多说，如果认为不保险，仓库其实是可以搭建在自家服务器上的。接下来就讲一下整个过程。</p>
@@ -365,8 +365,8 @@
 
 <h2 id="二服务器建立仓库">二、服务器建立仓库</h2>
 <ul>
-  <li><code class="highlighter-rouge">git --bare init</code>建立裸仓：
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[root@gitserver ~]# mkdir /git   =&gt;在根目录下新建一个git目录
+  <li><code class="language-plaintext highlighter-rouge">git --bare init</code>建立裸仓：
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[root@gitserver ~]# mkdir /git   =&gt;在根目录下新建一个git目录
 [root@gitserver ~]# cd /git      =&gt; 进入刚才新建的目录
 [root@gitserver git]# ls  -a     =&gt;  里面空空如也，没有任何隐藏文件
 [root@gitserver git]#  git --bare init    =&gt;初始化一个裸仓库
@@ -375,15 +375,15 @@ Initialized empty Git repository in /git/
 .  ..  branches  config  description  HEAD  hooks  info  objects  refs
 </code></pre></div>    </div>
   </li>
-  <li><code class="highlighter-rouge">git init</code>建立初始化建库：
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[root@gitserver ~]# cd ~
+  <li><code class="language-plaintext highlighter-rouge">git init</code>建立初始化建库：
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[root@gitserver ~]# cd ~
 [root@gitserver ~]# mkdir /git_2
 [root@gitserver ~]# cd /git_2
 [root@gitserver git2]# git init
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>初始化仓库有2种方式,  <code class="highlighter-rouge">git --bare init</code> 和<code class="highlighter-rouge">git init</code>区别有以下2点</p>
+    <p>初始化仓库有2种方式,  <code class="language-plaintext highlighter-rouge">git --bare init</code> 和<code class="language-plaintext highlighter-rouge">git init</code>区别有以下2点</p>
 
     <p>1， 用git init 初始化里面，git目录下面只有一个.git文件夹，用git –bare init里面的都是些配置文件</p>
 
@@ -394,13 +394,13 @@ Initialized empty Git repository in /git/
 
 <h2 id="三本地克隆仓库">三、本地克隆仓库</h2>
 <p>举个例子，其中 user为用户名，xx.xx.xx.xx为服务器ip，/usr/workspace/codebase/是git仓库的所在目录</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone user@xx.xx.xx.xx:/usr/workspace/codebase/
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone user@xx.xx.xx.xx:/usr/workspace/codebase/
 </code></pre></div></div>
 
 <h2 id="四遇见的问题">四、遇见的问题</h2>
 <ul>
   <li>git init - 首次push报错：
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>remote: error: refusing to update checked out branch: refs/heads/master  
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>remote: error: refusing to update checked out branch: refs/heads/master  
 remote: error: By default, updating the current branch in a non-bare repository remote: error: is denied, because it will make the index and work tree inconsistent remote: error: with what you pushed, and will require 'git reset --hard' to match
 remote: error: the work tree to HEAD. remote: error: 
 remote: error: You can set 'receive.denyCurrentBranch' configuration variable to 
@@ -410,7 +410,7 @@ remote: error: arranged to update its work tree to match what you pushed in some
 remote: error: To squelch this message and still keep the default behaviour, set remote: error: 'receive.denyCurrentBranch' configuration variable to 'refuse'. To ... ! [remote rejected] master -&gt; master (branch is currently checked out) error: failed to push some refs to
 </code></pre></div>    </div>
     <p>需要配置一下git的接收配置，在服务器端init的目录下执行如下命令即可正确提交：</p>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git config receive.denyCurrentBranch ignore`
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git config receive.denyCurrentBranch ignore`
 </code></pre></div>    </div>
   </li>
   <li>git init - 客户端提交后，服务器代码没有更新。但多个客户端测试下来push、pull等功能均正常：<br />
@@ -418,7 +418,7 @@ remote: error: To squelch this message and still keep the default behaviour, set
     <ul>
       <li>客户端push的分支，如果和服务器当前的分支不是同一个，显然服务器‘显示’的代码理所当然不会更新。</li>
       <li>客户端push的分支，如果和服务器当前的分支是同一个，因为有服务器本身在修改代码的可能性，git在设计的时候考虑到这一点，显然要等用户来执行‘将push上来的内容更新到当前分支’这一操作。</li>
-      <li>如果同一分支，必须得使用<code class="highlighter-rouge">git reset --hard</code>才能看到push后的内容。这也是git init很容易会导致冲突的原因。</li>
+      <li>如果同一分支，必须得使用<code class="language-plaintext highlighter-rouge">git reset --hard</code>才能看到push后的内容。这也是git init很容易会导致冲突的原因。</li>
     </ul>
   </li>
   <li>git –bare init - 客户端提交后，服务器没有看到相应的代码。

@@ -5,14 +5,13 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 07 Feb 2021 21:41:03 +0800</pubDate>
-    <lastBuildDate>Sun, 07 Feb 2021 21:41:03 +0800</lastBuildDate>
-    <generator>Jekyll v3.8.4</generator>
+    <pubDate>Tue, 09 Feb 2021 10:39:34 +0800</pubDate>
+    <lastBuildDate>Tue, 09 Feb 2021 10:39:34 +0800</lastBuildDate>
+    <generator>Jekyll v4.2.0</generator>
     
       <item>
         <title>关于 Github graphQL</title>
         <description>笔记向。
-
 </description>
         <pubDate>Sat, 06 Feb 2021 11:49:01 +0800</pubDate>
         <link>https://nicelee.top/blog/2021/02/06/github-graphql/</link>
@@ -27,9 +26,8 @@
     
       <item>
         <title>Python 关于装饰器(以web地址解析为例)</title>
-        <description>例如&lt;code class=&quot;highlighter-rouge&quot;&gt;Flask&lt;/code&gt;，在处理方法上加一个&lt;code class=&quot;highlighter-rouge&quot;&gt;@app.route('xxx')&lt;/code&gt;即可。&lt;br /&gt;
+        <description>例如&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Flask&lt;/code&gt;，在处理方法上加一个&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@app.route('xxx')&lt;/code&gt;即可。&lt;br /&gt;
 这是怎么实现的呢？
-
 </description>
         <pubDate>Tue, 02 Feb 2021 11:49:01 +0800</pubDate>
         <link>https://nicelee.top/blog/2021/02/02/python-decorators-2/</link>
@@ -45,7 +43,6 @@
       <item>
         <title>Python 关于装饰器(以异常重试为例)</title>
         <description>以抛出异常重试为例。
-
 </description>
         <pubDate>Mon, 01 Feb 2021 11:49:01 +0800</pubDate>
         <link>https://nicelee.top/blog/2021/02/01/python-decorators/</link>
@@ -65,7 +62,6 @@
 比如1.jpg、10.jpg、2.jpg…
 怎么办呢？&lt;br /&gt;
 自己做个html网页，用浏览器来阅读。
-
 </description>
         <pubDate>Fri, 15 Jan 2021 11:49:01 +0800</pubDate>
         <link>https://nicelee.top/blog/2021/01/15/pic-read-html/</link>
@@ -83,7 +79,6 @@
         <description>现在要对一个视频文件提取关键帧等信息用来做预览图。&lt;br /&gt;
 图中应当包含 文件名、大小、分辨率、视频时长以及8张截图。&lt;br /&gt;
 拟选用opencv(主要) + PIL(用于图片添加中文)来加以实现。
-
 </description>
         <pubDate>Wed, 06 Jan 2021 11:49:01 +0800</pubDate>
         <link>https://nicelee.top/blog/2021/01/06/python-opencv-video-frame/</link>
@@ -100,7 +95,6 @@
         <title>Python 某站漫画的佛系随缘下载</title>
         <description>啊这。&lt;br /&gt;
 因为本身就可以打包，权当练习。
-
 </description>
         <pubDate>Fri, 01 Jan 2021 11:49:01 +0800</pubDate>
         <link>https://nicelee.top/blog/2021/01/01/python-18comic/</link>
@@ -117,7 +111,6 @@
         <title>Python 微博位置小尾巴</title>
         <description>如何伪装微博位置&lt;a href=&quot;/blog/2019/03/13/weibo-location/&quot;&gt;前文&lt;/a&gt;有讲，但还是挺麻烦的。&lt;br /&gt;
 现在尝试简化一下，配合vercel进行适配。
-
 </description>
         <pubDate>Wed, 16 Dec 2020 11:49:01 +0800</pubDate>
         <link>https://nicelee.top/blog/2020/12/16/python-weibo-location/</link>
@@ -133,7 +126,6 @@
       <item>
         <title>Vercel Serverless使用笔记(Python版)</title>
         <description>服务器冇得了，只能白嫖了，就这样。
-
 </description>
         <pubDate>Mon, 16 Nov 2020 11:49:01 +0800</pubDate>
         <link>https://nicelee.top/blog/2020/11/16/vercel-serverless/</link>
@@ -155,7 +147,6 @@
         <description>【已失效】服务器快到期，如无意外可能转静态托管了。 &lt;br /&gt;
 那么一些功能实现起来就会有些麻烦，是时候考虑一下移动端实现了。    &lt;br /&gt;
 乐心不能第三方同步，那么只能回退到春雨了。
-
 </description>
         <pubDate>Sat, 31 Oct 2020 11:49:01 +0800</pubDate>
         <link>https://nicelee.top/blog/2020/10/31/weixin-step-counter-cheater-6/</link>
@@ -173,7 +164,6 @@
         <description>服务器快到期，如无意外可能转静态托管了。 &lt;br /&gt;
 那么一些功能实现起来就会有些麻烦，是时候考虑一下移动端实现了。    &lt;br /&gt;
 &lt;strong&gt;更新：需要绑定乐心手环才能实现第三方数据同步&lt;/strong&gt;
-
 </description>
         <pubDate>Fri, 11 Sep 2020 11:49:01 +0800</pubDate>
         <link>https://nicelee.top/blog/2020/09/11/weixin-step-counter-cheater-5/</link>

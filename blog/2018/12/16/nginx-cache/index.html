@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,14 +310,14 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Nginx" title="Tag: Nginx" rel="tag">Nginx</a-->
-        <a href="/tag/#Nginx" title="Tag: Nginx" rel="tag">Nginx</a>&nbsp;
+        <!--a href="/blog/tag/#Nginx" title="Tag: Nginx" rel="tag">Nginx</a-->
+        <a href="/blog/tag/#Nginx" title="Tag: Nginx" rel="tag">Nginx</a>&nbsp;
     
-        <!--a href="/tag/#%E7%BC%93%E5%AD%98" title="Tag: 缓存" rel="tag">缓存</a-->
-        <a href="/tag/#缓存" title="Tag: 缓存" rel="tag">缓存</a>&nbsp;
+        <!--a href="/blog/tag/#%E7%BC%93%E5%AD%98" title="Tag: 缓存" rel="tag">缓存</a-->
+        <a href="/blog/tag/#缓存" title="Tag: 缓存" rel="tag">缓存</a>&nbsp;
     
-        <!--a href="/tag/#%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86" title="Tag: 反向代理" rel="tag">反向代理</a-->
-        <a href="/tag/#反向代理" title="Tag: 反向代理" rel="tag">反向代理</a>
+        <!--a href="/blog/tag/#%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86" title="Tag: 反向代理" rel="tag">反向代理</a-->
+        <a href="/blog/tag/#反向代理" title="Tag: 反向代理" rel="tag">反向代理</a>
     
   
 
@@ -345,9 +345,9 @@
 <h2 id="简介">简介</h2>
 <ul>
   <li>
-    <p>Nginx的Web缓存服务主要由<code class="highlighter-rouge">proxy_cache</code>相关指令集和<code class="highlighter-rouge">fastcgi_cache</code>相关指令集构成。 <br />
-1) <code class="highlighter-rouge">proxy_cache</code>相关指令集用于反向代理时,对后端内容源服务器进行缓存<br />
-2) <code class="highlighter-rouge">fastcgi</code>相关指令集主要用于对FastCGI的动态程序进行缓存</p>
+    <p>Nginx的Web缓存服务主要由<code class="language-plaintext highlighter-rouge">proxy_cache</code>相关指令集和<code class="language-plaintext highlighter-rouge">fastcgi_cache</code>相关指令集构成。 <br />
+1) <code class="language-plaintext highlighter-rouge">proxy_cache</code>相关指令集用于反向代理时,对后端内容源服务器进行缓存<br />
+2) <code class="language-plaintext highlighter-rouge">fastcgi</code>相关指令集主要用于对FastCGI的动态程序进行缓存</p>
   </li>
   <li>
     <p><strong>proxy_cache</strong>和<strong>fastcgi_cache</strong>构成了Nginx的缓存，<strong>proxy_cache</strong>主要用于反向代理时，对后端内容源服务器进行缓存，<strong>fastcgi_cache</strong>主要用于对<strong>FastCGI</strong>的动态程序进行缓存。两者的功能基本上一样。<br />
@@ -363,7 +363,7 @@
 
 <h2 id="http-模块缓存设置">http 模块缓存设置</h2>
 <h3 id="缓存到磁盘">缓存到磁盘</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#要想开启nginx的缓存功能，需要添加此处的两行内容！
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#要想开启nginx的缓存功能，需要添加此处的两行内容！
 #设置Web缓存区名称为cache_one,内存缓存空间大小为100M,缓存的数据超过1天没有被访问就自动清除;访问的缓存数据,硬盘缓存空间大小为1G
 proxy_cache_path /usr/nginx/proxy_cache_path levels=1:2 keys_zone=cache_one:100m inactive=1d max_size=1g;
  
@@ -376,7 +376,7 @@ proxy_ignore_headers X-Accel-Expires Expires Cache-Control Set-Cookie;
 
 <h3 id="缓存到内存">缓存到内存</h3>
 <p>缓存到内存（/dev/shm）,可以提高访问速度，但重启失效，需要重新mount。</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir /dev/shm/proxy_temp 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir /dev/shm/proxy_temp 
 mkdir /dev/shm/proxy_cache
 chmod -R 777 /dev/shm/proxy*
 mkdir /mnt/nginx_temp /mnt/nginx_cache
@@ -384,14 +384,14 @@ mount –bind /dev/shm/proxy_temp /mnt/nginx_temp
 mount –bind /dev/shm/proxy_cache /mnt/nginx_cache
 </code></pre></div></div>
 <p>http 具体配置：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>proxy_temp_path /mnt/nginx_temp;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>proxy_temp_path /mnt/nginx_temp;
 proxy_cache_path /mnt/nginx_cache levels=1:2 keys_zone=cache_one:200m inactive=5d max_size=400m;
 proxy_ignore_headers X-Accel-Expires Expires Cache-Control Set-Cookie;
 </code></pre></div></div>
 
 <h2 id="location-模块缓存设置">location 模块缓存设置</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#缓存静态文件
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#缓存静态文件
 location ~ .*\.(html|htm|css|js|ico|jpeg|git|jpg|png|bmp|swf)$ {
     root /home/www;
     proxy_pass http://127.0.0.1:8080;

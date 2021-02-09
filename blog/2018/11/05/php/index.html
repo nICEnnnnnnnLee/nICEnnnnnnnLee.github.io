@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,14 +310,14 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8" title="Tag: 云服务器" rel="tag">云服务器</a-->
-        <a href="/tag/#云服务器" title="Tag: 云服务器" rel="tag">云服务器</a>&nbsp;
+        <!--a href="/blog/tag/#%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8" title="Tag: 云服务器" rel="tag">云服务器</a-->
+        <a href="/blog/tag/#云服务器" title="Tag: 云服务器" rel="tag">云服务器</a>&nbsp;
     
-        <!--a href="/tag/#%E5%BB%BA%E7%AB%99" title="Tag: 建站" rel="tag">建站</a-->
-        <a href="/tag/#建站" title="Tag: 建站" rel="tag">建站</a>&nbsp;
+        <!--a href="/blog/tag/#%E5%BB%BA%E7%AB%99" title="Tag: 建站" rel="tag">建站</a-->
+        <a href="/blog/tag/#建站" title="Tag: 建站" rel="tag">建站</a>&nbsp;
     
-        <!--a href="/tag/#php" title="Tag: php" rel="tag">php</a-->
-        <a href="/tag/#php" title="Tag: php" rel="tag">php</a>
+        <!--a href="/blog/tag/#php" title="Tag: php" rel="tag">php</a-->
+        <a href="/blog/tag/#php" title="Tag: php" rel="tag">php</a>
     
   
 
@@ -348,12 +348,12 @@
 <h2 id="前置环境">前置环境</h2>
 <p>如果没有libxml2和libxml2-devel会报错，所以应该更新libxml2并安装libxml2-devel，使用在线安装：</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum -y install libxml2
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum -y install libxml2
 yum -y install libxml2-devel
 </code></pre></div></div>
 <p>补充:因为不同的操作系统环境，系统安装开发环境包的完整程度也不相同，所以建议安装操作系统的时候做必要选择，也可以统一执行一遍所有的命令，将没有安装的组件安装好.
 如果已经安装了可能会进行升级，版本完全一致则不会进行任何操作，命令除上面2个之外，汇总如下：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum -y install openssl
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum -y install openssl
 yum -y install openssl-devel
 yum -y install curl
 yum -y install curl-devel
@@ -376,55 +376,55 @@ yum -y install bzip2-devel
     <ol>
       <li>打开php官网http://php.net/,点击导航栏的Downloads进入下载页面：<a href="http://php.net/downloads.php">http://php.net/downloads.php</a>,下载后FTP上传</li>
       <li>或者直接wget:注意这里下载后的解压名称应该为mirror
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget http://php.net/get/php-7.2.11.tar.xz/from/a/mirror
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget http://php.net/get/php-7.2.11.tar.xz/from/a/mirror
 </code></pre></div>        </div>
       </li>
     </ol>
   </li>
   <li>释放php安装包
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tar -xvzf php-7.2.11.tar.gz
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tar -xvzf php-7.2.11.tar.gz
 cd php-7.2.11
 </code></pre></div>    </div>
   </li>
   <li>配置并编译
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./configure --prefix=/usr/local/php --with-curl --with-freetype-dir --with-gd --with-gettext --with-iconv-dir --with-kerberos --with-libdir=lib64 --with-libxml-dir --with-mysqli --with-openssl --with-pcre-regex --with-pdo-mysql --with-pdo-sqlite --with-pear --with-png-dir --with-jpeg-dir --with-xmlrpc --with-xsl --with-zlib --with-bz2 --with-mhash --enable-fpm --enable-bcmath --enable-libxml --enable-inline-optimization --enable-gd-native-ttf --enable-mbregex --enable-mbstring --enable-opcache --enable-pcntl --enable-shmop --enable-soap --enable-sockets --enable-sysvsem --enable-sysvshm --enable-xml --enable-zip
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./configure --prefix=/usr/local/php --with-curl --with-freetype-dir --with-gd --with-gettext --with-iconv-dir --with-kerberos --with-libdir=lib64 --with-libxml-dir --with-mysqli --with-openssl --with-pcre-regex --with-pdo-mysql --with-pdo-sqlite --with-pear --with-png-dir --with-jpeg-dir --with-xmlrpc --with-xsl --with-zlib --with-bz2 --with-mhash --enable-fpm --enable-bcmath --enable-libxml --enable-inline-optimization --enable-gd-native-ttf --enable-mbregex --enable-mbstring --enable-opcache --enable-pcntl --enable-shmop --enable-soap --enable-sockets --enable-sysvsem --enable-sysvshm --enable-xml --enable-zip
 </code></pre></div>    </div>
     <p>　　实际上这里的配置项比上述还多，可以使用 ./configure –help 命令查看所有选项.<br />
   这里注意在php7中–with-mysql原生支持已经不存在了，操作都变成mysqli或者pdo了；以上这些选项在正常的php开发中完全够用了，后期如果需要，可以选择手动开启相应的模块</p>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make
 </code></pre></div>    </div>
     <p>　　编译时间可能会有点长，编译完成之后，执行安装：</p>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make install
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make install
 </code></pre></div>    </div>
   </li>
 </ul>
 
 <h2 id="配置-php-fpm">配置 php-fpm</h2>
-<p>　　php的默认安装位置上面已经指定为<code class="highlighter-rouge">/usr/local/php</code>，接下来配置相应的文件：</p>
+<p>　　php的默认安装位置上面已经指定为<code class="language-plaintext highlighter-rouge">/usr/local/php</code>，接下来配置相应的文件：</p>
 <h3 id="复制默认文件">复制默认文件</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cp php.ini-development /usr/local/php/lib/php.ini
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cp php.ini-development /usr/local/php/lib/php.ini
 cp /usr/local/php/etc/php-fpm.conf.default /usr/local/php/etc/php-fpm.conf
 cp sapi/fpm/php-fpm /usr/local/bin
 </code></pre></div></div>
 <h3 id="phpini">php.ini</h3>
-<p><code class="highlighter-rouge">vim /usr/local/php/lib/php.ini</code> 打开php配置文件找到<code class="highlighter-rouge">cgi.fix_pathinfo</code>配置项，这一项默认被注释并且值为<code class="highlighter-rouge">1</code>，根据官方文档的说明，这里为了当文件不存在时，阻止Nginx将请求发送到后端的PHP-FPM模块，从而避免恶意脚本注入的攻击，所以此项应该去掉注释并设置为<code class="highlighter-rouge">0</code><br />
+<p><code class="language-plaintext highlighter-rouge">vim /usr/local/php/lib/php.ini</code> 打开php配置文件找到<code class="language-plaintext highlighter-rouge">cgi.fix_pathinfo</code>配置项，这一项默认被注释并且值为<code class="language-plaintext highlighter-rouge">1</code>，根据官方文档的说明，这里为了当文件不存在时，阻止Nginx将请求发送到后端的PHP-FPM模块，从而避免恶意脚本注入的攻击，所以此项应该去掉注释并设置为<code class="language-plaintext highlighter-rouge">0</code><br />
 <img src="https://s1.ax1x.com/2018/11/06/ioqceP.png" alt="" /></p>
 <h3 id="创建web用户">创建web用户：</h3>
 <p>创建用户www,如果已存在可跳过.</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>groupadd www
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>groupadd www
 useradd -g www www
 </code></pre></div></div>
 <h3 id="配置web用户">配置web用户</h3>
 <ol>
   <li>php-fpm.conf<br />
-修改php-fpm.conf添加以上创建的用户和组，这时候使用 <code class="highlighter-rouge">vim /usr/local/php/etc/php-fpm.conf</code> 打开文件php-fpm.conf <br />
-最后一行会发现如下内容,将<code class="highlighter-rouge">NONE</code>需要修改为我们的实际目录：<code class="highlighter-rouge">/usr/local</code><br />
+修改php-fpm.conf添加以上创建的用户和组，这时候使用 <code class="language-plaintext highlighter-rouge">vim /usr/local/php/etc/php-fpm.conf</code> 打开文件php-fpm.conf <br />
+最后一行会发现如下内容,将<code class="language-plaintext highlighter-rouge">NONE</code>需要修改为我们的实际目录：<code class="language-plaintext highlighter-rouge">/usr/local</code><br />
 (如果编译时添加–prefix选项以下位置会自动补全，默认是下面是空的，要注意)：<br />
 <img src="https://s1.ax1x.com/2018/11/06/ioqhWQ.png" alt="" /></li>
   <li>www.conf<br />
 php-fpm.conf最后一行引入了php-fpm.d目录下所有的conf配置文件，conf文件应该长啥样?<br />
 我们复制一个默认的配置看一下:
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cp /usr/local/php/etc/php-fpm.d/www.conf.default /usr/local/php/etc/php-fpm.d/www.conf
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cp /usr/local/php/etc/php-fpm.d/www.conf.default /usr/local/php/etc/php-fpm.d/www.conf
 vim /usr/local/php/etc/php-fpm.d/www.conf
 </code></pre></div>    </div>
     <p>默认user和group的设置为nobody，将其改为www即可</p>
@@ -433,12 +433,12 @@ vim /usr/local/php/etc/php-fpm.d/www.conf
 
 <p>　　</p>
 <h2 id="启动-php-fpm">启动 php-fpm</h2>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/local/bin/php-fpm
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/local/bin/php-fpm
 </code></pre></div></div>
-<p>启动完毕之后，php-fpm服务默认使用9000端口，使用 <code class="highlighter-rouge">netstat -tln | grep 9000</code>可以查看端口使用情况：</p>
+<p>启动完毕之后，php-fpm服务默认使用9000端口，使用 <code class="language-plaintext highlighter-rouge">netstat -tln | grep 9000</code>可以查看端口使用情况：</p>
 
 <h2 id="相关命令">相关命令</h2>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/local/bin/php-fpm	#启动  
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/local/bin/php-fpm	#启动  
 pkill php-fpm		#关闭
 </code></pre></div></div>
 

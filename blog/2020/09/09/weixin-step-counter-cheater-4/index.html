@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#小技巧" title="Category: 小技巧" rel="category">小技巧</a>
+        <a href="/blog/category/#小技巧" title="Category: 小技巧" rel="category">小技巧</a>
     
   
 
@@ -310,8 +310,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#%E5%BE%AE%E4%BF%A1%E8%BF%90%E5%8A%A8" title="Tag: 微信运动" rel="tag">微信运动</a-->
-        <a href="/tag/#微信运动" title="Tag: 微信运动" rel="tag">微信运动</a>
+        <!--a href="/blog/tag/#%E5%BE%AE%E4%BF%A1%E8%BF%90%E5%8A%A8" title="Tag: 微信运动" rel="tag">微信运动</a-->
+        <a href="/blog/tag/#微信运动" title="Tag: 微信运动" rel="tag">微信运动</a>
     
   
 
@@ -350,58 +350,58 @@
 
 <h2 id="模拟登录">模拟登录</h2>
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">testLogin</span><span class="o">()</span> <span class="o">{</span>
-	<span class="n">String</span> <span class="n">userName</span> <span class="o">=</span> <span class="s">"手机号"</span><span class="o">;</span>
-	<span class="n">String</span> <span class="n">userPwd</span> <span class="o">=</span> <span class="s">"密码MD5"</span><span class="o">;</span> <span class="c1">// MD5</span>
-	<span class="n">String</span> <span class="n">clientId</span> <span class="o">=</span> <span class="s">"xxx"</span><span class="o">;</span> <span class="c1">// 盲猜可以随机生成，生成后但不要变动，建议使用userName的MD5值</span>
+	<span class="nc">String</span> <span class="n">userName</span> <span class="o">=</span> <span class="s">"手机号"</span><span class="o">;</span>
+	<span class="nc">String</span> <span class="n">userPwd</span> <span class="o">=</span> <span class="s">"密码MD5"</span><span class="o">;</span> <span class="c1">// MD5</span>
+	<span class="nc">String</span> <span class="n">clientId</span> <span class="o">=</span> <span class="s">"xxx"</span><span class="o">;</span> <span class="c1">// 盲猜可以随机生成，生成后但不要变动，建议使用userName的MD5值</span>
 
-	<span class="n">String</span> <span class="n">url</span> <span class="o">=</span> <span class="s">"https://sports.lifesense.com/sessions_service/login?city=&amp;province=&amp;devicemodel=PLK-TL01H&amp;roleType=0&amp;areaCode=&amp;osversion=6.0&amp;screenHeight=1812&amp;provinceCode=&amp;version=4.6.7&amp;channel=huawei&amp;systemType=2&amp;promotion_channel=huawei&amp;screenWidth=1080&amp;rnd=6287cadf&amp;requestId=&amp;longitude=&amp;requestToken=&amp;screenheight=1812&amp;os_country=CN&amp;timezone=Asia%2FShanghai&amp;cityCode=&amp;os_langs=zh&amp;platform=android&amp;openudid=&amp;countryCode=&amp;country=&amp;screenwidth=1080&amp;network_type=wifi&amp;appType=6&amp;area=CN&amp;latitude=&amp;language=zh&amp;ts="</span>
-		<span class="o">+</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">/</span> <span class="mi">1000</span><span class="o">;</span>
-	<span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">headers</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
+	<span class="nc">String</span> <span class="n">url</span> <span class="o">=</span> <span class="s">"https://sports.lifesense.com/sessions_service/login?city=&amp;province=&amp;devicemodel=PLK-TL01H&amp;roleType=0&amp;areaCode=&amp;osversion=6.0&amp;screenHeight=1812&amp;provinceCode=&amp;version=4.6.7&amp;channel=huawei&amp;systemType=2&amp;promotion_channel=huawei&amp;screenWidth=1080&amp;rnd=6287cadf&amp;requestId=&amp;longitude=&amp;requestToken=&amp;screenheight=1812&amp;os_country=CN&amp;timezone=Asia%2FShanghai&amp;cityCode=&amp;os_langs=zh&amp;platform=android&amp;openudid=&amp;countryCode=&amp;country=&amp;screenwidth=1080&amp;network_type=wifi&amp;appType=6&amp;area=CN&amp;latitude=&amp;language=zh&amp;ts="</span>
+		<span class="o">+</span> <span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">/</span> <span class="mi">1000</span><span class="o">;</span>
+	<span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="n">headers</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
 	<span class="n">headers</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"Content-Type"</span><span class="o">,</span> <span class="s">"application/json; charset=utf-8"</span><span class="o">);</span>
 	<span class="n">headers</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"User-Agent"</span><span class="o">,</span> <span class="s">"Dalvik/2.1.0 (Linux; U; Android 6.0; PLK-TL01H Build/HONORPLK-TL01H)"</span><span class="o">);</span>
 	<span class="n">headers</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"Connection"</span><span class="o">,</span> <span class="s">"Keep-Alive"</span><span class="o">);</span>
 	<span class="n">headers</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"Accept-Encoding"</span><span class="o">,</span> <span class="s">"gzip"</span><span class="o">);</span>
-	<span class="n">String</span> <span class="n">params</span> <span class="o">=</span> <span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span>
+	<span class="nc">String</span> <span class="n">params</span> <span class="o">=</span> <span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span>
 		<span class="s">"{\"loginName\":\"%s\",\"password\":\"%s\",\"clientId\":\"%s\",\"roleType\":0,\"appType\":6}"</span><span class="o">,</span> <span class="n">userName</span><span class="o">,</span>
 		<span class="n">userPwd</span><span class="o">,</span> <span class="n">clientId</span><span class="o">);</span>
 	
-	<span class="n">HttpRequestUtil</span> <span class="n">util</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HttpRequestUtil</span><span class="o">();</span>
-	<span class="n">String</span> <span class="n">content</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="na">postContent</span><span class="o">(</span><span class="n">url</span><span class="o">,</span> <span class="n">headers</span><span class="o">,</span> <span class="n">params</span><span class="o">);</span>
-	<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">content</span><span class="o">);</span>
-	<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
-	<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">util</span><span class="o">.</span><span class="na">CurrentCookieManager</span><span class="o">().</span><span class="na">getCookieStore</span><span class="o">().</span><span class="na">getCookies</span><span class="o">().</span><span class="na">toString</span><span class="o">());</span>
+	<span class="nc">HttpRequestUtil</span> <span class="n">util</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HttpRequestUtil</span><span class="o">();</span>
+	<span class="nc">String</span> <span class="n">content</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="na">postContent</span><span class="o">(</span><span class="n">url</span><span class="o">,</span> <span class="n">headers</span><span class="o">,</span> <span class="n">params</span><span class="o">);</span>
+	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">content</span><span class="o">);</span>
+	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
+	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">util</span><span class="o">.</span><span class="na">CurrentCookieManager</span><span class="o">().</span><span class="na">getCookieStore</span><span class="o">().</span><span class="na">getCookies</span><span class="o">().</span><span class="na">toString</span><span class="o">());</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
 <h2 id="模拟提交步数数据">模拟提交步数数据</h2>
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">testModifyStep</span><span class="o">()</span> <span class="o">{</span>
-	<span class="n">String</span> <span class="n">userIMEI</span> <span class="o">=</span> <span class="s">"M_NULL"</span><span class="o">;</span> <span class="c1">// M_ + 手机imei号</span>
+	<span class="nc">String</span> <span class="n">userIMEI</span> <span class="o">=</span> <span class="s">"M_NULL"</span><span class="o">;</span> <span class="c1">// M_ + 手机imei号</span>
 	<span class="c1">// 从登录数据得来</span>
-	 <span class="n">String</span> <span class="n">cookie</span> <span class="o">=</span> <span class="s">""</span><span class="o">;</span>
-	 <span class="n">String</span> <span class="n">userId</span> <span class="o">=</span> <span class="s">""</span><span class="o">;</span>
+	 <span class="nc">String</span> <span class="n">cookie</span> <span class="o">=</span> <span class="s">""</span><span class="o">;</span>
+	 <span class="nc">String</span> <span class="n">userId</span> <span class="o">=</span> <span class="s">""</span><span class="o">;</span>
 	 
 	<span class="c1">// 当前时间</span>
-	<span class="kt">long</span> <span class="n">updated</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
-	<span class="n">SimpleDateFormat</span> <span class="n">sdf</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SimpleDateFormat</span><span class="o">(</span><span class="s">"yyyy-MM-dd HH:mm:ss"</span><span class="o">);</span>
-	<span class="n">sdf</span><span class="o">.</span><span class="na">setTimeZone</span><span class="o">(</span><span class="n">TimeZone</span><span class="o">.</span><span class="na">getTimeZone</span><span class="o">(</span><span class="s">"GMT+8:00"</span><span class="o">));</span>
-	<span class="n">String</span> <span class="n">createdTime</span> <span class="o">=</span> <span class="n">sdf</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="n">updated</span><span class="o">);</span>
-	<span class="n">String</span> <span class="n">measurementTime</span> <span class="o">=</span> <span class="n">createdTime</span><span class="o">;</span>
-	<span class="n">String</span> <span class="n">dayMeasurementTime</span> <span class="o">=</span> <span class="n">createdTime</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">" "</span><span class="o">)[</span><span class="mi">0</span><span class="o">];</span>
+	<span class="kt">long</span> <span class="n">updated</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+	<span class="nc">SimpleDateFormat</span> <span class="n">sdf</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SimpleDateFormat</span><span class="o">(</span><span class="s">"yyyy-MM-dd HH:mm:ss"</span><span class="o">);</span>
+	<span class="n">sdf</span><span class="o">.</span><span class="na">setTimeZone</span><span class="o">(</span><span class="nc">TimeZone</span><span class="o">.</span><span class="na">getTimeZone</span><span class="o">(</span><span class="s">"GMT+8:00"</span><span class="o">));</span>
+	<span class="nc">String</span> <span class="n">createdTime</span> <span class="o">=</span> <span class="n">sdf</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="n">updated</span><span class="o">);</span>
+	<span class="nc">String</span> <span class="n">measurementTime</span> <span class="o">=</span> <span class="n">createdTime</span><span class="o">;</span>
+	<span class="nc">String</span> <span class="n">dayMeasurementTime</span> <span class="o">=</span> <span class="n">createdTime</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">" "</span><span class="o">)[</span><span class="mi">0</span><span class="o">];</span>
 	<span class="c1">// 想要的数据</span>
 	<span class="kt">int</span> <span class="n">step</span> <span class="o">=</span> <span class="mi">10087</span><span class="o">;</span>
 	<span class="kt">int</span> <span class="n">calories</span> <span class="o">=</span> <span class="n">step</span> <span class="o">/</span> <span class="mi">4000</span><span class="o">;</span>
 	<span class="kt">int</span> <span class="n">distance</span> <span class="o">=</span> <span class="n">step</span> <span class="o">/</span> <span class="mi">3</span><span class="o">;</span>
 
-	<span class="n">String</span> <span class="n">url</span> <span class="o">=</span> <span class="s">"https://sports.lifesense.com/sport_service/sport/sport/uploadMobileStepV2?city=&amp;province=&amp;devicemodel=PLK-TL01H&amp;areaCode=&amp;osversion=6.0&amp;provinceCode=&amp;version=4.6.7&amp;channel=huawei&amp;systemType=2&amp;promotion_channel=huawei&amp;rnd=&amp;requestId=&amp;longitude=&amp;requestToken=&amp;screenheight=1812&amp;os_country=CN&amp;timezone=Asia%2FShanghai&amp;cityCode=&amp;os_langs=zh&amp;platform=android&amp;openudid=&amp;countryCode=&amp;country=&amp;screenwidth=1080&amp;network_type=wifi&amp;appType=6&amp;area=CN&amp;latitude=&amp;language=zh&amp;ts="</span>
-			<span class="o">+</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">/</span> <span class="mi">1000</span><span class="o">;</span>
-	<span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">headers</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
+	<span class="nc">String</span> <span class="n">url</span> <span class="o">=</span> <span class="s">"https://sports.lifesense.com/sport_service/sport/sport/uploadMobileStepV2?city=&amp;province=&amp;devicemodel=PLK-TL01H&amp;areaCode=&amp;osversion=6.0&amp;provinceCode=&amp;version=4.6.7&amp;channel=huawei&amp;systemType=2&amp;promotion_channel=huawei&amp;rnd=&amp;requestId=&amp;longitude=&amp;requestToken=&amp;screenheight=1812&amp;os_country=CN&amp;timezone=Asia%2FShanghai&amp;cityCode=&amp;os_langs=zh&amp;platform=android&amp;openudid=&amp;countryCode=&amp;country=&amp;screenwidth=1080&amp;network_type=wifi&amp;appType=6&amp;area=CN&amp;latitude=&amp;language=zh&amp;ts="</span>
+			<span class="o">+</span> <span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">/</span> <span class="mi">1000</span><span class="o">;</span>
+	<span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="n">headers</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
 	<span class="n">headers</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"Content-Type"</span><span class="o">,</span> <span class="s">"application/json; charset=utf-8"</span><span class="o">);</span>
 	<span class="n">headers</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"User-Agent"</span><span class="o">,</span> <span class="s">"Dalvik/2.1.0 (Linux; U; Android 6.0; PLK-TL01H Build/HONORPLK-TL01H)"</span><span class="o">);</span>
 	<span class="n">headers</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"Connection"</span><span class="o">,</span> <span class="s">"Keep-Alive"</span><span class="o">);</span>
 	<span class="n">headers</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"Accept-Encoding"</span><span class="o">,</span> <span class="s">"gzip"</span><span class="o">);</span>
 	<span class="n">headers</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="n">cookie</span><span class="o">);</span>
 
-	<span class="n">JSONObject</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">();</span>
+	<span class="nc">JSONObject</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JSONObject</span><span class="o">();</span>
 	<span class="n">obj</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"active"</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
 	<span class="n">obj</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"calories"</span><span class="o">,</span> <span class="n">calories</span><span class="o">);</span>
 	<span class="n">obj</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"created"</span><span class="o">,</span> <span class="n">createdTime</span><span class="o">);</span>
@@ -418,12 +418,12 @@
 	<span class="n">obj</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"userId"</span><span class="o">,</span> <span class="n">userId</span><span class="o">);</span>
 	<span class="n">obj</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"DataSource"</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
 	<span class="n">obj</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"exerciseTime"</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
-	<span class="n">String</span> <span class="n">params</span> <span class="o">=</span> <span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"{\"list\":[%s]}"</span><span class="o">,</span> <span class="n">obj</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+	<span class="nc">String</span> <span class="n">params</span> <span class="o">=</span> <span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"{\"list\":[%s]}"</span><span class="o">,</span> <span class="n">obj</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 
-	<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">params</span><span class="o">);</span>
-	<span class="n">HttpRequestUtil</span> <span class="n">util</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HttpRequestUtil</span><span class="o">();</span>
-	<span class="n">String</span> <span class="n">content</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="na">postContent</span><span class="o">(</span><span class="n">url</span><span class="o">,</span> <span class="n">headers</span><span class="o">,</span> <span class="n">params</span><span class="o">);</span>
-	<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">content</span><span class="o">);</span>
+	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">params</span><span class="o">);</span>
+	<span class="nc">HttpRequestUtil</span> <span class="n">util</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HttpRequestUtil</span><span class="o">();</span>
+	<span class="nc">String</span> <span class="n">content</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="na">postContent</span><span class="o">(</span><span class="n">url</span><span class="o">,</span> <span class="n">headers</span><span class="o">,</span> <span class="n">params</span><span class="o">);</span>
+	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">content</span><span class="o">);</span>
 <span class="o">}</span>
 </code></pre></div></div>
 

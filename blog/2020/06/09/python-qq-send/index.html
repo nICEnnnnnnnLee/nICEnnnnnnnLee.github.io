@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,8 +310,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Python" title="Tag: Python" rel="tag">Python</a-->
-        <a href="/tag/#Python" title="Tag: Python" rel="tag">Python</a>
+        <!--a href="/blog/tag/#Python" title="Tag: Python" rel="tag">Python</a-->
+        <a href="/blog/tag/#Python" title="Tag: Python" rel="tag">Python</a>
     
   
 
@@ -334,7 +334,7 @@
 <h2 id="一个想法">一个想法</h2>
 <p>偶然间，在分享B站某个页面发现了这个，发送之后果然收到了消息，于是有了抓包改写的念头。<br />
 <img src="/sources/archive/2020/06/09-1-qq-share.png" alt="" /></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://connect.qq.com/widget/shareqq/index.html?url=https://www.bilibili.com/blackboard/knowledge.html&amp;share_source=qq&amp;share_medium=web&amp;desc=知识区正式开放！百万奖金寻找优质知识创作者&amp;title=B站知识区开放！学习网站实锤了&amp;summary=知识区正式开放！百万奖金寻找优质知识创作者&amp;pics=https://i0.hdslb.com/bfs/activity-plat/static/43624dcc688b84198072bd6e6e0d7b90/2D2Q54XJDm_w336_h336.jpg&amp;flash=&amp;site=&amp;style=201&amp;width=32&amp;height=32
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://connect.qq.com/widget/shareqq/index.html?url=https://www.bilibili.com/blackboard/knowledge.html&amp;share_source=qq&amp;share_medium=web&amp;desc=知识区正式开放！百万奖金寻找优质知识创作者&amp;title=B站知识区开放！学习网站实锤了&amp;summary=知识区正式开放！百万奖金寻找优质知识创作者&amp;pics=https://i0.hdslb.com/bfs/activity-plat/static/43624dcc688b84198072bd6e6e0d7b90/2D2Q54XJDm_w336_h336.jpg&amp;flash=&amp;site=&amp;style=201&amp;width=32&amp;height=32
 </code></pre></div></div>
 
 <h2 id="简单实现">简单实现</h2>
@@ -342,7 +342,7 @@
 发送的频率也不频繁，估摸着一天最多两三次，或者几天也不一定有一次。</p>
 
 <p><img src="/sources/archive/2020/06/09-2-qq-send.jpg" alt="" />  <br />
-这样的话，可以尝试发送一条信息测试，得到<code class="highlighter-rouge">cookie</code>、校验参数<code class="highlighter-rouge">t</code>、目标的<code class="highlighter-rouge">id</code>、以及目标的类型(普通用户/群组/讨论组)<br />
+这样的话，可以尝试发送一条信息测试，得到<code class="language-plaintext highlighter-rouge">cookie</code>、校验参数<code class="language-plaintext highlighter-rouge">t</code>、目标的<code class="language-plaintext highlighter-rouge">id</code>、以及目标的类型(普通用户/群组/讨论组)<br />
 基本上过期时间还是有相当一段时间的？，勉强算是完成了任务。</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span>
 
@@ -369,7 +369,7 @@
     <span class="p">}</span>
     <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s">'dest'</span><span class="p">:</span> <span class="s">'qq'</span><span class="p">,</span>
-        <span class="s">'uins'</span><span class="p">:</span> <span class="s">'[{"type":</span><span class="si">%</span><span class="s">d,"id":</span><span class="si">%</span><span class="s">d}]'</span> <span class="o">%</span> <span class="p">(</span><span class="n">stype</span><span class="p">,</span> <span class="n">uid</span><span class="p">),</span>
+        <span class="s">'uins'</span><span class="p">:</span> <span class="s">'[{"type":%d,"id":%d}]'</span> <span class="o">%</span> <span class="p">(</span><span class="n">stype</span><span class="p">,</span> <span class="n">uid</span><span class="p">),</span>
         <span class="s">'dmList'</span><span class="p">:</span> <span class="s">'[]'</span><span class="p">,</span>
         <span class="s">'ldw'</span><span class="p">:</span> <span class="s">'534111139'</span><span class="p">,</span> <span class="c1"># 疑似固定参数
 </span>        <span class="s">'t'</span><span class="p">:</span> <span class="n">t</span><span class="p">,</span>
@@ -379,7 +379,7 @@
         <span class="s">'summary'</span><span class="p">:</span> <span class="n">summary</span><span class="p">,</span>
         <span class="s">'content'</span><span class="p">:</span> <span class="n">content</span><span class="p">,</span>
     <span class="p">}</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">params</span><span class="p">).</span><span class="n">json</span><span class="p">()</span>
     <span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
     <span class="k">if</span> <span class="s">"msg"</span> <span class="ow">in</span> <span class="n">data</span> <span class="ow">and</span> <span class="s">"success"</span> <span class="o">==</span> <span class="n">data</span><span class="p">[</span><span class="s">"msg"</span><span class="p">]:</span>
         <span class="k">return</span> <span class="bp">True</span>

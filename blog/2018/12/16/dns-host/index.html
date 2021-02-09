@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#小技巧" title="Category: 小技巧" rel="category">小技巧</a>
+        <a href="/blog/category/#小技巧" title="Category: 小技巧" rel="category">小技巧</a>
     
   
 
@@ -310,17 +310,17 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#DNS" title="Tag: DNS" rel="tag">DNS</a-->
-        <a href="/tag/#DNS" title="Tag: DNS" rel="tag">DNS</a>&nbsp;
+        <!--a href="/blog/tag/#DNS" title="Tag: DNS" rel="tag">DNS</a-->
+        <a href="/blog/tag/#DNS" title="Tag: DNS" rel="tag">DNS</a>&nbsp;
     
-        <!--a href="/tag/#DNS%E6%B1%A1%E6%9F%93" title="Tag: DNS污染" rel="tag">DNS污染</a-->
-        <a href="/tag/#DNS污染" title="Tag: DNS污染" rel="tag">DNS污染</a>&nbsp;
+        <!--a href="/blog/tag/#DNS%E6%B1%A1%E6%9F%93" title="Tag: DNS污染" rel="tag">DNS污染</a-->
+        <a href="/blog/tag/#DNS污染" title="Tag: DNS污染" rel="tag">DNS污染</a>&nbsp;
     
-        <!--a href="/tag/#DNS%E5%8A%AB%E6%8C%81" title="Tag: DNS劫持" rel="tag">DNS劫持</a-->
-        <a href="/tag/#DNS劫持" title="Tag: DNS劫持" rel="tag">DNS劫持</a>&nbsp;
+        <!--a href="/blog/tag/#DNS%E5%8A%AB%E6%8C%81" title="Tag: DNS劫持" rel="tag">DNS劫持</a-->
+        <a href="/blog/tag/#DNS劫持" title="Tag: DNS劫持" rel="tag">DNS劫持</a>&nbsp;
     
-        <!--a href="/tag/#hosts" title="Tag: hosts" rel="tag">hosts</a-->
-        <a href="/tag/#hosts" title="Tag: hosts" rel="tag">hosts</a>
+        <!--a href="/blog/tag/#hosts" title="Tag: hosts" rel="tag">hosts</a-->
+        <a href="/blog/tag/#hosts" title="Tag: hosts" rel="tag">hosts</a>
     
   
 
@@ -340,7 +340,7 @@
   </li>
 </ul>
 <blockquote>
-  <p>最近在学DNS方面的东西，一直在思考这个问题。假定某域名<code class="highlighter-rouge">xxx.com</code>被DNS污染了，应该怎么办呢？</p>
+  <p>最近在学DNS方面的东西，一直在思考这个问题。假定某域名<code class="language-plaintext highlighter-rouge">xxx.com</code>被DNS污染了，应该怎么办呢？</p>
 </blockquote>
 
 <h2 id="思考">思考</h2>
@@ -351,12 +351,12 @@
 
 <h3 id="如何获得域名的对应ip地址">如何获得域名的对应ip地址</h3>
 <p>这个很简单，因为DNS域名污染不可能不计成本的各个地域都污，那么一种可行的方法就是从各个地域都来进行查询。<br />
-举个例子，如果<code class="highlighter-rouge">xxx.com</code>被污，那么一种简单的办法就是借助某些站长工具<a href="http://tool.chinaz.com/dns/">DNS查询</a>(最好还能够ping通<a href="http://ping.chinaz.com">ping</a>)。得到真实ip。</p>
+举个例子，如果<code class="language-plaintext highlighter-rouge">xxx.com</code>被污，那么一种简单的办法就是借助某些站长工具<a href="http://tool.chinaz.com/dns/">DNS查询</a>(最好还能够ping通<a href="http://ping.chinaz.com">ping</a>)。得到真实ip。</p>
 
 <h3 id="关于hosts的二三事">关于hosts的二三事</h3>
 <p>本地域名和IP的对应，其实就是hosts文件的设置问题。<br />
 这个问题在PC端很好解决，无非就是找到路径，编辑文件内容，保存。<br />
-移动端可能要麻烦点，毕竟需要root权限，这是个很敏感的操作。一种另类的思路是通过本地VPN来解决，比如<code class="highlighter-rouge">Hosts Go</code>等等。<br />
+移动端可能要麻烦点，毕竟需要root权限，这是个很敏感的操作。一种另类的思路是通过本地VPN来解决，比如<code class="language-plaintext highlighter-rouge">Hosts Go</code>等等。<br />
 最后还有一种骚操作，就是自建一个自用的DNS服务器了，就搭在局域网里，把该有的域名数据先存好，不假外求（其它的照旧处理）。数据都没出去也就没污染的事情了。</p>
 
 

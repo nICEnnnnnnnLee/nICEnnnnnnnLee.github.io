@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,11 +310,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
     
-        <!--a href="/tag/#Annotation" title="Tag: Annotation" rel="tag">Annotation</a-->
-        <a href="/tag/#Annotation" title="Tag: Annotation" rel="tag">Annotation</a>
+        <!--a href="/blog/tag/#Annotation" title="Tag: Annotation" rel="tag">Annotation</a-->
+        <a href="/blog/tag/#Annotation" title="Tag: Annotation" rel="tag">Annotation</a>
     
   
 
@@ -342,16 +342,16 @@
 <p>我们想要仿照Junit做一件这样的事情： 这样测试一个类，只要该类的方法声明了名为“Yts”的注解，那么我们就调用它，方法传入的参数在注解的声明里面。</p>
 <h2 id="自定义一个注解">自定义一个注解</h2>
 <p>在最开始，我们需要自定义一个注解Yts</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">nicelee</span><span class="o">.</span><span class="na">annotation</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">nicelee.annotation</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">static</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">annotation</span><span class="o">.</span><span class="na">ElementType</span><span class="o">.</span><span class="na">METHOD</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.lang.annotation.Retention</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.lang.annotation.RetentionPolicy</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.lang.annotation.Target</span><span class="o">;</span>
 
-<span class="nd">@Retention</span><span class="o">(</span><span class="n">RetentionPolicy</span><span class="o">.</span><span class="na">RUNTIME</span><span class="o">)</span> <span class="c1">//重要,不然没法在运行时读出来</span>
-<span class="nd">@Target</span><span class="o">(</span><span class="n">METHOD</span><span class="o">)</span>
-<span class="kd">public</span> <span class="nd">@interface</span> <span class="n">Yts</span> <span class="o">{</span>
-	<span class="n">String</span> <span class="nf">uri</span><span class="o">();</span>
+<span class="nd">@Retention</span><span class="o">(</span><span class="nc">RetentionPolicy</span><span class="o">.</span><span class="na">RUNTIME</span><span class="o">)</span> <span class="c1">//重要,不然没法在运行时读出来</span>
+<span class="nd">@Target</span><span class="o">(</span><span class="no">METHOD</span><span class="o">)</span>
+<span class="kd">public</span> <span class="nd">@interface</span> <span class="nc">Yts</span> <span class="o">{</span>
+	<span class="nc">String</span> <span class="nf">uri</span><span class="o">();</span>
 <span class="o">}</span>
 
 </code></pre></div></div>
@@ -390,23 +390,23 @@ RetentionPolicy.RUNTIME VM将在运行期也保留注释，因此可以通过反
 
 <h2 id="自定义一个需要测试的类">自定义一个需要测试的类</h2>
 <p>这一款没啥讲究，按照想要做的来就行了</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">nicelee</span><span class="o">.</span><span class="na">test</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">nicelee.test</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">nicelee.annotation.Yts</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">nicelee.utils.Log</span><span class="o">;</span>
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ClassIncludeAnno</span> <span class="kd">extends</span> <span class="n">Log</span><span class="o">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ClassIncludeAnno</span> <span class="kd">extends</span> <span class="nc">Log</span><span class="o">{</span>
 	<span class="nd">@Yts</span><span class="o">(</span><span class="n">uri</span> <span class="o">=</span> <span class="s">"注解Yts的uri属性1 - sayHello"</span><span class="o">)</span>  
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">sayHello</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">){</span>  
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">sayHello</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">){</span>  
         <span class="n">printf</span><span class="o">(</span><span class="s">"调用SayHello方法,传参值为:%s\n"</span><span class="o">,</span><span class="n">name</span><span class="o">);</span>
     <span class="o">}</span>
     
     <span class="nd">@Yts</span><span class="o">(</span><span class="n">uri</span> <span class="o">=</span> <span class="s">"注解Yts的uri属性2 - sayBye"</span><span class="o">)</span>  
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">sayBye</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">){</span>  
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">sayBye</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">){</span>  
         <span class="n">printf</span><span class="o">(</span><span class="s">"调用sayBye方法,传参值为:%s\n"</span><span class="o">,</span><span class="n">name</span><span class="o">);</span>
     <span class="o">}</span> 
     
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">sayHaha</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">){</span>  
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">sayHaha</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">){</span>  
         <span class="n">printf</span><span class="o">(</span><span class="s">"调用sayHaha方法,传参值为:%s\n"</span><span class="o">,</span><span class="n">name</span><span class="o">);</span>
     <span class="o">}</span>  
 <span class="o">}</span>
@@ -415,23 +415,23 @@ RetentionPolicy.RUNTIME VM将在运行期也保留注释，因此可以通过反
 <h2 id="测试">测试</h2>
 <p>接下来没啥好说的，直接上代码：</p>
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//调用某类中的全部注解为Yts的方法</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-	<span class="n">ClassIncludeAnno</span> <span class="n">test</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClassIncludeAnno</span><span class="o">();</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+	<span class="nc">ClassIncludeAnno</span> <span class="n">test</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ClassIncludeAnno</span><span class="o">();</span>
 	<span class="k">try</span> <span class="o">{</span>
 		<span class="n">println</span><span class="o">(</span><span class="s">"--------------------"</span><span class="o">);</span>
 		<span class="c1">// 获取所有方法</span>
-		<span class="n">Method</span><span class="o">[]</span> <span class="n">methods</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="na">getClass</span><span class="o">().</span><span class="na">getDeclaredMethods</span><span class="o">();</span>
-		<span class="k">for</span><span class="o">(</span><span class="n">Method</span> <span class="n">meth</span> <span class="o">:</span> <span class="n">methods</span><span class="o">){</span>
+		<span class="nc">Method</span><span class="o">[]</span> <span class="n">methods</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="na">getClass</span><span class="o">().</span><span class="na">getDeclaredMethods</span><span class="o">();</span>
+		<span class="k">for</span><span class="o">(</span><span class="nc">Method</span> <span class="n">meth</span> <span class="o">:</span> <span class="n">methods</span><span class="o">){</span>
 			<span class="n">printf</span><span class="o">(</span><span class="s">"当前方法名为: %s \n"</span><span class="o">,</span><span class="n">meth</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
 			<span class="c1">//该方法有无注解Yts</span>
-			<span class="n">Yts</span> <span class="n">annoYts</span> <span class="o">=</span> <span class="n">meth</span><span class="o">.</span><span class="na">getAnnotation</span><span class="o">(</span><span class="n">Yts</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+			<span class="nc">Yts</span> <span class="n">annoYts</span> <span class="o">=</span> <span class="n">meth</span><span class="o">.</span><span class="na">getAnnotation</span><span class="o">(</span><span class="nc">Yts</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
 			<span class="c1">//println(annoYts);</span>
 			<span class="k">if</span><span class="o">(</span> <span class="kc">null</span> <span class="o">!=</span> <span class="n">annoYts</span><span class="o">){</span>
 				<span class="c1">//通过反射调用该方法</span>
 				<span class="n">meth</span><span class="o">.</span><span class="na">invoke</span><span class="o">(</span><span class="n">test</span><span class="o">,</span> <span class="n">annoYts</span><span class="o">.</span><span class="na">uri</span><span class="o">());</span>
 			<span class="o">}</span>
 		<span class="o">}</span>
-	<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+	<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 		<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
 	<span class="o">}</span>
 <span class="o">}</span>

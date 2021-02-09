@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,17 +310,17 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
     
-        <!--a href="/tag/#html" title="Tag: html" rel="tag">html</a-->
-        <a href="/tag/#html" title="Tag: html" rel="tag">html</a>&nbsp;
+        <!--a href="/blog/tag/#html" title="Tag: html" rel="tag">html</a-->
+        <a href="/blog/tag/#html" title="Tag: html" rel="tag">html</a>&nbsp;
     
-        <!--a href="/tag/#%E7%88%AC%E8%99%AB" title="Tag: 爬虫" rel="tag">爬虫</a-->
-        <a href="/tag/#爬虫" title="Tag: 爬虫" rel="tag">爬虫</a>&nbsp;
+        <!--a href="/blog/tag/#%E7%88%AC%E8%99%AB" title="Tag: 爬虫" rel="tag">爬虫</a-->
+        <a href="/blog/tag/#爬虫" title="Tag: 爬虫" rel="tag">爬虫</a>&nbsp;
     
-        <!--a href="/tag/#bilibili" title="Tag: bilibili" rel="tag">bilibili</a-->
-        <a href="/tag/#bilibili" title="Tag: bilibili" rel="tag">bilibili</a>
+        <!--a href="/blog/tag/#bilibili" title="Tag: bilibili" rel="tag">bilibili</a-->
+        <a href="/blog/tag/#bilibili" title="Tag: bilibili" rel="tag">bilibili</a>
     
   
 
@@ -351,7 +351,7 @@
 这个比较简单，改下HTTP请求的头部，本地稍稍改下代码逻辑即可。</p>
   </li>
   <li>
-    <p>增加对<code class="highlighter-rouge">HTML5</code>播放源的下载支持<br />
+    <p>增加对<code class="language-plaintext highlighter-rouge">HTML5</code>播放源的下载支持<br />
 这个可能会有麻烦，下载这方面不是问题；粗略看了一下，这个源分成了视频、音频两个部分，而且浏览器播放的时候是分成一段一段下载的，目前试着下了一整段，直接用播放器是打不开的。<br />
 这个问题在于要不要模仿浏览器一段一段下载的行为，以及下下来后怎么处理。</p>
   </li>
@@ -364,12 +364,12 @@
 那么问题就简单了。</p>
 
 <p>原来的下载流程大概是这样子(有些步骤先后顺序可以替换)： <br />
-根据avId生成对应文件名 + <code class="highlighter-rouge">.part</code>后缀(若存在便删除，重新下载) <br />
+根据avId生成对应文件名 + <code class="language-plaintext highlighter-rouge">.part</code>后缀(若存在便删除，重新下载) <br />
 –&gt;  根据avId构造HTTP请求头部<br />
 –&gt;  开始下载(从零开始)<br />
 –&gt;  下载完毕后去掉后缀</p>
 
-<p>根据avId生成对应文件名 + <code class="highlighter-rouge">.part</code>后缀(若存在，获取文件<strong>size</strong>) <br />
+<p>根据avId生成对应文件名 + <code class="language-plaintext highlighter-rouge">.part</code>后缀(若存在，获取文件<strong>size</strong>) <br />
 –&gt;  根据avId构造HTTP请求头部(range: bytes=<strong>size</strong>-)<br />
 –&gt;  开始下载(先跳过f.seek(size))<br />
 –&gt;  下载完毕后去掉后缀</p>
@@ -377,7 +377,7 @@
 <h2 id="实现">实现</h2>
 <ul>
   <li>获取下载进度，并修改HTTP请求头部
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>long offset = 0;
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>long offset = 0;
 if (fileDownloadPart.exists()) {
   offset = fileDownloadPart.length();
   headers.put("range", "bytes=" + offset + "-");
@@ -385,14 +385,14 @@ if (fileDownloadPart.exists()) {
 </code></pre></div>    </div>
   </li>
   <li>获取文件随机访问对象，跳过已下载部分
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RandomAccessFile raf = new RandomAccessFile(fileDownloadPart, "rw");
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RandomAccessFile raf = new RandomAccessFile(fileDownloadPart, "rw");
 raf.seek(offset);
 </code></pre></div>    </div>
   </li>
 </ul>
 
 <h2 id="备注">备注</h2>
-<p>也许有的朋友对HTTP协议不太熟悉，这里简单讲一下，如果服务器支持的话，客户端可以通过<strong>HTTP</strong>请求的头部<code class="highlighter-rouge">Range</code>标签来访问文件的部分内容，而不是整个文件。<br />
+<p>也许有的朋友对HTTP协议不太熟悉，这里简单讲一下，如果服务器支持的话，客户端可以通过<strong>HTTP</strong>请求的头部<code class="language-plaintext highlighter-rouge">Range</code>标签来访问文件的部分内容，而不是整个文件。<br />
 这样，就给断点续传和多线程下载提供了可能。</p>
 
 <h2 id="源代码">源代码</h2>

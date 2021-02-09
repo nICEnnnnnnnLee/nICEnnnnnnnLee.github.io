@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,14 +310,14 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8" title="Tag: 云服务器" rel="tag">云服务器</a-->
-        <a href="/tag/#云服务器" title="Tag: 云服务器" rel="tag">云服务器</a>&nbsp;
+        <!--a href="/blog/tag/#%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8" title="Tag: 云服务器" rel="tag">云服务器</a-->
+        <a href="/blog/tag/#云服务器" title="Tag: 云服务器" rel="tag">云服务器</a>&nbsp;
     
-        <!--a href="/tag/#%E5%BB%BA%E7%AB%99" title="Tag: 建站" rel="tag">建站</a-->
-        <a href="/tag/#建站" title="Tag: 建站" rel="tag">建站</a>&nbsp;
+        <!--a href="/blog/tag/#%E5%BB%BA%E7%AB%99" title="Tag: 建站" rel="tag">建站</a-->
+        <a href="/blog/tag/#建站" title="Tag: 建站" rel="tag">建站</a>&nbsp;
     
-        <!--a href="/tag/#FTP" title="Tag: FTP" rel="tag">FTP</a-->
-        <a href="/tag/#FTP" title="Tag: FTP" rel="tag">FTP</a>
+        <!--a href="/blog/tag/#FTP" title="Tag: FTP" rel="tag">FTP</a-->
+        <a href="/blog/tag/#FTP" title="Tag: FTP" rel="tag">FTP</a>
     
   
 
@@ -344,11 +344,11 @@
 <ul>
   <li>远程连接 并登录到 Linux 实例。</li>
   <li>运行以下命令安装 vsftpd。
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum install -y vsftpd
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum install -y vsftpd
 </code></pre></div>    </div>
   </li>
   <li>运行以下命令打开及查看 etc/vsftpd。
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /etc/vsftpd
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /etc/vsftpd
 ls
 </code></pre></div>    </div>
   </li>
@@ -360,15 +360,15 @@ ls
 /etc/vsftpd/user_list 是白名单文件，是允许访问 FTP 服务器的用户列表。</p>
 <ul>
   <li>运行以下命令设置开机自启动。
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl enable vsftpd.service
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl enable vsftpd.service
 </code></pre></div>    </div>
   </li>
   <li>运行以下命令启动 FTP 服务。
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl start vsftpd.service
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl start vsftpd.service
 </code></pre></div>    </div>
   </li>
   <li>运行以下命令查看 FTP 服务端口。
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>netstat -antup | grep ftp
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>netstat -antup | grep ftp
 </code></pre></div>    </div>
   </li>
 </ul>
@@ -381,20 +381,20 @@ vsftpd 安装后默只支持匿名 FTP 登录，用户如果试图使用 Linux �
 
 <ul>
   <li>运行以下命令创建 ftptest 用户。
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>useradd ftptest
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>useradd ftptest
 </code></pre></div>    </div>
   </li>
   <li>运行以下命令修改 ftptest 用户密码。
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>passwd ftptest
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>passwd ftptest
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>修改 <code class="highlighter-rouge">/etc/vsftpd/vsftpd.conf</code>：<br />
-将是否允许匿名登录 FTP 的参数修改为 <code class="highlighter-rouge">anonymous enable=NO</code>。
-将是否允许本地用户登录 FTP 的参数修改为 <code class="highlighter-rouge">local_enable=YES</code>。</p>
+    <p>修改 <code class="language-plaintext highlighter-rouge">/etc/vsftpd/vsftpd.conf</code>：<br />
+将是否允许匿名登录 FTP 的参数修改为 <code class="language-plaintext highlighter-rouge">anonymous enable=NO</code>。
+将是否允许本地用户登录 FTP 的参数修改为 <code class="language-plaintext highlighter-rouge">local_enable=YES</code>。</p>
   </li>
   <li>运行以下命令重新加载配置文件。
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl restart vsftpd.service
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl restart vsftpd.service
 </code></pre></div>    </div>
   </li>
 </ul>

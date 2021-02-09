@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,17 +310,17 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
     
-        <!--a href="/tag/#HttpProxy" title="Tag: HttpProxy" rel="tag">HttpProxy</a-->
-        <a href="/tag/#HttpProxy" title="Tag: HttpProxy" rel="tag">HttpProxy</a>&nbsp;
+        <!--a href="/blog/tag/#HttpProxy" title="Tag: HttpProxy" rel="tag">HttpProxy</a-->
+        <a href="/blog/tag/#HttpProxy" title="Tag: HttpProxy" rel="tag">HttpProxy</a>&nbsp;
     
-        <!--a href="/tag/#HtmlUnit" title="Tag: HtmlUnit" rel="tag">HtmlUnit</a-->
-        <a href="/tag/#HtmlUnit" title="Tag: HtmlUnit" rel="tag">HtmlUnit</a>&nbsp;
+        <!--a href="/blog/tag/#HtmlUnit" title="Tag: HtmlUnit" rel="tag">HtmlUnit</a-->
+        <a href="/blog/tag/#HtmlUnit" title="Tag: HtmlUnit" rel="tag">HtmlUnit</a>&nbsp;
     
-        <!--a href="/tag/#%E7%88%AC%E8%99%AB" title="Tag: 爬虫" rel="tag">爬虫</a-->
-        <a href="/tag/#爬虫" title="Tag: 爬虫" rel="tag">爬虫</a>
+        <!--a href="/blog/tag/#%E7%88%AC%E8%99%AB" title="Tag: 爬虫" rel="tag">爬虫</a-->
+        <a href="/blog/tag/#爬虫" title="Tag: 爬虫" rel="tag">爬虫</a>
     
   
 
@@ -345,18 +345,18 @@
   <li>Java支持以System.setProperty的方式设置http代理及端口，如下：</li>
 </ul>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">System</span><span class="o">.</span><span class="na">setProperty</span><span class="o">(</span><span class="s">"http.proxyHost"</span><span class="o">,</span> <span class="n">proxyHost</span><span class="o">);</span>
-<span class="n">System</span><span class="o">.</span><span class="na">setProperty</span><span class="o">(</span><span class="s">"http.proxyPort"</span><span class="o">,</span> <span class="n">proxyPort</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">System</span><span class="o">.</span><span class="na">setProperty</span><span class="o">(</span><span class="s">"http.proxyHost"</span><span class="o">,</span> <span class="n">proxyHost</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">setProperty</span><span class="o">(</span><span class="s">"http.proxyPort"</span><span class="o">,</span> <span class="n">proxyPort</span><span class="o">);</span>
   
 <span class="c1">// 针对https也开启代理</span>
-<span class="n">System</span><span class="o">.</span><span class="na">setProperty</span><span class="o">(</span><span class="s">"https.proxyHost"</span><span class="o">,</span> <span class="n">proxyHost</span><span class="o">);</span>
-<span class="n">System</span><span class="o">.</span><span class="na">setProperty</span><span class="o">(</span><span class="s">"https.proxyPort"</span><span class="o">,</span> <span class="n">proxyPort</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">setProperty</span><span class="o">(</span><span class="s">"https.proxyHost"</span><span class="o">,</span> <span class="n">proxyHost</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">setProperty</span><span class="o">(</span><span class="s">"https.proxyPort"</span><span class="o">,</span> <span class="n">proxyPort</span><span class="o">);</span>
 </code></pre></div></div>
 <p>代理的关闭：</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">System</span><span class="o">.</span><span class="na">clearProperty</span><span class="o">(</span><span class="s">"http.proxyPort"</span><span class="o">);</span>
-<span class="n">System</span><span class="o">.</span><span class="na">clearProperty</span><span class="o">(</span><span class="s">"http.proxyHost"</span><span class="o">);</span>
-<span class="n">System</span><span class="o">.</span><span class="na">clearProperty</span><span class="o">(</span><span class="s">"https.proxyPort"</span><span class="o">);</span>
-<span class="n">System</span><span class="o">.</span><span class="na">clearProperty</span><span class="o">(</span><span class="s">"https.proxyHost"</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">System</span><span class="o">.</span><span class="na">clearProperty</span><span class="o">(</span><span class="s">"http.proxyPort"</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">clearProperty</span><span class="o">(</span><span class="s">"http.proxyHost"</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">clearProperty</span><span class="o">(</span><span class="s">"https.proxyPort"</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">clearProperty</span><span class="o">(</span><span class="s">"https.proxyHost"</span><span class="o">);</span>
 </code></pre></div></div>
 <p>更多设置可以参考：<a href="https://docs.oracle.com/javase/8/docs/technotes/guides/net/properties.html">https://docs.oracle.com/javase/8/docs/technotes/guides/net/properties.html</a></p>
 
@@ -365,17 +365,17 @@
 </ul>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 初始化proxy对象</span>
-<span class="n">Proxy</span> <span class="n">proxy</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Proxy</span><span class="o">(</span><span class="n">Proxy</span><span class="o">.</span><span class="na">Type</span><span class="o">.</span><span class="na">HTTP</span><span class="o">,</span> <span class="k">new</span> <span class="n">InetSocketAddress</span><span class="o">(</span><span class="n">proxyHost</span><span class="o">,</span> <span class="n">proxyPort</span><span class="o">));</span>
+<span class="nc">Proxy</span> <span class="n">proxy</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Proxy</span><span class="o">(</span><span class="nc">Proxy</span><span class="o">.</span><span class="na">Type</span><span class="o">.</span><span class="na">HTTP</span><span class="o">,</span> <span class="k">new</span> <span class="nc">InetSocketAddress</span><span class="o">(</span><span class="n">proxyHost</span><span class="o">,</span> <span class="n">proxyPort</span><span class="o">));</span>
   
 <span class="c1">// 创建连接</span>
-<span class="n">URL</span> <span class="n">u</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">url</span><span class="o">);</span>
-<span class="n">URLConnection</span> <span class="n">conn</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="na">openConnection</span><span class="o">(</span><span class="n">proxy</span><span class="o">);</span>
+<span class="no">URL</span> <span class="n">u</span> <span class="o">=</span> <span class="k">new</span> <span class="no">URL</span><span class="o">(</span><span class="n">url</span><span class="o">);</span>
+<span class="nc">URLConnection</span> <span class="n">conn</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="na">openConnection</span><span class="o">(</span><span class="n">proxy</span><span class="o">);</span>
 </code></pre></div></div>
 
 <h2 id="htmlunit-设置代理">HtmlUnit 设置代理</h2>
 <p>有的时候需要支持js，这时，一种可行的解决方案是使用HtmlUnit：</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">WebClient</span> <span class="n">webClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">WebClient</span><span class="o">(</span><span class="n">BrowserVersion</span><span class="o">.</span><span class="na">CHROME</span><span class="o">);</span>
-<span class="n">ProxyConfig</span> <span class="n">proxyConfig</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ProxyConfig</span><span class="o">(</span><span class="n">proxyHost</span><span class="o">,</span> <span class="n">proxyPort</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">WebClient</span> <span class="n">webClient</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">WebClient</span><span class="o">(</span><span class="nc">BrowserVersion</span><span class="o">.</span><span class="na">CHROME</span><span class="o">);</span>
+<span class="nc">ProxyConfig</span> <span class="n">proxyConfig</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ProxyConfig</span><span class="o">(</span><span class="n">proxyHost</span><span class="o">,</span> <span class="n">proxyPort</span><span class="o">);</span>
 <span class="n">webClient</span><span class="o">.</span><span class="na">getOptions</span><span class="o">().</span><span class="na">setProxyConfig</span><span class="o">(</span><span class="n">proxyConfig</span><span class="o">);</span>
 </code></pre></div></div>
 

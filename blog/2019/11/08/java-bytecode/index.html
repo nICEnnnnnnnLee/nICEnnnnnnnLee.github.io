@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,8 +310,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>
     
   
 
@@ -331,7 +331,7 @@
 <p>假设有某类<strong>ClassA</strong>的方法<strong>sayHello</strong>，在不改动源代码的基础上，想要在每次调用该方法前后各打印一句话，表示开始/结束。</p>
 
 <p>一般情况下，一种容易想到的方法是建立一个代理类<strong>ClassAProxy</strong>，再适当改改<strong>sayHello</strong>方法，以后咱就别用<strong>ClassA</strong>，都用这个代理类得了。</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class ClassAProxy extends ClassA{
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class ClassAProxy extends ClassA{
     @override
     public void sayHello() {
         System.out.println("before sayHello ...");
@@ -361,7 +361,7 @@
 
 <p>这大概就是Java字节码操作的现状了吧~~~</p>
 
-<p>另外，记几个关键词：<code class="highlighter-rouge">BCEL</code>、<code class="highlighter-rouge">ASM</code>、<code class="highlighter-rouge">CGLIB</code>、<code class="highlighter-rouge">Javassist</code></p>
+<p>另外，记几个关键词：<code class="language-plaintext highlighter-rouge">BCEL</code>、<code class="language-plaintext highlighter-rouge">ASM</code>、<code class="language-plaintext highlighter-rouge">CGLIB</code>、<code class="language-plaintext highlighter-rouge">Javassist</code></p>
 
 
         </article>

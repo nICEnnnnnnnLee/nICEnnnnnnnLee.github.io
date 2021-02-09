@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,17 +310,17 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
     
-        <!--a href="/tag/#html" title="Tag: html" rel="tag">html</a-->
-        <a href="/tag/#html" title="Tag: html" rel="tag">html</a>&nbsp;
+        <!--a href="/blog/tag/#html" title="Tag: html" rel="tag">html</a-->
+        <a href="/blog/tag/#html" title="Tag: html" rel="tag">html</a>&nbsp;
     
-        <!--a href="/tag/#%E7%88%AC%E8%99%AB" title="Tag: 爬虫" rel="tag">爬虫</a-->
-        <a href="/tag/#爬虫" title="Tag: 爬虫" rel="tag">爬虫</a>&nbsp;
+        <!--a href="/blog/tag/#%E7%88%AC%E8%99%AB" title="Tag: 爬虫" rel="tag">爬虫</a-->
+        <a href="/blog/tag/#爬虫" title="Tag: 爬虫" rel="tag">爬虫</a>&nbsp;
     
-        <!--a href="/tag/#bilibili" title="Tag: bilibili" rel="tag">bilibili</a-->
-        <a href="/tag/#bilibili" title="Tag: bilibili" rel="tag">bilibili</a>
+        <!--a href="/blog/tag/#bilibili" title="Tag: bilibili" rel="tag">bilibili</a-->
+        <a href="/blog/tag/#bilibili" title="Tag: bilibili" rel="tag">bilibili</a>
     
   
 
@@ -364,14 +364,14 @@
 <ul>
   <li>默认get方式没毛病;</li>
   <li>
-    <p>url 已经get到了，如下，<code class="highlighter-rouge">https://api.bilibili.com/x/player/playurl</code><br />
+    <p>url 已经get到了，如下，<code class="language-plaintext highlighter-rouge">https://api.bilibili.com/x/player/playurl</code><br />
 <img src="https://s2.ax1x.com/2019/01/24/kZtacj.png" alt="sources/archive/2019/01/24-request-url.png" /></p>
   </li>
   <li>request参数,如图，这个最好要多试几个av观察一下: <br />
 <img src="https://s2.ax1x.com/2019/01/24/kZt0un.png" alt="sources/archive/2019/01/24-request-param.png" /></li>
 </ul>
 
-<p>最后发现关键参数还是<code class="highlighter-rouge">qn/avid/cid</code>，其它可以不变。</p>
+<p>最后发现关键参数还是<code class="language-plaintext highlighter-rouge">qn/avid/cid</code>，其它可以不变。</p>
 <ul>
   <li>qn - 视频质量，容易获得</li>
   <li>avid - 这个就不说了</li>
@@ -384,14 +384,14 @@
 到这里其实已经差不多解决了：</p>
 <ol>
   <li>模拟访问av播放页面，获取作品信息以及想要的cid；</li>
-  <li>构造参数请求<code class="highlighter-rouge">https://api.bilibili.com/x/player/playurl</code>，返回下载链接</li>
+  <li>构造参数请求<code class="language-plaintext highlighter-rouge">https://api.bilibili.com/x/player/playurl</code>，返回下载链接</li>
   <li>构造参数，下载视频</li>
 </ol>
 
 <p>这样可以解决，但对于强迫症来说不够圆满，想把查询视频信息的接口也整出来（如果不费事的话），于是就有了方案二。</p>
 
 <h3 id="方案二">方案二</h3>
-<p>好了，现在明确方向了，就是想找返回<code class="highlighter-rouge">json</code>类型的请求（xhr先不管，瞅一下找不到就不折腾了，毕竟已经有方案了），看看bilibili有木有这方面的接口。</p>
+<p>好了，现在明确方向了，就是想找返回<code class="language-plaintext highlighter-rouge">json</code>类型的请求（xhr先不管，瞅一下找不到就不折腾了，毕竟已经有方案了），看看bilibili有木有这方面的接口。</p>
 
 <p>也好。。。</p>
 
@@ -406,8 +406,8 @@
 
 <p>类似前面：</p>
 <ol>
-  <li>模拟访问<code class="highlighter-rouge">https://api.bilibili.com/x/web-interface/view?aid=52454</code>，获取作品信息（包括cid）</li>
-  <li>构造参数请求<code class="highlighter-rouge">https://api.bilibili.com/x/player/playurl?otype=json&amp;fnver=0&amp;fnval=2&amp;player=1&amp;qn=16&amp;avid=52454&amp;cid=90108</code>，返回下载链接</li>
+  <li>模拟访问<code class="language-plaintext highlighter-rouge">https://api.bilibili.com/x/web-interface/view?aid=52454</code>，获取作品信息（包括cid）</li>
+  <li>构造参数请求<code class="language-plaintext highlighter-rouge">https://api.bilibili.com/x/player/playurl?otype=json&amp;fnver=0&amp;fnval=2&amp;player=1&amp;qn=16&amp;avid=52454&amp;cid=90108</code>，返回下载链接</li>
   <li>构造参数，下载视频</li>
 </ol>
 
@@ -419,22 +419,22 @@
  * @param isGetLink
  * @return
  */</span>
-<span class="kd">public</span> <span class="n">VideoInfo</span> <span class="nf">getVideoDetail</span><span class="o">(</span><span class="n">String</span> <span class="n">avId</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">isGetLink</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">VideoInfo</span> <span class="n">viInfo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">VideoInfo</span><span class="o">();</span>
+<span class="kd">public</span> <span class="nc">VideoInfo</span> <span class="nf">getVideoDetail</span><span class="o">(</span><span class="nc">String</span> <span class="n">avId</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">isGetLink</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">VideoInfo</span> <span class="n">viInfo</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">VideoInfo</span><span class="o">();</span>
     <span class="n">viInfo</span><span class="o">.</span><span class="na">setVideoId</span><span class="o">(</span><span class="n">avId</span><span class="o">);</span>
 
-    <span class="n">String</span> <span class="n">avIdNum</span> <span class="o">=</span> <span class="n">avId</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s">"av"</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
-    <span class="n">String</span> <span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.bilibili.com/x/web-interface/view?aid="</span> <span class="o">+</span> <span class="n">avIdNum</span><span class="o">;</span>
-    <span class="n">HttpHeaders</span> <span class="n">headers</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HttpHeaders</span><span class="o">();</span>
-    <span class="n">String</span> <span class="n">json</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="na">getContent</span><span class="o">(</span><span class="n">url</span><span class="o">,</span> <span class="n">headers</span><span class="o">.</span><span class="na">getBiliJsonAPIHeaders</span><span class="o">(</span><span class="n">avId</span><span class="o">),</span>
-            <span class="n">HttpCookies</span><span class="o">.</span><span class="na">getGlobalCookies</span><span class="o">());</span>
+    <span class="nc">String</span> <span class="n">avIdNum</span> <span class="o">=</span> <span class="n">avId</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s">"av"</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
+    <span class="nc">String</span> <span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.bilibili.com/x/web-interface/view?aid="</span> <span class="o">+</span> <span class="n">avIdNum</span><span class="o">;</span>
+    <span class="nc">HttpHeaders</span> <span class="n">headers</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HttpHeaders</span><span class="o">();</span>
+    <span class="nc">String</span> <span class="n">json</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="na">getContent</span><span class="o">(</span><span class="n">url</span><span class="o">,</span> <span class="n">headers</span><span class="o">.</span><span class="na">getBiliJsonAPIHeaders</span><span class="o">(</span><span class="n">avId</span><span class="o">),</span>
+            <span class="nc">HttpCookies</span><span class="o">.</span><span class="na">getGlobalCookies</span><span class="o">());</span>
 
-    <span class="n">JSONObject</span> <span class="n">jObj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">(</span><span class="n">json</span><span class="o">).</span><span class="na">getJSONObject</span><span class="o">(</span><span class="s">"data"</span><span class="o">);</span>
-    <span class="n">String</span> <span class="n">videoName</span> <span class="o">=</span> <span class="n">jObj</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"title"</span><span class="o">);</span>
-    <span class="n">String</span> <span class="n">brief</span> <span class="o">=</span> <span class="n">jObj</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"desc"</span><span class="o">);</span>
-    <span class="n">String</span> <span class="n">author</span> <span class="o">=</span> <span class="n">jObj</span><span class="o">.</span><span class="na">getJSONObject</span><span class="o">(</span><span class="s">"owner"</span><span class="o">).</span><span class="na">getString</span><span class="o">(</span><span class="s">"name"</span><span class="o">);</span>
-    <span class="n">String</span> <span class="n">authorId</span> <span class="o">=</span> <span class="n">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">jObj</span><span class="o">.</span><span class="na">getJSONObject</span><span class="o">(</span><span class="s">"owner"</span><span class="o">).</span><span class="na">getLong</span><span class="o">(</span><span class="s">"mid"</span><span class="o">));</span>
-    <span class="n">String</span> <span class="n">videoPreview</span> <span class="o">=</span> <span class="n">jObj</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"pic"</span><span class="o">);</span>
+    <span class="nc">JSONObject</span> <span class="n">jObj</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JSONObject</span><span class="o">(</span><span class="n">json</span><span class="o">).</span><span class="na">getJSONObject</span><span class="o">(</span><span class="s">"data"</span><span class="o">);</span>
+    <span class="nc">String</span> <span class="n">videoName</span> <span class="o">=</span> <span class="n">jObj</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"title"</span><span class="o">);</span>
+    <span class="nc">String</span> <span class="n">brief</span> <span class="o">=</span> <span class="n">jObj</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"desc"</span><span class="o">);</span>
+    <span class="nc">String</span> <span class="n">author</span> <span class="o">=</span> <span class="n">jObj</span><span class="o">.</span><span class="na">getJSONObject</span><span class="o">(</span><span class="s">"owner"</span><span class="o">).</span><span class="na">getString</span><span class="o">(</span><span class="s">"name"</span><span class="o">);</span>
+    <span class="nc">String</span> <span class="n">authorId</span> <span class="o">=</span> <span class="nc">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">jObj</span><span class="o">.</span><span class="na">getJSONObject</span><span class="o">(</span><span class="s">"owner"</span><span class="o">).</span><span class="na">getLong</span><span class="o">(</span><span class="s">"mid"</span><span class="o">));</span>
+    <span class="nc">String</span> <span class="n">videoPreview</span> <span class="o">=</span> <span class="n">jObj</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"pic"</span><span class="o">);</span>
     <span class="n">viInfo</span><span class="o">.</span><span class="na">setVideoName</span><span class="o">(</span><span class="n">videoName</span><span class="o">);</span>
     <span class="n">viInfo</span><span class="o">.</span><span class="na">setBrief</span><span class="o">(</span><span class="n">brief</span><span class="o">);</span>
     <span class="n">viInfo</span><span class="o">.</span><span class="na">setAuthor</span><span class="o">(</span><span class="n">author</span><span class="o">);</span>
@@ -442,21 +442,21 @@
     <span class="n">viInfo</span><span class="o">.</span><span class="na">setVideoPreview</span><span class="o">(</span><span class="n">videoPreview</span><span class="o">);</span>
 
     <span class="c1">//</span>
-    <span class="n">JSONArray</span> <span class="n">array</span> <span class="o">=</span> <span class="n">jObj</span><span class="o">.</span><span class="na">getJSONArray</span><span class="o">(</span><span class="s">"pages"</span><span class="o">);</span>
-    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">ClipInfo</span><span class="o">&gt;</span> <span class="n">clipMap</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">ClipInfo</span><span class="o">&gt;();</span>
+    <span class="nc">JSONArray</span> <span class="n">array</span> <span class="o">=</span> <span class="n">jObj</span><span class="o">.</span><span class="na">getJSONArray</span><span class="o">(</span><span class="s">"pages"</span><span class="o">);</span>
+    <span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">,</span> <span class="nc">ClipInfo</span><span class="o">&gt;</span> <span class="n">clipMap</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">,</span> <span class="nc">ClipInfo</span><span class="o">&gt;();</span>
     <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">array</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="n">JSONObject</span> <span class="n">clipObj</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="na">getJSONObject</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
-        <span class="n">ClipInfo</span> <span class="n">clip</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClipInfo</span><span class="o">();</span>
+        <span class="nc">JSONObject</span> <span class="n">clipObj</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="na">getJSONObject</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+        <span class="nc">ClipInfo</span> <span class="n">clip</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ClipInfo</span><span class="o">();</span>
         <span class="n">clip</span><span class="o">.</span><span class="na">setAvId</span><span class="o">(</span><span class="n">avId</span><span class="o">);</span>
         <span class="n">clip</span><span class="o">.</span><span class="na">setcId</span><span class="o">(</span><span class="n">clipObj</span><span class="o">.</span><span class="na">getLong</span><span class="o">(</span><span class="s">"cid"</span><span class="o">));</span>
         <span class="n">clip</span><span class="o">.</span><span class="na">setPage</span><span class="o">(</span><span class="n">clipObj</span><span class="o">.</span><span class="na">getInt</span><span class="o">(</span><span class="s">"page"</span><span class="o">));</span>
         <span class="n">clip</span><span class="o">.</span><span class="na">setTitle</span><span class="o">(</span><span class="n">clipObj</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"part"</span><span class="o">));</span>
 
-        <span class="kt">int</span> <span class="n">qnList</span><span class="o">[]</span> <span class="o">=</span> <span class="n">getVideoQNList</span><span class="o">(</span><span class="n">avId</span><span class="o">,</span> <span class="n">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">clip</span><span class="o">.</span><span class="na">getcId</span><span class="o">()));</span>
-        <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">links</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;();</span>
+        <span class="kt">int</span> <span class="n">qnList</span><span class="o">[]</span> <span class="o">=</span> <span class="n">getVideoQNList</span><span class="o">(</span><span class="n">avId</span><span class="o">,</span> <span class="nc">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">clip</span><span class="o">.</span><span class="na">getcId</span><span class="o">()));</span>
+        <span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="n">links</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;();</span>
         <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">qn</span> <span class="o">:</span> <span class="n">qnList</span><span class="o">)</span> <span class="o">{</span>
             <span class="k">if</span><span class="o">(</span><span class="n">isGetLink</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">String</span> <span class="n">link</span> <span class="o">=</span> <span class="n">getVideoFLVLink</span><span class="o">(</span><span class="n">avId</span><span class="o">,</span> <span class="n">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">clip</span><span class="o">.</span><span class="na">getcId</span><span class="o">()),</span> <span class="n">qn</span><span class="o">);</span>
+                <span class="nc">String</span> <span class="n">link</span> <span class="o">=</span> <span class="n">getVideoFLVLink</span><span class="o">(</span><span class="n">avId</span><span class="o">,</span> <span class="nc">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">clip</span><span class="o">.</span><span class="na">getcId</span><span class="o">()),</span> <span class="n">qn</span><span class="o">);</span>
                 <span class="n">links</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">qn</span><span class="o">,</span> <span class="n">link</span><span class="o">);</span>
             <span class="o">}</span><span class="k">else</span> <span class="o">{</span>
                 <span class="n">links</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">qn</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
@@ -478,17 +478,17 @@
  * @param qn   112: hdflv2;80: flv; 64: flv720; 32: flv480; 16: flv360
  * @return
  */</span>
-<span class="kd">public</span> <span class="n">String</span> <span class="nf">getVideoFLVLink</span><span class="o">(</span><span class="n">String</span> <span class="n">avId</span><span class="o">,</span> <span class="n">String</span> <span class="n">cid</span><span class="o">,</span> <span class="kt">int</span> <span class="n">qn</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">String</span> <span class="n">avIdNum</span> <span class="o">=</span> <span class="n">avId</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s">"av"</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
-    <span class="n">String</span> <span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.bilibili.com/x/player/playurl?fnval=2&amp;fnver=0&amp;player=1&amp;otype=json&amp;avid=%s&amp;cid=%s&amp;qn=%s"</span><span class="o">;</span>
-    <span class="n">url</span> <span class="o">=</span> <span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="n">url</span><span class="o">,</span> <span class="n">avIdNum</span><span class="o">,</span> <span class="n">cid</span><span class="o">,</span> <span class="n">qn</span><span class="o">);</span>
+<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getVideoFLVLink</span><span class="o">(</span><span class="nc">String</span> <span class="n">avId</span><span class="o">,</span> <span class="nc">String</span> <span class="n">cid</span><span class="o">,</span> <span class="kt">int</span> <span class="n">qn</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">String</span> <span class="n">avIdNum</span> <span class="o">=</span> <span class="n">avId</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s">"av"</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
+    <span class="nc">String</span> <span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.bilibili.com/x/player/playurl?fnval=2&amp;fnver=0&amp;player=1&amp;otype=json&amp;avid=%s&amp;cid=%s&amp;qn=%s"</span><span class="o">;</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="n">url</span><span class="o">,</span> <span class="n">avIdNum</span><span class="o">,</span> <span class="n">cid</span><span class="o">,</span> <span class="n">qn</span><span class="o">);</span>
     <span class="c1">// System.out.println(url);</span>
-    <span class="n">HttpHeaders</span> <span class="n">headers</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HttpHeaders</span><span class="o">();</span>
-    <span class="n">String</span> <span class="n">json</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="na">getContent</span><span class="o">(</span><span class="n">url</span><span class="o">,</span> <span class="n">headers</span><span class="o">.</span><span class="na">getBiliJsonAPIHeaders</span><span class="o">(</span><span class="n">avId</span><span class="o">),</span>
-            <span class="n">HttpCookies</span><span class="o">.</span><span class="na">getGlobalCookies</span><span class="o">());</span>
-    <span class="n">JSONObject</span> <span class="n">jObj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">(</span><span class="n">json</span><span class="o">).</span><span class="na">getJSONObject</span><span class="o">(</span><span class="s">"data"</span><span class="o">);</span>
+    <span class="nc">HttpHeaders</span> <span class="n">headers</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HttpHeaders</span><span class="o">();</span>
+    <span class="nc">String</span> <span class="n">json</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="na">getContent</span><span class="o">(</span><span class="n">url</span><span class="o">,</span> <span class="n">headers</span><span class="o">.</span><span class="na">getBiliJsonAPIHeaders</span><span class="o">(</span><span class="n">avId</span><span class="o">),</span>
+            <span class="nc">HttpCookies</span><span class="o">.</span><span class="na">getGlobalCookies</span><span class="o">());</span>
+    <span class="nc">JSONObject</span> <span class="n">jObj</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JSONObject</span><span class="o">(</span><span class="n">json</span><span class="o">).</span><span class="na">getJSONObject</span><span class="o">(</span><span class="s">"data"</span><span class="o">);</span>
     <span class="kt">int</span> <span class="n">linkQN</span> <span class="o">=</span> <span class="n">jObj</span><span class="o">.</span><span class="na">getInt</span><span class="o">(</span><span class="s">"quality"</span><span class="o">);</span>
-    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"查询质量为:"</span> <span class="o">+</span> <span class="n">qn</span> <span class="o">+</span> <span class="s">"的链接, 得到质量为:"</span> <span class="o">+</span> <span class="n">linkQN</span> <span class="o">+</span> <span class="s">"的链接"</span><span class="o">);</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"查询质量为:"</span> <span class="o">+</span> <span class="n">qn</span> <span class="o">+</span> <span class="s">"的链接, 得到质量为:"</span> <span class="o">+</span> <span class="n">linkQN</span> <span class="o">+</span> <span class="s">"的链接"</span><span class="o">);</span>
     <span class="k">return</span> <span class="n">jObj</span><span class="o">.</span><span class="na">getJSONArray</span><span class="o">(</span><span class="s">"durl"</span><span class="o">).</span><span class="na">getJSONObject</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="na">getString</span><span class="o">(</span><span class="s">"url"</span><span class="o">);</span>
 <span class="o">}</span>
 </code></pre></div></div>

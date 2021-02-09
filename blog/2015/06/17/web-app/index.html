@@ -292,7 +292,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -309,17 +309,17 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a-->
-        <a href="/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a>&nbsp;
+        <!--a href="/blog/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a-->
+        <a href="/blog/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a>&nbsp;
     
-        <!--a href="/tag/#HTML" title="Tag: HTML" rel="tag">HTML</a-->
-        <a href="/tag/#HTML" title="Tag: HTML" rel="tag">HTML</a>&nbsp;
+        <!--a href="/blog/tag/#HTML" title="Tag: HTML" rel="tag">HTML</a-->
+        <a href="/blog/tag/#HTML" title="Tag: HTML" rel="tag">HTML</a>&nbsp;
     
-        <!--a href="/tag/#CSS" title="Tag: CSS" rel="tag">CSS</a-->
-        <a href="/tag/#CSS" title="Tag: CSS" rel="tag">CSS</a>&nbsp;
+        <!--a href="/blog/tag/#CSS" title="Tag: CSS" rel="tag">CSS</a-->
+        <a href="/blog/tag/#CSS" title="Tag: CSS" rel="tag">CSS</a>&nbsp;
     
-        <!--a href="/tag/#WebApp" title="Tag: WebApp" rel="tag">WebApp</a-->
-        <a href="/tag/#WebApp" title="Tag: WebApp" rel="tag">WebApp</a>
+        <!--a href="/blog/tag/#WebApp" title="Tag: WebApp" rel="tag">WebApp</a-->
+        <a href="/blog/tag/#WebApp" title="Tag: WebApp" rel="tag">WebApp</a>
     
   
 
@@ -368,7 +368,7 @@
     </ul>
   </li>
   <li><a href="#其他" id="markdown-toc-其他">其他</a>    <ul>
-      <li><a href="#-webkit-tap-highlight-color-属性" id="markdown-toc--webkit-tap-highlight-color-属性"><code class="highlighter-rouge">-webkit-tap-highlight-color</code> 属性</a></li>
+      <li><a href="#-webkit-tap-highlight-color-属性" id="markdown-toc--webkit-tap-highlight-color-属性"><code class="language-plaintext highlighter-rouge">-webkit-tap-highlight-color</code> 属性</a></li>
       <li><a href="#textarea-标签-disabled-颜色" id="markdown-toc-textarea-标签-disabled-颜色">textarea 标签 disabled 颜色</a></li>
     </ul>
   </li>
@@ -479,7 +479,7 @@
   <li>
     <p>为移动设备添加 viewport</p>
 
-    <p><code class="highlighter-rouge">viewport</code> 可以让布局在移动浏览器上显示的更好。 通常会写</p>
+    <p><code class="language-plaintext highlighter-rouge">viewport</code> 可以让布局在移动浏览器上显示的更好。 通常会写</p>
   </li>
 </ul>
 
@@ -635,9 +635,9 @@
 
 <p>首先要有 ruby 环境。</p>
 
-<p>由于国内网络原因（你懂的），导致 rubygems.org 存放在 Amazon S3 上面的资源文件间歇性连接失败。这时候我们可以通过gem sources命令来配置源，先移除默认的 https://rubygems.org 源，然后添加淘宝的源 https://ruby.taobao.org/，然后查看下当前使用的源是哪个，如果是淘宝的，则表示可以输入 sass 安装命令 <code class="highlighter-rouge">gem install sass</code> 了。</p>
+<p>由于国内网络原因（你懂的），导致 rubygems.org 存放在 Amazon S3 上面的资源文件间歇性连接失败。这时候我们可以通过gem sources命令来配置源，先移除默认的 https://rubygems.org 源，然后添加淘宝的源 https://ruby.taobao.org/，然后查看下当前使用的源是哪个，如果是淘宝的，则表示可以输入 sass 安装命令 <code class="language-plaintext highlighter-rouge">gem install sass</code> 了。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ gem sources --remove https://rubygems.org/
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ gem sources --remove https://rubygems.org/
 $ gem sources -a https://ruby.taobao.org/
 $ gem sources -l
 *** CURRENT SOURCES ***
@@ -649,14 +649,14 @@ $ gem install sass
 
 <h3 id="编译">编译</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sass --watch style.scss:style.css --style expanded
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sass --watch style.scss:style.css --style expanded
 </code></pre></div></div>
 
 <hr />
 
 <h3 id="补充">补充</h3>
 
-<p><strong><code class="highlighter-rouge">rem</code></strong></p>
+<p><strong><code class="language-plaintext highlighter-rouge">rem</code></strong></p>
 
 <p>字体单位使用 rem，用户在手机上设置了字体大小时，不会打破布局，造成混乱。</p>
 
@@ -759,12 +759,12 @@ $ gem install sass
  * @return {String}     转码后的字符串
  */</span>
 <span class="kd">function</span> <span class="nx">changeCode</span><span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">str</span> <span class="o">=</span> <span class="nx">str</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/&amp;/g</span><span class="p">,</span> <span class="s2">"&amp;amp;"</span><span class="p">)</span>
-              <span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/&lt;/g</span><span class="p">,</span> <span class="s2">"&amp;lt;"</span><span class="p">)</span>
-              <span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/&gt;/g</span><span class="p">,</span> <span class="s2">"&amp;gt;"</span><span class="p">)</span>
-              <span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/"/g</span><span class="p">,</span> <span class="s2">"&amp;quot;"</span><span class="p">)</span>
-              <span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/'/g</span><span class="p">,</span> <span class="s2">"&amp;#x27;"</span><span class="p">)</span>
-              <span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/</span><span class="se">\/</span><span class="sr">/g</span><span class="p">,</span> <span class="s2">"&amp;#x2f;"</span><span class="p">);</span>
+    <span class="nx">str</span> <span class="o">=</span> <span class="nx">str</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/&amp;/g</span><span class="p">,</span> <span class="dl">"</span><span class="s2">&amp;amp;</span><span class="dl">"</span><span class="p">)</span>
+              <span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/&lt;/g</span><span class="p">,</span> <span class="dl">"</span><span class="s2">&amp;lt;</span><span class="dl">"</span><span class="p">)</span>
+              <span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/&gt;/g</span><span class="p">,</span> <span class="dl">"</span><span class="s2">&amp;gt;</span><span class="dl">"</span><span class="p">)</span>
+              <span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/"/g</span><span class="p">,</span> <span class="dl">"</span><span class="s2">&amp;quot;</span><span class="dl">"</span><span class="p">)</span>
+              <span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/'/g</span><span class="p">,</span> <span class="dl">"</span><span class="s2">&amp;#x27;</span><span class="dl">"</span><span class="p">)</span>
+              <span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/</span><span class="se">\/</span><span class="sr">/g</span><span class="p">,</span> <span class="dl">"</span><span class="s2">&amp;#x2f;</span><span class="dl">"</span><span class="p">);</span>
     <span class="k">return</span> <span class="nx">str</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></div>
@@ -888,9 +888,9 @@ $ gem install sass
 
 <p>一个模块就是实现特定功能的文件，有了模块，我们就可以更方便地使用别人的代码，想要什么功能，就加载什么模块。模块开发需要遵循一定的规范，否则就都乱套了。</p>
 
-<p>根据AMD规范，我们可以使用 <code class="highlighter-rouge">define</code> 定义模块，使用 <code class="highlighter-rouge">require</code> 调用模块。</p>
+<p>根据AMD规范，我们可以使用 <code class="language-plaintext highlighter-rouge">define</code> 定义模块，使用 <code class="language-plaintext highlighter-rouge">require</code> 调用模块。</p>
 
-<p>目前，通行的 js 模块规范主要有两种：<code class="highlighter-rouge">CommonJS</code> 和 <code class="highlighter-rouge">AMD</code>。</p>
+<p>目前，通行的 js 模块规范主要有两种：<code class="language-plaintext highlighter-rouge">CommonJS</code> 和 <code class="language-plaintext highlighter-rouge">AMD</code>。</p>
 
 <h3 id="amd规范">AMD规范</h3>
 
@@ -1035,7 +1035,7 @@ CMD:延迟执行（运行到需加载，根据顺序执行）</p>
 
     <p>以 JSON 模拟数据表的形式存储于 LocalStorage 中</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   使用数据库的思想，构建3张表。
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   使用数据库的思想，构建3张表。
    cateJson 分类
    childCateJson 子分类
    taskJson 任务
@@ -1057,7 +1057,7 @@ CMD:延迟执行（运行到需加载，根据顺序执行）</p>
 </code></pre></div>    </div>
   </li>
   <li>
-    <p><strong>使用 <code class="highlighter-rouge">Sass</code> 重构了 CSS 代码</strong></p>
+    <p><strong>使用 <code class="language-plaintext highlighter-rouge">Sass</code> 重构了 CSS 代码</strong></p>
 
     <p>使用分块、继承等方式，使得代码更加清晰明了。</p>
   </li>
@@ -1069,7 +1069,7 @@ CMD:延迟执行（运行到需加载，根据顺序执行）</p>
   <li>
     <p><strong>加入页面切换效果</strong></p>
 
-    <p>使用 <code class="highlighter-rouge">translate3d()</code>，纯 CSS3 切换动画效果。</p>
+    <p>使用 <code class="language-plaintext highlighter-rouge">translate3d()</code>，纯 CSS3 切换动画效果。</p>
   </li>
   <li>
     <p><strong>处理了 XSS 防护</strong></p>
@@ -1097,17 +1097,17 @@ CMD:延迟执行（运行到需加载，根据顺序执行）</p>
 
 <h2 id="其他">其他</h2>
 
-<h3 id="-webkit-tap-highlight-color-属性"><code class="highlighter-rouge">-webkit-tap-highlight-color</code> 属性</h3>
+<h3 id="-webkit-tap-highlight-color-属性"><code class="language-plaintext highlighter-rouge">-webkit-tap-highlight-color</code> 属性</h3>
 
 <p>感谢 <a href="https://github.com/fiona23">fiona</a> 指出。</p>
 
-<p>safari移动端点击的时候会闪一下加上 <code class="highlighter-rouge">-webkit-tap-highlight-color: transparent;</code> 就不会闪了。</p>
+<p>safari移动端点击的时候会闪一下加上 <code class="language-plaintext highlighter-rouge">-webkit-tap-highlight-color: transparent;</code> 就不会闪了。</p>
 
 <p>参考：</p>
 
 <ul>
-  <li><a href="http://www.css88.com/webkit/-webkit-tap-highlight-color/"><code class="highlighter-rouge">-webkit-tap-highlight-color</code>  css88</a></li>
-  <li><a href="http://ued.ctrip.com/webkitcss/prop/tap-highlight-color.html"><code class="highlighter-rouge">-webkit-tap-highlight-color</code> 属性</a></li>
+  <li><a href="http://www.css88.com/webkit/-webkit-tap-highlight-color/"><code class="language-plaintext highlighter-rouge">-webkit-tap-highlight-color</code>  css88</a></li>
+  <li><a href="http://ued.ctrip.com/webkitcss/prop/tap-highlight-color.html"><code class="language-plaintext highlighter-rouge">-webkit-tap-highlight-color</code> 属性</a></li>
 </ul>
 
 <hr />
@@ -1127,7 +1127,7 @@ CMD:延迟执行（运行到需加载，根据顺序执行）</p>
   </li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>background: #fff;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>background: #fff;
 -webkit-text-fill-color: rgba(0, 0, 0, 1);
 -webkit-opacity: 1;
 </code></pre></div></div>

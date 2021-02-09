@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,8 +310,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>
     
   
 
@@ -327,7 +327,7 @@
   <li><a href="#实现" id="markdown-toc-实现">实现</a></li>
   <li><a href="#源码" id="markdown-toc-源码">源码</a></li>
 </ul>
-<p><code class="highlighter-rouge">王境则·真香.gif</code>、<code class="highlighter-rouge">谁赞成谁反对.gif</code>、<code class="highlighter-rouge">为所欲为.gif</code>…<br />
+<p><code class="language-plaintext highlighter-rouge">王境则·真香.gif</code>、<code class="language-plaintext highlighter-rouge">谁赞成谁反对.gif</code>、<code class="language-plaintext highlighter-rouge">为所欲为.gif</code>…<br />
  网络上有很多搞笑的gif图片，里面的对白还是可以自定义的。 <br />
  想搞这个想了很久了，最近终于把它实现了。</p>
 
@@ -351,17 +351,17 @@
 <h2 id="实现">实现</h2>
 <ul>
   <li>这里先讲如何从GIF里面读取每一帧的图像  <br />
-下面的实现是将<code class="highlighter-rouge">sample.gif</code>中每一帧都保存下来
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">File</span> <span class="n">gif</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"sample.gif"</span><span class="o">);</span>
-<span class="n">ImageReader</span> <span class="n">reader</span> <span class="o">=</span> <span class="o">(</span><span class="n">ImageReader</span><span class="o">)</span> <span class="n">ImageIO</span><span class="o">.</span><span class="na">getImageReadersByFormatName</span><span class="o">(</span><span class="s">"gif"</span><span class="o">).</span><span class="na">next</span><span class="o">();</span>
-<span class="n">ImageInputStream</span> <span class="n">ciis</span> <span class="o">=</span> <span class="n">ImageIO</span><span class="o">.</span><span class="na">createImageInputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="n">gif</span><span class="o">));</span>
+下面的实现是将<code class="language-plaintext highlighter-rouge">sample.gif</code>中每一帧都保存下来
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">File</span> <span class="n">gif</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="s">"sample.gif"</span><span class="o">);</span>
+<span class="nc">ImageReader</span> <span class="n">reader</span> <span class="o">=</span> <span class="o">(</span><span class="nc">ImageReader</span><span class="o">)</span> <span class="nc">ImageIO</span><span class="o">.</span><span class="na">getImageReadersByFormatName</span><span class="o">(</span><span class="s">"gif"</span><span class="o">).</span><span class="na">next</span><span class="o">();</span>
+<span class="nc">ImageInputStream</span> <span class="n">ciis</span> <span class="o">=</span> <span class="nc">ImageIO</span><span class="o">.</span><span class="na">createImageInputStream</span><span class="o">(</span><span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="n">gif</span><span class="o">));</span>
 <span class="n">reader</span><span class="o">.</span><span class="na">setInput</span><span class="o">(</span><span class="n">ciis</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
 <span class="k">try</span> <span class="o">{</span>
   <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-      <span class="n">BufferedImage</span> <span class="n">image</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
-      <span class="n">ImageIO</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">image</span><span class="o">,</span> <span class="s">"jpg"</span><span class="o">,</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"%03d.jpg"</span><span class="o">,</span> <span class="n">i</span><span class="o">)));</span>
+      <span class="nc">BufferedImage</span> <span class="n">image</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+      <span class="nc">ImageIO</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">image</span><span class="o">,</span> <span class="s">"jpg"</span><span class="o">,</span> <span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"%03d.jpg"</span><span class="o">,</span> <span class="n">i</span><span class="o">)));</span>
   <span class="o">}</span>
-<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IndexOutOfBoundsException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IndexOutOfBoundsException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 <span class="o">}</span>
 <span class="n">ciis</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 </code></pre></div>    </div>

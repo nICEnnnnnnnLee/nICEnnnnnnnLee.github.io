@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#小技巧" title="Category: 小技巧" rel="category">小技巧</a>
+        <a href="/blog/category/#小技巧" title="Category: 小技巧" rel="category">小技巧</a>
     
   
 
@@ -310,8 +310,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Android" title="Tag: Android" rel="tag">Android</a-->
-        <a href="/tag/#Android" title="Tag: Android" rel="tag">Android</a>
+        <!--a href="/blog/tag/#Android" title="Tag: Android" rel="tag">Android</a-->
+        <a href="/blog/tag/#Android" title="Tag: Android" rel="tag">Android</a>
     
   
 
@@ -333,18 +333,18 @@
 <h2 id="原理">原理</h2>
 <ul>
   <li>
-    <p>实际上, Android端所有app都会在某个安装目录下留存一个<code class="highlighter-rouge">base.apk</code>, 重要的是找到这个对应的目录.</p>
+    <p>实际上, Android端所有app都会在某个安装目录下留存一个<code class="language-plaintext highlighter-rouge">base.apk</code>, 重要的是找到这个对应的目录.</p>
   </li>
   <li>
     <p>可能用到的adb shell命令:</p>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pm list packages                            #####查看当前连接设备或者虚拟机的所有包
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pm list packages                            #####查看当前连接设备或者虚拟机的所有包
 pm list packages -f                         #####输出包和包相关联的.apk文件
 pm path 包名                                #####输出包对应.apk所在路径
 pm list packages -[option] keyword          #####按照要求搜索包
 pm list packages -[option] | grep keyword   #####按照要求搜索包
 </code></pre></div>    </div>
-    <p>虽然<code class="highlighter-rouge">pm list</code>似乎仍然有效, 但根据NOTE, 可能未来会被移除, 失效时尝试用<code class="highlighter-rouge">cmd package</code>代替</p>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NOTE: 'pm list' commands have moved! Run 'adb shell cmd package'
+    <p>虽然<code class="language-plaintext highlighter-rouge">pm list</code>似乎仍然有效, 但根据NOTE, 可能未来会被移除, 失效时尝试用<code class="language-plaintext highlighter-rouge">cmd package</code>代替</p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NOTE: 'pm list' commands have moved! Run 'adb shell cmd package'
 </code></pre></div>    </div>
   </li>
 </ul>
@@ -353,15 +353,15 @@ pm list packages -[option] | grep keyword   #####按照要求搜索包
 <p>以哔哩哔哩App为例:</p>
 <ol>
   <li>以<strong>bili</strong>为关键词, 找到哔哩哔哩对应的路径所在:
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>adb shell pm list packages -f bili
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>adb shell pm list packages -f bili
 </code></pre></div>    </div>
     <p>结果如下:</p>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>C:\Users\xxx&gt;adb shell pm list packages -f bili
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>C:\Users\xxx&gt;adb shell pm list packages -f bili
 package:/data/app/tv.danmaku.bili-n2DAdd4sya5UlwQudEFQew==/base.apk=tv.danmaku.bili
 </code></pre></div>    </div>
   </li>
   <li>将对应apk导出至PC端:
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>adb pull /data/app/tv.danmaku.bili-n2DAdd4sya5UlwQudEFQew==/base.apk .
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>adb pull /data/app/tv.danmaku.bili-n2DAdd4sya5UlwQudEFQew==/base.apk .
 </code></pre></div>    </div>
   </li>
 </ol>

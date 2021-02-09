@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,8 +310,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Python" title="Tag: Python" rel="tag">Python</a-->
-        <a href="/tag/#Python" title="Tag: Python" rel="tag">Python</a>
+        <!--a href="/blog/tag/#Python" title="Tag: Python" rel="tag">Python</a-->
+        <a href="/blog/tag/#Python" title="Tag: Python" rel="tag">Python</a>
     
   
 
@@ -331,7 +331,7 @@
   <li><a href="#正式分发" id="markdown-toc-正式分发">正式分发</a></li>
 </ul>
 <p>感觉还是Python用的人比较多，至少入门简单，使用也方便。<br />
-现在，我要发布一个Python应用，包名<code class="highlighter-rouge">you-live</code>，console命令<code class="highlighter-rouge">you-live</code>。<br />
+现在，我要发布一个Python应用，包名<code class="language-plaintext highlighter-rouge">you-live</code>，console命令<code class="language-plaintext highlighter-rouge">you-live</code>。<br />
 记录一下整个过程。</p>
 
 <h2 id="参考">参考</h2>
@@ -340,19 +340,19 @@
 <h2 id="关于相对引用">关于相对引用</h2>
 <p>因为某些问题，我把顶层的文件夹改了个名，于是引发了一些列的import错误。<br />
 此处应有相对引用，方便改动。具体就不说了，知道有这回事就行。</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from ..src.folder1 import file1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from ..src.folder1 import file1
 from .folder1 import file2
 </code></pre></div></div>
 <p>另外，想引用同目录所在的包，应该注意以下要素：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import .folder1 	×
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import .folder1 	×
 from . import folder1	 √
 </code></pre></div></div>
 
 <h2 id="setuppy">setup.py</h2>
 <p>要素过多，但一次填写后续项目基本大同小异。<br />
-对我而言，主要关心<code class="highlighter-rouge">packages</code>、<code class="highlighter-rouge">requires</code>、<code class="highlighter-rouge">entry_points</code></p>
+对我而言，主要关心<code class="language-plaintext highlighter-rouge">packages</code>、<code class="language-plaintext highlighter-rouge">requires</code>、<code class="language-plaintext highlighter-rouge">entry_points</code></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import setuptools
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import setuptools
 import os
 from live_recorder import version
 
@@ -416,11 +416,11 @@ setuptools.setup(
 <h2 id="文件生成">文件生成</h2>
 <ul>
   <li>确保前置环境OK
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 -m pip install --user --upgrade setuptools wheel
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 -m pip install --user --upgrade setuptools wheel
 </code></pre></div>    </div>
   </li>
   <li>生成分发文件
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 setup.py sdist bdist_wheel
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 setup.py sdist bdist_wheel
 </code></pre></div>    </div>
   </li>
 </ul>
@@ -429,19 +429,19 @@ setuptools.setup(
 <ul>
   <li>正式发布前的可选操作，确保拥有<a href="https://test.pypi.org/account/register/">Test PyPI</a>账号</li>
   <li>确保前置环境OK
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 -m pip install --user --upgrade twine
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 -m pip install --user --upgrade twine
 </code></pre></div>    </div>
   </li>
-  <li>将<code class="highlighter-rouge">dist</code>文件夹下的文件发布到TestPy
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 -m twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+  <li>将<code class="language-plaintext highlighter-rouge">dist</code>文件夹下的文件发布到TestPy
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 -m twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 </code></pre></div>    </div>
   </li>
   <li>从TestPy安装包you-live
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 -m pip install --upgrade --index-url https://test.pypi.org/simple/ you-live
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 -m pip install --upgrade --index-url https://test.pypi.org/simple/ you-live
 </code></pre></div>    </div>
   </li>
   <li>(可选)卸载you-live
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 -m pip uninstall you-live
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 -m pip uninstall you-live
 </code></pre></div>    </div>
   </li>
 </ul>
@@ -451,10 +451,10 @@ setuptools.setup(
   <li>确保拥有<a href="https://pypi.org">PyPI</a>账号</li>
   <li>(可选)将账号写入配置
     <ul>
-      <li>编辑<code class="highlighter-rouge">~/.pypirc</code></li>
+      <li>编辑<code class="language-plaintext highlighter-rouge">~/.pypirc</code></li>
     </ul>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  [distutils]
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  [distutils]
   index-servers = pypi
 
   [pypi]
@@ -463,15 +463,15 @@ setuptools.setup(
 </code></pre></div>    </div>
   </li>
   <li>确保前置环境OK
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 -m pip install --user --upgrade twine
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 -m pip install --user --upgrade twine
 </code></pre></div>    </div>
   </li>
-  <li>将<code class="highlighter-rouge">dist</code>文件夹下的文件发布到pypi
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 -m twine upload dist/*
+  <li>将<code class="language-plaintext highlighter-rouge">dist</code>文件夹下的文件发布到pypi
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 -m twine upload dist/*
 </code></pre></div>    </div>
   </li>
   <li>从pypi安装包you-live
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 -m pip install --upgrade you-live
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 -m pip install --upgrade you-live
 </code></pre></div>    </div>
   </li>
 </ul>

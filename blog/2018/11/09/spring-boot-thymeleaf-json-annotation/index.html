@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,17 +310,17 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#SpringBoot" title="Tag: SpringBoot" rel="tag">SpringBoot</a-->
-        <a href="/tag/#SpringBoot" title="Tag: SpringBoot" rel="tag">SpringBoot</a>&nbsp;
+        <!--a href="/blog/tag/#SpringBoot" title="Tag: SpringBoot" rel="tag">SpringBoot</a-->
+        <a href="/blog/tag/#SpringBoot" title="Tag: SpringBoot" rel="tag">SpringBoot</a>&nbsp;
     
-        <!--a href="/tag/#%E8%B8%A9%E5%9D%91" title="Tag: 踩坑" rel="tag">踩坑</a-->
-        <a href="/tag/#踩坑" title="Tag: 踩坑" rel="tag">踩坑</a>&nbsp;
+        <!--a href="/blog/tag/#%E8%B8%A9%E5%9D%91" title="Tag: 踩坑" rel="tag">踩坑</a-->
+        <a href="/blog/tag/#踩坑" title="Tag: 踩坑" rel="tag">踩坑</a>&nbsp;
     
-        <!--a href="/tag/#%E6%B3%A8%E8%A7%A3" title="Tag: 注解" rel="tag">注解</a-->
-        <a href="/tag/#注解" title="Tag: 注解" rel="tag">注解</a>&nbsp;
+        <!--a href="/blog/tag/#%E6%B3%A8%E8%A7%A3" title="Tag: 注解" rel="tag">注解</a-->
+        <a href="/blog/tag/#注解" title="Tag: 注解" rel="tag">注解</a>&nbsp;
     
-        <!--a href="/tag/#Annotation" title="Tag: Annotation" rel="tag">Annotation</a-->
-        <a href="/tag/#Annotation" title="Tag: Annotation" rel="tag">Annotation</a>
+        <!--a href="/blog/tag/#Annotation" title="Tag: Annotation" rel="tag">Annotation</a-->
+        <a href="/blog/tag/#Annotation" title="Tag: Annotation" rel="tag">Annotation</a>
     
   
 
@@ -332,17 +332,17 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#controller" id="markdown-toc-controller"><code class="highlighter-rouge">@Controller</code></a></li>
-  <li><a href="#restcontroller" id="markdown-toc-restcontroller"><code class="highlighter-rouge">@RestController</code></a></li>
+  <li><a href="#controller" id="markdown-toc-controller"><code class="language-plaintext highlighter-rouge">@Controller</code></a></li>
+  <li><a href="#restcontroller" id="markdown-toc-restcontroller"><code class="language-plaintext highlighter-rouge">@RestController</code></a></li>
 </ul>
 <blockquote>
   <p>本文记录SpringBoot学习中遇到的问题。 <br />
 网页访问还是内容请求接口的处理方式？注解告诉你。</p>
 </blockquote>
 
-<h2 id="controller"><code class="highlighter-rouge">@Controller</code></h2>
+<h2 id="controller"><code class="language-plaintext highlighter-rouge">@Controller</code></h2>
 <p>这个@Controller和@RequestMapping(“/xxx”)用来处理网页访问。举例：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@RequestMapping("/query")
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@RequestMapping("/query")
 String query( Model model, MusicQuery query) {
 	logger.info( query.toString() );
 	model.addAttribute("query", query);
@@ -354,9 +354,9 @@ String query( Model model, MusicQuery query) {
 </code></pre></div></div>
 <p>这里返回的是一个页面，这个页面即由query方法返回的String “result”对应的静态页面资源（可能是result.html,result.jsp等）</p>
 
-<h2 id="restcontroller"><code class="highlighter-rouge">@RestController</code></h2>
+<h2 id="restcontroller"><code class="language-plaintext highlighter-rouge">@RestController</code></h2>
 <p>这个@RestController@RequestMapping(“/xxx”)用来处理接口请求。举例：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@RequestMapping("/query")
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@RequestMapping("/query")
 String query( MusicQuery query) {
 	logger.info( query.toString() );
 	return "result";
@@ -364,7 +364,7 @@ String query( MusicQuery query) {
 </code></pre></div></div>
 <p>这里返回的是一个字符串，仅仅只是一个“result”的字符串</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@RequestMapping("/query")
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@RequestMapping("/query")
 MusicQuery query( MusicQuery query) {
 	logger.info( query.toString() );
 	return query;

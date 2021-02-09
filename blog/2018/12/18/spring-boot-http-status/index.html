@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,20 +310,20 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#SpringBoot" title="Tag: SpringBoot" rel="tag">SpringBoot</a-->
-        <a href="/tag/#SpringBoot" title="Tag: SpringBoot" rel="tag">SpringBoot</a>&nbsp;
+        <!--a href="/blog/tag/#SpringBoot" title="Tag: SpringBoot" rel="tag">SpringBoot</a-->
+        <a href="/blog/tag/#SpringBoot" title="Tag: SpringBoot" rel="tag">SpringBoot</a>&nbsp;
     
-        <!--a href="/tag/#%E8%B8%A9%E5%9D%91" title="Tag: 踩坑" rel="tag">踩坑</a-->
-        <a href="/tag/#踩坑" title="Tag: 踩坑" rel="tag">踩坑</a>&nbsp;
+        <!--a href="/blog/tag/#%E8%B8%A9%E5%9D%91" title="Tag: 踩坑" rel="tag">踩坑</a-->
+        <a href="/blog/tag/#踩坑" title="Tag: 踩坑" rel="tag">踩坑</a>&nbsp;
     
-        <!--a href="/tag/#http%E7%8A%B6%E6%80%81%E7%A0%81" title="Tag: http状态码" rel="tag">http状态码</a-->
-        <a href="/tag/#http状态码" title="Tag: http状态码" rel="tag">http状态码</a>&nbsp;
+        <!--a href="/blog/tag/#http%E7%8A%B6%E6%80%81%E7%A0%81" title="Tag: http状态码" rel="tag">http状态码</a-->
+        <a href="/blog/tag/#http状态码" title="Tag: http状态码" rel="tag">http状态码</a>&nbsp;
     
-        <!--a href="/tag/#Nginx" title="Tag: Nginx" rel="tag">Nginx</a-->
-        <a href="/tag/#Nginx" title="Tag: Nginx" rel="tag">Nginx</a>&nbsp;
+        <!--a href="/blog/tag/#Nginx" title="Tag: Nginx" rel="tag">Nginx</a-->
+        <a href="/blog/tag/#Nginx" title="Tag: Nginx" rel="tag">Nginx</a>&nbsp;
     
-        <!--a href="/tag/#%E7%BC%93%E5%AD%98" title="Tag: 缓存" rel="tag">缓存</a-->
-        <a href="/tag/#缓存" title="Tag: 缓存" rel="tag">缓存</a>
+        <!--a href="/blog/tag/#%E7%BC%93%E5%AD%98" title="Tag: 缓存" rel="tag">缓存</a-->
+        <a href="/blog/tag/#缓存" title="Tag: 缓存" rel="tag">缓存</a>
     
   
 
@@ -338,8 +338,8 @@
   <li><a href="#问题描述" id="markdown-toc-问题描述">问题描述</a></li>
   <li><a href="#解决思路" id="markdown-toc-解决思路">解决思路</a>    <ul>
       <li><a href="#1减少缓存过期时间" id="markdown-toc-1减少缓存过期时间">1、减少缓存过期时间</a></li>
-      <li><a href="#2更改下一页指向" id="markdown-toc-2更改下一页指向">2、更改<code class="highlighter-rouge">下一页</code>指向</a></li>
-      <li><a href="#3置灰下一页" id="markdown-toc-3置灰下一页">3、置灰<code class="highlighter-rouge">下一页</code></a></li>
+      <li><a href="#2更改下一页指向" id="markdown-toc-2更改下一页指向">2、更改<code class="language-plaintext highlighter-rouge">下一页</code>指向</a></li>
+      <li><a href="#3置灰下一页" id="markdown-toc-3置灰下一页">3、置灰<code class="language-plaintext highlighter-rouge">下一页</code></a></li>
       <li><a href="#4提供更新缓存接口" id="markdown-toc-4提供更新缓存接口">4、提供更新缓存接口</a></li>
       <li><a href="#5分情况返回http-状态码" id="markdown-toc-5分情况返回http-状态码">5、分情况返回Http 状态码</a></li>
     </ul>
@@ -358,56 +358,56 @@
 
 <h2 id="问题描述">问题描述</h2>
 <p>在Nginx端，我缓存了读取指定具体文章的链接，以减免对Tomcat服务器的访问请求，链接形式如下：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>location ~* /xxx/[0-9]+/[0-9]+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>location ~* /xxx/[0-9]+/[0-9]+
 </code></pre></div></div>
 <p>但是，缓存之后存在一个问题，最新的文章不能及时更新。<br />
-举个例子来说，假设文章一天一更，如果最新文章是<code class="highlighter-rouge">/xxx/001/099</code>，<br />
-而我在文章的下部会有一个导航：<code class="highlighter-rouge">上一页</code>、 <code class="highlighter-rouge">目录</code>、 <code class="highlighter-rouge">下一页</code>；<br />
+举个例子来说，假设文章一天一更，如果最新文章是<code class="language-plaintext highlighter-rouge">/xxx/001/099</code>，<br />
+而我在文章的下部会有一个导航：<code class="language-plaintext highlighter-rouge">上一页</code>、 <code class="language-plaintext highlighter-rouge">目录</code>、 <code class="language-plaintext highlighter-rouge">下一页</code>；<br />
 现在，<br />
-<code class="highlighter-rouge">上一页</code>指向<code class="highlighter-rouge">/xxx/001/098</code>，  <br />
-<code class="highlighter-rouge">下一页</code>指向<code class="highlighter-rouge">/xxx/001/100</code>，  <br />
-服务端在处理<code class="highlighter-rouge">/xxx/001/100</code>时，直接返回目录页（章节id的生成遵循一定原理，删除、插入文章等功能暂不考虑）</p>
+<code class="language-plaintext highlighter-rouge">上一页</code>指向<code class="language-plaintext highlighter-rouge">/xxx/001/098</code>，  <br />
+<code class="language-plaintext highlighter-rouge">下一页</code>指向<code class="language-plaintext highlighter-rouge">/xxx/001/100</code>，  <br />
+服务端在处理<code class="language-plaintext highlighter-rouge">/xxx/001/100</code>时，直接返回目录页（章节id的生成遵循一定原理，删除、插入文章等功能暂不考虑）</p>
 
-<p><strong>缓存后</strong>，游客在读取前一天的最新文章时，因为现在很多的浏览器都有预读取功能，哪怕不点<code class="highlighter-rouge">下一页</code>，实际也会访问使得Nginx缓存了“下一天的最新文章”，这使得文章内容实际上是个“旧的”目录页。<br />
-如果缓存时间设置较长，比如一周，那么在长达一周的时间内，游客访问的<code class="highlighter-rouge">/xxx/001/100</code>链接都是一个老的目录页。这是我们所不期望的。</p>
+<p><strong>缓存后</strong>，游客在读取前一天的最新文章时，因为现在很多的浏览器都有预读取功能，哪怕不点<code class="language-plaintext highlighter-rouge">下一页</code>，实际也会访问使得Nginx缓存了“下一天的最新文章”，这使得文章内容实际上是个“旧的”目录页。<br />
+如果缓存时间设置较长，比如一周，那么在长达一周的时间内，游客访问的<code class="language-plaintext highlighter-rouge">/xxx/001/100</code>链接都是一个老的目录页。这是我们所不期望的。</p>
 
 <h2 id="解决思路">解决思路</h2>
 <h3 id="1减少缓存过期时间">1、减少缓存过期时间</h3>
 <p>这是一种解决方案，但过期时间设置得过小，缓存也就没啥意义；有点大，对于有追更需求，希望第一时间获取最新文章的读者来说，也是不可忍受的。</p>
 
-<h3 id="2更改下一页指向">2、更改<code class="highlighter-rouge">下一页</code>指向</h3>
+<h3 id="2更改下一页指向">2、更改<code class="language-plaintext highlighter-rouge">下一页</code>指向</h3>
 
-<p><code class="highlighter-rouge">上一页</code>指向<code class="highlighter-rouge">/xxx/001/098</code>，<br />
-<code class="highlighter-rouge">下一页</code>指向<strong>目录页</strong><br />
-这个影响有所减小，但较长的一段时间内，最近几天的底部导航<code class="highlighter-rouge">下一页</code>将会失效，直接到目录页。从目录页获得的最新目录中可以访问最新章节。</p>
+<p><code class="language-plaintext highlighter-rouge">上一页</code>指向<code class="language-plaintext highlighter-rouge">/xxx/001/098</code>，<br />
+<code class="language-plaintext highlighter-rouge">下一页</code>指向<strong>目录页</strong><br />
+这个影响有所减小，但较长的一段时间内，最近几天的底部导航<code class="language-plaintext highlighter-rouge">下一页</code>将会失效，直接到目录页。从目录页获得的最新目录中可以访问最新章节。</p>
 
-<h3 id="3置灰下一页">3、置灰<code class="highlighter-rouge">下一页</code></h3>
+<h3 id="3置灰下一页">3、置灰<code class="language-plaintext highlighter-rouge">下一页</code></h3>
 
-<p><code class="highlighter-rouge">上一页</code>指向<code class="highlighter-rouge">/xxx/001/098</code>，<br />
-<code class="highlighter-rouge">下一页</code>无指向<br />
-和2 类似，较长的一段时间内，最近几天的底部导航将会<code class="highlighter-rouge">下一页</code>将会失效。</p>
+<p><code class="language-plaintext highlighter-rouge">上一页</code>指向<code class="language-plaintext highlighter-rouge">/xxx/001/098</code>，<br />
+<code class="language-plaintext highlighter-rouge">下一页</code>无指向<br />
+和2 类似，较长的一段时间内，最近几天的底部导航将会<code class="language-plaintext highlighter-rouge">下一页</code>将会失效。</p>
 
 <h3 id="4提供更新缓存接口">4、提供更新缓存接口</h3>
 <p>能较好解决缓存问题，接口最好包装一下，并加上其它逻辑。</p>
 
 <h3 id="5分情况返回http-状态码">5、分情况返回Http 状态码</h3>
-<p>Tomcat服务端在处理<code class="highlighter-rouge">/xxx/001/100</code>时， 
+<p>Tomcat服务端在处理<code class="language-plaintext highlighter-rouge">/xxx/001/100</code>时， 
 返回正常文章时，正常处理；<br />
 返回到目录页时，考虑将状态码作修饰，比如404 OK，而不是直接200 OK</p>
 
 <p>Nginx端location对404码做特殊配置，比如只缓存两分钟</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>proxy_cache_valid 404 120s;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>proxy_cache_valid 404 120s;
 </code></pre></div></div>
 <p>本文采取的是第五种方法，并对其做详细讨论。</p>
 
 <h2 id="实现方案">实现方案</h2>
 <p>SpringBoot 中修饰HTTP Status的方法具体有以下几种：</p>
 <h3 id="1responsestatus">1、@ResponseStatus</h3>
-<p><code class="highlighter-rouge">@ResponseStatus</code>是一个注解，可以作用在方法和类上面，如下使用(也可以配合Exception)，</p>
+<p><code class="language-plaintext highlighter-rouge">@ResponseStatus</code>是一个注解，可以作用在方法和类上面，如下使用(也可以配合Exception)，</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"/xxx/{bookId}/{chapterId}"</span><span class="o">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">)</span>
-<span class="nd">@ResponseStatus</span><span class="o">(</span><span class="n">code</span><span class="o">=</span><span class="n">HttpStatus</span><span class="o">.</span><span class="na">INTERNAL_SERVER_ERROR</span><span class="o">,</span><span class="n">reason</span><span class="o">=</span><span class="s">"server error"</span><span class="o">)</span>
-<span class="kd">public</span> <span class="n">String</span> <span class="nf">readChapter</span><span class="o">(</span><span class="nd">@PathVariable</span> <span class="kt">int</span> <span class="n">bookId</span><span class="o">,</span> <span class="nd">@PathVariable</span> <span class="kt">int</span> <span class="n">chpterId</span><span class="o">){</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"/xxx/{bookId}/{chapterId}"</span><span class="o">,</span> <span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">)</span>
+<span class="nd">@ResponseStatus</span><span class="o">(</span><span class="n">code</span><span class="o">=</span><span class="nc">HttpStatus</span><span class="o">.</span><span class="na">INTERNAL_SERVER_ERROR</span><span class="o">,</span><span class="n">reason</span><span class="o">=</span><span class="s">"server error"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="nc">String</span> <span class="nf">readChapter</span><span class="o">(</span><span class="nd">@PathVariable</span> <span class="kt">int</span> <span class="n">bookId</span><span class="o">,</span> <span class="nd">@PathVariable</span> <span class="kt">int</span> <span class="n">chpterId</span><span class="o">){</span>
     <span class="k">return</span> <span class="s">"chapter"</span><span class="o">;</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -417,7 +417,7 @@
 
 <h3 id="2responseentity">2、@ResponseEntity</h3>
 <p>该方法的一个样例如下，对于RestAPI来说没有问题，渲染Thymeleaf待尝试。</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@RequestMapping(value = "/user", method = RequestMethod.GET)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@RequestMapping(value = "/user", method = RequestMethod.GET)
 public ResponseEntity&lt;Map&lt;String,Object&gt;&gt; getUser() throws IOException{
     Map&lt;String,Object&gt; map = new HashMap&lt;String,Object&gt;();
     map.put("name", "zhangsan");
@@ -431,20 +431,20 @@ public ResponseEntity&lt;Map&lt;String,Object&gt;&gt; getUser() throws IOExcepti
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">SampleController</span> <span class="o">{</span>
     
     <span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">"/getUser"</span><span class="o">)</span>
-	<span class="kd">public</span> <span class="n">String</span> <span class="nf">test</span><span class="o">(</span><span class="n">HttpServletResponse</span> <span class="n">response</span><span class="o">){</span>
-		<span class="n">User</span> <span class="n">user</span> <span class="o">=</span> <span class="k">new</span> <span class="n">User</span><span class="o">();</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">test</span><span class="o">(</span><span class="nc">HttpServletResponse</span> <span class="n">response</span><span class="o">){</span>
+		<span class="nc">User</span> <span class="n">user</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">User</span><span class="o">();</span>
 		<span class="n">user</span><span class="o">.</span><span class="na">setId</span><span class="o">(</span><span class="mi">123</span><span class="o">);</span>
 		<span class="n">user</span><span class="o">.</span><span class="na">setSex</span><span class="o">(</span><span class="s">"male"</span><span class="o">);</span>
 		<span class="n">user</span><span class="o">.</span><span class="na">setUsername</span><span class="o">(</span><span class="s">"nicelee"</span><span class="o">);</span>
-		<span class="n">String</span> <span class="n">data</span> <span class="o">=</span> <span class="n">JSON</span><span class="o">.</span><span class="na">toJSONString</span><span class="o">(</span><span class="n">user</span><span class="o">);</span>
+		<span class="nc">String</span> <span class="n">data</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="na">toJSONString</span><span class="o">(</span><span class="n">user</span><span class="o">);</span>
 		<span class="k">try</span> <span class="o">{</span>
             <span class="n">response</span><span class="o">.</span><span class="na">setStatus</span><span class="o">(</span><span class="mi">500</span><span class="o">);</span>
 			<span class="n">response</span><span class="o">.</span><span class="na">setContentType</span><span class="o">(</span><span class="s">"application/json;charset=UTF-8"</span><span class="o">);</span>
-			<span class="n">PrintWriter</span> <span class="n">out</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="na">getWriter</span><span class="o">();</span>
+			<span class="nc">PrintWriter</span> <span class="n">out</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="na">getWriter</span><span class="o">();</span>
 			<span class="n">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
 			<span class="n">out</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
 			<span class="n">out</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 		<span class="err"> </span> <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
 		<span class="o">}</span>
 		<span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
@@ -457,7 +457,7 @@ public ResponseEntity&lt;Map&lt;String,Object&gt;&gt; getUser() throws IOExcepti
 <p>如何使用HttpServletResponse，同时还返回html？<br />
 其实并不一定要使用response.getWriter()然后输入，只要修改状态码以后什么都不做，其它的表现其实依然如旧。</p>
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"/{bookId}/{chpterId}"</span><span class="o">)</span>
-<span class="n">String</span> <span class="nf">readChapter</span><span class="o">(</span><span class="n">HttpServletResponse</span> <span class="n">response</span><span class="o">,</span> <span class="n">Model</span> <span class="n">model</span><span class="o">,</span> <span class="nd">@PathVariable</span> <span class="kt">int</span> <span class="n">bookId</span><span class="o">,</span> <span class="nd">@PathVariable</span> <span class="kt">int</span> <span class="n">chpterId</span><span class="o">)</span> <span class="o">{</span>
+<span class="nc">String</span> <span class="nf">readChapter</span><span class="o">(</span><span class="nc">HttpServletResponse</span> <span class="n">response</span><span class="o">,</span> <span class="nc">Model</span> <span class="n">model</span><span class="o">,</span> <span class="nd">@PathVariable</span> <span class="kt">int</span> <span class="n">bookId</span><span class="o">,</span> <span class="nd">@PathVariable</span> <span class="kt">int</span> <span class="n">chpterId</span><span class="o">)</span> <span class="o">{</span>
     <span class="o">...</span>
     <span class="k">if</span> <span class="o">((</span><span class="n">lChpter</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">||</span> <span class="o">(</span><span class="n">lChpter</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">==</span> <span class="mi">0</span><span class="o">))</span> <span class="o">{</span>
         <span class="n">error</span> <span class="o">=</span> <span class="s">"无此章节!!"</span><span class="o">;</span>

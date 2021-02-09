@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,8 +310,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>
     
   
 
@@ -337,7 +337,7 @@
   </li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>编译：mvn compile　　--src/main/java目录java源码编译生成class （target目录下）
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>编译：mvn compile　　--src/main/java目录java源码编译生成class （target目录下）
 测试：mvn test　　　　--src/test/java 目录编译
 清理：mvn clean　　　 --删除target目录，也就是将class文件等删除
 打包：mvn package　　--生成压缩文件：java项目#jar包；web项目#war包，也是放在target目录下
@@ -351,12 +351,12 @@
 <img src="/sources/archive/2019/05/06-maven.png" alt="" /></p>
   </li>
   <li>
-    <p>关于私服认证的<code class="highlighter-rouge">settings</code>配置<br />
-  本地用户setting.xml文件的设定   <code class="highlighter-rouge">?/.m2/settings.xml</code></p>
+    <p>关于私服认证的<code class="language-plaintext highlighter-rouge">settings</code>配置<br />
+  本地用户setting.xml文件的设定   <code class="language-plaintext highlighter-rouge">?/.m2/settings.xml</code></p>
   </li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!-- id要和pom.xml里远程deploy的地址对应一致 --&gt;  
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!-- id要和pom.xml里远程deploy的地址对应一致 --&gt;  
 &lt;server&gt;
     &lt;id&gt;my-deploy-respository1&lt;/id&gt;
     &lt;username&gt;user&lt;/username&gt;
@@ -374,7 +374,7 @@
   pom.xml 配置</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!-- 配置远程发布到私服，mvn deploy --&gt;   
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!-- 配置远程发布到私服，mvn deploy --&gt;   
 &lt;distributionManagement&gt;   
     &lt;repository&gt;   
         &lt;id&gt;my-deploy-respository1&lt;/id&gt;   

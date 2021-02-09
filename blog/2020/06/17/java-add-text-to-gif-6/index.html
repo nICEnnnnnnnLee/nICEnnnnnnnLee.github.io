@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,8 +310,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>
     
   
 
@@ -337,7 +337,7 @@
     </ul>
   </li>
   <li>前面已经把工具基本都做好了(好吧，只是讲了简单的原理，复杂的功能实现其实就是拼积木)。<br />
-接下来要开始正式动工了。以<code class="highlighter-rouge">真香.gif</code>为例，我们应该怎么做呢？
+接下来要开始正式动工了。以<code class="language-plaintext highlighter-rouge">真香.gif</code>为例，我们应该怎么做呢？
     <ul>
       <li>获取素材(没有对话的GIF + 标准对话的GIF)</li>
       <li>分离有对话的GIF，观察各个jpg图像，弄清楚有几段对话，分别出现在第几帧到第几帧，比如：
@@ -363,8 +363,8 @@
 <ul>
   <li>X坐标：
     <ul>
-      <li><code class="highlighter-rouge">X坐标 = (图片宽度 - 文字宽度)/2</code></li>
-      <li><code class="highlighter-rouge">文字宽度 = 文字数量 * 字体大小</code></li>
+      <li><code class="language-plaintext highlighter-rouge">X坐标 = (图片宽度 - 文字宽度)/2</code></li>
+      <li><code class="language-plaintext highlighter-rouge">文字宽度 = 文字数量 * 字体大小</code></li>
     </ul>
   </li>
   <li>
@@ -373,12 +373,12 @@
   </li>
   <li>获取没有对话的分离素材后，可以人工在单张图片上加文字进行调试，看看是否符合
     <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">try</span> <span class="o">{</span>
-  <span class="n">BufferedImage</span> <span class="n">img</span> <span class="o">=</span> <span class="o">(</span><span class="n">BufferedImage</span><span class="o">)</span> <span class="n">ImageIO</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"pics/真香/notext/000.jpg"</span><span class="o">));</span>
-  <span class="n">Font</span> <span class="n">font</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Font</span><span class="o">(</span><span class="s">""</span><span class="o">,</span> <span class="n">Font</span><span class="o">.</span><span class="na">BOLD</span><span class="o">,</span> <span class="mi">12</span><span class="o">);</span>
-  <span class="n">Color</span> <span class="n">color</span> <span class="o">=</span> <span class="n">Color</span><span class="o">.</span><span class="na">white</span><span class="o">;</span>
-  <span class="n">img</span> <span class="o">=</span> <span class="n">ImgUtil</span><span class="o">.</span><span class="na">addText</span><span class="o">(</span><span class="n">img</span><span class="o">,</span> <span class="s">"我就是饿死"</span><span class="o">,</span> <span class="mi">90</span><span class="o">,</span> <span class="mi">165</span><span class="o">,</span> <span class="n">font</span><span class="o">,</span> <span class="n">color</span><span class="o">);</span>
-  <span class="n">ImageIO</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">img</span><span class="o">,</span> <span class="s">"jpg"</span><span class="o">,</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"我就是饿死.jpg"</span><span class="o">));</span>
-<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+  <span class="nc">BufferedImage</span> <span class="n">img</span> <span class="o">=</span> <span class="o">(</span><span class="nc">BufferedImage</span><span class="o">)</span> <span class="nc">ImageIO</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="s">"pics/真香/notext/000.jpg"</span><span class="o">));</span>
+  <span class="nc">Font</span> <span class="n">font</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Font</span><span class="o">(</span><span class="s">""</span><span class="o">,</span> <span class="nc">Font</span><span class="o">.</span><span class="na">BOLD</span><span class="o">,</span> <span class="mi">12</span><span class="o">);</span>
+  <span class="nc">Color</span> <span class="n">color</span> <span class="o">=</span> <span class="nc">Color</span><span class="o">.</span><span class="na">white</span><span class="o">;</span>
+  <span class="n">img</span> <span class="o">=</span> <span class="nc">ImgUtil</span><span class="o">.</span><span class="na">addText</span><span class="o">(</span><span class="n">img</span><span class="o">,</span> <span class="s">"我就是饿死"</span><span class="o">,</span> <span class="mi">90</span><span class="o">,</span> <span class="mi">165</span><span class="o">,</span> <span class="n">font</span><span class="o">,</span> <span class="n">color</span><span class="o">);</span>
+  <span class="nc">ImageIO</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">img</span><span class="o">,</span> <span class="s">"jpg"</span><span class="o">,</span> <span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="s">"我就是饿死.jpg"</span><span class="o">));</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
   <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
 <span class="o">}</span>
 </code></pre></div>    </div>

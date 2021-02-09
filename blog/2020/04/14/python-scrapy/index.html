@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,11 +310,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Python" title="Tag: Python" rel="tag">Python</a-->
-        <a href="/tag/#Python" title="Tag: Python" rel="tag">Python</a>&nbsp;
+        <!--a href="/blog/tag/#Python" title="Tag: Python" rel="tag">Python</a-->
+        <a href="/blog/tag/#Python" title="Tag: Python" rel="tag">Python</a>&nbsp;
     
-        <!--a href="/tag/#scrapy" title="Tag: scrapy" rel="tag">scrapy</a-->
-        <a href="/tag/#scrapy" title="Tag: scrapy" rel="tag">scrapy</a>
+        <!--a href="/blog/tag/#scrapy" title="Tag: scrapy" rel="tag">scrapy</a-->
+        <a href="/blog/tag/#scrapy" title="Tag: scrapy" rel="tag">scrapy</a>
     
   
 
@@ -356,30 +356,30 @@
 <ul>
   <li>自定义items.py<br />
 就记录序号和用户名，比较简单
-    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">GithubstarerItem</span><span class="p">(</span><span class="n">scrapy</span><span class="o">.</span><span class="n">Item</span><span class="p">):</span>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">GithubstarerItem</span><span class="p">(</span><span class="n">scrapy</span><span class="p">.</span><span class="n">Item</span><span class="p">):</span>
   <span class="c1"># define the fields for your item here like:
 </span>  <span class="c1"># name = scrapy.Field()
 </span>  <span class="c1">#序号
-</span>  <span class="n">serial_number</span> <span class="o">=</span> <span class="n">scrapy</span><span class="o">.</span><span class="n">Field</span><span class="p">()</span>
+</span>  <span class="n">serial_number</span> <span class="o">=</span> <span class="n">scrapy</span><span class="p">.</span><span class="n">Field</span><span class="p">()</span>
   <span class="c1">#用户名
-</span>  <span class="n">user_name</span> <span class="o">=</span> <span class="n">scrapy</span><span class="o">.</span><span class="n">Field</span><span class="p">()</span>
+</span>  <span class="n">user_name</span> <span class="o">=</span> <span class="n">scrapy</span><span class="p">.</span><span class="n">Field</span><span class="p">()</span>
 </code></pre></div>    </div>
   </li>
   <li>自定义爬虫逻辑
-已经有现成的接口，每页最多返回30个，只需要改一下分页的参数就行了<code class="highlighter-rouge">?page=%d</code>，当返回为空的时候停止。
-    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">BilibilidownSpider</span><span class="p">(</span><span class="n">scrapy</span><span class="o">.</span><span class="n">Spider</span><span class="p">):</span>
+已经有现成的接口，每页最多返回30个，只需要改一下分页的参数就行了<code class="language-plaintext highlighter-rouge">?page=%d</code>，当返回为空的时候停止。
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">BilibilidownSpider</span><span class="p">(</span><span class="n">scrapy</span><span class="p">.</span><span class="n">Spider</span><span class="p">):</span>
   <span class="n">name</span> <span class="o">=</span> <span class="s">'BilibiliDown'</span>
   <span class="n">allowed_domains</span> <span class="o">=</span> <span class="p">[</span><span class="s">'api.github.com'</span><span class="p">]</span>
   <span class="n">start_urls</span> <span class="o">=</span> <span class="p">[</span><span class="s">'https://api.github.com/repos/nICEnnnnnnnLee/BilibiliDown/stargazers'</span><span class="p">]</span>
   <span class="n">page</span> <span class="o">=</span> <span class="mi">1</span>
     
   <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
-      <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
-      <span class="n">result</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+      <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">text</span><span class="p">)</span>
+      <span class="n">result</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">text</span><span class="p">)</span>
       <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
          <span class="k">return</span>
        
-      <span class="n">i</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">page</span><span class="o">*</span><span class="mi">30</span> <span class="o">-</span> <span class="mi">30</span>
+      <span class="n">i</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">page</span><span class="o">*</span><span class="mi">30</span> <span class="o">-</span> <span class="mi">30</span>
       <span class="k">for</span> <span class="n">i_user</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
           <span class="n">starer</span> <span class="o">=</span> <span class="n">GithubstarerItem</span><span class="p">()</span>
           <span class="n">starer</span><span class="p">[</span><span class="s">'serial_number'</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
@@ -389,9 +389,9 @@
           <span class="k">yield</span> <span class="n">starer</span>
             
       <span class="c1"># 解析下一页
-</span>      <span class="bp">self</span><span class="o">.</span><span class="n">page</span> <span class="o">+=</span> <span class="mi">1</span>
-      <span class="n">next_link</span> <span class="o">=</span> <span class="s">'https://api.github.com/repos/nICEnnnnnnnLee/BilibiliDown/stargazers?page=</span><span class="si">%</span><span class="s">d'</span><span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">page</span>
-      <span class="k">yield</span> <span class="n">scrapy</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="n">next_link</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parse</span><span class="p">)</span>
+</span>      <span class="bp">self</span><span class="p">.</span><span class="n">page</span> <span class="o">+=</span> <span class="mi">1</span>
+      <span class="n">next_link</span> <span class="o">=</span> <span class="s">'https://api.github.com/repos/nICEnnnnnnnLee/BilibiliDown/stargazers?page=%d'</span><span class="o">%</span><span class="bp">self</span><span class="p">.</span><span class="n">page</span>
+      <span class="k">yield</span> <span class="n">scrapy</span><span class="p">.</span><span class="n">Request</span><span class="p">(</span><span class="n">next_link</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">parse</span><span class="p">)</span>
 </code></pre></div>    </div>
   </li>
   <li>自定义pipelines.py
@@ -399,12 +399,12 @@
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">GithubstarerPipeline</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
   <span class="k">def</span> <span class="nf">process_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">spider</span><span class="p">):</span>
       <span class="c1"># 获取当前工作目录
-</span>      <span class="n">base_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+</span>      <span class="n">base_dir</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">getcwd</span><span class="p">()</span>
       <span class="n">fiename</span> <span class="o">=</span> <span class="n">base_dir</span> <span class="o">+</span> <span class="s">'/starers.txt'</span>
       <span class="c1"># 从内存以追加的方式打开文件，并写入对应的数据
 </span>      <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fiename</span><span class="p">,</span> <span class="s">'a'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-          <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s">'serial_number'</span><span class="p">])</span> <span class="o">+</span> <span class="s">'</span><span class="se">\t</span><span class="s">'</span><span class="p">)</span>
-          <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s">'user_name'</span><span class="p">]</span> <span class="o">+</span> <span class="s">'  </span><span class="se">\r\n</span><span class="s">'</span><span class="p">)</span>
+          <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s">'serial_number'</span><span class="p">])</span> <span class="o">+</span> <span class="s">'</span><span class="se">\t</span><span class="s">'</span><span class="p">)</span>
+          <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s">'user_name'</span><span class="p">]</span> <span class="o">+</span> <span class="s">'  </span><span class="se">\r\n</span><span class="s">'</span><span class="p">)</span>
       <span class="k">return</span> <span class="n">item</span>
 </code></pre></div>    </div>
     <p>相应配置：</p>
@@ -414,14 +414,14 @@
 </code></pre></div>    </div>
   </li>
   <li>其它琐碎<br />
-难度比较低，不是很讲究http headers等等，对<code class="highlighter-rouge">settings.py</code>、<code class="highlighter-rouge">middlewares.py</code>几乎没有修改。</li>
+难度比较低，不是很讲究http headers等等，对<code class="language-plaintext highlighter-rouge">settings.py</code>、<code class="language-plaintext highlighter-rouge">middlewares.py</code>几乎没有修改。</li>
 </ul>
 
 <h2 id="github文件上传">Github文件上传</h2>
 <p>在前面已有现成的实现，参考<strong><a href="https://github.com/nICEnnnnnnnLee/FileUploader4Github">FileUploader4Github</a></strong>。<br />
 以下为参考的脚本调用：</p>
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 格式化日期</span>
-<span class="nv">cur_date</span><span class="o">=</span><span class="k">$(</span><span class="nb">date</span> <span class="s2">"+%Y-%m-%d"</span><span class="k">)</span>
+<span class="nv">cur_date</span><span class="o">=</span><span class="si">$(</span><span class="nb">date</span> <span class="s2">"+%Y-%m-%d"</span><span class="si">)</span>
 <span class="c"># 上传路径</span>
 <span class="nv">upload_path</span><span class="o">=</span><span class="s2">"https://api.github.com/repos/nICEnnnnnnnLee/GithubStargazers/contents/BilibiliDown/</span><span class="nv">$cur_date</span><span class="s2">.txt"</span>
 <span class="c"># 调用已有的实现上传starers.txt</span>
@@ -429,7 +429,7 @@ java <span class="nt">-jar</span> tool/FileUploadTool.jar <span class="nv">$uplo
 </code></pre></div></div>
 
 <h2 id="github-workfow周期性调用">Github workfow周期性调用</h2>
-<p>其实没啥难度，要注意的是需要在<code class="highlighter-rouge">settings</code>-&gt;<code class="highlighter-rouge">secrets</code>里面设置好<code class="highlighter-rouge">AUTH_TOKEN</code>，用于指定repo的文件上传的授权。</p>
+<p>其实没啥难度，要注意的是需要在<code class="language-plaintext highlighter-rouge">settings</code>-&gt;<code class="language-plaintext highlighter-rouge">secrets</code>里面设置好<code class="language-plaintext highlighter-rouge">AUTH_TOKEN</code>，用于指定repo的文件上传的授权。</p>
 <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">CI</span>
 
 <span class="na">on</span><span class="pi">:</span>
@@ -445,32 +445,32 @@ java <span class="nt">-jar</span> tool/FileUploadTool.jar <span class="nv">$uplo
     <span class="c1"># 检出工程</span>
     <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v2</span>
     <span class="c1"># 安装java环境</span>
-    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Set up JDK 1.8</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Set up JDK </span><span class="m">1.8</span>
       <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/setup-java@v1</span>
       <span class="na">with</span><span class="pi">:</span>
-        <span class="na">java-version</span><span class="pi">:</span> <span class="s">1.8</span>
+        <span class="na">java-version</span><span class="pi">:</span> <span class="m">1.8</span>
     <span class="c1"># 安装python环境</span>
-    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Set up Python 3.8</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Set up Python </span><span class="m">3.8</span>
       <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/setup-python@v1</span>
       <span class="na">with</span><span class="pi">:</span>
-        <span class="na">python-version</span><span class="pi">:</span> <span class="s">3.8</span>
+        <span class="na">python-version</span><span class="pi">:</span> <span class="m">3.8</span>
     <span class="c1"># 安装scrapy</span>
     <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install dependencies</span>
       <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
-        <span class="no">python -m pip install --upgrade pip</span>
-        <span class="no">pip install scrapy</span>
+        <span class="s">python -m pip install --upgrade pip</span>
+        <span class="s">pip install scrapy</span>
     <span class="c1"># 获取Star用户信息，保存到starers.txt</span>
     <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Get GithubStargazers</span>
       <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
-        <span class="no">rm -rf starers.txt</span>
-        <span class="no">scrapy crawl BilibiliDown</span>
+        <span class="s">rm -rf starers.txt</span>
+        <span class="s">scrapy crawl BilibiliDown</span>
     <span class="c1"># 上传starers.txt到指定Repo</span>
     <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Upload GithubStargazers</span>
       <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
-        <span class="no">cur_date=$(date "+%Y-%m-%d")</span>
-        <span class="no">upload_path="https://api.github.com/repos/nICEnnnnnnnLee/GithubStargazers/contents/BilibiliDown/$cur_date.txt"</span>
-        <span class="no">echo upload_path</span>
-        <span class="no">java -jar tool/FileUploadTool.jar $upload_path starers.txt $</span>
+        <span class="s">cur_date=$(date "+%Y-%m-%d")</span>
+        <span class="s">upload_path="https://api.github.com/repos/nICEnnnnnnnLee/GithubStargazers/contents/BilibiliDown/$cur_date.txt"</span>
+        <span class="s">echo upload_path</span>
+        <span class="s">java -jar tool/FileUploadTool.jar $upload_path starers.txt $</span>
 </code></pre></div></div>
 
         </article>

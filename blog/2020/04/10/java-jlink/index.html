@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,8 +310,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>
     
   
 
@@ -336,14 +336,14 @@
 <p>比较简单，以下转自<a href="https://www.cnblogs.com/roadwide/p/12628773.html">https://www.cnblogs.com/roadwide/p/12628773.html</a></p>
 <ul>
   <li>查看jar依赖了哪些模块
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jdeps mylib.jar
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jdeps mylib.jar
 </code></pre></div>    </div>
   </li>
   <li>根据依赖模块生成特定jre
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jlink --output minimal-jre --add-modules java.base,java.logging
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jlink --output minimal-jre --add-modules java.base,java.logging
 </code></pre></div>    </div>
-    <p>如上面的命令，会生成一个<code class="highlighter-rouge">minimal-jre</code>的文件夹，这个文件夹就是jre。<br />
-该jre包含了两个模块，分别是<code class="highlighter-rouge">java.base</code>和<code class="highlighter-rouge">java.logging</code>。<br />
+    <p>如上面的命令，会生成一个<code class="language-plaintext highlighter-rouge">minimal-jre</code>的文件夹，这个文件夹就是jre。<br />
+该jre包含了两个模块，分别是<code class="language-plaintext highlighter-rouge">java.base</code>和<code class="language-plaintext highlighter-rouge">java.logging</code>。<br />
 根据第二步查看的依赖模块，自行修改。</p>
   </li>
 </ul>

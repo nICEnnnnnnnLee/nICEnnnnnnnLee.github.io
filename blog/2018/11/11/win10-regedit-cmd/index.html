@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#小技巧" title="Category: 小技巧" rel="category">小技巧</a>
+        <a href="/blog/category/#小技巧" title="Category: 小技巧" rel="category">小技巧</a>
     
   
 
@@ -310,14 +310,14 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Windows" title="Tag: Windows" rel="tag">Windows</a-->
-        <a href="/tag/#Windows" title="Tag: Windows" rel="tag">Windows</a>&nbsp;
+        <!--a href="/blog/tag/#Windows" title="Tag: Windows" rel="tag">Windows</a-->
+        <a href="/blog/tag/#Windows" title="Tag: Windows" rel="tag">Windows</a>&nbsp;
     
-        <!--a href="/tag/#cmd" title="Tag: cmd" rel="tag">cmd</a-->
-        <a href="/tag/#cmd" title="Tag: cmd" rel="tag">cmd</a>&nbsp;
+        <!--a href="/blog/tag/#cmd" title="Tag: cmd" rel="tag">cmd</a-->
+        <a href="/blog/tag/#cmd" title="Tag: cmd" rel="tag">cmd</a>&nbsp;
     
-        <!--a href="/tag/#PowerShell" title="Tag: PowerShell" rel="tag">PowerShell</a-->
-        <a href="/tag/#PowerShell" title="Tag: PowerShell" rel="tag">PowerShell</a>
+        <!--a href="/blog/tag/#PowerShell" title="Tag: PowerShell" rel="tag">PowerShell</a-->
+        <a href="/blog/tag/#PowerShell" title="Tag: PowerShell" rel="tag">PowerShell</a>
     
   
 
@@ -340,9 +340,9 @@
 </blockquote>
 
 <h2 id="一打开注册表">一、打开注册表</h2>
-<p>按下win+r 组合键打开运行，输入：<code class="highlighter-rouge">regedit</code> 按下回车键按钮打开注册表；</p>
+<p>按下win+r 组合键打开运行，输入：<code class="language-plaintext highlighter-rouge">regedit</code> 按下回车键按钮打开注册表；</p>
 
-<p>HKCR\Directory\Background\shell\
+<p>HKCR\Directory\Background\shell<br />
 下面有cmd和Powershell两个选项值得注意</p>
 
 <h2 id="二备份注册表">二、备份注册表</h2>
@@ -353,27 +353,27 @@
 参考<a href="https://jingyan.baidu.com/article/3aed632ec4b9257010809183.html">百度经验</a></p>
 <ul>
   <li><strong>现象</strong>：在打开注册表编辑器后，进入需要操作的路径，对权限进行操作。目标是对管理员账户给予完全控制的权限，但提示无法更改</li>
-  <li>1、 <code class="highlighter-rouge">右键</code> -&gt; <code class="highlighter-rouge">权限</code> -&gt; <code class="highlighter-rouge">高级</code>-&gt; <code class="highlighter-rouge">审核</code>，在上方有一个<code class="highlighter-rouge">所有者</code>，选择<code class="highlighter-rouge">更改</code></li>
-  <li>2、在选择用户或组的界面中，打开左下角的<code class="highlighter-rouge">高级</code>，并进行<code class="highlighter-rouge">立即查找</code>，选中Administrators这个组，然后<code class="highlighter-rouge">确定</code>、<code class="highlighter-rouge">确定</code></li>
-  <li>3、在修改好用户组之后，进入审核项目的添加，在<code class="highlighter-rouge">审核</code>选项卡下，左下角<code class="highlighter-rouge">添加</code></li>
+  <li>1、 <code class="language-plaintext highlighter-rouge">右键</code> -&gt; <code class="language-plaintext highlighter-rouge">权限</code> -&gt; <code class="language-plaintext highlighter-rouge">高级</code>-&gt; <code class="language-plaintext highlighter-rouge">审核</code>，在上方有一个<code class="language-plaintext highlighter-rouge">所有者</code>，选择<code class="language-plaintext highlighter-rouge">更改</code></li>
+  <li>2、在选择用户或组的界面中，打开左下角的<code class="language-plaintext highlighter-rouge">高级</code>，并进行<code class="language-plaintext highlighter-rouge">立即查找</code>，选中Administrators这个组，然后<code class="language-plaintext highlighter-rouge">确定</code>、<code class="language-plaintext highlighter-rouge">确定</code></li>
+  <li>3、在修改好用户组之后，进入审核项目的添加，在<code class="language-plaintext highlighter-rouge">审核</code>选项卡下，左下角<code class="language-plaintext highlighter-rouge">添加</code></li>
   <li>4、参照第2、步，添加完组后，赋给读取和完全控制权限。</li>
 </ul>
 
 <h2 id="四修改注册表">四、修改注册表</h2>
 <ul>
-  <li>1、显示<code class="highlighter-rouge">cmd</code>命令<br />
-<em>** 定位到<code class="highlighter-rouge">\HKEY_CLASSES_ROOT\Directory\Background\shell\cmd</code>;<br />
-**</em> 将右侧的<code class="highlighter-rouge">HideBasedOnVelocityId</code>改成<code class="highlighter-rouge">ShowBasedOnVelocityId</code><br />
+  <li>1、显示<code class="language-plaintext highlighter-rouge">cmd</code>命令<br />
+<em>** 定位到<code class="language-plaintext highlighter-rouge">\HKEY_CLASSES_ROOT\Directory\Background\shell\cmd</code>;<br />
+**</em> 将右侧的<code class="language-plaintext highlighter-rouge">HideBasedOnVelocityId</code>改成<code class="language-plaintext highlighter-rouge">ShowBasedOnVelocityId</code><br />
 <img src="https://s1.ax1x.com/2018/11/12/iOCwdK.png" alt="" /></li>
   <li>
-    <p>2、隐藏<code class="highlighter-rouge">Power Shell</code>命令<br />
-<em>** 定位到<code class="highlighter-rouge">\HKEY_CLASSES_ROOT\Directory\Background\shell\Powershell</code>；<br />
-**</em> 将右侧的<code class="highlighter-rouge">ShowBasedOnVelocityId</code>改成<code class="highlighter-rouge">HideBasedOnVelocityId</code>即可</p>
+    <p>2、隐藏<code class="language-plaintext highlighter-rouge">Power Shell</code>命令<br />
+<em>** 定位到<code class="language-plaintext highlighter-rouge">\HKEY_CLASSES_ROOT\Directory\Background\shell\Powershell</code>；<br />
+**</em> 将右侧的<code class="language-plaintext highlighter-rouge">ShowBasedOnVelocityId</code>改成<code class="language-plaintext highlighter-rouge">HideBasedOnVelocityId</code>即可</p>
   </li>
-  <li>ps：想要修改右键菜单的显示，可以将上图中的默认值的<code class="highlighter-rouge">数据</code>选项修改成你要的值即可，例如改为<code class="highlighter-rouge">“在此处打开CMD窗口”</code></li>
+  <li>ps：想要修改右键菜单的显示，可以将上图中的默认值的<code class="language-plaintext highlighter-rouge">数据</code>选项修改成你要的值即可，例如改为<code class="language-plaintext highlighter-rouge">“在此处打开CMD窗口”</code></li>
   <li>ps：网上还有一个土办法，等于是将PowerShell的命令用来执行cmd。<br />
-<code class="highlighter-rouge">HKCR\Directory\Background\shell\Powershell\command</code>  将右侧默认字符串值改成：<br />
-<code class="highlighter-rouge">cmd.exe /s /k pushd "%V"</code> 点击确定保存接口！</li>
+<code class="language-plaintext highlighter-rouge">HKCR\Directory\Background\shell\Powershell\command</code>  将右侧默认字符串值改成：<br />
+<code class="language-plaintext highlighter-rouge">cmd.exe /s /k pushd "%V"</code> 点击确定保存接口！</li>
 </ul>
 
         </article>

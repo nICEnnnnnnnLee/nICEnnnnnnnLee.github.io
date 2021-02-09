@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,14 +310,14 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#SpringBoot" title="Tag: SpringBoot" rel="tag">SpringBoot</a-->
-        <a href="/tag/#SpringBoot" title="Tag: SpringBoot" rel="tag">SpringBoot</a>&nbsp;
+        <!--a href="/blog/tag/#SpringBoot" title="Tag: SpringBoot" rel="tag">SpringBoot</a-->
+        <a href="/blog/tag/#SpringBoot" title="Tag: SpringBoot" rel="tag">SpringBoot</a>&nbsp;
     
-        <!--a href="/tag/#%E8%B8%A9%E5%9D%91" title="Tag: 踩坑" rel="tag">踩坑</a-->
-        <a href="/tag/#踩坑" title="Tag: 踩坑" rel="tag">踩坑</a>&nbsp;
+        <!--a href="/blog/tag/#%E8%B8%A9%E5%9D%91" title="Tag: 踩坑" rel="tag">踩坑</a-->
+        <a href="/blog/tag/#踩坑" title="Tag: 踩坑" rel="tag">踩坑</a>&nbsp;
     
-        <!--a href="/tag/#String" title="Tag: String" rel="tag">String</a-->
-        <a href="/tag/#String" title="Tag: String" rel="tag">String</a>
+        <!--a href="/blog/tag/#String" title="Tag: String" rel="tag">String</a-->
+        <a href="/blog/tag/#String" title="Tag: String" rel="tag">String</a>
     
   
 
@@ -375,11 +375,11 @@
   <li>在”了解文件头”部分，我们说明了文件头实际上是两个指针，分别指向了第一条索引和最后一条索引的绝对偏移。如图所示：<br />
 <img src="https://s1.ax1x.com/2018/12/14/FUumZt.gif" alt="" /></li>
   <li>实在是很简单，不是吗？从文件头你就可以定位到索引区，然后你就可以开始搜索IP了！每条索引长度为7个字节，前4个字节是起始IP地址，后三个字节就指向 了IP记录。这里有些概念需要说明一下，什么是起始IP，那么有没有结束IP？ <br />
-假设有这么一条记录：<code class="highlighter-rouge">166.111.0.0</code> - <code class="highlighter-rouge">166.111.255.255</code>，那么<code class="highlighter-rouge">166.111.0.0</code>就是起始IP，<code class="highlighter-rouge">166.111.255.255</code>就是结束IP，结束IP就是IP记录中的那头 4个字节，这下你应该就清楚了吧。<br />
-于是乎，每条索引配合一条记录，构成了一个IP范围，如果你要查找<code class="highlighter-rouge">166.111.138.138</code>所在的位置，你就会发现<code class="highlighter-rouge">166.111.138.138</code>落在了<code class="highlighter-rouge">166.111.0.0</code> - <code class="highlighter-rouge">166.111.255.255</code>这个范围内，那么你就可以顺着这条索引去读取国家和地区名了。那么我们给出一个最详细的图解吧：<br />
+假设有这么一条记录：<code class="language-plaintext highlighter-rouge">166.111.0.0</code> - <code class="language-plaintext highlighter-rouge">166.111.255.255</code>，那么<code class="language-plaintext highlighter-rouge">166.111.0.0</code>就是起始IP，<code class="language-plaintext highlighter-rouge">166.111.255.255</code>就是结束IP，结束IP就是IP记录中的那头 4个字节，这下你应该就清楚了吧。<br />
+于是乎，每条索引配合一条记录，构成了一个IP范围，如果你要查找<code class="language-plaintext highlighter-rouge">166.111.138.138</code>所在的位置，你就会发现<code class="language-plaintext highlighter-rouge">166.111.138.138</code>落在了<code class="language-plaintext highlighter-rouge">166.111.0.0</code> - <code class="language-plaintext highlighter-rouge">166.111.255.255</code>这个范围内，那么你就可以顺着这条索引去读取国家和地区名了。那么我们给出一个最详细的图解吧：<br />
 <img src="https://s1.ax1x.com/2018/12/14/FUumZt.gif" alt="" /></li>
   <li>现在一切都清楚了是不是？也许还有一点你不清楚，QQWry.dat的版本信息存在哪里呢？ 答案是：最后一条IP记录实际上就是版本信息，最后一条记录显示出来就是这样：
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>255.255.255.0 255.255.255.255 纯真网络 2004年6月25日IP数据
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>255.255.255.0 255.255.255.255 纯真网络 2004年6月25日IP数据
 </code></pre></div>    </div>
     <p>OK，到现在你应该全部清楚了。</p>
   </li>

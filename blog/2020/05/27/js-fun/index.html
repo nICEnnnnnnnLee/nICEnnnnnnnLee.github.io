@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,8 +310,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a-->
-        <a href="/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a>
+        <!--a href="/blog/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a-->
+        <a href="/blog/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a>
     
   
 
@@ -334,9 +334,9 @@
   <li><a href="#一步一步慢慢认识" id="markdown-toc-一步一步慢慢认识">一步一步慢慢认识</a></li>
 </ul>
 <p>老是碰见这些类型，是时候理顺一下思路了。<br />
-<code class="highlighter-rouge">(function (){…}())</code><br />
-<code class="highlighter-rouge">(function (){…})()</code><br />
-<code class="highlighter-rouge">!function (){…}()</code></p>
+<code class="language-plaintext highlighter-rouge">(function (){…}())</code><br />
+<code class="language-plaintext highlighter-rouge">(function (){…})()</code><br />
+<code class="language-plaintext highlighter-rouge">!function (){…}()</code></p>
 
 <h2 id="需要简单了解的一些概念">需要简单了解的一些概念</h2>
 <h3 id="闭包">闭包</h3>
@@ -345,27 +345,27 @@
 <h3 id="函数声明">函数声明</h3>
 <p>像这种:</p>
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">test1</span><span class="p">(){</span>
-    <span class="nx">alert</span><span class="p">(</span><span class="s1">'Hello World'</span><span class="p">);</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Hello World</span><span class="dl">'</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
 <h3 id="函数表达式">函数表达式</h3>
 <p>像这种:</p>
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">test2</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
-    <span class="nx">alert</span><span class="p">(</span><span class="s1">'Hello World'</span><span class="p">);</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Hello World</span><span class="dl">'</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
 <h3 id="执行一个函数">执行一个函数</h3>
 <p>像这种:</p>
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">test3</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
-    <span class="nx">alert</span><span class="p">(</span><span class="s1">'Hello World'</span><span class="p">);</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Hello World</span><span class="dl">'</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="nx">test3</span><span class="p">();</span>
 </code></pre></div></div>
 <p>或者这种:</p>
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">test4</span><span class="p">(){</span>
-    <span class="nx">alert</span><span class="p">(</span><span class="s1">'Hello World'</span><span class="p">);</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Hello World</span><span class="dl">'</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="nx">test4</span><span class="p">();</span>
 </code></pre></div></div>
@@ -376,11 +376,11 @@
     <p>它不能单独存在，否则会报语法错误。<br />
 js引擎会将开头的function关键字当做函数声明，会报错需要一个函数名。</p>
   </li>
-  <li>它可以是函数表达式<code class="highlighter-rouge">var a=b;</code>右边的<strong>b</strong>那一部分。</li>
-  <li>它也可以是其它表达式的一部分，比如<code class="highlighter-rouge">(a)</code>、<code class="highlighter-rouge">!a</code>、<code class="highlighter-rouge">+a</code>。</li>
+  <li>它可以是函数表达式<code class="language-plaintext highlighter-rouge">var a=b;</code>右边的<strong>b</strong>那一部分。</li>
+  <li>它也可以是其它表达式的一部分，比如<code class="language-plaintext highlighter-rouge">(a)</code>、<code class="language-plaintext highlighter-rouge">!a</code>、<code class="language-plaintext highlighter-rouge">+a</code>。</li>
   <li>像这种:
     <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span><span class="p">(){</span>
-  <span class="nx">alert</span><span class="p">(</span><span class="s1">'Hello World'</span><span class="p">);</span>
+  <span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Hello World</span><span class="dl">'</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>    </div>
   </li>
@@ -390,20 +390,20 @@ js引擎会将开头的function关键字当做函数声明，会报错需要一�
 <ul>
   <li>首先，我们要认识到我们的目的，将某些实现放在匿名函数里面，实现闭包
     <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span><span class="p">(){</span>
-  <span class="nx">alert</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">);</span>
+  <span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>    </div>
   </li>
   <li>然后，我们要让这个函数马上跑起来
     <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span><span class="p">(){</span>
-  <span class="nx">alert</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">);</span>
+  <span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span><span class="p">);</span>
 <span class="p">}()</span>
 </code></pre></div>    </div>
   </li>
   <li>为了方便外部调用，可以传个参数进去
     <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">module</span> <span class="o">=</span> <span class="p">{};</span>
 <span class="kd">function</span><span class="p">(</span><span class="nx">exports</span><span class="p">){</span>
-  <span class="nx">exports</span><span class="p">.</span><span class="nx">alert</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span><span class="nx">alert</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">)};</span>
+  <span class="nx">exports</span><span class="p">.</span><span class="nx">alert</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span><span class="p">)};</span>
 <span class="p">}(</span><span class="nx">module</span><span class="p">)</span>
 <span class="c1">// 如果一切顺利，module.alert()可以实现警报方法</span>
 <span class="nx">module</span><span class="p">.</span><span class="nx">alert</span><span class="p">();</span>
@@ -413,28 +413,28 @@ js引擎会将开头的function关键字当做函数声明，会报错需要一�
 以下是几种实现：
     <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">module</span> <span class="o">=</span> <span class="p">{};</span>
 <span class="o">!</span><span class="kd">function</span><span class="p">(</span><span class="nx">exports</span><span class="p">){</span>
-  <span class="nx">exports</span><span class="p">.</span><span class="nx">alert</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span><span class="nx">alert</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">)};</span>
+  <span class="nx">exports</span><span class="p">.</span><span class="nx">alert</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span><span class="p">)};</span>
 <span class="p">}(</span><span class="nx">module</span><span class="p">);</span>
 </code></pre></div>    </div>
 
     <p>或者</p>
     <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">var</span> <span class="nx">module</span> <span class="o">=</span> <span class="p">{};</span>
   <span class="o">~</span><span class="kd">function</span><span class="p">(</span><span class="nx">exports</span><span class="p">){</span>
-      <span class="nx">exports</span><span class="p">.</span><span class="nx">alert</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span><span class="nx">alert</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">)};</span>
+      <span class="nx">exports</span><span class="p">.</span><span class="nx">alert</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span><span class="p">)};</span>
   <span class="p">}(</span><span class="nx">module</span><span class="p">);</span>
 </code></pre></div>    </div>
 
     <p>或者</p>
     <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">var</span> <span class="nx">module</span> <span class="o">=</span> <span class="p">{};</span>
   <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">exports</span><span class="p">){</span>
-      <span class="nx">exports</span><span class="p">.</span><span class="nx">alert</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span><span class="nx">alert</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">)};</span>
+      <span class="nx">exports</span><span class="p">.</span><span class="nx">alert</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span><span class="p">)};</span>
   <span class="p">})(</span><span class="nx">module</span><span class="p">);</span>
 </code></pre></div>    </div>
 
     <p>或者</p>
     <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">var</span> <span class="nx">module</span> <span class="o">=</span> <span class="p">{};</span>
   <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">exports</span><span class="p">){</span>
-      <span class="nx">exports</span><span class="p">.</span><span class="nx">alert</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span><span class="nx">alert</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">)};</span>
+      <span class="nx">exports</span><span class="p">.</span><span class="nx">alert</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span><span class="p">)};</span>
   <span class="p">}(</span><span class="nx">module</span><span class="p">));</span>
 </code></pre></div>    </div>
 

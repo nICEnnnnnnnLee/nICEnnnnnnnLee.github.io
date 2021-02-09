@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,14 +310,14 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a-->
-        <a href="/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a>&nbsp;
+        <!--a href="/blog/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a-->
+        <a href="/blog/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a>&nbsp;
     
-        <!--a href="/tag/#HTML" title="Tag: HTML" rel="tag">HTML</a-->
-        <a href="/tag/#HTML" title="Tag: HTML" rel="tag">HTML</a>&nbsp;
+        <!--a href="/blog/tag/#HTML" title="Tag: HTML" rel="tag">HTML</a-->
+        <a href="/blog/tag/#HTML" title="Tag: HTML" rel="tag">HTML</a>&nbsp;
     
-        <!--a href="/tag/#CSS" title="Tag: CSS" rel="tag">CSS</a-->
-        <a href="/tag/#CSS" title="Tag: CSS" rel="tag">CSS</a>
+        <!--a href="/blog/tag/#CSS" title="Tag: CSS" rel="tag">CSS</a-->
+        <a href="/blog/tag/#CSS" title="Tag: CSS" rel="tag">CSS</a>
     
   
 
@@ -345,9 +345,9 @@
 </code></pre></div></div>
 
 <p>js - 引用APlayer.min.js即可</p>
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s2">"/js/APlayer.min.js"</span><span class="o">&gt;&lt;</span><span class="sr">/script&gt;</span><span class="err"> 
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="dl">"</span><span class="s2">/js/APlayer.min.js</span><span class="dl">"</span><span class="o">&gt;&lt;</span><span class="sr">/script&gt;</span><span class="err"> 
 </span><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
-<span class="kd">var</span> <span class="nx">getDom</span><span class="o">=</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByClassName</span><span class="p">(</span><span class="s2">"aplayer"</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">getDom</span><span class="o">=</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByClassName</span><span class="p">(</span><span class="dl">"</span><span class="s2">aplayer</span><span class="dl">"</span><span class="p">);</span>
 <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="nx">i</span><span class="o">&lt;</span><span class="nx">getDom</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">){</span><span class="c1">//遍历网页中所有播放器</span>
 	<span class="kd">var</span> <span class="nx">ap1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">APlayer</span><span class="p">({</span>
 		<span class="na">element</span><span class="p">:</span> <span class="nx">getDom</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span>
@@ -355,10 +355,10 @@
 		<span class="na">autoplay</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
 		<span class="na">showlrc</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
 		<span class="na">music</span><span class="p">:</span> <span class="p">{</span>
-			<span class="na">title</span><span class="p">:</span> <span class="nx">getDom</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s2">"title"</span><span class="p">),</span>
-			<span class="na">author</span><span class="p">:</span> <span class="nx">getDom</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s2">"author"</span><span class="p">),</span>
-			<span class="na">url</span><span class="p">:</span> <span class="nx">getDom</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s2">"src"</span><span class="p">),</span>
-			<span class="na">pic</span><span class="p">:</span> <span class="nx">getDom</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s2">"pic"</span><span class="p">)</span>
+			<span class="na">title</span><span class="p">:</span> <span class="nx">getDom</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">getAttribute</span><span class="p">(</span><span class="dl">"</span><span class="s2">title</span><span class="dl">"</span><span class="p">),</span>
+			<span class="na">author</span><span class="p">:</span> <span class="nx">getDom</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">getAttribute</span><span class="p">(</span><span class="dl">"</span><span class="s2">author</span><span class="dl">"</span><span class="p">),</span>
+			<span class="na">url</span><span class="p">:</span> <span class="nx">getDom</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">getAttribute</span><span class="p">(</span><span class="dl">"</span><span class="s2">src</span><span class="dl">"</span><span class="p">),</span>
+			<span class="na">pic</span><span class="p">:</span> <span class="nx">getDom</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">getAttribute</span><span class="p">(</span><span class="dl">"</span><span class="s2">pic</span><span class="dl">"</span><span class="p">)</span>
 		<span class="p">}</span>
 	<span class="p">});</span>
 	<span class="nx">ap1</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span> 

@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,8 +310,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Python" title="Tag: Python" rel="tag">Python</a-->
-        <a href="/tag/#Python" title="Tag: Python" rel="tag">Python</a>
+        <!--a href="/blog/tag/#Python" title="Tag: Python" rel="tag">Python</a-->
+        <a href="/blog/tag/#Python" title="Tag: Python" rel="tag">Python</a>
     
   
 
@@ -365,7 +365,7 @@ result = xxx(func)("若干参数")
             <span class="k">if</span><span class="p">(</span><span class="n">retry</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
                 <span class="k">raise</span> <span class="n">e</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">sleep</span><span class="p">)</span>
+                <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">sleep</span><span class="p">)</span>
                 <span class="k">return</span> <span class="n">checkRun</span><span class="p">(</span><span class="n">retry</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
                 
     <span class="o">@</span><span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>      
@@ -382,7 +382,7 @@ result = xxx(func)("若干参数")
                 <span class="k">if</span><span class="p">(</span><span class="n">retry</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
                     <span class="k">raise</span> <span class="n">e</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">sleep</span><span class="p">)</span>
+                    <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">sleep</span><span class="p">)</span>
                     <span class="k">return</span> <span class="n">checkRun</span><span class="p">(</span><span class="n">retry</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
                     
         <span class="o">@</span><span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>      
@@ -393,19 +393,19 @@ result = xxx(func)("若干参数")
     
 <span class="k">class</span> <span class="nc">retryWithClass</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">retry</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">sleep</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">retry</span> <span class="o">=</span> <span class="n">retry</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sleep</span> <span class="o">=</span> <span class="n">sleep</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">retry</span> <span class="o">=</span> <span class="n">retry</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">sleep</span> <span class="o">=</span> <span class="n">sleep</span>
  
     <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
         <span class="k">def</span> <span class="nf">checkRun</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
             <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-                <span class="k">if</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">retry</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+                <span class="k">if</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">retry</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
                     <span class="k">raise</span> <span class="n">e</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">retry</span> <span class="o">-=</span> <span class="mi">1</span>
-                    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sleep</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="p">.</span><span class="n">retry</span> <span class="o">-=</span> <span class="mi">1</span>
+                    <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">sleep</span><span class="p">)</span>
                     <span class="k">return</span> <span class="n">checkRun</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
                     
         <span class="o">@</span><span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>

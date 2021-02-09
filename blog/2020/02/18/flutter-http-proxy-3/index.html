@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,11 +310,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#flutter" title="Tag: flutter" rel="tag">flutter</a-->
-        <a href="/tag/#flutter" title="Tag: flutter" rel="tag">flutter</a>&nbsp;
+        <!--a href="/blog/tag/#flutter" title="Tag: flutter" rel="tag">flutter</a-->
+        <a href="/blog/tag/#flutter" title="Tag: flutter" rel="tag">flutter</a>&nbsp;
     
-        <!--a href="/tag/#dart" title="Tag: dart" rel="tag">dart</a-->
-        <a href="/tag/#dart" title="Tag: dart" rel="tag">dart</a>
+        <!--a href="/blog/tag/#dart" title="Tag: dart" rel="tag">dart</a-->
+        <a href="/blog/tag/#dart" title="Tag: dart" rel="tag">dart</a>
     
   
 
@@ -344,18 +344,18 @@
 
 <h2 id="过程">过程</h2>
 <ul>
-  <li>看了一下<code class="highlighter-rouge">dart:io</code>，想要实现这个功能只需要在源码里面改那么一丁点东西，也就是在Socket连接建立的时候将host替换掉，可惜。</li>
+  <li>看了一下<code class="language-plaintext highlighter-rouge">dart:io</code>，想要实现这个功能只需要在源码里面改那么一丁点东西，也就是在Socket连接建立的时候将host替换掉，可惜。</li>
   <li>目前也没啥好一点的现成的工具，如果是从TCP层面入手的话，如果没有像java netty那样的第三方工具，自己实现整个SSL层很麻烦啊。</li>
   <li>工作量少一点的方法是，考虑自己建立一个本地HTTPS代理，想要访问的HTTP请求设置一下代理即可。  思路如下：
     <ul>
       <li>接收从Client段发来的CONNECT消息，从头部读取到host和port</li>
       <li>在自己维护的表内查询是否有host，并据此建立与服务器的连接
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  host = map[host] == null? host : map[host];
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  host = map[host] == null? host : map[host];
   socketWithServer = socket.connect(host, port);
 </code></pre></div>        </div>
       </li>
       <li>与服务器的连接建立后，向客户端回个确认消息
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  socketWithClient.add('HTTP/1.1 200 Connection Established\r\n\r\n');
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  socketWithClient.add('HTTP/1.1 200 Connection Established\r\n\r\n');
 </code></pre></div>        </div>
       </li>
       <li>充当客户端与服务器之间的水管工，来啥转发啥。</li>
@@ -366,7 +366,7 @@
 
 <h2 id="代码">代码</h2>
 <h3 id="功能实现">功能实现</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import 'dart:io';
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import 'dart:io';
 import 'dart:convert';
 
 
@@ -509,7 +509,7 @@ class ServerConnectionHandler {
 </code></pre></div></div>
 
 <h3 id="一个样例">一个样例</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import 'dart:io';
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import 'dart:io';
 import 'dart:convert';
 import 'package:httpProxy/httpProxy.dart';
 

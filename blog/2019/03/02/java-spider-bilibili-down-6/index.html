@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,17 +310,17 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
     
-        <!--a href="/tag/#html" title="Tag: html" rel="tag">html</a-->
-        <a href="/tag/#html" title="Tag: html" rel="tag">html</a>&nbsp;
+        <!--a href="/blog/tag/#html" title="Tag: html" rel="tag">html</a-->
+        <a href="/blog/tag/#html" title="Tag: html" rel="tag">html</a>&nbsp;
     
-        <!--a href="/tag/#%E7%88%AC%E8%99%AB" title="Tag: 爬虫" rel="tag">爬虫</a-->
-        <a href="/tag/#爬虫" title="Tag: 爬虫" rel="tag">爬虫</a>&nbsp;
+        <!--a href="/blog/tag/#%E7%88%AC%E8%99%AB" title="Tag: 爬虫" rel="tag">爬虫</a-->
+        <a href="/blog/tag/#爬虫" title="Tag: 爬虫" rel="tag">爬虫</a>&nbsp;
     
-        <!--a href="/tag/#bilibili" title="Tag: bilibili" rel="tag">bilibili</a-->
-        <a href="/tag/#bilibili" title="Tag: bilibili" rel="tag">bilibili</a>
+        <!--a href="/blog/tag/#bilibili" title="Tag: bilibili" rel="tag">bilibili</a-->
+        <a href="/blog/tag/#bilibili" title="Tag: bilibili" rel="tag">bilibili</a>
     
   
 
@@ -343,7 +343,7 @@
   <li><a href="#源代码" id="markdown-toc-源代码">源代码</a></li>
 </ul>
 <blockquote>
-  <p>现在要做的就是增加对<code class="highlighter-rouge">HTML5</code>播放源的下载支持(๑•̀ㅂ•́)و✧</p>
+  <p>现在要做的就是增加对<code class="language-plaintext highlighter-rouge">HTML5</code>播放源的下载支持(๑•̀ㅂ•́)و✧</p>
 </blockquote>
 
 <h2 id="要做的事情">要做的事情</h2>
@@ -369,8 +369,8 @@
       <li>如果换我来，我想把视频的分片计算的映射方法，还有其它一些必要信息写到文件头部，这个空间肯定占用不大，传输也花不了多长时间，嗯，耐撕的解决方案。</li>
     </ul>
   </li>
-  <li>经过观察，似乎整个播放流程就是这样实现的。下面截取了一部分配置，注意<code class="highlighter-rouge">SegmentBase</code>。每次播放源的前两个请求果然与这区间一致。
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  <li>经过观察，似乎整个播放流程就是这样实现的。下面截取了一部分配置，注意<code class="language-plaintext highlighter-rouge">SegmentBase</code>。每次播放源的前两个请求果然与这区间一致。
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
   "duration": 83,
       "minBufferTime": 1.5,
       "video": [{
@@ -405,7 +405,7 @@
 我把服务器那端的文件整个都挪过来了，怎么可能生不成想要的东西。。。Pia!(ｏ ‵-′)ノ”(ノ﹏&lt;。) <br />
 所以，直接ffmpeg处理一下试一试，现在我有一个音频，一个视频<br />
 <a href="https://zhidao.baidu.com/question/1888515562979217228.html">FFmpeg将视频和音频合并</a></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ffmpeg -i /path/to/input-no-audio.mp4 -i input.mp3 -c copy /path/to/output.mp4
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ffmpeg -i /path/to/input-no-audio.mp4 -i input.mp3 -c copy /path/to/output.mp4
 </code></pre></div></div>
 
 <h3 id="搞掂">搞掂</h3>
@@ -416,8 +416,8 @@
 <ul>
   <li>获取下载地址的api参数
     <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//String url = "https://api.bilibili.com/x/player/playurl?fnval=2&amp;fnver=0&amp;player=1&amp;otype=json&amp;avid=%s&amp;cid=%s&amp;qn=%s";</span>
-<span class="n">String</span> <span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.bilibili.com/x/player/playurl?fnval=16&amp;fnver=0&amp;type=&amp;otype=json&amp;avid=%s&amp;cid=%s&amp;qn=%s"</span><span class="o">;</span>
-<span class="n">url</span> <span class="o">=</span> <span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="n">url</span><span class="o">,</span> <span class="n">avIdNum</span><span class="o">,</span> <span class="n">cid</span><span class="o">,</span> <span class="n">qn</span><span class="o">);</span>
+<span class="nc">String</span> <span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.bilibili.com/x/player/playurl?fnval=16&amp;fnver=0&amp;type=&amp;otype=json&amp;avid=%s&amp;cid=%s&amp;qn=%s"</span><span class="o">;</span>
+<span class="n">url</span> <span class="o">=</span> <span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="n">url</span><span class="o">,</span> <span class="n">avIdNum</span><span class="o">,</span> <span class="n">cid</span><span class="o">,</span> <span class="n">qn</span><span class="o">);</span>
 </code></pre></div>    </div>
   </li>
   <li>下载的HTTP请求头部<br />
@@ -430,15 +430,15 @@
   </li>
   <li>
     <p>下载的文件
-由一个<code class="highlighter-rouge">.flv</code>变为视频音频两个<code class="highlighter-rouge">.m4s</code></p>
+由一个<code class="language-plaintext highlighter-rouge">.flv</code>变为视频音频两个<code class="language-plaintext highlighter-rouge">.m4s</code></p>
   </li>
   <li>是否需要经过ffmpeg处理  <br />
 flash源下载可以直接食用，HTML5源需要经过处理
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span><span class="o">[]</span> <span class="nf">createConvertCmd</span><span class="o">(</span><span class="n">String</span> <span class="n">videoName</span><span class="o">,</span> <span class="n">String</span> <span class="n">audioName</span><span class="o">,</span> <span class="n">String</span> <span class="n">dstName</span><span class="o">)</span> <span class="o">{</span>
-  <span class="n">String</span> <span class="n">cmd</span><span class="o">[]</span> <span class="o">=</span> <span class="o">{</span><span class="s">"ffmpeg"</span><span class="o">,</span>
-          <span class="s">"-i"</span><span class="o">,</span> <span class="n">Global</span><span class="o">.</span><span class="na">savePath</span> <span class="o">+</span><span class="n">videoName</span><span class="o">,</span> 
-          <span class="s">"-i"</span><span class="o">,</span> <span class="n">Global</span><span class="o">.</span><span class="na">savePath</span> <span class="o">+</span><span class="n">audioName</span><span class="o">,</span> 
-          <span class="s">"-c"</span><span class="o">,</span> <span class="s">"copy"</span><span class="o">,</span> <span class="n">Global</span><span class="o">.</span><span class="na">savePath</span> <span class="o">+</span> <span class="n">dstName</span><span class="o">};</span>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="nc">String</span><span class="o">[]</span> <span class="nf">createConvertCmd</span><span class="o">(</span><span class="nc">String</span> <span class="n">videoName</span><span class="o">,</span> <span class="nc">String</span> <span class="n">audioName</span><span class="o">,</span> <span class="nc">String</span> <span class="n">dstName</span><span class="o">)</span> <span class="o">{</span>
+  <span class="nc">String</span> <span class="n">cmd</span><span class="o">[]</span> <span class="o">=</span> <span class="o">{</span><span class="s">"ffmpeg"</span><span class="o">,</span>
+          <span class="s">"-i"</span><span class="o">,</span> <span class="nc">Global</span><span class="o">.</span><span class="na">savePath</span> <span class="o">+</span><span class="n">videoName</span><span class="o">,</span> 
+          <span class="s">"-i"</span><span class="o">,</span> <span class="nc">Global</span><span class="o">.</span><span class="na">savePath</span> <span class="o">+</span><span class="n">audioName</span><span class="o">,</span> 
+          <span class="s">"-c"</span><span class="o">,</span> <span class="s">"copy"</span><span class="o">,</span> <span class="nc">Global</span><span class="o">.</span><span class="na">savePath</span> <span class="o">+</span> <span class="n">dstName</span><span class="o">};</span>
   <span class="k">return</span> <span class="n">cmd</span><span class="o">;</span>
 <span class="o">}</span>
 </code></pre></div>    </div>

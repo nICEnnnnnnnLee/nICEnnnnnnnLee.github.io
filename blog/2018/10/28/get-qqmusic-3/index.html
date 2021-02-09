@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,14 +310,14 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a-->
-        <a href="/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a>&nbsp;
+        <!--a href="/blog/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a-->
+        <a href="/blog/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a>&nbsp;
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
     
-        <!--a href="/tag/#%E5%89%8D%E7%AB%AF%E8%B0%83%E8%AF%95" title="Tag: 前端调试" rel="tag">前端调试</a-->
-        <a href="/tag/#前端调试" title="Tag: 前端调试" rel="tag">前端调试</a>
+        <!--a href="/blog/tag/#%E5%89%8D%E7%AB%AF%E8%B0%83%E8%AF%95" title="Tag: 前端调试" rel="tag">前端调试</a-->
+        <a href="/blog/tag/#前端调试" title="Tag: 前端调试" rel="tag">前端调试</a>
     
   
 
@@ -339,13 +339,13 @@
 <h2 id="关键代码">关键代码</h2>
 
 <p>如下,setJavaScriptEnabled设置成true,让其运行一段时间后,返回一个HtmlPage网页,接下来的工作便是对网页进行解析</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="n">HtmlPage</span> <span class="nf">visitWebByUrl</span><span class="o">(</span><span class="n">String</span> <span class="n">url</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">,</span> <span class="n">MalformedURLException</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="nc">HtmlPage</span> <span class="nf">visitWebByUrl</span><span class="o">(</span><span class="nc">String</span> <span class="n">url</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span><span class="o">,</span> <span class="nc">MalformedURLException</span> <span class="o">{</span>
 		<span class="c1">//构造一个webClient 模拟Chrome 浏览器</span>
-		<span class="n">WebClient</span> <span class="n">webClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">WebClient</span><span class="o">(</span><span class="n">BrowserVersion</span><span class="o">.</span><span class="na">CHROME</span><span class="o">);</span>
+		<span class="nc">WebClient</span> <span class="n">webClient</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">WebClient</span><span class="o">(</span><span class="nc">BrowserVersion</span><span class="o">.</span><span class="na">CHROME</span><span class="o">);</span>
 		<span class="c1">//屏蔽日志信息</span>
-		<span class="n">LogFactory</span><span class="o">.</span><span class="na">getFactory</span><span class="o">().</span><span class="na">setAttribute</span><span class="o">(</span><span class="s">"org.apache.commons.logging.Log"</span><span class="o">,</span>
+		<span class="nc">LogFactory</span><span class="o">.</span><span class="na">getFactory</span><span class="o">().</span><span class="na">setAttribute</span><span class="o">(</span><span class="s">"org.apache.commons.logging.Log"</span><span class="o">,</span>
 				<span class="s">"org.apache.commons.logging.impl.NoOpLog"</span><span class="o">);</span>
-		<span class="n">java</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">logging</span><span class="o">.</span><span class="na">Logger</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="s">"com.gargoylesoftware"</span><span class="o">).</span><span class="na">setLevel</span><span class="o">(</span><span class="n">Level</span><span class="o">.</span><span class="na">OFF</span><span class="o">);</span>
+		<span class="n">java</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">logging</span><span class="o">.</span><span class="na">Logger</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="s">"com.gargoylesoftware"</span><span class="o">).</span><span class="na">setLevel</span><span class="o">(</span><span class="nc">Level</span><span class="o">.</span><span class="na">OFF</span><span class="o">);</span>
 		<span class="c1">//支持JavaScript</span>
 		<span class="n">webClient</span><span class="o">.</span><span class="na">getOptions</span><span class="o">().</span><span class="na">setJavaScriptEnabled</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
 		<span class="n">webClient</span><span class="o">.</span><span class="na">getOptions</span><span class="o">().</span><span class="na">setActiveXNative</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
@@ -353,7 +353,7 @@
 		<span class="n">webClient</span><span class="o">.</span><span class="na">getOptions</span><span class="o">().</span><span class="na">setThrowExceptionOnScriptError</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
 		<span class="n">webClient</span><span class="o">.</span><span class="na">getOptions</span><span class="o">().</span><span class="na">setThrowExceptionOnFailingStatusCode</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
 		<span class="n">webClient</span><span class="o">.</span><span class="na">getOptions</span><span class="o">().</span><span class="na">setTimeout</span><span class="o">(</span><span class="mi">3000</span><span class="o">);</span>
-		<span class="n">HtmlPage</span> <span class="n">rootPage</span> <span class="o">=</span> <span class="n">webClient</span><span class="o">.</span><span class="na">getPage</span><span class="o">(</span><span class="n">url</span><span class="o">);</span>
+		<span class="nc">HtmlPage</span> <span class="n">rootPage</span> <span class="o">=</span> <span class="n">webClient</span><span class="o">.</span><span class="na">getPage</span><span class="o">(</span><span class="n">url</span><span class="o">);</span>
 		<span class="c1">//设置一个运行JavaScript的时间</span>
 		<span class="n">webClient</span><span class="o">.</span><span class="na">waitForBackgroundJavaScript</span><span class="o">(</span><span class="mi">1000</span><span class="o">);</span>
 		<span class="k">return</span> <span class="n">rootPage</span><span class="o">;</span>
@@ -364,12 +364,12 @@
 <h2 id="解析工作">解析工作</h2>
 
 <p>其实是单纯的前端都会的东西…</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Song</span><span class="o">&gt;</span> <span class="nf">parseDomToSongList</span><span class="o">(</span><span class="n">HtmlPage</span> <span class="n">rootPage</span><span class="o">)</span> <span class="o">{</span>
-		<span class="n">List</span><span class="o">&lt;</span><span class="n">Song</span><span class="o">&gt;</span> <span class="n">lstSong</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
-		<span class="kd">final</span> <span class="n">DomNodeList</span><span class="o">&lt;</span><span class="n">DomNode</span><span class="o">&gt;</span> <span class="n">divs</span> <span class="o">=</span> <span class="n">rootPage</span><span class="o">.</span><span class="na">querySelectorAll</span><span class="o">(</span><span class="s">"div.songlist__item"</span><span class="o">);</span>
-		<span class="k">for</span> <span class="o">(</span><span class="n">DomNode</span> <span class="n">div</span> <span class="o">:</span> <span class="n">divs</span><span class="o">)</span> <span class="o">{</span>
-			<span class="n">Song</span> <span class="n">song</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Song</span><span class="o">();</span>
-			<span class="n">HtmlElement</span> <span class="n">ele</span> <span class="o">=</span> <span class="n">div</span><span class="o">.</span><span class="na">querySelector</span><span class="o">(</span><span class="s">".songlist__songname_txt a"</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Song</span><span class="o">&gt;</span> <span class="nf">parseDomToSongList</span><span class="o">(</span><span class="nc">HtmlPage</span> <span class="n">rootPage</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">List</span><span class="o">&lt;</span><span class="nc">Song</span><span class="o">&gt;</span> <span class="n">lstSong</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+		<span class="kd">final</span> <span class="nc">DomNodeList</span><span class="o">&lt;</span><span class="nc">DomNode</span><span class="o">&gt;</span> <span class="n">divs</span> <span class="o">=</span> <span class="n">rootPage</span><span class="o">.</span><span class="na">querySelectorAll</span><span class="o">(</span><span class="s">"div.songlist__item"</span><span class="o">);</span>
+		<span class="k">for</span> <span class="o">(</span><span class="nc">DomNode</span> <span class="n">div</span> <span class="o">:</span> <span class="n">divs</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">Song</span> <span class="n">song</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Song</span><span class="o">();</span>
+			<span class="nc">HtmlElement</span> <span class="n">ele</span> <span class="o">=</span> <span class="n">div</span><span class="o">.</span><span class="na">querySelector</span><span class="o">(</span><span class="s">".songlist__songname_txt a"</span><span class="o">);</span>
 			
 		    <span class="n">song</span><span class="o">.</span><span class="na">mid</span> <span class="o">=</span> <span class="n">ele</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">"href"</span><span class="o">)</span>
 		    		<span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s">"https://y.qq.com/n/yqq/song/"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
@@ -402,33 +402,33 @@
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="nd">@Test</span> <span class="c1">//访问关键词结果页面</span>
 	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">test</span><span class="o">()</span> <span class="o">{</span>
 		<span class="n">logOn</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
-		<span class="n">String</span> <span class="n">url</span> <span class="o">=</span> <span class="n">genQueryUrl</span><span class="o">(</span><span class="s">"战 排骨教主"</span><span class="o">);</span>
-		<span class="n">println</span><span class="o">(</span><span class="k">new</span> <span class="n">Date</span><span class="o">().</span><span class="na">toString</span><span class="o">());</span>
+		<span class="nc">String</span> <span class="n">url</span> <span class="o">=</span> <span class="n">genQueryUrl</span><span class="o">(</span><span class="s">"战 排骨教主"</span><span class="o">);</span>
+		<span class="n">println</span><span class="o">(</span><span class="k">new</span> <span class="nc">Date</span><span class="o">().</span><span class="na">toString</span><span class="o">());</span>
 		<span class="k">try</span> <span class="o">{</span>
-			<span class="n">HtmlPage</span> <span class="n">rootPage</span> <span class="o">=</span> <span class="n">visitWebByUrl</span><span class="o">(</span><span class="n">url</span><span class="o">);</span>
+			<span class="nc">HtmlPage</span> <span class="n">rootPage</span> <span class="o">=</span> <span class="n">visitWebByUrl</span><span class="o">(</span><span class="n">url</span><span class="o">);</span>
 			<span class="n">parseDomToSongList</span><span class="o">(</span><span class="n">rootPage</span><span class="o">);</span>
-		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">FailingHttpStatusCodeException</span> <span class="o">|</span> <span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">FailingHttpStatusCodeException</span> <span class="o">|</span> <span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
 		<span class="o">}</span>
-		<span class="n">println</span><span class="o">(</span><span class="k">new</span> <span class="n">Date</span><span class="o">().</span><span class="na">toString</span><span class="o">());</span>
+		<span class="n">println</span><span class="o">(</span><span class="k">new</span> <span class="nc">Date</span><span class="o">().</span><span class="na">toString</span><span class="o">());</span>
 	<span class="o">}</span>
 	
 	<span class="nd">@Test</span> <span class="c1">////访问歌曲页面,获取  专辑图片\歌词</span>
 	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">test2</span><span class="o">()</span> <span class="o">{</span>
 		<span class="n">logOn</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
 		<span class="n">printNowTime</span><span class="o">();</span>
-		<span class="n">String</span> <span class="n">url</span> <span class="o">=</span> <span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"https://y.qq.com/n/yqq/song/%s.html"</span><span class="o">,</span> <span class="s">"000wDA7M23CRIf"</span><span class="o">);</span>
-		<span class="n">println</span><span class="o">(</span><span class="k">new</span> <span class="n">Date</span><span class="o">().</span><span class="na">toString</span><span class="o">());</span>
+		<span class="nc">String</span> <span class="n">url</span> <span class="o">=</span> <span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"https://y.qq.com/n/yqq/song/%s.html"</span><span class="o">,</span> <span class="s">"000wDA7M23CRIf"</span><span class="o">);</span>
+		<span class="n">println</span><span class="o">(</span><span class="k">new</span> <span class="nc">Date</span><span class="o">().</span><span class="na">toString</span><span class="o">());</span>
 		<span class="k">try</span> <span class="o">{</span>
-			<span class="n">HtmlPage</span> <span class="n">rootPage</span> <span class="o">=</span> <span class="n">visitWebByUrl</span><span class="o">(</span><span class="n">url</span><span class="o">);</span>
+			<span class="nc">HtmlPage</span> <span class="n">rootPage</span> <span class="o">=</span> <span class="n">visitWebByUrl</span><span class="o">(</span><span class="n">url</span><span class="o">);</span>
 			
 			<span class="c1">//专辑图片\歌曲链接\歌词</span>
-			<span class="n">HtmlElement</span> <span class="n">ele</span> <span class="o">=</span> <span class="n">rootPage</span><span class="o">.</span><span class="na">querySelector</span><span class="o">(</span><span class="s">"img.data__photo"</span><span class="o">);</span>
+			<span class="nc">HtmlElement</span> <span class="n">ele</span> <span class="o">=</span> <span class="n">rootPage</span><span class="o">.</span><span class="na">querySelector</span><span class="o">(</span><span class="s">"img.data__photo"</span><span class="o">);</span>
 			<span class="n">println</span><span class="o">(</span><span class="n">ele</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">"src"</span><span class="o">));</span>
 			<span class="n">ele</span> <span class="o">=</span> <span class="n">rootPage</span><span class="o">.</span><span class="na">getHtmlElementById</span><span class="o">(</span><span class="s">"lrc_content"</span><span class="o">);</span>
 			<span class="n">print</span><span class="o">(</span><span class="n">ele</span><span class="o">.</span><span class="na">asText</span><span class="o">());</span>
 			
-		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">FailingHttpStatusCodeException</span> <span class="o">|</span> <span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">FailingHttpStatusCodeException</span> <span class="o">|</span> <span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
 		<span class="o">}</span>
 		<span class="n">printNowTime</span><span class="o">();</span>

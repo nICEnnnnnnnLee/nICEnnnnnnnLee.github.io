@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,26 +310,26 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8" title="Tag: 云服务器" rel="tag">云服务器</a-->
-        <a href="/tag/#云服务器" title="Tag: 云服务器" rel="tag">云服务器</a>&nbsp;
+        <!--a href="/blog/tag/#%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8" title="Tag: 云服务器" rel="tag">云服务器</a-->
+        <a href="/blog/tag/#云服务器" title="Tag: 云服务器" rel="tag">云服务器</a>&nbsp;
     
-        <!--a href="/tag/#%E5%BB%BA%E7%AB%99" title="Tag: 建站" rel="tag">建站</a-->
-        <a href="/tag/#建站" title="Tag: 建站" rel="tag">建站</a>&nbsp;
+        <!--a href="/blog/tag/#%E5%BB%BA%E7%AB%99" title="Tag: 建站" rel="tag">建站</a-->
+        <a href="/blog/tag/#建站" title="Tag: 建站" rel="tag">建站</a>&nbsp;
     
-        <!--a href="/tag/#php" title="Tag: php" rel="tag">php</a-->
-        <a href="/tag/#php" title="Tag: php" rel="tag">php</a>&nbsp;
+        <!--a href="/blog/tag/#php" title="Tag: php" rel="tag">php</a-->
+        <a href="/blog/tag/#php" title="Tag: php" rel="tag">php</a>&nbsp;
     
-        <!--a href="/tag/#%E5%8D%9A%E5%AE%A2" title="Tag: 博客" rel="tag">博客</a-->
-        <a href="/tag/#博客" title="Tag: 博客" rel="tag">博客</a>&nbsp;
+        <!--a href="/blog/tag/#%E5%8D%9A%E5%AE%A2" title="Tag: 博客" rel="tag">博客</a-->
+        <a href="/blog/tag/#博客" title="Tag: 博客" rel="tag">博客</a>&nbsp;
     
-        <!--a href="/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a-->
-        <a href="/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a>&nbsp;
+        <!--a href="/blog/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a-->
+        <a href="/blog/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a>&nbsp;
     
-        <!--a href="/tag/#git" title="Tag: git" rel="tag">git</a-->
-        <a href="/tag/#git" title="Tag: git" rel="tag">git</a>&nbsp;
+        <!--a href="/blog/tag/#git" title="Tag: git" rel="tag">git</a-->
+        <a href="/blog/tag/#git" title="Tag: git" rel="tag">git</a>&nbsp;
     
-        <!--a href="/tag/#webhook" title="Tag: webhook" rel="tag">webhook</a-->
-        <a href="/tag/#webhook" title="Tag: webhook" rel="tag">webhook</a>
+        <!--a href="/blog/tag/#webhook" title="Tag: webhook" rel="tag">webhook</a-->
+        <a href="/blog/tag/#webhook" title="Tag: webhook" rel="tag">webhook</a>
     
   
 
@@ -355,30 +355,30 @@
 
 <h2 id="一准备工作">一、准备工作</h2>
 <ul>
-  <li>新建<code class="highlighter-rouge">/usr/workspace/webhook/</code>文件夹
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /usr
+  <li>新建<code class="language-plaintext highlighter-rouge">/usr/workspace/webhook/</code>文件夹
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /usr
 mkdir workspace
 cd workspace
 mkdir webhook
 </code></pre></div>    </div>
   </li>
-  <li>新建<code class="highlighter-rouge">/usr/workspace/nicelee.coding.me/</code>文件夹
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /usr
+  <li>新建<code class="language-plaintext highlighter-rouge">/usr/workspace/nicelee.coding.me/</code>文件夹
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /usr
 mkdir workspace
 cd workspace
 mkdir nicelee.coding.me
 </code></pre></div>    </div>
   </li>
-  <li>将<code class="highlighter-rouge">nicelee.coding.me</code>文件夹拥有者设为www
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chown -R www.www /usr/workspace/nicelee.coding.me/
+  <li>将<code class="language-plaintext highlighter-rouge">nicelee.coding.me</code>文件夹拥有者设为www
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chown -R www.www /usr/workspace/nicelee.coding.me/
 </code></pre></div>    </div>
   </li>
-  <li>将nginx 默认Server目录设为<code class="highlighter-rouge">/usr/workspace/nicelee.coding.me/_site</code>
-因为jekyll最终的文件全部都部署在<code class="highlighter-rouge">_site</code>文件夹下，所以直接将它设为根目录即可。
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vim /usr/local/webserver/nginx/conf/nginx.conf
+  <li>将nginx 默认Server目录设为<code class="language-plaintext highlighter-rouge">/usr/workspace/nicelee.coding.me/_site</code>
+因为jekyll最终的文件全部都部署在<code class="language-plaintext highlighter-rouge">_site</code>文件夹下，所以直接将它设为根目录即可。
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vim /usr/local/webserver/nginx/conf/nginx.conf
 </code></pre></div>    </div>
     <p>打开nginx的配置文件，修改server的root配置</p>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> #下面是server虚拟主机的配置
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> #下面是server虚拟主机的配置
  server
 {
   listen 80;#监听端口
@@ -405,21 +405,21 @@ mkdir nicelee.coding.me
 }
 </code></pre></div>    </div>
     <h2 id="二git-clone">二、Git clone</h2>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone git@git.dev.tencent.com:nicelee/nicelee.coding.me.git
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone git@git.dev.tencent.com:nicelee/nicelee.coding.me.git
 </code></pre></div>    </div>
     <h2 id="三阶段性验证">三、阶段性验证</h2>
-    <p>客户端打开网址，<code class="highlighter-rouge">http://公网ip</code>,此时,应该能访问成功
+    <p>客户端打开网址，<code class="language-plaintext highlighter-rouge">http://公网ip</code>,此时,应该能访问成功
 <img src="https://s1.ax1x.com/2018/11/06/iovNCT.png" alt="" /></p>
   </li>
 </ul>
 
 <h2 id="四服务器webhook响应设置">四、服务器WebHook响应设置</h2>
 <p>现拟监听端口8090，收到请求后执行git pull操作，更新博客的相关信息</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vim /usr/local/webserver/nginx/conf/nginx.conf
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vim /usr/local/webserver/nginx/conf/nginx.conf
 </code></pre></div></div>
 <ul>
   <li>打开nginx的配置文件，再增加一个server的root配置
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#WebHook的位置
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#WebHook的位置
 server
 {
   listen 8090;#监听端口

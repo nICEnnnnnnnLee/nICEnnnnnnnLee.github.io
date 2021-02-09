@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,11 +310,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a-->
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
+        <!--a href="/blog/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a-->
+        <a href="/blog/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
     
-        <!--a href="/tag/#Nginx" title="Tag: Nginx" rel="tag">Nginx</a-->
-        <a href="/tag/#Nginx" title="Tag: Nginx" rel="tag">Nginx</a>
+        <!--a href="/blog/tag/#Nginx" title="Tag: Nginx" rel="tag">Nginx</a-->
+        <a href="/blog/tag/#Nginx" title="Tag: Nginx" rel="tag">Nginx</a>
     
   
 
@@ -344,28 +344,28 @@ Nginx日志越来越大了，非常不方便查看和分析，因而有定时分
 
 <h2 id="分割日志">分割日志</h2>
 <p>不多说，直接上脚本：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
-<span class="nv">year</span><span class="o">=</span><span class="sb">`</span><span class="nb">date</span> +%Y<span class="sb">`</span>
-<span class="nv">month</span><span class="o">=</span><span class="sb">`</span><span class="nb">date</span> +%m<span class="sb">`</span>
-<span class="nv">day</span><span class="o">=</span><span class="sb">`</span><span class="nb">date</span> +%d<span class="sb">`</span>
-<span class="nv">logs_backup_path</span><span class="o">=</span><span class="s2">"/usr/local/webserver/nginx/logs/logs_backup/</span><span class="nv">$year$month</span><span class="s2">"</span>  <span class="c">#日志存储路径</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/bin/bash
+year=`date +%Y`
+month=`date +%m`
+day=`date +%d`
+logs_backup_path="/usr/local/webserver/nginx/logs/logs_backup/$year$month"  #日志存储路径
 
-<span class="nv">logs_path</span><span class="o">=</span><span class="s2">"/usr/local/webserver/nginx/logs/"</span>    <span class="c">#要切割的日志路径</span>
-<span class="nv">logs_access</span><span class="o">=</span><span class="s2">"nginx_access"</span>  <span class="c">#要切割的日志</span>
-<span class="nv">logs_error</span><span class="o">=</span><span class="s2">"nginx_error"</span>
-<span class="nv">pid</span><span class="o">=</span><span class="s2">"/usr/local/webserver/nginx/nginx.pid"</span>      <span class="c">#nginx的pid</span>
+logs_path="/usr/local/webserver/nginx/logs/"    #要切割的日志路径
+logs_access="nginx_access"  #要切割的日志
+logs_error="nginx_error"
+pid="/usr/local/webserver/nginx/nginx.pid"      #nginx的pid
 
-<span class="o">[</span> <span class="nt">-d</span> <span class="nv">$logs_backup_path</span> <span class="o">]||</span><span class="nb">mkdir</span> <span class="nt">-p</span> <span class="nv">$logs_backup_path</span>
-<span class="nv">rq</span><span class="o">=</span><span class="sb">`</span><span class="nb">date</span> +%Y%m%d<span class="sb">`</span>
-<span class="nb">mv</span> <span class="k">${</span><span class="nv">logs_path</span><span class="k">}${</span><span class="nv">logs_access</span><span class="k">}</span>.log <span class="k">${</span><span class="nv">logs_backup_path</span><span class="k">}</span>/<span class="k">${</span><span class="nv">logs_access</span><span class="k">}</span>_<span class="k">${</span><span class="nv">rq</span><span class="k">}</span>.log
-<span class="c">#mv ${logs_path}${logs_error}.log ${logs_backup_path}/${logs_error}_${rq}.log</span>
-<span class="nb">kill</span> <span class="nt">-USR1</span> <span class="sb">`</span><span class="nb">cat</span> <span class="nv">$pid</span><span class="sb">`</span>
+[ -d $logs_backup_path ]||mkdir -p $logs_backup_path
+rq=`date +%Y%m%d`
+mv ${logs_path}${logs_access}.log ${logs_backup_path}/${logs_access}_${rq}.log
+#mv ${logs_path}${logs_error}.log ${logs_backup_path}/${logs_error}_${rq}.log
+kill -USR1 `cat $pid`
 </code></pre></div></div>
 
 <h2 id="定时运行">定时运行</h2>
 <ul>
   <li>在Linux系统下，直接使用crontab即可。
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>crontab -e 
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>crontab -e 
 57 23 * * * bash /usr/local/webserver/nginx/logs/backup_log.sh   #每天23：57分开始执行；
 </code></pre></div>    </div>
   </li>

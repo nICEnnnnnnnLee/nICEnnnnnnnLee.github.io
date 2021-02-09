@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,11 +310,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
     
-        <!--a href="/tag/#%E9%97%B2%E8%AF%9D" title="Tag: 闲话" rel="tag">闲话</a-->
-        <a href="/tag/#闲话" title="Tag: 闲话" rel="tag">闲话</a>
+        <!--a href="/blog/tag/#%E9%97%B2%E8%AF%9D" title="Tag: 闲话" rel="tag">闲话</a-->
+        <a href="/blog/tag/#闲话" title="Tag: 闲话" rel="tag">闲话</a>
     
   
 
@@ -336,41 +336,41 @@
 <ul>
   <li>
     <p>萌新的时候曾经有想法，想实现根据收到的命令(字符串)调用相应方法。<br />
-因为命令很多，不想用<code class="highlighter-rouge">if else if ...</code>，为此折腾了很久，最后赶时间用了<code class="highlighter-rouge">switch</code>(这里还踩了个坑，涉及到<code class="highlighter-rouge">Enum</code>)。<br />
+因为命令很多，不想用<code class="language-plaintext highlighter-rouge">if else if ...</code>，为此折腾了很久，最后赶时间用了<code class="language-plaintext highlighter-rouge">switch</code>(这里还踩了个坑，涉及到<code class="language-plaintext highlighter-rouge">Enum</code>)。<br />
 为此遗憾了很久。<br />
 后来学<strong>反射</strong>，卧槽nice啊，hhhh</p>
   </li>
-  <li><code class="highlighter-rouge">"select * from xxx where id =" + id +" and name = '" + name + "'"</code>，<br />
-最开始也没什么工具，发现<code class="highlighter-rouge">load(String queryStr, Object params...)</code>的实现感觉特别牛b<br />
+  <li><code class="language-plaintext highlighter-rouge">"select * from xxx where id =" + id +" and name = '" + name + "'"</code>，<br />
+最开始也没什么工具，发现<code class="language-plaintext highlighter-rouge">load(String queryStr, Object params...)</code>的实现感觉特别牛b<br />
 像这种
-<code class="highlighter-rouge">("select * from xxx where id = ?1 and name = ?2", id, name)</code>
+<code class="language-plaintext highlighter-rouge">("select * from xxx where id = ?1 and name = ?2", id, name)</code>
 感觉就简洁了很多。  <br />
 但用的别人封装好的东西，也只告诉了一个用法，没有具体实现。<br />
 想自己拿去用，轮到自己去尝试的时候碰了许多壁，后来也就没有再折腾了。
     <ul>
       <li>传的参数的个数为什么可以是0,1,2…?</li>
       <li>传的参数是什么类型呢？我去，我得把这些都考虑一遍，该写多少个方法，会不会有漏。。。？</li>
-      <li>为什么是<code class="highlighter-rouge">?1</code> 和 <code class="highlighter-rouge">?2</code>，而不是 <code class="highlighter-rouge">?</code>呢？，我想直接split(“\\?”)，参数的顺序让用的时候传的时候注意一点好了，至于重复，同一个参数用几遍就传几遍好了。。。</li>
+      <li>为什么是<code class="language-plaintext highlighter-rouge">?1</code> 和 <code class="language-plaintext highlighter-rouge">?2</code>，而不是 <code class="language-plaintext highlighter-rouge">?</code>呢？，我想直接split(“\\?”)，参数的顺序让用的时候传的时候注意一点好了，至于重复，同一个参数用几遍就传几遍好了。。。</li>
       <li>。。。  果然，我还是太拿衣服</li>
-      <li>关键词 <code class="highlighter-rouge">可变长参数</code>、<code class="highlighter-rouge">instance of</code>、<code class="highlighter-rouge">正则表达式</code></li>
+      <li>关键词 <code class="language-plaintext highlighter-rouge">可变长参数</code>、<code class="language-plaintext highlighter-rouge">instance of</code>、<code class="language-plaintext highlighter-rouge">正则表达式</code></li>
     </ul>
   </li>
-  <li>这么多<code class="highlighter-rouge">xml</code>简直不能忍！
+  <li>这么多<code class="language-plaintext highlighter-rouge">xml</code>简直不能忍！
     <ul>
       <li>哇注解真是个好东西。</li>
     </ul>
   </li>
-  <li>每来个请求，就开个线程处理<code class="highlighter-rouge">Socket</code>，没有消息就会一直阻塞。
+  <li>每来个请求，就开个线程处理<code class="language-plaintext highlighter-rouge">Socket</code>，没有消息就会一直阻塞。
     <ul>
-      <li>对于频繁地请求短连接来说，每次频繁地创建、结束<code class="highlighter-rouge">Socket</code>，不如一直保持着不断掉；</li>
+      <li>对于频繁地请求短连接来说，每次频繁地创建、结束<code class="language-plaintext highlighter-rouge">Socket</code>，不如一直保持着不断掉；</li>
       <li>对于长连接来说，消息和消息中间的那段等待过程占着茅坑实在是浪费资源</li>
       <li>所以，非阻塞地实现设计是件非常棒的事情，虽然不可避免的引入了缓存，同时还要额外添加一个请求处理对应机制</li>
       <li>当然，假设每次请求都是数据始终在传输地不间断连接，这种设计也不见得会有啥优势😳</li>
     </ul>
   </li>
-  <li>又得到了一串字符串，匹配，处理，难道又要<code class="highlighter-rouge">if else if ...</code>
+  <li>又得到了一串字符串，匹配，处理，难道又要<code class="language-plaintext highlighter-rouge">if else if ...</code>
     <ul>
-      <li>匹配方法+处理方法定义一个<code class="highlighter-rouge">interface</code>，一个具体方法实现对应一个实现类，再加一个代理，实现对外的方法。</li>
+      <li>匹配方法+处理方法定义一个<code class="language-plaintext highlighter-rouge">interface</code>，一个具体方法实现对应一个实现类，再加一个代理，实现对外的方法。</li>
       <li>即 遍历实现类集合的匹配方法，匹配成功则调用对应的实现类的具体处理。</li>
       <li>实现类集合如何获得？类如何实例化？ ==&gt; 可以扫描指定路径 + 注解配合获取类，然后通过反射手段获取实例。</li>
       <li>如何扩展 ==&gt; 新增匹配+处理，在指定路径实现接口，并在实现类上加注解即可</li>

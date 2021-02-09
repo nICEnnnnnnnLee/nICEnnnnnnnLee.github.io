@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,8 +310,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>
     
   
 
@@ -359,10 +359,10 @@
     <span class="na">steps</span><span class="pi">:</span>
     <span class="c1">## 取出项目代码，设置java环境</span>
     <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v2</span>
-    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Set up JDK 1.8</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Set up JDK </span><span class="m">1.8</span>
       <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/setup-java@v1</span>
       <span class="na">with</span><span class="pi">:</span>
-        <span class="na">java-version</span><span class="pi">:</span> <span class="s">1.8</span>
+        <span class="na">java-version</span><span class="pi">:</span> <span class="m">1.8</span>
     
     <span class="c1">## 从release.json 读取相关信息</span>
     <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Read tag_main</span>
@@ -388,38 +388,38 @@
     <span class="c1">## 打包项目jar包</span>
     <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">MVN Package</span>
       <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
-        <span class="no">mvn -B package assembly:single --file pom.xml -Dmaven.test.skip=true</span>
+        <span class="s">mvn -B package assembly:single --file pom.xml -Dmaven.test.skip=true</span>
 
     <span class="c1">## 将jar包和其它相关文件打包压缩</span>
     <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">ZIP files</span>
       <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
-        <span class="no">mv -f ./target/live-record-${ {steps.tag_main.outputs.value}}-jar-with-dependencies.jar BiliLiveRecorder.jar</span>
-        <span class="no">rm -rf ./plugin</span>
-        <span class="no">rm -rf ./LICENSE</span>
-        <span class="no">mkdir ./plugin/</span>
-        <span class="no">mkdir ./LICENSE/</span>
-        <span class="no">mv -f ./release/run-zhanqi.bat .</span>
-        <span class="no">mv -f ./release/run-yy.bat .</span>
-        <span class="no">mv -f ./release/run-kuaishou.bat .</span>
-        <span class="no">mv -f ./release/run-huya.bat .</span>
-        <span class="no">mv -f ./release/run-douyu.bat .</span>
-        <span class="no">mv -f ./release/run-bili.bat .</span>
-        <span class="no">mv -f ./release/checkFlv.splitScripts.bat .</span>
-        <span class="no">mv -f ./release/checkFlv.bat .</span>
-        <span class="no">mv -f ./release/plugin/* ./plugin/</span>
-        <span class="no">mv -f ./release/LICENSE/* ./LICENSE/        </span>
+        <span class="s">mv -f ./target/live-record-${ {steps.tag_main.outputs.value}}-jar-with-dependencies.jar BiliLiveRecorder.jar</span>
+        <span class="s">rm -rf ./plugin</span>
+        <span class="s">rm -rf ./LICENSE</span>
+        <span class="s">mkdir ./plugin/</span>
+        <span class="s">mkdir ./LICENSE/</span>
+        <span class="s">mv -f ./release/run-zhanqi.bat .</span>
+        <span class="s">mv -f ./release/run-yy.bat .</span>
+        <span class="s">mv -f ./release/run-kuaishou.bat .</span>
+        <span class="s">mv -f ./release/run-huya.bat .</span>
+        <span class="s">mv -f ./release/run-douyu.bat .</span>
+        <span class="s">mv -f ./release/run-bili.bat .</span>
+        <span class="s">mv -f ./release/checkFlv.splitScripts.bat .</span>
+        <span class="s">mv -f ./release/checkFlv.bat .</span>
+        <span class="s">mv -f ./release/plugin/* ./plugin/</span>
+        <span class="s">mv -f ./release/LICENSE/* ./LICENSE/        </span>
         
-        <span class="no">zip BilibiliLiveRecord\ v${ {steps.tag_latest.outputs.value}}.zip BiliLiveRecorder.jar</span>
-        <span class="no">zip -m BilibiliLiveRecord\ v${ {steps.tag_latest.outputs.value}}.zip ./run-zhanqi.bat</span>
-        <span class="no">zip -m BilibiliLiveRecord\ v${ {steps.tag_latest.outputs.value}}.zip ./run-yy.bat</span>
-        <span class="no">zip -m BilibiliLiveRecord\ v${ {steps.tag_latest.outputs.value}}.zip ./run-kuaishou.bat</span>
-        <span class="no">zip -m BilibiliLiveRecord\ v${ {steps.tag_latest.outputs.value}}.zip ./run-huya.bat</span>
-        <span class="no">zip -m BilibiliLiveRecord\ v${ {steps.tag_latest.outputs.value}}.zip ./run-douyu.bat</span>
-        <span class="no">zip -m BilibiliLiveRecord\ v${ {steps.tag_latest.outputs.value}}.zip ./run-bili.bat</span>
-        <span class="no">zip -m BilibiliLiveRecord\ v${ {steps.tag_latest.outputs.value}}.zip ./checkFlv.bat</span>
-        <span class="no">zip -m BilibiliLiveRecord\ v${ {steps.tag_latest.outputs.value}}.zip ./checkFlv.splitScripts.bat</span>
-        <span class="no">zip -rm BilibiliLiveRecord\ v${ {steps.tag_latest.outputs.value}}.zip ./plugin/</span>
-        <span class="no">zip -rm BilibiliLiveRecord\ v${ {steps.tag_latest.outputs.value}}.zip ./LICENSE/</span>
+        <span class="s">zip BilibiliLiveRecord\ v${ {steps.tag_latest.outputs.value}}.zip BiliLiveRecorder.jar</span>
+        <span class="s">zip -m BilibiliLiveRecord\ v${ {steps.tag_latest.outputs.value}}.zip ./run-zhanqi.bat</span>
+        <span class="s">zip -m BilibiliLiveRecord\ v${ {steps.tag_latest.outputs.value}}.zip ./run-yy.bat</span>
+        <span class="s">zip -m BilibiliLiveRecord\ v${ {steps.tag_latest.outputs.value}}.zip ./run-kuaishou.bat</span>
+        <span class="s">zip -m BilibiliLiveRecord\ v${ {steps.tag_latest.outputs.value}}.zip ./run-huya.bat</span>
+        <span class="s">zip -m BilibiliLiveRecord\ v${ {steps.tag_latest.outputs.value}}.zip ./run-douyu.bat</span>
+        <span class="s">zip -m BilibiliLiveRecord\ v${ {steps.tag_latest.outputs.value}}.zip ./run-bili.bat</span>
+        <span class="s">zip -m BilibiliLiveRecord\ v${ {steps.tag_latest.outputs.value}}.zip ./checkFlv.bat</span>
+        <span class="s">zip -m BilibiliLiveRecord\ v${ {steps.tag_latest.outputs.value}}.zip ./checkFlv.splitScripts.bat</span>
+        <span class="s">zip -rm BilibiliLiveRecord\ v${ {steps.tag_latest.outputs.value}}.zip ./plugin/</span>
+        <span class="s">zip -rm BilibiliLiveRecord\ v${ {steps.tag_latest.outputs.value}}.zip ./LICENSE/</span>
     
     <span class="c1">## 发布Release</span>
     <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Create Release</span>
@@ -431,7 +431,7 @@
         <span class="na">tag_name</span><span class="pi">:</span> <span class="s">V${ {steps.tag_latest.outputs.value}}</span>
         <span class="na">release_name</span><span class="pi">:</span> <span class="s">BiliLiveRecorder - v${ {steps.tag_latest.outputs.value}}</span>
         <span class="na">body</span><span class="pi">:</span> <span class="pi">|</span>
-          <span class="no">${ {steps.description.outputs.content}}</span>
+          <span class="s">${ {steps.description.outputs.content}}</span>
         <span class="na">draft</span><span class="pi">:</span> <span class="no">false</span>
         <span class="na">prerelease</span><span class="pi">:</span> <span class="no">false</span>
 

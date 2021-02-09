@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,11 +310,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
     
-        <!--a href="/tag/#%E7%BA%BF%E7%A8%8B%E6%B1%A0" title="Tag: 线程池" rel="tag">线程池</a-->
-        <a href="/tag/#线程池" title="Tag: 线程池" rel="tag">线程池</a>
+        <!--a href="/blog/tag/#%E7%BA%BF%E7%A8%8B%E6%B1%A0" title="Tag: 线程池" rel="tag">线程池</a-->
+        <a href="/blog/tag/#线程池" title="Tag: 线程池" rel="tag">线程池</a>
     
   
 
@@ -335,7 +335,7 @@
 
 <h2 id="总结">总结</h2>
 <ul>
-  <li>线程池核心为<code class="highlighter-rouge">java.uitl.concurrent.ThreadPoolExecutor</code>类，该类有几个构造函数，实际上调用的是一个，其参数的大致含义：
+  <li>线程池核心为<code class="language-plaintext highlighter-rouge">java.uitl.concurrent.ThreadPoolExecutor</code>类，该类有几个构造函数，实际上调用的是一个，其参数的大致含义：
     <ul>
       <li>corePoolSize：核心池的大小</li>
       <li>maximumPoolSize：线程池最大线程数</li>
@@ -352,24 +352,24 @@
   </li>
   <li>一般来说，提交一个任务，
     <ul>
-      <li>当前线程数小于<code class="highlighter-rouge">corePoolSize</code>，则新建线程来执行；</li>
-      <li>大于<code class="highlighter-rouge">corePoolSize</code>，则放入队列<code class="highlighter-rouge">workQueue</code>；</li>
-      <li>队列满了以后，如果线程数小于<code class="highlighter-rouge">maximumPoolSize</code>，则新建线程来执行；</li>
-      <li>大于<code class="highlighter-rouge">maximumPoolSize</code>，则根据拒绝处理任务时的策略处理。</li>
+      <li>当前线程数小于<code class="language-plaintext highlighter-rouge">corePoolSize</code>，则新建线程来执行；</li>
+      <li>大于<code class="language-plaintext highlighter-rouge">corePoolSize</code>，则放入队列<code class="language-plaintext highlighter-rouge">workQueue</code>；</li>
+      <li>队列满了以后，如果线程数小于<code class="language-plaintext highlighter-rouge">maximumPoolSize</code>，则新建线程来执行；</li>
+      <li>大于<code class="language-plaintext highlighter-rouge">maximumPoolSize</code>，则根据拒绝处理任务时的策略处理。</li>
     </ul>
   </li>
   <li>一般来说，当一个任务被线程执行完毕，
     <ul>
       <li>当前若不为空闲，继续执行其他任务；</li>
-      <li>若空闲<code class="highlighter-rouge">keepAliveTime</code>单位时间后，线程数大于<code class="highlighter-rouge">corePoolSize</code>，释放该线程；</li>
-      <li>线程数小于<code class="highlighter-rouge">corePoolSize</code>，无特殊设置不处理；</li>
+      <li>若空闲<code class="language-plaintext highlighter-rouge">keepAliveTime</code>单位时间后，线程数大于<code class="language-plaintext highlighter-rouge">corePoolSize</code>，释放该线程；</li>
+      <li>线程数小于<code class="language-plaintext highlighter-rouge">corePoolSize</code>，无特殊设置不处理；</li>
     </ul>
   </li>
-  <li><code class="highlighter-rouge">Executors</code>类中提供的几个静态方法来创建线程池，实际上也是调用了<code class="highlighter-rouge">ThreadPoolExecutor</code>
+  <li><code class="language-plaintext highlighter-rouge">Executors</code>类中提供的几个静态方法来创建线程池，实际上也是调用了<code class="language-plaintext highlighter-rouge">ThreadPoolExecutor</code>
     <ul>
-      <li><code class="highlighter-rouge">FixedThreadPool</code>创建的线程池corePoolSize和maximumPoolSize值是相等的，它使用的LinkedBlockingQueue；</li>
-      <li><code class="highlighter-rouge">SingleThreadExecutor</code>将corePoolSize和maximumPoolSize都设置为1，也使用的LinkedBlockingQueue；</li>
-      <li><code class="highlighter-rouge">CachedThreadPool</code>将corePoolSize设置为0，将maximumPoolSize设置为Integer.MAX_VALUE，使用的SynchronousQueue，也就是说来了任务就创建线程运行，当线程空闲超过60秒，就销毁线程。</li>
+      <li><code class="language-plaintext highlighter-rouge">FixedThreadPool</code>创建的线程池corePoolSize和maximumPoolSize值是相等的，它使用的LinkedBlockingQueue；</li>
+      <li><code class="language-plaintext highlighter-rouge">SingleThreadExecutor</code>将corePoolSize和maximumPoolSize都设置为1，也使用的LinkedBlockingQueue；</li>
+      <li><code class="language-plaintext highlighter-rouge">CachedThreadPool</code>将corePoolSize设置为0，将maximumPoolSize设置为Integer.MAX_VALUE，使用的SynchronousQueue，也就是说来了任务就创建线程运行，当线程空闲超过60秒，就销毁线程。</li>
     </ul>
   </li>
 </ul>

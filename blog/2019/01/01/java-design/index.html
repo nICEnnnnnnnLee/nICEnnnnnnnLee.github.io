@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,8 +310,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>
     
   
 
@@ -337,7 +337,7 @@
 <h2 id="懒汉式">懒汉式</h2>
 <ul>
   <li>实现
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class Singleton {  
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class Singleton {  
   /* 持有私有静态实例，防止被引用，此处赋值为null，目的是实现延迟加载 */  
   private static Singleton instance = null;  
 
@@ -365,7 +365,7 @@
 <h2 id="双重线程检查模式">双重线程检查模式</h2>
 <ul>
   <li>实现
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class SingletonInner {  
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class SingletonInner {  
   private static volatile SingletonInner sInst = null;  // &lt;&lt;&lt; 这里添加了 volatile  
   
   /** 

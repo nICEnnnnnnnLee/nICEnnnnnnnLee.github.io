@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,14 +310,14 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
     
-        <!--a href="/tag/#Http" title="Tag: Http" rel="tag">Http</a-->
-        <a href="/tag/#Http" title="Tag: Http" rel="tag">Http</a>&nbsp;
+        <!--a href="/blog/tag/#Http" title="Tag: Http" rel="tag">Http</a-->
+        <a href="/blog/tag/#Http" title="Tag: Http" rel="tag">Http</a>&nbsp;
     
-        <!--a href="/tag/#%E4%BB%A3%E7%90%86" title="Tag: 代理" rel="tag">代理</a-->
-        <a href="/tag/#代理" title="Tag: 代理" rel="tag">代理</a>
+        <!--a href="/blog/tag/#%E4%BB%A3%E7%90%86" title="Tag: 代理" rel="tag">代理</a-->
+        <a href="/blog/tag/#代理" title="Tag: 代理" rel="tag">代理</a>
     
   
 
@@ -347,7 +347,7 @@
 <h2 id="思考">思考</h2>
 <ul>
   <li>本文先考虑中间人代理方式</li>
-  <li>前面<code class="highlighter-rouge">Http文件服务器Demo - ProxyHttpServer</code>是来了请求直接读取文件内容回复；现在代理的话其实只是换个方式，也就是来了请求，根据请求访问网页，再把得到的内容回复过去。<br />
+  <li>前面<code class="language-plaintext highlighter-rouge">Http文件服务器Demo - ProxyHttpServer</code>是来了请求直接读取文件内容回复；现在代理的话其实只是换个方式，也就是来了请求，根据请求访问网页，再把得到的内容回复过去。<br />
 这样的话，变动的地方在于要再开一个线程：
     <ul>
       <li>本来的线程用来接收客户端的请求、创建到服务器的连接、构造到服务器的数据；</li>
@@ -359,7 +359,7 @@
 <h2 id="实现">实现</h2>
 <p>其实明白了原理，似乎也没啥好bb的。。<br />
 创建到服务器的TCP连接，打开面向服务器的监听线程，专用于转发数据给客户端</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>private void connecToServer(HttpRequest httpRequest) throws IOException {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>private void connecToServer(HttpRequest httpRequest) throws IOException {
     //默认ip：port参数
     String dstIp = httpRequest.host;
     int dstPort = 80;
@@ -391,7 +391,7 @@
 </code></pre></div></div>
 
 <p>处理客户端的消息，构造Http请求发送给服务器</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>private void doProxyNormal(HttpRequest httpRequest) throws IOException {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>private void doProxyNormal(HttpRequest httpRequest) throws IOException {
     // TODO do something with the httpRequest. Put 'X-forward...', for example.
     httpRequest.headers.put("X-Forwarded-For", "123.123.123.123");
 

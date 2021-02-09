@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,8 +310,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Python" title="Tag: Python" rel="tag">Python</a-->
-        <a href="/tag/#Python" title="Tag: Python" rel="tag">Python</a>
+        <!--a href="/blog/tag/#Python" title="Tag: Python" rel="tag">Python</a-->
+        <a href="/blog/tag/#Python" title="Tag: Python" rel="tag">Python</a>
     
   
 
@@ -330,8 +330,8 @@
 <h2 id="一个登录措施">一个登录措施</h2>
 <p>因为一时兴起，现在也母鸡服务器端cookie的持续生效时间，但从本地看到有很多cookie的生存期为会话，也有几个短的只有3天左右。感觉需要想办法延长一点。<br />
 <img src="/sources/archive/2020/06/09-3-qq-login.png" alt="" />  <br />
-尝试了PC端QQ的授权登录，需要参数<code class="highlighter-rouge">url</code>、QQ号<code class="highlighter-rouge">clientuin</code>、加密的验证参数<code class="highlighter-rouge">clientkey</code>。<br />
-这些都可以通过过滤<code class="highlighter-rouge">https://ssl.ptlogin2.qq.com/jump?clientuin</code>得到(url也就是这个加后面一长串参数，目测参数都是几个固定的，也就没再分开整了)。</p>
+尝试了PC端QQ的授权登录，需要参数<code class="language-plaintext highlighter-rouge">url</code>、QQ号<code class="language-plaintext highlighter-rouge">clientuin</code>、加密的验证参数<code class="language-plaintext highlighter-rouge">clientkey</code>。<br />
+这些都可以通过过滤<code class="language-plaintext highlighter-rouge">https://ssl.ptlogin2.qq.com/jump?clientuin</code>得到(url也就是这个加后面一长串参数，目测参数都是几个固定的，也就没再分开整了)。</p>
 
 <ul>
   <li>当然，这只是一个补救措施，有使用限制，建议cookie失效时使用：
@@ -352,7 +352,7 @@
     <span class="s">'''
      登录，获取cookies
     '''</span>
-    <span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">session</span><span class="p">()</span>
+    <span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">session</span><span class="p">()</span>
     <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s">'Host'</span><span class="p">:</span> <span class="s">'ssl.ptlogin2.qq.com'</span><span class="p">,</span>
         <span class="s">'User-Agent'</span><span class="p">:</span> <span class="s">'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:75.0) Gecko/20100101 Firefox/75.0'</span><span class="p">,</span>
@@ -364,13 +364,13 @@
         <span class="s">'Pragma'</span><span class="p">:</span> <span class="s">'no-cache'</span><span class="p">,</span>
         <span class="s">'Cache-Control'</span><span class="p">:</span> <span class="s">'no-cache'</span><span class="p">,</span>
         <span class="s">'TE'</span><span class="p">:</span> <span class="s">'Trailers'</span><span class="p">,</span>
-        <span class="s">'Cookie'</span><span class="p">:</span> <span class="s">'clientuin=</span><span class="si">%</span><span class="s">s; clientkey=</span><span class="si">%</span><span class="s">s'</span><span class="o">%</span><span class="p">(</span><span class="n">clientuin</span><span class="p">,</span> <span class="n">clientkey</span><span class="p">)</span>
+        <span class="s">'Cookie'</span><span class="p">:</span> <span class="s">'clientuin=%s; clientkey=%s'</span><span class="o">%</span><span class="p">(</span><span class="n">clientuin</span><span class="p">,</span> <span class="n">clientkey</span><span class="p">)</span>
     <span class="p">}</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s">'GET'</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">session</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s">'GET'</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">).</span><span class="n">text</span>
     <span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-    <span class="n">searchObj</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s">r"(https://.*?)',"</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+    <span class="n">searchObj</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s">"(https://.*?)',"</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">searchObj</span><span class="p">:</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="n">searchObj</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">searchObj</span><span class="p">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s">'Host'</span><span class="p">:</span> <span class="s">'ptlogin2.connect.qq.com'</span><span class="p">,</span>
             <span class="s">'User-Agent'</span><span class="p">:</span> <span class="s">'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:75.0) Gecko/20100101 Firefox/75.0'</span><span class="p">,</span>
@@ -383,16 +383,16 @@
             <span class="s">'Cache-Control'</span><span class="p">:</span> <span class="s">'no-cache'</span><span class="p">,</span>
             <span class="s">'TE'</span><span class="p">:</span> <span class="s">'Trailers'</span><span class="p">,</span>
         <span class="p">}</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s">'GET'</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">allow_redirects</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
-        <span class="n">cookies</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">dict_from_cookiejar</span><span class="p">(</span><span class="n">session</span><span class="o">.</span><span class="n">cookies</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">session</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s">'GET'</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">allow_redirects</span><span class="o">=</span><span class="bp">False</span><span class="p">).</span><span class="n">text</span>
+        <span class="n">cookies</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">utils</span><span class="p">.</span><span class="n">dict_from_cookiejar</span><span class="p">(</span><span class="n">session</span><span class="p">.</span><span class="n">cookies</span><span class="p">)</span>
         <span class="k">print</span><span class="p">(</span><span class="n">cookies</span><span class="p">)</span>
         <span class="n">cookie_str</span> <span class="o">=</span> <span class="s">''</span>
         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">cookies</span><span class="p">:</span>
-            <span class="n">cookie_str</span> <span class="o">+=</span> <span class="s">'</span><span class="si">%</span><span class="s">s=</span><span class="si">%</span><span class="s">s; '</span><span class="o">%</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">cookies</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+            <span class="n">cookie_str</span> <span class="o">+=</span> <span class="s">'%s=%s; '</span><span class="o">%</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">cookies</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
         <span class="n">cookie_str</span> <span class="o">=</span> <span class="n">cookie_str</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
-        <span class="n">session</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">session</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">cookie_str</span>
-    <span class="n">session</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">session</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
     
 <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="n">cookie</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">stype</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
     <span class="s">'''
@@ -405,13 +405,13 @@
         <span class="n">users</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">"info"</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">users</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">user</span><span class="p">[</span><span class="s">"nick"</span><span class="p">]</span> <span class="ow">or</span> <span class="p">(</span><span class="s">'markname'</span> <span class="ow">in</span> <span class="n">user</span> <span class="ow">and</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">user</span><span class="p">[</span><span class="s">"markname"</span><span class="p">])</span> <span class="p">:</span>
-                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">user</span><span class="p">[</span><span class="s">"uin"</span><span class="p">],</span> <span class="n">user</span><span class="p">[</span><span class="s">"nick"</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s">"t"</span><span class="p">]))</span>
+                <span class="n">result</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">user</span><span class="p">[</span><span class="s">"uin"</span><span class="p">],</span> <span class="n">user</span><span class="p">[</span><span class="s">"nick"</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s">"t"</span><span class="p">]))</span>
         <span class="k">return</span> <span class="n">result</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">groups</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">"groups"</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">group</span><span class="p">[</span><span class="s">"name"</span><span class="p">]</span> <span class="ow">or</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">group</span><span class="p">[</span><span class="s">"gid"</span><span class="p">]</span> <span class="p">:</span>
-                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">group</span><span class="p">[</span><span class="s">"code"</span><span class="p">],</span> <span class="n">group</span><span class="p">[</span><span class="s">'name'</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s">"t"</span><span class="p">]))</span>
+                <span class="n">result</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">group</span><span class="p">[</span><span class="s">"code"</span><span class="p">],</span> <span class="n">group</span><span class="p">[</span><span class="s">'name'</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s">"t"</span><span class="p">]))</span>
     <span class="k">return</span> <span class="n">result</span>
 
 
@@ -419,7 +419,7 @@
     <span class="s">'''
         获取好友列表
     '''</span>
-    <span class="n">url</span> <span class="o">=</span> <span class="s">'https://cgi.connect.qq.com/qqconnectopen/openapi/get_user_friends?t=</span><span class="si">%</span><span class="s">d'</span><span class="o">%</span><span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">))</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s">'https://cgi.connect.qq.com/qqconnectopen/openapi/get_user_friends?t=%d'</span><span class="o">%</span><span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">))</span>
     <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s">'Host'</span><span class="p">:</span> <span class="s">'cgi.connect.qq.com'</span><span class="p">,</span>
         <span class="s">'User-Agent'</span><span class="p">:</span> <span class="s">'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:75.0) Gecko/20100101 Firefox/75.0'</span><span class="p">,</span>
@@ -435,7 +435,7 @@
         <span class="s">'TE'</span><span class="p">:</span> <span class="s">'Trailers'</span><span class="p">,</span>
         <span class="s">'Cookie'</span><span class="p">:</span> <span class="n">cookie</span>
     <span class="p">}</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">).</span><span class="n">json</span><span class="p">()</span>
     <span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">data</span>
 
@@ -463,7 +463,7 @@
     <span class="p">}</span>
     <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s">'dest'</span><span class="p">:</span> <span class="s">'qq'</span><span class="p">,</span>
-        <span class="s">'uins'</span><span class="p">:</span> <span class="s">'[{"type":</span><span class="si">%</span><span class="s">d,"id":</span><span class="si">%</span><span class="s">d}]'</span> <span class="o">%</span> <span class="p">(</span><span class="n">stype</span><span class="p">,</span> <span class="n">uid</span><span class="p">),</span>
+        <span class="s">'uins'</span><span class="p">:</span> <span class="s">'[{"type":%d,"id":%d}]'</span> <span class="o">%</span> <span class="p">(</span><span class="n">stype</span><span class="p">,</span> <span class="n">uid</span><span class="p">),</span>
         <span class="s">'dmList'</span><span class="p">:</span> <span class="s">'[]'</span><span class="p">,</span>
         <span class="s">'ldw'</span><span class="p">:</span> <span class="s">'534111139'</span><span class="p">,</span> <span class="c1"># 疑似固定参数
 </span>        <span class="s">'t'</span><span class="p">:</span> <span class="n">t</span><span class="p">,</span>
@@ -473,7 +473,7 @@
         <span class="s">'summary'</span><span class="p">:</span> <span class="n">summary</span><span class="p">,</span>
         <span class="s">'content'</span><span class="p">:</span> <span class="n">content</span><span class="p">,</span>
     <span class="p">}</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">params</span><span class="p">).</span><span class="n">json</span><span class="p">()</span>
     <span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
     <span class="k">if</span> <span class="s">"msg"</span> <span class="ow">in</span> <span class="n">data</span> <span class="ow">and</span> <span class="s">"success"</span> <span class="o">==</span> <span class="n">data</span><span class="p">[</span><span class="s">"msg"</span><span class="p">]:</span>
         <span class="k">return</span> <span class="bp">True</span>

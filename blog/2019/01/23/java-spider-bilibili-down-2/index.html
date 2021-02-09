@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,17 +310,17 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
     
-        <!--a href="/tag/#html" title="Tag: html" rel="tag">html</a-->
-        <a href="/tag/#html" title="Tag: html" rel="tag">html</a>&nbsp;
+        <!--a href="/blog/tag/#html" title="Tag: html" rel="tag">html</a-->
+        <a href="/blog/tag/#html" title="Tag: html" rel="tag">html</a>&nbsp;
     
-        <!--a href="/tag/#%E7%88%AC%E8%99%AB" title="Tag: 爬虫" rel="tag">爬虫</a-->
-        <a href="/tag/#爬虫" title="Tag: 爬虫" rel="tag">爬虫</a>&nbsp;
+        <!--a href="/blog/tag/#%E7%88%AC%E8%99%AB" title="Tag: 爬虫" rel="tag">爬虫</a-->
+        <a href="/blog/tag/#爬虫" title="Tag: 爬虫" rel="tag">爬虫</a>&nbsp;
     
-        <!--a href="/tag/#bilibili" title="Tag: bilibili" rel="tag">bilibili</a-->
-        <a href="/tag/#bilibili" title="Tag: bilibili" rel="tag">bilibili</a>
+        <!--a href="/blog/tag/#bilibili" title="Tag: bilibili" rel="tag">bilibili</a-->
+        <a href="/blog/tag/#bilibili" title="Tag: bilibili" rel="tag">bilibili</a>
     
   
 
@@ -357,15 +357,15 @@
 <h2 id="实现步骤整理">实现步骤整理</h2>
 <p>目前已经知道了实现思路可行，现在整理下如何实现，假设av号已知：</p>
 <ol>
-  <li>人工访问<code class="highlighter-rouge">https://www.bilibili.com/video/av52738/</code>，记录<strong>headers1</strong>的构成格式</li>
-  <li>人工筛选链接关键词<code class="highlighter-rouge">.flv</code>，从后台筛选出我们需要的链接，记录<strong>headers2</strong>的构成格式</li>
-  <li>模拟访问页面<code class="highlighter-rouge">https://www.bilibili.com/video/av52738/</code>，提取出FLV下载链接（仿<strong>headers1</strong>）</li>
+  <li>人工访问<code class="language-plaintext highlighter-rouge">https://www.bilibili.com/video/av52738/</code>，记录<strong>headers1</strong>的构成格式</li>
+  <li>人工筛选链接关键词<code class="language-plaintext highlighter-rouge">.flv</code>，从后台筛选出我们需要的链接，记录<strong>headers2</strong>的构成格式</li>
+  <li>模拟访问页面<code class="language-plaintext highlighter-rouge">https://www.bilibili.com/video/av52738/</code>，提取出FLV下载链接（仿<strong>headers1</strong>）</li>
   <li>根据提取的FLV下载链接，下载FLV视频（仿<strong>headers2</strong>）</li>
 </ol>
 
 <h2 id="关键代码">关键代码</h2>
 <p>关键是头部需要告诉服务器，我使用Flash播放器，从PC端访问，这个请求是从播放页面打开的。</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/**
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/**
  * 该Header配置用于视频下载
  */
 public HashMap&lt;String, String&gt; getBiliWwwHeaders(String avId) {

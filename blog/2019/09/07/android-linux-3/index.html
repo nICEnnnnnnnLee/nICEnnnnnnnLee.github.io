@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,11 +310,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
     
-        <!--a href="/tag/#Android" title="Tag: Android" rel="tag">Android</a-->
-        <a href="/tag/#Android" title="Tag: Android" rel="tag">Android</a>
+        <!--a href="/blog/tag/#Android" title="Tag: Android" rel="tag">Android</a-->
+        <a href="/blog/tag/#Android" title="Tag: Android" rel="tag">Android</a>
     
   
 
@@ -346,7 +346,7 @@
 <ul>
   <li>更换国内源(可选)</li>
   <li>安装基本工具
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pkg update
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pkg update
 pkg install vim curl wget git unzip unrar
 </code></pre></div>    </div>
   </li>
@@ -363,17 +363,17 @@ C/C++、Python2/3、Node.js、PHP等语言</li>
     <ul>
       <li>使用了Jar文件扫描原理的包扫描机制失效，毕竟是dex文件。<br />
   这让我写的部分小程序没法运行，构思的小框架拓展灵活性缺失。找到替代方案前只能写死了。</li>
-      <li>dalvikvm未实现反射包的<code class="highlighter-rouge">Parameter</code>类，这导致<code class="highlighter-rouge">Method</code>类无法获取方法的参数名称。<br />
+      <li>dalvikvm未实现反射包的<code class="language-plaintext highlighter-rouge">Parameter</code>类，这导致<code class="language-plaintext highlighter-rouge">Method</code>类无法获取方法的参数名称。<br />
   换句话说，无法实现Springboot那样缺省的解决方案，目前只能麻烦的再加上注解。<br />
   举例来说，想要给Controller注解的方法参数自动赋值，不能再缺省的凭借参数名称了，而必须加注解。<br />
   以下失效：
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@Controller(path = "/test")
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@Controller(path = "/test")
 public String test(String param, String time) {
   return null;
 }
 </code></pre></div>        </div>
         <p>以下有效：</p>
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@Controller(path = "/test", note="测试")
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@Controller(path = "/test", note="测试")
 public String test(@Value(key = "param") String param, @Value(key = "_t") String time) {
   return null;
 }

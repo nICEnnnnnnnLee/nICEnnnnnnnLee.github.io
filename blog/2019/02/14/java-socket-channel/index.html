@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,11 +310,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
     
-        <!--a href="/tag/#SocketChannel" title="Tag: SocketChannel" rel="tag">SocketChannel</a-->
-        <a href="/tag/#SocketChannel" title="Tag: SocketChannel" rel="tag">SocketChannel</a>
+        <!--a href="/blog/tag/#SocketChannel" title="Tag: SocketChannel" rel="tag">SocketChannel</a-->
+        <a href="/blog/tag/#SocketChannel" title="Tag: SocketChannel" rel="tag">SocketChannel</a>
     
   
 
@@ -356,14 +356,14 @@
 <h2 id="要注意的地方">要注意的地方</h2>
 <ul>
   <li><strong>SocketChannel</strong>在注册时，可以传入附件，很方便。
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sc.register(selector, SelectionKey.OP_READ, attaches);
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sc.register(selector, SelectionKey.OP_READ, attaches);
 </code></pre></div>    </div>
   </li>
   <li><strong>SocketChannel</strong>打开后并不意味着就已经建立连接了，还需要进一步操作：
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>remoteSc = SocketChannel.open();
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>remoteSc = SocketChannel.open();
 remoteSc.configureBlocking(false);  
 </code></pre></div>    </div>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if (!twins.remoteSc.isConnected()) {
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if (!twins.remoteSc.isConnected()) {
   // 如果正在连接，则完成连接
   twins.remoteSc.finishConnect();
   twins.remoteSc.configureBlocking(false);

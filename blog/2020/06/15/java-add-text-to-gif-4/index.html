@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,8 +310,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>
     
   
 
@@ -337,7 +337,7 @@
     </ul>
   </li>
   <li>前面已经把工具基本都做好了(好吧，只是讲了简单的原理，复杂的功能实现其实就是拼积木)。<br />
-接下来要开始正式动工了。以<code class="highlighter-rouge">真香.gif</code>为例，我们应该怎么做呢？
+接下来要开始正式动工了。以<code class="language-plaintext highlighter-rouge">真香.gif</code>为例，我们应该怎么做呢？
     <ul>
       <li>获取素材(没有对话的GIF + 标准对话的GIF)</li>
       <li>分离有对话的GIF，观察各个jpg图像，弄清楚有几段对话，分别出现在第几帧到第几帧，比如：
@@ -362,18 +362,18 @@
 <p>如何获取GIF素材呢？</p>
 <ul>
   <li>访问<a href="https://www.gifhome.com/dt/">GIF之家</a>(可以是别的，知道这个意思即可)</li>
-  <li>搜索<code class="highlighter-rouge">王境泽</code>，找到表情包<a href="https://www.gifhome.com/diy/8.html">https://www.gifhome.com/diy/8.html</a> <br />
+  <li>搜索<code class="language-plaintext highlighter-rouge">王境泽</code>，找到表情包<a href="https://www.gifhome.com/diy/8.html">https://www.gifhome.com/diy/8.html</a> <br />
 <img src="/sources/archive/2020/06/search.png" alt="" /></li>
   <li>下载标准对话的GIF，这个很好办，不用多说</li>
   <li>下载没有对话的GIF
     <ul>
-      <li>对话为空时提示<code class="highlighter-rouge">请输入对话内容</code>，怎么办呢? <br />
+      <li>对话为空时提示<code class="language-plaintext highlighter-rouge">请输入对话内容</code>，怎么办呢? <br />
   <img src="/sources/archive/2020/06/input-none.png" alt="" /></li>
-      <li>搜索<code class="highlighter-rouge">请输入对话内容</code>，可以发现有个判断<code class="highlighter-rouge">util.isNotEmpty</code>，把这个hook掉即可<br />
+      <li>搜索<code class="language-plaintext highlighter-rouge">请输入对话内容</code>，可以发现有个判断<code class="language-plaintext highlighter-rouge">util.isNotEmpty</code>，把这个hook掉即可<br />
   <img src="/sources/archive/2020/06/isEmpty.png" alt="" />
         <ul>
-          <li>按<code class="highlighter-rouge">F12</code>键，打开控制台</li>
-          <li>输入<code class="highlighter-rouge">util.isNotEmpty=function(){return true;}</code><br />
+          <li>按<code class="language-plaintext highlighter-rouge">F12</code>键，打开控制台</li>
+          <li>输入<code class="language-plaintext highlighter-rouge">util.isNotEmpty=function(){return true;}</code><br />
   <img src="/sources/archive/2020/06/hookJs.png" alt="" /></li>
           <li>对话全空格，点击提交，然后下载即可</li>
         </ul>

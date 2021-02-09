@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,8 +310,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>
     
   
 
@@ -355,7 +355,7 @@
 
 <h2 id="工程结构">工程结构</h2>
 <h4 id="目录">目录</h4>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>src
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>src
  |
  |---nicelee.bilibili
  |          |
@@ -382,13 +382,13 @@
 </code></pre></div></div>
 
 <h4 id="testjava">Test.java</h4>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">nicelee</span><span class="o">.</span><span class="na">bilibili</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">nicelee.bilibili</span><span class="o">;</span>
 
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
 
 	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
-		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"原始实现"</span><span class="o">);</span> <span class="c1">// 三个Test.java实现差不多，打印的语句不同</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"原始实现"</span><span class="o">);</span> <span class="c1">// 三个Test.java实现差不多，打印的语句不同</span>
         <span class="c1">//System.out.println("加载实现1");</span>
         <span class="c1">//System.out.println("加载实现2");</span>
 	<span class="o">}</span>
@@ -398,18 +398,18 @@
 
 <h4 id="customclassloaderjava">CustomClassLoader.java</h4>
 <p>自定义findClass方法，没啥好讲的…</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">nicelee</span><span class="o">.</span><span class="na">bilibili</span><span class="o">.</span><span class="na">plugin</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">nicelee.bilibili.plugin</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">java.io.ByteArrayOutputStream</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.io.File</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.io.FileInputStream</span><span class="o">;</span>
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomClassLoader</span> <span class="kd">extends</span> <span class="n">ClassLoader</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomClassLoader</span> <span class="kd">extends</span> <span class="nc">ClassLoader</span> <span class="o">{</span>
 
-	<span class="kd">protected</span> <span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">findClass</span><span class="o">(</span><span class="n">String</span> <span class="n">classPath</span><span class="o">,</span> <span class="n">String</span> <span class="n">className</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">protected</span> <span class="nc">Class</span><span class="o">&lt;?&gt;</span> <span class="n">findClass</span><span class="o">(</span><span class="nc">String</span> <span class="n">classPath</span><span class="o">,</span> <span class="nc">String</span> <span class="n">className</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">try</span> <span class="o">{</span>
-			<span class="n">FileInputStream</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="n">classPath</span><span class="o">));</span>
-			<span class="n">ByteArrayOutputStream</span> <span class="n">out</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ByteArrayOutputStream</span><span class="o">();</span>
+			<span class="nc">FileInputStream</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="n">classPath</span><span class="o">));</span>
+			<span class="nc">ByteArrayOutputStream</span> <span class="n">out</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ByteArrayOutputStream</span><span class="o">();</span>
 			<span class="kt">byte</span><span class="o">[]</span> <span class="n">buffer</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="mi">1024</span><span class="o">];</span>
 			<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="o">(</span><span class="n">len</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">buffer</span><span class="o">))</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;)</span> <span class="o">{</span>
 				<span class="n">out</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">buffer</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">len</span><span class="o">);</span>
@@ -417,7 +417,7 @@
 			<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 			<span class="kt">byte</span><span class="o">[]</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="na">toByteArray</span><span class="o">();</span>
 			<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">defineClass</span><span class="o">(</span><span class="n">className</span><span class="o">,</span> <span class="n">bytes</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">bytes</span><span class="o">.</span><span class="na">length</span><span class="o">);</span>
-		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
 			<span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
 		<span class="o">}</span>
@@ -427,7 +427,7 @@
 
 <h2 id="尝试一个classloader重复加载">尝试一个ClassLoader重复加载</h2>
 <h4 id="pluginmanagerjava">PluginManager.java</h4>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">nicelee</span><span class="o">.</span><span class="na">bilibili</span><span class="o">.</span><span class="na">plugin</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">nicelee.bilibili.plugin</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">java.io.File</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
@@ -438,7 +438,7 @@
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">PluginManager</span> <span class="o">{</span>
 
 	<span class="c1">// 类加载器，全局只用这一个</span>
-	<span class="kd">public</span> <span class="kd">static</span> <span class="n">CustomClassLoader</span> <span class="n">ccloader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CustomClassLoader</span><span class="o">();</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="nc">CustomClassLoader</span> <span class="n">ccloader</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CustomClassLoader</span><span class="o">();</span>
 
 	<span class="cm">/**
 	 * 编译指定的java文件，成功后，在同一目录下将得到若干个.class(数目取决于是否有匿名/内部类)
@@ -446,12 +446,12 @@
 	 * @param javaFile
 	 * @return
 	 */</span>
-	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">compile</span><span class="o">(</span><span class="n">File</span> <span class="n">javaFile</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">compile</span><span class="o">(</span><span class="nc">File</span> <span class="n">javaFile</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">try</span> <span class="o">{</span>
-			<span class="n">JavaCompiler</span> <span class="n">compiler</span> <span class="o">=</span> <span class="n">ToolProvider</span><span class="o">.</span><span class="na">getSystemJavaCompiler</span><span class="o">();</span>
+			<span class="nc">JavaCompiler</span> <span class="n">compiler</span> <span class="o">=</span> <span class="nc">ToolProvider</span><span class="o">.</span><span class="na">getSystemJavaCompiler</span><span class="o">();</span>
 			<span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">compiler</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="n">javaFile</span><span class="o">.</span><span class="na">getCanonicalPath</span><span class="o">());</span>
 			<span class="k">return</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">0</span><span class="o">;</span>
-		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 			<span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
 		<span class="o">}</span>
 	<span class="o">}</span>
@@ -464,11 +464,11 @@
 	 * @param classNameWithPackage  类的全称
 	 * @throws IOException
 	 */</span>
-	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">loadClass</span><span class="o">(</span><span class="n">File</span> <span class="n">pluginDir</span><span class="o">,</span> <span class="n">String</span> <span class="n">fileNameWithoutSuffix</span><span class="o">,</span> <span class="n">String</span> <span class="n">classNameWithPackage</span><span class="o">)</span>
-			<span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
-		<span class="k">for</span> <span class="o">(</span><span class="n">File</span> <span class="n">f</span> <span class="o">:</span> <span class="n">pluginDir</span><span class="o">.</span><span class="na">listFiles</span><span class="o">())</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">loadClass</span><span class="o">(</span><span class="nc">File</span> <span class="n">pluginDir</span><span class="o">,</span> <span class="nc">String</span> <span class="n">fileNameWithoutSuffix</span><span class="o">,</span> <span class="nc">String</span> <span class="n">classNameWithPackage</span><span class="o">)</span>
+			<span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+		<span class="k">for</span> <span class="o">(</span><span class="nc">File</span> <span class="n">f</span> <span class="o">:</span> <span class="n">pluginDir</span><span class="o">.</span><span class="na">listFiles</span><span class="o">())</span> <span class="o">{</span>
 			<span class="k">if</span> <span class="o">(</span><span class="n">f</span><span class="o">.</span><span class="na">getName</span><span class="o">().</span><span class="na">endsWith</span><span class="o">(</span><span class="s">".class"</span><span class="o">))</span> <span class="o">{</span>
-				<span class="n">String</span> <span class="n">name</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="na">getName</span><span class="o">().</span><span class="na">replaceFirst</span><span class="o">(</span><span class="s">"\\.class$"</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
+				<span class="nc">String</span> <span class="n">name</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="na">getName</span><span class="o">().</span><span class="na">replaceFirst</span><span class="o">(</span><span class="s">"\\.class$"</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
 				<span class="c1">// 考虑Test$1.class等匿名类、内部类，这些也是要自动加载的</span>
 				<span class="k">if</span> <span class="o">(</span><span class="n">name</span><span class="o">.</span><span class="na">startsWith</span><span class="o">(</span><span class="n">fileNameWithoutSuffix</span><span class="o">))</span> <span class="o">{</span>
 					<span class="n">ccloader</span><span class="o">.</span><span class="na">findClass</span><span class="o">(</span><span class="n">f</span><span class="o">.</span><span class="na">getCanonicalPath</span><span class="o">(),</span> <span class="n">classNameWithPackage</span><span class="o">);</span>
@@ -477,45 +477,45 @@
 		<span class="o">}</span>
 	<span class="o">}</span>
 	
-	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-		<span class="n">Test</span> <span class="n">test</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Test</span><span class="o">();</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">Test</span> <span class="n">test</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Test</span><span class="o">();</span>
 		<span class="n">test</span><span class="o">.</span><span class="na">run</span><span class="o">();</span>
 
 		<span class="k">try</span> <span class="o">{</span>
 			<span class="c1">// 文件夹1下的各种文件</span>
-			<span class="n">File</span> <span class="n">pluginDir</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"D:\\Workspace\\javaweb-springboot\\plugin\\1"</span><span class="o">);</span>
-			<span class="n">File</span> <span class="n">javaFile</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"D:\\Workspace\\javaweb-springboot\\plugin\\1\\Test.java"</span><span class="o">);</span>
+			<span class="nc">File</span> <span class="n">pluginDir</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="s">"D:\\Workspace\\javaweb-springboot\\plugin\\1"</span><span class="o">);</span>
+			<span class="nc">File</span> <span class="n">javaFile</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="s">"D:\\Workspace\\javaweb-springboot\\plugin\\1\\Test.java"</span><span class="o">);</span>
 			<span class="c1">// 编译</span>
-			<span class="kt">boolean</span> <span class="n">result</span> <span class="o">=</span> <span class="n">PluginManager</span><span class="o">.</span><span class="na">compile</span><span class="o">(</span><span class="n">javaFile</span><span class="o">);</span>
+			<span class="kt">boolean</span> <span class="n">result</span> <span class="o">=</span> <span class="nc">PluginManager</span><span class="o">.</span><span class="na">compile</span><span class="o">(</span><span class="n">javaFile</span><span class="o">);</span>
 			<span class="c1">// 加载</span>
-			<span class="n">PluginManager</span><span class="o">.</span><span class="na">loadClass</span><span class="o">(</span><span class="n">pluginDir</span><span class="o">,</span> <span class="s">"Test"</span><span class="o">,</span> <span class="s">"nicelee.bilibili.Test"</span><span class="o">);</span>
+			<span class="nc">PluginManager</span><span class="o">.</span><span class="na">loadClass</span><span class="o">(</span><span class="n">pluginDir</span><span class="o">,</span> <span class="s">"Test"</span><span class="o">,</span> <span class="s">"nicelee.bilibili.Test"</span><span class="o">);</span>
 			<span class="c1">// 获取ccloader下的某 类</span>
-			<span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">clazz</span> <span class="o">=</span> <span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">"nicelee.bilibili.Test"</span><span class="o">,</span> <span class="kc">true</span><span class="o">,</span> <span class="n">ccloader</span><span class="o">);</span>
+			<span class="nc">Class</span><span class="o">&lt;?&gt;</span> <span class="n">clazz</span> <span class="o">=</span> <span class="nc">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">"nicelee.bilibili.Test"</span><span class="o">,</span> <span class="kc">true</span><span class="o">,</span> <span class="n">ccloader</span><span class="o">);</span>
 			<span class="c1">// 测试运行run方法</span>
 			<span class="n">clazz</span><span class="o">.</span><span class="na">getMethod</span><span class="o">(</span><span class="s">"run"</span><span class="o">).</span><span class="na">invoke</span><span class="o">(</span><span class="n">clazz</span><span class="o">.</span><span class="na">newInstance</span><span class="o">());</span>
-		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
 		<span class="o">}</span>
 
 		<span class="k">try</span> <span class="o">{</span>
 			<span class="c1">// 文件夹2下的各种文件</span>
-			<span class="n">File</span> <span class="n">pluginDir</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"D:\\Workspace\\javaweb-springboot\\plugin\\2"</span><span class="o">);</span>
-			<span class="n">File</span> <span class="n">javaFile</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"D:\\Workspace\\javaweb-springboot\\plugin\\2\\Test.java"</span><span class="o">);</span>
+			<span class="nc">File</span> <span class="n">pluginDir</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="s">"D:\\Workspace\\javaweb-springboot\\plugin\\2"</span><span class="o">);</span>
+			<span class="nc">File</span> <span class="n">javaFile</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="s">"D:\\Workspace\\javaweb-springboot\\plugin\\2\\Test.java"</span><span class="o">);</span>
 			<span class="c1">// 编译</span>
-			<span class="kt">boolean</span> <span class="n">result</span> <span class="o">=</span> <span class="n">PluginManager</span><span class="o">.</span><span class="na">compile</span><span class="o">(</span><span class="n">javaFile</span><span class="o">);</span>
+			<span class="kt">boolean</span> <span class="n">result</span> <span class="o">=</span> <span class="nc">PluginManager</span><span class="o">.</span><span class="na">compile</span><span class="o">(</span><span class="n">javaFile</span><span class="o">);</span>
 			<span class="c1">// 加载</span>
-			<span class="n">PluginManager</span><span class="o">.</span><span class="na">loadClass</span><span class="o">(</span><span class="n">pluginDir</span><span class="o">,</span> <span class="s">"Test"</span><span class="o">,</span> <span class="s">"nicelee.bilibili.Test"</span><span class="o">);</span>
+			<span class="nc">PluginManager</span><span class="o">.</span><span class="na">loadClass</span><span class="o">(</span><span class="n">pluginDir</span><span class="o">,</span> <span class="s">"Test"</span><span class="o">,</span> <span class="s">"nicelee.bilibili.Test"</span><span class="o">);</span>
 			<span class="c1">// 获取ccloader下的某 类</span>
-			<span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">clazz</span> <span class="o">=</span> <span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">"nicelee.bilibili.Test"</span><span class="o">,</span> <span class="kc">true</span><span class="o">,</span> <span class="n">ccloader</span><span class="o">);</span>
+			<span class="nc">Class</span><span class="o">&lt;?&gt;</span> <span class="n">clazz</span> <span class="o">=</span> <span class="nc">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">"nicelee.bilibili.Test"</span><span class="o">,</span> <span class="kc">true</span><span class="o">,</span> <span class="n">ccloader</span><span class="o">);</span>
 			<span class="c1">// 测试运行run方法</span>
 			<span class="n">clazz</span><span class="o">.</span><span class="na">getMethod</span><span class="o">(</span><span class="s">"run"</span><span class="o">).</span><span class="na">invoke</span><span class="o">(</span><span class="n">clazz</span><span class="o">.</span><span class="na">newInstance</span><span class="o">());</span>
-		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
 		<span class="o">}</span>
 
 		<span class="k">try</span> <span class="o">{</span>
 
-		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
 		<span class="o">}</span>
 	<span class="o">}</span>
@@ -527,7 +527,7 @@
 
 <h2 id="加入简单的类管理">加入简单的类管理</h2>
 <h4 id="pluginmanagerjava-1">PluginManager.java</h4>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">nicelee</span><span class="o">.</span><span class="na">bilibili</span><span class="o">.</span><span class="na">plugin</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">nicelee.bilibili.plugin</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">java.io.File</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
@@ -539,10 +539,10 @@
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">PluginManager</span> <span class="o">{</span>
 
 	<span class="c1">// 使用map保存类名与对应的class</span>
-	<span class="kd">static</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Class</span><span class="o">&lt;?&gt;&gt;</span> <span class="n">clazzMap</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Class</span><span class="o">&lt;?&gt;&gt;();</span>
+	<span class="kd">static</span> <span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Class</span><span class="o">&lt;?&gt;&gt;</span> <span class="n">clazzMap</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Class</span><span class="o">&lt;?&gt;&gt;();</span>
 
 	<span class="c1">// 提供外部的类访问接口</span>
-	<span class="kd">public</span> <span class="kd">static</span> <span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">getClass</span><span class="o">(</span><span class="n">String</span> <span class="n">className</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="nc">Class</span><span class="o">&lt;?&gt;</span> <span class="n">getClass</span><span class="o">(</span><span class="nc">String</span> <span class="n">className</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="n">clazzMap</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">className</span><span class="o">);</span>
 	<span class="o">}</span>
 
@@ -552,12 +552,12 @@
 	 * @param javaFile
 	 * @return
 	 */</span>
-	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">compile</span><span class="o">(</span><span class="n">File</span> <span class="n">javaFile</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">compile</span><span class="o">(</span><span class="nc">File</span> <span class="n">javaFile</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">try</span> <span class="o">{</span>
-			<span class="n">JavaCompiler</span> <span class="n">compiler</span> <span class="o">=</span> <span class="n">ToolProvider</span><span class="o">.</span><span class="na">getSystemJavaCompiler</span><span class="o">();</span>
+			<span class="nc">JavaCompiler</span> <span class="n">compiler</span> <span class="o">=</span> <span class="nc">ToolProvider</span><span class="o">.</span><span class="na">getSystemJavaCompiler</span><span class="o">();</span>
 			<span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">compiler</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="n">javaFile</span><span class="o">.</span><span class="na">getCanonicalPath</span><span class="o">());</span>
 			<span class="k">return</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">0</span><span class="o">;</span>
-		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 			<span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
 		<span class="o">}</span>
 	<span class="o">}</span>
@@ -570,53 +570,53 @@
 	 * @param classNameWithPackage  类的全称
 	 * @throws IOException
 	 */</span>
-	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">loadClass</span><span class="o">(</span><span class="n">File</span> <span class="n">pluginDir</span><span class="o">,</span> <span class="n">String</span> <span class="n">fileNameWithoutSuffix</span><span class="o">,</span> <span class="n">String</span> <span class="n">classNameWithPackage</span><span class="o">)</span>
-			<span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
-		<span class="n">CustomClassLoader</span> <span class="n">ccloader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CustomClassLoader</span><span class="o">();</span>
-		<span class="k">for</span> <span class="o">(</span><span class="n">File</span> <span class="n">f</span> <span class="o">:</span> <span class="n">pluginDir</span><span class="o">.</span><span class="na">listFiles</span><span class="o">())</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">loadClass</span><span class="o">(</span><span class="nc">File</span> <span class="n">pluginDir</span><span class="o">,</span> <span class="nc">String</span> <span class="n">fileNameWithoutSuffix</span><span class="o">,</span> <span class="nc">String</span> <span class="n">classNameWithPackage</span><span class="o">)</span>
+			<span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+		<span class="nc">CustomClassLoader</span> <span class="n">ccloader</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CustomClassLoader</span><span class="o">();</span>
+		<span class="k">for</span> <span class="o">(</span><span class="nc">File</span> <span class="n">f</span> <span class="o">:</span> <span class="n">pluginDir</span><span class="o">.</span><span class="na">listFiles</span><span class="o">())</span> <span class="o">{</span>
 			<span class="k">if</span> <span class="o">(</span><span class="n">f</span><span class="o">.</span><span class="na">getName</span><span class="o">().</span><span class="na">endsWith</span><span class="o">(</span><span class="s">".class"</span><span class="o">))</span> <span class="o">{</span>
-				<span class="n">String</span> <span class="n">name</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="na">getName</span><span class="o">().</span><span class="na">replaceFirst</span><span class="o">(</span><span class="s">"\\.class$"</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
+				<span class="nc">String</span> <span class="n">name</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="na">getName</span><span class="o">().</span><span class="na">replaceFirst</span><span class="o">(</span><span class="s">"\\.class$"</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
 				<span class="c1">// 考虑Test$1.class等匿名类、内部类，这些也是要自动加载的</span>
 				<span class="k">if</span> <span class="o">(</span><span class="n">name</span><span class="o">.</span><span class="na">startsWith</span><span class="o">(</span><span class="n">fileNameWithoutSuffix</span><span class="o">))</span> <span class="o">{</span>
-					<span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">clazz</span> <span class="o">=</span> <span class="n">ccloader</span><span class="o">.</span><span class="na">findClass</span><span class="o">(</span><span class="n">f</span><span class="o">.</span><span class="na">getCanonicalPath</span><span class="o">(),</span> <span class="n">classNameWithPackage</span><span class="o">);</span>
+					<span class="nc">Class</span><span class="o">&lt;?&gt;</span> <span class="n">clazz</span> <span class="o">=</span> <span class="n">ccloader</span><span class="o">.</span><span class="na">findClass</span><span class="o">(</span><span class="n">f</span><span class="o">.</span><span class="na">getCanonicalPath</span><span class="o">(),</span> <span class="n">classNameWithPackage</span><span class="o">);</span>
 					<span class="n">clazzMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">classNameWithPackage</span><span class="o">,</span> <span class="n">clazz</span><span class="o">);</span>
 				<span class="o">}</span>
 			<span class="o">}</span>
 		<span class="o">}</span>
 	<span class="o">}</span>
 
-	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-		<span class="n">Test</span> <span class="n">test</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Test</span><span class="o">();</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">Test</span> <span class="n">test</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Test</span><span class="o">();</span>
 		<span class="n">test</span><span class="o">.</span><span class="na">run</span><span class="o">();</span>
 
 		<span class="k">try</span> <span class="o">{</span>
 			<span class="c1">// 文件夹1下的各种文件</span>
-			<span class="n">File</span> <span class="n">pluginDir</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"D:\\Workspace\\javaweb-springboot\\plugin\\1"</span><span class="o">);</span>
-			<span class="n">File</span> <span class="n">javaFile</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"D:\\Workspace\\javaweb-springboot\\plugin\\1\\Test.java"</span><span class="o">);</span>
+			<span class="nc">File</span> <span class="n">pluginDir</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="s">"D:\\Workspace\\javaweb-springboot\\plugin\\1"</span><span class="o">);</span>
+			<span class="nc">File</span> <span class="n">javaFile</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="s">"D:\\Workspace\\javaweb-springboot\\plugin\\1\\Test.java"</span><span class="o">);</span>
 			<span class="c1">// 编译</span>
-			<span class="kt">boolean</span> <span class="n">result</span> <span class="o">=</span> <span class="n">PluginManager</span><span class="o">.</span><span class="na">compile</span><span class="o">(</span><span class="n">javaFile</span><span class="o">);</span>
+			<span class="kt">boolean</span> <span class="n">result</span> <span class="o">=</span> <span class="nc">PluginManager</span><span class="o">.</span><span class="na">compile</span><span class="o">(</span><span class="n">javaFile</span><span class="o">);</span>
 			<span class="c1">// 加载</span>
-			<span class="n">PluginManager</span><span class="o">.</span><span class="na">loadClass</span><span class="o">(</span><span class="n">pluginDir</span><span class="o">,</span> <span class="s">"Test"</span><span class="o">,</span> <span class="s">"nicelee.bilibili.Test"</span><span class="o">);</span>
+			<span class="nc">PluginManager</span><span class="o">.</span><span class="na">loadClass</span><span class="o">(</span><span class="n">pluginDir</span><span class="o">,</span> <span class="s">"Test"</span><span class="o">,</span> <span class="s">"nicelee.bilibili.Test"</span><span class="o">);</span>
 			<span class="c1">// 获取自己实现的管理提取某类</span>
-			<span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">clazz</span> <span class="o">=</span> <span class="n">PluginManager</span><span class="o">.</span><span class="na">getClass</span><span class="o">(</span><span class="s">"nicelee.bilibili.Test"</span><span class="o">);</span>
+			<span class="nc">Class</span><span class="o">&lt;?&gt;</span> <span class="n">clazz</span> <span class="o">=</span> <span class="nc">PluginManager</span><span class="o">.</span><span class="na">getClass</span><span class="o">(</span><span class="s">"nicelee.bilibili.Test"</span><span class="o">);</span>
 			<span class="c1">// 测试运行run方法</span>
 			<span class="n">clazz</span><span class="o">.</span><span class="na">getMethod</span><span class="o">(</span><span class="s">"run"</span><span class="o">).</span><span class="na">invoke</span><span class="o">(</span><span class="n">clazz</span><span class="o">.</span><span class="na">newInstance</span><span class="o">());</span>
-		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
 		<span class="o">}</span>
 
 		<span class="k">try</span> <span class="o">{</span>
-			<span class="n">File</span> <span class="n">pluginDir</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"D:\\Workspace\\javaweb-springboot\\plugin\\2"</span><span class="o">);</span>
-			<span class="n">File</span> <span class="n">javaFile</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"D:\\Workspace\\javaweb-springboot\\plugin\\2\\Test.java"</span><span class="o">);</span>
+			<span class="nc">File</span> <span class="n">pluginDir</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="s">"D:\\Workspace\\javaweb-springboot\\plugin\\2"</span><span class="o">);</span>
+			<span class="nc">File</span> <span class="n">javaFile</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="s">"D:\\Workspace\\javaweb-springboot\\plugin\\2\\Test.java"</span><span class="o">);</span>
 			<span class="c1">// 编译</span>
-			<span class="kt">boolean</span> <span class="n">result</span> <span class="o">=</span> <span class="n">PluginManager</span><span class="o">.</span><span class="na">compile</span><span class="o">(</span><span class="n">javaFile</span><span class="o">);</span>
+			<span class="kt">boolean</span> <span class="n">result</span> <span class="o">=</span> <span class="nc">PluginManager</span><span class="o">.</span><span class="na">compile</span><span class="o">(</span><span class="n">javaFile</span><span class="o">);</span>
 			<span class="c1">// 加载</span>
-			<span class="n">PluginManager</span><span class="o">.</span><span class="na">loadClass</span><span class="o">(</span><span class="n">pluginDir</span><span class="o">,</span> <span class="s">"Test"</span><span class="o">,</span> <span class="s">"nicelee.bilibili.Test"</span><span class="o">);</span>
+			<span class="nc">PluginManager</span><span class="o">.</span><span class="na">loadClass</span><span class="o">(</span><span class="n">pluginDir</span><span class="o">,</span> <span class="s">"Test"</span><span class="o">,</span> <span class="s">"nicelee.bilibili.Test"</span><span class="o">);</span>
 			<span class="c1">// 获取自己实现的管理提取某类</span>
-			<span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">clazz</span> <span class="o">=</span> <span class="n">PluginManager</span><span class="o">.</span><span class="na">getClass</span><span class="o">(</span><span class="s">"nicelee.bilibili.Test"</span><span class="o">);</span>
+			<span class="nc">Class</span><span class="o">&lt;?&gt;</span> <span class="n">clazz</span> <span class="o">=</span> <span class="nc">PluginManager</span><span class="o">.</span><span class="na">getClass</span><span class="o">(</span><span class="s">"nicelee.bilibili.Test"</span><span class="o">);</span>
 			<span class="c1">// 测试运行run方法</span>
 			<span class="n">clazz</span><span class="o">.</span><span class="na">getMethod</span><span class="o">(</span><span class="s">"run"</span><span class="o">).</span><span class="na">invoke</span><span class="o">(</span><span class="n">clazz</span><span class="o">.</span><span class="na">newInstance</span><span class="o">());</span>
-		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
 		<span class="o">}</span>
 	<span class="o">}</span>

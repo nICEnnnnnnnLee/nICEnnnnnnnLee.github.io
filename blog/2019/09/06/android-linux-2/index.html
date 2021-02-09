@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,11 +310,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
     
-        <!--a href="/tag/#Android" title="Tag: Android" rel="tag">Android</a-->
-        <a href="/tag/#Android" title="Tag: Android" rel="tag">Android</a>
+        <!--a href="/blog/tag/#Android" title="Tag: Android" rel="tag">Android</a-->
+        <a href="/blog/tag/#Android" title="Tag: Android" rel="tag">Android</a>
     
   
 
@@ -327,7 +327,7 @@
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
   <li><a href="#安装openssh并从pc端访问" id="markdown-toc-安装openssh并从pc端访问">安装openssh,并从PC端访问</a></li>
-  <li><a href="#通过sftp实现文件传输" id="markdown-toc-通过sftp实现文件传输">通过<code class="highlighter-rouge">sftp</code>实现文件传输</a></li>
+  <li><a href="#通过sftp实现文件传输" id="markdown-toc-通过sftp实现文件传输">通过<code class="language-plaintext highlighter-rouge">sftp</code>实现文件传输</a></li>
   <li><a href="#总结" id="markdown-toc-总结">总结</a></li>
 </ul>
 <p>手机端限于硬件，即使环境配置啥都OK，日常开发处理等其实仍应在PC端。<br />
@@ -336,50 +336,50 @@
 <h2 id="安装openssh并从pc端访问">安装openssh,并从PC端访问</h2>
 <ul>
   <li>更新软件源
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt update
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt update
 </code></pre></div>    </div>
   </li>
   <li>安装openssh
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pkg install openssh
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pkg install openssh
 </code></pre></div>    </div>
   </li>
   <li>获取当前用户名称
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$whoami
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$whoami
 u0_101
 </code></pre></div>    </div>
   </li>
   <li>设置当前用户密码
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$passwd
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$passwd
 #设置密码
 </code></pre></div>    </div>
   </li>
   <li>获取手机的局域网IP
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ifconfig
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ifconfig
 </code></pre></div>    </div>
   </li>
   <li>启动sshd
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sshd
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sshd
 </code></pre></div>    </div>
   </li>
   <li>PC端连接访问<br />
-Termux 默认的SSH端口为<code class="highlighter-rouge">8022</code>，IP、端口、用户名、密码都有了，剩下不多说</li>
+Termux 默认的SSH端口为<code class="language-plaintext highlighter-rouge">8022</code>，IP、端口、用户名、密码都有了，剩下不多说</li>
 </ul>
 
-<h2 id="通过sftp实现文件传输">通过<code class="highlighter-rouge">sftp</code>实现文件传输</h2>
-<p>有了SSH服务，其实就没有必要再安装FTP了，使用常见的<code class="highlighter-rouge">FileZilla</code>等FTP工具，把协议换成<code class="highlighter-rouge">SFTP</code>即可。</p>
+<h2 id="通过sftp实现文件传输">通过<code class="language-plaintext highlighter-rouge">sftp</code>实现文件传输</h2>
+<p>有了SSH服务，其实就没有必要再安装FTP了，使用常见的<code class="language-plaintext highlighter-rouge">FileZilla</code>等FTP工具，把协议换成<code class="language-plaintext highlighter-rouge">SFTP</code>即可。</p>
 
 <ul>
   <li>关于外部存储<br />
 执行命令，会弹框确认是否授权，确认即可。<br />
-此时，会生成<code class="highlighter-rouge">storage</code>目录，下面软链接指向各种常见位置。
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>termux-setup-storage
+此时，会生成<code class="language-plaintext highlighter-rouge">storage</code>目录，下面软链接指向各种常见位置。
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>termux-setup-storage
 </code></pre></div>    </div>
   </li>
 </ul>
 
 <h2 id="总结">总结</h2>
 <p>到此为止，基本上可以把手机端甩开了。<br />
-确保手机Wifi连上、<code class="highlighter-rouge">Termux</code>能够后台运行即可，后面的工作可以移到PC端来。</p>
+确保手机Wifi连上、<code class="language-plaintext highlighter-rouge">Termux</code>能够后台运行即可，后面的工作可以移到PC端来。</p>
 
 
         </article>

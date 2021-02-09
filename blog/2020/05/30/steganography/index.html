@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,14 +310,14 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#%E9%9A%90%E5%86%99" title="Tag: 隐写" rel="tag">隐写</a-->
-        <a href="/tag/#隐写" title="Tag: 隐写" rel="tag">隐写</a>&nbsp;
+        <!--a href="/blog/tag/#%E9%9A%90%E5%86%99" title="Tag: 隐写" rel="tag">隐写</a-->
+        <a href="/blog/tag/#隐写" title="Tag: 隐写" rel="tag">隐写</a>&nbsp;
     
-        <!--a href="/tag/#%E7%BC%96%E7%A0%81" title="Tag: 编码" rel="tag">编码</a-->
-        <a href="/tag/#编码" title="Tag: 编码" rel="tag">编码</a>&nbsp;
+        <!--a href="/blog/tag/#%E7%BC%96%E7%A0%81" title="Tag: 编码" rel="tag">编码</a-->
+        <a href="/blog/tag/#编码" title="Tag: 编码" rel="tag">编码</a>&nbsp;
     
-        <!--a href="/tag/#%E8%A7%A3%E7%A0%81" title="Tag: 解码" rel="tag">解码</a-->
-        <a href="/tag/#解码" title="Tag: 解码" rel="tag">解码</a>
+        <!--a href="/blog/tag/#%E8%A7%A3%E7%A0%81" title="Tag: 解码" rel="tag">解码</a-->
+        <a href="/blog/tag/#解码" title="Tag: 解码" rel="tag">解码</a>
     
   
 
@@ -369,16 +369,16 @@
 <p>向一段字符里面加入若干不可见字符是不影响阅读的。<br />
 那么，如何将不可见字符编码为我们想要的东西，进而达到隐秘地传递信息的用途呢？<br />
 我们可以参考<a href="/blog/2018/12/12/base64-encode/">Base64的编码原理</a>。<br />
-这里只要将原来的<code class="highlighter-rouge">abcd...ABCD...</code>等字典换位不可见字符集就行了。通过切换字符集内容、大小和顺序，你甚至可以定制各种不同的加解密方法。</p>
+这里只要将原来的<code class="language-plaintext highlighter-rouge">abcd...ABCD...</code>等字典换位不可见字符集就行了。通过切换字符集内容、大小和顺序，你甚至可以定制各种不同的加解密方法。</p>
 
 <h2 id="一种js实现">一种js实现</h2>
 <ul>
   <li>设定字典
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>setUseChars('\u200c\u200d\u202c\ufeff');
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>setUseChars('\u200c\u200d\u202c\ufeff');
 </code></pre></div>    </div>
   </li>
   <li>调用加解密
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var encrypt = this.encodeText('明文内容', '隐藏内容');
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var encrypt = this.encodeText('明文内容', '隐藏内容');
 var decrypt = this.decodeText(encrypt);
 console.log(decrypt.originalText);
 console.log(decrypt.hiddenText);
@@ -391,7 +391,7 @@ console.log(decrypt.hiddenText);
    *  http://opensource.org/licenses/mit-license.php
    */</span>
   <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">exports</span><span class="p">){</span>
-    <span class="s1">'use strict'</span><span class="p">;</span>
+    <span class="dl">'</span><span class="s1">use strict</span><span class="dl">'</span><span class="p">;</span>
     <span class="kd">var</span> <span class="nx">chars</span> <span class="o">=</span> <span class="p">[];</span>
     <span class="kd">var</span> <span class="nx">radix</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
     <span class="kd">var</span> <span class="nx">codelengthText</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
@@ -403,7 +403,7 @@ console.log(decrypt.hiddenText);
      */</span>
     <span class="kd">var</span> <span class="nx">setUseChars</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">newchars</span><span class="p">){</span>
       <span class="k">if</span><span class="p">(</span><span class="nx">newchars</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">){</span>
-        <span class="nx">chars</span> <span class="o">=</span> <span class="nx">newchars</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+        <span class="nx">chars</span> <span class="o">=</span> <span class="nx">newchars</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="dl">''</span><span class="p">);</span>
         <span class="nx">radix</span> <span class="o">=</span> <span class="nx">chars</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
         <span class="nx">codelengthText</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">ceil</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">65536</span><span class="p">)</span> <span class="o">/</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">radix</span><span class="p">));</span>
         <span class="nx">codelengthBinary</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">ceil</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">256</span><span class="p">)</span> <span class="o">/</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">radix</span><span class="p">));</span>
@@ -443,8 +443,8 @@ console.log(decrypt.hiddenText);
       <span class="kd">var</span> <span class="nx">splitted</span> <span class="o">=</span> <span class="nx">split_zerowidth_characters</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
         
       <span class="k">return</span> <span class="p">{</span>
-        <span class="s1">'originalText'</span><span class="p">:</span> <span class="nx">splitted</span><span class="p">.</span><span class="nx">originalText</span><span class="p">,</span>
-        <span class="s1">'hiddenText'</span><span class="p">:</span> <span class="nx">decode_from_zero_width_characters_text</span><span class="p">(</span><span class="nx">splitted</span><span class="p">.</span><span class="nx">hiddenText</span><span class="p">,</span> <span class="nx">codelengthText</span><span class="p">)</span>
+        <span class="dl">'</span><span class="s1">originalText</span><span class="dl">'</span><span class="p">:</span> <span class="nx">splitted</span><span class="p">.</span><span class="nx">originalText</span><span class="p">,</span>
+        <span class="dl">'</span><span class="s1">hiddenText</span><span class="dl">'</span><span class="p">:</span> <span class="nx">decode_from_zero_width_characters_text</span><span class="p">(</span><span class="nx">splitted</span><span class="p">.</span><span class="nx">hiddenText</span><span class="p">,</span> <span class="nx">codelengthText</span><span class="p">)</span>
       <span class="p">};</span>
     <span class="p">};</span>
     <span class="cm">/**
@@ -459,12 +459,12 @@ console.log(decrypt.hiddenText);
       <span class="kd">var</span> <span class="nx">splitted</span> <span class="o">=</span> <span class="nx">split_zerowidth_characters</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
         
       <span class="k">return</span> <span class="p">{</span>
-        <span class="s1">'originalText'</span><span class="p">:</span> <span class="nx">splitted</span><span class="p">.</span><span class="nx">originalText</span><span class="p">,</span>
-        <span class="s1">'hiddenData'</span><span class="p">:</span> <span class="nx">decode_from_zero_width_characters_binary</span><span class="p">(</span><span class="nx">splitted</span><span class="p">.</span><span class="nx">hiddenText</span><span class="p">)</span>
+        <span class="dl">'</span><span class="s1">originalText</span><span class="dl">'</span><span class="p">:</span> <span class="nx">splitted</span><span class="p">.</span><span class="nx">originalText</span><span class="p">,</span>
+        <span class="dl">'</span><span class="s1">hiddenData</span><span class="dl">'</span><span class="p">:</span> <span class="nx">decode_from_zero_width_characters_binary</span><span class="p">(</span><span class="nx">splitted</span><span class="p">.</span><span class="nx">hiddenText</span><span class="p">)</span>
       <span class="p">};</span>
     <span class="p">};</span>
       
-    <span class="nx">setUseChars</span><span class="p">(</span><span class="s1">'</span><span class="err">\</span><span class="s1">u200c</span><span class="err">\</span><span class="s1">u200d</span><span class="err">\</span><span class="s1">u202c</span><span class="err">\</span><span class="s1">ufeff'</span><span class="p">);</span>
+    <span class="nx">setUseChars</span><span class="p">(</span><span class="dl">'</span><span class="se">\</span><span class="s1">u200c</span><span class="se">\</span><span class="s1">u200d</span><span class="se">\</span><span class="s1">u202c</span><span class="se">\</span><span class="s1">ufeff</span><span class="dl">'</span><span class="p">);</span>
       
     <span class="nx">exports</span><span class="p">.</span><span class="nx">unicodeSteganographer</span> <span class="o">=</span> <span class="p">{</span>
       <span class="na">encodeText</span><span class="p">:</span> <span class="nx">encodeText</span><span class="p">,</span>
@@ -479,7 +479,7 @@ console.log(decrypt.hiddenText);
     */</span>
     <span class="kd">var</span> <span class="nx">encode_to_zerowidth_characters_text</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">str1</span><span class="p">){</span>
       <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">(</span><span class="nx">str1</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
-      <span class="kd">var</span> <span class="nx">base</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+      <span class="kd">var</span> <span class="nx">base</span> <span class="o">=</span> <span class="dl">''</span><span class="p">;</span>
       <span class="kd">var</span> <span class="nx">i</span><span class="p">;</span>
       <span class="kd">var</span> <span class="nx">c</span><span class="p">;</span>
       <span class="kd">var</span> <span class="nx">d</span><span class="p">;</span>
@@ -487,7 +487,7 @@ console.log(decrypt.hiddenText);
         
       <span class="c1">//var base = '0'.repeat(codelength); // IE not support this method</span>
       <span class="k">for</span><span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">codelengthText</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="nx">base</span> <span class="o">+=</span> <span class="s1">'0'</span><span class="p">;</span>
+        <span class="nx">base</span> <span class="o">+=</span> <span class="dl">'</span><span class="s1">0</span><span class="dl">'</span><span class="p">;</span>
       <span class="p">}</span>
         
       <span class="k">for</span><span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">str1</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
@@ -497,24 +497,24 @@ console.log(decrypt.hiddenText);
         <span class="nx">result</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="nx">base</span> <span class="o">+</span> <span class="nx">d</span><span class="p">).</span><span class="nx">substr</span><span class="p">(</span><span class="o">-</span><span class="nx">codelengthText</span><span class="p">);</span>
       <span class="p">}</span>
         
-      <span class="nx">r</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+      <span class="nx">r</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="dl">''</span><span class="p">);</span>
         
       <span class="k">for</span><span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">radix</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="nx">r</span> <span class="o">=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="s1">'g'</span><span class="p">),</span> <span class="nx">chars</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+        <span class="nx">r</span> <span class="o">=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="dl">'</span><span class="s1">g</span><span class="dl">'</span><span class="p">),</span> <span class="nx">chars</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
       <span class="p">}</span>
         
       <span class="k">return</span> <span class="nx">r</span><span class="p">;</span>
     <span class="p">};</span>
     <span class="kd">var</span> <span class="nx">encode_to_zerowidth_characters_binary</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">u8ary</span><span class="p">){</span>
       <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">(</span><span class="nx">u8ary</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
-      <span class="kd">var</span> <span class="nx">base</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+      <span class="kd">var</span> <span class="nx">base</span> <span class="o">=</span> <span class="dl">''</span><span class="p">;</span>
       <span class="kd">var</span> <span class="nx">i</span><span class="p">;</span>
       <span class="kd">var</span> <span class="nx">c</span><span class="p">;</span>
       <span class="kd">var</span> <span class="nx">d</span><span class="p">;</span>
       <span class="kd">var</span> <span class="nx">r</span><span class="p">;</span>
         
       <span class="k">for</span><span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">codelengthBinary</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="nx">base</span> <span class="o">+=</span> <span class="s1">'0'</span><span class="p">;</span>
+        <span class="nx">base</span> <span class="o">+=</span> <span class="dl">'</span><span class="s1">0</span><span class="dl">'</span><span class="p">;</span>
       <span class="p">}</span>
         
       <span class="k">for</span><span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">u8ary</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
@@ -522,10 +522,10 @@ console.log(decrypt.hiddenText);
         <span class="nx">result</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="nx">base</span> <span class="o">+</span> <span class="nx">d</span><span class="p">).</span><span class="nx">substr</span><span class="p">(</span><span class="o">-</span><span class="nx">codelengthBinary</span><span class="p">);</span>
       <span class="p">}</span>
         
-      <span class="nx">r</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+      <span class="nx">r</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="dl">''</span><span class="p">);</span>
         
       <span class="k">for</span><span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">radix</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="nx">r</span> <span class="o">=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="s1">'g'</span><span class="p">),</span> <span class="nx">chars</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+        <span class="nx">r</span> <span class="o">=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="dl">'</span><span class="s1">g</span><span class="dl">'</span><span class="p">),</span> <span class="nx">chars</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
       <span class="p">}</span>
         
       <span class="k">return</span> <span class="nx">r</span><span class="p">;</span>
@@ -537,11 +537,11 @@ console.log(decrypt.hiddenText);
       <span class="kd">var</span> <span class="nx">i</span><span class="p">;</span>
       <span class="kd">var</span> <span class="nx">j</span><span class="p">;</span>
       <span class="k">for</span><span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">c0</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="k">if</span><span class="p">((</span><span class="k">typeof</span> <span class="nx">c0</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">!==</span> <span class="s1">'undefined'</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">c0</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">!==</span> <span class="s1">''</span><span class="p">)){</span>
+        <span class="k">if</span><span class="p">((</span><span class="k">typeof</span> <span class="nx">c0</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">undefined</span><span class="dl">'</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">c0</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">!==</span> <span class="dl">''</span><span class="p">)){</span>
           <span class="nx">c1</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">c0</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
         <span class="p">}</span>
       <span class="p">}</span>
-      <span class="kd">var</span> <span class="nx">c2</span> <span class="o">=</span> <span class="nx">str2</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="s1">'(.{'</span> <span class="o">+</span> <span class="nx">codelength</span> <span class="o">+</span> <span class="s1">'})'</span><span class="p">,</span> <span class="s1">'g'</span><span class="p">));</span>
+      <span class="kd">var</span> <span class="nx">c2</span> <span class="o">=</span> <span class="nx">str2</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="dl">'</span><span class="s1">(.{</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">codelength</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">})</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">g</span><span class="dl">'</span><span class="p">));</span>
       <span class="kd">var</span> <span class="nx">ratio</span> <span class="o">=</span> <span class="nx">c1</span><span class="p">.</span><span class="nx">length</span> <span class="o">/</span> <span class="p">(</span><span class="nx">c1</span><span class="p">.</span><span class="nx">length</span> <span class="o">+</span> <span class="nx">c2</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
         
       <span class="cm">/* slow
@@ -568,12 +568,12 @@ console.log(decrypt.hiddenText);
         
       <span class="nx">result</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">c1</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">c2</span><span class="p">);</span>
         
-      <span class="k">return</span> <span class="nx">result</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+      <span class="k">return</span> <span class="nx">result</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="dl">''</span><span class="p">);</span>
     <span class="p">};</span>
     <span class="kd">var</span> <span class="nx">split_zerowidth_characters</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">str1</span><span class="p">){</span>
       <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="p">{};</span>
-      <span class="nx">result</span><span class="p">.</span><span class="nx">originalText</span> <span class="o">=</span> <span class="nx">str1</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="s1">'['</span> <span class="o">+</span> <span class="nx">chars</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span> <span class="o">+</span> <span class="s1">']'</span><span class="p">,</span> <span class="s1">'g'</span><span class="p">),</span> <span class="s1">''</span><span class="p">);</span>
-      <span class="nx">result</span><span class="p">.</span><span class="nx">hiddenText</span> <span class="o">=</span> <span class="nx">str1</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="s1">'[^'</span> <span class="o">+</span> <span class="nx">chars</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span> <span class="o">+</span> <span class="s1">']'</span><span class="p">,</span> <span class="s1">'g'</span><span class="p">),</span> <span class="s1">''</span><span class="p">);</span>
+      <span class="nx">result</span><span class="p">.</span><span class="nx">originalText</span> <span class="o">=</span> <span class="nx">str1</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="dl">'</span><span class="s1">[</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">chars</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="dl">''</span><span class="p">)</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">]</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">g</span><span class="dl">'</span><span class="p">),</span> <span class="dl">''</span><span class="p">);</span>
+      <span class="nx">result</span><span class="p">.</span><span class="nx">hiddenText</span> <span class="o">=</span> <span class="nx">str1</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="dl">'</span><span class="s1">[^</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">chars</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="dl">''</span><span class="p">)</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">]</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">g</span><span class="dl">'</span><span class="p">),</span> <span class="dl">''</span><span class="p">);</span>
         
       <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
     <span class="p">};</span>
@@ -582,13 +582,13 @@ console.log(decrypt.hiddenText);
       <span class="kd">var</span> <span class="nx">i</span><span class="p">;</span>
       <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="p">[];</span>
       <span class="k">for</span><span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">radix</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="nx">r</span> <span class="o">=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="nx">chars</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span> <span class="s1">'g'</span><span class="p">),</span> <span class="nx">i</span><span class="p">);</span>
+        <span class="nx">r</span> <span class="o">=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="nx">chars</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span> <span class="dl">'</span><span class="s1">g</span><span class="dl">'</span><span class="p">),</span> <span class="nx">i</span><span class="p">);</span>
       <span class="p">}</span>
       <span class="k">for</span><span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">r</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="nx">codelengthText</span><span class="p">){</span>
         <span class="nx">result</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">(</span><span class="nb">parseInt</span><span class="p">(</span><span class="nx">r</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">codelengthText</span><span class="p">),</span> <span class="nx">radix</span><span class="p">)));</span>
       <span class="p">}</span>
         
-      <span class="k">return</span> <span class="nx">result</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+      <span class="k">return</span> <span class="nx">result</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="dl">''</span><span class="p">);</span>
     <span class="p">};</span>
     <span class="kd">var</span> <span class="nx">decode_from_zero_width_characters_binary</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">str1</span><span class="p">){</span>
       <span class="kd">var</span> <span class="nx">r</span> <span class="o">=</span> <span class="nx">str1</span><span class="p">;</span>
@@ -597,7 +597,7 @@ console.log(decrypt.hiddenText);
       <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Uint8Array</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">ceil</span><span class="p">(</span><span class="nx">str1</span><span class="p">.</span><span class="nx">length</span> <span class="o">/</span> <span class="nx">codelengthBinary</span><span class="p">));</span>
         
       <span class="k">for</span><span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">radix</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="nx">r</span> <span class="o">=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="nx">chars</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span> <span class="s1">'g'</span><span class="p">),</span> <span class="nx">i</span><span class="p">);</span>
+        <span class="nx">r</span> <span class="o">=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="nx">chars</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span> <span class="dl">'</span><span class="s1">g</span><span class="dl">'</span><span class="p">),</span> <span class="nx">i</span><span class="p">);</span>
       <span class="p">}</span>
       <span class="k">for</span><span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">r</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="nx">codelengthBinary</span><span class="p">,</span> <span class="nx">j</span><span class="o">++</span><span class="p">){</span>
         <span class="nx">result</span><span class="p">[</span><span class="nx">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">r</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">codelengthBinary</span><span class="p">),</span> <span class="nx">radix</span><span class="p">);</span>

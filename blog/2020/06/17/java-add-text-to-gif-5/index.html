@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,8 +310,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>
     
   
 
@@ -337,7 +337,7 @@
     </ul>
   </li>
   <li>前面已经把工具基本都做好了(好吧，只是讲了简单的原理，复杂的功能实现其实就是拼积木)。<br />
-接下来要开始正式动工了。以<code class="highlighter-rouge">真香.gif</code>为例，我们应该怎么做呢？
+接下来要开始正式动工了。以<code class="language-plaintext highlighter-rouge">真香.gif</code>为例，我们应该怎么做呢？
     <ul>
       <li>获取素材(没有对话的GIF + 标准对话的GIF)</li>
       <li>分离有对话的GIF，观察各个jpg图像，弄清楚有几段对话，分别出现在第几帧到第几帧，比如：
@@ -363,22 +363,22 @@
 <ul>
   <li>分离素材
     <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 获取素材</span>
-<span class="n">File</span> <span class="n">source</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"pics/真香/text.gif"</span><span class="o">);</span>
-<span class="n">File</span> <span class="n">dstFolder</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"pics/真香/text"</span><span class="o">);</span>
-<span class="n">GifUtil</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="n">source</span><span class="o">,</span> <span class="n">dstFolder</span><span class="o">);</span>
+<span class="nc">File</span> <span class="n">source</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="s">"pics/真香/text.gif"</span><span class="o">);</span>
+<span class="nc">File</span> <span class="n">dstFolder</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="s">"pics/真香/text"</span><span class="o">);</span>
+<span class="nc">GifUtil</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="n">source</span><span class="o">,</span> <span class="n">dstFolder</span><span class="o">);</span>
 </code></pre></div>    </div>
     <p>以下为结果:<br />
 <img src="/sources/archive/2020/06/picss.png" alt="" /></p>
   </li>
   <li>浏览所有分离的图片，记录对话。举个例子：
     <ul>
-      <li>第0张图片出现对话<code class="highlighter-rouge">我就是饿死</code><br />
+      <li>第0张图片出现对话<code class="language-plaintext highlighter-rouge">我就是饿死</code><br />
   <img src="/sources/archive/2020/06/first.png" alt="" /></li>
-      <li>直到第8张图片<code class="highlighter-rouge">我就是饿死</code>仍然存在 <br />
+      <li>直到第8张图片<code class="language-plaintext highlighter-rouge">我就是饿死</code>仍然存在 <br />
   <img src="/sources/archive/2020/06/last-1.png" alt="" /></li>
       <li>第9章对话消失<br />
   <img src="/sources/archive/2020/06/last.png" alt="" /></li>
-      <li>记录： 对话<code class="highlighter-rouge">我就是饿死</code>出现在0~8帧</li>
+      <li>记录： 对话<code class="language-plaintext highlighter-rouge">我就是饿死</code>出现在0~8帧</li>
     </ul>
   </li>
 </ul>

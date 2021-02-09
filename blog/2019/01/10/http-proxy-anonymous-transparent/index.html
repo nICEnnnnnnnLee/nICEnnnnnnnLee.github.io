@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,17 +310,17 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#HttpProxy" title="Tag: HttpProxy" rel="tag">HttpProxy</a-->
-        <a href="/tag/#HttpProxy" title="Tag: HttpProxy" rel="tag">HttpProxy</a>&nbsp;
+        <!--a href="/blog/tag/#HttpProxy" title="Tag: HttpProxy" rel="tag">HttpProxy</a-->
+        <a href="/blog/tag/#HttpProxy" title="Tag: HttpProxy" rel="tag">HttpProxy</a>&nbsp;
     
-        <!--a href="/tag/#%E4%BB%A3%E7%90%86" title="Tag: 代理" rel="tag">代理</a-->
-        <a href="/tag/#代理" title="Tag: 代理" rel="tag">代理</a>&nbsp;
+        <!--a href="/blog/tag/#%E4%BB%A3%E7%90%86" title="Tag: 代理" rel="tag">代理</a-->
+        <a href="/blog/tag/#代理" title="Tag: 代理" rel="tag">代理</a>&nbsp;
     
-        <!--a href="/tag/#%E9%80%8F%E6%98%8E%E4%BB%A3%E7%90%86" title="Tag: 透明代理" rel="tag">透明代理</a-->
-        <a href="/tag/#透明代理" title="Tag: 透明代理" rel="tag">透明代理</a>&nbsp;
+        <!--a href="/blog/tag/#%E9%80%8F%E6%98%8E%E4%BB%A3%E7%90%86" title="Tag: 透明代理" rel="tag">透明代理</a-->
+        <a href="/blog/tag/#透明代理" title="Tag: 透明代理" rel="tag">透明代理</a>&nbsp;
     
-        <!--a href="/tag/#%E5%8C%BF%E5%90%8D%E4%BB%A3%E7%90%86" title="Tag: 匿名代理" rel="tag">匿名代理</a-->
-        <a href="/tag/#匿名代理" title="Tag: 匿名代理" rel="tag">匿名代理</a>
+        <!--a href="/blog/tag/#%E5%8C%BF%E5%90%8D%E4%BB%A3%E7%90%86" title="Tag: 匿名代理" rel="tag">匿名代理</a-->
+        <a href="/blog/tag/#匿名代理" title="Tag: 匿名代理" rel="tag">匿名代理</a>
     
   
 
@@ -340,7 +340,7 @@
   <li><a href="#转载来源" id="markdown-toc-转载来源">转载来源</a></li>
 </ul>
 <blockquote>
-  <p>透明代理、匿名代理、混淆代理、高匿代理这4种代理，主要是在代理服务器端的配置不同，导致其向目标地址发送请求时，<code class="highlighter-rouge">REMOTE_ADDR</code>， <code class="highlighter-rouge">HTTP_VIA</code>，<code class="highlighter-rouge">HTTP_X_FORWARDED_FOR</code>三个变量不同。</p>
+  <p>透明代理、匿名代理、混淆代理、高匿代理这4种代理，主要是在代理服务器端的配置不同，导致其向目标地址发送请求时，<code class="language-plaintext highlighter-rouge">REMOTE_ADDR</code>， <code class="language-plaintext highlighter-rouge">HTTP_VIA</code>，<code class="language-plaintext highlighter-rouge">HTTP_X_FORWARDED_FOR</code>三个变量不同。</p>
 </blockquote>
 
 <h2 id="透明代理transparent-proxy">透明代理(Transparent Proxy)</h2>
@@ -350,7 +350,7 @@
   <li><strong>HTTP_X_FORWARDED_FOR = Your IP</strong></li>
 </ul>
 
-<p>透明代理虽然可以直接“隐藏”你的IP地址，但是还是可以从<code class="highlighter-rouge">HTTP_X_FORWARDED_FOR</code>来查到你是谁。</p>
+<p>透明代理虽然可以直接“隐藏”你的IP地址，但是还是可以从<code class="language-plaintext highlighter-rouge">HTTP_X_FORWARDED_FOR</code>来查到你是谁。</p>
 
 <h2 id="匿名代理anonymous-proxy">匿名代理(Anonymous Proxy)</h2>
 <ul>
@@ -381,53 +381,53 @@
 
 <h2 id="分析与总结">分析与总结</h2>
 <p>以上只是大致的分类，实际服务器配置可能有些差距，具体判断依据还是能否识别客户端真实IP、能否识别使用了代理。<br />
-以下有几个请求header供参考（本机客户端ip已用<code class="highlighter-rouge">123.123.123.123</code>代替）：</p>
+以下有几个请求header供参考（本机客户端ip已用<code class="language-plaintext highlighter-rouge">123.123.123.123</code>代替）：</p>
 
 <ul>
   <li>未使用代理：
     <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"x-real-ip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123.123.123.123"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"referer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://xxx.com/xxx"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"accept-language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"zh-CN,zh;q=0.8"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"host"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xxx.com"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"x-requested-with"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XMLHttpRequest"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"connection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"close"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"x-forwarded-for"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123.123.123.123"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"accept-encoding"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gzip, deflate, sdch"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"accept"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json, text/javascript, */*; q=0.01"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"user-agent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0"</span><span class="w">
+  </span><span class="nl">"x-real-ip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123.123.123.123"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"referer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://xxx.com/xxx"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"accept-language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"zh-CN,zh;q=0.8"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"host"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xxx.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"x-requested-with"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XMLHttpRequest"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"connection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"close"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"x-forwarded-for"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123.123.123.123"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"accept-encoding"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gzip, deflate, sdch"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"accept"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json, text/javascript, */*; q=0.01"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"user-agent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>    </div>
   </li>
   <li>使用透明代理：
     <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"referer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://xxx.com/xxx"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"accept-language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"zh-CN,zh;q=0.8"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"x-forwarded-for"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123.123.123.123, 113.200.214.164"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"accept"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json, text/javascript, */*; q=0.01"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"via"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.1 ::ffff:113.200.214.164 (Mikrotik HttpProxy)"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"x-real-ip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"113.200.214.164"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"x-proxy-id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1846178648"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"host"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xxx.com"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"x-requested-with"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XMLHttpRequest"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"connection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"close"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"accept-encoding"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gzip, deflate, sdch"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"user-agent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0"</span><span class="w">
+  </span><span class="nl">"referer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://xxx.com/xxx"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"accept-language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"zh-CN,zh;q=0.8"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"x-forwarded-for"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123.123.123.123, 113.200.214.164"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"accept"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json, text/javascript, */*; q=0.01"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"via"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.1 ::ffff:113.200.214.164 (Mikrotik HttpProxy)"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"x-real-ip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"113.200.214.164"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"x-proxy-id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1846178648"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"host"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xxx.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"x-requested-with"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XMLHttpRequest"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"connection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"close"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"accept-encoding"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gzip, deflate, sdch"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"user-agent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>    </div>
   </li>
   <li>使用匿名代理：
     <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"x-real-ip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"120.236.168.19"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"referer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://xxx.com/xxx"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"accept-language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"zh-CN,zh;q=0.8"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"proxy-connection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"keep-alive"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"host"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xxx.com"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"x-requested-with"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XMLHttpRequest"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"connection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"close"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"x-forwarded-for"</span><span class="p">:</span><span class="w"> </span><span class="s2">"120.236.168.19"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"accept"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json, text/javascript, */*; q=0.01"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"user-agent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0"</span><span class="w">
+  </span><span class="nl">"x-real-ip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"120.236.168.19"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"referer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://xxx.com/xxx"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"accept-language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"zh-CN,zh;q=0.8"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"proxy-connection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"keep-alive"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"host"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xxx.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"x-requested-with"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XMLHttpRequest"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"connection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"close"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"x-forwarded-for"</span><span class="p">:</span><span class="w"> </span><span class="s2">"120.236.168.19"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"accept"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json, text/javascript, */*; q=0.01"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"user-agent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>    </div>
   </li>

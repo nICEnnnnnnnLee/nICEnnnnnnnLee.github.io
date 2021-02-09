@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,11 +310,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
     
-        <!--a href="/tag/#ip" title="Tag: ip" rel="tag">ip</a-->
-        <a href="/tag/#ip" title="Tag: ip" rel="tag">ip</a>
+        <!--a href="/blog/tag/#ip" title="Tag: ip" rel="tag">ip</a-->
+        <a href="/blog/tag/#ip" title="Tag: ip" rel="tag">ip</a>
     
   
 
@@ -342,9 +342,9 @@
  *  
  * @return ip
  */</span>
-<span class="kd">private</span> <span class="n">String</span> <span class="nf">getIpAddr</span><span class="o">(</span><span class="n">HttpServletRequest</span> <span class="n">request</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">String</span> <span class="n">ip</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">getHeader</span><span class="o">(</span><span class="s">"x-forwarded-for"</span><span class="o">);</span> 
-    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"x-forwarded-for ip: "</span> <span class="o">+</span> <span class="n">ip</span><span class="o">);</span>
+<span class="kd">private</span> <span class="nc">String</span> <span class="nf">getIpAddr</span><span class="o">(</span><span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">String</span> <span class="n">ip</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">getHeader</span><span class="o">(</span><span class="s">"x-forwarded-for"</span><span class="o">);</span> 
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"x-forwarded-for ip: "</span> <span class="o">+</span> <span class="n">ip</span><span class="o">);</span>
     <span class="k">if</span> <span class="o">(</span><span class="n">ip</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">ip</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="s">"unknown"</span><span class="o">.</span><span class="na">equalsIgnoreCase</span><span class="o">(</span><span class="n">ip</span><span class="o">))</span> <span class="o">{</span>  
         <span class="c1">// 多次反向代理后会有多个ip值，第一个ip才是真实ip</span>
         <span class="k">if</span><span class="o">(</span> <span class="n">ip</span><span class="o">.</span><span class="na">indexOf</span><span class="o">(</span><span class="s">","</span><span class="o">)!=-</span><span class="mi">1</span> <span class="o">){</span>
@@ -353,29 +353,29 @@
     <span class="o">}</span>  
     <span class="k">if</span> <span class="o">(</span><span class="n">ip</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">ip</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="s">"unknown"</span><span class="o">.</span><span class="na">equalsIgnoreCase</span><span class="o">(</span><span class="n">ip</span><span class="o">))</span> <span class="o">{</span>  
         <span class="n">ip</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">getHeader</span><span class="o">(</span><span class="s">"Proxy-Client-IP"</span><span class="o">);</span>  
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Proxy-Client-IP ip: "</span> <span class="o">+</span> <span class="n">ip</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Proxy-Client-IP ip: "</span> <span class="o">+</span> <span class="n">ip</span><span class="o">);</span>
     <span class="o">}</span>  
     <span class="k">if</span> <span class="o">(</span><span class="n">ip</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">ip</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="s">"unknown"</span><span class="o">.</span><span class="na">equalsIgnoreCase</span><span class="o">(</span><span class="n">ip</span><span class="o">))</span> <span class="o">{</span>  
         <span class="n">ip</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">getHeader</span><span class="o">(</span><span class="s">"WL-Proxy-Client-IP"</span><span class="o">);</span>  
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"WL-Proxy-Client-IP ip: "</span> <span class="o">+</span> <span class="n">ip</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"WL-Proxy-Client-IP ip: "</span> <span class="o">+</span> <span class="n">ip</span><span class="o">);</span>
     <span class="o">}</span>  
     <span class="k">if</span> <span class="o">(</span><span class="n">ip</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">ip</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="s">"unknown"</span><span class="o">.</span><span class="na">equalsIgnoreCase</span><span class="o">(</span><span class="n">ip</span><span class="o">))</span> <span class="o">{</span>  
         <span class="n">ip</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">getHeader</span><span class="o">(</span><span class="s">"HTTP_CLIENT_IP"</span><span class="o">);</span>  
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"HTTP_CLIENT_IP ip: "</span> <span class="o">+</span> <span class="n">ip</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"HTTP_CLIENT_IP ip: "</span> <span class="o">+</span> <span class="n">ip</span><span class="o">);</span>
     <span class="o">}</span>  
     <span class="k">if</span> <span class="o">(</span><span class="n">ip</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">ip</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="s">"unknown"</span><span class="o">.</span><span class="na">equalsIgnoreCase</span><span class="o">(</span><span class="n">ip</span><span class="o">))</span> <span class="o">{</span>  
         <span class="n">ip</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">getHeader</span><span class="o">(</span><span class="s">"HTTP_X_FORWARDED_FOR"</span><span class="o">);</span>  
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"HTTP_X_FORWARDED_FOR ip: "</span> <span class="o">+</span> <span class="n">ip</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"HTTP_X_FORWARDED_FOR ip: "</span> <span class="o">+</span> <span class="n">ip</span><span class="o">);</span>
     <span class="o">}</span>  
     <span class="k">if</span> <span class="o">(</span><span class="n">ip</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">ip</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="s">"unknown"</span><span class="o">.</span><span class="na">equalsIgnoreCase</span><span class="o">(</span><span class="n">ip</span><span class="o">))</span> <span class="o">{</span>  
         <span class="n">ip</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">getHeader</span><span class="o">(</span><span class="s">"X-Real-IP"</span><span class="o">);</span>  
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"X-Real-IP ip: "</span> <span class="o">+</span> <span class="n">ip</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"X-Real-IP ip: "</span> <span class="o">+</span> <span class="n">ip</span><span class="o">);</span>
     <span class="o">}</span>  
     <span class="k">if</span> <span class="o">(</span><span class="n">ip</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">ip</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="s">"unknown"</span><span class="o">.</span><span class="na">equalsIgnoreCase</span><span class="o">(</span><span class="n">ip</span><span class="o">))</span> <span class="o">{</span>  
         <span class="n">ip</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">getRemoteAddr</span><span class="o">();</span>  
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"getRemoteAddr ip: "</span> <span class="o">+</span> <span class="n">ip</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"getRemoteAddr ip: "</span> <span class="o">+</span> <span class="n">ip</span><span class="o">);</span>
     <span class="o">}</span> 
-    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"获取客户端ip: "</span> <span class="o">+</span> <span class="n">ip</span><span class="o">);</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"获取客户端ip: "</span> <span class="o">+</span> <span class="n">ip</span><span class="o">);</span>
     <span class="k">return</span> <span class="n">ip</span><span class="o">;</span>  
 <span class="o">}</span>
 </code></pre></div></div>

@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,17 +310,17 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#SpringBoot" title="Tag: SpringBoot" rel="tag">SpringBoot</a-->
-        <a href="/tag/#SpringBoot" title="Tag: SpringBoot" rel="tag">SpringBoot</a>&nbsp;
+        <!--a href="/blog/tag/#SpringBoot" title="Tag: SpringBoot" rel="tag">SpringBoot</a-->
+        <a href="/blog/tag/#SpringBoot" title="Tag: SpringBoot" rel="tag">SpringBoot</a>&nbsp;
     
-        <!--a href="/tag/#%E8%B8%A9%E5%9D%91" title="Tag: 踩坑" rel="tag">踩坑</a-->
-        <a href="/tag/#踩坑" title="Tag: 踩坑" rel="tag">踩坑</a>&nbsp;
+        <!--a href="/blog/tag/#%E8%B8%A9%E5%9D%91" title="Tag: 踩坑" rel="tag">踩坑</a-->
+        <a href="/blog/tag/#踩坑" title="Tag: 踩坑" rel="tag">踩坑</a>&nbsp;
     
-        <!--a href="/tag/#maven" title="Tag: maven" rel="tag">maven</a-->
-        <a href="/tag/#maven" title="Tag: maven" rel="tag">maven</a>&nbsp;
+        <!--a href="/blog/tag/#maven" title="Tag: maven" rel="tag">maven</a-->
+        <a href="/blog/tag/#maven" title="Tag: maven" rel="tag">maven</a>&nbsp;
     
-        <!--a href="/tag/#%E9%95%9C%E5%83%8F" title="Tag: 镜像" rel="tag">镜像</a-->
-        <a href="/tag/#镜像" title="Tag: 镜像" rel="tag">镜像</a>
+        <!--a href="/blog/tag/#%E9%95%9C%E5%83%8F" title="Tag: 镜像" rel="tag">镜像</a-->
+        <a href="/blog/tag/#镜像" title="Tag: 镜像" rel="tag">镜像</a>
     
   
 
@@ -343,26 +343,26 @@
 
 <h2 id="配置settings">配置settings</h2>
 <p>配置以下setting.xml即可，如果没有其它特殊需要配的，可以自己新建一个配置；</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
-<span class="nt">&lt;settings</span> <span class="na">xmlns=</span><span class="s">"http://maven.apache.org/SETTINGS/1.0.0"</span> 
-          <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span> 
-          <span class="na">xsi:schemaLocation=</span><span class="s">"http://maven.apache.org/SETTINGS/1.0.0
-                              http://maven.apache.org/xsd/settings-1.0.0.xsd"</span><span class="nt">&gt;</span>
-	<span class="nt">&lt;mirrors&gt;</span>
-		<span class="nt">&lt;mirror&gt;</span>
-		    <span class="nt">&lt;id&gt;</span>alimaven<span class="nt">&lt;/id&gt;</span>
-		    <span class="nt">&lt;name&gt;</span>aliyun maven<span class="nt">&lt;/name&gt;</span>
-		    <span class="nt">&lt;url&gt;</span>http://maven.aliyun.com/nexus/content/groups/public/<span class="nt">&lt;/url&gt;</span>
-		    <span class="nt">&lt;mirrorOf&gt;</span>central<span class="nt">&lt;/mirrorOf&gt;</span>        
-		<span class="nt">&lt;/mirror&gt;</span>
-		<span class="nt">&lt;mirror&gt;</span>    
-			<span class="nt">&lt;id&gt;</span>ibiblio<span class="nt">&lt;/id&gt;</span>    
-			<span class="nt">&lt;mirrorOf&gt;</span>central<span class="nt">&lt;/mirrorOf&gt;</span>    
-			<span class="nt">&lt;name&gt;</span>Human Readable Name for this Mirror.<span class="nt">&lt;/name&gt;</span>    
-			<span class="nt">&lt;url&gt;</span>http://mirrors.ibiblio.org/pub/mirrors/maven2/<span class="nt">&lt;/url&gt;</span>    
-		<span class="nt">&lt;/mirror&gt;</span>  
-	<span class="nt">&lt;/mirrors&gt;</span>
-<span class="nt">&lt;/settings&gt;</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" 
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                              http://maven.apache.org/xsd/settings-1.0.0.xsd"&gt;
+	&lt;mirrors&gt;
+		&lt;mirror&gt;
+		    &lt;id&gt;alimaven&lt;/id&gt;
+		    &lt;name&gt;aliyun maven&lt;/name&gt;
+		    &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public/&lt;/url&gt;
+		    &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;        
+		&lt;/mirror&gt;
+		&lt;mirror&gt;    
+			&lt;id&gt;ibiblio&lt;/id&gt;    
+			&lt;mirrorOf&gt;central&lt;/mirrorOf&gt;    
+			&lt;name&gt;Human Readable Name for this Mirror.&lt;/name&gt;    
+			&lt;url&gt;http://mirrors.ibiblio.org/pub/mirrors/maven2/&lt;/url&gt;    
+		&lt;/mirror&gt;  
+	&lt;/mirrors&gt;
+&lt;/settings&gt;
 </code></pre></div></div>
 
 <h2 id="在eclipse中设置">在Eclipse中设置</h2>

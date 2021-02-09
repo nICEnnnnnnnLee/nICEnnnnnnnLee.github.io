@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,11 +310,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Github" title="Tag: Github" rel="tag">Github</a-->
-        <a href="/tag/#Github" title="Tag: Github" rel="tag">Github</a>&nbsp;
+        <!--a href="/blog/tag/#Github" title="Tag: Github" rel="tag">Github</a-->
+        <a href="/blog/tag/#Github" title="Tag: Github" rel="tag">Github</a>&nbsp;
     
-        <!--a href="/tag/#python" title="Tag: python" rel="tag">python</a-->
-        <a href="/tag/#python" title="Tag: python" rel="tag">python</a>
+        <!--a href="/blog/tag/#python" title="Tag: python" rel="tag">python</a-->
+        <a href="/blog/tag/#python" title="Tag: python" rel="tag">python</a>
     
   
 
@@ -348,13 +348,13 @@
   </li>
   <li>
     <p>第二步，更改本机hosts<br />
-编辑<code class="highlighter-rouge">C:\Windows\System32\drivers\etc\hosts</code></p>
+编辑<code class="language-plaintext highlighter-rouge">C:\Windows\System32\drivers\etc\hosts</code></p>
   </li>
   <li>第三步，刷新缓存
     <ul>
-      <li><code class="highlighter-rouge">win</code>+<code class="highlighter-rouge">R</code>键打开运行</li>
-      <li>输入<code class="highlighter-rouge">cmd</code>，回车</li>
-      <li>输入<code class="highlighter-rouge">ipconfig /flushdns</code>，回车</li>
+      <li><code class="language-plaintext highlighter-rouge">win</code>+<code class="language-plaintext highlighter-rouge">R</code>键打开运行</li>
+      <li>输入<code class="language-plaintext highlighter-rouge">cmd</code>，回车</li>
+      <li>输入<code class="language-plaintext highlighter-rouge">ipconfig /flushdns</code>，回车</li>
     </ul>
   </li>
 </ul>
@@ -365,7 +365,7 @@
 <ol>
   <li>直接DNS查询<br />
 先安装库：
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install dnspython
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install dnspython
 </code></pre></div>    </div>
 
     <p>然后直接上码：</p>
@@ -375,24 +375,24 @@
  <span class="k">def</span> <span class="nf">get_ip</span><span class="p">(</span><span class="n">domain</span><span class="p">):</span>
      <span class="n">ip_list</span> <span class="o">=</span> <span class="p">[]</span>
      <span class="k">try</span><span class="p">:</span>
-         <span class="n">cn</span> <span class="o">=</span> <span class="n">dns</span><span class="o">.</span><span class="n">resolver</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="s">'CNAME'</span><span class="p">)</span>
-         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">cn</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">answer</span><span class="p">:</span>
-             <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">i</span><span class="o">.</span><span class="n">items</span><span class="p">:</span>
-                 <span class="n">cname_domain</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">to_text</span><span class="p">()</span> 
+         <span class="n">cn</span> <span class="o">=</span> <span class="n">dns</span><span class="p">.</span><span class="n">resolver</span><span class="p">.</span><span class="n">query</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="s">'CNAME'</span><span class="p">)</span>
+         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">cn</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">answer</span><span class="p">:</span>
+             <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">i</span><span class="p">.</span><span class="n">items</span><span class="p">:</span>
+                 <span class="n">cname_domain</span> <span class="o">=</span> <span class="n">j</span><span class="p">.</span><span class="n">to_text</span><span class="p">()</span> 
      <span class="k">except</span><span class="p">:</span>
          <span class="k">pass</span>
      <span class="k">else</span><span class="p">:</span>
-         <span class="n">A</span> <span class="o">=</span> <span class="n">dns</span><span class="o">.</span><span class="n">resolver</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">cname_domain</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s">'.'</span><span class="p">),</span> <span class="s">'A'</span><span class="p">)</span>
-         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">A</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">answer</span><span class="p">:</span>
-             <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">i</span><span class="o">.</span><span class="n">items</span><span class="p">:</span>
-                 <span class="n">ip_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">address</span><span class="p">)</span>
+         <span class="n">A</span> <span class="o">=</span> <span class="n">dns</span><span class="p">.</span><span class="n">resolver</span><span class="p">.</span><span class="n">query</span><span class="p">(</span><span class="n">cname_domain</span><span class="p">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s">'.'</span><span class="p">),</span> <span class="s">'A'</span><span class="p">)</span>
+         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">A</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">answer</span><span class="p">:</span>
+             <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">i</span><span class="p">.</span><span class="n">items</span><span class="p">:</span>
+                 <span class="n">ip_list</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">.</span><span class="n">address</span><span class="p">)</span>
              
      <span class="k">try</span><span class="p">:</span>
-         <span class="n">A</span> <span class="o">=</span> <span class="n">dns</span><span class="o">.</span><span class="n">resolver</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="s">'A'</span><span class="p">)</span>
-         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">A</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">answer</span><span class="p">:</span>
-             <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">i</span><span class="o">.</span><span class="n">items</span><span class="p">:</span>
+         <span class="n">A</span> <span class="o">=</span> <span class="n">dns</span><span class="p">.</span><span class="n">resolver</span><span class="p">.</span><span class="n">query</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="s">'A'</span><span class="p">)</span>
+         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">A</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">answer</span><span class="p">:</span>
+             <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">i</span><span class="p">.</span><span class="n">items</span><span class="p">:</span>
                  <span class="k">print</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
-                 <span class="n">ip_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">address</span><span class="p">)</span>
+                 <span class="n">ip_list</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">.</span><span class="n">address</span><span class="p">)</span>
      <span class="k">except</span><span class="p">:</span>
          <span class="k">pass</span>
         
@@ -419,18 +419,18 @@
 
  <span class="k">def</span> <span class="nf">ping</span><span class="p">(</span><span class="n">domain</span><span class="p">):</span>
      <span class="n">ip</span> <span class="o">=</span> <span class="p">[]</span>
-     <span class="k">if</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s">"Windows"</span><span class="p">:</span>
-         <span class="n">cmd</span> <span class="o">=</span> <span class="s">u"ping </span><span class="si">%</span><span class="s">s -n 1"</span> <span class="o">%</span> <span class="n">domain</span>
+     <span class="k">if</span> <span class="n">platform</span><span class="p">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s">"Windows"</span><span class="p">:</span>
+         <span class="n">cmd</span> <span class="o">=</span> <span class="sa">u</span><span class="s">"ping %s -n 1"</span> <span class="o">%</span> <span class="n">domain</span>
      <span class="k">else</span><span class="p">:</span>
-         <span class="n">cmd</span> <span class="o">=</span> <span class="s">u"ping </span><span class="si">%</span><span class="s">s -c 1"</span> <span class="o">%</span> <span class="n">domain</span>
+         <span class="n">cmd</span> <span class="o">=</span> <span class="sa">u</span><span class="s">"ping %s -c 1"</span> <span class="o">%</span> <span class="n">domain</span>
             
-     <span class="n">p</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
+     <span class="n">p</span> <span class="o">=</span> <span class="n">subprocess</span><span class="p">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="p">.</span><span class="n">PIPE</span><span class="p">)</span>
         
-     <span class="n">line</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">locale</span><span class="o">.</span><span class="n">getpreferredencoding</span><span class="p">())</span>
+     <span class="n">line</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">stdout</span><span class="p">.</span><span class="n">readline</span><span class="p">().</span><span class="n">decode</span><span class="p">(</span><span class="n">locale</span><span class="p">.</span><span class="n">getpreferredencoding</span><span class="p">())</span>
      <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-         <span class="n">line</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">locale</span><span class="o">.</span><span class="n">getpreferredencoding</span><span class="p">())</span>
+         <span class="n">line</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">stdout</span><span class="p">.</span><span class="n">readline</span><span class="p">().</span><span class="n">decode</span><span class="p">(</span><span class="n">locale</span><span class="p">.</span><span class="n">getpreferredencoding</span><span class="p">())</span>
          <span class="k">if</span> <span class="n">ip</span> <span class="o">==</span> <span class="p">[]:</span>
-             <span class="n">ip</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}'</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+             <span class="n">ip</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s">'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}'</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
      <span class="k">if</span> <span class="n">ip</span> <span class="o">==</span> <span class="p">[]:</span>
          <span class="k">return</span> <span class="bp">None</span>
      <span class="k">else</span><span class="p">:</span>
@@ -441,7 +441,7 @@
      <span class="k">print</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
 </code></pre></div>    </div>
     <p>缺点是系统可能没有ping工具，而安装可能又没有权限。例如github的workflow的Ubuntu虚拟机冇这个功能，安装报错…</p>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> apt-get install iputils-ping
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> apt-get install iputils-ping
 </code></pre></div>    </div>
   </li>
   <li>
@@ -454,7 +454,7 @@
  <span class="kn">import</span> <span class="nn">socket</span>       
         
  <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
-     <span class="n">ip</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">gethostbyname</span><span class="p">(</span><span class="s">'www.baidu.com'</span><span class="p">)</span>
+     <span class="n">ip</span> <span class="o">=</span> <span class="n">socket</span><span class="p">.</span><span class="n">gethostbyname</span><span class="p">(</span><span class="s">'www.baidu.com'</span><span class="p">)</span>
      <span class="k">print</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
 </code></pre></div>    </div>
   </li>
@@ -469,10 +469,10 @@
   </li>
   <li>如何触发workflow的工作流，这里有几种思路。
     <ul>
-      <li>周期性触发 <code class="highlighter-rouge">√</code></li>
-      <li>通过PUSH/PR来人工触发event <code class="highlighter-rouge">X</code> <br />
+      <li>周期性触发 <code class="language-plaintext highlighter-rouge">√</code></li>
+      <li>通过PUSH/PR来人工触发event <code class="language-plaintext highlighter-rouge">X</code> <br />
   (PUSH需要权限，而PR感觉麻烦，还要fork什么的</li>
-      <li>打开issue <code class="highlighter-rouge">√</code><br />
+      <li>打开issue <code class="language-plaintext highlighter-rouge">√</code><br />
   正好结果直接回复到相应issue中</li>
     </ul>
   </li>
@@ -493,15 +493,15 @@
       <span class="na">steps</span><span class="pi">:</span>
       <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v2</span>
                
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Set up Python 3.8</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Set up Python </span><span class="m">3.8</span>
         <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/setup-python@v1</span>
         <span class="na">with</span><span class="pi">:</span>
-          <span class="na">python-version</span><span class="pi">:</span> <span class="s">3.8</span>
+          <span class="na">python-version</span><span class="pi">:</span> <span class="m">3.8</span>
             
       <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Generate github hosts</span>
         <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
-          <span class="no">python socket_query.py</span>
-          <span class="no">cat hosts.txt</span>
+          <span class="s">python socket_query.py</span>
+          <span class="s">cat hosts.txt</span>
      
         
       <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Close issues of hosts label</span>
@@ -509,44 +509,44 @@
         <span class="na">with</span><span class="pi">:</span>
           <span class="na">github-token</span><span class="pi">:</span> <span class="s">$</span>
           <span class="na">script</span><span class="pi">:</span> <span class="pi">|</span>
-            <span class="no">let response = await github.issues.listForRepo({</span>
-              <span class="no">owner: context.repo.owner,</span>
-              <span class="no">repo: context.repo.repo,</span>
-              <span class="no">labels: ['host'],</span>
-              <span class="no">state: 'open'</span>
-            <span class="no">});</span>
-            <span class="no">let data = response['data'];</span>
+            <span class="s">let response = await github.issues.listForRepo({</span>
+              <span class="s">owner: context.repo.owner,</span>
+              <span class="s">repo: context.repo.repo,</span>
+              <span class="s">labels: ['host'],</span>
+              <span class="s">state: 'open'</span>
+            <span class="s">});</span>
+            <span class="s">let data = response['data'];</span>
             <span class="no">  </span>
-            <span class="no">data.forEach(function(issue){</span>
-              <span class="no">var id = issue['number'];</span>
-              <span class="no">github.issues.update({</span>
-                <span class="no">owner: context.repo.owner,</span>
-                <span class="no">repo: context.repo.repo,</span>
-                <span class="no">issue_number: id,</span>
-                <span class="no">state: 'closed'</span>
-              <span class="no">});</span>
-            <span class="no">});</span>
+            <span class="s">data.forEach(function(issue){</span>
+              <span class="s">var id = issue['number'];</span>
+              <span class="s">github.issues.update({</span>
+                <span class="s">owner: context.repo.owner,</span>
+                <span class="s">repo: context.repo.repo,</span>
+                <span class="s">issue_number: id,</span>
+                <span class="s">state: 'closed'</span>
+              <span class="s">});</span>
+            <span class="s">});</span>
             <span class="no">  </span>
       <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Create issue to show hosts</span>
         <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/github-script@0.4.0</span>
         <span class="na">with</span><span class="pi">:</span>
           <span class="na">github-token</span><span class="pi">:</span> <span class="s">$</span>
           <span class="na">script</span><span class="pi">:</span> <span class="pi">|</span>
-            <span class="no">const date = new Date();</span>
-            <span class="no">const year = date.getFullYear().toString();</span>
-            <span class="no">const month = (date.getMonth() + 1).toString();</span>
-            <span class="no">const day = date.getDate().toString();</span>
-            <span class="no">const title = year + '-' + month + '-' + day + ' github hosts';</span>
-            <span class="no">var fs = require("fs");</span>
-            <span class="no">fs.readFile("hosts.txt", 'utf-8', (err, data) =&gt; {</span>
-              <span class="no">github.issues.create({</span>
-                  <span class="no">owner: context.repo.owner,</span>
-                  <span class="no">repo: context.repo.repo,</span>
-                  <span class="no">labels: ['host'],</span>
-                  <span class="no">title: title,</span>
-                  <span class="no">body: data</span>
-              <span class="no">});</span>
-            <span class="no">});</span>
+            <span class="s">const date = new Date();</span>
+            <span class="s">const year = date.getFullYear().toString();</span>
+            <span class="s">const month = (date.getMonth() + 1).toString();</span>
+            <span class="s">const day = date.getDate().toString();</span>
+            <span class="s">const title = year + '-' + month + '-' + day + ' github hosts';</span>
+            <span class="s">var fs = require("fs");</span>
+            <span class="s">fs.readFile("hosts.txt", 'utf-8', (err, data) =&gt; {</span>
+              <span class="s">github.issues.create({</span>
+                  <span class="s">owner: context.repo.owner,</span>
+                  <span class="s">repo: context.repo.repo,</span>
+                  <span class="s">labels: ['host'],</span>
+                  <span class="s">title: title,</span>
+                  <span class="s">body: data</span>
+              <span class="s">});</span>
+            <span class="s">});</span>
 </code></pre></div>    </div>
   </li>
   <li>
@@ -566,8 +566,8 @@
       <span class="na">steps</span><span class="pi">:</span>
       <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">check permission</span>
         <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
-          <span class="no">echo $</span>
-          <span class="no">echo permission pass</span>
+          <span class="s">echo $</span>
+          <span class="s">echo permission pass</span>
           
           
     <span class="na">build</span><span class="pi">:</span>
@@ -576,28 +576,28 @@
       <span class="na">steps</span><span class="pi">:</span>
       <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v2</span>
                
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Set up Python 3.8</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Set up Python </span><span class="m">3.8</span>
         <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/setup-python@v1</span>
         <span class="na">with</span><span class="pi">:</span>
-          <span class="na">python-version</span><span class="pi">:</span> <span class="s">3.8</span>
+          <span class="na">python-version</span><span class="pi">:</span> <span class="m">3.8</span>
         
       <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Generate github hosts</span>
         <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
-          <span class="no">python socket_query.py</span>
+          <span class="s">python socket_query.py</span>
           <span class="no">  </span>
       <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/github-script@0.4.0</span>
         <span class="na">with</span><span class="pi">:</span>
           <span class="na">github-token</span><span class="pi">:</span> <span class="s">$</span>
           <span class="na">script</span><span class="pi">:</span> <span class="pi">|</span>
-            <span class="no">var fs = require("fs");</span>
-            <span class="no">fs.readFile("hosts.txt", 'utf-8', (err, data) =&gt; {</span>
-              <span class="no">github.issues.createComment({</span>
-                  <span class="no">owner: context.repo.owner,</span>
-                  <span class="no">repo: context.repo.repo,</span>
-                  <span class="no">issue_number: context.issue.number,</span>
-                  <span class="no">body: data</span>
-              <span class="no">});</span>
-            <span class="no">});</span>
+            <span class="s">var fs = require("fs");</span>
+            <span class="s">fs.readFile("hosts.txt", 'utf-8', (err, data) =&gt; {</span>
+              <span class="s">github.issues.createComment({</span>
+                  <span class="s">owner: context.repo.owner,</span>
+                  <span class="s">repo: context.repo.repo,</span>
+                  <span class="s">issue_number: context.issue.number,</span>
+                  <span class="s">body: data</span>
+              <span class="s">});</span>
+            <span class="s">});</span>
 </code></pre></div>    </div>
   </li>
 </ul>

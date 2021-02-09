@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,11 +310,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
     
-        <!--a href="/tag/#Android" title="Tag: Android" rel="tag">Android</a-->
-        <a href="/tag/#Android" title="Tag: Android" rel="tag">Android</a>
+        <!--a href="/blog/tag/#Android" title="Tag: Android" rel="tag">Android</a-->
+        <a href="/blog/tag/#Android" title="Tag: Android" rel="tag">Android</a>
     
   
 
@@ -352,13 +352,13 @@
   <li>关于DNS报文
     <ul>
       <li>似乎如果不在Builder生成时指定DNS服务器，手机本身另有一套机制，使得系统默认的DNS查询不会经过虚拟网卡。故而必须要加上一条：<br />
-  <code class="highlighter-rouge">builder.addDnsServer("xx.xx.xx.xx")</code></li>
+  <code class="language-plaintext highlighter-rouge">builder.addDnsServer("xx.xx.xx.xx")</code></li>
     </ul>
   </li>
   <li>关于默认DNS的获取
     <ul>
       <li>WiFi上网 - 默认DNS的获取
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
 if(wifi  != null){
   DhcpInfo info = wifi.getDhcpInfo();
   String dns = intToIp(info.dns1);
@@ -371,7 +371,7 @@ if(wifi  != null){
       <li>流量上网 - 默认DNS的获取<br />
   这里没有啥好的办法，只能从系统的prop参数中获取，但是网传的<strong>net.dns1/net.dns2</strong>不是很靠谱，故而直接过滤了所有关键词为dns的配置，然后从中匹配。<br />
   这里要注意： Runtime传管道符只能用字符串形式；
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>final static Pattern patternDNS = Pattern.compile(":[ ]*\\[([0-9]+.[0-9]+.[0-9]+.[0-9]+)\\]");
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>final static Pattern patternDNS = Pattern.compile(":[ ]*\\[([0-9]+.[0-9]+.[0-9]+.[0-9]+)\\]");
 public static List&lt;String&gt; getLocalDNS(){
   Process cmdProcess = null;
   BufferedReader reader = null;
@@ -406,7 +406,7 @@ public static List&lt;String&gt; getLocalDNS(){
   </li>
   <li>关于Builder的Route设置<br />
 因为仅仅用于DNS相关的设置，也就没有必要过滤所有ip包，没有必要<strong>builder.addRoute(“0.0.0.0”, 0)</strong>，直接抓取DNS服务器地址的包就行了。
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for(String dns :ConfigReader.dnsList){
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for(String dns :ConfigReader.dnsList){
   builder.addDnsServer(dns);
   builder.addRoute(dns, 32);
 } 

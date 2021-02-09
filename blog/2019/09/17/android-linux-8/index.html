@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,11 +310,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
     
-        <!--a href="/tag/#Android" title="Tag: Android" rel="tag">Android</a-->
-        <a href="/tag/#Android" title="Tag: Android" rel="tag">Android</a>
+        <!--a href="/blog/tag/#Android" title="Tag: Android" rel="tag">Android</a-->
+        <a href="/blog/tag/#Android" title="Tag: Android" rel="tag">Android</a>
     
   
 
@@ -361,9 +361,9 @@
 <h3 id="github">Github</h3>
 <ul>
   <li>新建一个用于鉴权的token</li>
-  <li>新建一个Repo(可以是私有),例如<code class="highlighter-rouge">AbcTest</code></li>
-  <li>为了方便识别在线设备，添加对MAC地址的备注，如<code class="highlighter-rouge">online-devices/remarks.txt</code>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2b:2b:2b:2b:2b:2b 我的PC
+  <li>新建一个Repo(可以是私有),例如<code class="language-plaintext highlighter-rouge">AbcTest</code></li>
+  <li>为了方便识别在线设备，添加对MAC地址的备注，如<code class="language-plaintext highlighter-rouge">online-devices/remarks.txt</code>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2b:2b:2b:2b:2b:2b 我的PC
 2b:2b:2b:2b:2b:2c 我的手机
 </code></pre></div>    </div>
   </li>
@@ -372,7 +372,7 @@
 <h3 id="termux">Termux</h3>
 <ul>
   <li>将程序拷至Termux
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#执行的时候请去掉注释
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#执行的时候请去掉注释
 cd ~
 mkdir -p ~/workspace/ninjaV4/config
 cd ~/workspace/ninjaV4/config
@@ -385,12 +385,12 @@ wget -4 -O ninjaV4.dex https://github.com/nICEnnnnnnnLee/NinjaV4/releases/downlo
 </code></pre></div>    </div>
   </li>
   <li>做好配置
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd ~/workspace/ninjaV4/config
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd ~/workspace/ninjaV4/config
 vi app.config
 </code></pre></div>    </div>
   </li>
   <li>配置要点
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 监听端口，用于局域网内对设备的控制，如果更改，需要修改涉及到的Tasker脚本  
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 监听端口，用于局域网内对设备的控制，如果更改，需要修改涉及到的Tasker脚本  
 httpServerPort = 8888
 # 下载文件夹，程序有啥要下载的东西都放这里
 downloadDir = download/
@@ -410,7 +410,7 @@ url_taskReport = https://api.github.com/repos/nICEnnnnnnnLee/AbcTest/contents/ta
 </code></pre></div>    </div>
   </li>
   <li>写好Tasker运行脚本
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir -p ~/.termux/tasker
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir -p ~/.termux/tasker
 cd ~/.termux/tasker
 echo "curl http://127.0.0.1:8888/onliner/status/upload" &gt; wifi_status_upload.sh
 echo "exit"  &gt;&gt; wifi_status_upload.sh
@@ -421,7 +421,7 @@ echo "exit"  &gt;&gt; get_command_and_run.sh
   <li>运行
 为了节省空间，直接将日志定位到了null。<br />
 初次测试最好看看控制台输出，配置好以后可以不用管。
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd ~/workspace/ninjaV4
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd ~/workspace/ninjaV4
 nohup dalvikvm -cp ninjaV4.dex nicelee.server.MainServer &gt;/dev/null 2&gt;&amp;1 &amp;
 </code></pre></div>    </div>
   </li>
@@ -453,7 +453,7 @@ nohup dalvikvm -cp ninjaV4.dex nicelee.server.MainServer &gt;/dev/null 2&gt;&amp
 <h2 id="如何使用">如何使用</h2>
 <h3 id="同一局域网内">同一局域网内</h3>
 <p>假设手机IP为:<strong>192.168.0.101</strong><br />
-浏览器访问<code class="highlighter-rouge">http://192.168.0.101:8888/</code>,可以得到如下结果：<br />
+浏览器访问<code class="language-plaintext highlighter-rouge">http://192.168.0.101:8888/</code>,可以得到如下结果：<br />
 <img src="/sources/archive/2019/09/index-page.png" alt="" /></p>
 
 <p>根据提示操作即可。<br />
@@ -470,20 +470,20 @@ nohup dalvikvm -cp ninjaV4.dex nicelee.server.MainServer &gt;/dev/null 2&gt;&amp
   <li>让家内的Android设备执行某些特定操作
     <ul>
       <li>因为是每5分钟取一次，有一定延迟。</li>
-      <li>编辑配置指定好的位置的文件，如<code class="highlighter-rouge">task/todo.txt</code></li>
+      <li>编辑配置指定好的位置的文件，如<code class="language-plaintext highlighter-rouge">task/todo.txt</code></li>
     </ul>
   </li>
   <li>任务格式说明
     <ul>
       <li>任务编号： 需要严格递增，编号超过99999以后从0开始</li>
-      <li>计划时间： 假设<code class="highlighter-rouge">18:15</code>,<code class="highlighter-rouge">18:20</code>各取一次任务，企划在<code class="highlighter-rouge">18:18</code>,<code class="highlighter-rouge">18:19</code>的任务都将在<code class="highlighter-rouge">18:20</code>左右执行，且执行顺序没法确定</li>
+      <li>计划时间： 假设<code class="language-plaintext highlighter-rouge">18:15</code>,<code class="language-plaintext highlighter-rouge">18:20</code>各取一次任务，企划在<code class="language-plaintext highlighter-rouge">18:18</code>,<code class="language-plaintext highlighter-rouge">18:19</code>的任务都将在<code class="language-plaintext highlighter-rouge">18:20</code>左右执行，且执行顺序没法确定</li>
       <li>命令内容： 与局域网内各命令的网址URL一致，例如：
         <ul>
           <li>录制b站某主播： /live/start?liver=bili&amp;id=6&amp;qn=10000</li>
           <li>录制斗鱼某主播： /live/start?liver=douyu&amp;id=233223&amp;qn=0</li>
           <li>停止所有录制： /live/stopAll</li>
           <li>更新WiFi设备连接状态： /onliner/status/upload
-            <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>任务编号 计划时间 命令内容
+            <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>任务编号 计划时间 命令内容
 1 2019-09-16 14:14 /test
 2 2019-09-16 14:14 /cloud/history/delete
 3 2019-09-17 18:18 /onliner/status/upload

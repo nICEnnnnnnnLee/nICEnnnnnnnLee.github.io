@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,11 +310,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
     
-        <!--a href="/tag/#Android" title="Tag: Android" rel="tag">Android</a-->
-        <a href="/tag/#Android" title="Tag: Android" rel="tag">Android</a>
+        <!--a href="/blog/tag/#Android" title="Tag: Android" rel="tag">Android</a-->
+        <a href="/blog/tag/#Android" title="Tag: Android" rel="tag">Android</a>
     
   
 
@@ -338,7 +338,7 @@
 
 <h2 id="前言">前言</h2>
 <ul>
-  <li>可以先试试运行<code class="highlighter-rouge">termux-wake-lock</code>，防止设备睡眠，看能不能解决问题。</li>
+  <li>可以先试试运行<code class="language-plaintext highlighter-rouge">termux-wake-lock</code>，防止设备睡眠，看能不能解决问题。</li>
   <li>首先发现的问题是在<strong>熄屏</strong>状态下，Java调用Timer + Timer Task，时间到了基本不执行。<br />
 后来换了多种实现方式仍然有问题。</li>
   <li>接下来发现Termux终端本身timeout/crontab等功能在<strong>熄屏</strong>状态也不能很好地执行。</li>
@@ -357,10 +357,10 @@
 <h2 id="如何实现">如何实现</h2>
 <h3 id="准备工作">准备工作</h3>
 <ul>
-  <li>安装好<code class="highlighter-rouge">Tasker</code></li>
-  <li>安装好<code class="highlighter-rouge">Termux:Task</code>插件</li>
+  <li>安装好<code class="language-plaintext highlighter-rouge">Tasker</code></li>
+  <li>安装好<code class="language-plaintext highlighter-rouge">Termux:Task</code>插件</li>
   <li>Termux中新建存放任务脚本的文件夹
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir -p ~/.termux/tasker
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir -p ~/.termux/tasker
 </code></pre></div>    </div>
   </li>
 </ul>
@@ -369,7 +369,7 @@
 <ul>
   <li>放入待运行的脚本<br />
 假定访问本地的某个URL发起请求
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd ~/.termux/tasker
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd ~/.termux/tasker
 echo curl http://127.0.0.1:8888/test &gt;&gt; test.sh
 exit
 </code></pre></div>    </div>

@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,11 +310,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8" title="Tag: 云服务器" rel="tag">云服务器</a-->
-        <a href="/tag/#云服务器" title="Tag: 云服务器" rel="tag">云服务器</a>&nbsp;
+        <!--a href="/blog/tag/#%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8" title="Tag: 云服务器" rel="tag">云服务器</a-->
+        <a href="/blog/tag/#云服务器" title="Tag: 云服务器" rel="tag">云服务器</a>&nbsp;
     
-        <!--a href="/tag/#%E5%BB%BA%E7%AB%99" title="Tag: 建站" rel="tag">建站</a-->
-        <a href="/tag/#建站" title="Tag: 建站" rel="tag">建站</a>
+        <!--a href="/blog/tag/#%E5%BB%BA%E7%AB%99" title="Tag: 建站" rel="tag">建站</a-->
+        <a href="/blog/tag/#建站" title="Tag: 建站" rel="tag">建站</a>
     
   
 
@@ -339,45 +339,45 @@
 <h2 id="nginx-安装">Nginx 安装</h2>
 <ul>
   <li>一、安装编译工具及库文件
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum -y install make zlib zlib-devel gcc-c++ libtool  openssl openssl-devel
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum -y install make zlib zlib-devel gcc-c++ libtool  openssl openssl-devel
 </code></pre></div>    </div>
   </li>
   <li>二、安装 PCRE
 PCRE 作用是让 Nginx 支持 Rewrite 功能。<br />
 1、下载 PCRE 安装包,下载地址：<a href="http://downloads.sourceforge.net/project/pcre/pcre/8.35/pcre-8.35.tar.gz">http://downloads.sourceforge.net/project/pcre/pcre/8.35/pcre-8.35.tar.gz</a>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> wget http://downloads.sourceforge.net/project/pcre/pcre/8.35/pcre-8.35.tar.gz
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> wget http://downloads.sourceforge.net/project/pcre/pcre/8.35/pcre-8.35.tar.gz
 </code></pre></div>    </div>
     <p>2、解压安装包:</p>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> tar zxvf pcre-8.35.tar.gz
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> tar zxvf pcre-8.35.tar.gz
 </code></pre></div>    </div>
     <p>3、进入安装包目录</p>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> cd pcre-8.35
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> cd pcre-8.35
 </code></pre></div>    </div>
     <p>4、编译安装</p>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ./configure
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ./configure
  make &amp;&amp; make install
 </code></pre></div>    </div>
     <p>5、查看pcre版本</p>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> pcre-config --version
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> pcre-config --version
 </code></pre></div>    </div>
   </li>
   <li>三、安装 Nginx<br />
 1、下载 Nginx，下载地址：<a href="http://nginx.org/download/nginx-1.6.2.tar.gz">http://nginx.org/download/nginx-1.6.2.tar.gz</a>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> wget http://nginx.org/download/nginx-1.6.2.tar.gz
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> wget http://nginx.org/download/nginx-1.6.2.tar.gz
 </code></pre></div>    </div>
     <p>2、解压安装包</p>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> tar zxvf nginx-1.6.2.tar.gz
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> tar zxvf nginx-1.6.2.tar.gz
 </code></pre></div>    </div>
     <p>3、进入安装包目录</p>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> cd nginx-1.6.2
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> cd nginx-1.6.2
 </code></pre></div>    </div>
     <p>4、编译安装</p>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ./configure --prefix=/usr/local/webserver/nginx --with-http_stub_status_module --with-http_ssl_module --with-pcre=/usr/local/src/pcre-8.35
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ./configure --prefix=/usr/local/webserver/nginx --with-http_stub_status_module --with-http_ssl_module --with-pcre=/usr/local/src/pcre-8.35
  make
  make install
 </code></pre></div>    </div>
     <p>5、查看nginx版本</p>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> /usr/local/webserver/nginx/sbin/nginx -v
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> /usr/local/webserver/nginx/sbin/nginx -v
 </code></pre></div>    </div>
     <p>到此，nginx安装完成。</p>
   </li>
@@ -386,17 +386,17 @@ PCRE 作用是让 Nginx 支持 Rewrite 功能。<br />
 <h2 id="nginx-配置">Nginx 配置</h2>
 <ul>
   <li>创建 Nginx 运行使用的用户 www
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> /usr/sbin/groupadd www 
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> /usr/sbin/groupadd www 
  /usr/sbin/useradd -g www www
 </code></pre></div>    </div>
   </li>
-  <li>配置nginx.conf ,将<code class="highlighter-rouge">/usr/local/webserver/nginx/conf/nginx.conf</code>替换为以下内容
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat /usr/local/webserver/nginx/conf/nginx.conf
+  <li>配置nginx.conf ,将<code class="language-plaintext highlighter-rouge">/usr/local/webserver/nginx/conf/nginx.conf</code>替换为以下内容
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat /usr/local/webserver/nginx/conf/nginx.conf
 </code></pre></div>    </div>
   </li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user www www;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user www www;
 worker_processes 2; #设置值和CPU核心数一致
 error_log /usr/local/webserver/nginx/logs/nginx_error.log crit; #日志位置和日志级别
 pid /usr/local/webserver/nginx/nginx.pid;
@@ -473,20 +473,20 @@ http
 </code></pre></div></div>
 <ul>
   <li>检查配置文件nginx.conf的正确性命令：
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> /usr/local/webserver/nginx/sbin/nginx -t
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> /usr/local/webserver/nginx/sbin/nginx -t
 </code></pre></div>    </div>
   </li>
 </ul>
 
 <h2 id="nginx-验证">Nginx 验证</h2>
 <p>Nginx 启动命令如下：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> /usr/local/webserver/nginx/sbin/nginx
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> /usr/local/webserver/nginx/sbin/nginx
 </code></pre></div></div>
 <p>访问站点: 从浏览器访问我们配置的站点ip
  <img src="https://s1.ax1x.com/2018/11/06/ioqjW4.png" alt="" /></p>
 
 <h2 id="nginx-相关命令">Nginx 相关命令</h2>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/local/webserver/nginx/sbin/nginx
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/local/webserver/nginx/sbin/nginx
 /usr/local/webserver/nginx/sbin/nginx -s reload            # 重新载入配置文件
 /usr/local/webserver/nginx/sbin/nginx -s reopen            # 重启 Nginx
 /usr/local/webserver/nginx/sbin/nginx -s stop              # 停止 Nginx

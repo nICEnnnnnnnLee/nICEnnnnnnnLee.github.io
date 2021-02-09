@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,14 +310,14 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#SpringBoot" title="Tag: SpringBoot" rel="tag">SpringBoot</a-->
-        <a href="/tag/#SpringBoot" title="Tag: SpringBoot" rel="tag">SpringBoot</a>&nbsp;
+        <!--a href="/blog/tag/#SpringBoot" title="Tag: SpringBoot" rel="tag">SpringBoot</a-->
+        <a href="/blog/tag/#SpringBoot" title="Tag: SpringBoot" rel="tag">SpringBoot</a>&nbsp;
     
-        <!--a href="/tag/#%E8%B8%A9%E5%9D%91" title="Tag: 踩坑" rel="tag">踩坑</a-->
-        <a href="/tag/#踩坑" title="Tag: 踩坑" rel="tag">踩坑</a>&nbsp;
+        <!--a href="/blog/tag/#%E8%B8%A9%E5%9D%91" title="Tag: 踩坑" rel="tag">踩坑</a-->
+        <a href="/blog/tag/#踩坑" title="Tag: 踩坑" rel="tag">踩坑</a>&nbsp;
     
-        <!--a href="/tag/#JPA" title="Tag: JPA" rel="tag">JPA</a-->
-        <a href="/tag/#JPA" title="Tag: JPA" rel="tag">JPA</a>
+        <!--a href="/blog/tag/#JPA" title="Tag: JPA" rel="tag">JPA</a-->
+        <a href="/blog/tag/#JPA" title="Tag: JPA" rel="tag">JPA</a>
     
   
 
@@ -339,16 +339,16 @@
 
 <h2 id="配置applicationproperties">配置application.properties</h2>
 <p>需要更改application.properties 配置如下：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>spring.jpa.hibernate.ddl-auto=none
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>spring.jpa.hibernate.ddl-auto=none
 </code></pre></div></div>
 <p><strong>解释</strong>：
-DDL 模式可选项： <code class="highlighter-rouge">none</code>、 <code class="highlighter-rouge">validate</code>、 <code class="highlighter-rouge">update</code>、 <code class="highlighter-rouge">create</code> 和 <code class="highlighter-rouge">create-drop</code>。</p>
+DDL 模式可选项： <code class="language-plaintext highlighter-rouge">none</code>、 <code class="language-plaintext highlighter-rouge">validate</code>、 <code class="language-plaintext highlighter-rouge">update</code>、 <code class="language-plaintext highlighter-rouge">create</code> 和 <code class="language-plaintext highlighter-rouge">create-drop</code>。</p>
 
-<p>这是 <code class="highlighter-rouge">hibernate. hbm2ddl.auto</code>属性的一个快捷方式。</p>
+<p>这是 <code class="language-plaintext highlighter-rouge">hibernate. hbm2ddl.auto</code>属性的一个快捷方式。</p>
 
-<p>在使用嵌入式数据库时，默认为 <code class="highlighter-rouge">create-drop</code> , 其他情况下默认为 <code class="highlighter-rouge">none</code> 。</p>
+<p>在使用嵌入式数据库时，默认为 <code class="language-plaintext highlighter-rouge">create-drop</code> , 其他情况下默认为 <code class="language-plaintext highlighter-rouge">none</code> 。</p>
 
-<p>网上很多说更改为<code class="highlighter-rouge">update</code>，搞了半天也没有生效。该值应该为<code class="highlighter-rouge">none</code>。</p>
+<p>网上很多说更改为<code class="language-plaintext highlighter-rouge">update</code>，搞了半天也没有生效。该值应该为<code class="language-plaintext highlighter-rouge">none</code>。</p>
 
         </article>
         <hr>

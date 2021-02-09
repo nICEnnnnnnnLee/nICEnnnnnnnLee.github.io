@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,11 +310,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
     
-        <!--a href="/tag/#Android" title="Tag: Android" rel="tag">Android</a-->
-        <a href="/tag/#Android" title="Tag: Android" rel="tag">Android</a>
+        <!--a href="/blog/tag/#Android" title="Tag: Android" rel="tag">Android</a-->
+        <a href="/blog/tag/#Android" title="Tag: Android" rel="tag">Android</a>
     
   
 
@@ -333,19 +333,19 @@
 <p>最近尝试将旧的手机当Linux跑起来，跑一些自己写的Python/Java小程序。Android是基于Linux内核的操作系统，因为Java用的比较多，先写个demo，看看可不可行</p>
 
 <h2 id="一次失败的尝试">一次失败的尝试</h2>
-<p>先写个demo，为了尽量规避可能涉及的权限问题，将其导入手机公用下载目录，然后通过<code class="highlighter-rouge">adb shell</code>尝试调用。<br />
+<p>先写个demo，为了尽量规避可能涉及的权限问题，将其导入手机公用下载目录，然后通过<code class="language-plaintext highlighter-rouge">adb shell</code>尝试调用。<br />
 … 结果失败了</p>
 
 <ul>
-  <li>先写个<code class="highlighter-rouge">Hello World</code></li>
+  <li>先写个<code class="language-plaintext highlighter-rouge">Hello World</code></li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">nicelee</span><span class="p">.</span><span class="n">server</span><span class="p">;</span>
-<span class="k">public</span> <span class="n">class</span> <span class="n">Test</span> <span class="p">{</span>	
-	<span class="k">public</span> <span class="n">static</span> <span class="n">void</span> <span class="n">main</span><span class="p">(</span><span class="k">String</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>		
-		<span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"run in dalvikvm"</span><span class="p">);</span>
-	<span class="p">}</span>
-<span class="p">}</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>package nicelee.server;
+public class Test {	
+	public static void main(String[] args) {		
+		System.out.println("run in dalvikvm");
+	}
+}
 </code></pre></div></div>
 
 <ul>
@@ -353,12 +353,12 @@
     <p>先按正常来导出jar包，常见的JDK环境均能运行的那种</p>
   </li>
   <li>
-    <p>将test.jar通过<code class="highlighter-rouge">adb</code>导入常见的Download目录<br />
+    <p>将test.jar通过<code class="language-plaintext highlighter-rouge">adb</code>导入常见的Download目录<br />
 <img src="/sources/archive/2019/09/push-test.png" alt="" /></p>
   </li>
   <li>
     <p>进入adb shell，cd 到目录，尝试调用<br />
-<code class="highlighter-rouge">java -jar test.jar</code> 
+<code class="language-plaintext highlighter-rouge">java -jar test.jar</code> 
 <img src="/sources/archive/2019/09/java-cmd-not-found.png" alt="" /><br />
 运行失败</p>
   </li>
@@ -369,19 +369,19 @@
 虽然说Android本身便支持Java(不然Java写的app怎么个跑法)，但似乎环境与传统JVM虚拟机不同，至少不支持java命令那一套。<br />
 搜了一下，Android端使用dalvik虚拟机，jar包对应的以dex包形式存在。<br />
 所以，中间还缺一套“翻译”程序。<br />
-这里要用到Android SDK开发工具，最好将<code class="highlighter-rouge">dx.bat</code>所在目录设<code class="highlighter-rouge">Path</code>环境变量。 <br />
-这个目录一般是 <code class="highlighter-rouge">{...}\sdk\build-tools\28.0.3(版本号)</code></p>
+这里要用到Android SDK开发工具，最好将<code class="language-plaintext highlighter-rouge">dx.bat</code>所在目录设<code class="language-plaintext highlighter-rouge">Path</code>环境变量。 <br />
+这个目录一般是 <code class="language-plaintext highlighter-rouge">{...}\sdk\build-tools\28.0.3(版本号)</code></p>
 
 <ul>
   <li>jar转dex<br />
 一行命令搞定
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dx --dex --output=test.dex test.jar
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dx --dex --output=test.dex test.jar
 </code></pre></div>    </div>
   </li>
   <li>导入并运行</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>adb push test.dex /storage/self/primary/Download
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>adb push test.dex /storage/self/primary/Download
 adb shell
 cd /storage/self/primary/Download
 dalvikvm -cp test.dex nicelee.server.Test
@@ -391,12 +391,12 @@ dalvikvm -cp test.dex nicelee.server.Test
 <h2 id="依旧存在的问题">依旧存在的问题</h2>
 <p>虽然初步试了一下，跑个小程序基本上没啥毛病。但仍然存在以下问题：</p>
 <ul>
-  <li>在没有root的情况下，使用shell调用<code class="highlighter-rouge">nohup dalvikvm...</code>存在权限问题，这就意味着只能连着USB调试吊着小程序，局限太大。</li>
+  <li>在没有root的情况下，使用shell调用<code class="language-plaintext highlighter-rouge">nohup dalvikvm...</code>存在权限问题，这就意味着只能连着USB调试吊着小程序，局限太大。</li>
   <li>缺乏常见的vi/wget/curl等命令，阉割严重</li>
   <li>没有一个像yum和apt-get的软件包管理器，c、python等环境不好配置，同时日常开发非常困难</li>
 </ul>
 
-<p>综上，搜了一下，感觉<code class="highlighter-rouge">Termux</code>还算不错，轻量级使用，配置一番基本上可以和用云服务器差不多。</p>
+<p>综上，搜了一下，感觉<code class="language-plaintext highlighter-rouge">Termux</code>还算不错，轻量级使用，配置一番基本上可以和用云服务器差不多。</p>
 
         </article>
         <hr>

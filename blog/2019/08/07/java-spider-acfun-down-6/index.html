@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,17 +310,17 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
     
-        <!--a href="/tag/#html" title="Tag: html" rel="tag">html</a-->
-        <a href="/tag/#html" title="Tag: html" rel="tag">html</a>&nbsp;
+        <!--a href="/blog/tag/#html" title="Tag: html" rel="tag">html</a-->
+        <a href="/blog/tag/#html" title="Tag: html" rel="tag">html</a>&nbsp;
     
-        <!--a href="/tag/#%E7%88%AC%E8%99%AB" title="Tag: 爬虫" rel="tag">爬虫</a-->
-        <a href="/tag/#爬虫" title="Tag: 爬虫" rel="tag">爬虫</a>&nbsp;
+        <!--a href="/blog/tag/#%E7%88%AC%E8%99%AB" title="Tag: 爬虫" rel="tag">爬虫</a-->
+        <a href="/blog/tag/#爬虫" title="Tag: 爬虫" rel="tag">爬虫</a>&nbsp;
     
-        <!--a href="/tag/#AcFun" title="Tag: AcFun" rel="tag">AcFun</a-->
-        <a href="/tag/#AcFun" title="Tag: AcFun" rel="tag">AcFun</a>
+        <!--a href="/blog/tag/#AcFun" title="Tag: AcFun" rel="tag">AcFun</a-->
+        <a href="/blog/tag/#AcFun" title="Tag: AcFun" rel="tag">AcFun</a>
     
   
 
@@ -347,11 +347,11 @@
 <h2 id="获取up主上传的中视频列表">获取UP主上传的中视频列表</h2>
 <ol>
   <li>已知UP主页，易得up的spaceID
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://www.acfun.cn/u/6238691.aspx  ==&gt; spaceID为6238691
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://www.acfun.cn/u/6238691.aspx  ==&gt; spaceID为6238691
 </code></pre></div>    </div>
   </li>
   <li>由spaceID获得所有上传的ac号(分页)
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>String urlFormat = "https://www.acfun.cn/space/next?uid=%s&amp;type=video&amp;orderBy=2&amp;pageNo=%d";
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>String urlFormat = "https://www.acfun.cn/space/next?uid=%s&amp;type=video&amp;orderBy=2&amp;pageNo=%d";
 String url = String.format(urlFormat, spaceID, page);
 String json = util.getContent(url, new HttpHeaders().getCommonHeaders("www.acfun.cn"));
 JSONObject jobj = new JSONObject(json);

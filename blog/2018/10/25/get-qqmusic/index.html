@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,11 +310,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
     
-        <!--a href="/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a-->
-        <a href="/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a>
+        <!--a href="/blog/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a-->
+        <a href="/blog/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a>
     
   
 
@@ -355,7 +355,7 @@
 <p>– 这样不行的话，那么客户端直接爬网页吧，在打开QQ音乐主页进行搜索，然后爬页面结果。语言的话，想用python和java都来一遍，先用java吧。</p>
 
 <p>– 在网上看了很多的开源项目，感觉掌握起来很麻烦诶，我也没那么多需求。我想吧，这只是一个入门级的爬虫，其实更多的只是需要html的解析功能。找了半天，感觉jsoup刚刚够用。如果只是返回xml或json的http请求的话，甚至Java自带的java.net.HttpURLConnection也不是不能考虑。就这样决定了，jsoup！！！</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Document</span> <span class="n">doc</span> <span class="o">=</span> <span class="n">Jsoup</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="n">url</span><span class="o">).</span><span class="na">timeout</span><span class="o">(</span><span class="mi">2000</span><span class="o">).</span><span class="na">get</span><span class="o">();</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Document</span> <span class="n">doc</span> <span class="o">=</span> <span class="nc">Jsoup</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="n">url</span><span class="o">).</span><span class="na">timeout</span><span class="o">(</span><span class="mi">2000</span><span class="o">).</span><span class="na">get</span><span class="o">();</span>
 </code></pre></div></div>
 <p>参考
 <a href="https://www.cnblogs.com/nick-huang/p/3859353.html">通过java.net.URLConnection发送HTTP请求的方法</a><br />
@@ -396,14 +396,14 @@
 <ul>
   <li>生成RequestUrl<br />
 其中p=1 代表分页第一页，n=3代表每页3个数据，w代表关键词
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">private</span> <span class="n">String</span> <span class="nf">genSongLstUrl</span><span class="o">(</span> <span class="n">String</span> <span class="n">keyWord</span> <span class="o">){</span>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">private</span> <span class="nc">String</span> <span class="nf">genSongLstUrl</span><span class="o">(</span> <span class="nc">String</span> <span class="n">keyWord</span> <span class="o">){</span>
       <span class="k">try</span> <span class="o">{</span>
-          <span class="n">StringBuffer</span> <span class="n">sbUrl</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>
+          <span class="nc">StringBuffer</span> <span class="n">sbUrl</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuffer</span><span class="o">();</span>
           <span class="n">sbUrl</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"https://c.y.qq.com/soso/fcgi-bin/client_search_cp?ct=24&amp;qqmusic_ver=1298&amp;new_json=1&amp;t=0&amp;aggr=1&amp;cr=1&amp;p=1&amp;n=3&amp;w="</span><span class="o">);</span>
           <span class="n">sbUrl</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="na">net</span><span class="o">.</span><span class="na">URLEncoder</span><span class="o">.</span><span class="na">encode</span><span class="o">(</span><span class="n">keyWord</span><span class="o">,</span><span class="s">"utf-8"</span><span class="o">));</span>
           <span class="k">return</span> <span class="n">sbUrl</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
-      <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-          <span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">"Method - querySongLstUrl : keyWord to Url error"</span><span class="o">);</span>
+      <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+          <span class="nc">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">"Method - querySongLstUrl : keyWord to Url error"</span><span class="o">);</span>
           <span class="k">return</span> <span class="s">""</span><span class="o">;</span>
       <span class="o">}</span>
 		
@@ -411,10 +411,10 @@
 </code></pre></div>    </div>
   </li>
   <li>发送Http请求
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">private</span> <span class="n">String</span> <span class="nf">getJsonStr</span><span class="o">(</span> <span class="n">String</span> <span class="n">url</span> <span class="o">){</span>
-      <span class="n">Response</span> <span class="n">res</span><span class="o">;</span>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">private</span> <span class="nc">String</span> <span class="nf">getJsonStr</span><span class="o">(</span> <span class="nc">String</span> <span class="n">url</span> <span class="o">){</span>
+      <span class="nc">Response</span> <span class="n">res</span><span class="o">;</span>
       <span class="k">try</span> <span class="o">{</span>
-          <span class="n">res</span> <span class="o">=</span> <span class="n">Jsoup</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="n">url</span><span class="o">)</span>
+          <span class="n">res</span> <span class="o">=</span> <span class="nc">Jsoup</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="n">url</span><span class="o">)</span>
                   <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"Accept"</span><span class="o">,</span> <span class="s">"*/*"</span><span class="o">)</span>
                   <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"Accept-Encoding"</span><span class="o">,</span> <span class="s">"gzip, deflate, sdch, br"</span><span class="o">)</span>
                   <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"Accept-Language"</span><span class="o">,</span><span class="s">"zh-CN,zh;q=0.8"</span><span class="o">)</span>
@@ -422,23 +422,23 @@
                   <span class="o">.</span><span class="na">userAgent</span><span class="o">(</span><span class="s">"Mozilla/5.0 (Windows NT 10.0; WOW64)"</span><span class="o">)</span>
                   <span class="o">.</span><span class="na">referrer</span><span class="o">(</span><span class="s">"https://y.qq.com/portal/player.html"</span><span class="o">)</span>
                   <span class="o">.</span><span class="na">ignoreContentType</span><span class="o">(</span><span class="kc">true</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
-          <span class="n">String</span> <span class="n">jsonStr</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="na">body</span><span class="o">();</span>
+          <span class="nc">String</span> <span class="n">jsonStr</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="na">body</span><span class="o">();</span>
           <span class="c1">//System.out.println(jsonStr);</span>
           <span class="k">return</span> <span class="n">jsonStr</span><span class="o">;</span>
-      <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-          <span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">"Connect to url: %s response error!\n"</span><span class="o">,</span><span class="n">url</span><span class="o">);</span>
+      <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+          <span class="nc">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">"Connect to url: %s response error!\n"</span><span class="o">,</span><span class="n">url</span><span class="o">);</span>
           <span class="k">return</span> <span class="s">""</span><span class="o">;</span>
       <span class="o">}</span>
   <span class="o">}</span>
 </code></pre></div>    </div>
   </li>
   <li>json解析如下：
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Song</span><span class="o">&gt;</span> <span class="nf">jsonToSongList</span><span class="o">(</span> <span class="n">String</span> <span class="n">jsonStr</span> <span class="o">){</span>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Song</span><span class="o">&gt;</span> <span class="nf">jsonToSongList</span><span class="o">(</span> <span class="nc">String</span> <span class="n">jsonStr</span> <span class="o">){</span>
       <span class="n">jsonStr</span> <span class="o">=</span> <span class="n">jsonStr</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s">"callback("</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
       <span class="n">jsonStr</span> <span class="o">=</span> <span class="n">jsonStr</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="n">jsonStr</span><span class="o">.</span><span class="na">length</span><span class="o">()-</span><span class="mi">1</span><span class="o">);</span>
       <span class="c1">//System.out.println(jsonStr);</span>
-      <span class="n">List</span><span class="o">&lt;</span><span class="n">Song</span><span class="o">&gt;</span> <span class="n">lstSong</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
-      <span class="n">JSONArray</span> <span class="n">jsonArr</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">(</span><span class="n">jsonStr</span><span class="o">)</span>
+      <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Song</span><span class="o">&gt;</span> <span class="n">lstSong</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+      <span class="nc">JSONArray</span> <span class="n">jsonArr</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JSONObject</span><span class="o">(</span><span class="n">jsonStr</span><span class="o">)</span>
               <span class="o">.</span><span class="na">getJSONObject</span><span class="o">(</span><span class="s">"data"</span><span class="o">)</span>
               <span class="o">.</span><span class="na">getJSONObject</span><span class="o">(</span><span class="s">"song"</span><span class="o">)</span>
               <span class="o">.</span><span class="na">getJSONArray</span><span class="o">(</span><span class="s">"list"</span><span class="o">);</span>
@@ -446,8 +446,8 @@
       <span class="c1">//System.out.printf("共有%d个搜索结果:\n------------\n",jsonArr.length());</span>
       <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">jsonArr</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">i</span><span class="o">++){</span>
           <span class="c1">//System.out.printf(" 当前第一个歌曲%d信息:\n",i+1);</span>
-          <span class="n">Song</span> <span class="n">song</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Song</span><span class="o">();</span>
-          <span class="n">JSONObject</span> <span class="n">json</span> <span class="o">=</span> <span class="n">jsonArr</span><span class="o">.</span><span class="na">getJSONObject</span><span class="o">(</span><span class="n">i</span><span class="o">);</span><span class="c1">//第i首歌曲</span>
+          <span class="nc">Song</span> <span class="n">song</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Song</span><span class="o">();</span>
+          <span class="nc">JSONObject</span> <span class="n">json</span> <span class="o">=</span> <span class="n">jsonArr</span><span class="o">.</span><span class="na">getJSONObject</span><span class="o">(</span><span class="n">i</span><span class="o">);</span><span class="c1">//第i首歌曲</span>
           <span class="n">song</span><span class="o">.</span><span class="na">mid</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"mid"</span><span class="o">);</span><span class="c1">//title</span>
           <span class="n">song</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"name"</span><span class="o">);</span><span class="c1">//title</span>
           <span class="n">song</span><span class="o">.</span><span class="na">singer</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="na">getJSONArray</span><span class="o">(</span><span class="s">"singer"</span><span class="o">)</span>
@@ -472,15 +472,15 @@
 <h3 id="根据songmid得到-歌曲外链">根据songMid得到 歌曲外链</h3>
 <p>—- 打开QQ音乐搜索页，搜索关键词 - <strong>战 排骨教主</strong>，点击播放其中一首歌曲，会弹出另一个页面<br />
 和以上类似，不过监控的是弹出的另一个页面</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="kd">private</span> <span class="n">String</span> <span class="nf">genSongLinkUrl</span><span class="o">(</span> <span class="n">String</span> <span class="n">songMid</span><span class="o">){</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="kd">private</span> <span class="nc">String</span> <span class="nf">genSongLinkUrl</span><span class="o">(</span> <span class="nc">String</span> <span class="n">songMid</span><span class="o">){</span>
 		<span class="k">try</span> <span class="o">{</span>
-			<span class="kd">final</span> <span class="n">String</span> <span class="n">urlHeader</span> <span class="o">=</span> <span class="s">"https://u.y.qq.com/cgi-bin/musicu.fcg?data="</span><span class="o">;</span>
-			<span class="n">String</span> <span class="n">urlData</span> <span class="o">=</span> <span class="s">"{\"req_0\":{\"module\":\"vkey.GetVkeyServer\",\"method\":\"CgiGetVkey\",\"param\":{\"guid\":\"2857186708\",\"songmid\":[\"%s\"],\"songtype\":[0],\"uin\":\"0\",\"loginflag\":1,\"platform\":\"20\"}},\"comm\":{\"uin\":0,\"format\":\"json\",\"ct\":20,\"cv\":0}}"</span><span class="o">;</span>
-			<span class="n">urlData</span> <span class="o">=</span> <span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="n">urlData</span><span class="o">,</span> <span class="n">songMid</span><span class="o">);</span>
+			<span class="kd">final</span> <span class="nc">String</span> <span class="n">urlHeader</span> <span class="o">=</span> <span class="s">"https://u.y.qq.com/cgi-bin/musicu.fcg?data="</span><span class="o">;</span>
+			<span class="nc">String</span> <span class="n">urlData</span> <span class="o">=</span> <span class="s">"{\"req_0\":{\"module\":\"vkey.GetVkeyServer\",\"method\":\"CgiGetVkey\",\"param\":{\"guid\":\"2857186708\",\"songmid\":[\"%s\"],\"songtype\":[0],\"uin\":\"0\",\"loginflag\":1,\"platform\":\"20\"}},\"comm\":{\"uin\":0,\"format\":\"json\",\"ct\":20,\"cv\":0}}"</span><span class="o">;</span>
+			<span class="n">urlData</span> <span class="o">=</span> <span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="n">urlData</span><span class="o">,</span> <span class="n">songMid</span><span class="o">);</span>
 			<span class="n">urlData</span> <span class="o">=</span> <span class="n">java</span><span class="o">.</span><span class="na">net</span><span class="o">.</span><span class="na">URLEncoder</span><span class="o">.</span><span class="na">encode</span><span class="o">(</span><span class="n">urlData</span><span class="o">,</span><span class="s">"utf-8"</span><span class="o">);</span>
 			<span class="k">return</span> <span class="n">urlHeader</span> <span class="o">+</span> <span class="n">urlData</span><span class="o">;</span>
-		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">UnsupportedEncodingException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-			<span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">"Method - querySongLstUrl : keyWord to Url error"</span><span class="o">);</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">UnsupportedEncodingException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">"Method - querySongLstUrl : keyWord to Url error"</span><span class="o">);</span>
 			<span class="k">return</span> <span class="s">""</span><span class="o">;</span>
 		<span class="o">}</span>
 	<span class="o">}</span>
@@ -490,25 +490,25 @@
 和以上类似，不过监控的是弹出的另一个页面</p>
 
 <p>需要注意的是，Refer需要设置https://y.qq.com，否则无法成功</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Jsoup</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="n">url</span><span class="o">).</span><span class="na">referrer</span><span class="o">(</span><span class="s">"https://y.qq.com/portal/player.html"</span><span class="o">)</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Jsoup</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="n">url</span><span class="o">).</span><span class="na">referrer</span><span class="o">(</span><span class="s">"https://y.qq.com/portal/player.html"</span><span class="o">)</span>
 </code></pre></div></div>
 <p>RequestUrl如下：</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">String</span> <span class="n">dstUrl</span> <span class="o">=</span> <span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"https://c.y.qq.com/lyric/fcgi-bin/fcg_query_lyric_new.fcg?callback=MusicJsonCallback_lrc&amp;pcachetime=1540437434727&amp;songmid=%s&amp;g_tk=5381&amp;jsonpCallback=MusicJsonCallback_lrc&amp;loginUin=0&amp;hostUin=0&amp;format=jsonp&amp;inCharset=utf8&amp;outCharset=utf-8&amp;notice=0&amp;platform=yqq&amp;needNewCode=0"</span><span class="o">,</span><span class="n">songMid</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">dstUrl</span> <span class="o">=</span> <span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"https://c.y.qq.com/lyric/fcgi-bin/fcg_query_lyric_new.fcg?callback=MusicJsonCallback_lrc&amp;pcachetime=1540437434727&amp;songmid=%s&amp;g_tk=5381&amp;jsonpCallback=MusicJsonCallback_lrc&amp;loginUin=0&amp;hostUin=0&amp;format=jsonp&amp;inCharset=utf8&amp;outCharset=utf-8&amp;notice=0&amp;platform=yqq&amp;needNewCode=0"</span><span class="o">,</span><span class="n">songMid</span><span class="o">);</span>
 </code></pre></div></div>
 <p>解析需要用到Base64：</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="kd">private</span> <span class="n">String</span> <span class="nf">jsonToLyric</span><span class="o">(</span><span class="n">String</span> <span class="n">jsonStr</span><span class="o">){</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="kd">private</span> <span class="nc">String</span> <span class="nf">jsonToLyric</span><span class="o">(</span><span class="nc">String</span> <span class="n">jsonStr</span><span class="o">){</span>
 		<span class="k">try</span> <span class="o">{</span>
 			<span class="n">jsonStr</span> <span class="o">=</span> <span class="n">jsonStr</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s">"MusicJsonCallback_lrc("</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
 			<span class="n">jsonStr</span> <span class="o">=</span> <span class="n">jsonStr</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s">"})"</span><span class="o">,</span> <span class="s">"}"</span><span class="o">);</span>
 
-			<span class="n">String</span> <span class="n">lyricOrg</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">(</span><span class="n">jsonStr</span><span class="o">)</span>
+			<span class="nc">String</span> <span class="n">lyricOrg</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JSONObject</span><span class="o">(</span><span class="n">jsonStr</span><span class="o">)</span>
 					<span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"lyric"</span><span class="o">);</span>
-			<span class="kd">final</span> <span class="n">Base64</span><span class="o">.</span><span class="na">Decoder</span> <span class="n">decoder</span> <span class="o">=</span> <span class="n">Base64</span><span class="o">.</span><span class="na">getDecoder</span><span class="o">();</span>
+			<span class="kd">final</span> <span class="nc">Base64</span><span class="o">.</span><span class="na">Decoder</span> <span class="n">decoder</span> <span class="o">=</span> <span class="nc">Base64</span><span class="o">.</span><span class="na">getDecoder</span><span class="o">();</span>
 			<span class="c1">//解码</span>
-			<span class="n">String</span> <span class="n">lyric</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="n">decoder</span><span class="o">.</span><span class="na">decode</span><span class="o">(</span><span class="n">lyricOrg</span><span class="o">),</span> <span class="s">"UTF-8"</span><span class="o">);</span>
+			<span class="nc">String</span> <span class="n">lyric</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">(</span><span class="n">decoder</span><span class="o">.</span><span class="na">decode</span><span class="o">(</span><span class="n">lyricOrg</span><span class="o">),</span> <span class="s">"UTF-8"</span><span class="o">);</span>
 			<span class="c1">//System.out.printf("歌词\n%s\n\n",lyric);	</span>
 			<span class="k">return</span> <span class="n">lyric</span><span class="o">;</span>
-		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span>  <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span>  <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
 			<span class="k">return</span> <span class="s">""</span><span class="o">;</span>
 		<span class="o">}</span>
@@ -522,19 +522,19 @@
 <p>在跑的时候看到有如下js代码：</p>
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">getMidPic</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">t</span><span class="p">)</span> <span class="p">{</span>
 	<span class="nx">t</span> <span class="o">=</span> <span class="nx">t</span> <span class="o">||</span> <span class="p">{};</span>
-	<span class="kd">var</span> <span class="nx">e</span> <span class="o">=</span> <span class="s2">"//y.gtimg.cn/mediastyle/macmusic_v4/extra/default_cover.png?max_age=31536000"</span>
+	<span class="kd">var</span> <span class="nx">e</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">//y.gtimg.cn/mediastyle/macmusic_v4/extra/default_cover.png?max_age=31536000</span><span class="dl">"</span>
 	  <span class="p">,</span> <span class="nx">o</span> <span class="o">=</span> <span class="nx">t</span><span class="p">.</span><span class="nx">page</span>
 	  <span class="p">,</span> <span class="nx">n</span> <span class="o">=</span> <span class="nx">t</span><span class="p">.</span><span class="nx">type</span>
 	  <span class="p">,</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">t</span><span class="p">.</span><span class="nx">mid</span><span class="p">;</span>
 	<span class="k">return</span> <span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span> <span class="o">&amp;&amp;</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="mi">150</span> <span class="o">==</span> <span class="nx">n</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">n</span> <span class="o">=</span> <span class="mi">300</span><span class="p">),</span>
 	<span class="p">(</span><span class="mi">68</span> <span class="o">==</span> <span class="nx">n</span> <span class="o">||</span> <span class="mi">90</span> <span class="o">==</span> <span class="nx">n</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">n</span> <span class="o">=</span> <span class="mi">150</span><span class="p">)),</span>
-	<span class="s2">"string"</span> <span class="o">==</span> <span class="k">typeof</span> <span class="nx">i</span> <span class="o">&amp;&amp;</span> <span class="nx">i</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;=</span> <span class="mi">14</span> <span class="p">?</span> <span class="p">(</span><span class="nx">o</span> <span class="o">=</span> <span class="s2">"album"</span> <span class="o">==</span> <span class="nx">o</span> <span class="p">?</span> <span class="s2">"T002"</span> <span class="p">:</span> <span class="s2">"singer"</span> <span class="o">==</span> <span class="nx">o</span> <span class="p">?</span> <span class="s2">"T001"</span> <span class="p">:</span> <span class="nx">o</span><span class="p">,</span>
-	<span class="nx">e</span> <span class="o">=</span> <span class="s2">"//y.gtimg.cn/music/photo_new/"</span> <span class="o">+</span> <span class="nx">o</span> <span class="o">+</span> <span class="s2">"R"</span> <span class="o">+</span> <span class="p">(</span><span class="nx">n</span> <span class="o">||</span> <span class="mi">68</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"x"</span> <span class="o">+</span> <span class="p">(</span><span class="nx">n</span> <span class="o">||</span> <span class="mi">68</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"M000"</span> <span class="o">+</span> <span class="nx">i</span> <span class="o">+</span> <span class="s2">".jpg?max_age=2592000"</span><span class="p">)</span> <span class="p">:</span> <span class="nx">i</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">e</span> <span class="o">=</span> <span class="s2">"//y.gtimg.cn/music/photo/"</span> <span class="o">+</span> <span class="nx">o</span> <span class="o">+</span> <span class="s2">"_"</span> <span class="o">+</span> <span class="p">(</span><span class="nx">n</span> <span class="o">||</span> <span class="mi">68</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"/"</span> <span class="o">+</span> <span class="nx">i</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">+</span> <span class="s2">"/"</span> <span class="o">+</span> <span class="p">(</span><span class="nx">n</span> <span class="o">||</span> <span class="mi">68</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"_"</span> <span class="o">+</span> <span class="nx">o</span> <span class="o">+</span> <span class="s2">"pic_"</span> <span class="o">+</span> <span class="nx">i</span> <span class="o">+</span> <span class="s2">"_0.jpg?max_age=2592000"</span><span class="p">),</span>
+	<span class="dl">"</span><span class="s2">string</span><span class="dl">"</span> <span class="o">==</span> <span class="k">typeof</span> <span class="nx">i</span> <span class="o">&amp;&amp;</span> <span class="nx">i</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;=</span> <span class="mi">14</span> <span class="p">?</span> <span class="p">(</span><span class="nx">o</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">album</span><span class="dl">"</span> <span class="o">==</span> <span class="nx">o</span> <span class="p">?</span> <span class="dl">"</span><span class="s2">T002</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">singer</span><span class="dl">"</span> <span class="o">==</span> <span class="nx">o</span> <span class="p">?</span> <span class="dl">"</span><span class="s2">T001</span><span class="dl">"</span> <span class="p">:</span> <span class="nx">o</span><span class="p">,</span>
+	<span class="nx">e</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">//y.gtimg.cn/music/photo_new/</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">o</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">R</span><span class="dl">"</span> <span class="o">+</span> <span class="p">(</span><span class="nx">n</span> <span class="o">||</span> <span class="mi">68</span><span class="p">)</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">x</span><span class="dl">"</span> <span class="o">+</span> <span class="p">(</span><span class="nx">n</span> <span class="o">||</span> <span class="mi">68</span><span class="p">)</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">M000</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">i</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">.jpg?max_age=2592000</span><span class="dl">"</span><span class="p">)</span> <span class="p">:</span> <span class="nx">i</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">e</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">//y.gtimg.cn/music/photo/</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">o</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">_</span><span class="dl">"</span> <span class="o">+</span> <span class="p">(</span><span class="nx">n</span> <span class="o">||</span> <span class="mi">68</span><span class="p">)</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">i</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/</span><span class="dl">"</span> <span class="o">+</span> <span class="p">(</span><span class="nx">n</span> <span class="o">||</span> <span class="mi">68</span><span class="p">)</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">_</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">o</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">pic_</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">i</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">_0.jpg?max_age=2592000</span><span class="dl">"</span><span class="p">),</span>
 	<span class="nx">e</span>
 <span class="p">}</span>
 </code></pre></div></div>
 <p>所以能够直接生成：</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">String</span> <span class="n">dstUrl</span> <span class="o">=</span> <span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"https://y.gtimg.cn/music/photo_new/T001R300x300M000%s.jpg?max_age=2592000"</span><span class="o">,</span><span class="n">albumMid</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">dstUrl</span> <span class="o">=</span> <span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"https://y.gtimg.cn/music/photo_new/T001R300x300M000%s.jpg?max_age=2592000"</span><span class="o">,</span><span class="n">albumMid</span><span class="o">);</span>
 </code></pre></div></div>
 <hr />
 <p>##最后的话<br />

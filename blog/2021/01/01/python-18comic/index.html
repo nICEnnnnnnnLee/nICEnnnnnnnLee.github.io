@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#代码片段" title="Category: 代码片段" rel="category">代码片段</a>
+        <a href="/blog/category/#代码片段" title="Category: 代码片段" rel="category">代码片段</a>
     
   
 
@@ -310,8 +310,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Python" title="Tag: Python" rel="tag">Python</a-->
-        <a href="/tag/#Python" title="Tag: Python" rel="tag">Python</a>
+        <!--a href="/blog/tag/#Python" title="Tag: Python" rel="tag">Python</a-->
+        <a href="/blog/tag/#Python" title="Tag: Python" rel="tag">Python</a>
     
   
 
@@ -342,18 +342,18 @@
 
 <span class="k">class</span> <span class="nc">retry</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">retry</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">sleep</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">retry</span> <span class="o">=</span> <span class="n">retry</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sleep</span> <span class="o">=</span> <span class="n">sleep</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">retry</span> <span class="o">=</span> <span class="n">retry</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">sleep</span> <span class="o">=</span> <span class="n">sleep</span>
     <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
         <span class="k">def</span> <span class="nf">checkRun</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
             <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-                <span class="k">if</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">retry</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+                <span class="k">if</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">retry</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
                     <span class="k">raise</span> <span class="n">e</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">retry</span> <span class="o">-=</span> <span class="mi">1</span>
-                    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sleep</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="p">.</span><span class="n">retry</span> <span class="o">-=</span> <span class="mi">1</span>
+                    <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">sleep</span><span class="p">)</span>
                     <span class="k">return</span> <span class="n">checkRun</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
                     
         <span class="o">@</span><span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
@@ -364,76 +364,76 @@
 <span class="k">class</span> <span class="nc">Chapter</span><span class="p">:</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">chpId</span><span class="p">,</span> <span class="n">domain</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">session</span> <span class="o">=</span> <span class="n">session</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">domain</span> <span class="o">=</span> <span class="n">domain</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">chpId</span> <span class="o">=</span> <span class="n">chpId</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">commonHeaders</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">session</span> <span class="o">=</span> <span class="n">session</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">domain</span> <span class="o">=</span> <span class="n">domain</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">chpId</span> <span class="o">=</span> <span class="n">chpId</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">commonHeaders</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s">"Accept-Language"</span><span class="p">:</span> <span class="s">"zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2"</span><span class="p">,</span>
             <span class="s">"Accept-Encoding"</span><span class="p">:</span> <span class="s">"gzip"</span><span class="p">,</span>
             <span class="s">'Connection'</span><span class="p">:</span> <span class="s">'keep-alive'</span><span class="p">,</span>
             <span class="s">'Pragma'</span><span class="p">:</span> <span class="s">'no-cache'</span><span class="p">,</span>
             <span class="s">'Cache-Control'</span><span class="p">:</span> <span class="s">'no-cache'</span><span class="p">,</span>
             <span class="s">"User-Agent"</span><span class="p">:</span> <span class="s">"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0"</span><span class="p">,</span>
-            <span class="s">"Referer"</span><span class="p">:</span> <span class="s">"https://</span><span class="si">%</span><span class="s">s/album/</span><span class="si">%</span><span class="s">s/"</span><span class="o">%</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="n">chpId</span><span class="p">),</span>
+            <span class="s">"Referer"</span><span class="p">:</span> <span class="s">"https://%s/album/%s/"</span><span class="o">%</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="n">chpId</span><span class="p">),</span>
         <span class="p">}</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">commonHeaders</span><span class="p">)</span>  
+        <span class="bp">self</span><span class="p">.</span><span class="n">session</span><span class="p">.</span><span class="n">headers</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">commonHeaders</span><span class="p">)</span>  
     
     <span class="o">@</span><span class="n">retry</span><span class="p">(</span><span class="n">retry</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span> <span class="c1">#最大重试3次，4次全部报错，才会报错
 </span>    <span class="k">def</span> <span class="nf">getHtml</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chp_url</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">chp_url</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">session</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">chp_url</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">).</span><span class="n">text</span>
     
     <span class="k">def</span> <span class="nf">downloadAll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">folder</span><span class="p">):</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">folder</span><span class="p">):</span>
-            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span> 
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">exists</span><span class="p">(</span><span class="n">folder</span><span class="p">):</span>
+            <span class="n">os</span><span class="p">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span> 
         
         <span class="c1"># 获取所有图片链接
-</span>        <span class="n">chp_url</span> <span class="o">=</span> <span class="s">"https://</span><span class="si">%</span><span class="s">s/photo/</span><span class="si">%</span><span class="s">s?read_mode=read-by-page"</span><span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">chpId</span><span class="p">)</span>
-        <span class="n">html</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getHtml</span><span class="p">(</span><span class="n">chp_url</span><span class="p">)</span>
+</span>        <span class="n">chp_url</span> <span class="o">=</span> <span class="s">"https://%s/photo/%s?read_mode=read-by-page"</span><span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">domain</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">chpId</span><span class="p">)</span>
+        <span class="n">html</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">getHtml</span><span class="p">(</span><span class="n">chp_url</span><span class="p">)</span>
         <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="p">,</span><span class="s">'lxml'</span><span class="p">)</span>
-        <span class="n">img_template</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s">".img_template img#album_photo_"</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">img_template</span> <span class="o">=</span> <span class="n">soup</span><span class="p">.</span><span class="n">select</span><span class="p">(</span><span class="s">".img_template img#album_photo_"</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">img_prefix</span> <span class="o">=</span> <span class="n">img_template</span><span class="p">[</span><span class="s">"data-src"</span><span class="p">]</span>        
-        <span class="n">img_options</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s">"#pageselect option "</span><span class="p">)</span>
+        <span class="n">img_options</span> <span class="o">=</span> <span class="n">soup</span><span class="p">.</span><span class="n">select</span><span class="p">(</span><span class="s">"#pageselect option "</span><span class="p">)</span>
         <span class="n">img_suffixs</span> <span class="o">=</span> <span class="p">[</span>  <span class="n">op</span><span class="p">[</span><span class="s">"data-page"</span><span class="p">]</span> <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">img_options</span> <span class="p">]</span>
         
-        <span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+        <span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="p">.</span><span class="n">get_event_loop</span><span class="p">()</span>
         <span class="n">threadPool</span> <span class="o">=</span> <span class="n">ThreadPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">thread_name_prefix</span><span class="o">=</span><span class="s">"download_"</span><span class="p">)</span>
         <span class="n">tasks</span> <span class="o">=</span> <span class="p">[]</span>  
         <span class="c1"># 逐个下载链接
 </span>        <span class="k">for</span> <span class="n">img_suffix</span> <span class="ow">in</span> <span class="n">img_suffixs</span><span class="p">:</span>
-            <span class="n">url</span> <span class="o">=</span> <span class="s">r"</span><span class="si">%</span><span class="s">s</span><span class="si">%</span><span class="s">s?v=</span><span class="si">%</span><span class="s">d"</span><span class="o">%</span><span class="p">(</span><span class="n">img_prefix</span><span class="p">,</span> <span class="n">img_suffix</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()))</span>
-            <span class="n">path</span> <span class="o">=</span> <span class="s">r'</span><span class="si">%</span><span class="s">s/</span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="n">img_suffix</span><span class="p">)</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="sa">r</span><span class="s">"%s%s?v=%d"</span><span class="o">%</span><span class="p">(</span><span class="n">img_prefix</span><span class="p">,</span> <span class="n">img_suffix</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()))</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="sa">r</span><span class="s">'%s/%s'</span> <span class="o">%</span> <span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="n">img_suffix</span><span class="p">)</span>
             <span class="c1">#future = threadPool.submit(th_download_pic, url, path)
-</span>            <span class="n">task</span> <span class="o">=</span> <span class="n">loop</span><span class="o">.</span><span class="n">run_in_executor</span><span class="p">(</span><span class="n">threadPool</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">th_download_pic</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
-            <span class="n">tasks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+</span>            <span class="n">task</span> <span class="o">=</span> <span class="n">loop</span><span class="p">.</span><span class="n">run_in_executor</span><span class="p">(</span><span class="n">threadPool</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">th_download_pic</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+            <span class="n">tasks</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
             
         <span class="c1">#threadPool.shutdown(wait=True)
-</span>        <span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">asyncio</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">tasks</span><span class="p">))</span>
+</span>        <span class="n">loop</span><span class="p">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">asyncio</span><span class="p">.</span><span class="n">wait</span><span class="p">(</span><span class="n">tasks</span><span class="p">))</span>
         <span class="k">print</span><span class="p">(</span><span class="s">""</span><span class="p">)</span>
     
     <span class="k">def</span> <span class="nf">th_download_pic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
         <span class="c1">#print("下载中... %s"%(path))
-</span>        <span class="k">print</span><span class="p">(</span><span class="s">"</span><span class="se">\r</span><span class="s">下载中... </span><span class="si">%</span><span class="s">s"</span><span class="o">%</span><span class="p">(</span><span class="n">path</span><span class="p">),</span> <span class="n">sep</span><span class="o">=</span><span class="s">''</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">''</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+</span>        <span class="k">print</span><span class="p">(</span><span class="s">"</span><span class="se">\r</span><span class="s">下载中... %s"</span><span class="o">%</span><span class="p">(</span><span class="n">path</span><span class="p">),</span> <span class="n">sep</span><span class="o">=</span><span class="s">''</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">''</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
             <span class="n">tmp_path</span> <span class="o">=</span> <span class="n">path</span> <span class="o">+</span> <span class="s">".tmp"</span>
-            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">tmp_path</span><span class="p">):</span>
-                <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">tmp_path</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">exists</span><span class="p">(</span><span class="n">tmp_path</span><span class="p">):</span>
+                <span class="n">os</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="n">tmp_path</span><span class="p">)</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">tmp_path</span><span class="p">,</span> <span class="s">"wb"</span><span class="p">)</span> <span class="k">as</span> <span class="nb">file</span><span class="p">:</span>
-                    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">commonHeaders</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
-                    <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">iter_content</span><span class="p">(</span><span class="n">chunk_size</span><span class="o">=</span><span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">):</span>
-                        <span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-                    <span class="n">response</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-                <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">tmp_path</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+                    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">commonHeaders</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">response</span><span class="p">.</span><span class="n">iter_content</span><span class="p">(</span><span class="n">chunk_size</span><span class="o">=</span><span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">):</span>
+                        <span class="nb">file</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+                    <span class="n">response</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+                <span class="n">os</span><span class="p">.</span><span class="n">rename</span><span class="p">(</span><span class="n">tmp_path</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
             <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
                 <span class="k">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-                <span class="k">print</span><span class="p">(</span><span class="s">"</span><span class="si">%</span><span class="s">s下载失败"</span><span class="o">%</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
-            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  
+                <span class="k">print</span><span class="p">(</span><span class="s">"%s下载失败"</span><span class="o">%</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+            <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  
 
         
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
-    <span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+    <span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">Session</span><span class="p">()</span>
     <span class="n">chpt</span> <span class="o">=</span> <span class="n">Chapter</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="s">"105925"</span><span class="p">,</span> <span class="n">domain_of_comic</span><span class="p">)</span> <span class="c1">#和谐去掉
-</span>    <span class="n">chpt</span><span class="o">.</span><span class="n">downloadAll</span><span class="p">(</span><span class="s">"test"</span><span class="p">)</span>
+</span>    <span class="n">chpt</span><span class="p">.</span><span class="n">downloadAll</span><span class="p">(</span><span class="s">"test"</span><span class="p">)</span>
 </code></pre></div></div>
 
 <h2 id="comicpy">comic.py</h2>
@@ -446,20 +446,20 @@
 <span class="kn">from</span> <span class="nn">chapter</span> <span class="kn">import</span> <span class="n">Chapter</span>
 
 <span class="k">def</span> <span class="nf">getWebsites</span><span class="p">():</span>
-    <span class="n">html</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">domain_of_comic_intro</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="c1">#和谐去掉
+    <span class="n">html</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">domain_of_comic_intro</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">).</span><span class="n">text</span><span class="c1">#和谐去掉
 </span>    <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="p">,</span><span class="s">'lxml'</span><span class="p">)</span>
-    <span class="n">p_all</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s">".has-luminous-vivid-orange-color"</span><span class="p">)</span>
-    <span class="n">sites</span> <span class="o">=</span> <span class="p">[</span> <span class="n">p</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">p_all</span> <span class="p">]</span>
+    <span class="n">p_all</span> <span class="o">=</span> <span class="n">soup</span><span class="p">.</span><span class="n">select</span><span class="p">(</span><span class="s">".has-luminous-vivid-orange-color"</span><span class="p">)</span>
+    <span class="n">sites</span> <span class="o">=</span> <span class="p">[</span> <span class="n">p</span><span class="p">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">p_all</span> <span class="p">]</span>
     <span class="k">print</span><span class="p">(</span><span class="n">sites</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">sites</span>
     
 <span class="k">class</span> <span class="nc">Comic</span><span class="p">:</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">comicId</span><span class="p">,</span> <span class="n">domain</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">session</span> <span class="o">=</span> <span class="n">session</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">domain</span> <span class="o">=</span> <span class="n">domain</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">comicId</span> <span class="o">=</span> <span class="n">comicId</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">commonHeaders</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">session</span> <span class="o">=</span> <span class="n">session</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">domain</span> <span class="o">=</span> <span class="n">domain</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">comicId</span> <span class="o">=</span> <span class="n">comicId</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">commonHeaders</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s">"Accept-Language"</span><span class="p">:</span> <span class="s">"zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2"</span><span class="p">,</span>
             <span class="s">"Accept-Encoding"</span><span class="p">:</span> <span class="s">"gzip"</span><span class="p">,</span>
             <span class="s">'Connection'</span><span class="p">:</span> <span class="s">'keep-alive'</span><span class="p">,</span>
@@ -467,35 +467,35 @@
             <span class="s">'Cache-Control'</span><span class="p">:</span> <span class="s">'no-cache'</span><span class="p">,</span>
             <span class="s">"User-Agent"</span><span class="p">:</span> <span class="s">"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0"</span><span class="p">,</span>
         <span class="p">}</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">commonHeaders</span><span class="p">)</span>  
+        <span class="bp">self</span><span class="p">.</span><span class="n">session</span><span class="p">.</span><span class="n">headers</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">commonHeaders</span><span class="p">)</span>  
     
     <span class="k">def</span> <span class="nf">downloadAll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">folder</span><span class="p">,</span> <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
         <span class="c1"># 获取所有章节链接
-</span>        <span class="n">comic_url</span> <span class="o">=</span> <span class="s">"https://</span><span class="si">%</span><span class="s">s/album/</span><span class="si">%</span><span class="s">s/"</span><span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">comicId</span><span class="p">)</span>
-        <span class="n">html</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">comic_url</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+</span>        <span class="n">comic_url</span> <span class="o">=</span> <span class="s">"https://%s/album/%s/"</span><span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">domain</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">comicId</span><span class="p">)</span>
+        <span class="n">html</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">session</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">comic_url</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">).</span><span class="n">text</span>
         <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="p">,</span><span class="s">'lxml'</span><span class="p">)</span>
-        <span class="n">comicName</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s">"div.pull-left[itemprop~=name]"</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"/"</span><span class="p">,</span><span class="s">"."</span><span class="p">)</span>
+        <span class="n">comicName</span> <span class="o">=</span> <span class="n">soup</span><span class="p">.</span><span class="n">select</span><span class="p">(</span><span class="s">"div.pull-left[itemprop~=name]"</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="n">text</span><span class="p">.</span><span class="n">strip</span><span class="p">().</span><span class="n">replace</span><span class="p">(</span><span class="s">"/"</span><span class="p">,</span><span class="s">"."</span><span class="p">)</span>
         <span class="k">print</span><span class="p">(</span><span class="n">comicName</span><span class="p">)</span>
-        <span class="n">folder</span> <span class="o">=</span> <span class="n">folder</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"{comicName}"</span><span class="p">,</span> <span class="n">comicName</span><span class="p">)</span>
+        <span class="n">folder</span> <span class="o">=</span> <span class="n">folder</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"{comicName}"</span><span class="p">,</span> <span class="n">comicName</span><span class="p">)</span>
         
-        <span class="n">chpt_all</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s">"ul.btn-toolbar"</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">t_title_all</span> <span class="o">=</span> <span class="n">chpt_all</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s">"li"</span><span class="p">)</span>
-        <span class="n">t_url_all</span> <span class="o">=</span> <span class="n">chpt_all</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s">"a"</span><span class="p">)</span>
-        <span class="n">titles</span> <span class="o">=</span> <span class="p">[</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">r" |\||\r|\t|\?|(最新)|(\d{4}-\d{2}-\d{2}$)"</span><span class="p">,</span> <span class="s">""</span><span class="p">,</span> <span class="n">tag</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="s">"_"</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"/"</span><span class="p">,</span><span class="s">"."</span><span class="p">)</span> <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">t_title_all</span> <span class="p">]</span>
-        <span class="n">chptIds</span> <span class="o">=</span> <span class="p">[</span> <span class="n">tag</span><span class="p">[</span><span class="s">"href"</span><span class="p">][</span><span class="n">tag</span><span class="p">[</span><span class="s">"href"</span><span class="p">]</span><span class="o">.</span><span class="n">rindex</span><span class="p">(</span><span class="s">"/"</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span> <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">t_url_all</span> <span class="p">]</span>
+        <span class="n">chpt_all</span> <span class="o">=</span> <span class="n">soup</span><span class="p">.</span><span class="n">select</span><span class="p">(</span><span class="s">"ul.btn-toolbar"</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">t_title_all</span> <span class="o">=</span> <span class="n">chpt_all</span><span class="p">.</span><span class="n">select</span><span class="p">(</span><span class="s">"li"</span><span class="p">)</span>
+        <span class="n">t_url_all</span> <span class="o">=</span> <span class="n">chpt_all</span><span class="p">.</span><span class="n">select</span><span class="p">(</span><span class="s">"a"</span><span class="p">)</span>
+        <span class="n">titles</span> <span class="o">=</span> <span class="p">[</span> <span class="n">re</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s">" |\||\r|\t|\?|(最新)|(\d{4}-\d{2}-\d{2}$)"</span><span class="p">,</span> <span class="s">""</span><span class="p">,</span> <span class="n">tag</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">strip</span><span class="p">()).</span><span class="n">strip</span><span class="p">().</span><span class="n">replace</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="s">"_"</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s">"/"</span><span class="p">,</span><span class="s">"."</span><span class="p">)</span> <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">t_title_all</span> <span class="p">]</span>
+        <span class="n">chptIds</span> <span class="o">=</span> <span class="p">[</span> <span class="n">tag</span><span class="p">[</span><span class="s">"href"</span><span class="p">][</span><span class="n">tag</span><span class="p">[</span><span class="s">"href"</span><span class="p">].</span><span class="n">rindex</span><span class="p">(</span><span class="s">"/"</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span> <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">t_url_all</span> <span class="p">]</span>
         
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">folder</span><span class="p">):</span>
-            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">exists</span><span class="p">(</span><span class="n">folder</span><span class="p">):</span>
+            <span class="n">os</span><span class="p">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">titles</span><span class="p">)):</span>
             <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">start</span><span class="p">:</span>
                 <span class="k">continue</span>
             <span class="k">print</span><span class="p">(</span><span class="s">"正在下载 "</span><span class="p">,</span> <span class="n">titles</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-            <span class="n">chpt</span> <span class="o">=</span> <span class="n">Chapter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="p">,</span> <span class="n">chptIds</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
-            <span class="n">path</span> <span class="o">=</span> <span class="s">"</span><span class="si">%</span><span class="s">s/</span><span class="si">%</span><span class="s">s"</span><span class="o">%</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="n">titles</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-            <span class="n">chpt</span><span class="o">.</span><span class="n">downloadAll</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            <span class="n">chpt</span> <span class="o">=</span> <span class="n">Chapter</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">session</span><span class="p">,</span> <span class="n">chptIds</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="bp">self</span><span class="p">.</span><span class="n">domain</span><span class="p">)</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="s">"%s/%s"</span><span class="o">%</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="n">titles</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">chpt</span><span class="p">.</span><span class="n">downloadAll</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
     
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
-    <span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+    <span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">Session</span><span class="p">()</span>
     <span class="c1"># 获取可以直连的域名
 </span>    <span class="c1">#domain = getWebsites()[-1]
 </span>    <span class="n">domain</span> <span class="o">=</span> <span class="n">getWebsites</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
@@ -503,7 +503,7 @@
 </span>    <span class="n">comic</span> <span class="o">=</span> <span class="n">Comic</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="s">"105924"</span><span class="p">,</span> <span class="n">domain</span><span class="p">)</span>
     <span class="c1"># 指定保存文件夹, 从第几章开始下载 (index start from 0)
 </span>    <span class="c1"># comic.downloadAll("test", 0)
-</span>    <span class="n">comic</span><span class="o">.</span><span class="n">downloadAll</span><span class="p">(</span><span class="s">"{comicName}"</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</span>    <span class="n">comic</span><span class="p">.</span><span class="n">downloadAll</span><span class="p">(</span><span class="s">"{comicName}"</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 </code></pre></div></div>
 
         </article>

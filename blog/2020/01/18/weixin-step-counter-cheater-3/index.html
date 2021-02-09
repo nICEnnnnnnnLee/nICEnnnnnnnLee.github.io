@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#小技巧" title="Category: 小技巧" rel="category">小技巧</a>
+        <a href="/blog/category/#小技巧" title="Category: 小技巧" rel="category">小技巧</a>
     
   
 
@@ -310,8 +310,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#%E5%BE%AE%E4%BF%A1%E8%BF%90%E5%8A%A8" title="Tag: 微信运动" rel="tag">微信运动</a-->
-        <a href="/tag/#微信运动" title="Tag: 微信运动" rel="tag">微信运动</a>
+        <!--a href="/blog/tag/#%E5%BE%AE%E4%BF%A1%E8%BF%90%E5%8A%A8" title="Tag: 微信运动" rel="tag">微信运动</a-->
+        <a href="/blog/tag/#微信运动" title="Tag: 微信运动" rel="tag">微信运动</a>
     
   
 
@@ -346,7 +346,7 @@
 <ul>
   <li>手机安装了春雨计步app，关注春雨计步器微信公众号，手机打开春雨计步app并与微信相关联</li>
   <li>某设备已经安装好<a href="https://github.com/nICEnnnnnnnLee/NinjaV4/">NinjaV4</a>并成功运行。<br />
-假设其ip/端口为<code class="highlighter-rouge">192.168.0.102:8888</code></li>
+假设其ip/端口为<code class="language-plaintext highlighter-rouge">192.168.0.102:8888</code></li>
 </ul>
 
 <h2 id="step-1-获取相关参数">Step 1. 获取相关参数</h2>
@@ -354,13 +354,13 @@
   <li>原理是通过代理拦截相关http请求，如果你确保已经获取到了参数，请参见Step 2.</li>
   <li>具体步骤：
     <ol>
-      <li>手机通过Wifi设置代理<code class="highlighter-rouge">192.168.0.102:8888</code>
+      <li>手机通过Wifi设置代理<code class="language-plaintext highlighter-rouge">192.168.0.102:8888</code>
   <img src="/sources/archive/2020/01/1-wifi-proxy.jpg" alt="" /></li>
       <li>打开春雨计步app(可能会闪退，不过没关系)</li>
       <li>手机取消Wifi代理</li>
-      <li>访问<code class="highlighter-rouge">http://192.168.0.102:8888/weixin</code>
+      <li>访问<code class="language-plaintext highlighter-rouge">http://192.168.0.102:8888/weixin</code>
   <img src="/sources/archive/2020/01/2.print.png" alt="" /></li>
-      <li>点击<code class="highlighter-rouge">打印相关url</code>，如果生效，应该会有一长串<br />
+      <li>点击<code class="language-plaintext highlighter-rouge">打印相关url</code>，如果生效，应该会有一长串<br />
   以下为有效数据：<br />
   <img src="/sources/archive/2020/01/3.right_data.png" alt="有效数据" /><br />
   以下为空数据：<br />
@@ -383,22 +383,22 @@
 方法二讲述如何永久保存。</li>
   <li>方法一：
     <ol>
-      <li>获取<code class="highlighter-rouge">refreshCookieUrl</code>和<code class="highlighter-rouge">postStepUrl</code>，参见Step 1.5</li>
+      <li>获取<code class="language-plaintext highlighter-rouge">refreshCookieUrl</code>和<code class="language-plaintext highlighter-rouge">postStepUrl</code>，参见Step 1.5</li>
       <li>复制refreshCookieUrl在问号?及之后的那一堆参数(包括问号)</li>
-      <li>先假设要设置的设备的NinjaV4的ip/端口为<code class="highlighter-rouge">123.123.123.123:8888</code>，且没有反代，没有Docker等容器，我们先访问它。 <br />
-  也就是，打开浏览器，访问<code class="highlighter-rouge">http://123.123.123.123:8888/weixin</code></li>
-      <li>点击<code class="highlighter-rouge">通过代理拦截获取相关Url</code></li>
+      <li>先假设要设置的设备的NinjaV4的ip/端口为<code class="language-plaintext highlighter-rouge">123.123.123.123:8888</code>，且没有反代，没有Docker等容器，我们先访问它。 <br />
+  也就是，打开浏览器，访问<code class="language-plaintext highlighter-rouge">http://123.123.123.123:8888/weixin</code></li>
+      <li>点击<code class="language-plaintext highlighter-rouge">通过代理拦截获取相关Url</code></li>
       <li>在跳转页面的url后面补上复制的内容，大致会是下面这个样子，然后回车
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  http://123.123.123.123:8888/weixin/setParam?union_id=...&amp;nickname=...&amp;figure=......
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  http://123.123.123.123:8888/weixin/setParam?union_id=...&amp;nickname=...&amp;figure=......
 </code></pre></div>        </div>
       </li>
     </ol>
   </li>
   <li>方法二：
     <ol>
-      <li>获取<code class="highlighter-rouge">refreshCookieUrl</code>和<code class="highlighter-rouge">postStepUrl</code>，参见Step 1.5</li>
-      <li>修改<code class="highlighter-rouge">config/app.config</code>文件，加入配置
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  weixin_step_refreshCookieUrl = http://steps.chunyuyisheng.com/api/pedometer/contest_start/?...你懂的 
+      <li>获取<code class="language-plaintext highlighter-rouge">refreshCookieUrl</code>和<code class="language-plaintext highlighter-rouge">postStepUrl</code>，参见Step 1.5</li>
+      <li>修改<code class="language-plaintext highlighter-rouge">config/app.config</code>文件，加入配置
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  weixin_step_refreshCookieUrl = http://steps.chunyuyisheng.com/api/pedometer/contest_start/?...你懂的 
   weixin_step_postStepUrl = http://steps.chunyuyisheng.com/robot/p/upload_steps_data/?...你懂的 
 </code></pre></div>        </div>
       </li>
@@ -411,9 +411,9 @@
 <ul>
   <li>具体步骤：
     <ol>
-      <li>访问<code class="highlighter-rouge">http://192.168.0.102:8888/weixin</code><br />
+      <li>访问<code class="language-plaintext highlighter-rouge">http://192.168.0.102:8888/weixin</code><br />
   <img src="/sources/archive/2020/01/2.print.png" alt="" /></li>
-      <li>点击<code class="highlighter-rouge">延长cookie有效时长</code></li>
+      <li>点击<code class="language-plaintext highlighter-rouge">延长cookie有效时长</code></li>
     </ol>
   </li>
 </ul>
@@ -422,14 +422,14 @@
 <ul>
   <li>具体步骤：
     <ol>
-      <li>访问<code class="highlighter-rouge">http://192.168.0.102:8888/weixin</code> <br />
+      <li>访问<code class="language-plaintext highlighter-rouge">http://192.168.0.102:8888/weixin</code> <br />
   <img src="/sources/archive/2020/01/2.print.png" alt="" /></li>
-      <li>在跳转页面的url补上step参数，假设作弊步数为33333步，补上<code class="highlighter-rouge">?step=33333</code>，回车<br />
+      <li>在跳转页面的url补上step参数，假设作弊步数为33333步，补上<code class="language-plaintext highlighter-rouge">?step=33333</code>，回车<br />
   大致会是下面这个样子:
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  http://192.168.0.102:8888/weixin/stepcount?step=33333
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  http://192.168.0.102:8888/weixin/stepcount?step=33333
 </code></pre></div>        </div>
         <p>当返回页面显示如下，说明步数修改成功，快去微信运动看看吧。否则很可能cookie失效了哦。</p>
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  {"err_msg": "", "success": true} 
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  {"err_msg": "", "success": true} 
 </code></pre></div>        </div>
       </li>
     </ol>

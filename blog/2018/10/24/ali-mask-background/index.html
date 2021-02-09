@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,17 +310,17 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a-->
-        <a href="/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a>&nbsp;
+        <!--a href="/blog/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a-->
+        <a href="/blog/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a>&nbsp;
     
-        <!--a href="/tag/#HTML" title="Tag: HTML" rel="tag">HTML</a-->
-        <a href="/tag/#HTML" title="Tag: HTML" rel="tag">HTML</a>&nbsp;
+        <!--a href="/blog/tag/#HTML" title="Tag: HTML" rel="tag">HTML</a-->
+        <a href="/blog/tag/#HTML" title="Tag: HTML" rel="tag">HTML</a>&nbsp;
     
-        <!--a href="/tag/#CSS" title="Tag: CSS" rel="tag">CSS</a-->
-        <a href="/tag/#CSS" title="Tag: CSS" rel="tag">CSS</a>&nbsp;
+        <!--a href="/blog/tag/#CSS" title="Tag: CSS" rel="tag">CSS</a-->
+        <a href="/blog/tag/#CSS" title="Tag: CSS" rel="tag">CSS</a>&nbsp;
     
-        <!--a href="/tag/#%E5%89%8D%E7%AB%AF" title="Tag: 前端" rel="tag">前端</a-->
-        <a href="/tag/#前端" title="Tag: 前端" rel="tag">前端</a>
+        <!--a href="/blog/tag/#%E5%89%8D%E7%AB%AF" title="Tag: 前端" rel="tag">前端</a-->
+        <a href="/blog/tag/#前端" title="Tag: 前端" rel="tag">前端</a>
     
   
 
@@ -353,20 +353,20 @@
 
 <p>Then import it.</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">"text/javascript"</span> <span class="nx">src</span><span class="o">=</span><span class="s2">"dist/alimask.min.js"</span><span class="o">&gt;&lt;</span><span class="sr">/script</span><span class="err">&gt;
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="dl">"</span><span class="s2">text/javascript</span><span class="dl">"</span> <span class="nx">src</span><span class="o">=</span><span class="dl">"</span><span class="s2">dist/alimask.min.js</span><span class="dl">"</span><span class="o">&gt;&lt;</span><span class="sr">/script</span><span class="err">&gt;
 </span><span class="c1">// or</span>
-<span class="kd">var</span> <span class="nx">alimask</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'alimask'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">alimask</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">alimask</span><span class="dl">'</span><span class="p">);</span>
 <span class="c1">// or</span>
-<span class="k">import</span> <span class="nx">alimask</span> <span class="k">from</span> <span class="s1">'alimask'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">alimask</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">alimask</span><span class="dl">'</span><span class="p">;</span>
 </code></pre></div></div>
 
 <p>Then use <strong>alimask(text, options)</strong> API.</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">alimask</span><span class="p">(</span><span class="s1">'王小为(小为) 888888'</span><span class="p">);</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">alimask</span><span class="p">(</span><span class="dl">'</span><span class="s1">王小为(小为) 888888</span><span class="dl">'</span><span class="p">);</span>
 
-<span class="nx">alimask</span><span class="p">(</span><span class="s1">'王小为(小为) 888888'</span><span class="p">,</span> <span class="p">{</span> <span class="na">color</span><span class="p">:</span> <span class="s1">'#f6dcd7'</span> <span class="p">});</span>
+<span class="nx">alimask</span><span class="p">(</span><span class="dl">'</span><span class="s1">王小为(小为) 888888</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#f6dcd7</span><span class="dl">'</span> <span class="p">});</span>
 
-<span class="nx">alimask</span><span class="p">(</span><span class="s1">'小泥巴(小美) 888888'</span><span class="p">,</span> <span class="p">{</span> <span class="na">alpha</span><span class="p">:</span> <span class="mf">0.5</span> <span class="p">});</span>
+<span class="nx">alimask</span><span class="p">(</span><span class="dl">'</span><span class="s1">小泥巴(小美) 888888</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">alpha</span><span class="p">:</span> <span class="mf">0.5</span> <span class="p">});</span>
 </code></pre></div></div>
 
 <h1 id="2-api">2. API</h1>
@@ -377,11 +377,11 @@
   <li><strong>text</strong> (String): required, the text in the watermark image.</li>
   <li><strong>options</strong> (Object): optional, the options of watermark, with keys below:
     <ul>
-      <li><strong>width</strong> (Number): default is <code class="highlighter-rouge">250</code>.</li>
-      <li><strong>height</strong> (Number): default is <code class="highlighter-rouge">80</code>.</li>
-      <li><strong>color</strong> (String): the text color, default is <code class="highlighter-rouge">#ebebeb</code>.</li>
-      <li><strong>alpha</strong> (Float): the text alpha(0 ~ 1), default is <code class="highlighter-rouge">0.8</code>.</li>
-      <li><strong>font</strong> (String): the text font style, default is <code class="highlighter-rouge">10px Arial</code>.</li>
+      <li><strong>width</strong> (Number): default is <code class="language-plaintext highlighter-rouge">250</code>.</li>
+      <li><strong>height</strong> (Number): default is <code class="language-plaintext highlighter-rouge">80</code>.</li>
+      <li><strong>color</strong> (String): the text color, default is <code class="language-plaintext highlighter-rouge">#ebebeb</code>.</li>
+      <li><strong>alpha</strong> (Float): the text alpha(0 ~ 1), default is <code class="language-plaintext highlighter-rouge">0.8</code>.</li>
+      <li><strong>font</strong> (String): the text font style, default is <code class="language-plaintext highlighter-rouge">10px Arial</code>.</li>
     </ul>
   </li>
 </ul>

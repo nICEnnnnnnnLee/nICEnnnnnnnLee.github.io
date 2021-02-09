@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,8 +310,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Python" title="Tag: Python" rel="tag">Python</a-->
-        <a href="/tag/#Python" title="Tag: Python" rel="tag">Python</a>
+        <!--a href="/blog/tag/#Python" title="Tag: Python" rel="tag">Python</a-->
+        <a href="/blog/tag/#Python" title="Tag: Python" rel="tag">Python</a>
     
   
 
@@ -339,7 +339,7 @@
 
 
 <span class="k">def</span> <span class="nf">login</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">pwd</span><span class="p">):</span>
-    <span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">session</span><span class="p">()</span>
+    <span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">session</span><span class="p">()</span>
 <span class="c1">#     proxy = {
 #         'http': '127.0.0.1:8888',
 #         'https': '127.0.0.1:8888',
@@ -347,7 +347,7 @@
 #     session.proxies = proxy
 #     session.verify = False
 </span>    <span class="c1">###################
-</span>    <span class="n">url</span> <span class="o">=</span> <span class="s">"https://xui.ptlogin2.qq.com/cgi-bin/xlogin?proxy_url=https://game.qq.com/comm-htdocs/milo/proxy.html&amp;appid=21000501&amp;target=top&amp;s_url=https</span><span class="si">%3</span><span class="s">A</span><span class="si">%2</span><span class="s">F</span><span class="si">%2</span><span class="s">Flol.qq.com</span><span class="si">%2</span><span class="s">Fmain.shtml&amp;style=20&amp;daid=8"</span>
+</span>    <span class="n">url</span> <span class="o">=</span> <span class="s">"https://xui.ptlogin2.qq.com/cgi-bin/xlogin?proxy_url=https://game.qq.com/comm-htdocs/milo/proxy.html&amp;appid=21000501&amp;target=top&amp;s_url=https%3A%2F%2Flol.qq.com%2Fmain.shtml&amp;style=20&amp;daid=8"</span>
     <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s">'Host'</span><span class="p">:</span> <span class="s">'xui.ptlogin2.qq.com'</span><span class="p">,</span>
         <span class="s">'User-Agent'</span><span class="p">:</span> <span class="s">'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:75.0) Gecko/20100101 Firefox/75.0'</span><span class="p">,</span>
@@ -360,30 +360,30 @@
         <span class="s">'Cache-Control'</span><span class="p">:</span> <span class="s">'no-cache'</span><span class="p">,</span>
         <span class="s">'TE'</span><span class="p">:</span> <span class="s">'Trailers'</span><span class="p">,</span>
     <span class="p">}</span>
-    <span class="n">session</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s">'GET'</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
-    <span class="n">cookies</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">dict_from_cookiejar</span><span class="p">(</span><span class="n">session</span><span class="o">.</span><span class="n">cookies</span><span class="p">)</span>
+    <span class="n">session</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s">'GET'</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+    <span class="n">cookies</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">utils</span><span class="p">.</span><span class="n">dict_from_cookiejar</span><span class="p">(</span><span class="n">session</span><span class="p">.</span><span class="n">cookies</span><span class="p">)</span>
     <span class="n">pt_login_sig</span> <span class="o">=</span> <span class="n">cookies</span><span class="p">[</span><span class="s">'pt_login_sig'</span><span class="p">]</span>
     
     <span class="c1">#####################
-</span>    <span class="n">url</span> <span class="o">=</span> <span class="s">"https://ssl.ptlogin2.qq.com/check?regmaster=&amp;pt_tea=2&amp;pt_vcode=1&amp;uin=123456789&amp;appid=21000501&amp;js_ver=20032614&amp;js_type=1&amp;u1=https</span><span class="si">%3</span><span class="s">A</span><span class="si">%2</span><span class="s">F</span><span class="si">%2</span><span class="s">Flol.qq.com</span><span class="si">%2</span><span class="s">Fmain.shtml&amp;r=0.8346944097860031&amp;pt_uistyle=40&amp;login_sig="</span> <span class="o">+</span> <span class="n">pt_login_sig</span>
+</span>    <span class="n">url</span> <span class="o">=</span> <span class="s">"https://ssl.ptlogin2.qq.com/check?regmaster=&amp;pt_tea=2&amp;pt_vcode=1&amp;uin=123456789&amp;appid=21000501&amp;js_ver=20032614&amp;js_type=1&amp;u1=https%3A%2F%2Flol.qq.com%2Fmain.shtml&amp;r=0.8346944097860031&amp;pt_uistyle=40&amp;login_sig="</span> <span class="o">+</span> <span class="n">pt_login_sig</span>
     <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s">'Host'</span><span class="p">:</span> <span class="s">r'ssl.ptlogin2.qq.com'</span><span class="p">,</span>
-        <span class="s">'User-Agent'</span><span class="p">:</span> <span class="s">r'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:75.0) Gecko/20100101 Firefox/75.0'</span><span class="p">,</span>
-        <span class="s">'Accept'</span><span class="p">:</span> <span class="s">r'*/*'</span><span class="p">,</span>
-        <span class="s">'Accept-Language'</span><span class="p">:</span> <span class="s">r'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'</span><span class="p">,</span>
-        <span class="s">'Accept-Encoding'</span><span class="p">:</span> <span class="s">r'gzip, deflate, br'</span><span class="p">,</span>
-        <span class="s">'Connection'</span><span class="p">:</span> <span class="s">r'keep-alive'</span><span class="p">,</span>
-        <span class="s">'Referer'</span><span class="p">:</span> <span class="s">r'https://xui.ptlogin2.qq.com/cgi-bin/xlogin?proxy_url=https://game.qq.com/comm-htdocs/milo/proxy.html&amp;appid=21000501&amp;target=top&amp;s_url=https</span><span class="si">%3</span><span class="s">A</span><span class="si">%2</span><span class="s">F</span><span class="si">%2</span><span class="s">Flol.qq.com</span><span class="si">%2</span><span class="s">Fmain.shtml&amp;style=20&amp;daid=8'</span><span class="p">,</span>
+        <span class="s">'Host'</span><span class="p">:</span> <span class="sa">r</span><span class="s">'ssl.ptlogin2.qq.com'</span><span class="p">,</span>
+        <span class="s">'User-Agent'</span><span class="p">:</span> <span class="sa">r</span><span class="s">'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:75.0) Gecko/20100101 Firefox/75.0'</span><span class="p">,</span>
+        <span class="s">'Accept'</span><span class="p">:</span> <span class="sa">r</span><span class="s">'*/*'</span><span class="p">,</span>
+        <span class="s">'Accept-Language'</span><span class="p">:</span> <span class="sa">r</span><span class="s">'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'</span><span class="p">,</span>
+        <span class="s">'Accept-Encoding'</span><span class="p">:</span> <span class="sa">r</span><span class="s">'gzip, deflate, br'</span><span class="p">,</span>
+        <span class="s">'Connection'</span><span class="p">:</span> <span class="sa">r</span><span class="s">'keep-alive'</span><span class="p">,</span>
+        <span class="s">'Referer'</span><span class="p">:</span> <span class="sa">r</span><span class="s">'https://xui.ptlogin2.qq.com/cgi-bin/xlogin?proxy_url=https://game.qq.com/comm-htdocs/milo/proxy.html&amp;appid=21000501&amp;target=top&amp;s_url=https%3A%2F%2Flol.qq.com%2Fmain.shtml&amp;style=20&amp;daid=8'</span><span class="p">,</span>
         <span class="s">'Pragma'</span><span class="p">:</span> <span class="s">'no-cache'</span><span class="p">,</span>
         <span class="s">'Cache-Control'</span><span class="p">:</span> <span class="s">'no-cache'</span><span class="p">,</span>
         <span class="s">'TE'</span><span class="p">:</span> <span class="s">'Trailers'</span><span class="p">,</span>
     <span class="p">}</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s">'GET'</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">'ptui_checkVC('</span><span class="p">,</span> <span class="s">''</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">'</span><span class="se">\r</span><span class="s">'</span><span class="p">,</span> <span class="s">''</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">,</span> <span class="s">''</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">temp</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">","</span><span class="p">)</span>
-    <span class="n">vcode</span> <span class="o">=</span> <span class="n">temp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"'"</span><span class="p">,</span> <span class="s">''</span><span class="p">)</span>
-    <span class="n">salt</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"'"</span><span class="p">,</span> <span class="s">''</span><span class="p">))</span>
-    <span class="n">cookies</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">dict_from_cookiejar</span><span class="p">(</span><span class="n">session</span><span class="o">.</span><span class="n">cookies</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">session</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s">'GET'</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">).</span><span class="n">text</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="s">'ptui_checkVC('</span><span class="p">,</span> <span class="s">''</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s">'</span><span class="se">\r</span><span class="s">'</span><span class="p">,</span> <span class="s">''</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">,</span> <span class="s">''</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">temp</span> <span class="o">=</span> <span class="n">result</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">","</span><span class="p">)</span>
+    <span class="n">vcode</span> <span class="o">=</span> <span class="n">temp</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">replace</span><span class="p">(</span><span class="s">"'"</span><span class="p">,</span> <span class="s">''</span><span class="p">)</span>
+    <span class="n">salt</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="n">replace</span><span class="p">(</span><span class="s">"'"</span><span class="p">,</span> <span class="s">''</span><span class="p">))</span>
+    <span class="n">cookies</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">utils</span><span class="p">.</span><span class="n">dict_from_cookiejar</span><span class="p">(</span><span class="n">session</span><span class="p">.</span><span class="n">cookies</span><span class="p">)</span>
     <span class="k">print</span><span class="p">(</span><span class="n">cookies</span><span class="p">)</span>
     <span class="n">ptvfsession</span> <span class="o">=</span> <span class="n">cookies</span><span class="p">[</span><span class="s">'ptvfsession'</span><span class="p">]</span>
     <span class="n">ptdrvs</span> <span class="o">=</span> <span class="n">cookies</span><span class="p">[</span><span class="s">'ptdrvs'</span><span class="p">]</span>
@@ -399,14 +399,14 @@
         <span class="s">"pt_verifysession_v1"</span><span class="p">:</span><span class="n">ptvfsession</span><span class="p">,</span>
         <span class="s">"p"</span><span class="p">:</span><span class="n">encryptedPwd</span><span class="p">,</span>
         <span class="s">"pt_randsalt"</span><span class="p">:</span><span class="s">"2"</span><span class="p">,</span>
-        <span class="s">"u1"</span><span class="p">:</span><span class="s">"https</span><span class="si">%3</span><span class="s">A</span><span class="si">%2</span><span class="s">F</span><span class="si">%2</span><span class="s">Flol.qq.com</span><span class="si">%2</span><span class="s">Fmain.shtml"</span><span class="p">,</span> <span class="c1">#"https://lol.qq.com/main.shtml",
+        <span class="s">"u1"</span><span class="p">:</span><span class="s">"https%3A%2F%2Flol.qq.com%2Fmain.shtml"</span><span class="p">,</span> <span class="c1">#"https://lol.qq.com/main.shtml",
 </span>        <span class="s">"ptredirect"</span><span class="p">:</span><span class="s">"1"</span><span class="p">,</span>
         <span class="s">"h"</span><span class="p">:</span><span class="s">"1"</span><span class="p">,</span>
         <span class="s">"t"</span><span class="p">:</span><span class="s">"1"</span><span class="p">,</span>
         <span class="s">"g"</span><span class="p">:</span><span class="s">"1"</span><span class="p">,</span>
         <span class="s">"from_ui"</span><span class="p">:</span><span class="s">"1"</span><span class="p">,</span>
         <span class="s">"ptlang"</span><span class="p">:</span><span class="s">"2052"</span><span class="p">,</span>
-        <span class="s">"action"</span><span class="p">:</span><span class="s">"</span><span class="si">%</span><span class="s">d-</span><span class="si">%</span><span class="s">d-</span><span class="si">%</span><span class="s">d"</span> <span class="o">%</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pwd</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">))),</span>
+        <span class="s">"action"</span><span class="p">:</span><span class="s">"%d-%d-%d"</span> <span class="o">%</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pwd</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">))),</span>
         <span class="s">"js_ver"</span><span class="p">:</span><span class="s">"20032614"</span><span class="p">,</span>
         <span class="s">"js_type"</span><span class="p">:</span><span class="s">"1"</span><span class="p">,</span>
         <span class="s">"login_sig"</span><span class="p">:</span><span class="n">pt_login_sig</span><span class="p">,</span>
@@ -417,28 +417,28 @@
     <span class="p">}</span>
     <span class="n">param_str</span> <span class="o">=</span> <span class="s">''</span>
     <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
-        <span class="n">param_str</span> <span class="o">+=</span> <span class="s">'</span><span class="si">%</span><span class="s">s=</span><span class="si">%</span><span class="s">s&amp;'</span><span class="o">%</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+        <span class="n">param_str</span> <span class="o">+=</span> <span class="s">'%s=%s&amp;'</span><span class="o">%</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
     <span class="n">url</span> <span class="o">+=</span> <span class="n">param_str</span>
 <span class="c1">#     urlencode(params)
 </span>    <span class="k">print</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
     <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s">'Host'</span><span class="p">:</span> <span class="s">'ssl.ptlogin2.qq.com'</span><span class="p">,</span>
-        <span class="s">'User-Agent'</span><span class="p">:</span> <span class="s">r'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:75.0) Gecko/20100101 Firefox/75.0'</span><span class="p">,</span>
+        <span class="s">'User-Agent'</span><span class="p">:</span> <span class="sa">r</span><span class="s">'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:75.0) Gecko/20100101 Firefox/75.0'</span><span class="p">,</span>
         <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'*/*'</span><span class="p">,</span>
-        <span class="s">'Accept-Language'</span><span class="p">:</span> <span class="s">r'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'</span><span class="p">,</span>
+        <span class="s">'Accept-Language'</span><span class="p">:</span> <span class="sa">r</span><span class="s">'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'</span><span class="p">,</span>
         <span class="s">'Accept-Encoding'</span><span class="p">:</span> <span class="s">'gzip, deflate, br'</span><span class="p">,</span>
         <span class="s">'Connection'</span><span class="p">:</span> <span class="s">'keep-alive'</span><span class="p">,</span>
-        <span class="s">'Referer'</span><span class="p">:</span> <span class="s">r'https://xui.ptlogin2.qq.com/cgi-bin/xlogin?proxy_url=https://game.qq.com/comm-htdocs/milo/proxy.html&amp;appid=21000501&amp;target=top&amp;s_url=https</span><span class="si">%3</span><span class="s">A</span><span class="si">%2</span><span class="s">F</span><span class="si">%2</span><span class="s">Flol.qq.com</span><span class="si">%2</span><span class="s">Fmain.shtml&amp;style=20&amp;daid=8'</span><span class="p">,</span>
+        <span class="s">'Referer'</span><span class="p">:</span> <span class="sa">r</span><span class="s">'https://xui.ptlogin2.qq.com/cgi-bin/xlogin?proxy_url=https://game.qq.com/comm-htdocs/milo/proxy.html&amp;appid=21000501&amp;target=top&amp;s_url=https%3A%2F%2Flol.qq.com%2Fmain.shtml&amp;style=20&amp;daid=8'</span><span class="p">,</span>
         <span class="s">'Pragma'</span><span class="p">:</span> <span class="s">'no-cache'</span><span class="p">,</span>
         <span class="s">'Cache-Control'</span><span class="p">:</span> <span class="s">'no-cache'</span><span class="p">,</span>
         <span class="s">'TE'</span><span class="p">:</span> <span class="s">'Trailers'</span><span class="p">,</span>
     <span class="p">}</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s">'GET'</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">session</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s">'GET'</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">).</span><span class="n">text</span>
     <span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-    <span class="n">searchObj</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s">r"(https://.*?)',"</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+    <span class="n">searchObj</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s">"(https://.*?)',"</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">searchObj</span><span class="p">:</span>
         <span class="k">print</span><span class="p">(</span><span class="s">"登录成功"</span><span class="p">)</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="n">searchObj</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">searchObj</span><span class="p">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s">'User-Agent'</span><span class="p">:</span> <span class="s">'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:75.0) Gecko/20100101 Firefox/75.0'</span><span class="p">,</span>
             <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'</span><span class="p">,</span>
@@ -450,16 +450,16 @@
             <span class="s">'Cache-Control'</span><span class="p">:</span> <span class="s">'no-cache'</span><span class="p">,</span>
             <span class="s">'TE'</span><span class="p">:</span> <span class="s">'Trailers'</span><span class="p">,</span>
         <span class="p">}</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s">'GET'</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">allow_redirects</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">session</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s">'GET'</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">allow_redirects</span><span class="o">=</span><span class="bp">False</span><span class="p">).</span><span class="n">text</span>
         <span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-    <span class="n">session</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">session</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
 
     
 <span class="k">def</span> <span class="nf">encrypt</span><span class="p">(</span><span class="n">pwd</span><span class="p">,</span> <span class="n">salt</span><span class="p">,</span> <span class="n">vcode</span><span class="p">):</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'encrypt.js'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="n">js_code</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-    <span class="n">ctx</span> <span class="o">=</span> <span class="n">execjs</span><span class="o">.</span><span class="nb">compile</span><span class="p">(</span><span class="n">js_code</span><span class="p">)</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s">'encrypt'</span><span class="p">,</span> <span class="n">pwd</span><span class="p">,</span> <span class="n">salt</span><span class="p">,</span> <span class="n">vcode</span><span class="p">)</span>
+        <span class="n">js_code</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="n">ctx</span> <span class="o">=</span> <span class="n">execjs</span><span class="p">.</span><span class="nb">compile</span><span class="p">(</span><span class="n">js_code</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">ctx</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="s">'encrypt'</span><span class="p">,</span> <span class="n">pwd</span><span class="p">,</span> <span class="n">salt</span><span class="p">,</span> <span class="n">vcode</span><span class="p">)</span>
     <span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">result</span>
 
@@ -471,7 +471,7 @@
 
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">encrypt.js</code> 在<a href="/sources/archive/2020/06/encrypt.js">此处</a></p>
+<p><code class="language-plaintext highlighter-rouge">encrypt.js</code> 在<a href="/sources/archive/2020/06/encrypt.js">此处</a></p>
 
         </article>
         <hr>

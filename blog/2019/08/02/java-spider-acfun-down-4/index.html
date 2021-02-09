@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,17 +310,17 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
     
-        <!--a href="/tag/#html" title="Tag: html" rel="tag">html</a-->
-        <a href="/tag/#html" title="Tag: html" rel="tag">html</a>&nbsp;
+        <!--a href="/blog/tag/#html" title="Tag: html" rel="tag">html</a-->
+        <a href="/blog/tag/#html" title="Tag: html" rel="tag">html</a>&nbsp;
     
-        <!--a href="/tag/#%E7%88%AC%E8%99%AB" title="Tag: 爬虫" rel="tag">爬虫</a-->
-        <a href="/tag/#爬虫" title="Tag: 爬虫" rel="tag">爬虫</a>&nbsp;
+        <!--a href="/blog/tag/#%E7%88%AC%E8%99%AB" title="Tag: 爬虫" rel="tag">爬虫</a-->
+        <a href="/blog/tag/#爬虫" title="Tag: 爬虫" rel="tag">爬虫</a>&nbsp;
     
-        <!--a href="/tag/#AcFun" title="Tag: AcFun" rel="tag">AcFun</a-->
-        <a href="/tag/#AcFun" title="Tag: AcFun" rel="tag">AcFun</a>
+        <!--a href="/blog/tag/#AcFun" title="Tag: AcFun" rel="tag">AcFun</a-->
+        <a href="/blog/tag/#AcFun" title="Tag: AcFun" rel="tag">AcFun</a>
     
   
 
@@ -344,14 +344,14 @@
 
 <h2 id="要做的事情">要做的事情</h2>
 <ul>
-  <li>发起API请求1，获得<code class="highlighter-rouge">qrLoginToken</code>和<code class="highlighter-rouge">qrLoginSignature1</code></li>
-  <li>由<code class="highlighter-rouge">qrLoginToken</code>构造二维码，供手机端扫描</li>
-  <li>发起API请求2，确认手机端是否扫描，得到<code class="highlighter-rouge">qrLoginToken</code>和新的<code class="highlighter-rouge">qrLoginSignature2</code></li>
-  <li>发起API请求3，确认手机端扫描后是否授权登录，得到<code class="highlighter-rouge">Cookie</code></li>
+  <li>发起API请求1，获得<code class="language-plaintext highlighter-rouge">qrLoginToken</code>和<code class="language-plaintext highlighter-rouge">qrLoginSignature1</code></li>
+  <li>由<code class="language-plaintext highlighter-rouge">qrLoginToken</code>构造二维码，供手机端扫描</li>
+  <li>发起API请求2，确认手机端是否扫描，得到<code class="language-plaintext highlighter-rouge">qrLoginToken</code>和新的<code class="language-plaintext highlighter-rouge">qrLoginSignature2</code></li>
+  <li>发起API请求3，确认手机端扫描后是否授权登录，得到<code class="language-plaintext highlighter-rouge">Cookie</code></li>
 </ul>
 
 <h2 id="发起api请求1">发起API请求1</h2>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HttpHeaders headers = new HttpHeaders();
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HttpHeaders headers = new HttpHeaders();
 String url = "https://scan.acfun.cn/rest/pc-direct/qr/start?type=WEB_LOGIN";
 String json = util.getContent(url, headers.getAcFunLoginAuthVaHeaders());
 JSONObject jObj = new JSONObject(json);
@@ -360,11 +360,11 @@ String qrLoginToken = jObj.getString("qrLoginToken");
 </code></pre></div></div>
 
 <h2 id="构造二维码">构造二维码</h2>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>qrCodeStr = String.format("http://scan.acfun.cn/l/%s", qrLoginToken);
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>qrCodeStr = String.format("http://scan.acfun.cn/l/%s", qrLoginToken);
 </code></pre></div></div>
 
 <h2 id="发起api请求2">发起API请求2</h2>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>String param = String.format("qrLoginToken=%s&amp;qrLoginSignature=%s", qrLoginToken, qrLoginSignature);
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>String param = String.format("qrLoginToken=%s&amp;qrLoginSignature=%s", qrLoginToken, qrLoginSignature);
 String url = "https://scan.acfun.cn/rest/pc-direct/qr/scanResult?" + param;
 String json = util.getContent(url, headers.getAcFunLoginAuthVaHeaders());
 
@@ -378,7 +378,7 @@ qrLoginSignature = jObj.getString("qrLoginSignature")
 </code></pre></div></div>
 
 <h2 id="发起api请求3">发起API请求3</h2>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>String param = String.format("qrLoginToken=%s&amp;qrLoginSignature=%s", qrLoginToken, qrLoginSignature);
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>String param = String.format("qrLoginToken=%s&amp;qrLoginSignature=%s", qrLoginToken, qrLoginSignature);
 String url = "https://scan.acfun.cn/rest/pc-direct/qr/acceptResult?" + param;
 String json = util.getContent(url, headers.getAcFunLoginAuthVaHeaders());
 

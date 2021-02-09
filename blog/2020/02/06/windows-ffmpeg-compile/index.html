@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,8 +310,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#%E9%BB%91%E7%A7%91%E6%8A%80" title="Tag: 黑科技" rel="tag">黑科技</a-->
-        <a href="/tag/#黑科技" title="Tag: 黑科技" rel="tag">黑科技</a>
+        <!--a href="/blog/tag/#%E9%BB%91%E7%A7%91%E6%8A%80" title="Tag: 黑科技" rel="tag">黑科技</a-->
+        <a href="/blog/tag/#黑科技" title="Tag: 黑科技" rel="tag">黑科技</a>
     
   
 
@@ -342,36 +342,36 @@
 <ul>
   <li>建议去<a href="http://www.msys2.org/">官网</a>下载</li>
   <li>安装完毕之后，可以直接调用pacman安装其它所需的东西，不用再东一个西一个到处找了。</li>
-  <li>假设安装路径<code class="highlighter-rouge">D:\Work\msys64\</code></li>
+  <li>假设安装路径<code class="language-plaintext highlighter-rouge">D:\Work\msys64\</code></li>
 </ul>
 
 <h4 id="为pacman更换国内镜像源">为pacman更换国内镜像源</h4>
 <ol>
   <li>
-    <p>打开<code class="highlighter-rouge">D:\Work\msys64\etc\pacman.d\</code></p>
+    <p>打开<code class="language-plaintext highlighter-rouge">D:\Work\msys64\etc\pacman.d\</code></p>
   </li>
-  <li>编辑<code class="highlighter-rouge">mirrorlist.mingw32</code>，在文件开头添加：
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Server = https://mirrors.tuna.tsinghua.edu.cn/msys2/mingw/i686
+  <li>编辑<code class="language-plaintext highlighter-rouge">mirrorlist.mingw32</code>，在文件开头添加：
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Server = https://mirrors.tuna.tsinghua.edu.cn/msys2/mingw/i686
 Server = http://mirrors.ustc.edu.cn/msys2/mingw/i686
 </code></pre></div>    </div>
   </li>
-  <li>编辑<code class="highlighter-rouge">mirrorlist.mingw64</code>，在文件开头添加：
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Server = https://mirrors.tuna.tsinghua.edu.cn/msys2/mingw/x86_64
+  <li>编辑<code class="language-plaintext highlighter-rouge">mirrorlist.mingw64</code>，在文件开头添加：
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Server = https://mirrors.tuna.tsinghua.edu.cn/msys2/mingw/x86_64
 Server = http://mirrors.ustc.edu.cn/msys2/mingw/x86_64
 </code></pre></div>    </div>
   </li>
-  <li>编辑<code class="highlighter-rouge">mirrorlist.msys</code>，在文件开头添加：
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Server = https://mirrors.tuna.tsinghua.edu.cn/msys2/msys/$arch
+  <li>编辑<code class="language-plaintext highlighter-rouge">mirrorlist.msys</code>，在文件开头添加：
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Server = https://mirrors.tuna.tsinghua.edu.cn/msys2/msys/$arch
 Server = http://mirrors.ustc.edu.cn/msys2/msys/$arch
 </code></pre></div>    </div>
   </li>
-  <li>然后执行<code class="highlighter-rouge">pacman -Sy</code>刷新软件包数据即可。</li>
+  <li>然后执行<code class="language-plaintext highlighter-rouge">pacman -Sy</code>刷新软件包数据即可。</li>
 </ol>
 
 <h4 id="安装前置环境">安装前置环境</h4>
 <ul>
   <li>运行D:\Work\msys64\msys2_shell.cmd，在弹出的shell窗口中执行
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  pacman -S make yasm nasm diffutils pkg-config
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  pacman -S make yasm nasm diffutils pkg-config
   pacman -S gcc base-devel vim
   pacman -S mingw-w64-i686-gcc 
   pacman -S mingw-w64-x86_64-gcc 
@@ -386,7 +386,7 @@ Server = http://mirrors.ustc.edu.cn/msys2/msys/$arch
   <li>写在前面：<br />
 用Msys2生成的库有依赖，例如直接运行生成的static的ffmpeg.exe会报错。<br />
 此时，依赖的库基本上位于
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>D:\Work\msys64\mingw64\bin
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>D:\Work\msys64\mingw64\bin
 或
 D:\Work\msys64\mingw32\bin
 </code></pre></div>    </div>
@@ -396,12 +396,12 @@ D:\Work\msys64\mingw32\bin
   <li>编译
     <ul>
       <li>先打开cmd窗口
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  cd D:\Work\msys64\
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  cd D:\Work\msys64\
   msys2_shell.cmd -mingw64
 </code></pre></div>        </div>
       </li>
       <li>打开mingW32 shell后，cd 到ffmpeg所在目录
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ./configure --enable-static --disable-shared --disable-everything --enable-decoder=h264 --enable-parser=h264 --arch=x86_64
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ./configure --enable-static --disable-shared --disable-everything --enable-decoder=h264 --enable-parser=h264 --arch=x86_64
   make
   make install
 </code></pre></div>        </div>
@@ -427,7 +427,7 @@ D:\Work\msys64\mingw32\bin
   <li>设置环境变量
     <ul>
       <li>系统环境变量Path添加3个位置：
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ## 第一个位置先找到VS安装位置，然后下面有很多路径，根据当前设备与目的设备的情况决定  
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ## 第一个位置先找到VS安装位置，然后下面有很多路径，根据当前设备与目的设备的情况决定  
   ## D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\amd64\
   D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\amd64_x86
 
@@ -444,7 +444,7 @@ D:\Work\msys64\mingw32\bin
   <li>配置msys2_shell.cmd
     <ul>
       <li>编辑D:\Work\msys64\msys2_shell.cmd
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  在@echo off后面的第二行插入VC的配置脚本，插入哪一个取决于当前设备与目的设备的情况：
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  在@echo off后面的第二行插入VC的配置脚本，插入哪一个取决于当前设备与目的设备的情况：
   rem call "D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\amd64\vcvars64.bat"
   call "D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\amd64_x86\vcvarsamd64_x86.bat"
 
@@ -456,12 +456,12 @@ D:\Work\msys64\mingw32\bin
   <li>在编译前的检查
     <ul>
       <li>先打开cmd窗口
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  cd D:\Work\msys64\
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  cd D:\Work\msys64\
   msys2_shell.cmd -mingw32
 </code></pre></div>        </div>
       </li>
       <li>打开mingW32 shell后
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  which cl link yasm cpp
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  which cl link yasm cpp
   #显示如下内容
   /d/Program Files (x86)/Microsoft Visual Studio 14.0/VC/BIN/amd64_x86/cl
   /d/Program Files (x86)/Microsoft Visual Studio 14.0/VC/BIN/amd64_x86/link
@@ -475,12 +475,12 @@ D:\Work\msys64\mingw32\bin
   <li>编译
     <ul>
       <li>先打开cmd窗口
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  cd D:\Work\msys64\
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  cd D:\Work\msys64\
   msys2_shell.cmd -mingw32
 </code></pre></div>        </div>
       </li>
       <li>打开mingW32 shell后，cd 到ffmpeg所在目录
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ./configure --toolchain=msvc --arch=x86_64 --enable-yasm --enable-asm --disable-debug --disable-doc --disable-ffplay --disable-ffprobe --enable-static --disable-shared --disable-everything --enable-decoder=h264 --enable-parser=h264
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ./configure --toolchain=msvc --arch=x86_64 --enable-yasm --enable-asm --disable-debug --disable-doc --disable-ffplay --disable-ffprobe --enable-static --disable-shared --disable-everything --enable-decoder=h264 --enable-parser=h264
   make
   make install
 </code></pre></div>        </div>

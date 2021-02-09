@@ -293,7 +293,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -310,11 +310,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
     
-        <!--a href="/tag/#Android" title="Tag: Android" rel="tag">Android</a-->
-        <a href="/tag/#Android" title="Tag: Android" rel="tag">Android</a>
+        <!--a href="/blog/tag/#Android" title="Tag: Android" rel="tag">Android</a-->
+        <a href="/blog/tag/#Android" title="Tag: Android" rel="tag">Android</a>
     
   
 
@@ -358,18 +358,18 @@
     <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Controller</span><span class="o">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">"/test"</span><span class="o">,</span> <span class="n">note</span> <span class="o">=</span> <span class="s">"在线设备状态相关"</span><span class="o">)</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">ControllerHelloWorld</span> <span class="o">{</span>
   <span class="nd">@Controller</span><span class="o">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">"/hello"</span><span class="o">,</span> <span class="n">note</span><span class="o">=</span><span class="s">"传参+返回结果测试"</span><span class="o">)</span>
-  <span class="kd">public</span> <span class="n">String</span> <span class="nf">hello</span><span class="o">(</span><span class="nd">@Value</span><span class="o">(</span><span class="n">key</span> <span class="o">=</span> <span class="s">"param"</span><span class="o">)</span> <span class="n">String</span> <span class="n">param</span><span class="o">,</span> <span class="nd">@Value</span><span class="o">(</span><span class="n">key</span> <span class="o">=</span> <span class="s">"_t"</span><span class="o">)</span> <span class="n">String</span> <span class="n">time</span><span class="o">)</span> <span class="o">{</span>
-      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">param</span><span class="o">);</span>
-      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">time</span><span class="o">);</span>
+  <span class="kd">public</span> <span class="nc">String</span> <span class="nf">hello</span><span class="o">(</span><span class="nd">@Value</span><span class="o">(</span><span class="n">key</span> <span class="o">=</span> <span class="s">"param"</span><span class="o">)</span> <span class="nc">String</span> <span class="n">param</span><span class="o">,</span> <span class="nd">@Value</span><span class="o">(</span><span class="n">key</span> <span class="o">=</span> <span class="s">"_t"</span><span class="o">)</span> <span class="nc">String</span> <span class="n">time</span><span class="o">)</span> <span class="o">{</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">param</span><span class="o">);</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">time</span><span class="o">);</span>
       <span class="k">return</span> <span class="s">"Hello World"</span><span class="o">;</span>
   <span class="o">}</span>    
   <span class="nd">@Controller</span><span class="o">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">"/hello2"</span><span class="o">,</span> <span class="n">note</span><span class="o">=</span><span class="s">"返回结果测试2"</span><span class="o">)</span>
-  <span class="kd">public</span> <span class="n">String</span> <span class="nf">hello</span><span class="o">(</span><span class="n">BufferedWriter</span> <span class="n">out</span><span class="o">)</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="nc">String</span> <span class="nf">hello</span><span class="o">(</span><span class="nc">BufferedWriter</span> <span class="n">out</span><span class="o">)</span> <span class="o">{</span>
       <span class="n">out</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="s">"Hello World"</span><span class="o">);</span>
       <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
   <span class="o">}</span>    
   <span class="nd">@Controller</span><span class="o">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">"/hello3"</span><span class="o">,</span> <span class="n">note</span><span class="o">=</span><span class="s">"返回结果测试3"</span><span class="o">)</span>
-  <span class="kd">public</span> <span class="n">String</span> <span class="nf">hello</span><span class="o">(</span><span class="n">BufferedWriter</span> <span class="n">out</span><span class="o">)</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="nc">String</span> <span class="nf">hello</span><span class="o">(</span><span class="nc">BufferedWriter</span> <span class="n">out</span><span class="o">)</span> <span class="o">{</span>
       <span class="n">out</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="s">"&lt;html&gt;"</span><span class="o">);</span>
       <span class="n">out</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="s">"&lt;head&gt;&lt;title&gt;Index&lt;/title&gt;&lt;/head&gt;"</span><span class="o">);</span>
       <span class="n">out</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="s">"&lt;body&gt;&lt;h2&gt;Hello World&lt;/h2&gt;&lt;/body&gt;"</span><span class="o">);</span>
@@ -379,14 +379,14 @@
 <span class="o">}</span>
 </code></pre></div>    </div>
     <ul>
-      <li>假设要处理<code class="highlighter-rouge">/test/hello</code>路径的请求，我们可以仿照SpringBoot创建相应类+方法，注意<strong>@Controller</strong>注解</li>
+      <li>假设要处理<code class="language-plaintext highlighter-rouge">/test/hello</code>路径的请求，我们可以仿照SpringBoot创建相应类+方法，注意<strong>@Controller</strong>注解</li>
       <li>对于传参问题，需要加上<strong>@Value</strong>注解，处理时会自动赋值。若path里面不含对应参数，默认指向null
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  http://192.168.0.101:8888/test/hello?param=test  hello方法里，param=="test",time==null; 
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  http://192.168.0.101:8888/test/hello?param=test  hello方法里，param=="test",time==null; 
   http://192.168.0.101:8888/test/hello?param=test&amp;_t=123 hello方法里，param=="test",time=="123";
 </code></pre></div>        </div>
       </li>
       <li>对于返回结果，举例
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  /test/hello ==&gt; "Hello World"
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  /test/hello ==&gt; "Hello World"
   /test/hello2 ==&gt; "Hello World"
   即浏览器直接访问会收到并显示文本Hello World
   /test/hello3 ==&gt; 浏览器直接访问会显示Hello World
@@ -403,11 +403,11 @@
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SocketServer</span> <span class="o">{</span>	
 	<span class="kt">int</span> <span class="n">portServerListening</span><span class="o">;</span> <span class="c1">// 监听端口</span>
 	<span class="kt">boolean</span> <span class="n">isRun</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
-	<span class="n">ExecutorService</span> <span class="n">httpThreadPool</span><span class="o">;</span> <span class="c1">// Socket处理线程池</span>
-	<span class="n">ServerSocket</span> <span class="n">serverSocket</span><span class="o">;</span>	
+	<span class="nc">ExecutorService</span> <span class="n">httpThreadPool</span><span class="o">;</span> <span class="c1">// Socket处理线程池</span>
+	<span class="nc">ServerSocket</span> <span class="n">serverSocket</span><span class="o">;</span>	
 	<span class="kd">public</span> <span class="nf">SocketServer</span><span class="o">(</span><span class="kt">int</span> <span class="n">portServerListening</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">this</span><span class="o">.</span><span class="na">portServerListening</span> <span class="o">=</span> <span class="n">portServerListening</span><span class="o">;</span>
-		<span class="n">httpThreadPool</span> <span class="o">=</span> <span class="n">Executors</span><span class="o">.</span><span class="na">newFixedThreadPool</span><span class="o">(</span><span class="mi">20</span><span class="o">);</span>
+		<span class="n">httpThreadPool</span> <span class="o">=</span> <span class="nc">Executors</span><span class="o">.</span><span class="na">newFixedThreadPool</span><span class="o">(</span><span class="mi">20</span><span class="o">);</span>
 	<span class="o">}</span>	
 	<span class="cm">/**
 	 *  关闭服务器
@@ -415,38 +415,38 @@
 	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">stopServer</span><span class="o">()</span> <span class="o">{</span>
 		<span class="k">try</span> <span class="o">{</span>
 			<span class="n">serverSocket</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
 		<span class="o">}</span>
-		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"正在关闭 SocketServer: 服务器... "</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"正在关闭 SocketServer: 服务器... "</span><span class="o">);</span>
 	<span class="o">}</span>	
 	<span class="cm">/**
 	 *  打开服务器
 	 */</span>
 	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">startServer</span><span class="o">()</span> <span class="o">{</span>
-		<span class="n">Socket</span> <span class="n">socket</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"SocketServer: 服务器监听开始... "</span><span class="o">);</span>
+		<span class="nc">Socket</span> <span class="n">socket</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"SocketServer: 服务器监听开始... "</span><span class="o">);</span>
 		<span class="k">try</span> <span class="o">{</span>
-			<span class="n">serverSocket</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ServerSocket</span><span class="o">(</span><span class="n">portServerListening</span><span class="o">);</span>
+			<span class="n">serverSocket</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ServerSocket</span><span class="o">(</span><span class="n">portServerListening</span><span class="o">);</span>
             <span class="k">while</span> <span class="o">(</span><span class="n">isRun</span><span class="o">)</span> <span class="o">{</span>
 				<span class="k">try</span> <span class="o">{</span>
 					<span class="n">socket</span> <span class="o">=</span> <span class="n">serverSocket</span><span class="o">.</span><span class="na">accept</span><span class="o">();</span>
-				<span class="o">}</span><span class="k">catch</span> <span class="o">(</span><span class="n">SocketTimeoutException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+				<span class="o">}</span><span class="k">catch</span> <span class="o">(</span><span class="nc">SocketTimeoutException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 					<span class="k">continue</span><span class="o">;</span>
-				<span class="o">}</span><span class="k">catch</span> <span class="o">(</span><span class="n">SocketException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+				<span class="o">}</span><span class="k">catch</span> <span class="o">(</span><span class="nc">SocketException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 					<span class="k">break</span><span class="o">;</span>
 				<span class="o">}</span>
 				<span class="c1">//System.out.println("收到新连接: " + socket.getInetAddress() + ":" + socket.getPort());</span>
-				<span class="n">SocketDealer</span> <span class="n">dealer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SocketDealer</span><span class="o">(</span><span class="n">socket</span><span class="o">);</span>
+				<span class="nc">SocketDealer</span> <span class="n">dealer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SocketDealer</span><span class="o">(</span><span class="n">socket</span><span class="o">);</span>
 				<span class="n">httpThreadPool</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="n">dealer</span><span class="o">);</span>
 			<span class="o">}</span>
 			<span class="n">httpThreadPool</span><span class="o">.</span><span class="na">shutdownNow</span><span class="o">();</span>
-		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
 		<span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
 			<span class="o">...</span>
 		<span class="o">}</span>
-		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"SocketServer: 服务器已经关闭... "</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"SocketServer: 服务器已经关闭... "</span><span class="o">);</span>
 	<span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -464,18 +464,18 @@
 
 <p>以下是Socket线程处理的run方法</p>
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
-    <span class="n">String</span> <span class="n">path</span> <span class="o">=</span> <span class="kc">null</span><span class="o">,</span> <span class="n">param</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="nc">String</span> <span class="n">path</span> <span class="o">=</span> <span class="kc">null</span><span class="o">,</span> <span class="n">param</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
     <span class="k">try</span> <span class="o">{</span>
-        <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">socketClient</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
-        <span class="n">out</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedWriter</span><span class="o">(</span><span class="k">new</span> <span class="n">OutputStreamWriter</span><span class="o">(</span><span class="n">socketClient</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">()));</span>
+        <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="nc">InputStreamReader</span><span class="o">(</span><span class="n">socketClient</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedWriter</span><span class="o">(</span><span class="k">new</span> <span class="nc">OutputStreamWriter</span><span class="o">(</span><span class="n">socketClient</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">()));</span>
         
         <span class="c1">// 读取url请求, 得到path + param</span>
-        <span class="n">String</span> <span class="n">line</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="nc">String</span> <span class="n">line</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
         <span class="k">while</span> <span class="o">((</span><span class="n">line</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">Pattern</span> <span class="n">urlPattern</span> <span class="o">=</span> <span class="n">Pattern</span><span class="o">.</span><span class="na">compile</span><span class="o">(</span><span class="s">"^GET ([^ \\?]+)\\??([^ \\?]*) HTTP.*$"</span><span class="o">);</span>
-            <span class="n">Matcher</span> <span class="n">matcher</span> <span class="o">=</span> <span class="n">urlPattern</span><span class="o">.</span><span class="na">matcher</span><span class="o">(</span><span class="n">line</span><span class="o">);</span>
+            <span class="nc">Pattern</span> <span class="n">urlPattern</span> <span class="o">=</span> <span class="nc">Pattern</span><span class="o">.</span><span class="na">compile</span><span class="o">(</span><span class="s">"^GET ([^ \\?]+)\\??([^ \\?]*) HTTP.*$"</span><span class="o">);</span>
+            <span class="nc">Matcher</span> <span class="n">matcher</span> <span class="o">=</span> <span class="n">urlPattern</span><span class="o">.</span><span class="na">matcher</span><span class="o">(</span><span class="n">line</span><span class="o">);</span>
             <span class="k">if</span><span class="o">(</span><span class="n">path</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">matcher</span><span class="o">.</span><span class="na">find</span><span class="o">())</span> <span class="o">{</span>
-                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"正在处理请求: "</span> <span class="o">+</span> <span class="n">line</span><span class="o">);</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"正在处理请求: "</span> <span class="o">+</span> <span class="n">line</span><span class="o">);</span>
                 <span class="n">path</span> <span class="o">=</span> <span class="n">matcher</span><span class="o">.</span><span class="na">group</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
                 <span class="n">param</span> <span class="o">=</span> <span class="n">matcher</span><span class="o">.</span><span class="na">group</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
             <span class="o">}</span>
@@ -489,12 +489,12 @@
         <span class="n">out</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="s">"\r\n"</span><span class="o">);</span>
         <span class="c1">// 处理请求并返回内容</span>
         <span class="c1">// 遍历Controller类，得到和Path匹配的处理方法, 目前仅一个Class</span>
-        <span class="n">Method</span> <span class="n">currentMethod</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-        <span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">klass</span> <span class="o">=</span> <span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">"nicelee.server.controller.ControllerOnlinerFinder"</span><span class="o">);</span>
-        <span class="n">Controller</span> <span class="n">preAnno</span> <span class="o">=</span> <span class="n">klass</span><span class="o">.</span><span class="na">getAnnotation</span><span class="o">(</span><span class="n">Controller</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-        <span class="n">String</span> <span class="n">pathPrefix</span> <span class="o">=</span> <span class="n">preAnno</span><span class="o">.</span><span class="na">path</span><span class="o">();</span>
-        <span class="k">for</span><span class="o">(</span><span class="n">Method</span> <span class="nl">method:</span> <span class="n">klass</span><span class="o">.</span><span class="na">getMethods</span><span class="o">())</span> <span class="o">{</span>
-            <span class="n">Controller</span> <span class="n">controller</span> <span class="o">=</span> <span class="n">method</span><span class="o">.</span><span class="na">getAnnotation</span><span class="o">(</span><span class="n">Controller</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="nc">Method</span> <span class="n">currentMethod</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="nc">Class</span><span class="o">&lt;?&gt;</span> <span class="n">klass</span> <span class="o">=</span> <span class="nc">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">"nicelee.server.controller.ControllerOnlinerFinder"</span><span class="o">);</span>
+        <span class="nc">Controller</span> <span class="n">preAnno</span> <span class="o">=</span> <span class="n">klass</span><span class="o">.</span><span class="na">getAnnotation</span><span class="o">(</span><span class="nc">Controller</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="nc">String</span> <span class="n">pathPrefix</span> <span class="o">=</span> <span class="n">preAnno</span><span class="o">.</span><span class="na">path</span><span class="o">();</span>
+        <span class="k">for</span><span class="o">(</span><span class="nc">Method</span> <span class="nl">method:</span> <span class="n">klass</span><span class="o">.</span><span class="na">getMethods</span><span class="o">())</span> <span class="o">{</span>
+            <span class="nc">Controller</span> <span class="n">controller</span> <span class="o">=</span> <span class="n">method</span><span class="o">.</span><span class="na">getAnnotation</span><span class="o">(</span><span class="nc">Controller</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
             <span class="k">if</span><span class="o">(</span><span class="n">controller</span><span class="o">!=</span><span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">pathPrefix</span> <span class="o">+</span> <span class="n">controller</span><span class="o">.</span><span class="na">path</span><span class="o">()).</span><span class="na">equals</span><span class="o">(</span><span class="n">path</span><span class="o">))</span> <span class="o">{</span>
                 <span class="n">currentMethod</span> <span class="o">=</span> <span class="n">method</span><span class="o">;</span>
                 <span class="k">break</span><span class="o">;</span>
@@ -509,7 +509,7 @@
         <span class="n">out</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="s">"\r\n"</span><span class="o">);</span>
         <span class="n">out</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
         
-    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
     <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
         <span class="o">...</span>
@@ -518,23 +518,23 @@
 </code></pre></div></div>
 
 <p>上接run方法，自动生成参数、实例化对象并调用处理方法：</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">dealWithPathKnown</span><span class="o">(</span><span class="n">String</span> <span class="n">param</span><span class="o">,</span> <span class="n">Method</span> <span class="n">currentMethod</span><span class="o">,</span> <span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">klass</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
-    <span class="n">Annotation</span><span class="o">[][]</span> <span class="n">paramAnnos</span> <span class="o">=</span> <span class="n">currentMethod</span><span class="o">.</span><span class="na">getParameterAnnotations</span><span class="o">();</span>
-    <span class="n">Class</span><span class="o">&lt;?&gt;[]</span> <span class="n">paramTypes</span> <span class="o">=</span> <span class="n">currentMethod</span><span class="o">.</span><span class="na">getParameterTypes</span><span class="o">();</span>
-    <span class="n">Object</span><span class="o">[]</span> <span class="n">values</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Object</span><span class="o">[</span><span class="n">paramTypes</span><span class="o">.</span><span class="na">length</span><span class="o">];</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">dealWithPathKnown</span><span class="o">(</span><span class="nc">String</span> <span class="n">param</span><span class="o">,</span> <span class="nc">Method</span> <span class="n">currentMethod</span><span class="o">,</span> <span class="nc">Class</span><span class="o">&lt;?&gt;</span> <span class="n">klass</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+    <span class="nc">Annotation</span><span class="o">[][]</span> <span class="n">paramAnnos</span> <span class="o">=</span> <span class="n">currentMethod</span><span class="o">.</span><span class="na">getParameterAnnotations</span><span class="o">();</span>
+    <span class="nc">Class</span><span class="o">&lt;?&gt;[]</span> <span class="n">paramTypes</span> <span class="o">=</span> <span class="n">currentMethod</span><span class="o">.</span><span class="na">getParameterTypes</span><span class="o">();</span>
+    <span class="nc">Object</span><span class="o">[]</span> <span class="n">values</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Object</span><span class="o">[</span><span class="n">paramTypes</span><span class="o">.</span><span class="na">length</span><span class="o">];</span>
     <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">paramTypes</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
         <span class="c1">// 如果是BufferedWriter，那么直接赋值，否则从params中找</span>
-        <span class="k">if</span><span class="o">(</span><span class="n">paramTypes</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="n">BufferedWriter</span><span class="o">.</span><span class="na">class</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">paramTypes</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="nc">BufferedWriter</span><span class="o">.</span><span class="na">class</span><span class="o">)</span> <span class="o">{</span>
             <span class="n">values</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">out</span><span class="o">;</span>
         <span class="o">}</span><span class="k">else</span> <span class="o">{</span>
             <span class="k">if</span><span class="o">(</span><span class="n">paramAnnos</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">Value</span> <span class="n">value</span> <span class="o">=</span> <span class="o">(</span><span class="n">Value</span><span class="o">)</span> <span class="n">paramAnnos</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">0</span><span class="o">];</span>
+                <span class="nc">Value</span> <span class="n">value</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Value</span><span class="o">)</span> <span class="n">paramAnnos</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">0</span><span class="o">];</span>
                 <span class="n">values</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">getValue</span><span class="o">(</span><span class="n">param</span><span class="o">,</span> <span class="n">value</span><span class="o">.</span><span class="na">key</span><span class="o">());</span>
             <span class="o">}</span>
         <span class="o">}</span>
     <span class="o">}</span>
     <span class="c1">// 实例化Controller，并执行该方法</span>
-    <span class="n">String</span> <span class="n">result</span> <span class="o">=</span> <span class="o">(</span><span class="n">String</span><span class="o">)</span> <span class="n">currentMethod</span><span class="o">.</span><span class="na">invoke</span><span class="o">(</span><span class="n">klass</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(),</span> <span class="n">values</span><span class="o">);</span>
+    <span class="nc">String</span> <span class="n">result</span> <span class="o">=</span> <span class="o">(</span><span class="nc">String</span><span class="o">)</span> <span class="n">currentMethod</span><span class="o">.</span><span class="na">invoke</span><span class="o">(</span><span class="n">klass</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(),</span> <span class="n">values</span><span class="o">);</span>
     <span class="k">if</span><span class="o">(</span><span class="n">result</span><span class="o">!=</span><span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">out</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">result</span><span class="o">);</span>
     <span class="o">}</span>
@@ -546,9 +546,9 @@
  * @param key
  * @return
  */</span>
-<span class="kd">private</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">getValue</span><span class="o">(</span><span class="n">String</span> <span class="n">param</span><span class="o">,</span> <span class="n">String</span> <span class="n">key</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">Pattern</span> <span class="n">pattern</span> <span class="o">=</span> <span class="n">Pattern</span><span class="o">.</span><span class="na">compile</span><span class="o">(</span><span class="n">key</span> <span class="o">+</span> <span class="s">"=([^&amp;]*)"</span><span class="o">);</span>
-    <span class="n">Matcher</span> <span class="n">matcher</span> <span class="o">=</span> <span class="n">pattern</span><span class="o">.</span><span class="na">matcher</span><span class="o">(</span><span class="n">param</span><span class="o">);</span>
+<span class="kd">private</span> <span class="kd">static</span> <span class="nc">String</span> <span class="nf">getValue</span><span class="o">(</span><span class="nc">String</span> <span class="n">param</span><span class="o">,</span> <span class="nc">String</span> <span class="n">key</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Pattern</span> <span class="n">pattern</span> <span class="o">=</span> <span class="nc">Pattern</span><span class="o">.</span><span class="na">compile</span><span class="o">(</span><span class="n">key</span> <span class="o">+</span> <span class="s">"=([^&amp;]*)"</span><span class="o">);</span>
+    <span class="nc">Matcher</span> <span class="n">matcher</span> <span class="o">=</span> <span class="n">pattern</span><span class="o">.</span><span class="na">matcher</span><span class="o">(</span><span class="n">param</span><span class="o">);</span>
     <span class="k">if</span> <span class="o">(</span><span class="n">matcher</span><span class="o">.</span><span class="na">find</span><span class="o">())</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">matcher</span><span class="o">.</span><span class="na">group</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
     <span class="o">}</span>
