@@ -280,6 +280,56 @@
 
             <li>
                 <time>
+                2021-02-21 Sun.
+                </time>
+                <a class="title" href="/blog/2021/02/21/key-shortcut/">知识库 常用IDE快捷键</a>
+				<brief style="display:none">VSCode、AndroidStudio、IDEA、Eclipse、NotePad++。。。编辑器太多，一段时间不用容易搞混，记录一下常用的，不用每次再搜一遍了。</brief>
+                
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/blog/tag/#知识库" title="Tag: 知识库" rel="tag">知识库</a>&nbsp;
+    
+        <a href="/blog/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
+    
+        <a href="/blog/tag/#vi" title="Tag: vi" rel="tag">vi</a>&nbsp;
+    
+        <a href="/blog/tag/#编辑器" title="Tag: 编辑器" rel="tag">编辑器</a>
+    
+  
+
+</span>
+
+            </li>
+
+          
+
+            
+              
+              
+              
+            
+
+            <li>
+                <time>
                 2021-02-06 Sat.
                 </time>
                 <a class="title" href="/blog/2021/02/06/github-graphql/">关于 Github graphQL</a>
@@ -7566,7 +7616,12 @@
                           
                           
                           
-                            <li><a data-scroll href="#y2021">2021 (6)</a></li>
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="#y2021">2021 (7)</a></li>
                             
                           
                         
@@ -8577,6 +8632,59 @@ function addLink() {
 }
 document.oncopy = addLink;
 */
+
+displaySearchContent();
+function displaySearchContent(){
+	var keys = getLocalStorage("blogSearchKey");
+	//keys = "踩坑记录 Git".toLowerCase().split(" ");//必须包含全部词汇,忽略大小写
+	if( keys == null || keys =="" ){
+		//alert("无搜索内容");
+		return;
+	}
+	keys = keys.toLowerCase().split(" ");//必须包含全部词汇,忽略大小写
+	var blogs = document.querySelectorAll(".left ul>li");
+	var i;
+	
+	//隐藏无关节点
+	for (i = 0; i < blogs.length; i++) {
+		var toShow = true;
+		for( var kk = 0; kk < keys.length; kk++){
+			if( blogs[i].innerHTML.toLowerCase().indexOf(keys[kk]) == -1 ){
+				toShow = false;
+				break;
+			}
+		}
+	
+		if( !toShow){
+			blogs[i].style.display="none";
+			//console.log(blogs[i].innerHTML);
+		}else{
+			blogs[i].style.display="";
+		}
+	}
+	//若子节点均被隐藏,则该年份节点隐藏
+	var nodes = document.querySelector(".left ul").children;
+	var curDisplay = "none";
+	var curYearNodeId;
+	for(i = 0; i < nodes.length; i++){
+		if( nodes[i].nodeName.toLowerCase() == "h2" ){//将上个节点设置好显示属性,并记录下当前节点位置
+			if(curYearNodeId != null){
+				nodes[curYearNodeId].style.display=curDisplay;
+				document.querySelector(".right ul>li>a[href='#" + nodes[curYearNodeId].id+"']").parentNode.style.display=curDisplay;
+			}
+			curYearNodeId = i;
+			curDisplay="none";
+		}else if( nodes[i].nodeName.toLowerCase () == "li" ){//如遇到节点为显示,记录下来
+			if( nodes[i].style.display != "none") curDisplay = "";
+		}
+	}
+	nodes[curYearNodeId].style.display=curDisplay;
+	document.querySelector(".right ul>li>a[href='#" + nodes[curYearNodeId].id+"']").parentNode.style.display=curDisplay;
+	//显示内容后,yearNodes
+	//delLocalStorage("blogSearchKey");
+	setLocalStorage("blogSearchKey","");
+
+}
 
 //contetn为要显示的内容  
 function showTips( content ){  

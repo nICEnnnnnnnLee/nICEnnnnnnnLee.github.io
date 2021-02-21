@@ -5,9 +5,31 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 09 Feb 2021 10:39:34 +0800</pubDate>
-    <lastBuildDate>Tue, 09 Feb 2021 10:39:34 +0800</lastBuildDate>
+    <pubDate>Sun, 21 Feb 2021 18:16:50 +0800</pubDate>
+    <lastBuildDate>Sun, 21 Feb 2021 18:16:50 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>知识库 常用IDE快捷键</title>
+        <description>VSCode、AndroidStudio、IDEA、Eclipse、NotePad++。。。
+编辑器太多，一段时间不用容易搞混，记录一下常用的，不用每次再搜一遍了。
+</description>
+        <pubDate>Sun, 21 Feb 2021 10:59:01 +0800</pubDate>
+        <link>https://nicelee.top/blog/2021/02/21/key-shortcut/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/02/21/key-shortcut/</guid>
+        
+        <category>知识库</category>
+        
+        <category>Linux</category>
+        
+        <category>vi</category>
+        
+        <category>编辑器</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
     
       <item>
         <title>关于 Github graphQL</title>
@@ -151,23 +173,6 @@
         <pubDate>Sat, 31 Oct 2020 11:49:01 +0800</pubDate>
         <link>https://nicelee.top/blog/2020/10/31/weixin-step-counter-cheater-6/</link>
         <guid isPermaLink="true">https://nicelee.top/blog/2020/10/31/weixin-step-counter-cheater-6/</guid>
-        
-        <category>微信运动</category>
-        
-        
-        <category>小技巧</category>
-        
-      </item>
-    
-      <item>
-        <title>【ReadMe】微信运动作弊的操作指引(乐心)</title>
-        <description>服务器快到期，如无意外可能转静态托管了。 &lt;br /&gt;
-那么一些功能实现起来就会有些麻烦，是时候考虑一下移动端实现了。    &lt;br /&gt;
-&lt;strong&gt;更新：需要绑定乐心手环才能实现第三方数据同步&lt;/strong&gt;
-</description>
-        <pubDate>Fri, 11 Sep 2020 11:49:01 +0800</pubDate>
-        <link>https://nicelee.top/blog/2020/09/11/weixin-step-counter-cheater-5/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2020/09/11/weixin-step-counter-cheater-5/</guid>
         
         <category>微信运动</category>
         

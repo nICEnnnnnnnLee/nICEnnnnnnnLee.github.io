@@ -2,6 +2,13 @@
 	"code" : 0 ,
 	"data" : [
 	{
+		"title" : "知识库 常用IDE快捷键",
+		"tags" : "知识库_Linux_vi_编辑器",
+		"url" : "/blog/2021/02/21/key-shortcut/"
+		"brief" : "VSCode、AndroidStudio、IDEA、Eclipse、NotePad++。。。编辑器太多，一段时间不用容易搞混，记录一下常用的，不用每次再搜一遍了。"
+	},
+    
+	{
 		"title" : "关于 Github graphQL",
 		"tags" : "Python",
 		"url" : "/blog/2021/02/06/github-graphql/"
