@@ -3,7 +3,7 @@
 	"data" : [
 	{
 		"title" : "知识库 常用IDE快捷键",
-		"tags" : "知识库_Linux_vi_编辑器",
+		"tags" : "知识库",
 		"url" : "/blog/2021/02/21/key-shortcut/"
 		"brief" : "VSCode、AndroidStudio、IDEA、Eclipse、NotePad++。。。编辑器太多，一段时间不用容易搞混，记录一下常用的，不用每次再搜一遍了。"
 	},
@@ -171,7 +171,7 @@
     
 	{
 		"title" : "知识库 零宽度字符隐写",
-		"tags" : "隐写_编码_解码",
+		"tags" : "隐写",
 		"url" : "/blog/2020/05/30/steganography/"
 		"brief" : "如何将消息隐藏在文本中"
 	},
@@ -458,7 +458,7 @@
     
 	{
 		"title" : "Java FLV文件结构分析 与 直播流录制问题处理",
-		"tags" : "Java_flv",
+		"tags" : "Java",
 		"url" : "/blog/2019/05/16/java-live-record-flv/"
 		"brief" : "最近做了一下B站的直播录制，发现下载的flv文件播放时视频时长有点问题，于是深入了解了一下，在此做些记录。"
 	},
@@ -479,7 +479,7 @@
     
 	{
 		"title" : "可能感兴趣的东西 Mark一下",
-		"tags" : "Java_gif",
+		"tags" : "Java",
 		"url" : "/blog/2019/04/11/notes/"
 		"brief" : "发现了一些可能感兴趣的东西，先记着，有空可以尝试一下。"
 	},
@@ -598,7 +598,7 @@
     
 	{
 		"title" : "Java 本地TCPServer Demo",
-		"tags" : "Java_SocketChannel",
+		"tags" : "Java",
 		"url" : "/blog/2019/02/14/java-socket-channel/"
 		"brief" : "本文在上篇的基础上独立而来，可以看作是VpnService中TCPServer的简单实现，也可以单独出来看作JavaNIO的一个Demo。"
 	},
@@ -675,7 +675,7 @@
     
 	{
 		"title" : "前端 FireFox扩展插件实践 - 网页视频下载器",
-		"tags" : "浏览器扩展_JavaScript_HTML_前端",
+		"tags" : "浏览器扩展_JavaScript_html_前端",
 		"url" : "/blog/2019/01/18/firefox-web-extentions/"
 		"brief" : "浏览器扩展是个很好用的东西，像Chrome好用的插件就特别多。可惜找了半天手机端支持的只有火狐，因为都是使用的统一的WebExtensionsAPI，转Chrome也不太费事，尝试着做了一下。"
 	},
@@ -703,21 +703,21 @@
     
 	{
 		"title" : "知识库 透明代理、匿名代理、混淆代理、高匿代理 [转]",
-		"tags" : "HttpProxy_代理_透明代理_匿名代理",
+		"tags" : "知识库",
 		"url" : "/blog/2019/01/10/http-proxy-anonymous-transparent/"
 		"brief" : "透明代理、匿名代理、混淆代理、高匿代理这4种代理，主要是在代理服务器端的配置不同，导致其向目标地址发送请求时，REMOTE_ADDR，HTTP_VIA，HTTP_X_FORWARDED_FOR三个变量不同。"
 	},
     
 	{
 		"title" : "Java 线程池笔记",
-		"tags" : "Java_线程池",
+		"tags" : "Java",
 		"url" : "/blog/2019/01/10/java-thread-excutor/"
 		"brief" : "Java线程池笔记"
 	},
     
 	{
 		"title" : "Java Http代理设置",
-		"tags" : "Java_HttpProxy_HtmlUnit_爬虫",
+		"tags" : "Java_爬虫",
 		"url" : "/blog/2019/01/07/http-proxy/"
 		"brief" : "在做爬虫的时候，同一ip频繁抓取有很大可能会被识别，然后被ban。因而，使用代理是很有必要的。"
 	},
@@ -752,56 +752,56 @@
     
 	{
 		"title" : "SpringBoot 踩坑记录(七)- http状态码",
-		"tags" : "SpringBoot_踩坑_http状态码_Nginx_缓存",
+		"tags" : "SpringBoot_踩坑_Nginx",
 		"url" : "/blog/2018/12/18/spring-boot-http-status/"
 		"brief" : "在Nginx端反向代理使用了缓存，由此引出了一个较为严重的问题，最新的文章不能及时更新，本文讨论的该问题的解决思路。"
 	},
     
 	{
 		"title" : "Nginx 内置缓存Proxy_cache",
-		"tags" : "Nginx_缓存_反向代理",
+		"tags" : "Nginx",
 		"url" : "/blog/2018/12/16/nginx-cache/"
 		"brief" : "用Nginx反向代理其它服务器，有些静态资源可以直接缓存，没必要再次去查询一遍，减少后端请求的同时加快响应时间。"
 	},
     
 	{
 		"title" : "Nginx 配置身份验证 http_auth_basic_module",
-		"tags" : "Nginx_身份验证",
+		"tags" : "Nginx",
 		"url" : "/blog/2018/12/16/nginx-httpd/"
 		"brief" : "实现用户名和密码验证访问,可以直接使用Nginx的http_auth_basic_module模块。"
 	},
     
 	{
 		"title" : "一种访问被DNS劫持/污染的域名的解决办法",
-		"tags" : "DNS_DNS污染_DNS劫持_hosts",
+		"tags" : "DNS",
 		"url" : "/blog/2018/12/16/dns-host/"
 		"brief" : "最近在学DNS方面的东西，一直在思考这个问题。假定某域名xxx.com被DNS污染了，应该怎么办呢？"
 	},
     
 	{
 		"title" : "[资源备份] 下载站点备份",
-		"tags" : "电影_bt下载",
+		"tags" : "",
 		"url" : "/blog/2018/12/16/bt-resources/"
 		"brief" : "虽然说由于网速的提升，现在电视、电影很多都是在线观看了。对于搜集控来说，还是有那么一部分BT的死忠粉的。"
 	},
     
 	{
 		"title" : "Java 获取真实客户端ip",
-		"tags" : "Java_ip",
+		"tags" : "Java",
 		"url" : "/blog/2018/12/15/request-ip/"
 		"brief" : "一般的Http请求跑到最终的处理端时都经过(多级)反向的代理，通过方法getRemoteAddr()得不到客户端真实IP，必须要经过一定处理。下面做个转载备份。"
 	},
     
 	{
 		"title" : "Thunder等下载地址链接的互相转换",
-		"tags" : "工具_下载链接_迅雷连接_快车链接",
+		"tags" : "",
 		"url" : "/blog/2018/12/15/link-convert/"
 		"brief" : "本文就各种下载链接的编码原理及转换详细说明一下，明白以后就可以用迅雷下载快车、旋风专用地址的软件啦。"
 	},
     
 	{
 		"title" : "SpringBoot 踩坑记录(六)- 返回String带双引号问题",
-		"tags" : "SpringBoot_踩坑_String",
+		"tags" : "SpringBoot_踩坑",
 		"url" : "/blog/2018/12/14/spring-boot-string/"
 		"brief" : "本文记录SpringBoot学习中遇到的问题。使用fastJson对出参做处理，会将String类型自动增加双引号字符串。若仅仅想返回String内容，可以在WebConfig里面增加转换器。"
 	},
@@ -815,77 +815,77 @@
     
 	{
 		"title" : "知识库 纯真IP数据库格式详解 [转]",
-		"tags" : "SpringBoot_踩坑_String",
+		"tags" : "SpringBoot_踩坑",
 		"url" : "/blog/2018/12/13/ipdatabase/"
 		"brief" : "纯真版IP数据库，优点是记录多，查询速度快，它只用一个文件QQWry.dat就包含了所有记录，方便嵌入到其他程序中，也方便升级。缺点是你想要编辑它却是比较麻烦的。"
 	},
     
 	{
 		"title" : "知识库 Base64编码原理",
-		"tags" : "Base64_编码_解码",
+		"tags" : "知识库",
 		"url" : "/blog/2018/12/12/base64-encode/"
 		"brief" : "介绍一下Base64的相关内容，花几分钟时间就可以彻底理解它。文章下边贴了一个Base64的编解码器，方便阅读文章的同时来实验。"
 	},
     
 	{
 		"title" : "Jekyll 站点地图的生成",
-		"tags" : "Jekyll_sitemap_SEO_站点地图",
+		"tags" : "",
 		"url" : "/blog/2018/12/11/jekyll-sitemap/"
 		"brief" : "这几天考虑把网站推到搜索引擎，也不考虑推广啥的，但不说别的，至少要搜索域名至少也得出现个链接呗。"
 	},
     
 	{
 		"title" : "知识库 VPS虚拟化架构简介",
-		"tags" : "知识库_Linux_VPS_虚拟化架构",
+		"tags" : "知识库_Linux_VPS",
 		"url" : "/blog/2018/12/10/vps-virt/"
 		"brief" : "选择VPS产品的时候一定要注意虚拟化架构，因为不同的虚拟化架构对操作系统是Linux还是Windows会有较大的性能损失差异！"
 	},
     
 	{
 		"title" : "知识库 VPS主机性能和速度测试",
-		"tags" : "知识库_Linux_VPS_性能测试",
+		"tags" : "知识库_Linux_VPS",
 		"url" : "/blog/2018/12/10/vps-test/"
 		"brief" : "购买VPS前主要是使用一些网络测试工具如ping、tracert、WinMTR之类的工具进行测试，确定VPS所走线路的好坏。购买后主要测试VPS的性能。下面主要介绍一下常用的工具："
 	},
     
 	{
 		"title" : "Putty 免密自动登录设置",
-		"tags" : "知识库_Linux_Putty",
+		"tags" : "知识库",
 		"url" : "/blog/2018/12/09/putty/"
 		"brief" : "虽然XShell等工具越来越流行，但是小巧的Putty仍然有一定作用。Putty出于安全考虑，不愿去保存密码，这点很烦。以下是一种解决办法。"
 	},
     
 	{
 		"title" : "知识库 Linux vi编辑器",
-		"tags" : "知识库_Linux_vi_编辑器",
+		"tags" : "知识库_Linux",
 		"url" : "/blog/2018/12/09/vi/"
 		"brief" : "vi编辑器是所有Unix及Linux系统下标准的编辑器，它的强大不逊色于任何最新的文本编辑器，这里只是简单地介绍一下它的用法和一小部分指令。"
 	},
     
 	{
 		"title" : "知识库 Centos yum源配置",
-		"tags" : "知识库_Linux_CentOS",
+		"tags" : "知识库_Linux",
 		"url" : "/blog/2018/12/09/yum/"
 		"brief" : "有时候不用自己下载安装包再安装,直接使用yum可以省去很多功夫"
 	},
     
 	{
 		"title" : "前端 两个PDF预览API",
-		"tags" : "JavaScript_HTML",
+		"tags" : "JavaScript_html",
 		"url" : "/blog/2018/12/06/html-pdf/"
 		"brief" : "收藏两款可用的在线PDF预览神器，pdfobject、pdf.js。"
 	},
     
 	{
 		"title" : "吐槽",
-		"tags" : "吐槽",
+		"tags" : "",
 		"url" : "/blog/2018/12/04/work-tucao/"
 		"brief" : "谨以此文纪念我的第一份工作。基于保密需要，有各种省略"
 	},
     
 	{
 		"title" : "Thymeleaf 模板表达式",
-		"tags" : "Thymeleaf",
+		"tags" : "",
 		"url" : "/blog/2018/12/01/thymeleaf/"
 		"brief" : "markThymeleaf模板表达式"
 	},
@@ -906,21 +906,21 @@
     
 	{
 		"title" : "Windows下为右键菜单减负",
-		"tags" : "Windows_注册表_Regedit",
+		"tags" : "Windows",
 		"url" : "/blog/2018/11/22/win-regedit-right-click-menu/"
 		"brief" : "随着安装软件的不断增多，右键菜单也越来越长，臃肿不堪。这样，本来以快捷菜单自居的右键菜单使用起来反而并不快捷。本文记录一些注册表中关于右键菜单的位置。"
 	},
     
 	{
 		"title" : "SpringBoot 踩坑记录(五)- Thymeleaf th:replace/include路径问题",
-		"tags" : "SpringBoot_踩坑_Thymeleaf_replace_标签",
+		"tags" : "SpringBoot_踩坑",
 		"url" : "/blog/2018/11/22/spring-boot-thymeleaf-path/"
 		"brief" : "本文记录SpringBoot学习中遇到的问题。因为网页有许多地方老是重复同一坨代码，看着很不舒服，所以想办法把他们公共部分提取出来。在Windows下用Thymeleafth:replace标签用的好好的，调试也完全没有问题，结果部署到服务器上后，就出现error了，百思不得其解。"
 	},
     
 	{
 		"title" : "RSS 一种小众的信息获取方式介绍",
-		"tags" : "追更神器_RSS",
+		"tags" : "",
 		"url" : "/blog/2018/11/20/awsome-rss/"
 		"brief" : "即使在RSS最火的时候，你也许也仅仅是听说过它。大多数人从没有了解过它。是的，这是一款神器，但就和本文毫无吸引力的标题一样，各网站专业拗口的解释让很多人望而却步。也许对于网站流量的分流使得各门户不重视甚至阻碍它的发展。渐渐的，RSS成了冷门的东西。但如果说这是一款方便看新闻、追小说、追各种up主更新等一系列操作的神器，也许你会更感兴趣。"
 	},
@@ -941,7 +941,7 @@
     
 	{
 		"title" : "Win10 Shift+右键还原打开cmd命令窗口",
-		"tags" : "Windows_cmd_PowerShell",
+		"tags" : "Windows",
 		"url" : "/blog/2018/11/11/win10-regedit-cmd/"
 		"brief" : "在Win10系统上Shift+鼠标右键，在此处打开命令窗口的快捷方式没有了。从此只能win+R然后cmd再然后cd到当前目录。用久了以后真的是很烦很烦，不得已百度了一下，贴一下方法。"
 	},
@@ -969,14 +969,14 @@
     
 	{
 		"title" : "SpringBoot 踩坑记录(一)- maven 国内镜像",
-		"tags" : "SpringBoot_踩坑_maven_镜像",
+		"tags" : "SpringBoot_踩坑",
 		"url" : "/blog/2018/11/08/spring-boot-note-maven-mirror/"
 		"brief" : "本文记录SpringBoot学习中遇到的问题。从官网上下载导入了helloWorld的demo，结果在SpringToolSuitez中打开，一直报错，mavenupdate也没法解决。最后更换了国内的阿里云镜像，成功解决。"
 	},
     
 	{
 		"title" : "阿里云CentOS 部署静态博客",
-		"tags" : "云服务器_建站_php_博客_jekyll_git_webhook",
+		"tags" : "云服务器_建站",
 		"url" : "/blog/2018/11/06/blog-to-my-site/"
 		"brief" : "本文档介绍如何从Coding.net上将Jekyll编写的静态博客移植到阿里云服务器，并设置WebHook自动更新"
 	},
@@ -1011,7 +1011,7 @@
     
 	{
 		"title" : "阿里云CentOS FTP部署",
-		"tags" : "云服务器_建站_FTP",
+		"tags" : "Linux",
 		"url" : "/blog/2018/11/05/ftp/"
 		"brief" : "本文介绍在CentOS64位操作系统下,如何搭建并配置服务器端的FTP环境。这里采用的是vsftpd来搭建FTP环境。vsftpd是Linux下的一款小巧轻快、安全易用的FTP服务器软件，是一款在各个Linux发行版中最受推崇的FTP服务器软件。"
 	},
@@ -1025,7 +1025,7 @@
     
 	{
 		"title" : "Java poi操作Excel踩坑记录",
-		"tags" : "Java_poi_Excel",
+		"tags" : "Java",
 		"url" : "/blog/2018/10/28/java-excel-poi/"
 		"brief" : "最近想将数据保存到Excel文件中，一件很简单的事情，结果遇到了坑。。。最新的Excel文件操作会原来的数据给覆盖掉！！囧了个囧，这种坑我也不想的"
 	},
@@ -1053,14 +1053,14 @@
     
 	{
 		"title" : "前端 一个网站背景水印图片插件",
-		"tags" : "JavaScript_HTML_CSS_前端",
+		"tags" : "JavaScript_html_CSS_前端",
 		"url" : "/blog/2018/10/24/ali-mask-background/"
 		"brief" : "alimask是一个使用canvas生成类似阿里巴巴内部网站水印图片的JavaScript库。Onlinedemohere."
 	},
     
 	{
 		"title" : "前端 一个网页粒子背景插件 -Canvas-nest.js",
-		"tags" : "JavaScript_HTML_CSS_前端",
+		"tags" : "JavaScript_html_CSS_前端",
 		"url" : "/blog/2018/10/23/canvas-nest/"
 		"brief" : "一个基于html5canvas绘制的网页背景效果。"
 	},
@@ -1074,7 +1074,7 @@
     
 	{
 		"title" : "前端 一个简单的音乐播放器",
-		"tags" : "JavaScript_HTML_CSS",
+		"tags" : "JavaScript_html_CSS",
 		"url" : "/blog/2018/10/23/music-player/"
 		"brief" : "APlayer.js迷你音乐播放器插件是一款小型的网页音乐播放器代码，支持歌词滚动，带播放进度条和声音控制，暂停播放等功能。话不多说,先上效果图:"
 	},
@@ -1095,7 +1095,7 @@
     
 	{
 		"title" : "Web App 相关技术",
-		"tags" : "JavaScript_HTML_CSS_WebApp",
+		"tags" : "JavaScript_html_CSS_WebApp",
 		"url" : "/blog/2015/06/17/web-app/"
 		"brief" : "这是一篇主题作者的文章,保留以作纪念.往前推2到3年，前端工程师还在忧心忡忡地想，移动互联网时代下，前端是不是没有生存空间了。但今天一看，在我们团队，前端工程师超过一半的工作都是在做移动端的Web或者APP的开发。移动Web或者APP在技术本质上是和做桌面端Web没有本质区别，但是移动端的坑那是非常的多，通过学习这部分内容，让你成为一名桌面移动通吃的前端开发工程师。"
 	}

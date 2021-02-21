@@ -5,13 +5,13 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 21 Feb 2021 18:16:50 +0800</pubDate>
-    <lastBuildDate>Sun, 21 Feb 2021 18:16:50 +0800</lastBuildDate>
+    <pubDate>Sun, 21 Feb 2021 19:06:46 +0800</pubDate>
+    <lastBuildDate>Sun, 21 Feb 2021 19:06:46 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
         <title>知识库 常用IDE快捷键</title>
-        <description>VSCode、AndroidStudio、IDEA、Eclipse、NotePad++。。。
+        <description>VSCode、AndroidStudio、IDEA、Eclipse、NotePad++。。。  &lt;br /&gt;
 编辑器太多，一段时间不用容易搞混，记录一下常用的，不用每次再搜一遍了。
 </description>
         <pubDate>Sun, 21 Feb 2021 10:59:01 +0800</pubDate>
@@ -19,12 +19,6 @@
         <guid isPermaLink="true">https://nicelee.top/blog/2021/02/21/key-shortcut/</guid>
         
         <category>知识库</category>
-        
-        <category>Linux</category>
-        
-        <category>vi</category>
-        
-        <category>编辑器</category>
         
         
         <category>技术学习</category>
