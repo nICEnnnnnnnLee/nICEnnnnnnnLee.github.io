@@ -5,9 +5,43 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 21 Feb 2021 19:06:46 +0800</pubDate>
-    <lastBuildDate>Sun, 21 Feb 2021 19:06:46 +0800</lastBuildDate>
+    <pubDate>Sat, 27 Feb 2021 15:22:31 +0800</pubDate>
+    <lastBuildDate>Sat, 27 Feb 2021 15:22:31 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>Python 关于requests的DNS和SNI设置</title>
+        <description>&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;requests&lt;/code&gt;包算是比较常用了，怎么能比较方便指定DNS和设置是否发送SNI呢？
+</description>
+        <pubDate>Sat, 27 Feb 2021 11:49:01 +0800</pubDate>
+        <link>https://nicelee.top/blog/2021/02/27/python-dns-sni/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/02/27/python-dns-sni/</guid>
+        
+        <category>Python</category>
+        
+        
+        <category>技术学习</category>
+        
+        <category>小技巧</category>
+        
+        <category>代码片段</category>
+        
+      </item>
+    
+      <item>
+        <title>杂七杂八 啊这。。。</title>
+        <description>想到哪吐槽到哪。
+</description>
+        <pubDate>Wed, 24 Feb 2021 10:59:01 +0800</pubDate>
+        <link>https://nicelee.top/blog/2021/02/24/something-about-nothing/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/02/24/something-about-nothing/</guid>
+        
+        <category>知识库</category>
+        
+        
+        <category>杂七杂八</category>
+        
+      </item>
     
       <item>
         <title>知识库 常用IDE快捷键</title>
@@ -136,42 +170,6 @@
         
         
         <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>Vercel Serverless使用笔记(Python版)</title>
-        <description>服务器冇得了，只能白嫖了，就这样。
-</description>
-        <pubDate>Mon, 16 Nov 2020 11:49:01 +0800</pubDate>
-        <link>https://nicelee.top/blog/2020/11/16/vercel-serverless/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2020/11/16/vercel-serverless/</guid>
-        
-        <category>Vercel</category>
-        
-        <category>Serverless</category>
-        
-        <category>Python</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>【ReadMe】微信运动作弊的操作指引(春雨)</title>
-        <description>【已失效】服务器快到期，如无意外可能转静态托管了。 &lt;br /&gt;
-那么一些功能实现起来就会有些麻烦，是时候考虑一下移动端实现了。    &lt;br /&gt;
-乐心不能第三方同步，那么只能回退到春雨了。
-</description>
-        <pubDate>Sat, 31 Oct 2020 11:49:01 +0800</pubDate>
-        <link>https://nicelee.top/blog/2020/10/31/weixin-step-counter-cheater-6/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2020/10/31/weixin-step-counter-cheater-6/</guid>
-        
-        <category>微信运动</category>
-        
-        
-        <category>小技巧</category>
         
       </item>
     

@@ -2,6 +2,20 @@
 	"code" : 0 ,
 	"data" : [
 	{
+		"title" : "Python 关于requests的DNS和SNI设置",
+		"tags" : "Python",
+		"url" : "/blog/2021/02/27/python-dns-sni/"
+		"brief" : "requests包算是比较常用了，怎么能比较方便指定DNS和设置是否发送SNI呢？"
+	},
+    
+	{
+		"title" : "杂七杂八 啊这。。。",
+		"tags" : "知识库",
+		"url" : "/blog/2021/02/24/something-about-nothing/"
+		"brief" : "想到哪吐槽到哪。"
+	},
+    
+	{
 		"title" : "知识库 常用IDE快捷键",
 		"tags" : "知识库",
 		"url" : "/blog/2021/02/21/key-shortcut/"
