@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>一种利用Github notification达到邮件通知目的的思路及其Python实现</title>
+    <meta name="description" content="说到邮件通知，简单的试了一下，发觉里面的坑蛮深的。   很多云服务直接把端口给封了。。。  邮件服务商也满满的套路，巴不得你用他们的app才好（海外一样）。 开启第三方SMTP服务各种身份验证。隔三岔五“你是不是本人？” 真正的spam拦也拦不住，尽给真正用户增加使用门槛。 抢市场的时候总是野蛮生长，当大头后根据...">
+
+    <meta property="og:url" content="https://nicelee.top/blog/2021/03/01/issue-as-notification/">
+    <meta property="og:site_name" content="NiceLee的博客">
+    <meta property="og:title" content="一种利用Github notification达到邮件通知目的的思路及其Python实现">
+    <meta property="og:description" content="说到邮件通知，简单的试了一下，发觉里面的坑蛮深的。   很多云服务直接把端口给封了。。。  邮件服务商也满满的套路，巴不得你用他们的app才好（海外一样）。 开启第三方SMTP服务各种身份验证。隔三岔五“你是不是本人？” 真正的spam拦也拦不住，尽给真正用户增加使用门槛。 抢市场的时候总是野蛮生长，当大头后根据...">
+    <meta property="og:image" content="https://nicelee.top/favicon.ico?">
+    <meta property="og:image:type" content="image/x-icon">
+    
+    <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="stylesheet" href="/css/font-awesome.min.css ">
+    <link rel="stylesheet" href="/css/font-ali.css?v=1.2 ">
+    <link rel="stylesheet" href="/css/main.css?v=1.1 ">
+    <link rel="canonical" href="https://nicelee.top/blog/2021/03/01/issue-as-notification/">
+    <link rel="alternate" type="application/rss+xml" title="NiceLeeのBlog" href="https://nicelee.top/feed.xml ">
+
+	
+
+    <script>
+    // 百度统计代码
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?11f780e4e4ccd4e99b101eac776e93e4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+</head>
+
+    <link rel="stylesheet" href="/sources/live2d/css/live2d.css" />
+  <body>
+	
+		
+		<script type="text/javascript" src="/js/ribbon.min.js "></script>
+		
+	
+	
+    <header id="top">
+    <div class="wrapper">
+        <a href="/blog/" class="brand awsome-font">NiceLeeのBlog</a>
+        <small>用爱发电 bilibili~</small>
+        <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
+        <nav id="headerNav">
+            <ul>
+				<li onclick="showdiv()" >
+                    <a href="#">
+                    <i class="fa fa-search">搜索</i>
+                    </a>
+                </li>
+                <li>
+                    
+                    <a href="/blog/">
+                    
+                        <i class="fa fa-home"></i>主页
+                    </a>
+                </li>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <a href="/blog/archive/">
+                        
+                            <i class="fa fa-archive"></i>归档
+                        </a>
+                    </li>
+                
+                    
+                    <li>
+                        <a href="/ilikemusic/">
+                        
+                            <i class="fa fa-music"></i>音乐
+                        </a>
+                    </li>
+                
+                    
+                    <li>
+                        <a href="/collect/">
+                        
+                            <i class="fa fa-bookmark"></i>收藏
+                        </a>
+                    </li>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <a href="/blog/timeline/">
+                        
+                            <i class="fa fa-clock-o"></i>时间轴
+                        </a>
+                    </li>
+                
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <a href="/about/">
+                        
+                            <i class="fa fa-info-circle"></i>关于
+                        </a>
+                    </li>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                				
+				
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+        <div class="page clearfix" post>
+    <div class="left">
+        <h1>一种利用Github notification达到邮件通知目的的思路及其Python实现</h1>
+        <div class="label">
+
+            <div class="label-card">
+                <i class="fa fa-calendar"></i>2021-03-01
+            </div>
+
+            <div class="label-card">
+                <i class="fa fa-user"></i>nIceLee
+                
+            </div>
+            <div class="label-card">
+                <p>阅读：<span id="busuanzi_value_page_pv1"></span></p>
+            </div>
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+            
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/blog/category/#小技巧" title="Category: 小技巧" rel="category">小技巧</a>&nbsp;
+    
+        <a href="/blog/category/#代码片段" title="Category: 代码片段" rel="category">代码片段</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+            </div>
+
+            <div class="label-card">
+            
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <!--a href="/blog/tag/#Python" title="Tag: Python" rel="tag">Python</a-->
+        <a href="/blog/tag/#Python" title="Tag: Python" rel="tag">Python</a>&nbsp;
+    
+        <!--a href="/blog/tag/#Github" title="Tag: Github" rel="tag">Github</a-->
+        <a href="/blog/tag/#Github" title="Tag: Github" rel="tag">Github</a>
+    
+  
+
+</span>
+
+            </div>
+
+        </div>
+        <hr>
+        <article itemscope itemtype="http://schema.org/BlogPosting">
+        <ul id="markdown-toc">
+  <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
+  <li><a href="#实现思路" id="markdown-toc-实现思路">实现思路</a></li>
+  <li><a href="#示例代码" id="markdown-toc-示例代码">示例代码</a></li>
+</ul>
+<p>说到邮件通知，简单的试了一下，发觉里面的坑蛮深的。   <br />
+很多云服务直接把端口给封了。。。  <br />
+邮件服务商也满满的套路，巴不得你用他们的app才好（海外一样）。 <br />
+开启第三方SMTP服务各种身份验证。隔三岔五“你是不是本人？” <br />
+真正的spam拦也拦不住，尽给真正用户增加使用门槛。 <br />
+抢市场的时候总是野蛮生长，当大头后根据相关规范！    <br />
+有的时候还发现你的邮件躺在垃圾邮箱里。。。<br />
+得了，通知而已，让人代发吧。</p>
+
+<h2 id="前言">前言</h2>
+<ul>
+  <li>Github在什么时候会给我发邮件呢？
+    <ul>
+      <li>我设置关注的repo发布了新的release</li>
+      <li>我设置关注的repo有了新的issue</li>
+      <li>我设置关注的repo有了新的pull request</li>
+      <li>我设置关注的issue下有了新的回复</li>
+      <li>我设置关注的pull request有了新的回复</li>
+      <li>我设置关注的gist有了新的回复</li>
+      <li>我参加并设置关注的team有了讨论</li>
+      <li>…</li>
+    </ul>
+  </li>
+  <li>Github给我发邮件的标题/内容是什么呢？
+    <ul>
+      <li>基本是事件主体的内容。<br />
+  因为需求是通知，控制正文的文本内容很容易达到。 <br />
+  更复杂的，比如格式要求、附件、回执等这里就不做考虑了。</li>
+    </ul>
+  </li>
+  <li>隐私和安全性问题
+    <ul>
+      <li>如果不考虑邮件通知的隐私问题，对象直接取用公开的repo即可。</li>
+      <li>项目可以设为私有(由此可能引发实现的某些问题，但可以解决。)</li>
+      <li>Gist可以设为secret，但其内容仍然是对任何人可见的。</li>
+    </ul>
+  </li>
+  <li>关于实现的考量
+    <ul>
+      <li>由于Github不可能发邮件提示你本人自己的操作，故而需要两个账号。</li>
+      <li>由于个人私有项目无法对第二人可见，故而只能采用组织私有项目的形式。<br />
+  这需要再创建一个组织。</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="实现思路">实现思路</h2>
+<ul>
+  <li>一种利用issue(comment)的实现思路
+    <ul>
+      <li>准备账号A，该账号的注册邮箱用于接收邮件</li>
+      <li>准备账号B，并生成用于github操作的token。该账号用于创建issue和issue comment</li>
+      <li>A(或者B)创建一个组织C，并邀请B(或者A)加入</li>
+      <li>A(或者B)在组织C创建一个私有的项目repo</li>
+      <li>确认AB对repo的接入权限</li>
+      <li>确认A对repo的关注</li>
+      <li>接下来，考虑B如何在repo新建issue和issue comment即可
+        <ul>
+          <li>先人为在repo创建一个issue</li>
+          <li>api查询最近的issue信息
+            <ul>
+              <li>若最近的comment数量大于20，api新建一个issue</li>
+              <li>若最近的comment数量小于等于20，在该issue下api新建一个issue comment</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="示例代码">示例代码</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/bin/env python
+# coding:utf-8
+</span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">requests</span><span class="p">,</span><span class="n">json</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+        
+<span class="k">def</span> <span class="nf">load_from_env</span><span class="p">():</span>
+    <span class="n">repo_full_name</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'MY_REPOSITORY'</span><span class="p">)</span>
+    <span class="n">owner</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'MY_OWNER'</span><span class="p">)</span>
+    <span class="n">repo</span> <span class="o">=</span> <span class="n">repo_full_name</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">owner</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]</span>
+    <span class="n">token</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'MY_GITHUB_TOKEN'</span><span class="p">)</span>
+    <span class="n">github_config</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">"repo"</span><span class="p">:</span> <span class="n">repo</span><span class="p">,</span>
+        <span class="s">"owner"</span><span class="p">:</span> <span class="n">owner</span><span class="p">,</span>
+        <span class="s">"token"</span><span class="p">:</span> <span class="n">token</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">github_config</span>
+    
+<span class="k">class</span> <span class="nc">GithubHelper</span><span class="p">:</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">owner</span><span class="p">,</span> <span class="n">repo</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">auth</span> <span class="o">=</span> <span class="n">token</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">owner</span> <span class="o">=</span> <span class="n">owner</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">repo</span> <span class="o">=</span> <span class="n">repo</span>
+        
+    <span class="k">def</span> <span class="nf">getLatestRelease</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">):</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s">'https://api.github.com/repos/%s/%s/releases/latest'</span><span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">owner</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">repo</span><span class="p">)</span>
+        <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">'User-Agent'</span><span class="p">:</span> <span class="s">'None'</span><span class="p">,</span> <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/vnd.github.v3.+json'</span><span class="p">,</span> <span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"token "</span><span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">auth</span><span class="p">}</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">).</span><span class="n">json</span><span class="p">()</span>
+        <span class="c1">#print(res)
+</span>        <span class="k">return</span> <span class="n">res</span>
+    
+                
+    <span class="k">def</span> <span class="nf">updateReleaseBody</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">release_id</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">):</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s">'https://api.github.com/repos/%s/%s/releases/%d'</span><span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">owner</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">repo</span><span class="p">,</span> <span class="n">release_id</span><span class="p">)</span>
+        <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">'User-Agent'</span><span class="p">:</span> <span class="s">'None'</span><span class="p">,</span> <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/vnd.github.v3.+json'</span><span class="p">,</span> <span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"token "</span><span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">auth</span><span class="p">}</span>
+        <span class="n">param</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">"body"</span><span class="p">:</span> <span class="n">body</span>
+        <span class="p">}</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"PATCH"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">param</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">).</span><span class="n">json</span><span class="p">()</span>
+        <span class="c1">#print(res)
+</span>        <span class="k">return</span> <span class="n">res</span> 
+        
+    <span class="k">def</span> <span class="nf">updateReleaseAsset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asset_id</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">):</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s">'https://api.github.com/repos/%s/%s/releases/assets/%d'</span><span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">owner</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">repo</span><span class="p">,</span> <span class="n">asset_id</span><span class="p">)</span>
+        <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">'User-Agent'</span><span class="p">:</span> <span class="s">'None'</span><span class="p">,</span> <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/vnd.github.v3.+json'</span><span class="p">,</span> <span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"token "</span><span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">auth</span><span class="p">}</span>
+        <span class="n">param</span> <span class="o">=</span> <span class="s">'{"name":"%s"}'</span><span class="o">%</span><span class="n">name</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"PATCH"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">param</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">).</span><span class="n">json</span><span class="p">()</span>
+        <span class="c1">#print(res)
+</span>        <span class="k">return</span> <span class="n">res</span>    
+            
+    <span class="k">def</span> <span class="nf">deleteReleaseAsset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asset_id</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">):</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s">'https://api.github.com/repos/%s/%s/releases/assets/%d'</span><span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">owner</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">repo</span><span class="p">,</span> <span class="n">asset_id</span><span class="p">)</span>
+        <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">'User-Agent'</span><span class="p">:</span> <span class="s">'None'</span><span class="p">,</span> <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/vnd.github.v3.+json'</span><span class="p">,</span> <span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"token "</span><span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">auth</span><span class="p">}</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"DELETE"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+        <span class="c1">#print(res.text)
+</span>        <span class="k">return</span> <span class="n">res</span>
+        
+    <span class="k">def</span> <span class="nf">uploadReleaseAsset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">release_id</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">):</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s">'https://uploads.github.com/repos/%s/%s/releases/%d/assets?name=%s'</span><span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">owner</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">repo</span><span class="p">,</span> <span class="n">release_id</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">'content-type'</span><span class="p">:</span> <span class="s">'application/octet-stream'</span><span class="p">,</span> <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/vnd.github.v3.+json'</span><span class="p">,</span> <span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"token "</span><span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">auth</span><span class="p">}</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"POST"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">).</span><span class="n">json</span><span class="p">()</span>
+        <span class="c1">#print(res)
+</span>        <span class="k">return</span> <span class="n">res</span>
+        
+    <span class="k">def</span> <span class="nf">replaceLatestReleaseAssets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="s">"releaseInfo"</span> <span class="ow">in</span> <span class="nb">locals</span><span class="p">():</span>
+            <span class="n">releaseInfo</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">getLatestRelease</span><span class="p">()</span>
+        <span class="n">release_id</span> <span class="o">=</span> <span class="n">releaseInfo</span><span class="p">[</span><span class="s">'id'</span><span class="p">]</span>
+        <span class="n">assets</span> <span class="o">=</span> <span class="n">releaseInfo</span><span class="p">[</span><span class="s">'assets'</span><span class="p">]</span>
+        <span class="c1"># 删除原来的附件
+</span>        <span class="k">for</span> <span class="n">asset</span> <span class="ow">in</span> <span class="n">assets</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="n">asset</span><span class="p">[</span><span class="s">"name"</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="p">.</span><span class="n">deleteReleaseAsset</span><span class="p">(</span><span class="n">asset</span><span class="p">[</span><span class="s">'id'</span><span class="p">])</span>
+                <span class="k">break</span><span class="p">;</span>
+        <span class="c1"># 上传新的附件
+</span>        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">uploadReleaseAsset</span><span class="p">(</span><span class="n">release_id</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        
+            
+    <span class="k">def</span> <span class="nf">createIssueComment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">issue_id</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">content</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">):</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s">'https://api.github.com/repos/%s/%s/issues/%d/comments'</span><span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">owner</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">repo</span><span class="p">,</span> <span class="n">issue_id</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s">"body"</span><span class="p">:</span><span class="n">content</span><span class="p">}</span>
+        <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/vnd.github.v3.+json'</span><span class="p">,</span> 
+            <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json; charset=utf-8'</span><span class="p">,</span> 
+            <span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"token "</span><span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">auth</span>
+        <span class="p">}</span>
+        <span class="c1">#d = encode_multipart_formdata(data, boundary=boundary)        
+</span>        <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"POST"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">).</span><span class="n">text</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span>
+        
+    <span class="k">def</span> <span class="nf">createIssue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">):</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s">'https://api.github.com/repos/%s/%s/issues'</span><span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">owner</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">repo</span><span class="p">)</span>
+        <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">'User-Agent'</span><span class="p">:</span> <span class="s">'None'</span><span class="p">,</span> <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/vnd.github.v3.+json'</span><span class="p">,</span> <span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"token "</span><span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">auth</span><span class="p">}</span>
+        <span class="n">param</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">"title"</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span>
+            <span class="s">"body"</span><span class="p">:</span> <span class="n">body</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"POST"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">param</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">).</span><span class="n">json</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span>
+        
+    <span class="k">def</span> <span class="nf">getLatestIssue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">):</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s">'https://api.github.com/repos/%s/%s/issues?per_page=1'</span><span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">owner</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">repo</span><span class="p">)</span>
+        <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">'User-Agent'</span><span class="p">:</span> <span class="s">'None'</span><span class="p">,</span> <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/vnd.github.v3.+json'</span><span class="p">,</span> <span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"token "</span><span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">auth</span><span class="p">}</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">).</span><span class="n">json</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span> 
+    
+    <span class="k">def</span> <span class="nf">send_notice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">):</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">getLatestIssue</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="p">[</span><span class="s">"comments"</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">20</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">createIssueComment</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s">"number"</span><span class="p">],</span> <span class="n">content</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">createIssue</span><span class="p">(</span><span class="s">'邮件通知issue[%d]'</span><span class="o">%</span><span class="n">issue</span><span class="p">[</span><span class="s">"number"</span><span class="p">],</span> <span class="n">content</span><span class="p">)</span>
+        
+            
+    <span class="k">def</span> <span class="nf">createGist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gist_id</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">):</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s">'https://api.github.com/gists/%s/comments'</span><span class="o">%</span><span class="p">(</span><span class="n">gist_id</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">'User-Agent'</span><span class="p">:</span> <span class="s">'None'</span><span class="p">,</span> <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/vnd.github.raw'</span><span class="p">,</span> <span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"token "</span><span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">auth</span><span class="p">}</span>
+        <span class="n">param</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">"body"</span><span class="p">:</span> <span class="n">content</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"POST"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">param</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">).</span><span class="n">json</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span>
+        
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="n">github_config</span> <span class="o">=</span> <span class="n">load_from_env</span><span class="p">()</span>
+    <span class="s">"""或者这样，repo是项目名，owner是组织名，token是B的tokan
+    github_config = {
+        "repo": repo,
+        "owner": owner,
+        "token": token,
+    }
+    """</span>
+    <span class="n">helper</span> <span class="o">=</span> <span class="n">GithubHelper</span><span class="p">(</span><span class="o">**</span><span class="n">github_config</span><span class="p">)</span>
+    <span class="c1">#helper.getLatestRelease()
+</span>    <span class="c1">#helper.updateReleaseAsset(asset_id = 123,name = "test.zip")
+</span>    <span class="c1">#helper.uploadReleaseAsset(release_id = 123,name = "test.zip",data = 'hahaha')
+</span>    <span class="c1">#helper.deleteReleaseAsset(asset_id = 123)
+</span>    <span class="c1">#helper.replaceLatestReleaseAssets(name = "test.zip", data = '1234测试'.encode("utf-8"))
+</span>    <span class="c1">#date_now = get_now_date_str()
+</span>    <span class="c1">#body = '更新于%s'%date_now
+</span>    <span class="c1">#helper.updateReleaseBody(release_id = 123, body=body)
+</span>    <span class="c1">#helper.createIssueComment(123, "test @xxx")
+</span>    <span class="c1">#helper.createIssue('邮件通知issue', "test @xxx")
+</span>    <span class="n">helper</span><span class="p">.</span><span class="n">send_notice</span><span class="p">(</span><span class="s">"快点干活啦~~"</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+        </article>
+        <hr>
+
+        
+        
+            
+            
+                
+                    
+                        
+                        <h2 id="similar_posts">相似文章</h2>
+                        <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2021/02/27/python-dns-sni/">Python 关于requests的DNS和SNI设置
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2021/02/06/github-graphql/">关于 Github graphQL
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2021/02/02/python-decorators-2/">Python 关于装饰器(以web地址解析为例)
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2021/02/01/python-decorators/">Python 关于装饰器(以异常重试为例)
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2021/01/06/python-opencv-video-frame/">Python 提取视频截图作预览图
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2021/01/01/python-18comic/">Python 某站漫画的佛系随缘下载
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+        
+        
+            </ul>
+        
+
+        <div class="post-recent">
+    <div class="pre">
+        
+        <p><strong>上一篇</strong> <a href="/blog/2021/02/27/python-dns-sni/">Python 关于requests的DNS和SNI设置</a></p>
+        
+    </div>
+    <div class="nex">
+
+        
+    </div>
+</div>
+
+
+        <!-- <h2 id="comments">评论</h2>  
+        
+
+
+
+ -->
+
+
+    </div>
+    <button class="anchor"><i class="fa fa-anchor"></i></button>
+    <div class="right">
+        <div class="wrap">
+
+            <!-- Content -->
+            <div class="side content">
+                <div>
+                    内容
+                </div>
+                <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#similar_posts">相似文章</a></li>
+                    
+                    <!-- <li><a href="#comments">评论</a></li> -->
+                </ul>
+            </div>
+			
+            <!-- 其他div框放到这里 -->
+            <!-- <div class="side">bbbb</div> -->
+        </div>
+    </div>
+</div>
+<script>
+/**
+ * target _blank
+ */
+(function() {
+    var aTags = document.querySelectorAll('article a:not([id])')
+    for (var i = 0; i < aTags.length; i++) {
+        aTags[i].setAttribute('target', '_blank')
+    }
+
+}());
+</script>
+<script src="/js/pageContent.js " charset="utf-8"></script>
+
+
+    <footer class="site-footer">
+
+
+    <div class="wrapper">
+        <p class="description">
+             这是一个缺爱的博客(๑‾ ꇴ ‾๑)！ 
+        </p>
+        <p class="contact">
+            联系我: 
+            <a href="https://github.com/nICEnnnnnnnLee" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
+            <a href="mailto:lijia0732@sina.com" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>  
+            <a href="https://weibo.com/blackhigh" title="Weibo"><i class="fa fa-weibo" aria-hidden="true"></i></a>       
+			<span onclick="copyToClipboard('https://nicelee.top/feed.xml')"><a href="#">订阅我<i class="fa fa-gg"></i></a></span>
+        </p>
+        <p>
+            总pv:<span id="busuanzi_value_site_pv"></span>，uv:<span id="busuanzi_value_site_uv"></span>，本页pv:<span id="busuanzi_value_page_pv"></span>
+        </p>
+        <p class="power">
+            <span>
+            有用链接：
+                <a href="http://www.bejson.com/" target="_blank">BeJSON</a> &nbsp;&nbsp;
+                <a href="http://site.ip138.com/"  target="_blank">IP或域名查询</a> &nbsp;&nbsp;
+                <a href="http://ping.chinaz.com/"  target="_blank">各地ping</a> &nbsp;&nbsp;
+                <a href="https://tool.lu/"  target="_blank">在线工具</a> &nbsp;&nbsp; 
+                <a href="https://www.aliyun.com/"  target="_blank">阿里云</a> &nbsp;&nbsp; 
+                <a href="http://patorjk.com/software/taag/"  target="_blank">Text转FIGlet</a> &nbsp;&nbsp; 
+                <a href="https://mx-model.ga/"  target="_blank">Live2D 模型资源</a> &nbsp;&nbsp;
+                <a href="https://vercel.com/dashboard"  target="_blank">Vercel</a> &nbsp;&nbsp;
+                <a href="https://dash.cloudflare.com/"  target="_blank">Cloudflare</a> &nbsp;&nbsp;
+            </span>
+        </p>
+        <p class="power">
+            <span>
+            除非另有注明，否则本网站上的内容可按 <a href="http://creativecommons.org/licenses/by-nc/4.0/"  target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议许可</a> 或更新版本使用。
+            </span>
+        </p>
+        <p class="power">
+            <span>
+                建站声明详见 <a href="/about/#关于个人博客">[关于]</a>. <a href="/sitemap.xml">[站点地图]</a>. 
+            </span>
+            
+        </p>
+        <p class="power beian">
+        </p>
+		<p class="power">
+            <span>
+                Site powered by <a href="https://jekyllrb.com/">Jekyll</a>.
+            </span>
+            <span>
+                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
+            </span>
+        </p>
+        
+		
+    </div>
+</footer>
+
+
+<!-- mask start -->
+<div id="searchBg"></div>
+<div id="searchDiv">
+	<input id="searchContent" type="text" onkeypress="if(event.keyCode==13) { search();return false;}" value=""/></input>
+    <div id="searchBtn" onclick="search();" /><i class="fa fa-search"></i></div>
+	<span onclick="hidediv();" class="close"></span>
+</div>
+<!-- mask end -->
+<!-- live2d begin -->
+<div id="landlord">
+    <div class="message" style="opacity:0"></div>
+    <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+    <div class="hide-button">隐藏</div>
+</div>
+<!-- live2d end -->
+<script type='text/javascript' src='/js/jquery.min.js '></script>
+<script type='text/javascript'>
+function search(){	
+	var str = document.getElementById("searchContent").value;
+	//console.log(str);
+	setLocalStorage("blogSearchKey",str);
+	hidediv();
+	window.location.href="/blog/archive/";
+}
+function showdiv() {
+	//alert("调用了showdiv()函数");
+	document.getElementById("searchBg").style.display ="block";
+	document.getElementById("searchDiv").style.display ="block";
+
+	//$('body').css("overflow", "hidden");
+	document.getElementsByTagName('body')[0].setAttribute("overflow", "hidden");
+}
+function hidediv() {
+	document.getElementById("searchBg").style.display = 'none';
+	document.getElementById("searchDiv").style.display = 'none';
+	//$('body').css("overflow", "auto");
+	document.getElementsByTagName('body')[0].setAttribute("overflow", "hidden");
+}
+////////////////////////////useful function //////////////////////////////////////
+//写cookies
+function setLocalStorage(name,value)
+{
+	localStorage.setItem(name, JSON.stringify(value));
+}
+//读cookies
+function getLocalStorage(name)
+{
+	return JSON.parse(localStorage.getItem(name));
+}
+//删cookies
+function delLocalStorage(name)
+{
+	localStorage.setItem(name, JSON.stringify(""));
+}
+function copyToClipboard (text) {
+    if(text.indexOf('-') !== -1) {
+        var arr = text.split('-');
+        text = arr[0] + arr[1];
+    }
+    var textArea = document.createElement("textarea");
+      textArea.style.position = 'fixed';
+      textArea.style.top = '0';
+      textArea.style.left = '0';
+      textArea.style.width = '2em';
+      textArea.style.height = '2em';
+      textArea.style.padding = '0';
+      textArea.style.border = 'none';
+      textArea.style.outline = 'none';
+      textArea.style.boxShadow = 'none';
+      textArea.style.background = 'transparent';
+      textArea.value = text;
+      document.body.appendChild(textArea);
+      textArea.select();
+	//alert("调用了复制剪贴板函数");
+      try {
+        var successful = document.execCommand('copy');
+        var msg = successful ? 'Rss源已成功复制到剪贴板' : 'RSS源为:https://nicelee.top/feed.xml';
+		//alert(msg);
+		showTips(msg);
+      } catch (err) {
+		//console.log(err);
+        //alert('该浏览器不支持点击复制到剪贴板');
+		showTips('RSS源为:https://nicelee.top/feed.xml');
+      }
+
+      document.body.removeChild(textArea);
+}
+/*
+<!--  版权维护  -->
+function addLink() {
+//alert("!!!");
+    var body_element = document.body;
+    var selection;
+    selection = window.getSelection();
+    if((selection + "").indexOf("/feed.xml") != -1){
+        return;
+    }
+	if(selection == ""){
+		return;
+	}
+    var locationHref=document.location.href;
+    var appendLink="\r\n------------------------------\r\n 原文出自[ NiceLee的个人博客 ] 转载请保留原文链接: <a href='"+locationHref+"'>"+locationHref+"</a>";
+    if (window.clipboardData) { // Internet Explorer
+        //console.log("调用原生函数");
+        var copytext = selection + appendLink;
+        window.clipboardData.setData ("Text", copytext);
+        return false;
+    } else {
+        //console.log("复杂的套路");
+        var copytext = selection + appendLink;
+        var newdiv = document.createElement('div');
+        newdiv.style.position='absolute';
+        newdiv.style.left='-99999px';
+        body_element.appendChild(newdiv);
+        newdiv.innerHTML = "<pre>" +copytext + "</pre>";
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function() {
+        	body_element.removeChild(newdiv);
+        },0);
+    }
+}
+document.oncopy = addLink;
+*/
+
+//contetn为要显示的内容  
+function showTips( content ){  
+	//alert("调用了复制提示消息函数");
+	//alert("内容为"+ content);
+    //窗口的宽度  
+	//alert(content);
+	var width = 250;
+	var x  = $(window).width()/2 - width/2;	
+	var y = $(window).height()/2 -20;
+	var $i = $("<span/>").text(content);
+	$i.css({
+		"z-index": 999999999999999999999999999,
+		"top": y,
+		"left": x,
+		"position": "absolute",
+		"font-weight": "bold",
+		'padding'   : '3px 5px',  
+		'background': '#8FBC8F',  
+		'font-size' : 12 + 'px',  
+		'margin'    : '0 auto',  
+		'text-align': 'center',  
+		'width'     : width + 'px',  
+		'height'    : 'auto',  
+		'color'     : '#fff'
+	});
+	$("body").append($i);
+	$i.animate({
+		"opacity": 0
+	},
+	3000,
+	function() {
+		//console.log($i.css());
+		$i.remove();
+		//alert('');
+	});
+}     
+</script>
+
+<!-- 窗口失去焦点 -- 别走啊 -->
+<!-- 窗口获得焦点 -- 恢复 -->
+<!-- console 打印figlet-->
+<script>
+var titleOnFocus = document.title;
+var titleOnBlur = "...(*￣０￣)ノ[别走啊…]";
+window.onfocus =function(){
+    document.title = titleOnFocus;
+    //console.log(titleOnFocus);
+}
+window.onblur = function(){
+    document.title = titleOnBlur;
+    //console.log(titleOnBlur);
+}
+
+var figlet = "\n" +
+"        _          _            _               \n" +
+"       (_)        | |          | |              \n" +
+"  _ __  _  ___ ___| | ___  ___ | |_ ___  _ __   \n" +
+" | '_ \\| |/ __/ _ \\ |/ _ \\/ _ \\| __/ _ \\| '_ \\  \n" +
+" | | | | | (_|  __/ |  __/  __/| || (_) | |_) | \n" +
+" |_| |_|_|\\___\\___|_|\\___|\\___(_)__\\___/| .__/  \n" +
+"                                        | |     \n" +
+"                                        |_|     \n" ;
+console.log(figlet);
+console.log("%c小改改爆个照呗\n hentai女个装呗", "color:red;font-size: 50px;font-weight:bold;");
+
+/* 防hentai
+document.onkeydown=function(){
+    var e = window.event||arguments[0];
+    if(e.keyCode==123){
+    	alert('请尊重劳动成果！');
+            return false;
+    }else if((e.ctrlKey)&&(e.shiftKey)&&(e.keyCode==73)){
+    	alert('请尊重劳动成果！');
+            return false;
+    }else if((e.ctrlKey)&&(e.keyCode==85)){
+            alert('请尊重劳动成果！');
+            return false;
+    }else if((e.ctrlKey)&&(e.keyCode==83)){
+           alert('请尊重劳动成果！');
+           return false;
+    }
+}
+document.oncontextmenu=function(){
+	alert('请尊重劳动成果！');
+    return false;
+}*/
+</script>
+
+<!-- live2d Begin-->
+<script type="text/javascript">
+    var message_Path = '/sources/live2d/'
+    var home_Path = 'https://nicelee.top/'
+</script>
+<script type="text/javascript" src="/sources/live2d/js/live2d.js"></script>
+<script type="text/javascript" src="/sources/live2d/js/message.js"></script>
+<script type="text/javascript">
+    var modelList = ["kesshouban_v2", "tia", "wanko", "index", "kanna", "koharu", "umaru", 
+	"22.closet.default.v2", 
+	"22.closet.2018.bls-summer", 
+	"22.closet.2019.summer", 
+	"33.closet.2016.xmas", 
+	"33.closet.2017.tomo-bukatsu", 
+	"33.closet.2018.bls-summer", 
+	"33.closet.2018.bls-winter", 
+	"33.closet.default.v2" ];    
+    var model = modelList[12]; 
+    // kesshouban_v2 血小板
+    // tia  小改改
+    // wanko 小狗狗 
+    // index 魔禁-茵蒂克丝
+    // kanna 康娜龙
+    // koharu 卡哇伊的Q版模型
+    // umaru 干物妹小埋 带声音
+    // 22 哔哩哔哩22娘
+    // 22.v2 哔哩哔哩22娘
+    console.log("live2d模型(小部分)来自官网: http://www.live2d.com/usermanual/cubism2_cn/samples.html");
+    console.log("live2d模型(大部分)来自梦象: https://mx-model.ga/");
+    if( window.document.body.offsetWidth >= 666){
+        loadlive2d("live2d", "/sources/live2d/model/"+ model +"/model.json");
+    }else{
+        //loadlive2d("live2d", "/sources/live2d/model/tia/model_tiny.json");
+        loadlive2d("live2d", "/sources/live2d/model/"+ model +"/model_tiny.json");
+    }
+</script>
+<!-- live2d End-->
+
+<script type="text/javascript">
+	var a_idx = 0;
+	jQuery(document).ready(function($) {
+		$("body").click(function(e) {
+			var a = new Array("大吉大利，今晚吃鸡！", "惊不惊喜，意不意外", "还有这种操作？", "小猪佩奇身上纹，掌声送给社会人", "确认过眼神", "皮一下，很开心", "很好很强大", "C位出道", "你若盛开，清风自来", "如果帅也是一种罪，那我已罪无可赦", "别看资料 ，看聊效！", "感动吗，不敢动", "打call", "我是你的超级英雄");
+			var $i = $("<span/>").text(a[a_idx]);
+			a_idx = (a_idx + 1) % a.length;
+			var x = e.pageX,
+			y = e.pageY;
+			$i.css({
+				"z-index": 999999999999999999999999999,
+				"top": y - 20,
+				"left": x,
+				"position": "absolute",
+				"font-weight": "bold",
+				"color": "#dd3333"
+			});
+			$("body").append($i);
+			$i.animate({
+				"top": y - 180,
+				"opacity": 0
+			},
+			1500,
+			function() {
+				$i.remove();
+				//alert('');
+			});
+		});
+	});
+</script>
+
+
+<script async src="/js/busuanzi.pure.mini.js "></script>
+
+
+    <div class="back-to-top">
+    <a href="#top" data-scroll>
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+    <script src="/js/main.js " charset="utf-8"></script>
+    <script src="/js/smooth-scroll.min.js " charset="utf-8"></script>
+    <script type="text/javascript">
+      smoothScroll.init({
+        speed: 500, // Integer. How fast to complete the scroll in milliseconds
+        easing: 'easeInOutCubic', // Easing pattern to use
+        offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
+      });
+      // 为了底部内容不被遮住
+      $(document).ready(function () {
+        resizeBody();
+      });
+      window.onresize = resizeBody;
+      function resizeBody(){
+        //console.log("resizing Body...");
+        if (window.innerWidth <= 770) {
+            var totalHeight = $("header#top").height() + $(".page.clearfix").height() + $("footer.site-footer").height() +80;
+            document.body.style.height = totalHeight + "px";
+        }else{
+            document.body.style.height = "auto";
+        }
+      }
+    </script>
+	
+	
+    <!-- <script src=" /js/scroll.min.js " charset="utf-8"></script> -->
+  </body>
+
+</html>
