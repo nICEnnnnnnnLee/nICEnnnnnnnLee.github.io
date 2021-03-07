@@ -7,13 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Acfun接口(六) - UP主视频获取</title>
-    <meta name="description" content="  做个笔记，UP主上传的视频应该如何下载(๑•̀ㅂ•́)و✧">
+    <title>Python 批量删除B站动态</title>
+    <meta name="description" content="前阵子过年的时候参加新春厨神大作战，发了上百来条动态。 现在看着挺碍眼的，决定批量删除。">
 
-    <meta property="og:url" content="https://nicelee.top/blog/2019/08/07/java-spider-acfun-down-6/">
+    <meta property="og:url" content="https://nicelee.top/blog/2021/03/07/python-delete-bilibili-dynamics/">
     <meta property="og:site_name" content="NiceLee的博客">
-    <meta property="og:title" content="Acfun接口(六) - UP主视频获取">
-    <meta property="og:description" content="  做个笔记，UP主上传的视频应该如何下载(๑•̀ㅂ•́)و✧">
+    <meta property="og:title" content="Python 批量删除B站动态">
+    <meta property="og:description" content="前阵子过年的时候参加新春厨神大作战，发了上百来条动态。 现在看着挺碍眼的，决定批量删除。">
     <meta property="og:image" content="https://nicelee.top/favicon.ico?">
     <meta property="og:image:type" content="image/x-icon">
     
@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="/css/font-awesome.min.css ">
     <link rel="stylesheet" href="/css/font-ali.css?v=1.2 ">
     <link rel="stylesheet" href="/css/main.css?v=1.1 ">
-    <link rel="canonical" href="https://nicelee.top/blog/2019/08/07/java-spider-acfun-down-6/">
+    <link rel="canonical" href="https://nicelee.top/blog/2021/03/07/python-delete-bilibili-dynamics/">
     <link rel="alternate" type="application/rss+xml" title="NiceLeeのBlog" href="https://nicelee.top/feed.xml ">
 
 	
@@ -268,11 +268,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>Acfun接口(六) - UP主视频获取</h1>
+        <h1>Python 批量删除B站动态</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2019-08-07
+                <i class="fa fa-calendar"></i>2021-03-07
             </div>
 
             <div class="label-card">
@@ -295,7 +295,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#代码片段" title="Category: 代码片段" rel="category">代码片段</a>&nbsp;
+    
+        <a href="/blog/category/#bilibili" title="Category: bilibili" rel="category">bilibili</a>
     
   
 
@@ -312,17 +314,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
-    
-        <!--a href="/blog/tag/#html" title="Tag: html" rel="tag">html</a-->
-        <a href="/blog/tag/#html" title="Tag: html" rel="tag">html</a>&nbsp;
-    
-        <!--a href="/blog/tag/#%E7%88%AC%E8%99%AB" title="Tag: 爬虫" rel="tag">爬虫</a-->
-        <a href="/blog/tag/#爬虫" title="Tag: 爬虫" rel="tag">爬虫</a>&nbsp;
-    
-        <!--a href="/blog/tag/#AcFun" title="Tag: AcFun" rel="tag">AcFun</a-->
-        <a href="/blog/tag/#AcFun" title="Tag: AcFun" rel="tag">AcFun</a>
+        <!--a href="/blog/tag/#Python" title="Tag: Python" rel="tag">Python</a-->
+        <a href="/blog/tag/#Python" title="Tag: Python" rel="tag">Python</a>
     
   
 
@@ -334,41 +327,141 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#要做的事情" id="markdown-toc-要做的事情">要做的事情</a></li>
-  <li><a href="#获取up主上传的中视频列表" id="markdown-toc-获取up主上传的中视频列表">获取UP主上传的中视频列表</a></li>
+  <li><a href="#代码" id="markdown-toc-代码">代码</a></li>
 </ul>
-<blockquote>
-  <p>做个笔记，UP主上传的视频应该如何下载(๑•̀ㅂ•́)و✧</p>
-</blockquote>
+<p>前阵子过年的时候参加<code class="language-plaintext highlighter-rouge">新春厨神大作战</code>，发了上百来条动态。 <br />
+现在看着挺碍眼的，决定批量删除。</p>
 
-<h2 id="要做的事情">要做的事情</h2>
-<ul>
-  <li>获取UP主上传的中视频列表</li>
-</ul>
+<h2 id="代码">代码</h2>
+<p>如下，改下cookie即可</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span><span class="p">,</span><span class="n">json</span><span class="p">,</span><span class="n">re</span>
 
-<h2 id="获取up主上传的中视频列表">获取UP主上传的中视频列表</h2>
-<ol>
-  <li>已知UP主页，易得up的spaceID
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://www.acfun.cn/u/6238691.aspx  ==&gt; spaceID为6238691
-</code></pre></div>    </div>
-  </li>
-  <li>由spaceID获得所有上传的ac号(分页)
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>String urlFormat = "https://www.acfun.cn/space/next?uid=%s&amp;type=video&amp;orderBy=2&amp;pageNo=%d";
-String url = String.format(urlFormat, spaceID, page);
-String json = util.getContent(url, new HttpHeaders().getCommonHeaders("www.acfun.cn"));
-JSONObject jobj = new JSONObject(json);
-// json直接得到的是html内容，需要做一定的处理
-String results[] = jobj.getJSONObject("data").getString("html").split("播放中");
-for (int i = min - 1; i &lt; results.length &amp;&amp; i &lt; max; i++) {
-     Pattern acPattern = Pattern.compile("&lt;a href=\"/v/(ac[0-9]+)\"");
-     Matcher matcher = acPattern.matcher(results[i]);
-     matcher.find();
-     // matcher.group(1) 为视频的ac号
-     pageQueryResult.append(" ").append(matcher.group(1));
-}
-</code></pre></div>    </div>
-  </li>
-</ol>
+
+<span class="k">def</span> <span class="nf">get_dynamics</span><span class="p">(</span><span class="n">uid</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">cookie</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">offset_dynamic_id</span><span class="p">:</span><span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">_http_get_dynamics</span><span class="p">(</span><span class="n">uid</span><span class="p">,</span> <span class="n">cookie</span><span class="p">,</span> <span class="n">offset_dynamic_id</span><span class="p">)</span>
+    <span class="k">while</span> <span class="n">result</span><span class="p">[</span><span class="s">"data"</span><span class="p">][</span><span class="s">"has_more"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">card</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s">"data"</span><span class="p">][</span><span class="s">"cards"</span><span class="p">]:</span>
+            <span class="c1"># 请注意，返回的json里面有很多id、rid、dynamic_id、dynamic_id_str之类的，请取用dynamic_id_str
+</span>            <span class="k">yield</span> <span class="n">card</span><span class="p">[</span><span class="s">"desc"</span><span class="p">][</span><span class="s">"dynamic_id_str"</span><span class="p">],</span> <span class="n">json</span><span class="p">.</span><span class="n">loads</span><span class="p">(</span><span class="n">card</span><span class="p">[</span><span class="s">"card"</span><span class="p">])</span>
+        <span class="n">offset_dynamic_id</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s">"data"</span><span class="p">][</span><span class="s">"next_offset"</span><span class="p">]</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">_http_get_dynamics</span><span class="p">(</span><span class="n">uid</span><span class="p">,</span> <span class="n">cookie</span><span class="p">,</span> <span class="n">offset_dynamic_id</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">_http_get_dynamics</span><span class="p">(</span><span class="n">uid</span><span class="p">,</span> <span class="n">cookie</span><span class="p">,</span> <span class="n">offset_dynamic_id</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">"Accept"</span><span class="p">:</span> <span class="s">"application/json, text/plain, */*"</span><span class="p">,</span>
+        <span class="s">"User-Agent"</span><span class="p">:</span> <span class="n">user_agent</span><span class="p">,</span>
+        <span class="s">"Accept-Encoding"</span><span class="p">:</span> <span class="s">"gzip, deflate"</span><span class="p">,</span>
+        <span class="s">"Cookie"</span><span class="p">:</span> <span class="n">cookie</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/space_history?visitor_uid=%s&amp;host_uid=%s&amp;offset_dynamic_id=%d&amp;need_top=1&amp;platform=web"</span><span class="o">%</span><span class="p">(</span><span class="n">uid</span><span class="p">,</span> <span class="n">uid</span><span class="p">,</span> <span class="n">offset_dynamic_id</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">).</span><span class="n">json</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">res</span>
+    
+<span class="k">def</span> <span class="nf">delete_dynamic</span><span class="p">(</span><span class="n">uid</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">dynamic_id_str</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">cookie</span><span class="p">):</span>
+    <span class="c1"># {'code': 500406, 'msg': '不能删除别人的动态哦', 'message': '不能删除别人的动态哦', 'data': {}}
+</span>    <span class="c1"># {'code': 500404, 'msg': '不能重复删除', 'message': '不能重复删除', 'data': {}}
+</span>    <span class="c1"># {'code': 0, 'msg': '', 'message': '', 'data': {'_gt_': 0}}
+</span>    <span class="n">regexs</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="s">"bili_jct=([^&amp;; =]+)"</span><span class="p">,</span> <span class="n">cookie</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">regexs</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">"cookie not valid"</span><span class="p">)</span>
+        
+    <span class="n">csrf_token</span> <span class="o">=</span> <span class="n">regexs</span><span class="p">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">"Accept"</span><span class="p">:</span> <span class="s">"application/json, text/plain, */*"</span><span class="p">,</span>
+        <span class="s">"User-Agent"</span><span class="p">:</span> <span class="n">user_agent</span><span class="p">,</span>
+        <span class="s">"Accept-Encoding"</span><span class="p">:</span> <span class="s">"gzip, deflate"</span><span class="p">,</span>
+        <span class="s">"Content-Type"</span><span class="p">:</span> <span class="s">"application/x-www-form-urlencoded"</span><span class="p">,</span>
+        <span class="s">"Origin"</span><span class="p">:</span> <span class="s">"https://space.bilibili.com"</span><span class="p">,</span>
+        <span class="s">"Referer"</span><span class="p">:</span> <span class="s">"https://space.bilibili.com/%s/dynamic"</span><span class="o">%</span><span class="n">uid</span><span class="p">,</span>
+        <span class="s">"Cookie"</span><span class="p">:</span> <span class="n">cookie</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="s">"dynamic_id=%s&amp;csrf_token=%s&amp;csrf=%s"</span><span class="o">%</span><span class="p">(</span><span class="n">dynamic_id_str</span><span class="p">,</span> <span class="n">csrf_token</span><span class="p">,</span> <span class="n">csrf_token</span><span class="p">)</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/rm_dynamic"</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="bp">True</span><span class="p">).</span><span class="n">json</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">res</span>
+
+<span class="k">def</span> <span class="nf">delete_dynamics</span><span class="p">(</span><span class="n">uid</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">cookie</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">isValid</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">dynamic_id_str</span><span class="p">,</span> <span class="n">card</span> <span class="ow">in</span> <span class="n">get_dynamics</span><span class="p">(</span><span class="n">uid</span> <span class="o">=</span> <span class="n">uid</span><span class="p">,</span> <span class="n">cookie</span> <span class="o">=</span> <span class="n">cookie</span><span class="p">,</span> <span class="n">offset_dynamic_id</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">isValid</span><span class="p">(</span><span class="n">card</span><span class="p">):</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">delete_dynamic</span><span class="p">(</span><span class="n">uid</span><span class="o">=</span><span class="n">uid</span><span class="p">,</span> <span class="n">dynamic_id_str</span><span class="o">=</span><span class="n">dynamic_id_str</span><span class="p">,</span> <span class="n">cookie</span><span class="o">=</span><span class="n">cookie</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">res</span><span class="p">[</span><span class="s">"code"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">"%s 删除成功"</span><span class="o">%</span><span class="p">(</span><span class="n">dynamic_id_str</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">"%s 删除失败"</span><span class="o">%</span><span class="p">(</span><span class="n">dynamic_id_str</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">check_valid_func</span><span class="p">(</span><span class="n">keyword</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="nb">type</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+
+    <span class="c1"># 不考虑转发内容，只考虑自己发的内容
+</span>    <span class="k">def</span> <span class="nf">is_dynamic_valid</span><span class="p">(</span><span class="n">dynamic</span><span class="p">:</span><span class="nb">dict</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s">"desc"</span> <span class="ow">in</span> <span class="n">dynamic</span><span class="p">:</span>
+            <span class="n">content</span> <span class="o">=</span> <span class="n">dynamic</span><span class="p">[</span><span class="s">"desc"</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="s">"item"</span> <span class="ow">in</span> <span class="n">dynamic</span> <span class="ow">and</span> <span class="s">"content"</span> <span class="ow">in</span> <span class="n">dynamic</span><span class="p">[</span><span class="s">"item"</span><span class="p">]:</span>
+            <span class="n">content</span> <span class="o">=</span> <span class="n">dynamic</span><span class="p">[</span><span class="s">"item"</span><span class="p">][</span><span class="s">"content"</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="s">"vest"</span> <span class="ow">in</span> <span class="n">dynamic</span> <span class="ow">and</span> <span class="s">"content"</span> <span class="ow">in</span> <span class="n">dynamic</span><span class="p">[</span><span class="s">"vest"</span><span class="p">]:</span>
+            <span class="n">content</span> <span class="o">=</span> <span class="n">dynamic</span><span class="p">[</span><span class="s">"vest"</span><span class="p">][</span><span class="s">"content"</span><span class="p">]</span>
+        
+        <span class="k">if</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="n">content</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span>
+    
+    <span class="c1"># 考虑转发的内容和自己的内容
+</span>    <span class="k">def</span> <span class="nf">is_dynamic_valid_forward</span><span class="p">(</span><span class="n">dynamic</span><span class="p">:</span><span class="nb">dict</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s">"origin"</span> <span class="ow">in</span> <span class="n">dynamic</span><span class="p">:</span>
+            <span class="n">origin</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">loads</span><span class="p">(</span><span class="n">dynamic</span><span class="p">[</span><span class="s">"origin"</span><span class="p">])</span>
+            <span class="n">item</span> <span class="o">=</span> <span class="n">origin</span><span class="p">[</span><span class="s">"item"</span><span class="p">]</span> <span class="k">if</span> <span class="s">"item"</span> <span class="ow">in</span> <span class="n">origin</span> <span class="k">else</span> <span class="n">origin</span>
+            <span class="k">if</span> <span class="s">"description"</span> <span class="ow">in</span> <span class="n">item</span> <span class="ow">and</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="n">item</span><span class="p">[</span><span class="s">"description"</span><span class="p">]:</span>
+                <span class="k">return</span> <span class="bp">False</span>
+            <span class="k">if</span> <span class="s">"intro"</span> <span class="ow">in</span> <span class="n">item</span> <span class="ow">and</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="n">item</span><span class="p">[</span><span class="s">"intro"</span><span class="p">]:</span>
+                <span class="k">return</span> <span class="bp">False</span>
+            <span class="k">if</span> <span class="s">"title"</span> <span class="ow">in</span> <span class="n">item</span> <span class="ow">and</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="n">item</span><span class="p">[</span><span class="s">"title"</span><span class="p">]:</span>
+                <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">if</span> <span class="s">"sketch"</span> <span class="ow">in</span> <span class="n">dynamic</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="n">dynamic</span><span class="p">[</span><span class="s">"sketch"</span><span class="p">][</span><span class="s">"title"</span><span class="p">]</span> <span class="ow">or</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="n">dynamic</span><span class="p">[</span><span class="s">"sketch"</span><span class="p">][</span><span class="s">"desc_text"</span><span class="p">]:</span>
+                <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">if</span> <span class="s">"item"</span> <span class="ow">in</span> <span class="n">dynamic</span> <span class="ow">and</span> <span class="s">"content"</span> <span class="ow">in</span> <span class="n">dynamic</span><span class="p">[</span><span class="s">"item"</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="n">dynamic</span><span class="p">[</span><span class="s">"item"</span><span class="p">][</span><span class="s">"content"</span><span class="p">]:</span>
+                <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    
+    <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">is_dynamic_valid</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">is_dynamic_valid_forward</span>
+<span class="n">user_agent</span> <span class="o">=</span> <span class="s">"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0"</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="n">cookie</span> <span class="o">=</span> <span class="s">"xxx"</span>
+    <span class="n">uid</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="s">"DedeUserID=([^&amp;; =]+)"</span><span class="p">,</span> <span class="n">cookie</span><span class="p">).</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="s">"""
+    罗列所有动态
+    
+    for dynamic_id_str, card in get_dynamics(uid = uid, cookie = cookie, offset_dynamic_id = 0):
+        print(dynamic_id_str)
+        print(card)
+    """</span>
+    
+    <span class="s">"""
+    调试删除动态(传入一个返回True的函数即可，可以将动态内容打印出来)
+    B站返回的API真的是五花八门
+    """</span>
+    <span class="k">def</span> <span class="nf">isValid</span><span class="p">(</span><span class="n">dynamic</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">dynamic</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">delete_dynamics</span><span class="p">(</span><span class="n">uid</span><span class="p">,</span> <span class="n">isValid</span> <span class="o">=</span> <span class="n">isValid</span><span class="p">,</span> <span class="n">cookie</span> <span class="o">=</span> <span class="n">cookie</span><span class="p">)</span> 
+    
+    
+    <span class="s">"""
+    删除包含keyword的动态
+    
+    result = delete_dynamics(uid, cookie = cookie,</span><span class="se">\
+</span><span class="s">        isValid = check_valid_func("新春厨神大作战", 1))
+    print(result)
+    """</span>
+
+</code></pre></div></div>
 
         </article>
         <hr>
@@ -379,128 +472,12 @@ for (int i = min - 1; i &lt; results.length &amp;&amp; i &lt; max; i++) {
             
                 
                     
-                
-                    
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
                         
                         <h2 id="similar_posts">相似文章</h2>
                         <ul>
                         
                         <li class="relatedPost">
-                            <a href="/blog/2021/01/15/pic-read-html/">PC端图片阅读的一种方法
+                            <a href="/blog/2021/03/01/issue-as-notification/">一种利用Github notification达到邮件通知目的的思路及其Python实现
                             
                             </a>
                         </li>
@@ -508,7 +485,30 @@ for (int i = min - 1; i &lt; results.length &amp;&amp; i &lt; max; i++) {
                         
                     
                 
+            
+                
                     
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2021/02/27/python-dns-sni/">Python 关于requests的DNS和SNI设置
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
                 
                     
                 
@@ -519,9 +519,81 @@ for (int i = min - 1; i &lt; results.length &amp;&amp; i &lt; max; i++) {
                 
                     
                 
-                    
+            
+        
+            
+            
                 
                     
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2021/02/06/github-graphql/">关于 Github graphQL
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2021/02/02/python-decorators-2/">Python 关于装饰器(以web地址解析为例)
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2021/02/01/python-decorators/">Python 关于装饰器(以异常重试为例)
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2021/01/06/python-opencv-video-frame/">Python 提取视频截图作预览图
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
                 
                     
                 
@@ -534,13 +606,11 @@ for (int i = min - 1; i &lt; results.length &amp;&amp; i &lt; max; i++) {
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/blog/2019/08/07/java-spider-acfun-down-5/">Acfun接口(五) - 个人收藏视频获取</a></p>
+        <p><strong>上一篇</strong> <a href="/blog/2021/03/01/issue-as-notification/">一种利用Github notification达到邮件通知目的的思路及其Python实现</a></p>
         
     </div>
     <div class="nex">
 
-        
-        <p><strong>下一篇</strong> <a href="/blog/2019/08/27/github-uploader/">薅个图床 - 基于GitHub API的文件创建与更新</a></p>
         
     </div>
 </div>
