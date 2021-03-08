@@ -3,7 +3,7 @@
 	"data" : [
 	{
 		"title" : "Python 批量删除B站动态",
-		"tags" : "Python",
+		"tags" : "Python_bilibili",
 		"url" : "/blog/2021/03/07/python-delete-bilibili-dynamics/"
 		"brief" : "前阵子过年的时候参加新春厨神大作战，发了上百来条动态。现在看着挺碍眼的，决定批量删除。"
 	},
