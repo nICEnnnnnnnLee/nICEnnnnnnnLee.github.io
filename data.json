@@ -2,6 +2,20 @@
 	"code" : 0 ,
 	"data" : [
 	{
+		"title" : "杂七杂八 不知该说些啥但就是不吐不快",
+		"tags" : "闲话",
+		"url" : "/blog/2021/03/11/something-about-something/"
+		"brief" : "Firefox浏览器在未经我的允许下自动升级了。"
+	},
+    
+	{
+		"title" : "备忘录 如何判断Android手机的CPU架构类型",
+		"tags" : "Android",
+		"url" : "/blog/2021/03/10/android-device-type/"
+		"brief" : "最近想给自己的旧手机下点东西，好久没捣鼓，忘记啥类型了。只能说x86、x86_64肯定不是；手机有点年代，但又不是特别古老的那种，arm64-v8a、armeabi-v7a什么的也拿不准。搜索了一下，为了防止还有下次，做个笔记。"
+	},
+    
+	{
 		"title" : "Python 批量删除B站动态",
 		"tags" : "Python_bilibili",
 		"url" : "/blog/2021/03/07/python-delete-bilibili-dynamics/"
