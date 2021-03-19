@@ -5,9 +5,29 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 11 Mar 2021 15:20:13 +0800</pubDate>
-    <lastBuildDate>Thu, 11 Mar 2021 15:20:13 +0800</lastBuildDate>
+    <pubDate>Fri, 19 Mar 2021 14:16:52 +0800</pubDate>
+    <lastBuildDate>Fri, 19 Mar 2021 14:16:52 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>Python 一种基于SNI的HTTPS代理</title>
+        <description>听人说起这个idea，感觉挺有意思(虽然没有什么大的用处)
+</description>
+        <pubDate>Fri, 19 Mar 2021 11:49:01 +0800</pubDate>
+        <pubDateFormat>2021-03-19</pubDateFormat>
+        <link>https://nicelee.top/blog/2021/03/19/python-https-sni-proxy/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/03/19/python-https-sni-proxy/</guid>
+        
+        <category>Python</category>
+        
+        <category>Http</category>
+        
+        <category>代理</category>
+        
+        
+        <category>代码片段</category>
+        
+      </item>
     
       <item>
         <title>杂七杂八 不知该说些啥但就是不吐不快</title>
@@ -167,22 +187,6 @@
         <pubDateFormat>2021-02-02</pubDateFormat>
         <link>https://nicelee.top/blog/2021/02/02/python-decorators-2/</link>
         <guid isPermaLink="true">https://nicelee.top/blog/2021/02/02/python-decorators-2/</guid>
-        
-        <category>Python</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>Python 关于装饰器(以异常重试为例)</title>
-        <description>以抛出异常重试为例。
-</description>
-        <pubDate>Mon, 01 Feb 2021 11:49:01 +0800</pubDate>
-        <pubDateFormat>2021-02-01</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/02/01/python-decorators/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/02/01/python-decorators/</guid>
         
         <category>Python</category>
         

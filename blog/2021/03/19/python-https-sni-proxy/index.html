@@ -7,13 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Acfun接口(四) - 模拟扫码登录</title>
-    <meta name="description" content="  做个笔记，A站登录Cookie应该如何获取(๑•̀ㅂ•́)و✧">
+    <title>Python 一种基于SNI的HTTPS代理</title>
+    <meta name="description" content="听人说起这个idea，感觉挺有意思(虽然没有什么大的用处)">
 
-    <meta property="og:url" content="https://nicelee.top/blog/2019/08/02/java-spider-acfun-down-4/">
+    <meta property="og:url" content="https://nicelee.top/blog/2021/03/19/python-https-sni-proxy/">
     <meta property="og:site_name" content="NiceLee的博客">
-    <meta property="og:title" content="Acfun接口(四) - 模拟扫码登录">
-    <meta property="og:description" content="  做个笔记，A站登录Cookie应该如何获取(๑•̀ㅂ•́)و✧">
+    <meta property="og:title" content="Python 一种基于SNI的HTTPS代理">
+    <meta property="og:description" content="听人说起这个idea，感觉挺有意思(虽然没有什么大的用处)">
     <meta property="og:image" content="https://nicelee.top/favicon.ico?">
     <meta property="og:image:type" content="image/x-icon">
     
@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="/css/font-awesome.min.css ">
     <link rel="stylesheet" href="/css/font-ali.css?v=1.2 ">
     <link rel="stylesheet" href="/css/main.css?v=1.1 ">
-    <link rel="canonical" href="https://nicelee.top/blog/2019/08/02/java-spider-acfun-down-4/">
+    <link rel="canonical" href="https://nicelee.top/blog/2021/03/19/python-https-sni-proxy/">
     <link rel="alternate" type="application/rss+xml" title="NiceLeeのBlog" href="https://nicelee.top/feed.xml ">
 
 	
@@ -268,11 +268,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>Acfun接口(四) - 模拟扫码登录</h1>
+        <h1>Python 一种基于SNI的HTTPS代理</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2019-08-02
+                <i class="fa fa-calendar"></i>2021-03-19
             </div>
 
             <div class="label-card">
@@ -295,7 +295,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#代码片段" title="Category: 代码片段" rel="category">代码片段</a>
     
   
 
@@ -312,17 +312,14 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
+        <!--a href="/blog/tag/#Python" title="Tag: Python" rel="tag">Python</a-->
+        <a href="/blog/tag/#Python" title="Tag: Python" rel="tag">Python</a>&nbsp;
     
-        <!--a href="/blog/tag/#html" title="Tag: html" rel="tag">html</a-->
-        <a href="/blog/tag/#html" title="Tag: html" rel="tag">html</a>&nbsp;
+        <!--a href="/blog/tag/#Http" title="Tag: Http" rel="tag">Http</a-->
+        <a href="/blog/tag/#Http" title="Tag: Http" rel="tag">Http</a>&nbsp;
     
-        <!--a href="/blog/tag/#%E7%88%AC%E8%99%AB" title="Tag: 爬虫" rel="tag">爬虫</a-->
-        <a href="/blog/tag/#爬虫" title="Tag: 爬虫" rel="tag">爬虫</a>&nbsp;
-    
-        <!--a href="/blog/tag/#AcFun" title="Tag: AcFun" rel="tag">AcFun</a-->
-        <a href="/blog/tag/#AcFun" title="Tag: AcFun" rel="tag">AcFun</a>
+        <!--a href="/blog/tag/#%E4%BB%A3%E7%90%86" title="Tag: 代理" rel="tag">代理</a-->
+        <a href="/blog/tag/#代理" title="Tag: 代理" rel="tag">代理</a>
     
   
 
@@ -334,63 +331,133 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#要做的事情" id="markdown-toc-要做的事情">要做的事情</a></li>
-  <li><a href="#发起api请求1" id="markdown-toc-发起api请求1">发起API请求1</a></li>
-  <li><a href="#构造二维码" id="markdown-toc-构造二维码">构造二维码</a></li>
-  <li><a href="#发起api请求2" id="markdown-toc-发起api请求2">发起API请求2</a></li>
-  <li><a href="#发起api请求3" id="markdown-toc-发起api请求3">发起API请求3</a></li>
+  <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
+  <li><a href="#示例代码" id="markdown-toc-示例代码">示例代码</a></li>
 </ul>
-<blockquote>
-  <p>做个笔记，A站登录Cookie应该如何获取(๑•̀ㅂ•́)و✧</p>
-</blockquote>
+<p>听人说起这个idea，感觉挺有意思(虽然没有什么大的用处)</p>
 
-<h2 id="要做的事情">要做的事情</h2>
+<h2 id="前言">前言</h2>
 <ul>
-  <li>发起API请求1，获得<code class="language-plaintext highlighter-rouge">qrLoginToken</code>和<code class="language-plaintext highlighter-rouge">qrLoginSignature1</code></li>
-  <li>由<code class="language-plaintext highlighter-rouge">qrLoginToken</code>构造二维码，供手机端扫描</li>
-  <li>发起API请求2，确认手机端是否扫描，得到<code class="language-plaintext highlighter-rouge">qrLoginToken</code>和新的<code class="language-plaintext highlighter-rouge">qrLoginSignature2</code></li>
-  <li>发起API请求3，确认手机端扫描后是否授权登录，得到<code class="language-plaintext highlighter-rouge">Cookie</code></li>
+  <li>一般情况下，我们的HTTPS代理是给中间服务器发送一条<code class="language-plaintext highlighter-rouge">CONNECT</code>消息，然后该干嘛干嘛。</li>
+  <li>有那么一种情况，我将要访问的站点域名的ip直接指向中间服务器，这时，中间服务器如何处理才能让我正常访问呢？
+    <ul>
+      <li>读取<code class="language-plaintext highlighter-rouge">Client Hello</code>消息中的SNI</li>
+      <li>根据SNI建立与目标站点的连接，并转发<code class="language-plaintext highlighter-rouge">Client Hello</code>消息</li>
+      <li>做水管工，传输客户端与服务器的数据</li>
+      <li>计划通√</li>
+    </ul>
+  </li>
 </ul>
 
-<h2 id="发起api请求1">发起API请求1</h2>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HttpHeaders headers = new HttpHeaders();
-String url = "https://scan.acfun.cn/rest/pc-direct/qr/start?type=WEB_LOGIN";
-String json = util.getContent(url, headers.getAcFunLoginAuthVaHeaders());
-JSONObject jObj = new JSONObject(json);
-String qrLoginSignature = jObj.getString("qrLoginSignature");
-String qrLoginToken = jObj.getString("qrLoginToken");
-</code></pre></div></div>
+<h2 id="示例代码">示例代码</h2>
+<ul>
+  <li>本地测试访问<code class="language-plaintext highlighter-rouge">www.baidu.com</code>，在host里面添加了记录指向本地，即：<br />
+  127.0.0.1 www.baidu.com</li>
+  <li>由于是本机测试，为了防止死循环建立，设置了一个DNS表，存放了百度的实际地址。</li>
+  <li>结果如图：<br />
+<img src="/sources/archive/2021/03/19.proxy.jpg" alt="" /></li>
+</ul>
 
-<h2 id="构造二维码">构造二维码</h2>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>qrCodeStr = String.format("http://scan.acfun.cn/l/%s", qrLoginToken);
-</code></pre></div></div>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+</span>
+<span class="kn">import</span> <span class="nn">socket</span><span class="p">,</span> <span class="n">threading</span>
 
-<h2 id="发起api请求2">发起API请求2</h2>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>String param = String.format("qrLoginToken=%s&amp;qrLoginSignature=%s", qrLoginToken, qrLoginSignature);
-String url = "https://scan.acfun.cn/rest/pc-direct/qr/scanResult?" + param;
-String json = util.getContent(url, headers.getAcFunLoginAuthVaHeaders());
+<span class="k">def</span> <span class="nf">recv</span><span class="p">(</span><span class="n">socket</span><span class="p">,</span> <span class="n">bufferSize</span><span class="o">=</span><span class="mi">1024</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">socket</span><span class="p">.</span><span class="n">recv</span><span class="p">(</span><span class="n">bufferSize</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">socket</span><span class="p">.</span><span class="n">timeout</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">stop</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">recv</span><span class="p">(</span><span class="n">socket</span><span class="p">,</span> <span class="n">bufferSize</span><span class="p">)</span>
+            
+<span class="k">def</span> <span class="nf">socket_handler</span><span class="p">(</span><span class="n">clientSock</span><span class="p">,</span> <span class="n">addr</span><span class="p">):</span>
+    <span class="n">clientSock</span><span class="p">.</span><span class="n">settimeout</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">recv</span><span class="p">(</span><span class="n">clientSock</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="c1">#print(data[120:190])
+</span>    <span class="n">end</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="sa">b</span><span class="s">'</span><span class="se">\x00</span><span class="s">'</span><span class="p">,</span> <span class="mi">127</span><span class="p">)</span>
+    <span class="n">sni</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">127</span><span class="p">:</span> <span class="n">end</span><span class="p">].</span><span class="n">decode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'Accept new connection from %s:%s...'</span> <span class="o">%</span> <span class="n">addr</span><span class="p">)</span>
+    <span class="c1">#print('Establishing new connection to %s' % sni)
+</span>    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">serverSock</span> <span class="o">=</span> <span class="n">socket</span><span class="p">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="p">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="p">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+        <span class="c1">#serverSock.connect((sni, 443))
+</span>        <span class="n">serverSock</span><span class="p">.</span><span class="n">connect</span><span class="p">((</span><span class="n">getHost</span><span class="p">(</span><span class="n">sni</span><span class="p">),</span> <span class="mi">443</span><span class="p">))</span>
+        <span class="n">serverSock</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">serverSock</span><span class="p">.</span><span class="n">settimeout</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+        
+        <span class="n">t1</span> <span class="o">=</span> <span class="n">threading</span><span class="p">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">clientToServer</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">clientSock</span><span class="p">,</span> <span class="n">serverSock</span><span class="p">,</span> <span class="n">sni</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s">'thread-%s-toServer'</span><span class="o">%</span><span class="n">sni</span><span class="p">)</span>
+        <span class="n">t2</span> <span class="o">=</span> <span class="n">threading</span><span class="p">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">serverToClient</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">clientSock</span><span class="p">,</span> <span class="n">serverSock</span><span class="p">,</span> <span class="n">sni</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s">'thread-%s-toClient'</span><span class="o">%</span><span class="n">sni</span><span class="p">)</span>
+        <span class="n">t1</span><span class="p">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="n">t2</span><span class="p">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="n">t1</span><span class="p">.</span><span class="n">join</span><span class="p">()</span>
+        <span class="n">t2</span><span class="p">.</span><span class="n">join</span><span class="p">()</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">clientSock</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">serverSock</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
 
-System.out.println(json);
-JSONObject jObj = new JSONObject(json);
+<span class="k">def</span> <span class="nf">getHost</span><span class="p">(</span><span class="n">sni</span><span class="p">):</span>
+    <span class="n">host</span> <span class="o">=</span> <span class="n">hosts</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">sni</span><span class="p">,</span> <span class="n">sni</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">host</span>
+<span class="k">def</span> <span class="nf">clientToServer</span><span class="p">(</span><span class="n">clientSock</span><span class="p">,</span> <span class="n">serverSock</span><span class="p">,</span> <span class="n">sni</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1">#data = clientSock.recv(1024)
+</span>        <span class="n">data</span> <span class="o">=</span> <span class="n">recv</span><span class="p">(</span><span class="n">clientSock</span><span class="p">)</span>
+        <span class="k">while</span> <span class="n">data</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">stop</span><span class="p">:</span>
+            <span class="n">serverSock</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">recv</span><span class="p">(</span><span class="n">clientSock</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'%s clientToServer 结束'</span><span class="o">%</span><span class="n">sni</span><span class="p">)</span>
+        <span class="n">clientSock</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">serverSock</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">serverToClient</span><span class="p">(</span><span class="n">clientSock</span><span class="p">,</span> <span class="n">serverSock</span><span class="p">,</span> <span class="n">sni</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">recv</span><span class="p">(</span><span class="n">serverSock</span><span class="p">)</span>
+        <span class="k">while</span> <span class="n">data</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">stop</span><span class="p">:</span>
+            <span class="n">clientSock</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">recv</span><span class="p">(</span><span class="n">serverSock</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'%s serverToClient 结束'</span><span class="o">%</span><span class="n">sni</span><span class="p">)</span>
+        <span class="n">clientSock</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">serverSock</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">startServer</span><span class="p">(</span><span class="n">port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">443</span><span class="p">,</span> <span class="n">maxLink</span> <span class="o">=</span> <span class="mi">5</span><span class="p">):</span>
+    <span class="c1"># 创建一个socket:
+</span>    <span class="n">s</span> <span class="o">=</span> <span class="n">socket</span><span class="p">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="p">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="p">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+    <span class="n">s</span><span class="p">.</span><span class="n">bind</span><span class="p">((</span><span class="s">'0.0.0.0'</span><span class="p">,</span> <span class="n">port</span><span class="p">))</span>
+    <span class="n">s</span><span class="p">.</span><span class="n">listen</span><span class="p">(</span><span class="n">maxLink</span><span class="p">)</span>
+    <span class="n">s</span><span class="p">.</span><span class="n">settimeout</span><span class="p">(</span><span class="mf">5.0</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'Waiting for connection...'</span><span class="p">)</span>
+    
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">stop</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">sock</span><span class="p">,</span> <span class="n">addr</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">accept</span><span class="p">()</span>
+            <span class="c1"># 创建新线程来处理TCP连接:
+</span>            <span class="n">t</span> <span class="o">=</span> <span class="n">threading</span><span class="p">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">socket_handler</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">sock</span><span class="p">,</span> <span class="n">addr</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s">'thread-dealSocket %s:%s'</span><span class="o">%</span><span class="n">addr</span><span class="p">)</span>
+            <span class="n">t</span><span class="p">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="k">except</span> <span class="n">socket</span><span class="p">.</span><span class="n">timeout</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">pass</span>
 
-// 手机端是否扫描
-jObj.getInt("result") == 0 ?
-// 更新qrLoginSignature
-qrLoginSignature = jObj.getString("qrLoginSignature")
-</code></pre></div></div>
 
-<h2 id="发起api请求3">发起API请求3</h2>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>String param = String.format("qrLoginToken=%s&amp;qrLoginSignature=%s", qrLoginToken, qrLoginSignature);
-String url = "https://scan.acfun.cn/rest/pc-direct/qr/acceptResult?" + param;
-String json = util.getContent(url, headers.getAcFunLoginAuthVaHeaders());
+<span class="n">stop</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">hosts</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">"www.baidu.com"</span><span class="p">:</span><span class="s">"14.215.177.38"</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="n">threadServer</span> <span class="o">=</span> <span class="n">threading</span><span class="p">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">startServer</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="mi">443</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s">'thread-startServer'</span><span class="p">)</span>
+    <span class="n">threadServer</span><span class="p">.</span><span class="n">start</span><span class="p">()</span>
 
-System.out.println(json);
-jObj = new JSONObject(json);
-
-// 手机端扫描后，是否点击确认
-jObj.getInt("result") == 0 ?
-// 得到Cookie
-iCookies = util.DefaultCookieManager().getCookieStore().getCookies();
+    <span class="k">try</span><span class="p">:</span>
+        <span class="nb">input</span><span class="p">(</span><span class="s">'输入任何按键以停止服务</span><span class="se">\r\n</span><span class="s">'</span><span class="p">)</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">stop</span> <span class="o">=</span> <span class="bp">True</span>
 </code></pre></div></div>
 
         </article>
@@ -407,6 +474,38 @@ iCookies = util.DefaultCookieManager().getCookieStore().getCookies();
                 
                     
                 
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <h2 id="similar_posts">相似文章</h2>
+                        <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2021/03/07/python-delete-bilibili-dynamics/">Python 批量删除B站动态
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
                     
                 
             
@@ -417,11 +516,58 @@ iCookies = util.DefaultCookieManager().getCookieStore().getCookies();
                 
                     
                 
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2021/03/01/issue-as-notification/">一种利用Github notification达到邮件通知目的的思路及其Python实现
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
                     
                 
             
                 
                     
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2021/02/27/python-dns-sni/">Python 关于requests的DNS和SNI设置
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
                 
                     
                 
@@ -440,38 +586,20 @@ iCookies = util.DefaultCookieManager().getCookieStore().getCookies();
                 
                     
                 
-                    
-                
             
         
             
             
                 
                     
-                
-                    
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2021/02/06/github-graphql/">关于 Github graphQL
+                            
+                            </a>
+                        </li>
+                        
+                        
                     
                 
                     
@@ -484,30 +612,14 @@ iCookies = util.DefaultCookieManager().getCookieStore().getCookies();
             
                 
                     
-                
-                    
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2021/02/02/python-decorators-2/">Python 关于装饰器(以web地址解析为例)
+                            
+                            </a>
+                        </li>
+                        
+                        
                     
                 
                     
@@ -520,7 +632,14 @@ iCookies = util.DefaultCookieManager().getCookieStore().getCookies();
             
                 
                     
-                
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2021/02/01/python-decorators/">Python 关于装饰器(以异常重试为例)
+                            
+                            </a>
+                        </li>
+                        
+                        
                     
                 
                     
@@ -529,57 +648,18 @@ iCookies = util.DefaultCookieManager().getCookieStore().getCookies();
                 
             
         
-            
-            
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-            
         
-            
-            
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-            
-        
+            </ul>
         
 
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/blog/2019/08/02/java-spider-acfun-down-3/">Acfun接口(三) - 番剧合集下载</a></p>
+        <p><strong>上一篇</strong> <a href="/blog/2021/03/11/something-about-something/">杂七杂八 不知该说些啥但就是不吐不快</a></p>
         
     </div>
     <div class="nex">
 
-        
-        <p><strong>下一篇</strong> <a href="/blog/2019/08/07/java-spider-acfun-down-5/">Acfun接口(五) - 个人收藏视频获取</a></p>
         
     </div>
 </div>
@@ -604,6 +684,8 @@ iCookies = util.DefaultCookieManager().getCookieStore().getCookies();
                     内容
                 </div>
                 <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#similar_posts">相似文章</a></li>
                     
                     <!-- <li><a href="#comments">评论</a></li> -->
                 </ul>

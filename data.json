@@ -2,6 +2,13 @@
 	"code" : 0 ,
 	"data" : [
 	{
+		"title" : "Python 一种基于SNI的HTTPS代理",
+		"tags" : "Python_Http_代理",
+		"url" : "/blog/2021/03/19/python-https-sni-proxy/"
+		"brief" : "听人说起这个idea，感觉挺有意思(虽然没有什么大的用处)"
+	},
+    
+	{
 		"title" : "杂七杂八 不知该说些啥但就是不吐不快",
 		"tags" : "闲话",
 		"url" : "/blog/2021/03/11/something-about-something/"
