@@ -332,7 +332,11 @@
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
   <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
-  <li><a href="#示例代码" id="markdown-toc-示例代码">示例代码</a></li>
+  <li><a href="#示例代码" id="markdown-toc-示例代码">示例代码</a>    <ul>
+      <li><a href="#sni_proxypy" id="markdown-toc-sni_proxypy">sni_proxy.py</a></li>
+      <li><a href="#sni_helperpy" id="markdown-toc-sni_helperpy">sni_helper.py</a></li>
+    </ul>
+  </li>
 </ul>
 <p>听人说起这个idea，感觉挺有意思(虽然没有什么大的用处)</p>
 
@@ -358,10 +362,14 @@
 <img src="/sources/archive/2021/03/19.proxy.jpg" alt="" /></li>
 </ul>
 
+<h3 id="sni_proxypy">sni_proxy.py</h3>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 </span>
 <span class="kn">import</span> <span class="nn">socket</span><span class="p">,</span> <span class="n">threading</span>
+<span class="kn">import</span> <span class="nn">sni_helper</span>
+
 
 <span class="k">def</span> <span class="nf">recv</span><span class="p">(</span><span class="n">socket</span><span class="p">,</span> <span class="n">bufferSize</span><span class="o">=</span><span class="mi">1024</span><span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
@@ -375,9 +383,10 @@
     <span class="n">data</span> <span class="o">=</span> <span class="n">recv</span><span class="p">(</span><span class="n">clientSock</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="p">:</span>
         <span class="k">return</span>
-    <span class="c1">#print(data[120:190])
-</span>    <span class="n">end</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="sa">b</span><span class="s">'</span><span class="se">\x00</span><span class="s">'</span><span class="p">,</span> <span class="mi">127</span><span class="p">)</span>
-    <span class="n">sni</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">127</span><span class="p">:</span> <span class="n">end</span><span class="p">].</span><span class="n">decode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">)</span>
+    <span class="n">sni</span> <span class="o">=</span> <span class="n">sni_helper</span><span class="p">.</span><span class="n">GetSniFromSslPlainText</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'sni not found'</span><span class="p">)</span>
+        <span class="k">return</span>
     <span class="k">print</span><span class="p">(</span><span class="s">'Accept new connection from %s:%s...'</span> <span class="o">%</span> <span class="n">addr</span><span class="p">)</span>
     <span class="c1">#print('Establishing new connection to %s' % sni)
 </span>    
@@ -458,6 +467,227 @@
         <span class="nb">input</span><span class="p">(</span><span class="s">'输入任何按键以停止服务</span><span class="se">\r\n</span><span class="s">'</span><span class="p">)</span>
     <span class="k">finally</span><span class="p">:</span>
         <span class="n">stop</span> <span class="o">=</span> <span class="bp">True</span>
+</code></pre></div></div>
+
+<h3 id="sni_helperpy">sni_helper.py</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+</span><span class="kn">import</span> <span class="nn">struct</span>
+
+<span class="n">ProtocolVersionSize</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">RandomSize</span> <span class="o">=</span> <span class="mi">32</span>
+
+<span class="k">def</span> <span class="nf">GetSniFromSslPlainText</span><span class="p">(</span><span class="n">sslPlainText</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">):</span>
+    <span class="s">'''
+    https://tools.ietf.org/html/rfc6101#section-5.2.1
+    struct {
+        ContentType type;
+        ProtocolVersion version;
+        uint16 length;
+        opaque fragment[SSLPlaintext.length];
+    } SSLPlaintext;
+    '''</span>
+    <span class="n">ContentTypeOffset</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">ProtocolVersionOffset</span> <span class="o">=</span> <span class="n">ContentTypeOffset</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">LengthOffset</span> <span class="o">=</span> <span class="n">ProtocolVersionOffset</span> <span class="o">+</span> <span class="n">ProtocolVersionSize</span>
+    <span class="n">HandshakeOffset</span> <span class="o">=</span> <span class="n">LengthOffset</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="c1"># SSL v2's ContentType has 0x80 bit set.
+</span>    <span class="c1"># We do not care about SSL v2 here because it does not support client hello extensions
+</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sslPlainText</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">HandshakeOffset</span> <span class="ow">or</span> <span class="n">sslPlainText</span><span class="p">[</span><span class="n">ContentTypeOffset</span><span class="p">]</span> <span class="o">!=</span> <span class="mh">0x16</span> <span class="p">:</span> <span class="c1">#Handshake
+</span>        <span class="k">print</span><span class="p">(</span><span class="s">'not SSLv3'</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">None</span>
+        
+    <span class="n">handshakeLength</span> <span class="o">=</span> <span class="n">struct</span><span class="p">.</span><span class="n">unpack_from</span><span class="p">(</span><span class="s">'&gt;H'</span> <span class="p">,</span><span class="n">sslPlainText</span><span class="p">,</span> <span class="n">LengthOffset</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">sslHandshake</span> <span class="o">=</span> <span class="n">sslPlainText</span><span class="p">[</span><span class="n">HandshakeOffset</span><span class="p">:]</span>
+    <span class="k">if</span> <span class="n">handshakeLength</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sslHandshake</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'handshakeLength is not right'</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="k">return</span> <span class="n">GetSniFromSslHandshake</span><span class="p">(</span><span class="n">sslHandshake</span><span class="p">);</span>
+
+<span class="k">def</span> <span class="nf">GetSniFromSslHandshake</span><span class="p">(</span><span class="n">sslHandshake</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">):</span>
+    <span class="s">'''
+    https://tools.ietf.org/html/rfc6101#section-5.6
+    struct {
+        HandshakeType msg_type;    /* handshake type */
+        uint24 length;             /* bytes in message */
+        select (HandshakeType) {
+            ...
+            case client_hello: ClientHello;
+            ...
+        } body;
+    } Handshake;
+    '''</span>
+    <span class="n">HandshakeTypeOffset</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">ClientHelloLengthOffset</span> <span class="o">=</span> <span class="n">HandshakeTypeOffset</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">ClientHelloOffset</span> <span class="o">=</span> <span class="n">ClientHelloLengthOffset</span> <span class="o">+</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sslHandshake</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">ClientHelloOffset</span> <span class="ow">or</span> <span class="n">sslHandshake</span><span class="p">[</span><span class="n">HandshakeTypeOffset</span><span class="p">]</span> <span class="o">!=</span> <span class="mh">0x01</span><span class="p">:</span> <span class="c1">#ClientHello
+</span>        <span class="k">print</span><span class="p">(</span><span class="s">'not a ClientHello msg'</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="c1">#clientHelloLength = struct.unpack_from('&gt;?????' ,sslHandshake, ClientHelloLengthOffset)[0]
+</span>    <span class="n">clientHelloLength</span> <span class="o">=</span> <span class="n">ReadUInt24BigEndian</span><span class="p">(</span><span class="n">sslHandshake</span><span class="p">,</span> <span class="n">ClientHelloLengthOffset</span><span class="p">)</span>
+    <span class="n">clientHello</span> <span class="o">=</span> <span class="n">sslHandshake</span><span class="p">[</span><span class="n">ClientHelloOffset</span><span class="p">:]</span>
+    <span class="k">if</span> <span class="n">clientHelloLength</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">clientHello</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'clientHelloLength is not right'</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">None</span>
+
+    <span class="k">return</span> <span class="n">GetSniFromClientHello</span><span class="p">(</span><span class="n">clientHello</span><span class="p">);</span>
+
+    
+<span class="k">def</span> <span class="nf">SkipBytes</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">numberOfBytesToSkip</span><span class="p">:</span><span class="nb">int</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">and</span> <span class="n">numberOfBytesToSkip</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">data</span><span class="p">[</span><span class="n">numberOfBytesToSkip</span><span class="p">:]</span>
+        
+    
+<span class="k">def</span> <span class="nf">SkipOpaqueType1</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">):</span>
+    <span class="s">'''
+    Opaque type is of structure:
+      - length (minimum number of bytes to hold the max value)
+      - data (length bytes)
+    We will only use opaque types which are of max size: 255 (length = 1) or 2^16-1 (length = 2).
+    We will call them SkipOpaqueType`length`
+    '''</span>
+    <span class="k">if</span> <span class="n">data</span><span class="p">:</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">totalBytes</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">length</span>
+        <span class="k">return</span> <span class="n">SkipBytes</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">totalBytes</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">SkipOpaqueType2</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">data</span><span class="p">:</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="n">struct</span><span class="p">.</span><span class="n">unpack_from</span><span class="p">(</span><span class="s">'&gt;H'</span> <span class="p">,</span><span class="n">data</span><span class="p">,</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">totalBytes</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">length</span>
+        <span class="n">valid</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">totalBytes</span><span class="p">;</span>
+        <span class="k">if</span> <span class="n">valid</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">data</span><span class="p">[</span><span class="n">totalBytes</span><span class="p">:]</span>
+            
+<span class="k">def</span> <span class="nf">GetSniFromClientHello</span><span class="p">(</span><span class="n">clientHello</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">):</span>
+    <span class="s">'''
+    Basic structure: https://tools.ietf.org/html/rfc6101#section-5.6.1.2
+    Extended structure: https://tools.ietf.org/html/rfc3546#section-2.1
+    struct {
+        ProtocolVersion client_version; 2x uint8
+        Random random; 32 bytes
+        SessionID session_id; opaque type
+        CipherSuite cipher_suites&lt;2..2^16-1&gt;; opaque type
+        CompressionMethod compression_methods&lt;1..2^8-1&gt;; opaque type
+        Extension client_hello_extension_list&lt;0..2^16-1&gt;;
+    } ClientHello;
+    '''</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">SkipBytes</span><span class="p">(</span><span class="n">clientHello</span><span class="p">,</span> <span class="n">ProtocolVersionSize</span> <span class="o">+</span> <span class="n">RandomSize</span><span class="p">);</span>
+    <span class="c1"># Skip SessionID (max size 32 =&gt; size fits in 1 byte)
+</span>    <span class="n">p</span> <span class="o">=</span> <span class="n">SkipOpaqueType1</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+    <span class="c1"># Skip cipher suites (max size 2^16-1 =&gt; size fits in 2 bytes)
+</span>    <span class="n">p</span> <span class="o">=</span> <span class="n">SkipOpaqueType2</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+    <span class="c1"># Skip compression methods (max size 2^8-1 =&gt; size fits in 1 byte)
+</span>    <span class="n">p</span> <span class="o">=</span> <span class="n">SkipOpaqueType1</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+    <span class="c1"># is invalid structure or no extensions?
+</span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">p</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'invalid structure or no extensions'</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">None</span>
+
+    <span class="c1"># client_hello_extension_list (max size 2^16-1 =&gt; size fits in 2 bytes)
+</span>    <span class="n">extensionListLength</span> <span class="o">=</span> <span class="n">struct</span><span class="p">.</span><span class="n">unpack_from</span><span class="p">(</span><span class="s">'&gt;H'</span> <span class="p">,</span><span class="n">p</span><span class="p">,</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">SkipBytes</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+    <span class="k">if</span> <span class="n">extensionListLength</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'extensionListLength is not right: (%d, %d)'</span><span class="o">%</span><span class="p">(</span><span class="n">extensionListLength</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)))</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="k">while</span> <span class="n">p</span><span class="p">:</span>
+        <span class="n">sni</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">invalid</span> <span class="o">=</span> <span class="n">GetSniFromExtension</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">sni</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">sni</span>
+        <span class="k">if</span> <span class="n">invalid</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">None</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'sni not found util end'</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">GetSniFromExtension</span><span class="p">(</span><span class="n">extension</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">):</span>
+    <span class="s">'''
+    https://tools.ietf.org/html/rfc3546#section-2.3
+    struct {
+        ExtensionType extension_type;
+        opaque extension_data&lt;0..2^16-1&gt;;
+    } Extension;
+    '''</span>
+    <span class="n">ExtensionDataOffset</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1"># ushort sizeof(ExtensionType);
+</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">extension</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">ExtensionDataOffset</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">True</span>
+    <span class="n">extensionType</span> <span class="o">=</span> <span class="n">struct</span><span class="p">.</span><span class="n">unpack_from</span><span class="p">(</span><span class="s">'&gt;H'</span> <span class="p">,</span> <span class="n">extension</span><span class="p">,</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">extensionData</span> <span class="o">=</span> <span class="n">extension</span><span class="p">[</span><span class="n">ExtensionDataOffset</span><span class="p">:]</span>
+    <span class="k">if</span> <span class="n">extensionType</span> <span class="o">==</span> <span class="mh">0x00</span><span class="p">:</span> <span class="c1">#ExtensionType.ServerName
+</span>        <span class="n">sni</span> <span class="o">=</span> <span class="n">GetSniFromServerNameList</span><span class="p">(</span><span class="n">extensionData</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">sni</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">sni</span> <span class="o">==</span> <span class="bp">None</span><span class="p">;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">remainingBytes</span> <span class="o">=</span> <span class="n">SkipOpaqueType2</span><span class="p">(</span><span class="n">extensionData</span><span class="p">);</span>
+        <span class="k">return</span> <span class="bp">None</span><span class="p">,</span> <span class="n">remainingBytes</span><span class="p">,</span> <span class="n">remainingBytes</span> <span class="o">==</span> <span class="bp">None</span>
+
+<span class="k">def</span> <span class="nf">GetSniFromServerNameList</span><span class="p">(</span><span class="n">serverNameListExtension</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">):</span>
+    <span class="s">'''
+    https://tools.ietf.org/html/rfc3546#section-3.1
+    struct {
+        ServerName server_name_list&lt;1..2^16-1&gt;
+    } ServerNameList;
+    ServerNameList is an opaque type (length of sufficient size for max data length is prepended)
+    '''</span>
+    <span class="n">ServerNameListOffset</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1">#sizeof(ushort);
+</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">serverNameListExtension</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span> <span class="c1"># 
+</span>        <span class="k">print</span><span class="p">(</span><span class="s">'invalid serverNameListExtension length'</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="n">serverNameListLength</span> <span class="o">=</span> <span class="n">struct</span><span class="p">.</span><span class="n">unpack_from</span><span class="p">(</span><span class="s">'&gt;H'</span> <span class="p">,</span> <span class="n">serverNameListExtension</span><span class="p">,</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">serverNameList</span> <span class="o">=</span> <span class="n">serverNameListExtension</span><span class="p">[</span><span class="n">ServerNameListOffset</span><span class="p">:]</span>
+    <span class="k">if</span> <span class="n">serverNameListLength</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">serverNameList</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'serverNameListExtension length is not right'</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">None</span>
+
+    <span class="c1">#remainingBytes = serverNameList.Slice(serverNameListLength);
+</span>    <span class="n">serverName</span> <span class="o">=</span> <span class="n">serverNameList</span><span class="p">[:</span><span class="n">serverNameListLength</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">GetSniFromServerName</span><span class="p">(</span><span class="n">serverName</span><span class="p">);</span>
+
+<span class="k">def</span> <span class="nf">GetSniFromServerName</span><span class="p">(</span><span class="n">serverName</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">):</span>
+    <span class="s">'''
+    https://tools.ietf.org/html/rfc3546#section-3.1
+    struct {
+        NameType name_type;
+        select (name_type) {
+            case host_name: HostName;
+        } name;
+    } ServerName;
+    ServerName is an opaque type (length of sufficient size for max data length is prepended)
+    '''</span>
+    <span class="n">ServerNameLengthOffset</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">NameTypeOffset</span> <span class="o">=</span> <span class="n">ServerNameLengthOffset</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="n">HostNameStructOffset</span> <span class="o">=</span> <span class="n">NameTypeOffset</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="c1"># HostName = 0x00
+</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">serverName</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">HostNameStructOffset</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'serverName len is not right'</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">None</span>
+
+    <span class="n">hostNameStructLength</span> <span class="o">=</span> <span class="n">struct</span><span class="p">.</span><span class="n">unpack_from</span><span class="p">(</span><span class="s">'&gt;H'</span> <span class="p">,</span> <span class="n">serverName</span><span class="p">,</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>  <span class="o">-</span><span class="mi">1</span>
+    <span class="n">nameType</span> <span class="o">=</span> <span class="n">serverName</span><span class="p">[</span><span class="n">NameTypeOffset</span><span class="p">]</span>
+    <span class="n">hostNameStruct</span> <span class="o">=</span> <span class="n">serverName</span><span class="p">[</span><span class="n">HostNameStructOffset</span><span class="p">:]</span>
+    <span class="k">if</span> <span class="n">hostNameStructLength</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">hostNameStruct</span><span class="p">)</span> <span class="ow">or</span> <span class="n">nameType</span> <span class="o">!=</span> <span class="mh">0x00</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'nameType is not Hostname'</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="k">return</span> <span class="n">GetSniFromHostNameStruct</span><span class="p">(</span><span class="n">hostNameStruct</span><span class="p">);</span>
+
+    
+<span class="k">def</span> <span class="nf">GetSniFromHostNameStruct</span><span class="p">(</span><span class="n">hostNameStruct</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">):</span>
+    <span class="s">'''
+    https://tools.ietf.org/html/rfc3546#section-3.1
+    HostName is an opaque type (length of sufficient size for max data length is prepended)
+    '''</span>
+    <span class="n">HostNameLengthOffset</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">HostNameOffset</span> <span class="o">=</span> <span class="n">HostNameLengthOffset</span> <span class="o">+</span> <span class="mi">2</span> <span class="c1">#sizeof(ushort);
+</span>
+    <span class="n">hostNameLength</span> <span class="o">=</span> <span class="n">struct</span><span class="p">.</span><span class="n">unpack_from</span><span class="p">(</span><span class="s">'&gt;H'</span> <span class="p">,</span> <span class="n">hostNameStruct</span><span class="p">,</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">hostName</span> <span class="o">=</span> <span class="n">hostNameStruct</span><span class="p">[</span><span class="n">HostNameOffset</span><span class="p">:]</span>
+    <span class="k">if</span> <span class="n">hostNameLength</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">hostName</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'hostName len is not valid'</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="k">return</span> <span class="n">hostName</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">ReadUInt24BigEndian</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">offset</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">offset</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">16</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">offset</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">|</span> <span class="n">data</span><span class="p">[</span><span class="n">offset</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span>
 </code></pre></div></div>
 
         </article>
