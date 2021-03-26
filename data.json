@@ -2,6 +2,20 @@
 	"code" : 0 ,
 	"data" : [
 	{
+		"title" : "备忘录 记一次CentOS下的Python3安装",
+		"tags" : "Python_Linux_知识库",
+		"url" : "/blog/2021/03/26/cenos-python3-ssl/"
+		"brief" : "./configure...make&amp;&amp;makeinstallOppppppppppppssssssssssssssssssssssssssssssssssssssssss无论它有没有技术含量，好歹花了我一小时以上。"
+	},
+    
+	{
+		"title" : "备忘录 Windows下使用OpenSSL 生成自签发证书",
+		"tags" : "知识库",
+		"url" : "/blog/2021/03/26/win-openssl-cerl/"
+		"brief" : "没有技术含量，仅作备忘。"
+	},
+    
+	{
 		"title" : "Python 一种基于SNI的HTTPS代理",
 		"tags" : "Python_Http_代理",
 		"url" : "/blog/2021/03/19/python-https-sni-proxy/"

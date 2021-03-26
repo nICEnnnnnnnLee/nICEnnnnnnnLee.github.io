@@ -5,9 +5,48 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 19 Mar 2021 17:03:29 +0800</pubDate>
-    <lastBuildDate>Fri, 19 Mar 2021 17:03:29 +0800</lastBuildDate>
+    <pubDate>Fri, 26 Mar 2021 14:08:02 +0800</pubDate>
+    <lastBuildDate>Fri, 26 Mar 2021 14:08:02 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>备忘录 记一次CentOS下的Python3安装</title>
+        <description>&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;./configure  ...&lt;/code&gt;&lt;br /&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;make &amp;amp;&amp;amp; make install&lt;/code&gt; &lt;br /&gt;
+Oppppppppppppssssssssssssssssssssssssssssssssssssssssss  &lt;br /&gt;
+无论它有没有技术含量，好歹花了我一小时以上。
+</description>
+        <pubDate>Fri, 26 Mar 2021 11:49:01 +0800</pubDate>
+        <pubDateFormat>2021-03-26</pubDateFormat>
+        <link>https://nicelee.top/blog/2021/03/26/cenos-python3-ssl/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/03/26/cenos-python3-ssl/</guid>
+        
+        <category>Python</category>
+        
+        <category>Linux</category>
+        
+        <category>知识库</category>
+        
+        
+        <category>小技巧</category>
+        
+      </item>
+    
+      <item>
+        <title>备忘录 Windows下使用OpenSSL 生成自签发证书</title>
+        <description>没有技术含量，仅作备忘。
+</description>
+        <pubDate>Fri, 26 Mar 2021 11:30:01 +0800</pubDate>
+        <pubDateFormat>2021-03-26</pubDateFormat>
+        <link>https://nicelee.top/blog/2021/03/26/win-openssl-cerl/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/03/26/win-openssl-cerl/</guid>
+        
+        <category>知识库</category>
+        
+        
+        <category>小技巧</category>
+        
+      </item>
     
       <item>
         <title>Python 一种基于SNI的HTTPS代理</title>
@@ -156,39 +195,6 @@
         <guid isPermaLink="true">https://nicelee.top/blog/2021/02/21/key-shortcut/</guid>
         
         <category>知识库</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>关于 Github graphQL</title>
-        <description>笔记向。
-</description>
-        <pubDate>Sat, 06 Feb 2021 11:49:01 +0800</pubDate>
-        <pubDateFormat>2021-02-06</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/02/06/github-graphql/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/02/06/github-graphql/</guid>
-        
-        <category>Python</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>Python 关于装饰器(以web地址解析为例)</title>
-        <description>例如&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Flask&lt;/code&gt;，在处理方法上加一个&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@app.route('xxx')&lt;/code&gt;即可。&lt;br /&gt;
-这是怎么实现的呢？
-</description>
-        <pubDate>Tue, 02 Feb 2021 11:49:01 +0800</pubDate>
-        <pubDateFormat>2021-02-02</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/02/02/python-decorators-2/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/02/02/python-decorators-2/</guid>
-        
-        <category>Python</category>
         
         
         <category>技术学习</category>

@@ -370,12 +370,12 @@
 <span class="kn">import</span> <span class="nn">socket</span><span class="p">,</span> <span class="n">threading</span>
 <span class="kn">import</span> <span class="nn">sni_helper</span>
 
-
+<span class="n">TIME_OUT_ERR</span> <span class="o">=</span> <span class="n">socket</span><span class="p">.</span><span class="n">timeout</span>
 <span class="k">def</span> <span class="nf">recv</span><span class="p">(</span><span class="n">socket</span><span class="p">,</span> <span class="n">bufferSize</span><span class="o">=</span><span class="mi">1024</span><span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">socket</span><span class="p">.</span><span class="n">recv</span><span class="p">(</span><span class="n">bufferSize</span><span class="p">)</span>
-    <span class="k">except</span> <span class="n">socket</span><span class="p">.</span><span class="n">timeout</span><span class="p">:</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">stop</span><span class="p">:</span>
+    <span class="k">except</span> <span class="n">TIME_OUT_ERR</span><span class="p">:</span> <span class="c1"># 设置超时时间后, socket.timeout变成数值
+</span>        <span class="k">if</span> <span class="ow">not</span> <span class="n">stop</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">recv</span><span class="p">(</span><span class="n">socket</span><span class="p">,</span> <span class="n">bufferSize</span><span class="p">)</span>
             
 <span class="k">def</span> <span class="nf">socket_handler</span><span class="p">(</span><span class="n">clientSock</span><span class="p">,</span> <span class="n">addr</span><span class="p">):</span>
@@ -699,31 +699,78 @@
             
                 
                     
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
                         
                         <h2 id="similar_posts">相似文章</h2>
                         <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2021/03/26/cenos-python3-ssl/">备忘录 记一次CentOS下的Python3安装
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
                         
                         <li class="relatedPost">
                             <a href="/blog/2021/03/07/python-delete-bilibili-dynamics/">Python 批量删除B站动态
@@ -838,46 +885,6 @@
                 
             
         
-            
-            
-                
-                    
-                        
-                        <li class="relatedPost">
-                            <a href="/blog/2021/02/02/python-decorators-2/">Python 关于装饰器(以web地址解析为例)
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                        
-                        <li class="relatedPost">
-                            <a href="/blog/2021/02/01/python-decorators/">Python 关于装饰器(以异常重试为例)
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-                    
-                
-                    
-                
-            
-        
         
             </ul>
         
@@ -890,6 +897,8 @@
     </div>
     <div class="nex">
 
+        
+        <p><strong>下一篇</strong> <a href="/blog/2021/03/26/win-openssl-cerl/">备忘录 Windows下使用OpenSSL 生成自签发证书</a></p>
         
     </div>
 </div>
@@ -967,9 +976,11 @@
                 <a href="https://tool.lu/"  target="_blank">在线工具</a> &nbsp;&nbsp; 
                 <a href="https://www.aliyun.com/"  target="_blank">阿里云</a> &nbsp;&nbsp; 
                 <a href="http://patorjk.com/software/taag/"  target="_blank">Text转FIGlet</a> &nbsp;&nbsp; 
-                <a href="https://mx-model.ga/"  target="_blank">Live2D 模型资源</a> &nbsp;&nbsp;
                 <a href="https://vercel.com/dashboard"  target="_blank">Vercel</a> &nbsp;&nbsp;
                 <a href="https://dash.cloudflare.com/"  target="_blank">Cloudflare</a> &nbsp;&nbsp;
+                <a href="https://www.webfx.com/tools/emoji-cheat-sheet/"  target="_blank">Emoji😳</a> &nbsp;&nbsp;
+                <a href="https://www.color-hex.com/"  target="_blank">Color-hex</a> &nbsp;&nbsp;
+                <a href="https://hub.fastgit.org/"  target="_blank">Github镜像fastgit</a> &nbsp;&nbsp;
             </span>
         </p>
         <p class="power">
