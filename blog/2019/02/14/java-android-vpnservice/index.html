@@ -354,16 +354,47 @@
       <li>建立一个<strong>VpnService</strong>，专门与<strong>VpnService.Builder</strong>返回的<strong>ParcelFileDescriptor</strong>实例，以及<strong>TCPServer</strong>/<strong>UDPServer</strong>对接</li>
     </ul>
   </li>
-</ul>
-
-<h2 id="坑s">坑s</h2>
-<ul>
+  <li>基于Android VpnService的框架，我们有必要选取三个永远用不到的地址出来作为标识，这样实现难度将大大降低。
+    <ul>
+      <li>一个用于<strong>VpnService.Builder.addAddress</strong>方法的<strong>地址A</strong>，<strong>ParcelFileDescriptor</strong>实例将其识别为本地ip，把它当作localhost就行</li>
+      <li>一个用于标识本地TCP Server的<strong>地址B</strong>
+        <ul>
+          <li>处理实例读出的本地TCP IP报文时，不妨将本地source ip 设为<strong>地址B</strong></li>
+          <li>这样TCP server收到报文，可以根据source ip是否为<strong>地址B</strong>，判断请求来自网络还是内部。
+            <ul>
+              <li>如果是内部请求建立报文，向外部网络发起TCP建立连接。将此时的两个连接结对。</li>
+              <li>如果是内部一般报文，转发给结对的外部。</li>
+              <li>如果是外部一般报文，转发给结对的内部。这时，写给内部的ip报文的目的地址就是<strong>地址B</strong>了(从哪里来，回哪里去)。</li>
+            </ul>
+          </li>
+          <li>此时，我们再看实例读出的TCP IP报文时，可以根据目的地址是否是<strong>地址B</strong>来判断报文是否来自本地Server。</li>
+        </ul>
+      </li>
+      <li>一个用于标识本地UDP Server的<strong>地址C</strong>
+        <ul>
+          <li>处理实例读出的本地UDP IP报文时，不妨将本地source ip 设为<strong>地址C</strong></li>
+          <li>这样UDP server收到报文，可以根据source ip是否为<strong>地址C</strong>，判断请求来自网络还是内部。
+            <ul>
+              <li>如果是内部，直接转发给外部</li>
+              <li>如果是外部，直接通过实例返回给本地应用即可</li>
+            </ul>
+          </li>
+          <li>此时，我们知道，实例读出的UDP IP报文，只会是本地报文。</li>
+        </ul>
+      </li>
+      <li>三个地址可以变为两个地址，因为<strong>地址B</strong>和<strong>地址C</strong>可以是相同的。
+        <h2 id="坑s">坑s</h2>
+      </li>
+    </ul>
+  </li>
   <li>什么IP包会往虚拟网卡发？或者说，虚拟网卡出入的IP报文怎么才算有效的？
     <ul>
       <li>只有本地到外地，或者外地到本地的报文，才会途径虚拟网卡。</li>
       <li>比如说， 本地6666端口，往本地9999端口发送了一个UDP包，其对应的IP报文不会经过虚拟网卡，不要指望读<strong>ParcelFileDescriptor</strong>实例能够得到这份IP报文。</li>
       <li>比如说， 本地6666端口，往外地<code class="language-plaintext highlighter-rouge">8.8.8.8:53</code>发送了一个UDP包。虚拟网卡收到后，将其目的地改为指向本地<strong>UDPServer</strong>，<code class="language-plaintext highlighter-rouge">6.6.6.6:6666</code>，重新写入虚拟网卡。<br />
   但这时本地<strong>UDPServer</strong>并不会收到这个报文，只有将这个IP报文的源地址更改一下，例如由本地ip改为<strong>8.8.8.8</strong>(原目的地址)，这个报文才会被本地<strong>UDPServer</strong>收到。</li>
+      <li>PS：这里的<code class="language-plaintext highlighter-rouge">6.6.6.6:6666</code>中的IP地址，即前文所说的<strong>地址A</strong>，取这个地址只是因为6666比较好看</li>
+      <li>PS2：这里说的<code class="language-plaintext highlighter-rouge">将本地IP改为原目的地址</code>只是一个举例，事实上任意非本地IP都行，这取决于你的实现。但建议改成<strong>地址C</strong>，方便逻辑判断。</li>
     </ul>
   </li>
   <li>TCP/UDP/IP报文长度

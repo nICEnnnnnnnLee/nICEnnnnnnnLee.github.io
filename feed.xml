@@ -5,15 +5,15 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 26 Mar 2021 14:08:02 +0800</pubDate>
-    <lastBuildDate>Fri, 26 Mar 2021 14:08:02 +0800</lastBuildDate>
+    <pubDate>Fri, 26 Mar 2021 21:33:49 +0800</pubDate>
+    <lastBuildDate>Fri, 26 Mar 2021 21:33:49 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
         <title>备忘录 记一次CentOS下的Python3安装</title>
         <description>&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;./configure  ...&lt;/code&gt;&lt;br /&gt;
 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;make &amp;amp;&amp;amp; make install&lt;/code&gt; &lt;br /&gt;
-Oppppppppppppssssssssssssssssssssssssssssssssssssssssss  &lt;br /&gt;
+Oppppppppppppssssssssssssssssssssssssssss &lt;br /&gt;
 无论它有没有技术含量，好歹花了我一小时以上。
 </description>
         <pubDate>Fri, 26 Mar 2021 11:49:01 +0800</pubDate>
