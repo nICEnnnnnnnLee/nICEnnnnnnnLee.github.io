@@ -467,7 +467,7 @@ tar -zxvf Python-3.8.1.tgz
   </li>
   <li>建立软链接<br />
 因为<code class="language-plaintext highlighter-rouge">--enable-shared</code>，为了防止如下报错，我们需要为几个共享object建立软链接。
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>error while loading shared libraries: libpython3.5m.so.1.0: cannot open shared object file: No such file or directory
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>error while loading shared libraries: libpython3.8.so.1.0: cannot open shared object file: No such file or directory
 </code></pre></div>    </div>
     <p>以下：</p>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 下面这个目录是python3解压包的位置
@@ -504,7 +504,7 @@ ln -s /usr/lib/python3/bin/pip3 /usr/bin/pip3
                         <ul>
                         
                         <li class="relatedPost">
-                            <a href="/blog/2021/03/27/python-proxy/">Python 一种自动的代代理
+                            <a href="/blog/2021/03/27/python-proxy/">Python 一种自动判断类型的SNI/HTTP/HTTPS代理
                             
                             </a>
                         </li>
@@ -701,7 +701,7 @@ ln -s /usr/lib/python3/bin/pip3 /usr/bin/pip3
     <div class="nex">
 
         
-        <p><strong>下一篇</strong> <a href="/blog/2021/03/27/python-proxy/">Python 一种自动的代代理</a></p>
+        <p><strong>下一篇</strong> <a href="/blog/2021/03/27/python-proxy/">Python 一种自动判断类型的SNI/HTTP/HTTPS代理</a></p>
         
     </div>
 </div>

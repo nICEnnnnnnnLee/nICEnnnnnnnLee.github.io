@@ -5,8 +5,8 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 07 Apr 2021 10:34:20 +0800</pubDate>
-    <lastBuildDate>Wed, 07 Apr 2021 10:34:20 +0800</lastBuildDate>
+    <pubDate>Wed, 07 Apr 2021 14:56:31 +0800</pubDate>
+    <lastBuildDate>Wed, 07 Apr 2021 14:56:31 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -15,8 +15,8 @@
 </description>
         <pubDate>Wed, 07 Apr 2021 09:49:01 +0800</pubDate>
         <pubDateFormat>2021-04-07</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/04/07/dns-over-https/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/04/07/dns-over-https/</guid>
+        <link>https://nicelee.top/blog/2021/04/07/dns-voer-https/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/04/07/dns-voer-https/</guid>
         
         
         <category>代码片段</category>
@@ -38,7 +38,7 @@
       </item>
     
       <item>
-        <title>Python 一种自动的代代理</title>
+        <title>Python 一种自动判断类型的SNI/HTTP/HTTPS代理</title>
         <description>听人说起这个idea，感觉挺有意思(虽然没有什么大的用处)
 </description>
         <pubDate>Sat, 27 Mar 2021 11:49:01 +0800</pubDate>
