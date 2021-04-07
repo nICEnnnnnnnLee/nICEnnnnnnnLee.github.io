@@ -5,9 +5,57 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 26 Mar 2021 21:33:49 +0800</pubDate>
-    <lastBuildDate>Fri, 26 Mar 2021 21:33:49 +0800</lastBuildDate>
+    <pubDate>Wed, 07 Apr 2021 10:34:20 +0800</pubDate>
+    <lastBuildDate>Wed, 07 Apr 2021 10:34:20 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>备忘录 关于可用的DNS over HTTPS公共服务器</title>
+        <description>&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://github.com/curl/curl/wiki/DNS-over-HTTPS&lt;/code&gt;
+</description>
+        <pubDate>Wed, 07 Apr 2021 09:49:01 +0800</pubDate>
+        <pubDateFormat>2021-04-07</pubDateFormat>
+        <link>https://nicelee.top/blog/2021/04/07/dns-over-https/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/04/07/dns-over-https/</guid>
+        
+        
+        <category>代码片段</category>
+        
+      </item>
+    
+      <item>
+        <title>备忘录 关于IP的地域判断(是否CN)</title>
+        <description>这类问题其实就是数据再加上解析的问题。
+</description>
+        <pubDate>Tue, 06 Apr 2021 11:49:01 +0800</pubDate>
+        <pubDateFormat>2021-04-06</pubDateFormat>
+        <link>https://nicelee.top/blog/2021/04/06/cn-ip/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/04/06/cn-ip/</guid>
+        
+        
+        <category>代码片段</category>
+        
+      </item>
+    
+      <item>
+        <title>Python 一种自动的代代理</title>
+        <description>听人说起这个idea，感觉挺有意思(虽然没有什么大的用处)
+</description>
+        <pubDate>Sat, 27 Mar 2021 11:49:01 +0800</pubDate>
+        <pubDateFormat>2021-03-27</pubDateFormat>
+        <link>https://nicelee.top/blog/2021/03/27/python-proxy/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/03/27/python-proxy/</guid>
+        
+        <category>Python</category>
+        
+        <category>Http</category>
+        
+        <category>代理</category>
+        
+        
+        <category>代码片段</category>
+        
+      </item>
     
       <item>
         <title>备忘录 记一次CentOS下的Python3安装</title>
@@ -145,59 +193,6 @@ Oppppppppppppssssssssssssssssssssssssssss &lt;br /&gt;
         <category>小技巧</category>
         
         <category>代码片段</category>
-        
-      </item>
-    
-      <item>
-        <title>Python 关于requests的DNS和SNI设置</title>
-        <description>在不考虑HTTP2等协议需求的情况下，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;requests&lt;/code&gt;包算是个人小项目中比较常用了，怎么能比较方便指定DNS和设置是否发送SNI呢？
-</description>
-        <pubDate>Sat, 27 Feb 2021 11:49:01 +0800</pubDate>
-        <pubDateFormat>2021-02-27</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/02/27/python-dns-sni/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/02/27/python-dns-sni/</guid>
-        
-        <category>Python</category>
-        
-        
-        <category>技术学习</category>
-        
-        <category>小技巧</category>
-        
-        <category>代码片段</category>
-        
-      </item>
-    
-      <item>
-        <title>杂七杂八 啊这。。。</title>
-        <description>想到哪吐槽到哪。
-</description>
-        <pubDate>Wed, 24 Feb 2021 10:59:01 +0800</pubDate>
-        <pubDateFormat>2021-02-24</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/02/24/something-about-nothing/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/02/24/something-about-nothing/</guid>
-        
-        <category>知识库</category>
-        
-        
-        <category>杂七杂八</category>
-        
-      </item>
-    
-      <item>
-        <title>知识库 常用IDE快捷键</title>
-        <description>VSCode、AndroidStudio、IDEA、Eclipse、NotePad++。。。  &lt;br /&gt;
-编辑器太多，一段时间不用容易搞混，记录一下常用的，不用每次再搜一遍了。
-</description>
-        <pubDate>Sun, 21 Feb 2021 10:59:01 +0800</pubDate>
-        <pubDateFormat>2021-02-21</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/02/21/key-shortcut/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/02/21/key-shortcut/</guid>
-        
-        <category>知识库</category>
-        
-        
-        <category>技术学习</category>
         
       </item>
     

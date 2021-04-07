@@ -2,6 +2,27 @@
 	"code" : 0 ,
 	"data" : [
 	{
+		"title" : "备忘录 关于可用的DNS over HTTPS公共服务器",
+		"tags" : "",
+		"url" : "/blog/2021/04/07/dns-over-https/"
+		"brief" : "https://github.com/curl/curl/wiki/DNS-over-HTTPS"
+	},
+    
+	{
+		"title" : "备忘录 关于IP的地域判断(是否CN)",
+		"tags" : "",
+		"url" : "/blog/2021/04/06/cn-ip/"
+		"brief" : "这类问题其实就是数据再加上解析的问题。"
+	},
+    
+	{
+		"title" : "Python 一种自动的代代理",
+		"tags" : "Python_Http_代理",
+		"url" : "/blog/2021/03/27/python-proxy/"
+		"brief" : "听人说起这个idea，感觉挺有意思(虽然没有什么大的用处)"
+	},
+    
+	{
 		"title" : "备忘录 记一次CentOS下的Python3安装",
 		"tags" : "Python_Linux_知识库",
 		"url" : "/blog/2021/03/26/cenos-python3-ssl/"
