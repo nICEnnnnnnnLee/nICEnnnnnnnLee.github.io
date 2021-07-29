@@ -5,9 +5,27 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 07 Apr 2021 14:56:31 +0800</pubDate>
-    <lastBuildDate>Wed, 07 Apr 2021 14:56:31 +0800</lastBuildDate>
+    <pubDate>Thu, 29 Jul 2021 21:29:02 +0800</pubDate>
+    <lastBuildDate>Thu, 29 Jul 2021 21:29:02 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>Python 记一次针对图文混搭反爬的文本数据采集处理</title>
+        <description>&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://github.com/curl/curl/wiki/DNS-over-HTTPS&lt;/code&gt;
+</description>
+        <pubDate>Thu, 29 Jul 2021 09:49:01 +0800</pubDate>
+        <pubDateFormat>2021-07-29</pubDateFormat>
+        <link>https://nicelee.top/blog/2021/07/29/something-interesting/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/07/29/something-interesting/</guid>
+        
+        <category>Python</category>
+        
+        <category>爬虫</category>
+        
+        
+        <category>代码片段</category>
+        
+      </item>
     
       <item>
         <title>备忘录 关于可用的DNS over HTTPS公共服务器</title>
@@ -15,8 +33,8 @@
 </description>
         <pubDate>Wed, 07 Apr 2021 09:49:01 +0800</pubDate>
         <pubDateFormat>2021-04-07</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/04/07/dns-voer-https/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/04/07/dns-voer-https/</guid>
+        <link>https://nicelee.top/blog/2021/04/07/dns-over-https/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/04/07/dns-over-https/</guid>
         
         
         <category>代码片段</category>
@@ -164,33 +182,6 @@ Oppppppppppppssssssssssssssssssssssssssss &lt;br /&gt;
         
         <category>bilibili</category>
         
-        
-        <category>代码片段</category>
-        
-      </item>
-    
-      <item>
-        <title>一种利用Github notification达到邮件通知目的的思路及其Python实现</title>
-        <description>说到邮件通知，简单的试了一下，发觉里面的坑蛮深的。   &lt;br /&gt;
-很多云服务直接把端口给封了。。。  &lt;br /&gt;
-邮件服务商也满满的套路，巴不得你用他们的app才好（海外一样）。 &lt;br /&gt;
-开启第三方SMTP服务各种身份验证。隔三岔五“你是不是本人？” &lt;br /&gt;
-真正的spam拦也拦不住，尽给真正用户增加使用门槛。 &lt;br /&gt;
-抢市场的时候总是野蛮生长，当大头后根据相关规范！    &lt;br /&gt;
-有的时候还发现你的邮件躺在垃圾邮箱里。。。&lt;br /&gt;
-得了，通知而已，让人代发吧。
-</description>
-        <pubDate>Mon, 01 Mar 2021 11:49:01 +0800</pubDate>
-        <pubDateFormat>2021-03-01</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/03/01/issue-as-notification/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/03/01/issue-as-notification/</guid>
-        
-        <category>Python</category>
-        
-        <category>Github</category>
-        
-        
-        <category>小技巧</category>
         
         <category>代码片段</category>
         
