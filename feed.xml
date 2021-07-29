@@ -5,18 +5,18 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 29 Jul 2021 21:29:02 +0800</pubDate>
-    <lastBuildDate>Thu, 29 Jul 2021 21:29:02 +0800</lastBuildDate>
+    <pubDate>Thu, 29 Jul 2021 22:52:14 +0800</pubDate>
+    <lastBuildDate>Thu, 29 Jul 2021 22:52:14 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
         <title>Python 记一次针对图文混搭反爬的文本数据采集处理</title>
-        <description>&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://github.com/curl/curl/wiki/DNS-over-HTTPS&lt;/code&gt;
+        <description>偶然发现了一个图片藏文的小技巧😳
 </description>
         <pubDate>Thu, 29 Jul 2021 09:49:01 +0800</pubDate>
         <pubDateFormat>2021-07-29</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/07/29/something-interesting/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/07/29/something-interesting/</guid>
+        <link>https://nicelee.top/blog/2021/07/29/python-something-interesting-about-ocr/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/07/29/python-something-interesting-about-ocr/</guid>
         
         <category>Python</category>
         
