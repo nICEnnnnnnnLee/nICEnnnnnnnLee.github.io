@@ -5,9 +5,27 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 29 Jul 2021 22:52:14 +0800</pubDate>
-    <lastBuildDate>Thu, 29 Jul 2021 22:52:14 +0800</lastBuildDate>
+    <pubDate>Fri, 20 Aug 2021 15:16:40 +0800</pubDate>
+    <lastBuildDate>Fri, 20 Aug 2021 15:16:40 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>Python 换脸视频的简单实现</title>
+        <description>基于dlib库的人脸识别，对视频里面的人脸逐帧进行转换。
+</description>
+        <pubDate>Fri, 20 Aug 2021 09:49:01 +0800</pubDate>
+        <pubDateFormat>2021-08-20</pubDateFormat>
+        <link>https://nicelee.top/blog/2021/08/20/python-face-swap-in-video/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/08/20/python-face-swap-in-video/</guid>
+        
+        <category>Python</category>
+        
+        
+        <category>代码片段</category>
+        
+        <category>技术学习</category>
+        
+      </item>
     
       <item>
         <title>Python 记一次针对图文混搭反爬的文本数据采集处理</title>
@@ -24,6 +42,8 @@
         
         
         <category>代码片段</category>
+        
+        <category>技术学习</category>
         
       </item>
     
@@ -165,25 +185,6 @@ Oppppppppppppssssssssssssssssssssssssssss &lt;br /&gt;
         
         
         <category>小技巧</category>
-        
-      </item>
-    
-      <item>
-        <title>Python 批量删除B站动态</title>
-        <description>前阵子过年的时候参加&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;新春厨神大作战&lt;/code&gt;，发了上百来条动态。 &lt;br /&gt;
-现在看着挺碍眼的，决定批量删除。
-</description>
-        <pubDate>Sun, 07 Mar 2021 11:49:01 +0800</pubDate>
-        <pubDateFormat>2021-03-07</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/03/07/python-delete-bilibili-dynamics/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/03/07/python-delete-bilibili-dynamics/</guid>
-        
-        <category>Python</category>
-        
-        <category>bilibili</category>
-        
-        
-        <category>代码片段</category>
         
       </item>
     

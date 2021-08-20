@@ -7,13 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>踩坑记录 - 在服务器上搭建Git仓库</title>
-    <meta name="description" content="  之前在部署WebHook的时候就有一个想法: 有没有必要通过git提交到第三方, 然后由第三方的钩子触发事件发送请求给服务器, 让服务器pull代码?这里写下我的思考和实际操作, 以及操作里面的坑。( ╯□╰ )其实也不算是坑，只是脑筋没转过弯来。。">
+    <title>Python 换脸视频的简单实现</title>
+    <meta name="description" content="基于dlib库的人脸识别，对视频里面的人脸逐帧进行转换。">
 
-    <meta property="og:url" content="https://nicelee.top/blog/2018/11/13/linux-git-repo/">
+    <meta property="og:url" content="https://nicelee.top/blog/2021/08/20/python-face-swap-in-video/">
     <meta property="og:site_name" content="NiceLee的博客">
-    <meta property="og:title" content="踩坑记录 - 在服务器上搭建Git仓库">
-    <meta property="og:description" content="  之前在部署WebHook的时候就有一个想法: 有没有必要通过git提交到第三方, 然后由第三方的钩子触发事件发送请求给服务器, 让服务器pull代码?这里写下我的思考和实际操作, 以及操作里面的坑。( ╯□╰ )其实也不算是坑，只是脑筋没转过弯来。。">
+    <meta property="og:title" content="Python 换脸视频的简单实现">
+    <meta property="og:description" content="基于dlib库的人脸识别，对视频里面的人脸逐帧进行转换。">
     <meta property="og:image" content="https://nicelee.top/favicon.ico?">
     <meta property="og:image:type" content="image/x-icon">
     
@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="/css/font-awesome.min.css ">
     <link rel="stylesheet" href="/css/font-ali.css?v=1.2 ">
     <link rel="stylesheet" href="/css/main.css?v=1.1 ">
-    <link rel="canonical" href="https://nicelee.top/blog/2018/11/13/linux-git-repo/">
+    <link rel="canonical" href="https://nicelee.top/blog/2021/08/20/python-face-swap-in-video/">
     <link rel="alternate" type="application/rss+xml" title="NiceLeeのBlog" href="https://nicelee.top/feed.xml ">
 
 	
@@ -270,11 +270,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>踩坑记录 - 在服务器上搭建Git仓库</h1>
+        <h1>Python 换脸视频的简单实现</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2018-11-13
+                <i class="fa fa-calendar"></i>2021-08-20
             </div>
 
             <div class="label-card">
@@ -297,6 +297,8 @@
   <i class="fa fa-th-list"></i>
   
     
+        <a href="/blog/category/#代码片段" title="Category: 代码片段" rel="category">代码片段</a>&nbsp;
+    
         <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
@@ -314,14 +316,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/blog/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a-->
-        <a href="/blog/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
-    
-        <!--a href="/blog/tag/#git" title="Tag: git" rel="tag">git</a-->
-        <a href="/blog/tag/#git" title="Tag: git" rel="tag">git</a>&nbsp;
-    
-        <!--a href="/blog/tag/#PowerShell" title="Tag: PowerShell" rel="tag">PowerShell</a-->
-        <a href="/blog/tag/#PowerShell" title="Tag: PowerShell" rel="tag">PowerShell</a>
+        <!--a href="/blog/tag/#Python" title="Tag: Python" rel="tag">Python</a-->
+        <a href="/blog/tag/#Python" title="Tag: Python" rel="tag">Python</a>
     
   
 
@@ -333,101 +329,82 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#零写在前面" id="markdown-toc-零写在前面">零、写在前面</a></li>
-  <li><a href="#一几个概念" id="markdown-toc-一几个概念">一、几个概念</a></li>
-  <li><a href="#二服务器建立仓库" id="markdown-toc-二服务器建立仓库">二、服务器建立仓库</a></li>
-  <li><a href="#三本地克隆仓库" id="markdown-toc-三本地克隆仓库">三、本地克隆仓库</a></li>
-  <li><a href="#四遇见的问题" id="markdown-toc-四遇见的问题">四、遇见的问题</a></li>
+  <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
+  <li><a href="#效果预览" id="markdown-toc-效果预览">效果预览</a></li>
+  <li><a href="#源代码" id="markdown-toc-源代码">源代码</a></li>
+  <li><a href="#可能的坑" id="markdown-toc-可能的坑">可能的坑</a></li>
+  <li><a href="#如何使用" id="markdown-toc-如何使用">如何使用</a></li>
 </ul>
-<blockquote>
-  <p>之前在部署WebHook的时候就有一个想法: 有没有必要通过git提交到第三方, 然后由第三方的钩子触发事件发送请求给服务器, 让服务器pull代码?<br />
-这里写下我的思考和实际操作, 以及操作里面的坑。( ╯□╰ )其实也不算是坑，只是脑筋没转过弯来。。</p>
-</blockquote>
+<p>基于dlib库的人脸识别，对视频里面的人脸逐帧进行转换。</p>
 
-<h2 id="零写在前面">零、写在前面</h2>
-<p>客观或主观来说，由于架构还不够稳定完善，或者想法太多想要一一实践什么的，反正服务器上的代码要有一定频次的修改。</p>
+<h2 id="前言">前言</h2>
+<p>偶然被人安利了一个AI换脸的视频，问了一下，技术上还是机器学习，具体用的是<a href="https://github.com/iperov/DeepFaceLab">DeepFaceLab</a>。<br />
+碰巧，在学剪辑的时候发现AE也有换脸插件，只需要你照着图锚定好脸部特侦就差不多了。<br />
+感觉是不是可以放宽要求，尝试用更简单一点的方法来达到这个目的呢？<br />
+于是，我在github上搜了一下，发现一个opencv + dlib人脸识别的实现思路。</p>
 
-<p>对于这种情况，频繁使用FTP上传是不现实的，因为修改的只是部分，但我也不能精确确认需要上传修改的哪些文件，那么为了保证功能，每次上传肯定有未被修改的多的冗余。</p>
+<p>首先，要看看两个项目。</p>
 
-<p>还有一种办法， 就是使用文件同步，这里写一下关键词 <code class="language-plaintext highlighter-rouge">Rsync（remote synchronize）</code>。因为有其它解决方案，不太想新增功能，先mark一下，有需要再用。</p>
-
-<p>另一种方法，就是使用SVN或Git。 将Github或码云等平台作为中转是一个不错的选择，而且这些网站本身自身也有静态页面托管服务，可以做一个备份。 如果不想公开源码，也可以选择Coding.net 等其它平台。有时间还是想用SpringBoot自己将博客从零搭建一下试试。<br />
-话不多说，如果认为不保险，仓库其实是可以搭建在自家服务器上的。接下来就讲一下整个过程。</p>
-
-<h2 id="一几个概念">一、几个概念</h2>
 <ul>
-  <li>
-    <p><strong><em>工作目录</em></strong>:  就是你可以使用git操作的命令，比如git checkout啦，暂时可以理解为当前目录下有.git文件夹的目录.</p>
-  </li>
-  <li>
-    <p><strong><em>暂存区域</em></strong>:  所谓的暂存区域只不过是个简单的文件，一般都放在 Git 目录中。有时候人们会把这个文件叫做索引文件(index)，不过标准说法还是叫暂存区域.</p>
-  </li>
-  <li>
-    <p><strong><em>本地仓库</em></strong>:  就是把暂存区域里面的文件提交到git能够管理的和追踪的仓库里面.</p>
-  </li>
-</ul>
-
-<h2 id="二服务器建立仓库">二、服务器建立仓库</h2>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">git --bare init</code>建立裸仓：
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[root@gitserver ~]# mkdir /git   =&gt;在根目录下新建一个git目录
-[root@gitserver ~]# cd /git      =&gt; 进入刚才新建的目录
-[root@gitserver git]# ls  -a     =&gt;  里面空空如也，没有任何隐藏文件
-[root@gitserver git]#  git --bare init    =&gt;初始化一个裸仓库
-Initialized empty Git repository in /git/
-[root@gitserver git]# ls -a            =&gt;里面多了一些管理仓库的配置文件
-.  ..  branches  config  description  HEAD  hooks  info  objects  refs
-</code></pre></div>    </div>
-  </li>
-  <li><code class="language-plaintext highlighter-rouge">git init</code>建立初始化建库：
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[root@gitserver ~]# cd ~
-[root@gitserver ~]# mkdir /git_2
-[root@gitserver ~]# cd /git_2
-[root@gitserver git2]# git init
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>初始化仓库有2种方式,  <code class="language-plaintext highlighter-rouge">git --bare init</code> 和<code class="language-plaintext highlighter-rouge">git init</code>区别有以下2点</p>
-
-    <p>1， 用git init 初始化里面，git目录下面只有一个.git文件夹，用git –bare init里面的都是些配置文件</p>
-
-    <p>2， 用”git init”初始化的版本库用户也可以在该目录下执行所有git方面的操作，但是在当前用户和push用户正在同一分支上的时候，容易冲突。
-而”git –bare init”因为不允许实现git操作。</p>
-  </li>
-</ul>
-
-<h2 id="三本地克隆仓库">三、本地克隆仓库</h2>
-<p>举个例子，其中 user为用户名，xx.xx.xx.xx为服务器ip，/usr/workspace/codebase/是git仓库的所在目录</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone user@xx.xx.xx.xx:/usr/workspace/codebase/
-</code></pre></div></div>
-
-<h2 id="四遇见的问题">四、遇见的问题</h2>
-<ul>
-  <li>git init - 首次push报错：
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>remote: error: refusing to update checked out branch: refs/heads/master  
-remote: error: By default, updating the current branch in a non-bare repository remote: error: is denied, because it will make the index and work tree inconsistent remote: error: with what you pushed, and will require 'git reset --hard' to match
-remote: error: the work tree to HEAD. remote: error: 
-remote: error: You can set 'receive.denyCurrentBranch' configuration variable to 
-remote: error: 'ignore' or 'warn' in the remote repository to allow pushing into 
-remote: error: its current branch; however, this is not recommended unless you 
-remote: error: arranged to update its work tree to match what you pushed in some remote: error: other way. 
-remote: error: To squelch this message and still keep the default behaviour, set remote: error: 'receive.denyCurrentBranch' configuration variable to 'refuse'. To ... ! [remote rejected] master -&gt; master (branch is currently checked out) error: failed to push some refs to
-</code></pre></div>    </div>
-    <p>需要配置一下git的接收配置，在服务器端init的目录下执行如下命令即可正确提交：</p>
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git config receive.denyCurrentBranch ignore`
-</code></pre></div>    </div>
-  </li>
-  <li>git init - 客户端提交后，服务器代码没有更新。但多个客户端测试下来push、pull等功能均正常：<br />
- <strong><em>这就是我踩的坑，脑子转不过弯~</em></strong>
+  <li><a href="https://github.com/Jacen789/simple_faceswap">simple_faceswap</a>
     <ul>
-      <li>客户端push的分支，如果和服务器当前的分支不是同一个，显然服务器‘显示’的代码理所当然不会更新。</li>
-      <li>客户端push的分支，如果和服务器当前的分支是同一个，因为有服务器本身在修改代码的可能性，git在设计的时候考虑到这一点，显然要等用户来执行‘将push上来的内容更新到当前分支’这一操作。</li>
-      <li>如果同一分支，必须得使用<code class="language-plaintext highlighter-rouge">git reset --hard</code>才能看到push后的内容。这也是git init很容易会导致冲突的原因。</li>
+      <li>实现了摄像头捕捉的视频流的简单换脸，将其实时显示。</li>
+      <li>换脸思路是直接整个面部到面部的转换。</li>
     </ul>
   </li>
-  <li>git –bare init - 客户端提交后，服务器没有看到相应的代码。
-仓库只是仓库，建议在服务器另开git clone仓库pull代码。</li>
+  <li><a href="https://github.com/Liangwe/AI-Change-face-in-the-video">AI-Change-face-in-the-video</a>
+    <ul>
+      <li>实现了视频中的人脸到指定照片中的人脸的更换，并且输出视频。<br />
+  但中间有很多冗余步骤，将视频转换为图片保存，再处理图片，再合并视频。<br />
+  这其中多出了大量磁盘读写IO，且视频帧频率信息丢失。</li>
+      <li>换脸思路是五官到五官的转换。</li>
+    </ul>
+  </li>
 </ul>
+
+<p>考虑到项目2的缺陷，我们可以参考一个简单的opencv读取复制视频的例子，对其进行改善。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># opencv读取复制视频
+</span><span class="kn">import</span> <span class="nn">cv2</span>
+
+<span class="n">video</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="s">"faces/trump.avi"</span><span class="p">)</span>
+<span class="n">fps</span> <span class="o">=</span> <span class="n">video</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">cv2</span><span class="p">.</span><span class="n">CAP_PROP_FPS</span><span class="p">)</span>
+<span class="n">frameCount</span> <span class="o">=</span> <span class="n">video</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">cv2</span><span class="p">.</span><span class="n">CAP_PROP_FRAME_COUNT</span><span class="p">)</span>
+<span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">video</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">cv2</span><span class="p">.</span><span class="n">CAP_PROP_FRAME_WIDTH</span><span class="p">)),</span> <span class="nb">int</span><span class="p">(</span><span class="n">video</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">cv2</span><span class="p">.</span><span class="n">CAP_PROP_FRAME_HEIGHT</span><span class="p">)))</span>
+<span class="n">videoWriter</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="n">VideoWriter</span><span class="p">(</span><span class="s">'trans.mp4'</span><span class="p">,</span> <span class="n">cv2</span><span class="p">.</span><span class="n">VideoWriter_fourcc</span><span class="p">(</span><span class="o">*</span><span class="s">'MP4V'</span><span class="p">),</span> <span class="n">fps</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>  
+<span class="n">success</span><span class="p">,</span> <span class="n">frame</span> <span class="o">=</span> <span class="n">video</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>  
+<span class="n">index</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">while</span> <span class="n">success</span> <span class="p">:</span>  
+	<span class="n">videoWriter</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
+	<span class="n">success</span><span class="p">,</span> <span class="n">frame</span> <span class="o">=</span> <span class="n">video</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+	<span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="n">video</span><span class="p">.</span><span class="n">release</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h2 id="效果预览">效果预览</h2>
+<p><a href="https://www.bilibili.com/video/BV1ff4y137ep">https://www.bilibili.com/video/BV1ff4y137ep</a></p>
+
+<h2 id="源代码">源代码</h2>
+<p><a href="https://github.com/nICEnnnnnnnLee/FaceSwap">https://github.com/nICEnnnnnnnLee/FaceSwap</a></p>
+
+<h2 id="可能的坑">可能的坑</h2>
+<ul>
+  <li>
+    <p>安装dlib报错<br />
+根据报错信息提示，使用pip安装Cmake即可。<br />
+但安装Cmake可能也会报错，你需要根据提示再安装Visual Studio，主要是要保证C++的编译环境。</p>
+  </li>
+  <li>
+    <p>转换后的视频花屏  <br />
+原始的image矩阵是0~255的整型的，经过处理后可能变成了浮点型，需要再进行<code class="language-plaintext highlighter-rouge">img.astype(np.uint8)</code>操作。</p>
+  </li>
+</ul>
+
+<h2 id="如何使用">如何使用</h2>
+<ul>
+  <li>根据<code class="language-plaintext highlighter-rouge">requirements.txt</code>安装依赖</li>
+  <li>修改<code class="language-plaintext highlighter-rouge">L15~L18</code>行的参数，指定输入的图片、视频即可。</li>
+</ul>
+
 
         </article>
         <hr>
@@ -438,27 +415,20 @@ remote: error: To squelch this message and still keep the default behaviour, set
             
                 
                     
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
+                        
+                        <h2 id="similar_posts">相似文章</h2>
+                        <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2021/07/29/python-something-interesting-about-ocr/">Python 记一次针对图文混搭反爬的文本数据采集处理
+                            
+                            </a>
+                        </li>
+                        
+                        
                     
                 
             
-                
-                    
-                
-                    
                 
                     
                 
@@ -471,47 +441,33 @@ remote: error: To squelch this message and still keep the default behaviour, set
             
         
             
-            
-                
-                    
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-                    
-                
             
                 
                     
                         
-                        <h2 id="similar_posts">相似文章</h2>
-                        <ul>
+                        <li class="relatedPost">
+                            <a href="/blog/2021/03/27/python-proxy/">Python 一种自动判断类型的SNI/HTTP/HTTPS代理
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
                         
                         <li class="relatedPost">
                             <a href="/blog/2021/03/26/cenos-python3-ssl/">备忘录 记一次CentOS下的Python3安装
@@ -522,15 +478,11 @@ remote: error: To squelch this message and still keep the default behaviour, set
                         
                     
                 
-                    
-                
-                    
-                
             
                 
                     
                 
-                    
+            
                 
                     
                 
@@ -541,7 +493,27 @@ remote: error: To squelch this message and still keep the default behaviour, set
                 
                     
                 
+            
+        
+            
+            
+                
                     
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2021/03/19/python-https-sni-proxy/">Python 一种基于SNI的HTTPS代理
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+                
+                    
+                
+            
                 
                     
                 
@@ -552,23 +524,10 @@ remote: error: To squelch this message and still keep the default behaviour, set
                 
                     
                 
-                    
-                
-                    
-                
             
-                
-                    
-                
-                    
-                
-                    
-                
+        
             
-                
-                    
-                
-                    
+            
                 
                     
                 
@@ -578,19 +537,17 @@ remote: error: To squelch this message and still keep the default behaviour, set
             
                 
                     
-                
-                    
-                
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2021/03/07/python-delete-bilibili-dynamics/">Python 批量删除B站动态
+                            
+                            </a>
+                        </li>
+                        
+                        
                     
                 
             
-        
-            
-            
-                
-                    
-                
-                    
                 
                     
                 
@@ -603,13 +560,11 @@ remote: error: To squelch this message and still keep the default behaviour, set
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/blog/2018/11/11/win10-regedit-cmd/">Win10 Shift+右键还原打开cmd命令窗口</a></p>
+        <p><strong>上一篇</strong> <a href="/blog/2021/07/29/python-something-interesting-about-ocr/">Python 记一次针对图文混搭反爬的文本数据采集处理</a></p>
         
     </div>
     <div class="nex">
 
-        
-        <p><strong>下一篇</strong> <a href="/blog/2018/11/18/win-vbs/">VBS 一些超简单、超有趣的VBS小应用</a></p>
         
     </div>
 </div>
