@@ -5,9 +5,26 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 21 Aug 2021 10:20:53 +0800</pubDate>
-    <lastBuildDate>Sat, 21 Aug 2021 10:20:53 +0800</lastBuildDate>
+    <pubDate>Mon, 23 Aug 2021 16:32:39 +0800</pubDate>
+    <lastBuildDate>Mon, 23 Aug 2021 16:32:39 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>使用CF-workers打造私人加密DNS</title>
+        <description>许多支持DoH加密公共DNS在国内基本无法使用。&lt;br /&gt;
+在此，我们考虑使用CF workers进行转发，搭建个人使用的DoH服务。
+</description>
+        <pubDate>Sun, 22 Aug 2021 09:49:01 +0800</pubDate>
+        <pubDateFormat>2021-08-22</pubDateFormat>
+        <link>https://nicelee.top/blog/2021/08/22/cloudflare-workers-doh-proxy/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/08/22/cloudflare-workers-doh-proxy/</guid>
+        
+        <category>cloudflare</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
     
       <item>
         <title>Python 换脸视频的简单实现</title>
@@ -49,7 +66,8 @@
     
       <item>
         <title>备忘录 关于可用的DNS over HTTPS公共服务器</title>
-        <description>&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://github.com/curl/curl/wiki/DNS-over-HTTPS&lt;/code&gt;
+        <description>&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://github.com/curl/curl/wiki/DNS-over-HTTPS&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://github.com/DNSCrypt/dnscrypt-resolvers&lt;/code&gt;
 </description>
         <pubDate>Wed, 07 Apr 2021 09:49:01 +0800</pubDate>
         <pubDateFormat>2021-04-07</pubDateFormat>
@@ -167,24 +185,6 @@ Oppppppppppppssssssssssssssssssssssssssss &lt;br /&gt;
         
         
         <category>杂七杂八</category>
-        
-      </item>
-    
-      <item>
-        <title>备忘录 如何判断Android手机的CPU架构类型</title>
-        <description>最近想给自己的旧手机下点东西，好久没捣鼓，忘记啥类型了。 &lt;br /&gt;
-只能说&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;x86&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;x86_64&lt;/code&gt;肯定不是；手机有点年代，但又不是特别古老的那种，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;arm64-v8a&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;armeabi-v7a&lt;/code&gt;什么的也拿不准。  &lt;br /&gt;
-搜索了一下，为了防止还有下次，做个笔记。
-</description>
-        <pubDate>Wed, 10 Mar 2021 11:49:01 +0800</pubDate>
-        <pubDateFormat>2021-03-10</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/03/10/android-device-type/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/03/10/android-device-type/</guid>
-        
-        <category>Android</category>
-        
-        
-        <category>小技巧</category>
         
       </item>
     

@@ -8,12 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>备忘录 关于可用的DNS over HTTPS公共服务器</title>
-    <meta name="description" content="https://github.com/curl/curl/wiki/DNS-over-HTTPS">
+    <meta name="description" content="https://github.com/curl/curl/wiki/DNS-over-HTTPS https://github.com/DNSCrypt/dnscrypt-resolvers">
 
     <meta property="og:url" content="https://nicelee.top/blog/2021/04/07/dns-over-https/">
     <meta property="og:site_name" content="NiceLee的博客">
     <meta property="og:title" content="备忘录 关于可用的DNS over HTTPS公共服务器">
-    <meta property="og:description" content="https://github.com/curl/curl/wiki/DNS-over-HTTPS">
+    <meta property="og:description" content="https://github.com/curl/curl/wiki/DNS-over-HTTPS https://github.com/DNSCrypt/dnscrypt-resolvers">
     <meta property="og:image" content="https://nicelee.top/favicon.ico?">
     <meta property="og:image:type" content="image/x-icon">
     
@@ -326,13 +326,23 @@
         <ul id="markdown-toc">
   <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
 </ul>
-<p><code class="language-plaintext highlighter-rouge">https://github.com/curl/curl/wiki/DNS-over-HTTPS</code></p>
+<p><code class="language-plaintext highlighter-rouge">https://github.com/curl/curl/wiki/DNS-over-HTTPS</code> <br />
+<code class="language-plaintext highlighter-rouge">https://github.com/DNSCrypt/dnscrypt-resolvers</code></p>
 
 <h2 id="前言">前言</h2>
-<p>有很多DoH服务国内用不了，需要测试一下连通性。</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>测试 查询www.google.com的DNS， 先不看内容，返回200 OK再说
-https://cloudflare-dns.com/dns-query?dns=AAIBAAABAAAAAAAAA3d3dwZnb29nbGUDY29tAAABAAE
-</code></pre></div></div>
+<ul>
+  <li>参考以下两个
+    <ul>
+      <li><a href="https://github.com/DNSCrypt/dnscrypt-resolvers">https://github.com/DNSCrypt/dnscrypt-resolvers</a></li>
+      <li><a href="https://github.com/curl/curl/wiki/DNS-over-HTTPS">https://github.com/curl/curl/wiki/DNS-over-HTTPS</a></li>
+    </ul>
+  </li>
+  <li>有很多DoH服务国内用不了，需要测试一下连通性。
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  测试 查询www.google.com的DNS， 先不看内容，返回200 OK再说
+  https://cloudflare-dns.com/dns-query?dns=AAIBAAABAAAAAAAAA3d3dwZnb29nbGUDY29tAAABAAE
+</code></pre></div>    </div>
+  </li>
+</ul>
 
         </article>
         <hr>
@@ -348,6 +358,11 @@ https://cloudflare-dns.com/dns-query?dns=AAIBAAABAAAAAAAAA3d3dwZnb29nbGUDY29tAAA
             
                 
             
+        
+            
+            
+                
+            
                 
             
         
@@ -392,13 +407,6 @@ https://cloudflare-dns.com/dns-query?dns=AAIBAAABAAAAAAAAA3d3dwZnb29nbGUDY29tAAA
             
         
             
-            
-                
-            
-        
-            
-            
-                
             
                 
             

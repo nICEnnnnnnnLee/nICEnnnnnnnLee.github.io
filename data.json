@@ -2,6 +2,13 @@
 	"code" : 0 ,
 	"data" : [
 	{
+		"title" : "使用CF-workers打造私人加密DNS",
+		"tags" : "cloudflare",
+		"url" : "/blog/2021/08/22/cloudflare-workers-doh-proxy/"
+		"brief" : "许多支持DoH加密公共DNS在国内基本无法使用。在此，我们考虑使用CFworkers进行转发，搭建个人使用的DoH服务。"
+	},
+    
+	{
 		"title" : "Python 换脸视频的简单实现",
 		"tags" : "Python",
 		"url" : "/blog/2021/08/20/python-face-swap-in-video/"
@@ -19,7 +26,7 @@
 		"title" : "备忘录 关于可用的DNS over HTTPS公共服务器",
 		"tags" : "",
 		"url" : "/blog/2021/04/07/dns-over-https/"
-		"brief" : "https://github.com/curl/curl/wiki/DNS-over-HTTPS"
+		"brief" : "https://github.com/curl/curl/wiki/DNS-over-HTTPShttps://github.com/DNSCrypt/dnscrypt-resolvers"
 	},
     
 	{

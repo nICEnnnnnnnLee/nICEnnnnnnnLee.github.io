@@ -7,13 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>一种伪装微博位置的方法</title>
-    <meta name="description" content="  此方法不需要使用第三方app mock GPS模拟位置，直接在微博发文内容后加上一段内容即可。话说几年前就发现了这个有趣的东西，发现到现在也没有改动 😳">
+    <title>使用CF-workers打造私人加密DNS</title>
+    <meta name="description" content="许多支持DoH加密公共DNS在国内基本无法使用。在此，我们考虑使用CF workers进行转发，搭建个人使用的DoH服务。">
 
-    <meta property="og:url" content="https://nicelee.top/blog/2019/03/13/weibo-location/">
+    <meta property="og:url" content="https://nicelee.top/blog/2021/08/22/cloudflare-workers-doh-proxy/">
     <meta property="og:site_name" content="NiceLee的博客">
-    <meta property="og:title" content="一种伪装微博位置的方法">
-    <meta property="og:description" content="  此方法不需要使用第三方app mock GPS模拟位置，直接在微博发文内容后加上一段内容即可。话说几年前就发现了这个有趣的东西，发现到现在也没有改动 😳">
+    <meta property="og:title" content="使用CF-workers打造私人加密DNS">
+    <meta property="og:description" content="许多支持DoH加密公共DNS在国内基本无法使用。在此，我们考虑使用CF workers进行转发，搭建个人使用的DoH服务。">
     <meta property="og:image" content="https://nicelee.top/favicon.ico?">
     <meta property="og:image:type" content="image/x-icon">
     
@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="/css/font-awesome.min.css ">
     <link rel="stylesheet" href="/css/font-ali.css?v=1.2 ">
     <link rel="stylesheet" href="/css/main.css?v=1.1 ">
-    <link rel="canonical" href="https://nicelee.top/blog/2019/03/13/weibo-location/">
+    <link rel="canonical" href="https://nicelee.top/blog/2021/08/22/cloudflare-workers-doh-proxy/">
     <link rel="alternate" type="application/rss+xml" title="NiceLeeのBlog" href="https://nicelee.top/feed.xml ">
 
 	
@@ -270,11 +270,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>一种伪装微博位置的方法</h1>
+        <h1>使用CF-workers打造私人加密DNS</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2019-03-13
+                <i class="fa fa-calendar"></i>2021-08-22
             </div>
 
             <div class="label-card">
@@ -297,7 +297,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/blog/category/#小技巧" title="Category: 小技巧" rel="category">小技巧</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -314,8 +314,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/blog/tag/#%E5%BE%AE%E5%8D%9A" title="Tag: 微博" rel="tag">微博</a-->
-        <a href="/blog/tag/#微博" title="Tag: 微博" rel="tag">微博</a>
+        <!--a href="/blog/tag/#cloudflare" title="Tag: cloudflare" rel="tag">cloudflare</a-->
+        <a href="/blog/tag/#cloudflare" title="Tag: cloudflare" rel="tag">cloudflare</a>
     
   
 
@@ -327,41 +327,84 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#实现步骤" id="markdown-toc-实现步骤">实现步骤</a></li>
+  <li><a href="#前言" id="markdown-toc-前言">前言</a>    <ul>
+      <li><a href="#doh与普通dns的比较" id="markdown-toc-doh与普通dns的比较">DoH与普通DNS的比较</a></li>
+      <li><a href="#实现原理" id="markdown-toc-实现原理">实现原理</a></li>
+      <li><a href="#具体实现" id="markdown-toc-具体实现">具体实现</a></li>
+      <li><a href="#其它" id="markdown-toc-其它">其它</a></li>
+    </ul>
+  </li>
 </ul>
-<blockquote>
-  <p>此方法不需要使用第三方app mock GPS模拟位置，直接在微博发文内容后加上一段内容即可。<br />
-话说几年前就发现了这个有趣的东西，发现到现在也没有改动 😳</p>
-</blockquote>
+<p>许多支持DoH加密公共DNS在国内基本无法使用。<br />
+在此，我们考虑使用CF workers进行转发，搭建个人使用的DoH服务。</p>
 
-<h2 id="实现步骤">实现步骤</h2>
-<p>举个例子一步一步操作吧。<br />
-如果我想伪装成在<strong>美国纽约</strong>发微博 -</p>
-
+<h2 id="前言">前言</h2>
+<h3 id="doh与普通dns的比较">DoH与普通DNS的比较</h3>
 <ul>
   <li>
-    <p>打开<a href="http://place.weibo.com">http://place.weibo.com</a></p>
+    <p>普通DNS的传播是基于UDP的，其内容对转发者是透明的，故而消息容易伪造。<br />
+具体可参考<a href="https://datatracker.ietf.org/doc/html/rfc1035">RFC8484</a></p>
   </li>
   <li>
-    <p>搜索<strong>纽约</strong><br />
-<img src="/sources/archive/2019/03/weibo-place.png" alt="" /></p>
+    <p>DoH(DNS over HTTPS), 即利用HTTPS协议建立通道传播DNS信息，其内容对转发者是保密的，故而有一定安全性。<br />
+  具体可参考<a href="https://datatracker.ietf.org/doc/html/rfc8484">RFC8484</a></p>
   </li>
   <li>
-    <p>在结果中选择想要的某个地址，从<code class="language-plaintext highlighter-rouge">data-url</code>属性中获取短网址(短网址最佳，其它有可能达不到效果)<br />
-<img src="/sources/archive/2019/03/weibo-place-content.png" alt="" /></p>
-  </li>
-  <li>
-    <p>在发布微博时在内容后面加上抠出来的短网址<br />
-<img src="/sources/archive/2019/03/weibo-place-public.png" alt="" /></p>
-  </li>
-  <li>
-    <p>大功告成，结果如图：<br />
-<img src="/sources/archive/2019/03/weibo-place-result.png" alt="" /></p>
+    <p>二者比较，仅仅是DNS报文由UDP改为了HTTPS传输。<br />
+具体来说，假设DNS报文数据为发送<code class="language-plaintext highlighter-rouge">data_query</code>，接收<code class="language-plaintext highlighter-rouge">data_answer</code>，那么：</p>
+    <ul>
+      <li>普通DNS的UDP报文就是<code class="language-plaintext highlighter-rouge">data_query</code>去，<code class="language-plaintext highlighter-rouge">data_answer</code>回</li>
+      <li>DoH则有两种方式：
+        <ul>
+          <li>
+            <p>使用HTTP GET方法，在参数末尾加上base64后的数据，例如：  <br />
+<code class="language-plaintext highlighter-rouge">https://cloudflare-dns.com/dns-query?dns={base64(data_query)}</code></p>
+          </li>
+          <li>使用HTTP POST方法，同普通HTTP POST请求一样，直接上传<code class="language-plaintext highlighter-rouge">data_query</code></li>
+          <li>返回的数据均是<code class="language-plaintext highlighter-rouge">data_answer</code></li>
+        </ul>
+      </li>
+    </ul>
   </li>
 </ul>
 
-<p>PS： 该方法理论上可用于任意终端。<br />
-<img src="/sources/archive/2019/03/weibo-place-result-android.png" alt="" /></p>
+<h3 id="实现原理">实现原理</h3>
+<ul>
+  <li>我们知道：
+    <ul>
+      <li>像谷歌、Cloudflare这些公共DNS并不是停摆了，只是在某些区域无法使用罢了。</li>
+      <li>Cloudflare Workers部署的机器是可以流畅访问这些公共加密DNS的。</li>
+      <li>我们是可以通过Cloudflare Workers提供的域名，或者自己的域名访问Cloudflare Workers的。</li>
+      <li>DoH和访问网页类似，都是进行一个HTTPS请求</li>
+      <li>Cloudflare Workers免费版每天有 10 万次免费请求，对于个人通常足够。</li>
+    </ul>
+  </li>
+  <li>我们只需要使用Cloudflare Workers代理HTTP请求即可。</li>
+</ul>
+
+<h3 id="具体实现">具体实现</h3>
+<p>比较简单，源代码可以使用<a href="https://github.com/tina-hello/doh-cf-workers">tina-hello/doh-cf-workers</a>。<br />
+你可以直接点击ReadMe里面的<code class="language-plaintext highlighter-rouge">Deploy with Workers</code>图标，一步一步来。<br />
+或者，也可以：</p>
+
+<ol>
+  <li>首页：https://workers.cloudflare.com</li>
+  <li>注册，登入，Start building，取一个子域名，Create a Worker。</li>
+  <li>复制 index.js 到左侧代码框，Save and deploy。如果正常，右侧应显示首页。</li>
+  <li>收藏地址框中的 https://xxxx.子域名.workers.dev，以后可直接访问。</li>
+</ol>
+
+<h3 id="其它">其它</h3>
+<ul>
+  <li>服务默认使用的是Cloudflare的公共DNS，如有需要，可对<code class="language-plaintext highlighter-rouge">index.js</code>第8行进行替换。<br />
+公共DNS可参考<a href="/blog/2021/04/07/dns-over-https/">这篇文章</a></li>
+  <li>如果你有自定义域名托管在Cloudflare，你可以将
+如果你想使用的链接是 <code class="language-plaintext highlighter-rouge">https://xxx.com/aaaaa/dns-query?dns=xxxxx</code>
+在添加路由时，建议匹配<code class="language-plaintext highlighter-rouge">xxx.com/aaaaa/dns-query*</code></li>
+</ul>
+
+<p><img src="/sources/archive/2021/08/22.cloudflare.png" alt="" /></p>
+
 
         </article>
         <hr>
@@ -381,13 +424,6 @@
                     
                 
             
-        
-            
-            
-                
-                    
-                
-            
                 
                     
                 
@@ -445,6 +481,13 @@
                 
                     
                 
+            
+                
+                    
+                
+            
+        
+            
             
                 
                     
@@ -463,13 +506,11 @@
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/blog/2019/03/13/game-the-invisible-guardian/">强推 《隐形守护者》</a></p>
+        <p><strong>上一篇</strong> <a href="/blog/2021/08/20/python-face-swap-in-video/">Python 换脸视频的简单实现</a></p>
         
     </div>
     <div class="nex">
 
-        
-        <p><strong>下一篇</strong> <a href="/blog/2019/03/14/little-talk-4/">杂七杂八 不知道要说什么</a></p>
         
     </div>
 </div>
