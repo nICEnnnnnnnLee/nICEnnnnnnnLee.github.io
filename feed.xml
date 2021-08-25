@@ -5,9 +5,57 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 23 Aug 2021 16:32:39 +0800</pubDate>
-    <lastBuildDate>Mon, 23 Aug 2021 16:32:39 +0800</lastBuildDate>
+    <pubDate>Wed, 25 Aug 2021 17:59:41 +0800</pubDate>
+    <lastBuildDate>Wed, 25 Aug 2021 17:59:41 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>使用CF-workers反代Github</title>
+        <description>GitHub时不时被断，公共代理服务有时也有些卡。&lt;br /&gt;
+在此，我们考虑使用CF workers进行反代，个人临时应急用。&lt;br /&gt;
+demo参见&lt;a href=&quot;https://git.n1cee.workers.dev&quot;&gt;https://git.n1cee.workers.dev&lt;/a&gt;。
+</description>
+        <pubDate>Tue, 24 Aug 2021 09:49:01 +0800</pubDate>
+        <pubDateFormat>2021-08-24</pubDateFormat>
+        <link>https://nicelee.top/blog/2021/08/24/cloudflare-workers-github-reverse-proxy/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/08/24/cloudflare-workers-github-reverse-proxy/</guid>
+        
+        <category>cloudflare</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
+    
+      <item>
+        <title>备忘录 freenom注册免费域名要点</title>
+        <description>在freenom上管理已有域名其实没啥要注意的，但注册新域名挺麻烦😳。
+</description>
+        <pubDate>Mon, 23 Aug 2021 09:49:01 +0800</pubDate>
+        <pubDateFormat>2021-08-23</pubDateFormat>
+        <link>https://nicelee.top/blog/2021/08/23/freenom-domain/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/08/23/freenom-domain/</guid>
+        
+        
+        <category>小技巧</category>
+        
+      </item>
+    
+      <item>
+        <title>使用CF-workers搭建短网址服务</title>
+        <description>demo参见&lt;a href=&quot;https://s-url.cf&quot;&gt;https://s-url.cf&lt;/a&gt;。
+</description>
+        <pubDate>Mon, 23 Aug 2021 09:47:01 +0800</pubDate>
+        <pubDateFormat>2021-08-23</pubDateFormat>
+        <link>https://nicelee.top/blog/2021/08/23/cloudflare-workers-short-url/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/08/23/cloudflare-workers-short-url/</guid>
+        
+        <category>cloudflare</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
     
       <item>
         <title>使用CF-workers打造私人加密DNS</title>
@@ -133,58 +181,6 @@ Oppppppppppppssssssssssssssssssssssssssss &lt;br /&gt;
         
         
         <category>小技巧</category>
-        
-      </item>
-    
-      <item>
-        <title>备忘录 Windows下使用OpenSSL 生成自签发证书</title>
-        <description>没有技术含量，仅作备忘。
-</description>
-        <pubDate>Fri, 26 Mar 2021 11:30:01 +0800</pubDate>
-        <pubDateFormat>2021-03-26</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/03/26/win-openssl-cerl/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/03/26/win-openssl-cerl/</guid>
-        
-        <category>知识库</category>
-        
-        
-        <category>小技巧</category>
-        
-      </item>
-    
-      <item>
-        <title>Python 一种基于SNI的HTTPS代理</title>
-        <description>听人说起这个idea，感觉挺有意思(虽然没有什么大的用处)
-</description>
-        <pubDate>Fri, 19 Mar 2021 11:49:01 +0800</pubDate>
-        <pubDateFormat>2021-03-19</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/03/19/python-https-sni-proxy/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/03/19/python-https-sni-proxy/</guid>
-        
-        <category>Python</category>
-        
-        <category>Http</category>
-        
-        <category>代理</category>
-        
-        
-        <category>代码片段</category>
-        
-      </item>
-    
-      <item>
-        <title>杂七杂八 不知该说些啥但就是不吐不快</title>
-        <description>Firefox浏览器在未经我的允许下自动升级了。
-</description>
-        <pubDate>Thu, 11 Mar 2021 11:49:01 +0800</pubDate>
-        <pubDateFormat>2021-03-11</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/03/11/something-about-something/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/03/11/something-about-something/</guid>
-        
-        <category>闲话</category>
-        
-        
-        <category>杂七杂八</category>
         
       </item>
     

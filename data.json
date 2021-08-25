@@ -2,6 +2,27 @@
 	"code" : 0 ,
 	"data" : [
 	{
+		"title" : "使用CF-workers反代Github",
+		"tags" : "cloudflare",
+		"url" : "/blog/2021/08/24/cloudflare-workers-github-reverse-proxy/"
+		"brief" : "GitHub时不时被断，公共代理服务有时也有些卡。在此，我们考虑使用CFworkers进行反代，个人临时应急用。demo参见https://git.n1cee.workers.dev。"
+	},
+    
+	{
+		"title" : "备忘录 freenom注册免费域名要点",
+		"tags" : "",
+		"url" : "/blog/2021/08/23/freenom-domain/"
+		"brief" : "在freenom上管理已有域名其实没啥要注意的，但注册新域名挺麻烦😳。"
+	},
+    
+	{
+		"title" : "使用CF-workers搭建短网址服务",
+		"tags" : "cloudflare",
+		"url" : "/blog/2021/08/23/cloudflare-workers-short-url/"
+		"brief" : "demo参见https://s-url.cf。"
+	},
+    
+	{
 		"title" : "使用CF-workers打造私人加密DNS",
 		"tags" : "cloudflare",
 		"url" : "/blog/2021/08/22/cloudflare-workers-doh-proxy/"
