@@ -5,20 +5,20 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 25 Aug 2021 18:14:31 +0800</pubDate>
-    <lastBuildDate>Wed, 25 Aug 2021 18:14:31 +0800</lastBuildDate>
+    <pubDate>Thu, 26 Aug 2021 14:42:52 +0800</pubDate>
+    <lastBuildDate>Thu, 26 Aug 2021 14:42:52 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
-        <title>使用CF-workers反代Github</title>
+        <title>使用CF-workers代理Github</title>
         <description>GitHub时不时被断，公共代理服务有时也有些卡。&lt;br /&gt;
-在此，我们考虑使用CF workers进行反代，个人临时应急用。&lt;br /&gt;
+在此，我们考虑使用CF workers进行代理，个人临时应急用。&lt;br /&gt;
 demo参见&lt;a href=&quot;https://git.n1cee.workers.dev&quot;&gt;https://git.n1cee.workers.dev&lt;/a&gt;。
 </description>
-        <pubDate>Tue, 24 Aug 2021 09:49:01 +0800</pubDate>
-        <pubDateFormat>2021-08-24</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/08/24/cloudflare-workers-github-reverse-proxy/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/08/24/cloudflare-workers-github-reverse-proxy/</guid>
+        <pubDate>Wed, 25 Aug 2021 09:49:01 +0800</pubDate>
+        <pubDateFormat>2021-08-25</pubDateFormat>
+        <link>https://nicelee.top/blog/2021/08/25/cloudflare-workers-github-proxy/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/08/25/cloudflare-workers-github-proxy/</guid>
         
         <category>cloudflare</category>
         

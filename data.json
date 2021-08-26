@@ -2,10 +2,10 @@
 	"code" : 0 ,
 	"data" : [
 	{
-		"title" : "使用CF-workers反代Github",
+		"title" : "使用CF-workers代理Github",
 		"tags" : "cloudflare",
-		"url" : "/blog/2021/08/24/cloudflare-workers-github-reverse-proxy/"
-		"brief" : "GitHub时不时被断，公共代理服务有时也有些卡。在此，我们考虑使用CFworkers进行反代，个人临时应急用。demo参见https://git.n1cee.workers.dev。"
+		"url" : "/blog/2021/08/25/cloudflare-workers-github-proxy/"
+		"brief" : "GitHub时不时被断，公共代理服务有时也有些卡。在此，我们考虑使用CFworkers进行代理，个人临时应急用。demo参见https://git.n1cee.workers.dev。"
 	},
     
 	{

@@ -7,13 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>使用CF-workers反代Github</title>
-    <meta name="description" content="GitHub时不时被断，公共代理服务有时也有些卡。在此，我们考虑使用CF workers进行反代，个人临时应急用。demo参见https://git.n1cee.workers.dev。">
+    <title>使用CF-workers代理Github</title>
+    <meta name="description" content="GitHub时不时被断，公共代理服务有时也有些卡。在此，我们考虑使用CF workers进行代理，个人临时应急用。demo参见https://git.n1cee.workers.dev。">
 
-    <meta property="og:url" content="https://nicelee.top/blog/2021/08/24/cloudflare-workers-github-reverse-proxy/">
+    <meta property="og:url" content="https://nicelee.top/blog/2021/08/25/cloudflare-workers-github-proxy/">
     <meta property="og:site_name" content="NiceLee的博客">
-    <meta property="og:title" content="使用CF-workers反代Github">
-    <meta property="og:description" content="GitHub时不时被断，公共代理服务有时也有些卡。在此，我们考虑使用CF workers进行反代，个人临时应急用。demo参见https://git.n1cee.workers.dev。">
+    <meta property="og:title" content="使用CF-workers代理Github">
+    <meta property="og:description" content="GitHub时不时被断，公共代理服务有时也有些卡。在此，我们考虑使用CF workers进行代理，个人临时应急用。demo参见https://git.n1cee.workers.dev。">
     <meta property="og:image" content="https://nicelee.top/favicon.ico?">
     <meta property="og:image:type" content="image/x-icon">
     
@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="/css/font-awesome.min.css ">
     <link rel="stylesheet" href="/css/font-ali.css?v=1.2 ">
     <link rel="stylesheet" href="/css/main.css?v=1.1 ">
-    <link rel="canonical" href="https://nicelee.top/blog/2021/08/24/cloudflare-workers-github-reverse-proxy/">
+    <link rel="canonical" href="https://nicelee.top/blog/2021/08/25/cloudflare-workers-github-proxy/">
     <link rel="alternate" type="application/rss+xml" title="NiceLeeのBlog" href="https://nicelee.top/feed.xml ">
 
 	
@@ -270,11 +270,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>使用CF-workers反代Github</h1>
+        <h1>使用CF-workers代理Github</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2021-08-24
+                <i class="fa fa-calendar"></i>2021-08-25
             </div>
 
             <div class="label-card">
@@ -335,7 +335,7 @@
   <li><a href="#如何将自己的域名解析到wokers上" id="markdown-toc-如何将自己的域名解析到wokers上">如何将自己的域名解析到wokers上</a></li>
 </ul>
 <p>GitHub时不时被断，公共代理服务有时也有些卡。<br />
-在此，我们考虑使用CF workers进行反代，个人临时应急用。<br />
+在此，我们考虑使用CF workers进行代理，个人临时应急用。<br />
 demo参见<a href="https://git.n1cee.workers.dev">https://git.n1cee.workers.dev</a>。</p>
 
 <h2 id="内容">内容</h2>
