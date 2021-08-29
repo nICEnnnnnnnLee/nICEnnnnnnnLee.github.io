@@ -339,7 +339,7 @@
 <p>本版本增加了短网址过期时间设置，以及一个简单的首页鉴权。</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>index.js 第6~7行
-开启健全后，需要加入?token={VALID_TOKEN}后缀，例如 https://xxx.com/?token=123
+开启鉴权后，需要加入?token={VALID_TOKEN}后缀，例如 https://xxx.com/?token=123
 
 const VALID_TOKEN = '123'  // '' 为首页不鉴权
 const RECORD_TTL = 60*60*24 // 0 为永久保存
