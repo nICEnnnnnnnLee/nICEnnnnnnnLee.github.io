@@ -2,6 +2,20 @@
 	"code" : 0 ,
 	"data" : [
 	{
+		"title" : "【资源】关于免费的域名邮箱托管",
+		"tags" : "",
+		"url" : "/blog/2021/09/07/email-host/"
+		"brief" : "以前使用的是Yandex，但Yandex早就收费了。心血来潮，还是搜了一下咋白嫖。"
+	},
+    
+	{
+		"title" : "【工具】关于邮箱app",
+		"tags" : "",
+		"url" : "/blog/2021/09/07/email-app/"
+		"brief" : "因为有很多邮箱，新浪、QQ、网易163、yeah等等，手机端一直以来用的是网易邮箱大师。我只是偶尔在移动端用用，但是每次使用新浪都会报异常IP，这就很烦。"
+	},
+    
+	{
 		"title" : "使用CF-workers代理Github",
 		"tags" : "cloudflare",
 		"url" : "/blog/2021/08/25/cloudflare-workers-github-proxy/"
