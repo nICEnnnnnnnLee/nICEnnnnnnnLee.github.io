@@ -7,13 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Java 真香！如何给Gif添加对白(四)</title>
-    <meta name="description" content="如何获取GIF素材。">
+    <title>备忘录 Azure单页应用授权 + keeweb Web应用部署问题</title>
+    <meta name="description" content="最近在折腾密码管理软件，相中了keepass。使用它的数据库的开源软件有很多，选择了keeweb(js写的，可以是桌面、Web应用，跨平台很好),以及keepass2android(Android端)。倒腾了许久，最终数据同步用的是坚果云的Webdav。但是有个缺点，因为浏览器请求会带上Origin等头部，因为跨...">
 
-    <meta property="og:url" content="https://nicelee.top/blog/2020/06/15/java-add-text-to-gif-4/">
+    <meta property="og:url" content="https://nicelee.top/blog/2021/09/08/keepass-onedrive/">
     <meta property="og:site_name" content="NiceLee的博客">
-    <meta property="og:title" content="Java 真香！如何给Gif添加对白(四)">
-    <meta property="og:description" content="如何获取GIF素材。">
+    <meta property="og:title" content="备忘录 Azure单页应用授权 + keeweb Web应用部署问题">
+    <meta property="og:description" content="最近在折腾密码管理软件，相中了keepass。使用它的数据库的开源软件有很多，选择了keeweb(js写的，可以是桌面、Web应用，跨平台很好),以及keepass2android(Android端)。倒腾了许久，最终数据同步用的是坚果云的Webdav。但是有个缺点，因为浏览器请求会带上Origin等头部，因为跨...">
     <meta property="og:image" content="https://nicelee.top/favicon.ico?">
     <meta property="og:image:type" content="image/x-icon">
     
@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="/css/font-awesome.min.css ">
     <link rel="stylesheet" href="/css/font-ali.css?v=1.2 ">
     <link rel="stylesheet" href="/css/main.css?v=1.1 ">
-    <link rel="canonical" href="https://nicelee.top/blog/2020/06/15/java-add-text-to-gif-4/">
+    <link rel="canonical" href="https://nicelee.top/blog/2021/09/08/keepass-onedrive/">
     <link rel="alternate" type="application/rss+xml" title="NiceLeeのBlog" href="https://nicelee.top/feed.xml ">
 
 	
@@ -272,11 +272,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>Java 真香！如何给Gif添加对白(四)</h1>
+        <h1>备忘录 Azure单页应用授权 + keeweb Web应用部署问题</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2020-06-15
+                <i class="fa fa-calendar"></i>2021-09-08
             </div>
 
             <div class="label-card">
@@ -299,7 +299,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#小技巧" title="Category: 小技巧" rel="category">小技巧</a>
     
   
 
@@ -316,9 +316,6 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>
-    
   
 
 </span>
@@ -329,67 +326,71 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
-  <li><a href="#实现" id="markdown-toc-实现">实现</a></li>
-  <li><a href="#源码" id="markdown-toc-源码">源码</a></li>
+  <li><a href="#问题复现" id="markdown-toc-问题复现">问题复现</a></li>
+  <li><a href="#问题分析" id="markdown-toc-问题分析">问题分析</a></li>
+  <li><a href="#问题解决" id="markdown-toc-问题解决">问题解决</a></li>
 </ul>
-<p>如何获取GIF素材。</p>
+<p>最近在折腾密码管理软件，相中了keepass。<br />
+使用它的数据库的开源软件有很多，选择了<a href="https://github.com/keeweb/keeweb">keeweb</a>(js写的，可以是桌面、Web应用，跨平台很好),<br />
+以及<a href="https://github.com/PhilippC/keepass2android">keepass2android</a>(Android端)。<br />
+倒腾了许久，最终数据同步用的是坚果云的Webdav。<br />
+但是有个缺点，因为浏览器请求会带上Origin等头部，因为跨域安全问题导致Web应用无法使用坚果云。 <br />
+所以Web应用只能尝试使用微软的Onedrive。</p>
 
-<h2 id="前言">前言</h2>
+<h2 id="问题复现">问题复现</h2>
 <ul>
-  <li>光是文字没啥具体指向，先把网上的一个成品贴出来：
+  <li>参照<a href="https://github.com/keeweb/keeweb/wiki/Dropbox%20and%20GDrive">Wiki</a>进行Onedrive的配置</li>
+  <li>单页应用直接copy的<a href="https://github.com/keeweb/keeweb/tree/gh-pages">gh-pages</a>分支</li>
+  <li>这里采取的是在url参数里面指定配置路径
     <ul>
-      <li><a href="https://www.gifhome.com/diy/8.html">王境泽吃饭对话表情包</a></li>
+      <li>https://your-keeweb-deployment-url/?config=your-config.json</li>
+      <li>json的内容为
+        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">  </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"onedriveClientId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xxx"</span><span class="p">,</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre></div>        </div>
+      </li>
     </ul>
   </li>
-  <li>前面已经把工具基本都做好了(好吧，只是讲了简单的原理，复杂的功能实现其实就是拼积木)。<br />
-接下来要开始正式动工了。以<code class="language-plaintext highlighter-rouge">真香.gif</code>为例，我们应该怎么做呢？
+  <li>最后在浏览器Web应用里使用OneDrive时，报错
     <ul>
-      <li>获取素材(没有对话的GIF + 标准对话的GIF)</li>
-      <li>分离有对话的GIF，观察各个jpg图像，弄清楚有几段对话，分别出现在第几帧到第几帧，比如：
-        <ul>
-          <li><strong>我就是饿死</strong>： 第0~8帧</li>
-          <li><strong>死外边，从这里跳下去</strong>： 第12~23帧</li>
-          <li><strong>不会吃你们一点东西</strong>： 第25~34帧</li>
-          <li><strong>真香</strong>： 第37~47帧</li>
-        </ul>
+      <li>log如下：
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  [storage-onedrive] OAuth error invalid_request The request is not valid for the application's 'userAudience' configuration. In order to use /common/ endpoint, the application must not be configured with 'Consumer' as the user audience. The userAudience should be configured with 'All' to use /common/ endpoint. xxxxx.xxx.com:1:450893
+  [storage-onedrive] OAuth error popup closed
+</code></pre></div>        </div>
       </li>
-      <li>对话的文字应当摆放到图像的哪个位置
-        <ul>
-          <li>这里主要是Y坐标要微调，X坐标可以根据对话长度自动计算</li>
-        </ul>
-      </li>
-      <li>根据调试好的参数，以没有对话的GIF为模板，加上自定义对话，生成GIF</li>
     </ul>
   </li>
 </ul>
 
-<h2 id="实现">实现</h2>
-<p>如何获取GIF素材呢？</p>
+<h2 id="问题分析">问题分析</h2>
 <ul>
-  <li>访问<a href="https://www.gifhome.com/dt/">GIF之家</a>(可以是别的，知道这个意思即可)</li>
-  <li>搜索<code class="language-plaintext highlighter-rouge">王境泽</code>，找到表情包<a href="https://www.gifhome.com/diy/8.html">https://www.gifhome.com/diy/8.html</a> <br />
-<img src="/sources/archive/2020/06/search.png" alt="" /></li>
-  <li>下载标准对话的GIF，这个很好办，不用多说</li>
-  <li>下载没有对话的GIF
+  <li>在<a href="https://github.com/dotnet/AspNetCore.Docs/issues/19795">dotnet/AspNetCore.Docs#19795</a>找到答案：
     <ul>
-      <li>对话为空时提示<code class="language-plaintext highlighter-rouge">请输入对话内容</code>，怎么办呢? <br />
-  <img src="/sources/archive/2020/06/input-none.png" alt="" /></li>
-      <li>搜索<code class="language-plaintext highlighter-rouge">请输入对话内容</code>，可以发现有个判断<code class="language-plaintext highlighter-rouge">util.isNotEmpty</code>，把这个hook掉即可<br />
-  <img src="/sources/archive/2020/06/isEmpty.png" alt="" />
-        <ul>
-          <li>按<code class="language-plaintext highlighter-rouge">F12</code>键，打开控制台</li>
-          <li>输入<code class="language-plaintext highlighter-rouge">util.isNotEmpty=function(){return true;}</code><br />
-  <img src="/sources/archive/2020/06/hookJs.png" alt="" /></li>
-          <li>对话全空格，点击提交，然后下载即可</li>
-        </ul>
-      </li>
+      <li>×    https://login.microsoftonline.com/<del><strong>common</strong></del>/oauth2/v2.0/authorize</li>
+      <li>√    https://login.microsoftonline.com/<strong>consumers</strong>/oauth2/v2.0/authorize</li>
+    </ul>
+  </li>
+  <li>在keeweb项目中，找到类似问题。。。只能说文档不够完善😳
+    <ul>
+      <li><a href="https://git.nicelee.top/keeweb/keeweb/issues/1672">#1672 OneDrive does not load in web app, but works fine from desktop</a></li>
+      <li><a href="https://git.nicelee.top/keeweb/keeweb/issues/1633">#1633 One drive single tenant mode</a></li>
+      <li><a href="https://git.nicelee.top/keeweb/keeweb/issues/1265">#1265 OneDrive access error when logged in in private and business account</a></li>
     </ul>
   </li>
 </ul>
 
-<h2 id="源码">源码</h2>
-<p><a href="https://github.com/ButterAndButterfly/Q-Gif">https://github.com/ButterAndButterfly/Q-Gif</a></p>
+<h2 id="问题解决">问题解决</h2>
+<p>修改配置</p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"onedriveClientId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xxx"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"onedriveTenantId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"consumers"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
 
         </article>
         <hr>
@@ -404,11 +405,6 @@
         
             
             
-        
-            
-            
-                
-                    
                 
             
         
@@ -418,33 +414,26 @@
             
             
                 
-                    
+            
+        
+            
+            
                 
             
         
             
             
                 
-                    
-                
             
         
             
             
                 
-                    
+            
                 
             
         
             
-            
-                
-                    
-                
-            
-                
-                    
-                
             
         
             
@@ -455,13 +444,11 @@
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/blog/2020/06/15/java-add-text-to-gif-3/">Java 真香！如何给Gif添加对白(三)</a></p>
+        <p><strong>上一篇</strong> <a href="/blog/2021/09/07/email-host/">【资源】关于免费的域名邮箱托管</a></p>
         
     </div>
     <div class="nex">
 
-        
-        <p><strong>下一篇</strong> <a href="/blog/2020/06/17/java-add-text-to-gif-5/">Java 真香！如何给Gif添加对白(五)</a></p>
         
     </div>
 </div>

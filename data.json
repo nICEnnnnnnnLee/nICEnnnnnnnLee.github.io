@@ -2,6 +2,13 @@
 	"code" : 0 ,
 	"data" : [
 	{
+		"title" : "备忘录 Azure单页应用授权 + keeweb Web应用部署问题",
+		"tags" : "",
+		"url" : "/blog/2021/09/08/keepass-onedrive/"
+		"brief" : "最近在折腾密码管理软件，相中了keepass。使用它的数据库的开源软件有很多，选择了keeweb(js写的，可以是桌面、Web应用，跨平台很好),以及keepass2android(Android端)。倒腾了许久，最终数据同步用的是坚果云的Webdav。但是有个缺点，因为浏览器请求会带上Origin等头部，因为跨域安全问题导致Web应用无法使用坚果云。所以Web应用只能尝试使用微软的Onedrive。"
+	},
+    
+	{
 		"title" : "【资源】关于免费的域名邮箱托管",
 		"tags" : "",
 		"url" : "/blog/2021/09/07/email-host/"

@@ -5,9 +5,28 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 07 Sep 2021 17:30:19 +0800</pubDate>
-    <lastBuildDate>Tue, 07 Sep 2021 17:30:19 +0800</lastBuildDate>
+    <pubDate>Wed, 08 Sep 2021 17:51:18 +0800</pubDate>
+    <lastBuildDate>Wed, 08 Sep 2021 17:51:18 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>备忘录 Azure单页应用授权 + keeweb Web应用部署问题</title>
+        <description>最近在折腾密码管理软件，相中了keepass。&lt;br /&gt;
+使用它的数据库的开源软件有很多，选择了&lt;a href=&quot;https://github.com/keeweb/keeweb&quot;&gt;keeweb&lt;/a&gt;(js写的，可以是桌面、Web应用，跨平台很好),&lt;br /&gt;
+以及&lt;a href=&quot;https://github.com/PhilippC/keepass2android&quot;&gt;keepass2android&lt;/a&gt;(Android端)。&lt;br /&gt;
+倒腾了许久，最终数据同步用的是坚果云的Webdav。&lt;br /&gt;
+但是有个缺点，因为浏览器请求会带上Origin等头部，因为跨域安全问题导致Web应用无法使用坚果云。 &lt;br /&gt;
+所以Web应用只能尝试使用微软的Onedrive。
+</description>
+        <pubDate>Wed, 08 Sep 2021 16:49:01 +0800</pubDate>
+        <pubDateFormat>2021-09-08</pubDateFormat>
+        <link>https://nicelee.top/blog/2021/09/08/keepass-onedrive/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/09/08/keepass-onedrive/</guid>
+        
+        
+        <category>小技巧</category>
+        
+      </item>
     
       <item>
         <title>【资源】关于免费的域名邮箱托管</title>
@@ -151,20 +170,6 @@ demo参见&lt;a href=&quot;https://git.n1cee.workers.dev&quot;&gt;https://git.n1
         <pubDateFormat>2021-04-07</pubDateFormat>
         <link>https://nicelee.top/blog/2021/04/07/dns-over-https/</link>
         <guid isPermaLink="true">https://nicelee.top/blog/2021/04/07/dns-over-https/</guid>
-        
-        
-        <category>代码片段</category>
-        
-      </item>
-    
-      <item>
-        <title>备忘录 关于IP的地域判断(是否CN)</title>
-        <description>这类问题其实就是数据再加上解析的问题。
-</description>
-        <pubDate>Tue, 06 Apr 2021 11:49:01 +0800</pubDate>
-        <pubDateFormat>2021-04-06</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/04/06/cn-ip/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/04/06/cn-ip/</guid>
         
         
         <category>代码片段</category>
