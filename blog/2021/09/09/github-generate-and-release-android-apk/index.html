@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>一次GitHub Action自动化发布集成部署(Android 篇)</title>
+    <meta name="description" content="分为三步。  在本地实现脱离IDE直接脚本打包。  分离敏感资源，确定在远程部署这些的方式方法。  在Github Actions机器上实现脚本打包并发布。">
+
+    <meta property="og:url" content="https://nicelee.top/blog/2021/09/09/github-generate-and-release-android-apk/">
+    <meta property="og:site_name" content="NiceLee的博客">
+    <meta property="og:title" content="一次GitHub Action自动化发布集成部署(Android 篇)">
+    <meta property="og:description" content="分为三步。  在本地实现脱离IDE直接脚本打包。  分离敏感资源，确定在远程部署这些的方式方法。  在Github Actions机器上实现脚本打包并发布。">
+    <meta property="og:image" content="https://nicelee.top/favicon.ico?">
+    <meta property="og:image:type" content="image/x-icon">
+    
+    <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="stylesheet" href="/css/font-awesome.min.css ">
+    <link rel="stylesheet" href="/css/font-ali.css?v=1.2 ">
+    <link rel="stylesheet" href="/css/main.css?v=1.1 ">
+    <link rel="canonical" href="https://nicelee.top/blog/2021/09/09/github-generate-and-release-android-apk/">
+    <link rel="alternate" type="application/rss+xml" title="NiceLeeのBlog" href="https://nicelee.top/feed.xml ">
+
+	
+
+    <script>
+    // 百度统计代码
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?11f780e4e4ccd4e99b101eac776e93e4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+</head>
+
+    <link rel="stylesheet" href="/sources/live2d/css/live2d.css" />
+  <body>
+	
+		
+		<script type="text/javascript" src="/js/ribbon.min.js "></script>
+		
+	
+	
+    <header id="top">
+    <div class="wrapper">
+        <a href="/blog/" class="brand awsome-font">NiceLeeのBlog</a>
+        <small>用爱发电 bilibili~</small>
+        <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
+        <nav id="headerNav">
+            <ul>
+				<li onclick="showdiv()" >
+                    <a href="#">
+                    <i class="fa fa-search">搜索</i>
+                    </a>
+                </li>
+                <li>
+                    
+                    <a href="/blog/">
+                    
+                        <i class="fa fa-home"></i>主页
+                    </a>
+                </li>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <a href="/blog/archive/">
+                        
+                            <i class="fa fa-archive"></i>归档
+                        </a>
+                    </li>
+                
+                    
+                    <li>
+                        <a href="/ilikemusic/">
+                        
+                            <i class="fa fa-music"></i>音乐
+                        </a>
+                    </li>
+                
+                    
+                    <li>
+                        <a href="/collect/">
+                        
+                            <i class="fa fa-bookmark"></i>收藏
+                        </a>
+                    </li>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <a href="/blog/timeline/">
+                        
+                            <i class="fa fa-clock-o"></i>时间轴
+                        </a>
+                    </li>
+                
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <a href="/about/">
+                        
+                            <i class="fa fa-info-circle"></i>关于
+                        </a>
+                    </li>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                				
+				
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+        <div class="page clearfix" post>
+    <div class="left">
+        <h1>一次GitHub Action自动化发布集成部署(Android 篇)</h1>
+        <div class="label">
+
+            <div class="label-card">
+                <i class="fa fa-calendar"></i>2021-09-09
+            </div>
+
+            <div class="label-card">
+                <i class="fa fa-user"></i>nIceLee
+                
+            </div>
+            <div class="label-card">
+                <p>阅读：<span id="busuanzi_value_page_pv1"></span></p>
+            </div>
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+            
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+            </div>
+
+            <div class="label-card">
+            
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <!--a href="/blog/tag/#Android" title="Tag: Android" rel="tag">Android</a-->
+        <a href="/blog/tag/#Android" title="Tag: Android" rel="tag">Android</a>&nbsp;
+    
+        <!--a href="/blog/tag/#Github" title="Tag: Github" rel="tag">Github</a-->
+        <a href="/blog/tag/#Github" title="Tag: Github" rel="tag">Github</a>
+    
+  
+
+</span>
+
+            </div>
+
+        </div>
+        <hr>
+        <article itemscope itemtype="http://schema.org/BlogPosting">
+        <ul id="markdown-toc">
+  <li><a href="#本地脚本打包" id="markdown-toc-本地脚本打包">本地脚本打包</a></li>
+  <li><a href="#分离敏感资源" id="markdown-toc-分离敏感资源">分离敏感资源</a></li>
+  <li><a href="#github-actions-打包并发布" id="markdown-toc-github-actions-打包并发布">Github Actions 打包并发布</a></li>
+</ul>
+<p>分为三步。</p>
+<ol>
+  <li>在本地实现脱离IDE直接脚本打包。</li>
+  <li>分离敏感资源，确定在远程部署这些的方式方法。</li>
+  <li>在Github Actions机器上实现脚本打包并发布。</li>
+</ol>
+
+<h2 id="本地脚本打包">本地脚本打包</h2>
+<ul>
+  <li>实际上IDE在创建工程时已经将基本的脚本什么的写好了
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">gradlew</code> - Linux</li>
+      <li><code class="language-plaintext highlighter-rouge">gradlew.bat</code> - Windows</li>
+      <li>配置完毕以后直接运行脚本
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nb">chmod</span> +x gradlew <span class="c">#linux需要先授权, windows不需要</span>
+  ./gradlew assembleRelease
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>混淆(可选)
+    <ul>
+      <li>修改<code class="language-plaintext highlighter-rouge">app/build.gradle</code>文件
+        <div class="language-gradle highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">buildTypes</span> <span class="o">{</span>
+  <span class="n">release</span> <span class="o">{</span>
+      <span class="n">minifyEnabled</span> <span class="kc">true</span>
+      <span class="n">proguardFiles</span> <span class="nf">getDefaultProguardFile</span><span class="o">(</span><span class="s1">'proguard-android-optimize.txt'</span><span class="o">),</span> <span class="s1">'proguard-rules.pro'</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>        </div>
+      </li>
+      <li>根据需要配置<code class="language-plaintext highlighter-rouge">app/proguard-rules.pro</code>文件
+        <details>
+      <summary>proguard-rules.pro</summary>
+        
+  <pre>
+  <blockcode>
+  # Add project specific ProGuard rules here.
+  # You can control the set of applied configuration files using the
+  # proguardFiles setting in build.gradle.
+  #
+  # For more details, see
+  #   http://developer.android.com/guide/developing/tools/proguard.html
+
+  # If your project uses WebView with JS, uncomment the following
+  # and specify the fully qualified class name to the JavaScript interface
+  # class:
+  #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
+  #   public *;
+  #}
+
+  # Uncomment this to preserve the line number information for
+  # debugging stack traces.
+  #-keepattributes SourceFile,LineNumberTable
+
+  # If you keep the line number information, uncomment this to
+  # hide the original source file name.
+  #-renamesourcefileattribute SourceFile
+
+  #############################################
+  #
+  # 基本指令区域（没什么别的需求不需要动）
+  #
+  #############################################
+  # 代码混淆压缩比，在0~7之间，默认为5，一般不做修改
+  -optimizationpasses 5
+
+  # 混合时不使用大小写混合，混合后的类名为小写
+  -dontusemixedcaseclassnames
+
+  # 指定不去忽略非公共库的类
+  -dontskipnonpubliclibraryclasses
+
+  # 这句话能够使我们的项目混淆后产生映射文件
+  # 包含有类名-&gt;混淆后类名的映射关系
+  -verbose
+
+  # 指定不去忽略非公共库的类成员
+  -dontskipnonpubliclibraryclassmembers
+
+  # 不做预校验，preverify是proguard的四个步骤之一，Android不需要preverify，去掉这一步能够加快混淆速度。
+  -dontpreverify
+
+  # 保留Annotation不混淆
+  -keepattributes *Annotation*,InnerClasses
+
+  # 避免混淆泛型
+  -keepattributes Signature
+
+  # 抛出异常时保留代码行号
+  -keepattributes SourceFile,LineNumberTable
+
+  # 指定混淆是采用的算法，后面的参数是一个过滤器
+  # 这个过滤器是谷歌推荐的算法，一般不做更改
+  -optimizations !code/simplification/cast,!field/*,!class/merging/*
+
+
+  #############################################
+  #
+  # Android开发中一些需要保留的公共部分（没什么别的需求不需要动）
+  #
+  #############################################
+
+  # 保留我们使用的四大组件，自定义的Application等等这些类不被混淆
+  # 因为这些子类都有可能被外部调用
+  -keep public class * extends android.app.Activity
+  -keep public class * extends android.app.Appliction
+  -keep public class * extends android.app.Service
+  -keep public class * extends android.content.BroadcastReceiver
+  -keep public class * extends android.content.ContentProvider
+  -keep public class * extends android.app.backup.BackupAgentHelper
+  -keep public class * extends android.preference.Preference
+  -keep public class * extends android.view.View
+  -keep public class com.android.vending.licensing.ILicensingService
+
+
+  # 保留support下的所有类及其内部类
+  -keep class android.support.** {*;}
+
+  # 保留继承的
+  -keep public class * extends androidx.**
+  -keep public class * extends android.support.v4.**
+  -keep public class * extends android.support.v7.**
+  -keep public class * extends android.support.annotation.**
+
+  # 保留R下面的资源
+  -keep class **.R$* {*;}
+
+  # 保留本地native方法不被混淆
+  -keepclasseswithmembernames class * {
+      native <methods>;
+  }
+
+  # 保留在Activity中的方法参数是view的方法，
+  # 这样以来我们在layout中写的onClick就不会被影响
+  -keepclassmembers class * extends android.app.Activity{
+      public void *(android.view.View);
+  }
+
+  # 保留枚举类不被混淆
+  -keepclassmembers enum * {
+      public static **[] values();
+      public static ** valueOf(java.lang.String);
+  }
+
+  # 保留我们自定义控件（继承自View）不被混淆
+  -keep public class * extends android.view.View{
+      *** get*();
+      void set*(***);
+      public <init>(android.content.Context);
+      public <init>(android.content.Context, android.util.AttributeSet);
+      public <init>(android.content.Context, android.util.AttributeSet, int);
+  }
+
+  # 保留Parcelable序列化类不被混淆
+  -keep class * implements android.os.Parcelable {
+      public static final android.os.Parcelable$Creator *;
+  }
+
+  # 保留Serializable序列化的类不被混淆
+  -keepclassmembers class * implements java.io.Serializable {
+      static final long serialVersionUID;
+      private static final java.io.ObjectStreamField[] serialPersistentFields;
+      !static !transient <fields>;
+      !private <fields>;
+      !private <methods>;
+      private void writeObject(java.io.ObjectOutputStream);
+      private void readObject(java.io.ObjectInputStream);
+      java.lang.Object writeReplace();
+      java.lang.Object readResolve();
+  }
+
+  # 对于带有回调函数的onXXEvent、**On*Listener的，不能被混淆
+  -keepclassmembers class * {
+      void *(**On*Event);
+      void *(**On*Listener);
+  }
+
+  # webView处理，项目中没有使用到webView忽略即可
+  #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
+  #    public *;
+  #}
+  #-keepclassmembers class * extends android.webkit.webViewClient {
+  #    public void *(android.webkit.WebView, java.lang.String, android.graphics.Bitmap);
+  #    public boolean *(android.webkit.WebView, java.lang.String);
+  #}
+  #-keepclassmembers class * extends android.webkit.webViewClient {
+  #    public void *(android.webkit.webView, jav.lang.String);
+  #}
+
+  # 移除Log类打印各个等级日志的代码，打正式包的时候可以做为禁log使用，这里可以作为禁止log打印的功能使用
+  # 记得proguard-android.txt中一定不要加-dontoptimize才起作用
+  # 另外的一种实现方案是通过BuildConfig.DEBUG的变量来控制
+  #-assumenosideeffects class android.util.Log {
+  #    public static int v(...);
+  #    public static int i(...);
+  #    public static int w(...);
+  #    public static int d(...);
+  #    public static int e(...);
+  #
+  #############################################
+  #
+  # 项目中特殊处理部分
+  #
+  #############################################
+
+  #-----------处理反射类---------------
+  #-dontwarn aaa.bbb.ccc.model.**
+  -keep class aaa.bbb.ccc.model.** {*;}
+
+  #-----------处理js交互---------------
+
+  #-----------处理实体类---------------
+  # 在开发的时候我们可以将所有的实体类放在一个包内，这样我们写一次混淆就行了。
+  #-keep class com.ghs.ghspm.bean.** { *; }
+
+
+  #-----------处理第三方依赖库---------
+  -keep class io.netty.** { *;}
+  -dontwarn io.netty.**
+  &lt;/blockcode&gt;
+  &lt;/pre&gt;
+  &lt;/details&gt;
+
+</methods></fields></fields></init></init></init></methods></blockcode></pre></details>
+      </li>
+    </ul>
+  </li>
+  <li>签名
+    <ul>
+      <li>
+        <p>修改<code class="language-plaintext highlighter-rouge">app/build.gradle</code>文件</p>
+
+        <div class="language-gradle highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">signingConfigs</span> <span class="o">{</span>
+      <span class="n">release</span><span class="o">{</span>
+          <span class="n">keyAlias</span> <span class="err">这里填写</span><span class="n">keyAlias</span>
+          <span class="n">keyPassword</span> <span class="err">这里填写</span><span class="n">keyPassword</span>
+          <span class="n">storeFile</span> <span class="nf">file</span><span class="o">(</span><span class="err">这里填写</span><span class="n">xxx</span><span class="o">.</span><span class="na">jks</span><span class="err">的路径</span><span class="o">)</span>
+          <span class="n">storePassword</span> <span class="err">这里填写</span><span class="n">storePassword</span>
+      <span class="o">}</span>
+  <span class="o">}</span>
+  <span class="n">buildTypes</span> <span class="o">{</span>
+      <span class="c1">// 这里debug和release使用同样的配置</span>
+      <span class="n">release</span> <span class="o">{</span>
+          <span class="n">signingConfig</span> <span class="n">signingConfigs</span><span class="o">.</span><span class="na">release</span>
+      <span class="o">}</span>
+      <span class="n">debug</span><span class="o">{</span>
+          <span class="n">signingConfig</span> <span class="n">signingConfigs</span><span class="o">.</span><span class="na">release</span>
+      <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="分离敏感资源">分离敏感资源</h2>
+<ul>
+  <li>主要是签名文件和相关密码等，可以将其统一放到额外的配置文件中，它不上传的公共云端。<br />
+此处将敏感信息放入了<code class="language-plaintext highlighter-rouge">signing.properties</code>
+    <ul>
+      <li>app/signing.properties
+        <div class="language-properties highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="py">KEYSTORE_FILE</span> <span class="p">=</span> <span class="s">C:</span><span class="se">\\</span><span class="s">Users</span><span class="se">\\</span><span class="s">xxx</span><span class="se">\\</span><span class="s">abc.jks</span>
+  <span class="py">KEYSTORE_PASSWORD</span> <span class="p">=</span> <span class="s">pwd1</span>
+  <span class="py">KEY_ALIAS</span> <span class="p">=</span> <span class="s">alias_xxxxx</span>
+  <span class="py">KEY_PASSWORD</span> <span class="p">=</span> <span class="s">pwd2</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>app/build.gradle</p>
+
+        <div class="language-gradle highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">// 加载signing.properties 读取配置</span>
+  <span class="n">Properties</span> <span class="n">props</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Properties</span><span class="o">()</span>
+  <span class="n">props</span><span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="n">file</span><span class="o">(</span><span class="s2">"signing.properties"</span><span class="o">)))</span>
+  <span class="n">android</span> <span class="o">{</span>
+      <span class="n">compileSdkVersion</span> <span class="mi">29</span>
+      <span class="n">buildToolsVersion</span> <span class="s2">"29.0.3"</span>
+      <span class="n">defaultConfig</span> <span class="o">{</span>
+          <span class="n">applicationId</span> <span class="s2">"a.b.c"</span>
+          <span class="n">minSdkVersion</span> <span class="mi">24</span>
+          <span class="n">targetSdkVersion</span> <span class="mi">29</span>
+          <span class="n">versionCode</span> <span class="mi">10</span>
+          <span class="n">versionName</span> <span class="s2">"1.2.0r"</span>
+          <span class="n">testInstrumentationRunner</span> <span class="s2">"androidx.test.runner.AndroidJUnitRunner"</span>
+      <span class="o">}</span>
+      <span class="n">signingConfigs</span> <span class="o">{</span>
+          <span class="n">release</span><span class="o">{</span>
+              <span class="n">keyAlias</span> <span class="n">props</span><span class="o">[</span><span class="s1">'KEY_ALIAS'</span><span class="o">]</span>
+              <span class="n">keyPassword</span> <span class="n">props</span><span class="o">[</span><span class="s1">'KEY_PASSWORD'</span><span class="o">]</span>
+              <span class="n">storeFile</span> <span class="nf">file</span><span class="o">(</span><span class="n">props</span><span class="o">[</span><span class="s1">'KEYSTORE_FILE'</span><span class="o">])</span>
+              <span class="n">storePassword</span> <span class="n">props</span><span class="o">[</span><span class="s1">'KEYSTORE_PASSWORD'</span><span class="o">]</span>
+          <span class="o">}</span>
+      <span class="o">}</span>
+      <span class="n">buildTypes</span> <span class="o">{</span>
+          <span class="n">release</span> <span class="o">{</span>
+              <span class="c1">// ...省略其他配置</span>
+              <span class="n">signingConfig</span> <span class="n">signingConfigs</span><span class="o">.</span><span class="na">release</span>
+          <span class="o">}</span>
+          <span class="n">debug</span><span class="o">{</span>
+              <span class="n">signingConfig</span> <span class="n">signingConfigs</span><span class="o">.</span><span class="na">release</span>
+          <span class="o">}</span>
+      <span class="o">}</span>
+  <span class="o">}</span>
+  <span class="c1">// ...省略其他配置</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>如何在云端部署<code class="language-plaintext highlighter-rouge">signing.properties</code>和<code class="language-plaintext highlighter-rouge">abc.jks</code>
+    <ul>
+      <li>signing.properties
+        <ul>
+          <li>机密信息只有<code class="language-plaintext highlighter-rouge">KEYSTORE_PASSWORD</code>、<code class="language-plaintext highlighter-rouge">KEY_ALIAS</code>、<code class="language-plaintext highlighter-rouge">KEY_PASSWORD</code>。</li>
+          <li>我们可以将它们放到Github Repo的secrets里面，然后直接echo写进配置文件</li>
+        </ul>
+      </li>
+      <li>abc.jks
+        <ul>
+          <li>我们可以将它上传到自己私密服务器上，通过wget临时下载至Github Actions的机器上。<br />
+将可以实现该功能的单行shell命令放到Github Repo的secrets里面，其名为 <code class="language-plaintext highlighter-rouge">BASH_DOWNLOAD_JKS</code>。</li>
+          <li>举个例子，我们可以将它上传到我们Github的私有repo里面，并申请一个有接触权限的token。<br />
+此时，<code class="language-plaintext highlighter-rouge">BASH_DOWNLOAD_JKS</code>可以是这样子，里面的变量自己去替换：</li>
+        </ul>
+
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  wget https://raw.githubusercontent.com/<span class="o">{</span>user<span class="o">}</span>/<span class="o">{</span>repo<span class="o">}</span>/<span class="o">{</span>branch<span class="o">}</span>/<span class="o">{</span>path<span class="o">}</span>/abc.jks <span class="nt">--header</span><span class="o">=</span><span class="s2">"Authorization: token {token}"</span> <span class="nt">-O</span> abc.jks
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>Github Action 脚本</p>
+
+        <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Generate signing.properties</span>
+      <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+        <span class="s">rm -rf xxx.jks</span>
+        <span class="s">${{ secrets.BASH_DOWNLOAD_JKS }}</span>
+        <span class="s">echo "KEYSTORE_FILE = ${{github.workspace}}/xxx.jks" &gt; app/signing.properties</span>
+        <span class="s">echo "KEYSTORE_PASSWORD = ${{ secrets.KEYSTORE_PASSWORD }}" &gt;&gt; app/signing.properties</span>
+        <span class="s">echo "KEY_ALIAS = ${{ secrets.KEY_ALIAS }}" &gt;&gt; app/signing.properties</span>
+        <span class="s">echo "KEY_PASSWORD = ${{ secrets.KEY_PASSWORD }}" &gt;&gt; app/signing.properties</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="github-actions-打包并发布">Github Actions 打包并发布</h2>
+<ul>
+  <li>可以参考<a href="/blog/2020/04/08/github-workflow/">一次GitHub Action自动化发布集成部署(Java 篇)</a></li>
+  <li>最终实现的例子<a href="https://github.com/nICEnnnnnnnLee/freedom4NG">freedom4NG</a></li>
+  <li>Workflow的yaml配置如下，当我修改<code class="language-plaintext highlighter-rouge">release.json</code>的信息时，会触发构建。</li>
+</ul>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">android master CI</span>
+
+<span class="na">on</span><span class="pi">:</span>
+  <span class="na">push</span><span class="pi">:</span>
+    <span class="na">branches</span><span class="pi">:</span> <span class="pi">[</span> <span class="nv">master</span> <span class="pi">]</span>
+    <span class="na">paths</span><span class="pi">:</span>
+    <span class="c1"># Trigger only when src/** changes</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">.github/release.json"</span>
+
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">build</span><span class="pi">:</span>
+
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v2</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">set up JDK </span><span class="m">11</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/setup-java@v2</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">java-version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">11'</span>
+          <span class="na">distribution</span><span class="pi">:</span> <span class="s1">'</span><span class="s">adopt'</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Read tag_latest</span>
+        <span class="na">id</span><span class="pi">:</span> <span class="s">tag_latest</span>
+        <span class="na">uses</span><span class="pi">:</span>  <span class="s">ashley-taylor/read-json-property-action@v1.0</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">path</span><span class="pi">:</span> <span class="s">./.github/release.json</span>
+          <span class="na">property</span><span class="pi">:</span> <span class="s">tag_latest</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Read description</span>
+        <span class="na">id</span><span class="pi">:</span> <span class="s">description</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">juliangruber/read-file-action@v1</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">path</span><span class="pi">:</span> <span class="s">./.github/release.info</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Generate signing.properties</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+          <span class="s">rm -rf freedom.jks</span>
+          <span class="s">${{ secrets.BASH_DOWNLOAD_JKS }}</span>
+          <span class="s">echo "KEYSTORE_FILE = ${{github.workspace}}/freedom.jks" &gt; app/signing.properties</span>
+          <span class="s">echo "KEYSTORE_PASSWORD = ${{ secrets.KEYSTORE_PASSWORD }}" &gt;&gt; app/signing.properties</span>
+          <span class="s">echo "KEY_ALIAS = ${{ secrets.KEY_ALIAS }}" &gt;&gt; app/signing.properties</span>
+          <span class="s">echo "KEY_PASSWORD = ${{ secrets.KEY_PASSWORD }}" &gt;&gt; app/signing.properties</span>
+          <span class="s">cat app/signing.properties</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Grant execute permission for gradlew</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">chmod +x gradlew</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Build with Gradle</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">./gradlew assembleRelease</span>
+    
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Create Release</span>
+        <span class="na">id</span><span class="pi">:</span> <span class="s">create_release</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/create-release@latest</span>
+        <span class="na">env</span><span class="pi">:</span>
+          <span class="na">GITHUB_TOKEN</span><span class="pi">:</span> <span class="s">${{ secrets.GITHUB_TOKEN }}</span> 
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">tag_name</span><span class="pi">:</span> <span class="s">${{steps.tag_latest.outputs.value}}</span>
+          <span class="na">release_name</span><span class="pi">:</span> <span class="s">Freedom - v${{steps.tag_latest.outputs.value}}</span>
+          <span class="na">body</span><span class="pi">:</span> <span class="pi">|</span>
+            <span class="s">${{steps.description.outputs.content}}</span>
+          <span class="na">draft</span><span class="pi">:</span> <span class="no">false</span>
+          <span class="na">prerelease</span><span class="pi">:</span> <span class="no">false</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Upload Release Asset</span>
+        <span class="na">id</span><span class="pi">:</span> <span class="s">upload-release-asset</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/upload-release-asset@v1</span>
+        <span class="na">env</span><span class="pi">:</span>
+          <span class="na">GITHUB_TOKEN</span><span class="pi">:</span> <span class="s">${{ secrets.GITHUB_TOKEN }}</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">upload_url</span><span class="pi">:</span> <span class="s">${{ steps.create_release.outputs.upload_url }}</span>
+          <span class="na">asset_path</span><span class="pi">:</span> <span class="s">./app/build/outputs/apk/release/app-release.apk</span>
+          <span class="na">asset_name</span><span class="pi">:</span> <span class="s">Freedom.${{steps.tag_latest.outputs.value}}.apk</span>
+          <span class="na">asset_content_type</span><span class="pi">:</span> <span class="s">application/vnd.android.package-archive</span>
+
+</code></pre></div></div>
+
+
+        </article>
+        <hr>
+
+        
+        
+            
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+        
+        
+
+        <div class="post-recent">
+    <div class="pre">
+        
+        <p><strong>上一篇</strong> <a href="/blog/2021/09/08/keepass-onedrive/">备忘录 Azure单页应用授权 + keeweb Web应用部署问题</a></p>
+        
+    </div>
+    <div class="nex">
+
+        
+        <p><strong>下一篇</strong> <a href="/blog/2021/09/10/watermark-hide-in-image/">知识库 给图片添加数字盲水印</a></p>
+        
+    </div>
+</div>
+
+
+        <!-- <h2 id="comments">评论</h2>  
+        
+
+
+
+ -->
+
+
+    </div>
+    <button class="anchor"><i class="fa fa-anchor"></i></button>
+    <div class="right">
+        <div class="wrap">
+
+            <!-- Content -->
+            <div class="side content">
+                <div>
+                    内容
+                </div>
+                <ul id="content-side" class="content-ul">
+                    
+                    <!-- <li><a href="#comments">评论</a></li> -->
+                </ul>
+            </div>
+			
+            <!-- 其他div框放到这里 -->
+            <!-- <div class="side">bbbb</div> -->
+        </div>
+    </div>
+</div>
+<script>
+/**
+ * target _blank
+ */
+(function() {
+    var aTags = document.querySelectorAll('article a:not([id])')
+    for (var i = 0; i < aTags.length; i++) {
+        aTags[i].setAttribute('target', '_blank')
+    }
+
+}());
+</script>
+<script src="/js/pageContent.js " charset="utf-8"></script>
+
+
+    <footer class="site-footer">
+
+
+    <div class="wrapper">
+        <p class="description">
+             这是一个缺爱的博客(๑‾ ꇴ ‾๑)！ 
+        </p>
+        <p class="contact">
+            联系我: 
+            <a href="https://github.com/nICEnnnnnnnLee" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
+            <a href="mailto:lijia0732@sina.com" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>  
+            <a href="https://weibo.com/blackhigh" title="Weibo"><i class="fa fa-weibo" aria-hidden="true"></i></a>       
+			<span onclick="copyToClipboard('https://nicelee.top/feed.xml')"><a href="#">订阅我<i class="fa fa-gg"></i></a></span>
+        </p>
+        <p>
+            总pv:<span id="busuanzi_value_site_pv"></span>，uv:<span id="busuanzi_value_site_uv"></span>，本页pv:<span id="busuanzi_value_page_pv"></span>
+        </p>
+        <p class="power">
+            <span>
+            有用链接：
+                <a href="http://www.bejson.com/" target="_blank">BeJSON</a> &nbsp;&nbsp;
+                <a href="http://site.ip138.com/"  target="_blank">IP或域名查询</a> &nbsp;&nbsp;
+                <a href="http://ping.chinaz.com/"  target="_blank">各地ping</a> &nbsp;&nbsp;
+                <a href="https://tool.lu/"  target="_blank">在线工具</a> &nbsp;&nbsp; 
+                <a href="https://www.aliyun.com/"  target="_blank">阿里云</a> &nbsp;&nbsp; 
+                <a href="http://patorjk.com/software/taag/"  target="_blank">Text转FIGlet</a> &nbsp;&nbsp; 
+                <a href="https://vercel.com/dashboard"  target="_blank">Vercel</a> &nbsp;&nbsp;
+                <a href="https://dash.cloudflare.com/"  target="_blank">Cloudflare</a> &nbsp;&nbsp;
+                <a href="https://www.webfx.com/tools/emoji-cheat-sheet/"  target="_blank">Emoji😳</a> &nbsp;&nbsp;
+                <a href="https://www.color-hex.com/"  target="_blank">Color-hex</a> &nbsp;&nbsp;
+                <a href="https://hub.fastgit.org/"  target="_blank">Github镜像fastgit</a> &nbsp;&nbsp;
+            </span>
+        </p>
+        <p class="power">
+            <span>
+            除非另有注明，否则本网站上的内容可按 <a href="http://creativecommons.org/licenses/by-nc/4.0/"  target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议许可</a> 或更新版本使用。
+            </span>
+        </p>
+        <p class="power">
+            <span>
+                建站声明详见 <a href="/about/#关于个人博客">[关于]</a>. <a href="/sitemap.xml">[站点地图]</a>. 
+            </span>
+            
+        </p>
+        <p class="power beian">
+        </p>
+		<p class="power">
+            <span>
+                Site powered by <a href="https://jekyllrb.com/">Jekyll</a>.
+            </span>
+            <span>
+                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
+            </span>
+        </p>
+        
+		
+    </div>
+</footer>
+
+
+<!-- mask start -->
+<div id="searchBg"></div>
+<div id="searchDiv">
+	<input id="searchContent" type="text" onkeypress="if(event.keyCode==13) { search();return false;}" value=""/></input>
+    <div id="searchBtn" onclick="search();" /><i class="fa fa-search"></i></div>
+	<span onclick="hidediv();" class="close"></span>
+</div>
+<!-- mask end -->
+<!-- live2d begin -->
+<div id="landlord">
+    <div class="message" style="opacity:0"></div>
+    <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+    <div class="hide-button">隐藏</div>
+</div>
+<!-- live2d end -->
+<script type='text/javascript' src='/js/jquery.min.js '></script>
+<script type='text/javascript'>
+function search(){	
+	var str = document.getElementById("searchContent").value;
+	//console.log(str);
+	setLocalStorage("blogSearchKey",str);
+	hidediv();
+	window.location.href="/blog/archive/";
+}
+function showdiv() {
+	//alert("调用了showdiv()函数");
+	document.getElementById("searchBg").style.display ="block";
+	document.getElementById("searchDiv").style.display ="block";
+
+	//$('body').css("overflow", "hidden");
+	document.getElementsByTagName('body')[0].setAttribute("overflow", "hidden");
+}
+function hidediv() {
+	document.getElementById("searchBg").style.display = 'none';
+	document.getElementById("searchDiv").style.display = 'none';
+	//$('body').css("overflow", "auto");
+	document.getElementsByTagName('body')[0].setAttribute("overflow", "hidden");
+}
+////////////////////////////useful function //////////////////////////////////////
+//写cookies
+function setLocalStorage(name,value)
+{
+	localStorage.setItem(name, JSON.stringify(value));
+}
+//读cookies
+function getLocalStorage(name)
+{
+	return JSON.parse(localStorage.getItem(name));
+}
+//删cookies
+function delLocalStorage(name)
+{
+	localStorage.setItem(name, JSON.stringify(""));
+}
+function copyToClipboard (text) {
+    if(text.indexOf('-') !== -1) {
+        var arr = text.split('-');
+        text = arr[0] + arr[1];
+    }
+    var textArea = document.createElement("textarea");
+      textArea.style.position = 'fixed';
+      textArea.style.top = '0';
+      textArea.style.left = '0';
+      textArea.style.width = '2em';
+      textArea.style.height = '2em';
+      textArea.style.padding = '0';
+      textArea.style.border = 'none';
+      textArea.style.outline = 'none';
+      textArea.style.boxShadow = 'none';
+      textArea.style.background = 'transparent';
+      textArea.value = text;
+      document.body.appendChild(textArea);
+      textArea.select();
+	//alert("调用了复制剪贴板函数");
+      try {
+        var successful = document.execCommand('copy');
+        var msg = successful ? 'Rss源已成功复制到剪贴板' : 'RSS源为:https://nicelee.top/feed.xml';
+		//alert(msg);
+		showTips(msg);
+      } catch (err) {
+		//console.log(err);
+        //alert('该浏览器不支持点击复制到剪贴板');
+		showTips('RSS源为:https://nicelee.top/feed.xml');
+      }
+
+      document.body.removeChild(textArea);
+}
+/*
+<!--  版权维护  -->
+function addLink() {
+//alert("!!!");
+    var body_element = document.body;
+    var selection;
+    selection = window.getSelection();
+    if((selection + "").indexOf("/feed.xml") != -1){
+        return;
+    }
+	if(selection == ""){
+		return;
+	}
+    var locationHref=document.location.href;
+    var appendLink="\r\n------------------------------\r\n 原文出自[ NiceLee的个人博客 ] 转载请保留原文链接: <a href='"+locationHref+"'>"+locationHref+"</a>";
+    if (window.clipboardData) { // Internet Explorer
+        //console.log("调用原生函数");
+        var copytext = selection + appendLink;
+        window.clipboardData.setData ("Text", copytext);
+        return false;
+    } else {
+        //console.log("复杂的套路");
+        var copytext = selection + appendLink;
+        var newdiv = document.createElement('div');
+        newdiv.style.position='absolute';
+        newdiv.style.left='-99999px';
+        body_element.appendChild(newdiv);
+        newdiv.innerHTML = "<pre>" +copytext + "</pre>";
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function() {
+        	body_element.removeChild(newdiv);
+        },0);
+    }
+}
+document.oncopy = addLink;
+*/
+
+//contetn为要显示的内容  
+function showTips( content ){  
+	//alert("调用了复制提示消息函数");
+	//alert("内容为"+ content);
+    //窗口的宽度  
+	//alert(content);
+	var width = 250;
+	var x  = $(window).width()/2 - width/2;	
+	var y = $(window).height()/2 -20;
+	var $i = $("<span/>").text(content);
+	$i.css({
+		"z-index": 999999999999999999999999999,
+		"top": y,
+		"left": x,
+		"position": "absolute",
+		"font-weight": "bold",
+		'padding'   : '3px 5px',  
+		'background': '#8FBC8F',  
+		'font-size' : 12 + 'px',  
+		'margin'    : '0 auto',  
+		'text-align': 'center',  
+		'width'     : width + 'px',  
+		'height'    : 'auto',  
+		'color'     : '#fff'
+	});
+	$("body").append($i);
+	$i.animate({
+		"opacity": 0
+	},
+	3000,
+	function() {
+		//console.log($i.css());
+		$i.remove();
+		//alert('');
+	});
+}     
+</script>
+
+<!-- 窗口失去焦点 -- 别走啊 -->
+<!-- 窗口获得焦点 -- 恢复 -->
+<!-- console 打印figlet-->
+<script>
+var titleOnFocus = document.title;
+var titleOnBlur = "...(*￣０￣)ノ[别走啊…]";
+window.onfocus =function(){
+    document.title = titleOnFocus;
+    //console.log(titleOnFocus);
+}
+window.onblur = function(){
+    document.title = titleOnBlur;
+    //console.log(titleOnBlur);
+}
+
+var figlet = "\n" +
+"        _          _            _               \n" +
+"       (_)        | |          | |              \n" +
+"  _ __  _  ___ ___| | ___  ___ | |_ ___  _ __   \n" +
+" | '_ \\| |/ __/ _ \\ |/ _ \\/ _ \\| __/ _ \\| '_ \\  \n" +
+" | | | | | (_|  __/ |  __/  __/| || (_) | |_) | \n" +
+" |_| |_|_|\\___\\___|_|\\___|\\___(_)__\\___/| .__/  \n" +
+"                                        | |     \n" +
+"                                        |_|     \n" ;
+console.log(figlet);
+console.log("%c小改改爆个照呗\n hentai女个装呗", "color:red;font-size: 50px;font-weight:bold;");
+
+/* 防hentai
+document.onkeydown=function(){
+    var e = window.event||arguments[0];
+    if(e.keyCode==123){
+    	alert('请尊重劳动成果！');
+            return false;
+    }else if((e.ctrlKey)&&(e.shiftKey)&&(e.keyCode==73)){
+    	alert('请尊重劳动成果！');
+            return false;
+    }else if((e.ctrlKey)&&(e.keyCode==85)){
+            alert('请尊重劳动成果！');
+            return false;
+    }else if((e.ctrlKey)&&(e.keyCode==83)){
+           alert('请尊重劳动成果！');
+           return false;
+    }
+}
+document.oncontextmenu=function(){
+	alert('请尊重劳动成果！');
+    return false;
+}*/
+</script>
+
+<!-- live2d Begin-->
+<script type="text/javascript">
+    var message_Path = '/sources/live2d/'
+    var home_Path = 'https://nicelee.top/'
+</script>
+<script type="text/javascript" src="/sources/live2d/js/live2d.js"></script>
+<script type="text/javascript" src="/sources/live2d/js/message.js"></script>
+<script type="text/javascript">
+    var modelList = ["kesshouban_v2", "tia", "wanko", "index", "kanna", "koharu", "umaru", 
+	"22.closet.default.v2", 
+	"22.closet.2018.bls-summer", 
+	"22.closet.2019.summer", 
+	"33.closet.2016.xmas", 
+	"33.closet.2017.tomo-bukatsu", 
+	"33.closet.2018.bls-summer", 
+	"33.closet.2018.bls-winter", 
+	"33.closet.default.v2" ];    
+    var model = modelList[12]; 
+    // kesshouban_v2 血小板
+    // tia  小改改
+    // wanko 小狗狗 
+    // index 魔禁-茵蒂克丝
+    // kanna 康娜龙
+    // koharu 卡哇伊的Q版模型
+    // umaru 干物妹小埋 带声音
+    // 22 哔哩哔哩22娘
+    // 22.v2 哔哩哔哩22娘
+    console.log("live2d模型(小部分)来自官网: http://www.live2d.com/usermanual/cubism2_cn/samples.html");
+    console.log("live2d模型(大部分)来自梦象: https://mx-model.ga/");
+    if( window.document.body.offsetWidth >= 666){
+        loadlive2d("live2d", "/sources/live2d/model/"+ model +"/model.json");
+    }else{
+        //loadlive2d("live2d", "/sources/live2d/model/tia/model_tiny.json");
+        loadlive2d("live2d", "/sources/live2d/model/"+ model +"/model_tiny.json");
+    }
+</script>
+<!-- live2d End-->
+
+<script type="text/javascript">
+	var a_idx = 0;
+	jQuery(document).ready(function($) {
+		$("body").click(function(e) {
+			var a = new Array("大吉大利，今晚吃鸡！", "惊不惊喜，意不意外", "还有这种操作？", "小猪佩奇身上纹，掌声送给社会人", "确认过眼神", "皮一下，很开心", "很好很强大", "C位出道", "你若盛开，清风自来", "如果帅也是一种罪，那我已罪无可赦", "别看资料 ，看聊效！", "感动吗，不敢动", "打call", "我是你的超级英雄");
+			var $i = $("<span/>").text(a[a_idx]);
+			a_idx = (a_idx + 1) % a.length;
+			var x = e.pageX,
+			y = e.pageY;
+			$i.css({
+				"z-index": 999999999999999999999999999,
+				"top": y - 20,
+				"left": x,
+				"position": "absolute",
+				"font-weight": "bold",
+				"color": "#dd3333"
+			});
+			$("body").append($i);
+			$i.animate({
+				"top": y - 180,
+				"opacity": 0
+			},
+			1500,
+			function() {
+				$i.remove();
+				//alert('');
+			});
+		});
+	});
+</script>
+
+
+<script async src="/js/busuanzi.pure.mini.js "></script>
+
+
+    <div class="back-to-top">
+    <a href="#top" data-scroll>
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+    <script src="/js/main.js " charset="utf-8"></script>
+    <script src="/js/smooth-scroll.min.js " charset="utf-8"></script>
+    <script type="text/javascript">
+      smoothScroll.init({
+        speed: 500, // Integer. How fast to complete the scroll in milliseconds
+        easing: 'easeInOutCubic', // Easing pattern to use
+        offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
+      });
+      // 为了底部内容不被遮住
+      $(document).ready(function () {
+        resizeBody();
+      });
+      window.onresize = resizeBody;
+      function resizeBody(){
+        //console.log("resizing Body...");
+        if (window.innerWidth <= 770) {
+            var totalHeight = $("header#top").height() + $(".page.clearfix").height() + $("footer.site-footer").height() +80;
+            document.body.style.height = totalHeight + "px";
+        }else{
+            document.body.style.height = "auto";
+        }
+      }
+    </script>
+	
+	
+    <!-- <script src=" /js/scroll.min.js " charset="utf-8"></script> -->
+  </body>
+
+</html>

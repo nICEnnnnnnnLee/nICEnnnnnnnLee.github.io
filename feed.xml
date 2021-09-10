@@ -5,9 +5,62 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 08 Sep 2021 17:51:18 +0800</pubDate>
-    <lastBuildDate>Wed, 08 Sep 2021 17:51:18 +0800</lastBuildDate>
+    <pubDate>Fri, 10 Sep 2021 22:00:31 +0800</pubDate>
+    <lastBuildDate>Fri, 10 Sep 2021 22:00:31 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>一个低级问题：CDN缓存暴露了我的加密配置页😳</title>
+        <description>今天突然发现不登录也能访问我的私人用的Web应用页面，人傻了。。。
+</description>
+        <pubDate>Fri, 10 Sep 2021 16:59:01 +0800</pubDate>
+        <pubDateFormat>2021-09-10</pubDateFormat>
+        <link>https://nicelee.top/blog/2021/09/10/no-cdn-cache/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/09/10/no-cdn-cache/</guid>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
+    
+      <item>
+        <title>知识库 给图片添加数字盲水印</title>
+        <description>如何将水印隐藏在图片中。
+</description>
+        <pubDate>Fri, 10 Sep 2021 10:59:01 +0800</pubDate>
+        <pubDateFormat>2021-09-10</pubDateFormat>
+        <link>https://nicelee.top/blog/2021/09/10/watermark-hide-in-image/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/09/10/watermark-hide-in-image/</guid>
+        
+        <category>隐写</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
+    
+      <item>
+        <title>一次GitHub Action自动化发布集成部署(Android 篇)</title>
+        <description>分为三步。
+&lt;ol&gt;
+  &lt;li&gt;在本地实现脱离IDE直接脚本打包。&lt;/li&gt;
+  &lt;li&gt;分离敏感资源，确定在远程部署这些的方式方法。&lt;/li&gt;
+  &lt;li&gt;在Github Actions机器上实现脚本打包并发布。&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Thu, 09 Sep 2021 16:49:01 +0800</pubDate>
+        <pubDateFormat>2021-09-09</pubDateFormat>
+        <link>https://nicelee.top/blog/2021/09/09/github-generate-and-release-android-apk/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/09/09/github-generate-and-release-android-apk/</guid>
+        
+        <category>Android</category>
+        
+        <category>Github</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
     
       <item>
         <title>备忘录 Azure单页应用授权 + keeweb Web应用部署问题</title>
@@ -120,59 +173,6 @@ demo参见&lt;a href=&quot;https://git.n1cee.workers.dev&quot;&gt;https://git.n1
         
         
         <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>Python 换脸视频的简单实现</title>
-        <description>基于dlib库的人脸识别，对视频里面的人脸逐帧进行转换。
-</description>
-        <pubDate>Fri, 20 Aug 2021 09:49:01 +0800</pubDate>
-        <pubDateFormat>2021-08-20</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/08/20/python-face-swap-in-video/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/08/20/python-face-swap-in-video/</guid>
-        
-        <category>Python</category>
-        
-        
-        <category>代码片段</category>
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>Python 记一次针对图文混搭反爬的文本数据采集处理</title>
-        <description>偶然发现了一个图片藏文的小技巧😳
-</description>
-        <pubDate>Thu, 29 Jul 2021 09:49:01 +0800</pubDate>
-        <pubDateFormat>2021-07-29</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/07/29/python-something-interesting-about-ocr/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/07/29/python-something-interesting-about-ocr/</guid>
-        
-        <category>Python</category>
-        
-        <category>爬虫</category>
-        
-        
-        <category>代码片段</category>
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>备忘录 关于可用的DNS over HTTPS公共服务器</title>
-        <description>&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://github.com/curl/curl/wiki/DNS-over-HTTPS&lt;/code&gt; &lt;br /&gt;
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://github.com/DNSCrypt/dnscrypt-resolvers&lt;/code&gt;
-</description>
-        <pubDate>Wed, 07 Apr 2021 09:49:01 +0800</pubDate>
-        <pubDateFormat>2021-04-07</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/04/07/dns-over-https/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/04/07/dns-over-https/</guid>
-        
-        
-        <category>代码片段</category>
         
       </item>
     
