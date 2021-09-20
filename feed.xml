@@ -5,9 +5,25 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 10 Sep 2021 22:00:31 +0800</pubDate>
-    <lastBuildDate>Fri, 10 Sep 2021 22:00:31 +0800</lastBuildDate>
+    <pubDate>Mon, 20 Sep 2021 21:06:18 +0800</pubDate>
+    <lastBuildDate>Mon, 20 Sep 2021 21:06:18 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>Python 关于检查域名证书是否过期遇到的问题</title>
+        <description>现在要做这么一件事情，批量监控域名是否快要到期，并作出提醒。
+</description>
+        <pubDate>Tue, 14 Sep 2021 10:59:01 +0800</pubDate>
+        <pubDateFormat>2021-09-14</pubDateFormat>
+        <link>https://nicelee.top/blog/2021/09/14/python-https-cert/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/09/14/python-https-cert/</guid>
+        
+        <category>隐写</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
     
       <item>
         <title>一个低级问题：CDN缓存暴露了我的加密配置页😳</title>
@@ -151,23 +167,6 @@ demo参见&lt;a href=&quot;https://git.n1cee.workers.dev&quot;&gt;https://git.n1
         <pubDateFormat>2021-08-23</pubDateFormat>
         <link>https://nicelee.top/blog/2021/08/23/cloudflare-workers-short-url/</link>
         <guid isPermaLink="true">https://nicelee.top/blog/2021/08/23/cloudflare-workers-short-url/</guid>
-        
-        <category>cloudflare</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>使用CF-workers打造私人加密DNS</title>
-        <description>许多支持DoH加密公共DNS在国内基本无法使用。&lt;br /&gt;
-在此，我们考虑使用CF workers进行转发，搭建个人使用的DoH服务。
-</description>
-        <pubDate>Sun, 22 Aug 2021 09:49:01 +0800</pubDate>
-        <pubDateFormat>2021-08-22</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/08/22/cloudflare-workers-doh-proxy/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/08/22/cloudflare-workers-doh-proxy/</guid>
         
         <category>cloudflare</category>
         
