@@ -5,9 +5,25 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 20 Sep 2021 21:06:18 +0800</pubDate>
-    <lastBuildDate>Mon, 20 Sep 2021 21:06:18 +0800</lastBuildDate>
+    <pubDate>Tue, 28 Sep 2021 13:46:45 +0800</pubDate>
+    <lastBuildDate>Tue, 28 Sep 2021 13:46:45 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>Python 关于斗鱼每日荧光棒礼物的领取</title>
+        <description>每天必须在websocket端进入房间才能领取当日荧光棒，这基本上等价于斗鱼发送弹幕。
+</description>
+        <pubDate>Tue, 28 Sep 2021 10:59:01 +0800</pubDate>
+        <pubDateFormat>2021-09-28</pubDateFormat>
+        <link>https://nicelee.top/blog/2021/09/28/python-douyu-danmu/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/09/28/python-douyu-danmu/</guid>
+        
+        <category>Python</category>
+        
+        
+        <category>代码片段</category>
+        
+      </item>
     
       <item>
         <title>Python 关于检查域名证书是否过期遇到的问题</title>
@@ -18,7 +34,7 @@
         <link>https://nicelee.top/blog/2021/09/14/python-https-cert/</link>
         <guid isPermaLink="true">https://nicelee.top/blog/2021/09/14/python-https-cert/</guid>
         
-        <category>隐写</category>
+        <category>Python</category>
         
         
         <category>技术学习</category>
@@ -156,22 +172,6 @@ demo参见&lt;a href=&quot;https://git.n1cee.workers.dev&quot;&gt;https://git.n1
         
         
         <category>小技巧</category>
-        
-      </item>
-    
-      <item>
-        <title>使用CF-workers搭建短网址服务</title>
-        <description>demo参见&lt;a href=&quot;https://s-url.cf&quot;&gt;https://s-url.cf&lt;/a&gt;。
-</description>
-        <pubDate>Mon, 23 Aug 2021 09:47:01 +0800</pubDate>
-        <pubDateFormat>2021-08-23</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/08/23/cloudflare-workers-short-url/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/08/23/cloudflare-workers-short-url/</guid>
-        
-        <category>cloudflare</category>
-        
-        
-        <category>技术学习</category>
         
       </item>
     
