@@ -5,9 +5,57 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 28 Sep 2021 13:46:45 +0800</pubDate>
-    <lastBuildDate>Tue, 28 Sep 2021 13:46:45 +0800</lastBuildDate>
+    <pubDate>Sun, 10 Oct 2021 23:28:36 +0800</pubDate>
+    <lastBuildDate>Sun, 10 Oct 2021 23:28:36 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>备忘录 根据Dockerfile新建并发布镜像</title>
+        <description>简单的新建并发布镜像。
+</description>
+        <pubDate>Sun, 10 Oct 2021 12:59:01 +0800</pubDate>
+        <pubDateFormat>2021-10-10</pubDateFormat>
+        <link>https://nicelee.top/blog/2021/10/10/docker-notes-3/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/10/10/docker-notes-3/</guid>
+        
+        <category>Docker</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
+    
+      <item>
+        <title>备忘录 Docker镜像的修改更新</title>
+        <description>在现有的镜像上进行修改。
+</description>
+        <pubDate>Sun, 10 Oct 2021 11:59:01 +0800</pubDate>
+        <pubDateFormat>2021-10-10</pubDateFormat>
+        <link>https://nicelee.top/blog/2021/10/10/docker-notes-2/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/10/10/docker-notes-2/</guid>
+        
+        <category>Docker</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
+    
+      <item>
+        <title>备忘录 Docker镜像的使用</title>
+        <description>由于使用不是很频繁，每次基本上都忘了，然后临时搜一下。现在做好笔记。
+</description>
+        <pubDate>Sun, 10 Oct 2021 10:59:01 +0800</pubDate>
+        <pubDateFormat>2021-10-10</pubDateFormat>
+        <link>https://nicelee.top/blog/2021/10/10/docker-notes/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/10/10/docker-notes/</guid>
+        
+        <category>Docker</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
     
       <item>
         <title>Python 关于斗鱼每日荧光棒礼物的领取</title>
@@ -125,53 +173,6 @@
         
         
         <category>工具与资源</category>
-        
-      </item>
-    
-      <item>
-        <title>【工具】关于邮箱app</title>
-        <description>因为有很多邮箱，新浪、QQ、网易163、yeah等等，手机端一直以来用的是网易邮箱大师。 &lt;br /&gt;
-我只是偶尔在移动端用用，但是每次使用新浪都会报异常IP，这就很烦。
-</description>
-        <pubDate>Tue, 07 Sep 2021 09:49:01 +0800</pubDate>
-        <pubDateFormat>2021-09-07</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/09/07/email-app/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/09/07/email-app/</guid>
-        
-        
-        <category>工具与资源</category>
-        
-      </item>
-    
-      <item>
-        <title>使用CF-workers代理Github</title>
-        <description>GitHub时不时被断，公共代理服务有时也有些卡。&lt;br /&gt;
-在此，我们考虑使用CF workers进行代理，个人临时应急用。&lt;br /&gt;
-demo参见&lt;a href=&quot;https://git.n1cee.workers.dev&quot;&gt;https://git.n1cee.workers.dev&lt;/a&gt;。
-</description>
-        <pubDate>Wed, 25 Aug 2021 09:49:01 +0800</pubDate>
-        <pubDateFormat>2021-08-25</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/08/25/cloudflare-workers-github-proxy/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/08/25/cloudflare-workers-github-proxy/</guid>
-        
-        <category>cloudflare</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>备忘录 freenom注册免费域名要点</title>
-        <description>在freenom上管理已有域名其实没啥要注意的，但注册新域名挺麻烦😳。
-</description>
-        <pubDate>Mon, 23 Aug 2021 09:49:01 +0800</pubDate>
-        <pubDateFormat>2021-08-23</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/08/23/freenom-domain/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/08/23/freenom-domain/</guid>
-        
-        
-        <category>小技巧</category>
         
       </item>
     
