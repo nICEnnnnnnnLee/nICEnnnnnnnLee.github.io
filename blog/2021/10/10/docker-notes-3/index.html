@@ -264,6 +264,8 @@
                     
                 
                     
+                
+                    
                 				
 				
             </ul>
@@ -374,18 +376,20 @@ CMD ["java", "-jar", "test.jar"]
           <li>COPY 命令只能复制上下文路径下的内容</li>
           <li>COPY 命令拷贝文件夹下的内容，并不拷贝文件夹本身</li>
           <li>COPY命令中右侧的Container路径如果是相对路径，那么与WORKDIR协同</li>
+          <li>上下文路径中不要包含无关文件，否则会影响build的速度，因为开始build的时候整个路径中的内容会被传给docker daemon</li>
+          <li>RUN命令要合理分层，特别是删除文件时，由于每次RUN都会生成新的image，在下一个image删除冗余文件并不会对上一个image造成影响，image大小不会因此而减小，这点要特别注意</li>
         </ul>
       </li>
     </ul>
   </li>
-  <li>下面我们开始实现<br />
-Dockerfile 如下：
-    <div class="language-Dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> ubuntu</span>
+  <li>下面我们开始实现</li>
+</ul>
+
+<p>Dockerfile 如下：</p>
+<div class="language-Dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> ubuntu</span>
 <span class="k">WORKDIR</span><span class="s"> /home</span>
 <span class="k">COPY</span><span class="s"> test test</span>
-</code></pre></div>    </div>
-  </li>
-</ul>
+</code></pre></div></div>
 
 <p>shell命令如下：</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 生成新镜像</span>
@@ -439,6 +443,62 @@ build-test: digest: sha256:ecb8f9fde6d65bc638571ec91f53a6be0b3ee4aeafd126118b8ff
             
                 
                     
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
                         
                         <h2 id="similar_posts">相似文章</h2>
                         <ul>
@@ -470,50 +530,6 @@ build-test: digest: sha256:ecb8f9fde6d65bc638571ec91f53a6be0b3ee4aeafd126118b8ff
                 
             
         
-            
-            
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-            
-        
-            
-            
-        
-            
-            
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-            
-                
-                    
-                
-            
-        
-            
-            
-        
-            
-            
-        
-            
-            
-        
         
             </ul>
         
@@ -526,6 +542,8 @@ build-test: digest: sha256:ecb8f9fde6d65bc638571ec91f53a6be0b3ee4aeafd126118b8ff
     </div>
     <div class="nex">
 
+        
+        <p><strong>下一篇</strong> <a href="/blog/2021/10/12/webpack-diy-plugins-and-loaders-0/">Webpack Plugin制作0-序</a></p>
         
     </div>
 </div>

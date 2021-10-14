@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Webpack Plugin制作0-序</title>
+    <meta name="description" content="拟通过制作Plugin和Loader加深对Webpack的认知。">
+
+    <meta property="og:url" content="https://nicelee.top/blog/2021/10/12/webpack-diy-plugins-and-loaders-0/">
+    <meta property="og:site_name" content="NiceLee的博客">
+    <meta property="og:title" content="Webpack Plugin制作0-序">
+    <meta property="og:description" content="拟通过制作Plugin和Loader加深对Webpack的认知。">
+    <meta property="og:image" content="https://nicelee.top/favicon.ico?">
+    <meta property="og:image:type" content="image/x-icon">
+    
+    <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="stylesheet" href="/css/font-awesome.min.css ">
+    <link rel="stylesheet" href="/css/font-ali.css?v=1.2 ">
+    <link rel="stylesheet" href="/css/main.css?v=1.1 ">
+    <link rel="canonical" href="https://nicelee.top/blog/2021/10/12/webpack-diy-plugins-and-loaders-0/">
+    <link rel="alternate" type="application/rss+xml" title="NiceLeeのBlog" href="https://nicelee.top/feed.xml ">
+
+	
+
+    <script>
+    // 百度统计代码
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?11f780e4e4ccd4e99b101eac776e93e4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+</head>
+
+    <link rel="stylesheet" href="/sources/live2d/css/live2d.css" />
+  <body>
+	
+		
+		<script type="text/javascript" src="/js/ribbon.min.js "></script>
+		
+	
+	
+    <header id="top">
+    <div class="wrapper">
+        <a href="/blog/" class="brand awsome-font">NiceLeeのBlog</a>
+        <small>用爱发电 bilibili~</small>
+        <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
+        <nav id="headerNav">
+            <ul>
+				<li onclick="showdiv()" >
+                    <a href="#">
+                    <i class="fa fa-search">搜索</i>
+                    </a>
+                </li>
+                <li>
+                    
+                    <a href="/blog/">
+                    
+                        <i class="fa fa-home"></i>主页
+                    </a>
+                </li>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <a href="/blog/archive/">
+                        
+                            <i class="fa fa-archive"></i>归档
+                        </a>
+                    </li>
+                
+                    
+                    <li>
+                        <a href="/ilikemusic/">
+                        
+                            <i class="fa fa-music"></i>音乐
+                        </a>
+                    </li>
+                
+                    
+                    <li>
+                        <a href="/collect/">
+                        
+                            <i class="fa fa-bookmark"></i>收藏
+                        </a>
+                    </li>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <a href="/blog/timeline/">
+                        
+                            <i class="fa fa-clock-o"></i>时间轴
+                        </a>
+                    </li>
+                
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <a href="/about/">
+                        
+                            <i class="fa fa-info-circle"></i>关于
+                        </a>
+                    </li>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                				
+				
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+        <div class="page clearfix" post>
+    <div class="left">
+        <h1>Webpack Plugin制作0-序</h1>
+        <div class="label">
+
+            <div class="label-card">
+                <i class="fa fa-calendar"></i>2021-10-12
+            </div>
+
+            <div class="label-card">
+                <i class="fa fa-user"></i>nIceLee
+                
+            </div>
+            <div class="label-card">
+                <p>阅读：<span id="busuanzi_value_page_pv1"></span></p>
+            </div>
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+            
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+            </div>
+
+            <div class="label-card">
+            
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <!--a href="/blog/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a-->
+        <a href="/blog/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a>
+    
+  
+
+</span>
+
+            </div>
+
+        </div>
+        <hr>
+        <article itemscope itemtype="http://schema.org/BlogPosting">
+        <ul id="markdown-toc">
+  <li><a href="#前言" id="markdown-toc-前言">前言</a>    <ul>
+      <li><a href="#我为什么写下这些东西" id="markdown-toc-我为什么写下这些东西">我为什么写下这些东西</a></li>
+      <li><a href="#学习大前端的一些想法" id="markdown-toc-学习大前端的一些想法">学习大前端的一些想法</a></li>
+      <li><a href="#我对webpack的一些理解" id="markdown-toc-我对webpack的一些理解">我对Webpack的一些理解</a></li>
+      <li><a href="#我该如何获取帮助" id="markdown-toc-我该如何获取帮助">我该如何获取帮助</a></li>
+    </ul>
+  </li>
+  <li><a href="#系列文章" id="markdown-toc-系列文章">系列文章</a></li>
+</ul>
+<p>拟通过制作Plugin和Loader加深对Webpack的认知。</p>
+
+<h2 id="前言">前言</h2>
+<h3 id="我为什么写下这些东西">我为什么写下这些东西</h3>
+<ul>
+  <li>
+    <p>        曾经看过一部印象深刻的电视剧，记得当时大结局被感动得一塌糊涂，也有还几部小说看得励志打鸡血的。我只记得有那么几个深受触动的瞬间，却总也找不回了。  <br />
+        也曾有学习巩固基础，感觉学完后目空一切尽在彀中的自信。没想到出道即巅峰，见识或许慢慢的是长了，但心态在随后的繁琐事中慢慢的也没了。  <br />
+        我想记录下自己此时的状态。或者说，我有这么一个期望，当我回顾此时的学习过程和心路历程，能够快速找回此时的状态。<br />
+ <br />
+ </p>
+  </li>
+  <li>
+    <p>        这不是我第一遍学webpack了，以前学的时候也听别人讲了webpack的基本原理，讲了这个资源加载用哪几个loader，要做那个使用什么plugin，开发环境该怎么配置，生产环境又怎么怎么样。<br />
+        但是没用。没过多久基本上全忘了。有人说这些配置只在项目初始化那会配置一次，而且流行的框架基本上都有脚手架，配置都是现成的，看看文档的事，忘也就忘了。<br />
+        <strong>我也这样认为，而且一直这样认为，到现在也一样。</strong> <br />
+        但是当我尝试自己新建一个工程，npm i -S -D一大片相关依赖，然后因为版本问题折腾了半天不成功时，我感到十分沮丧，以及前所未有的挫败感。  <br />
+        我知道这是因为版本升级，组件接口或者功能变化，组件之间协调出了问题造成的，但也仅此而已了。除了在网上搜索恰当的版本号，我对此无能为力。<br />
+        我意识到我从来没有真正了解过Webpack。  <br />
+        我又想起另一件事情。<br />
+        在我上学的时候是有《计算机网络》这门课程的，教材谢希仁那本，那本书挺好，我感觉当时也学得挺好的，至少绩点上还过得去。  <br />
+        作为一门网络课程，理所当然提到了HTTP协议。你跟我考试这部分，我肯定没问题；你要我说，我也能说个三四五六来。 <br />
+        但你要我基于套接字手撸一个简单的HTTP0.9服务器，我只能回你一个黑人问号脸。即使这之前因为项目原因我没少做UDP/TCP通信的case。<br />
+        这就很尴尬了。<br />
+        你以为你懂了，但其实并没有，至少不能学以致用。<br />
+        不过真的致用以后，你又会发现其实也就那么一回事，先前只是脑子没开窍。<br />
+        接下来HTTP1.1/HTTP2等更加复杂，也许你的coding能力并不足以较小的代价优雅地将它实现，但你应该有了底气。<br />
+        举个不那么恰当的例子，虽然你不一定会做菜，但你仍旧可以点评厨师做的食物。当然前提是你品尝过它。<br />
+        也正是因为这个经历，我想通过写plugin和loader的方法，从另一个角度重新认识webpack。   <br />
+ <br />
+ </p>
+  </li>
+  <li>
+    <p>        在写这些之前，其实plugin和loader都已经做好了，毕竟只要入了门其实很简单。现在把它写下来告诉别人我是怎么做怎么想的(假设会有人)，应该能巩固所学吧。   <br />
+ <br />
+ </p>
+  </li>
+  <li>
+    <p>        我并不能对自己写的内容保证什么。人在面对未知时，视野总是狭隘的。也许经验丰富后高屋建瓴回看此时的东西会不那么成熟。<br />
+        说实话，我现在看我半年前写的东西都会感叹那都是些什么啊。  <br />
+        总不能玩过几下云服务器/服务器就说自己会运维了，写过几个爬虫就说自己会js分析了，跑过几轮模型训练就说自己会机器学习了，用过几次frida就会说自己会Android逆向了，照着别人做了几个玩具就说自己有项目实战经验了。 <br />
+        我就自曝一下吧，以前学Java Web的时候，我一度以为生产环境和开发没啥两样，都是把Eclipse打开放在那里，然后跑起来…[捂脸] <br />
+        在此我还是要狡辩几句，这是因为我从图书馆里借的那几本书没提打包war包以及Apache部署(或许提了，只是我跳过了)，而且实习的时候也没接触到项目打包那一块。哈哈哈。 <br />
+        为此，我还专门想了一下，没了IDE我们应该怎么打包我们的java源代码。
+嗨，入门的第一个hello world就是写个类，然后javac编译，然后java执行。
+类多了以后，把它们都编译成.class，放个MANIFEST说明文件，把它们压缩一下，改个.jar后缀名，这不就出来了吗。。。 <br />
+        有时候我们自己都不知道自己无知得多离谱。。。</p>
+  </li>
+</ul>
+
+<h3 id="学习大前端的一些想法">学习大前端的一些想法</h3>
+<ul>
+  <li>
+    <p>我接触html/js/css算是比较早的，那时h5和css3才刚刚兴起，前端这一块远未成熟。
+基本上还属于页面靠下载模板或者直接从其它网页里面抠，撸起袖子直接靠jQuery蛮干的野蛮生长的阶段。<br />
+现在查了一下，Bootstrap那时才刚出生😳。  <br />
+当时重心没放在这块，主要在学jsp + java struts2，感觉前端js这东西真的简单，有手就行，我上我也行。<br />
+        <br />
+后来听说了js的新规范ES6，也没怎么关注，感觉反正能用就行。 <br />
+        <br />
+再后来因为需要，主要玩工控机、Arm板或者单片机这些东西，有很长一段时间没有搞过Web这一块，前后端都没有，感觉生疏了不少。<br />
+        <br />
+一段时间过去，前端变化是真的大。<br />
+        <br />
+以前想要引个库，看别人的readMe基本上是给个script标签引入再加段js代码。
+慢慢的这样的Repo越来越少了，清一色的npm + import开干，我尼玛，对非前端人员太不友好了，tmd。<br />
+        <br />
+这其实是前端逐渐工程化的一个过程，渐渐不再是手撸html再手撸js+css的事了，即使是新语法的<code class="language-plaintext highlighter-rouge">&lt;script type='module' src=...&gt;</code>应对也十分吃力，我们写的源文件在慢慢变成浏览器看不懂的东西，需要经过一定的润色翻译。<br />
+但做出这样的牺牲是有原因的，像Vue、jsx、less这些不说。举一个html模板的例子，这种使用liquid语法实现html套娃，复用代码的方式，就是最早的一种尝试。<br />
+浏览器能读得懂html模板吗？<br />
+也许可以，但那肯定缺少数据，只是个空壳UI。当拆分的更加细致，连样子都会看不到了。举个例子，这篇博客所用的Jekyll，就是这样的实践。<br />
+或许你会说Jekyll用的是ruby，这不算数。但要我说，要是nodejs没有出生，没准这事还真让ruby给包了。当然也可能是其它语言，就看那位伟大的全栈工程师哪个用的最顺手了。</p>
+  </li>
+  <li>
+    <p>我一度很排斥js和python这两门语言，将它们放在程序语言的底端。排斥是因为它们上手实在是才容易了，然后到处攻城略地。<br />
+浏览器有js，桌面应用electron有js，后端node experss有js，移动端React Native有js，整个都包圆了，到处都有js就离谱。<br />
+还有python，我就没见过搞机器学习的不会python的。不得不说python的生态很完好，你能想到的日常功能基本上都实现了。他们把程序都写好了，只差你写几行代码调用了。</p>
+  </li>
+  <li>
+    <p>Python、JavaScript这类弱类型的语言，写起来非常爽，但是看起来非常费力，这是我的感觉。<br />
+不是它的实现者，对整个工程十分熟悉，在修改较底层代码时会非常吃力。<br />
+我知道我要传入或者返回一个东西，它的作用我也比较了解，但我不知道应该怎么去构造/修改它。
+我不确认这个对象具体应该具有哪些属性，生怕多了少了或者错了。
+我在要修改的地方上下溯源了几个函数，它们有的只是简单的传递参数，有的只是涉及到部分属性，但我看到的这部分属性就是需要修改的全部了吗？<br />
+我不确定。即使我的修改生效消除了一个bug，心里也没底，不知道是否埋下了不知名的隐患。<br />
+我不知道我的理解到不到位，但我相信TypeScript的诞生是有道理的。</p>
+  </li>
+  <li>
+    <p>但说了那么多，最后还是逃不过一句真香。。。</p>
+  </li>
+</ul>
+
+<h3 id="我对webpack的一些理解">我对Webpack的一些理解</h3>
+<ul>
+  <li>
+    <p>Webpack是用于将前端代码(.js/ts/jsx/vue/css/less/html…)打包生成浏览器(或其它终端)可用的前端资源的一个工具。<br />
+与Java开发做一个类比，它有点像maven，但又不是。<br />
+因为它缺少maven的包管理功能，这是由npm或yarn来完成的。<br />
+但某些方面又远比maven强大，因为它的编译打包机制使得它在开发测试的过程中占据重要地位。<br />
+可实际上又非常弱鸡，离开插件/加载器模块寸步难行。<br />
+扯这么多，实际上单独拿出来做对比没啥意义，就当大脑的热身运动。</p>
+  </li>
+  <li>
+    <p>Webpack，以及辅助实现webpack功能的plugin、loader的js，可以把它看作与python、ruby、java等语言类同，最好将它和浏览器里运行的js区分开来。<br />
+因为遵从浏览器规范的js是有局限的，本地文件的读写、不受限制的网络请求是它跨不去的坎。  <br />
+所以，plugin、loader开发时使用的是node所遵循的规范CommonJS，而不是浏览器的ES6。 <br />
+当然，开发时因为测试需要传入浏览器的那部分不算，把这个代入到其它语言的场景应该也很好理解。<br />
+反而是src里面的代码，因为我们要站在浏览器的角度去思考，所以常常写的是ES6。但实际上ES6或者CommonJS二者皆可，因为最终都是要经过node执行babel来翻译，CommonJS它肯定也是认识的。</p>
+  </li>
+</ul>
+
+<h3 id="我该如何获取帮助">我该如何获取帮助</h3>
+
+<ul>
+  <li>一般而言，有四种情况：
+    <ul>
+      <li>中文社区</li>
+      <li>国外社区</li>
+      <li>官方文档(专指接下来的工作)
+        <ul>
+          <li><a href="https://webpack.js.org/contribute/writing-a-plugin/">Writing a Plugin</a></li>
+          <li><a href="https://webpack.js.org/api/compiler-hooks/">Compiler Hooks</a></li>
+          <li><a href="https://webpack.js.org/api/compilation-hooks/">Compilation Hooks</a></li>
+          <li><a href="https://webpack.js.org/api/compilation-object/">Compilation Object</a></li>
+          <li><a href="https://webpack.js.org/api/plugins/">Plugin API</a></li>
+          <li><a href="https://webpack.js.org/contribute/writing-a-loader/">Writing a Loader</a></li>
+        </ul>
+      </li>
+      <li>源码(专指接下来的工作)
+        <ul>
+          <li><a href="https://hub.fastgit.org/webpack/webpack">webpack/webpack</a></li>
+          <li><a href="https://hub.fastgit.org/webpack/webpack/blob/main/lib/Compiler.js">Compiler.js</a></li>
+          <li><a href="https://hub.fastgit.org/webpack/webpack/blob/main/lib/Compilation.js">Compilation.js</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>对于前两种(尤其是第一种)情况下获得的信息，需要抱着审慎的态度。<br />
+因为它很可能过时了；或者并不适用于你的问题，因为会有很多不同的原因导致相同的异常抛出，当情况复杂时尤其如此。<br />
+正因如此，我从不在CSDN等地方写下自己的东西，只是在自己的小窝里做下笔记。
+    <ul>
+      <li>
+        <p>因为我知道自己不能保证写下的东西的有效性。<br />
+  一个东西做完了，过了一段时间还能使用吗？我不确定。<br />
+  即使过了很久很久，久到它百分百过时了，我会专门去改动它、删除它吗？我不会。</p>
+      </li>
+      <li>
+        <p>因为我也不知道自己的视野是不是狭隘，导致我的想法偏于正途；野路子虽然能实现目标，但实际上也许有更优的解决方案。</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="系列文章">系列文章</h2>
+<p><a href="/blog/2021/10/12/webpack-diy-plugins-and-loaders-0/">0-序</a><br />
+<a href="/blog/2021/10/12/webpack-diy-plugins-and-loaders-1/">1-将LICENSE打包到目的文件夹</a><br />
+<a href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-2/">2-在打包目录输出文件列表</a><br />
+<a href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-3/">3-重写LICENSE打包插件</a><br />
+<a href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-4/">4-在index.html里添加一条备注</a><br />
+<a href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-5/">5-与其它插件进行交互</a><br />
+<a href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-6/">6-修改其它插件的配置</a><br />
+<a href="/blog/2021/10/14/webpack-diy-plugins-and-loaders-7/">7-做一个自定义类型的loader</a></p>
+
+        </article>
+        <hr>
+
+        
+        
+            
+            
+                
+                    
+                        
+                        <h2 id="similar_posts">相似文章</h2>
+                        <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2021/10/14/webpack-diy-plugins-and-loaders-7/">Webpack Plugin制作7-做一个自定义类型的loader
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-6/">Webpack Plugin制作6-修改其它插件的配置
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-5/">Webpack Plugin制作5-与其它插件进行交互
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-4/">Webpack Plugin制作4-在index.html里添加一条备注
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-3/">Webpack Plugin制作3-重写LICENSE打包插件
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-2/">Webpack Plugin制作2-在打包目录输出文件列表
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+        
+            </ul>
+        
+
+        <div class="post-recent">
+    <div class="pre">
+        
+        <p><strong>上一篇</strong> <a href="/blog/2021/10/10/docker-notes-3/">备忘录 根据Dockerfile新建并发布镜像</a></p>
+        
+    </div>
+    <div class="nex">
+
+        
+        <p><strong>下一篇</strong> <a href="/blog/2021/10/12/webpack-diy-plugins-and-loaders-1/">Webpack Plugin制作1-将LICENSE打包到目的文件夹</a></p>
+        
+    </div>
+</div>
+
+
+        <!-- <h2 id="comments">评论</h2>  
+        
+
+
+
+ -->
+
+
+    </div>
+    <button class="anchor"><i class="fa fa-anchor"></i></button>
+    <div class="right">
+        <div class="wrap">
+
+            <!-- Content -->
+            <div class="side content">
+                <div>
+                    内容
+                </div>
+                <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#similar_posts">相似文章</a></li>
+                    
+                    <!-- <li><a href="#comments">评论</a></li> -->
+                </ul>
+            </div>
+			
+            <!-- 其他div框放到这里 -->
+            <!-- <div class="side">bbbb</div> -->
+        </div>
+    </div>
+</div>
+<script>
+/**
+ * target _blank
+ */
+(function() {
+    var aTags = document.querySelectorAll('article a:not([id])')
+    for (var i = 0; i < aTags.length; i++) {
+        aTags[i].setAttribute('target', '_blank')
+    }
+
+}());
+</script>
+<script src="/js/pageContent.js " charset="utf-8"></script>
+
+
+    <footer class="site-footer">
+
+
+    <div class="wrapper">
+        <p class="description">
+             这是一个缺爱的博客(๑‾ ꇴ ‾๑)！ 
+        </p>
+        <p class="contact">
+            联系我: 
+            <a href="https://github.com/nICEnnnnnnnLee" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
+            <a href="mailto:lijia0732@sina.com" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>  
+            <a href="https://weibo.com/blackhigh" title="Weibo"><i class="fa fa-weibo" aria-hidden="true"></i></a>       
+			<span onclick="copyToClipboard('https://nicelee.top/feed.xml')"><a href="#">订阅我<i class="fa fa-gg"></i></a></span>
+        </p>
+        <p>
+            总pv:<span id="busuanzi_value_site_pv"></span>，uv:<span id="busuanzi_value_site_uv"></span>，本页pv:<span id="busuanzi_value_page_pv"></span>
+        </p>
+        <p class="power">
+            <span>
+            有用链接：
+                <a href="http://www.bejson.com/" target="_blank">BeJSON</a> &nbsp;&nbsp;
+                <a href="http://site.ip138.com/"  target="_blank">IP或域名查询</a> &nbsp;&nbsp;
+                <a href="http://ping.chinaz.com/"  target="_blank">各地ping</a> &nbsp;&nbsp;
+                <a href="https://tool.lu/"  target="_blank">在线工具</a> &nbsp;&nbsp; 
+                <a href="https://www.aliyun.com/"  target="_blank">阿里云</a> &nbsp;&nbsp; 
+                <a href="http://patorjk.com/software/taag/"  target="_blank">Text转FIGlet</a> &nbsp;&nbsp; 
+                <a href="https://vercel.com/dashboard"  target="_blank">Vercel</a> &nbsp;&nbsp;
+                <a href="https://dash.cloudflare.com/"  target="_blank">Cloudflare</a> &nbsp;&nbsp;
+                <a href="https://www.webfx.com/tools/emoji-cheat-sheet/"  target="_blank">Emoji😳</a> &nbsp;&nbsp;
+                <a href="https://www.color-hex.com/"  target="_blank">Color-hex</a> &nbsp;&nbsp;
+                <a href="https://hub.fastgit.org/"  target="_blank">Github镜像fastgit</a> &nbsp;&nbsp;
+            </span>
+        </p>
+        <p class="power">
+            <span>
+            除非另有注明，否则本网站上的内容可按 <a href="http://creativecommons.org/licenses/by-nc/4.0/"  target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议许可</a> 或更新版本使用。
+            </span>
+        </p>
+        <p class="power">
+            <span>
+                建站声明详见 <a href="/about/#关于个人博客">[关于]</a>. <a href="/sitemap.xml">[站点地图]</a>. 
+            </span>
+            
+        </p>
+        <p class="power beian">
+        </p>
+		<p class="power">
+            <span>
+                Site powered by <a href="https://jekyllrb.com/">Jekyll</a>.
+            </span>
+            <span>
+                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
+            </span>
+        </p>
+        
+		
+    </div>
+</footer>
+
+
+<!-- mask start -->
+<div id="searchBg"></div>
+<div id="searchDiv">
+	<input id="searchContent" type="text" onkeypress="if(event.keyCode==13) { search();return false;}" value=""/></input>
+    <div id="searchBtn" onclick="search();" /><i class="fa fa-search"></i></div>
+	<span onclick="hidediv();" class="close"></span>
+</div>
+<!-- mask end -->
+<!-- live2d begin -->
+<div id="landlord">
+    <div class="message" style="opacity:0"></div>
+    <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+    <div class="hide-button">隐藏</div>
+</div>
+<!-- live2d end -->
+<script type='text/javascript' src='/js/jquery.min.js '></script>
+<script type='text/javascript'>
+function search(){	
+	var str = document.getElementById("searchContent").value;
+	//console.log(str);
+	setLocalStorage("blogSearchKey",str);
+	hidediv();
+	window.location.href="/blog/archive/";
+}
+function showdiv() {
+	//alert("调用了showdiv()函数");
+	document.getElementById("searchBg").style.display ="block";
+	document.getElementById("searchDiv").style.display ="block";
+
+	//$('body').css("overflow", "hidden");
+	document.getElementsByTagName('body')[0].setAttribute("overflow", "hidden");
+}
+function hidediv() {
+	document.getElementById("searchBg").style.display = 'none';
+	document.getElementById("searchDiv").style.display = 'none';
+	//$('body').css("overflow", "auto");
+	document.getElementsByTagName('body')[0].setAttribute("overflow", "hidden");
+}
+////////////////////////////useful function //////////////////////////////////////
+//写cookies
+function setLocalStorage(name,value)
+{
+	localStorage.setItem(name, JSON.stringify(value));
+}
+//读cookies
+function getLocalStorage(name)
+{
+	return JSON.parse(localStorage.getItem(name));
+}
+//删cookies
+function delLocalStorage(name)
+{
+	localStorage.setItem(name, JSON.stringify(""));
+}
+function copyToClipboard (text) {
+    if(text.indexOf('-') !== -1) {
+        var arr = text.split('-');
+        text = arr[0] + arr[1];
+    }
+    var textArea = document.createElement("textarea");
+      textArea.style.position = 'fixed';
+      textArea.style.top = '0';
+      textArea.style.left = '0';
+      textArea.style.width = '2em';
+      textArea.style.height = '2em';
+      textArea.style.padding = '0';
+      textArea.style.border = 'none';
+      textArea.style.outline = 'none';
+      textArea.style.boxShadow = 'none';
+      textArea.style.background = 'transparent';
+      textArea.value = text;
+      document.body.appendChild(textArea);
+      textArea.select();
+	//alert("调用了复制剪贴板函数");
+      try {
+        var successful = document.execCommand('copy');
+        var msg = successful ? 'Rss源已成功复制到剪贴板' : 'RSS源为:https://nicelee.top/feed.xml';
+		//alert(msg);
+		showTips(msg);
+      } catch (err) {
+		//console.log(err);
+        //alert('该浏览器不支持点击复制到剪贴板');
+		showTips('RSS源为:https://nicelee.top/feed.xml');
+      }
+
+      document.body.removeChild(textArea);
+}
+/*
+<!--  版权维护  -->
+function addLink() {
+//alert("!!!");
+    var body_element = document.body;
+    var selection;
+    selection = window.getSelection();
+    if((selection + "").indexOf("/feed.xml") != -1){
+        return;
+    }
+	if(selection == ""){
+		return;
+	}
+    var locationHref=document.location.href;
+    var appendLink="\r\n------------------------------\r\n 原文出自[ NiceLee的个人博客 ] 转载请保留原文链接: <a href='"+locationHref+"'>"+locationHref+"</a>";
+    if (window.clipboardData) { // Internet Explorer
+        //console.log("调用原生函数");
+        var copytext = selection + appendLink;
+        window.clipboardData.setData ("Text", copytext);
+        return false;
+    } else {
+        //console.log("复杂的套路");
+        var copytext = selection + appendLink;
+        var newdiv = document.createElement('div');
+        newdiv.style.position='absolute';
+        newdiv.style.left='-99999px';
+        body_element.appendChild(newdiv);
+        newdiv.innerHTML = "<pre>" +copytext + "</pre>";
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function() {
+        	body_element.removeChild(newdiv);
+        },0);
+    }
+}
+document.oncopy = addLink;
+*/
+
+//contetn为要显示的内容  
+function showTips( content ){  
+	//alert("调用了复制提示消息函数");
+	//alert("内容为"+ content);
+    //窗口的宽度  
+	//alert(content);
+	var width = 250;
+	var x  = $(window).width()/2 - width/2;	
+	var y = $(window).height()/2 -20;
+	var $i = $("<span/>").text(content);
+	$i.css({
+		"z-index": 999999999999999999999999999,
+		"top": y,
+		"left": x,
+		"position": "absolute",
+		"font-weight": "bold",
+		'padding'   : '3px 5px',  
+		'background': '#8FBC8F',  
+		'font-size' : 12 + 'px',  
+		'margin'    : '0 auto',  
+		'text-align': 'center',  
+		'width'     : width + 'px',  
+		'height'    : 'auto',  
+		'color'     : '#fff'
+	});
+	$("body").append($i);
+	$i.animate({
+		"opacity": 0
+	},
+	3000,
+	function() {
+		//console.log($i.css());
+		$i.remove();
+		//alert('');
+	});
+}     
+</script>
+
+<!-- 窗口失去焦点 -- 别走啊 -->
+<!-- 窗口获得焦点 -- 恢复 -->
+<!-- console 打印figlet-->
+<script>
+var titleOnFocus = document.title;
+var titleOnBlur = "...(*￣０￣)ノ[别走啊…]";
+window.onfocus =function(){
+    document.title = titleOnFocus;
+    //console.log(titleOnFocus);
+}
+window.onblur = function(){
+    document.title = titleOnBlur;
+    //console.log(titleOnBlur);
+}
+
+var figlet = "\n" +
+"        _          _            _               \n" +
+"       (_)        | |          | |              \n" +
+"  _ __  _  ___ ___| | ___  ___ | |_ ___  _ __   \n" +
+" | '_ \\| |/ __/ _ \\ |/ _ \\/ _ \\| __/ _ \\| '_ \\  \n" +
+" | | | | | (_|  __/ |  __/  __/| || (_) | |_) | \n" +
+" |_| |_|_|\\___\\___|_|\\___|\\___(_)__\\___/| .__/  \n" +
+"                                        | |     \n" +
+"                                        |_|     \n" ;
+console.log(figlet);
+console.log("%c小改改爆个照呗\n hentai女个装呗", "color:red;font-size: 50px;font-weight:bold;");
+
+/* 防hentai
+document.onkeydown=function(){
+    var e = window.event||arguments[0];
+    if(e.keyCode==123){
+    	alert('请尊重劳动成果！');
+            return false;
+    }else if((e.ctrlKey)&&(e.shiftKey)&&(e.keyCode==73)){
+    	alert('请尊重劳动成果！');
+            return false;
+    }else if((e.ctrlKey)&&(e.keyCode==85)){
+            alert('请尊重劳动成果！');
+            return false;
+    }else if((e.ctrlKey)&&(e.keyCode==83)){
+           alert('请尊重劳动成果！');
+           return false;
+    }
+}
+document.oncontextmenu=function(){
+	alert('请尊重劳动成果！');
+    return false;
+}*/
+</script>
+
+<!-- live2d Begin-->
+<script type="text/javascript">
+    var message_Path = '/sources/live2d/'
+    var home_Path = 'https://nicelee.top/'
+</script>
+<script type="text/javascript" src="/sources/live2d/js/live2d.js"></script>
+<script type="text/javascript" src="/sources/live2d/js/message.js"></script>
+<script type="text/javascript">
+    var modelList = ["kesshouban_v2", "tia", "wanko", "index", "kanna", "koharu", "umaru", 
+	"22.closet.default.v2", 
+	"22.closet.2018.bls-summer", 
+	"22.closet.2019.summer", 
+	"33.closet.2016.xmas", 
+	"33.closet.2017.tomo-bukatsu", 
+	"33.closet.2018.bls-summer", 
+	"33.closet.2018.bls-winter", 
+	"33.closet.default.v2" ];    
+    var model = modelList[12]; 
+    // kesshouban_v2 血小板
+    // tia  小改改
+    // wanko 小狗狗 
+    // index 魔禁-茵蒂克丝
+    // kanna 康娜龙
+    // koharu 卡哇伊的Q版模型
+    // umaru 干物妹小埋 带声音
+    // 22 哔哩哔哩22娘
+    // 22.v2 哔哩哔哩22娘
+    console.log("live2d模型(小部分)来自官网: http://www.live2d.com/usermanual/cubism2_cn/samples.html");
+    console.log("live2d模型(大部分)来自梦象: https://mx-model.ga/");
+    if( window.document.body.offsetWidth >= 666){
+        loadlive2d("live2d", "/sources/live2d/model/"+ model +"/model.json");
+    }else{
+        //loadlive2d("live2d", "/sources/live2d/model/tia/model_tiny.json");
+        loadlive2d("live2d", "/sources/live2d/model/"+ model +"/model_tiny.json");
+    }
+</script>
+<!-- live2d End-->
+
+<script type="text/javascript">
+	var a_idx = 0;
+	jQuery(document).ready(function($) {
+		$("body").click(function(e) {
+			var a = new Array("大吉大利，今晚吃鸡！", "惊不惊喜，意不意外", "还有这种操作？", "小猪佩奇身上纹，掌声送给社会人", "确认过眼神", "皮一下，很开心", "很好很强大", "C位出道", "你若盛开，清风自来", "如果帅也是一种罪，那我已罪无可赦", "别看资料 ，看聊效！", "感动吗，不敢动", "打call", "我是你的超级英雄");
+			var $i = $("<span/>").text(a[a_idx]);
+			a_idx = (a_idx + 1) % a.length;
+			var x = e.pageX,
+			y = e.pageY;
+			$i.css({
+				"z-index": 999999999999999999999999999,
+				"top": y - 20,
+				"left": x,
+				"position": "absolute",
+				"font-weight": "bold",
+				"color": "#dd3333"
+			});
+			$("body").append($i);
+			$i.animate({
+				"top": y - 180,
+				"opacity": 0
+			},
+			1500,
+			function() {
+				$i.remove();
+				//alert('');
+			});
+		});
+	});
+</script>
+
+
+<script async src="/js/busuanzi.pure.mini.js "></script>
+
+
+    <div class="back-to-top">
+    <a href="#top" data-scroll>
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+    <script src="/js/main.js " charset="utf-8"></script>
+    <script src="/js/smooth-scroll.min.js " charset="utf-8"></script>
+    <script type="text/javascript">
+      smoothScroll.init({
+        speed: 500, // Integer. How fast to complete the scroll in milliseconds
+        easing: 'easeInOutCubic', // Easing pattern to use
+        offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
+      });
+      // 为了底部内容不被遮住
+      $(document).ready(function () {
+        resizeBody();
+      });
+      window.onresize = resizeBody;
+      function resizeBody(){
+        //console.log("resizing Body...");
+        if (window.innerWidth <= 770) {
+            var totalHeight = $("header#top").height() + $(".page.clearfix").height() + $("footer.site-footer").height() +80;
+            document.body.style.height = totalHeight + "px";
+        }else{
+            document.body.style.height = "auto";
+        }
+      }
+    </script>
+	
+	
+    <!-- <script src=" /js/scroll.min.js " charset="utf-8"></script> -->
+  </body>
+
+</html>

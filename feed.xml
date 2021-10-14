@@ -5,9 +5,145 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 10 Oct 2021 23:28:36 +0800</pubDate>
-    <lastBuildDate>Sun, 10 Oct 2021 23:28:36 +0800</lastBuildDate>
+    <pubDate>Thu, 14 Oct 2021 16:07:31 +0800</pubDate>
+    <lastBuildDate>Thu, 14 Oct 2021 16:07:31 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>Webpack Plugin制作7-做一个自定义类型的loader</title>
+        <description>现在我们来做一个loader。&lt;br /&gt;
+我们自定义一个格式文件，其后缀是&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.b64&lt;/code&gt;。  &lt;br /&gt;
+我们把写好的js内容通过base64编码转换放到&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.b64&lt;/code&gt;中；&lt;br /&gt;
+通过对&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.b64&lt;/code&gt;内容的base64解码，我们可以获取到js内容。&lt;br /&gt;
+我希望在开发中能和&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.js&lt;/code&gt;一样import使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.b64&lt;/code&gt;资源，这就是loader要做的事情。
+</description>
+        <pubDate>Thu, 14 Oct 2021 10:59:01 +0800</pubDate>
+        <pubDateFormat>2021-10-14</pubDateFormat>
+        <link>https://nicelee.top/blog/2021/10/14/webpack-diy-plugins-and-loaders-7/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/10/14/webpack-diy-plugins-and-loaders-7/</guid>
+        
+        <category>JavaScript</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
+    
+      <item>
+        <title>Webpack Plugin制作6-修改其它插件的配置</title>
+        <description>现在我们要干两件事情：
+&lt;ul&gt;
+  &lt;li&gt;对上一节的备注插件的&lt;strong&gt;备注1&lt;/strong&gt;进行修改，让它把我们的&lt;strong&gt;备注2&lt;/strong&gt;写到index.html里面去&lt;/li&gt;
+  &lt;li&gt;提供一个对外的hook，让其它插件可以把他们的&lt;strong&gt;备注3&lt;/strong&gt;传过来，然后修改上一节的备注插件，把&lt;strong&gt;备注3&lt;/strong&gt;写到index.html里面去&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Wed, 13 Oct 2021 13:59:01 +0800</pubDate>
+        <pubDateFormat>2021-10-13</pubDateFormat>
+        <link>https://nicelee.top/blog/2021/10/13/webpack-diy-plugins-and-loaders-6/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/10/13/webpack-diy-plugins-and-loaders-6/</guid>
+        
+        <category>JavaScript</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
+    
+      <item>
+        <title>Webpack Plugin制作5-与其它插件进行交互</title>
+        <description>我们换一种思路，对添加备注进行实现。
+</description>
+        <pubDate>Wed, 13 Oct 2021 12:59:01 +0800</pubDate>
+        <pubDateFormat>2021-10-13</pubDateFormat>
+        <link>https://nicelee.top/blog/2021/10/13/webpack-diy-plugins-and-loaders-5/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/10/13/webpack-diy-plugins-and-loaders-5/</guid>
+        
+        <category>JavaScript</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
+    
+      <item>
+        <title>Webpack Plugin制作4-在index.html里添加一条备注</title>
+        <description>举一反三。
+</description>
+        <pubDate>Wed, 13 Oct 2021 11:59:01 +0800</pubDate>
+        <pubDateFormat>2021-10-13</pubDateFormat>
+        <link>https://nicelee.top/blog/2021/10/13/webpack-diy-plugins-and-loaders-4/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/10/13/webpack-diy-plugins-and-loaders-4/</guid>
+        
+        <category>JavaScript</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
+    
+      <item>
+        <title>Webpack Plugin制作3-重写LICENSE打包插件</title>
+        <description>Webpack Plugin制作1中的license打包插件不太规范，需要改进。
+</description>
+        <pubDate>Wed, 13 Oct 2021 11:59:01 +0800</pubDate>
+        <pubDateFormat>2021-10-13</pubDateFormat>
+        <link>https://nicelee.top/blog/2021/10/13/webpack-diy-plugins-and-loaders-3/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/10/13/webpack-diy-plugins-and-loaders-3/</guid>
+        
+        <category>JavaScript</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
+    
+      <item>
+        <title>Webpack Plugin制作2-在打包目录输出文件列表</title>
+        <description>现在分析一波官方文档的简单例子，这个例子把所有的文件列表输出到一个markdown文件。
+</description>
+        <pubDate>Wed, 13 Oct 2021 10:59:01 +0800</pubDate>
+        <pubDateFormat>2021-10-13</pubDateFormat>
+        <link>https://nicelee.top/blog/2021/10/13/webpack-diy-plugins-and-loaders-2/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/10/13/webpack-diy-plugins-and-loaders-2/</guid>
+        
+        <category>JavaScript</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
+    
+      <item>
+        <title>Webpack Plugin制作1-将LICENSE打包到目的文件夹</title>
+        <description>现在制作一个插件，它会在打包的时候将LICENSE放到目的文件夹中。
+</description>
+        <pubDate>Tue, 12 Oct 2021 13:59:01 +0800</pubDate>
+        <pubDateFormat>2021-10-12</pubDateFormat>
+        <link>https://nicelee.top/blog/2021/10/12/webpack-diy-plugins-and-loaders-1/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/10/12/webpack-diy-plugins-and-loaders-1/</guid>
+        
+        <category>JavaScript</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
+    
+      <item>
+        <title>Webpack Plugin制作0-序</title>
+        <description>拟通过制作Plugin和Loader加深对Webpack的认知。
+</description>
+        <pubDate>Tue, 12 Oct 2021 12:59:01 +0800</pubDate>
+        <pubDateFormat>2021-10-12</pubDateFormat>
+        <link>https://nicelee.top/blog/2021/10/12/webpack-diy-plugins-and-loaders-0/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/10/12/webpack-diy-plugins-and-loaders-0/</guid>
+        
+        <category>JavaScript</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
     
       <item>
         <title>备忘录 根据Dockerfile新建并发布镜像</title>
@@ -38,141 +174,6 @@
         
         
         <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>备忘录 Docker镜像的使用</title>
-        <description>由于使用不是很频繁，每次基本上都忘了，然后临时搜一下。现在做好笔记。
-</description>
-        <pubDate>Sun, 10 Oct 2021 10:59:01 +0800</pubDate>
-        <pubDateFormat>2021-10-10</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/10/10/docker-notes/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/10/10/docker-notes/</guid>
-        
-        <category>Docker</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>Python 关于斗鱼每日荧光棒礼物的领取</title>
-        <description>每天必须在websocket端进入房间才能领取当日荧光棒，这基本上等价于斗鱼发送弹幕。
-</description>
-        <pubDate>Tue, 28 Sep 2021 10:59:01 +0800</pubDate>
-        <pubDateFormat>2021-09-28</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/09/28/python-douyu-danmu/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/09/28/python-douyu-danmu/</guid>
-        
-        <category>Python</category>
-        
-        
-        <category>代码片段</category>
-        
-      </item>
-    
-      <item>
-        <title>Python 关于检查域名证书是否过期遇到的问题</title>
-        <description>现在要做这么一件事情，批量监控域名是否快要到期，并作出提醒。
-</description>
-        <pubDate>Tue, 14 Sep 2021 10:59:01 +0800</pubDate>
-        <pubDateFormat>2021-09-14</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/09/14/python-https-cert/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/09/14/python-https-cert/</guid>
-        
-        <category>Python</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>一个低级问题：CDN缓存暴露了我的加密配置页😳</title>
-        <description>今天突然发现不登录也能访问我的私人用的Web应用页面，人傻了。。。
-</description>
-        <pubDate>Fri, 10 Sep 2021 16:59:01 +0800</pubDate>
-        <pubDateFormat>2021-09-10</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/09/10/no-cdn-cache/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/09/10/no-cdn-cache/</guid>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>知识库 给图片添加数字盲水印</title>
-        <description>如何将水印隐藏在图片中。
-</description>
-        <pubDate>Fri, 10 Sep 2021 10:59:01 +0800</pubDate>
-        <pubDateFormat>2021-09-10</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/09/10/watermark-hide-in-image/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/09/10/watermark-hide-in-image/</guid>
-        
-        <category>隐写</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>一次GitHub Action自动化发布集成部署(Android 篇)</title>
-        <description>分为三步。
-&lt;ol&gt;
-  &lt;li&gt;在本地实现脱离IDE直接脚本打包。&lt;/li&gt;
-  &lt;li&gt;分离敏感资源，确定在远程部署这些的方式方法。&lt;/li&gt;
-  &lt;li&gt;在Github Actions机器上实现脚本打包并发布。&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Thu, 09 Sep 2021 16:49:01 +0800</pubDate>
-        <pubDateFormat>2021-09-09</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/09/09/github-generate-and-release-android-apk/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/09/09/github-generate-and-release-android-apk/</guid>
-        
-        <category>Android</category>
-        
-        <category>Github</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>备忘录 Azure单页应用授权 + keeweb Web应用部署问题</title>
-        <description>最近在折腾密码管理软件，相中了keepass。&lt;br /&gt;
-使用它的数据库的开源软件有很多，选择了&lt;a href=&quot;https://github.com/keeweb/keeweb&quot;&gt;keeweb&lt;/a&gt;(js写的，可以是桌面、Web应用，跨平台很好),&lt;br /&gt;
-以及&lt;a href=&quot;https://github.com/PhilippC/keepass2android&quot;&gt;keepass2android&lt;/a&gt;(Android端)。&lt;br /&gt;
-倒腾了许久，最终数据同步用的是坚果云的Webdav。&lt;br /&gt;
-但是有个缺点，因为浏览器请求会带上Origin等头部，因为跨域安全问题导致Web应用无法使用坚果云。 &lt;br /&gt;
-所以Web应用只能尝试使用微软的Onedrive。
-</description>
-        <pubDate>Wed, 08 Sep 2021 16:49:01 +0800</pubDate>
-        <pubDateFormat>2021-09-08</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/09/08/keepass-onedrive/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/09/08/keepass-onedrive/</guid>
-        
-        
-        <category>小技巧</category>
-        
-      </item>
-    
-      <item>
-        <title>【资源】关于免费的域名邮箱托管</title>
-        <description>以前使用的是Yandex，但Yandex早就收费了。&lt;br /&gt;
-心血来潮，还是搜了一下咋白嫖。
-</description>
-        <pubDate>Tue, 07 Sep 2021 16:49:01 +0800</pubDate>
-        <pubDateFormat>2021-09-07</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/09/07/email-host/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/09/07/email-host/</guid>
-        
-        
-        <category>工具与资源</category>
         
       </item>
     

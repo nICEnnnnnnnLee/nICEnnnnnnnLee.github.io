@@ -264,6 +264,8 @@
                     
                 
                     
+                
+                    
                 				
 				
             </ul>
@@ -333,6 +335,10 @@
         <ul id="markdown-toc">
   <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
   <li><a href="#例子" id="markdown-toc-例子">例子</a></li>
+  <li><a href="#关于容器内访问宿主机网络" id="markdown-toc-关于容器内访问宿主机网络">关于容器内访问宿主机网络</a>    <ul>
+      <li><a href="#bridge模式下访问宿主机网络" id="markdown-toc-bridge模式下访问宿主机网络">bridge模式下访问宿主机网络</a></li>
+    </ul>
+  </li>
 </ul>
 <p>由于使用不是很频繁，每次基本上都忘了，然后临时搜一下。现在做好笔记。</p>
 
@@ -425,10 +431,151 @@ docker container prune
 <p>运行结果：<br />
 <img src="/sources/archive/2021/10/10.docker.run.jpg" alt="" /></p>
 
+<h2 id="关于容器内访问宿主机网络">关于容器内访问宿主机网络</h2>
+
+<ul>
+  <li>
+    <p>在使用docker run创建Docker容器时，共有<code class="language-plaintext highlighter-rouge">host</code>、<code class="language-plaintext highlighter-rouge">none</code>、<code class="language-plaintext highlighter-rouge">bridge</code>、<code class="language-plaintext highlighter-rouge">overlay</code>、<code class="language-plaintext highlighter-rouge">macvlan</code>等网络模式。<br />
+详见<a href="https://docs.docker.com/network/">https://docs.docker.com/network/</a></p>
+  </li>
+  <li>一般情况下考虑前三种情况即可，当需要多容器之间网络共享时再考虑其它。
+    <ul>
+      <li>host模式：容器与宿主机在相同的网络命名空间下面，共享所有网络接口。模式简单并且性能高。但使用前请思考一下，什么叫容器，为什么使用容器？？</li>
+      <li>none模式：容器不使用网络</li>
+      <li>bridge模式：使用 –net=bridge 指定，默认设置。</li>
+    </ul>
+  </li>
+  <li>使用示例：
+    <ul>
+      <li>
+        <table>
+          <tbody>
+            <tr>
+              <td>docker run -it –net=&lt;host</td>
+              <td>none</td>
+              <td>bridge</td>
+              <td>…&gt; <container></container></td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="bridge模式下访问宿主机网络">bridge模式下访问宿主机网络</h3>
+<ul>
+  <li>
+    <p>先讲一下大概的思路和原理<br />
+容器与宿主机之间的网络是隔离的，因而localhost肯定访问不成功。<br />
+此时，我们需要知道宿主机的IP。<br />
+在获取到宿主机的IP后，我们实际上就可以在容器内访问宿主机了。
+但这往往还不够，因为相同镜像在不同宿主机的容器内对应的IP可能是不相同的，我们不可能将它硬编码到应用代码里。<br />
+放到配置文件里面是一条可行思路。不过更通用的一种做法是取一个别名，并将别名到IP的映射放到<code class="language-plaintext highlighter-rouge">/etc/hosts</code>文件中。
+通知镜像使用者在运行时配置host： <code class="language-plaintext highlighter-rouge">--add-host=&lt;别名&gt;:&lt;IP&gt;</code></p>
+  </li>
+  <li>
+    <p>如何获取宿主机IP
+Windows下，我们可以使用<code class="language-plaintext highlighter-rouge">ipconfig</code>查看WSL对应的IP地址</p>
+  </li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>无线局域网适配器 WLAN:
+
+   媒体状态  . . . . . . . . . . . . : 媒体已断开连接
+   连接特定的 DNS 后缀 . . . . . . . :
+
+以太网适配器 以太网:
+
+   连接特定的 DNS 后缀 . . . . . . . :
+   本地链接 IPv6 地址. . . . . . . . : xxxx::xxxx:xxxx:xxxx:xxxx%xx
+   IPv4 地址 . . . . . . . . . . . . : 192.168.1.110
+   子网掩码  . . . . . . . . . . . . : 255.255.255.0
+   默认网关. . . . . . . . . . . . . : 192.168.1.1
+
+以太网适配器 vEthernet (WSL):
+
+   连接特定的 DNS 后缀 . . . . . . . :
+   本地链接 IPv6 地址. . . . . . . . : xxxx::xxxx:xxxx:xxxx:xxxx%xx
+   IPv4 地址 . . . . . . . . . . . . : 172.29.176.1
+   子网掩码  . . . . . . . . . . . . : 255.255.240.0
+   默认网关. . . . . . . . . . . . . :
+</code></pre></div></div>
+
+<p>Linux下，我们可以使用<code class="language-plaintext highlighter-rouge">ifconfig</code>查看docker0对应的IP地址。<br />
+当然使用其它命令也是可以的，比如  <br />
+<code class="language-plaintext highlighter-rouge">ip -4 addr show docker0 | grep -Po 'inet \K[\d.]+'</code></p>
+
+<ul>
+  <li>关于如何配置<br />
+该问题可以转化为docker运行时如何配置容器的host。<br />
+版本较新的docker贴心地提供了配置项，我们可以直接使用<code class="language-plaintext highlighter-rouge">host-gateway</code>而不必自己再去寻找宿主机的IP。如下：</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--add-host=host.docker.internal:host-gateway
+</code></pre></div></div>
+
+
         </article>
         <hr>
 
         
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
         
             
             
@@ -463,50 +610,6 @@ docker container prune
                         
                     
                 
-            
-        
-            
-            
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-            
-        
-            
-            
-        
-            
-            
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-            
-                
-                    
-                
-            
-        
-            
-            
-        
-            
-            
-        
-            
             
         
         

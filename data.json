@@ -2,6 +2,62 @@
 	"code" : 0 ,
 	"data" : [
 	{
+		"title" : "Webpack Plugin制作7-做一个自定义类型的loader",
+		"tags" : "JavaScript",
+		"url" : "/blog/2021/10/14/webpack-diy-plugins-and-loaders-7/"
+		"brief" : "现在我们来做一个loader。我们自定义一个格式文件，其后缀是.b64。我们把写好的js内容通过base64编码转换放到.b64中；通过对.b64内容的base64解码，我们可以获取到js内容。我希望在开发中能和.js一样import使用.b64资源，这就是loader要做的事情。"
+	},
+    
+	{
+		"title" : "Webpack Plugin制作6-修改其它插件的配置",
+		"tags" : "JavaScript",
+		"url" : "/blog/2021/10/13/webpack-diy-plugins-and-loaders-6/"
+		"brief" : "现在我们要干两件事情：对上一节的备注插件的备注1进行修改，让它把我们的备注2写到index.html里面去提供一个对外的hook，让其它插件可以把他们的备注3传过来，然后修改上一节的备注插件，把备注3写到index.html里面去"
+	},
+    
+	{
+		"title" : "Webpack Plugin制作5-与其它插件进行交互",
+		"tags" : "JavaScript",
+		"url" : "/blog/2021/10/13/webpack-diy-plugins-and-loaders-5/"
+		"brief" : "我们换一种思路，对添加备注进行实现。"
+	},
+    
+	{
+		"title" : "Webpack Plugin制作4-在index.html里添加一条备注",
+		"tags" : "JavaScript",
+		"url" : "/blog/2021/10/13/webpack-diy-plugins-and-loaders-4/"
+		"brief" : "举一反三。"
+	},
+    
+	{
+		"title" : "Webpack Plugin制作3-重写LICENSE打包插件",
+		"tags" : "JavaScript",
+		"url" : "/blog/2021/10/13/webpack-diy-plugins-and-loaders-3/"
+		"brief" : "WebpackPlugin制作1中的license打包插件不太规范，需要改进。"
+	},
+    
+	{
+		"title" : "Webpack Plugin制作2-在打包目录输出文件列表",
+		"tags" : "JavaScript",
+		"url" : "/blog/2021/10/13/webpack-diy-plugins-and-loaders-2/"
+		"brief" : "现在分析一波官方文档的简单例子，这个例子把所有的文件列表输出到一个markdown文件。"
+	},
+    
+	{
+		"title" : "Webpack Plugin制作1-将LICENSE打包到目的文件夹",
+		"tags" : "JavaScript",
+		"url" : "/blog/2021/10/12/webpack-diy-plugins-and-loaders-1/"
+		"brief" : "现在制作一个插件，它会在打包的时候将LICENSE放到目的文件夹中。"
+	},
+    
+	{
+		"title" : "Webpack Plugin制作0-序",
+		"tags" : "JavaScript",
+		"url" : "/blog/2021/10/12/webpack-diy-plugins-and-loaders-0/"
+		"brief" : "拟通过制作Plugin和Loader加深对Webpack的认知。"
+	},
+    
+	{
 		"title" : "备忘录 根据Dockerfile新建并发布镜像",
 		"tags" : "Docker",
 		"url" : "/blog/2021/10/10/docker-notes-3/"

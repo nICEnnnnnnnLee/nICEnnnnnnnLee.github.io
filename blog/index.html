@@ -264,6 +264,8 @@
                     
                 
                     
+                
+                    
                 				
 				
             </ul>
@@ -289,11 +291,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/blog/2021/10/10/docker-notes-3/" style="overflow:hidden;text-overflow:ellipsis;">备忘录 根据Dockerfile新建并发布镜像</a>
+                  <a class="post-link" href="/blog/2021/10/14/webpack-diy-plugins-and-loaders-7/" style="overflow:hidden;text-overflow:ellipsis;">Webpack Plugin制作7-做一个自定义类型的loader</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2021-10-10
+                        <i class="fa fa-calendar"></i>2021-10-14
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>nIceLee
@@ -329,7 +331,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/blog/tag/#Docker" title="Tag: Docker" rel="tag">Docker</a>
+        <a href="/blog/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a>
     
   
 
@@ -338,22 +340,26 @@
                     </div>
                 </div>
                 <div class="excerpt">
-                    <p>简单的新建并发布镜像。</p>
+                    <p>现在我们来做一个loader。<br />
+我们自定义一个格式文件，其后缀是<code class="language-plaintext highlighter-rouge">.b64</code>。  <br />
+我们把写好的js内容通过base64编码转换放到<code class="language-plaintext highlighter-rouge">.b64</code>中；<br />
+通过对<code class="language-plaintext highlighter-rouge">.b64</code>内容的base64解码，我们可以获取到js内容。<br />
+我希望在开发中能和<code class="language-plaintext highlighter-rouge">.js</code>一样import使用<code class="language-plaintext highlighter-rouge">.b64</code>资源，这就是loader要做的事情。</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/blog/2021/10/10/docker-notes-3/"><i class="fa fa-newspaper-o"></i>阅读全文</a>
+                    <a  href="/blog/2021/10/14/webpack-diy-plugins-and-loaders-7/"><i class="fa fa-newspaper-o"></i>阅读全文</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/blog/2021/10/10/docker-notes-2/" style="overflow:hidden;text-overflow:ellipsis;">备忘录 Docker镜像的修改更新</a>
+                  <a class="post-link" href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-6/" style="overflow:hidden;text-overflow:ellipsis;">Webpack Plugin制作6-修改其它插件的配置</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2021-10-10
+                        <i class="fa fa-calendar"></i>2021-10-13
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>nIceLee
@@ -389,7 +395,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/blog/tag/#Docker" title="Tag: Docker" rel="tag">Docker</a>
+        <a href="/blog/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a>
     
   
 
@@ -398,22 +404,26 @@
                     </div>
                 </div>
                 <div class="excerpt">
-                    <p>在现有的镜像上进行修改。</p>
+                    <p>现在我们要干两件事情：</p>
+<ul>
+  <li>对上一节的备注插件的<strong>备注1</strong>进行修改，让它把我们的<strong>备注2</strong>写到index.html里面去</li>
+  <li>提供一个对外的hook，让其它插件可以把他们的<strong>备注3</strong>传过来，然后修改上一节的备注插件，把<strong>备注3</strong>写到index.html里面去</li>
+</ul>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/blog/2021/10/10/docker-notes-2/"><i class="fa fa-newspaper-o"></i>阅读全文</a>
+                    <a  href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-6/"><i class="fa fa-newspaper-o"></i>阅读全文</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/blog/2021/10/10/docker-notes/" style="overflow:hidden;text-overflow:ellipsis;">备忘录 Docker镜像的使用</a>
+                  <a class="post-link" href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-5/" style="overflow:hidden;text-overflow:ellipsis;">Webpack Plugin制作5-与其它插件进行交互</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2021-10-10
+                        <i class="fa fa-calendar"></i>2021-10-13
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>nIceLee
@@ -449,7 +459,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/blog/tag/#Docker" title="Tag: Docker" rel="tag">Docker</a>
+        <a href="/blog/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a>
     
   
 
@@ -458,82 +468,22 @@
                     </div>
                 </div>
                 <div class="excerpt">
-                    <p>由于使用不是很频繁，每次基本上都忘了，然后临时搜一下。现在做好笔记。</p>
+                    <p>我们换一种思路，对添加备注进行实现。</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/blog/2021/10/10/docker-notes/"><i class="fa fa-newspaper-o"></i>阅读全文</a>
+                    <a  href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-5/"><i class="fa fa-newspaper-o"></i>阅读全文</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/blog/2021/09/28/python-douyu-danmu/" style="overflow:hidden;text-overflow:ellipsis;">Python 关于斗鱼每日荧光棒礼物的领取</a>
+                  <a class="post-link" href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-4/" style="overflow:hidden;text-overflow:ellipsis;">Webpack Plugin制作4-在index.html里添加一条备注</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2021-09-28
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>nIceLee
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/blog/category/#代码片段" title="Category: 代码片段" rel="category">代码片段</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/blog/tag/#Python" title="Tag: Python" rel="tag">Python</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    <p>每天必须在websocket端进入房间才能领取当日荧光棒，这基本上等价于斗鱼发送弹幕。</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/blog/2021/09/28/python-douyu-danmu/"><i class="fa fa-newspaper-o"></i>阅读全文</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/blog/2021/09/14/python-https-cert/" style="overflow:hidden;text-overflow:ellipsis;">Python 关于检查域名证书是否过期遇到的问题</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2021-09-14
+                        <i class="fa fa-calendar"></i>2021-10-13
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>nIceLee
@@ -569,7 +519,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/blog/tag/#Python" title="Tag: Python" rel="tag">Python</a>
+        <a href="/blog/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a>
     
   
 
@@ -578,22 +528,22 @@
                     </div>
                 </div>
                 <div class="excerpt">
-                    <p>现在要做这么一件事情，批量监控域名是否快要到期，并作出提醒。</p>
+                    <p>举一反三。</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/blog/2021/09/14/python-https-cert/"><i class="fa fa-newspaper-o"></i>阅读全文</a>
+                    <a  href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-4/"><i class="fa fa-newspaper-o"></i>阅读全文</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/blog/2021/09/10/no-cdn-cache/" style="overflow:hidden;text-overflow:ellipsis;">一个低级问题：CDN缓存暴露了我的加密配置页😳</a>
+                  <a class="post-link" href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-3/" style="overflow:hidden;text-overflow:ellipsis;">Webpack Plugin制作3-重写LICENSE打包插件</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2021-09-10
+                        <i class="fa fa-calendar"></i>2021-10-13
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>nIceLee
@@ -629,6 +579,8 @@
   <i class="fa fa-tags"></i>
   
     
+        <a href="/blog/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a>
+    
   
 
 </span>
@@ -636,22 +588,22 @@
                     </div>
                 </div>
                 <div class="excerpt">
-                    <p>今天突然发现不登录也能访问我的私人用的Web应用页面，人傻了。。。</p>
+                    <p>Webpack Plugin制作1中的license打包插件不太规范，需要改进。</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/blog/2021/09/10/no-cdn-cache/"><i class="fa fa-newspaper-o"></i>阅读全文</a>
+                    <a  href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-3/"><i class="fa fa-newspaper-o"></i>阅读全文</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/blog/2021/09/10/watermark-hide-in-image/" style="overflow:hidden;text-overflow:ellipsis;">知识库 给图片添加数字盲水印</a>
+                  <a class="post-link" href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-2/" style="overflow:hidden;text-overflow:ellipsis;">Webpack Plugin制作2-在打包目录输出文件列表</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2021-09-10
+                        <i class="fa fa-calendar"></i>2021-10-13
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>nIceLee
@@ -687,7 +639,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/blog/tag/#隐写" title="Tag: 隐写" rel="tag">隐写</a>
+        <a href="/blog/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a>
     
   
 
@@ -696,22 +648,22 @@
                     </div>
                 </div>
                 <div class="excerpt">
-                    <p>如何将水印隐藏在图片中。</p>
+                    <p>现在分析一波官方文档的简单例子，这个例子把所有的文件列表输出到一个markdown文件。</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/blog/2021/09/10/watermark-hide-in-image/"><i class="fa fa-newspaper-o"></i>阅读全文</a>
+                    <a  href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-2/"><i class="fa fa-newspaper-o"></i>阅读全文</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/blog/2021/09/09/github-generate-and-release-android-apk/" style="overflow:hidden;text-overflow:ellipsis;">一次GitHub Action自动化发布集成部署(Android 篇)</a>
+                  <a class="post-link" href="/blog/2021/10/12/webpack-diy-plugins-and-loaders-1/" style="overflow:hidden;text-overflow:ellipsis;">Webpack Plugin制作1-将LICENSE打包到目的文件夹</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2021-09-09
+                        <i class="fa fa-calendar"></i>2021-10-12
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>nIceLee
@@ -747,9 +699,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/blog/tag/#Android" title="Tag: Android" rel="tag">Android</a>&nbsp;
-    
-        <a href="/blog/tag/#Github" title="Tag: Github" rel="tag">Github</a>
+        <a href="/blog/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a>
     
   
 
@@ -758,16 +708,71 @@
                     </div>
                 </div>
                 <div class="excerpt">
-                    <p>分为三步。</p>
-<ol>
-  <li>在本地实现脱离IDE直接脚本打包。</li>
-  <li>分离敏感资源，确定在远程部署这些的方式方法。</li>
-  <li>在Github Actions机器上实现脚本打包并发布。</li>
-</ol>
+                    <p>现在制作一个插件，它会在打包的时候将LICENSE放到目的文件夹中。</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/blog/2021/09/09/github-generate-and-release-android-apk/"><i class="fa fa-newspaper-o"></i>阅读全文</a>
+                    <a  href="/blog/2021/10/12/webpack-diy-plugins-and-loaders-1/"><i class="fa fa-newspaper-o"></i>阅读全文</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/blog/2021/10/12/webpack-diy-plugins-and-loaders-0/" style="overflow:hidden;text-overflow:ellipsis;">Webpack Plugin制作0-序</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2021-10-12
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>nIceLee
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/blog/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    <p>拟通过制作Plugin和Loader加深对Webpack的认知。</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/blog/2021/10/12/webpack-diy-plugins-and-loaders-0/"><i class="fa fa-newspaper-o"></i>阅读全文</a>
                 </div>
                 <hr>
               </li>
@@ -781,10 +786,10 @@
             <span class="previous disable"><i class="fa fa-angle-double-left"></i></span>
             <span class="previous disable"><i class="fa fa-angle-left"></i></span>
           
-          <span class="page_number ">1/24</span>
+          <span class="page_number ">1/25</span>
           
             <a href="/blog/2" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/blog/24" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/blog/25" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -798,25 +803,25 @@
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/blog/2021/10/14/webpack-diy-plugins-and-loaders-7/">Webpack Plugin制作7-做一个自定义类型的loader</a></li>
+                    
+                        <li><a href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-6/">Webpack Plugin制作6-修改其它插件的配置</a></li>
+                    
+                        <li><a href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-5/">Webpack Plugin制作5-与其它插件进行交互</a></li>
+                    
+                        <li><a href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-4/">Webpack Plugin制作4-在index.html里添加一条备注</a></li>
+                    
+                        <li><a href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-3/">Webpack Plugin制作3-重写LICENSE打包插件</a></li>
+                    
+                        <li><a href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-2/">Webpack Plugin制作2-在打包目录输出文件列表</a></li>
+                    
+                        <li><a href="/blog/2021/10/12/webpack-diy-plugins-and-loaders-1/">Webpack Plugin制作1-将LICENSE打包到目的文件夹</a></li>
+                    
+                        <li><a href="/blog/2021/10/12/webpack-diy-plugins-and-loaders-0/">Webpack Plugin制作0-序</a></li>
+                    
                         <li><a href="/blog/2021/10/10/docker-notes-3/">备忘录 根据Dockerfile新建并发布镜像</a></li>
                     
                         <li><a href="/blog/2021/10/10/docker-notes-2/">备忘录 Docker镜像的修改更新</a></li>
-                    
-                        <li><a href="/blog/2021/10/10/docker-notes/">备忘录 Docker镜像的使用</a></li>
-                    
-                        <li><a href="/blog/2021/09/28/python-douyu-danmu/">Python 关于斗鱼每日荧光棒礼物的领取</a></li>
-                    
-                        <li><a href="/blog/2021/09/14/python-https-cert/">Python 关于检查域名证书是否过期遇到的问题</a></li>
-                    
-                        <li><a href="/blog/2021/09/10/no-cdn-cache/">一个低级问题：CDN缓存暴露了我的加密配置页😳</a></li>
-                    
-                        <li><a href="/blog/2021/09/10/watermark-hide-in-image/">知识库 给图片添加数字盲水印</a></li>
-                    
-                        <li><a href="/blog/2021/09/09/github-generate-and-release-android-apk/">一次GitHub Action自动化发布集成部署(Android 篇)</a></li>
-                    
-                        <li><a href="/blog/2021/09/08/keepass-onedrive/">备忘录 Azure单页应用授权 + keeweb Web应用部署问题</a></li>
-                    
-                        <li><a href="/blog/2021/09/07/email-host/">【资源】关于免费的域名邮箱托管</a></li>
                     
                 </ul>
             </div>
@@ -834,7 +839,7 @@
                             <span class="name">
                                 技术学习
                             </span>
-                            <span class="badge">134</span>
+                            <span class="badge">142</span>
                         </a>
                     </li>
                     
@@ -905,7 +910,7 @@
                       
                       
                       
-                      <a href="/blog/tag/#JavaScript" style="font-size: 10.5pt; color: #888;">JavaScript</a>
+                      <a href="/blog/tag/#JavaScript" style="font-size: 11.5pt; color: #666;">JavaScript</a>
                     
                       
                       

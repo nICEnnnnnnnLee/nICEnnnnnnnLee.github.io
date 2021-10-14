@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Webpack Plugin制作6-修改其它插件的配置</title>
+    <meta name="description" content="现在我们要干两件事情：  对上一节的备注插件的备注1进行修改，让它把我们的备注2写到index.html里面去  提供一个对外的hook，让其它插件可以把他们的备注3传过来，然后修改上一节的备注插件，把备注3写到index.html里面去">
+
+    <meta property="og:url" content="https://nicelee.top/blog/2021/10/13/webpack-diy-plugins-and-loaders-6/">
+    <meta property="og:site_name" content="NiceLee的博客">
+    <meta property="og:title" content="Webpack Plugin制作6-修改其它插件的配置">
+    <meta property="og:description" content="现在我们要干两件事情：  对上一节的备注插件的备注1进行修改，让它把我们的备注2写到index.html里面去  提供一个对外的hook，让其它插件可以把他们的备注3传过来，然后修改上一节的备注插件，把备注3写到index.html里面去">
+    <meta property="og:image" content="https://nicelee.top/favicon.ico?">
+    <meta property="og:image:type" content="image/x-icon">
+    
+    <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="stylesheet" href="/css/font-awesome.min.css ">
+    <link rel="stylesheet" href="/css/font-ali.css?v=1.2 ">
+    <link rel="stylesheet" href="/css/main.css?v=1.1 ">
+    <link rel="canonical" href="https://nicelee.top/blog/2021/10/13/webpack-diy-plugins-and-loaders-6/">
+    <link rel="alternate" type="application/rss+xml" title="NiceLeeのBlog" href="https://nicelee.top/feed.xml ">
+
+	
+
+    <script>
+    // 百度统计代码
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?11f780e4e4ccd4e99b101eac776e93e4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+</head>
+
+    <link rel="stylesheet" href="/sources/live2d/css/live2d.css" />
+  <body>
+	
+		
+		<script type="text/javascript" src="/js/ribbon.min.js "></script>
+		
+	
+	
+    <header id="top">
+    <div class="wrapper">
+        <a href="/blog/" class="brand awsome-font">NiceLeeのBlog</a>
+        <small>用爱发电 bilibili~</small>
+        <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
+        <nav id="headerNav">
+            <ul>
+				<li onclick="showdiv()" >
+                    <a href="#">
+                    <i class="fa fa-search">搜索</i>
+                    </a>
+                </li>
+                <li>
+                    
+                    <a href="/blog/">
+                    
+                        <i class="fa fa-home"></i>主页
+                    </a>
+                </li>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <a href="/blog/archive/">
+                        
+                            <i class="fa fa-archive"></i>归档
+                        </a>
+                    </li>
+                
+                    
+                    <li>
+                        <a href="/ilikemusic/">
+                        
+                            <i class="fa fa-music"></i>音乐
+                        </a>
+                    </li>
+                
+                    
+                    <li>
+                        <a href="/collect/">
+                        
+                            <i class="fa fa-bookmark"></i>收藏
+                        </a>
+                    </li>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <a href="/blog/timeline/">
+                        
+                            <i class="fa fa-clock-o"></i>时间轴
+                        </a>
+                    </li>
+                
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <a href="/about/">
+                        
+                            <i class="fa fa-info-circle"></i>关于
+                        </a>
+                    </li>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                				
+				
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+        <div class="page clearfix" post>
+    <div class="left">
+        <h1>Webpack Plugin制作6-修改其它插件的配置</h1>
+        <div class="label">
+
+            <div class="label-card">
+                <i class="fa fa-calendar"></i>2021-10-13
+            </div>
+
+            <div class="label-card">
+                <i class="fa fa-user"></i>nIceLee
+                
+            </div>
+            <div class="label-card">
+                <p>阅读：<span id="busuanzi_value_page_pv1"></span></p>
+            </div>
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+            
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+            </div>
+
+            <div class="label-card">
+            
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <!--a href="/blog/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a-->
+        <a href="/blog/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a>
+    
+  
+
+</span>
+
+            </div>
+
+        </div>
+        <hr>
+        <article itemscope itemtype="http://schema.org/BlogPosting">
+        <ul id="markdown-toc">
+  <li><a href="#准备工作" id="markdown-toc-准备工作">准备工作</a></li>
+  <li><a href="#实现功能1" id="markdown-toc-实现功能1">实现功能1</a></li>
+  <li><a href="#分析功能2" id="markdown-toc-分析功能2">分析功能2</a></li>
+  <li><a href="#写一个hook" id="markdown-toc-写一个hook">写一个Hook</a></li>
+  <li><a href="#插件实现" id="markdown-toc-插件实现">插件实现</a></li>
+  <li><a href="#调用本插件hook的插件实现" id="markdown-toc-调用本插件hook的插件实现">调用本插件Hook的插件实现</a></li>
+  <li><a href="#源代码" id="markdown-toc-源代码">源代码</a></li>
+  <li><a href="#系列文章" id="markdown-toc-系列文章">系列文章</a></li>
+</ul>
+<p>现在我们要干两件事情：</p>
+<ul>
+  <li>对上一节的备注插件的<strong>备注1</strong>进行修改，让它把我们的<strong>备注2</strong>写到index.html里面去</li>
+  <li>提供一个对外的hook，让其它插件可以把他们的<strong>备注3</strong>传过来，然后修改上一节的备注插件，把<strong>备注3</strong>写到index.html里面去</li>
+</ul>
+
+<h2 id="准备工作">准备工作</h2>
+<p>本文的工程环境承接<a href="/blog/2021/10/12/webpack-diy-plugins-and-loaders-5/">上文</a></p>
+
+<p>这个简单的工程目录如下:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- build
+- node_modules
+- package.json
+- plugins
+    - 0.createLicense.js
+    - 1.createFileList.js
+    - 2.createLicense.js
+    - 3.addRemark.js
+    - 4.addRemark.js
+- loaders
+- src
+    - index.js
+    - index.html
+- LICENSE
+</code></pre></div></div>
+
+<h2 id="实现功能1">实现功能1</h2>
+<p>我们来分析一下，各个插件的函数的执行顺序。</p>
+<ul>
+  <li>首先，肯定是各个构造函数，按照在plugin数组的位置依次执行</li>
+  <li>在这之后，各个apply函数，按照在plugin数组的位置依次执行</li>
+  <li>然后，才是apply函数里面的hook订阅传入的回调函数，以及回调函数里订阅传入的回调函数…不断套娃
+    <ul>
+      <li>同一插件可以按套娃深度来做一个执行顺序判断</li>
+      <li>同一hook的回调按照订阅顺序做个判断</li>
+      <li>不同hook按照webpack的执行逻辑做个先后判断</li>
+    </ul>
+  </li>
+</ul>
+
+<p>我们再来看一下，添加备注的插件是怎么利用这个配置的：</p>
+<ul>
+  <li>它在构造函数里面把传入的参数经过一定处理放到<code class="language-plaintext highlighter-rouge">this.remarks</code>，</li>
+  <li>在apply函数挂上钩子之前并没有做任何修改，</li>
+  <li>然后在钩子回调函数里面直接使用<code class="language-plaintext highlighter-rouge">this.remarks</code></li>
+</ul>
+
+<p>简便起见，我们不妨在插件的apply函数里直接就把备注插件的remarks给修改掉。<br />
+我们可以在<code class="language-plaintext highlighter-rouge">compiler.options.plugins</code>获得所有插件实例。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">pluginName</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">WebpackConfigResetPlugin</span><span class="dl">'</span><span class="p">;</span>
+<span class="kd">class</span> <span class="nx">WebpackConfigResetPlugin</span> <span class="p">{</span>
+    <span class="kd">constructor</span><span class="p">(</span><span class="nx">options</span> <span class="o">=</span> <span class="p">{})</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">remarks</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">remarks</span> <span class="o">||</span> <span class="dl">'</span><span class="s1">&lt;!-- 这是一条由WebpackConfigResetPlugin生成的默认备注  --&gt;</span><span class="dl">'</span>
+    <span class="p">}</span>
+    <span class="nx">apply</span><span class="p">(</span><span class="nx">compiler</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="p">{</span> <span class="nx">hooks</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">webpack</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">compiler</span><span class="p">;</span>
+        <span class="kd">const</span> <span class="nx">outputPath</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">output</span><span class="p">.</span><span class="nx">path</span>
+        <span class="nx">options</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">plugin</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="dl">'</span><span class="s1">AddRemarksPlugin</span><span class="dl">'</span> <span class="o">===</span> <span class="nx">plugin</span><span class="p">.</span><span class="kd">constructor</span><span class="p">.</span><span class="nx">name</span><span class="p">){</span>
+                <span class="nx">plugin</span><span class="p">.</span><span class="nx">remarks</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">remarks</span>
+            <span class="p">}</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">WebpackConfigResetPlugin</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="分析功能2">分析功能2</h2>
+<p>功能2和上一节中html-webpack-plugin做的事情十分类似，让我们来看看它是怎么做的吧。<br />
+看看<a href="https://hub.fastgit.org/jantimon/html-webpack-plugin#events">ReadMe</a>和源码：</p>
+<ul>
+  <li>它在<a href="https://hub.fastgit.org/jantimon/html-webpack-plugin/blob/main/lib/hooks.js">lib/hooks.js</a>生成了若干个hook，</li>
+  <li>然后在<a href="https://hub.fastgit.org/jantimon/html-webpack-plugin/blob/2f5de7ab9e8bca60e9e200f2e4b4cfab90db28d4/index.js#L347">index.js#L347</a>发布了beforeEmit这一promise，</li>
+  <li>这使得我们自己实现的的beforeEmit的订阅回调函数得以执行，也就是html内容添加了备注。</li>
+</ul>
+
+<p>这里面有个关于<a href="https://github.com/webpack/tapable">tapable</a>的知识点，可以了解一下。我们也可以参考官方文档的各种<a href="https://webpack.js.org/contribute/writing-a-plugin/#synchronous-hooks">hooks</a>。  <br />
+hook类型很多，涉及到同步异步，多订阅等等。我们先以一个同步钩子为例，有个概念。</p>
+
+<ul>
+  <li>我先生成一个钩子
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">const</span> <span class="p">{</span> <span class="nx">SyncHook</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">tapable</span><span class="dl">'</span><span class="p">);</span>    
+  <span class="kd">const</span> <span class="nx">hook</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SyncHook</span><span class="p">([</span><span class="dl">'</span><span class="s1">age</span><span class="dl">'</span><span class="p">]);</span>
+</code></pre></div>    </div>
+  </li>
+  <li>订阅。传入回调，此时不会立刻执行
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nx">hook</span><span class="p">.</span><span class="nx">tap</span><span class="p">(</span><span class="dl">'</span><span class="s1">self intro</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">age</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`I'm </span><span class="p">${</span><span class="nx">age</span><span class="p">}</span><span class="s2"> years old`</span><span class="p">);</span>
+  <span class="p">});</span>
+</code></pre></div>    </div>
+  </li>
+  <li>发布。 此时订阅传入的回调函数会开始执行
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nx">hook</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="dl">'</span><span class="s1">18</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="写一个hook">写一个Hook</h2>
+<p>好了，分析到这里，我们参照<a href="https://hub.fastgit.org/jantimon/html-webpack-plugin/blob/main/lib/hooks.js">lib/hooks.js</a>写一个最简单的同步钩子。</p>
+
+<ul>
+  <li>因为字多难以理解，且容易混淆，我们将在下文使用简称：
+    <ul>
+      <li><strong>事件1</strong>: 添加备注插件进行添加备注这一动作</li>
+      <li><strong>事件2</strong>: 本插件对添加备注插件进行配置修改</li>
+      <li><strong>事件3</strong>: 其它插件对本插件进行配置修改</li>
+      <li><strong>事件4</strong>: 本插件通知其它插件对本插件进行配置修改</li>
+      <li><strong>事件5</strong>: 其它插件订阅本插件对配置修改的hook</li>
+    </ul>
+  </li>
+  <li>
+    <p>本插件只关注<strong>事件2</strong>和<strong>事件4</strong></p>
+  </li>
+  <li>先确定hook 的发布时机(即<strong>事件4</strong>)。<br />
+注意到我们要仿写的hook是和compilation绑定的，我们的hook只能挂在compilation上。<br />
+那么<strong>事件4</strong>区间大概在hooks.thisCompilation ~ hooks.afterEmit之间，因为其它hook不传compilation参数<br />
+   <br />
+再看看我们要做的事情，分析上一节的添加备注插件可知：
+    <ul>
+      <li><strong>事件1</strong>发生在HtmlWebpackPlugin的beforeEmit的回调上</li>
+      <li>那么<strong>事件2</strong>应当在HtmlWebpackPlugin.getHooks(compilation).beforeEmit之前<br />
+  (最好不要挂beforeEmit，因为这样会要考虑顺序问题)</li>
+      <li><strong>事件3</strong>在<strong>事件2</strong>之后</li>
+      <li><strong>事件4</strong>在<strong>事件3</strong>之后(这件事情是必定发生的, 而且因为是最简单的同步钩子，这里不必过多考虑)</li>
+      <li>那么<strong>事件4</strong>区间在<strong>事件2</strong>之前，在.beforeEmit之前</li>
+    </ul>
+
+    <p>   <br />
+  理论上，我们可以任意选取符合上面两个要求的时机来实现<strong>事件4</strong>和<strong>事件2</strong>。<br />
+  在这里，我选择了在hooks.thisCompilation的回调函数里面发布我们的hook事件。<br />
+  这给后面的<strong>事件2</strong>留下了充足的弹性空间。<br />
+  这也意味着，<strong>事件4</strong>将发生在.thisCompilation之后，在.compilation之前。<br />
+  因此我们把暴露的钩子命名为.beforeCompilation
+  (或者叫.afterThisCompilation也行😳)</p>
+  </li>
+  <li>Hook实现<br />
+以下是plugins/hook.js
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">const</span> <span class="nx">SyncHook</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">tapable</span><span class="dl">'</span><span class="p">).</span><span class="nx">SyncHook</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">pluginHooksMap</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">WeakMap</span><span class="p">();</span>
+  <span class="kd">function</span> <span class="nx">getHooks</span><span class="p">(</span><span class="nx">compilation</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">let</span> <span class="nx">hooks</span> <span class="o">=</span> <span class="nx">pluginHooksMap</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">compilation</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">hooks</span> <span class="o">===</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">hooks</span> <span class="o">=</span> <span class="nx">createHooks</span><span class="p">();</span>
+          <span class="nx">pluginHooksMap</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="nx">compilation</span><span class="p">,</span> <span class="nx">hooks</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="nx">hooks</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="kd">function</span> <span class="nx">createHooks</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="p">{</span>
+          <span class="na">beforeCompilation</span><span class="p">:</span> <span class="k">new</span> <span class="nx">SyncHook</span><span class="p">([</span><span class="dl">'</span><span class="s1">pluginObj</span><span class="dl">'</span><span class="p">]),</span>
+      <span class="p">};</span>
+  <span class="p">}</span>
+  <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">getHooks</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="插件实现">插件实现</h2>
+<p>已经约定好了<strong>事件4</strong>发生在hooks.thisCompilation，<br />
+而<strong>事件2</strong>应该在<strong>事件4</strong>之后，<br />
+所以我们把原来在apply方法实现的<strong>事件2</strong>挪到hooks.compilation里面</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">pluginName</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">WebpackConfigResetPlugin</span><span class="dl">'</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">getHooks</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./hooks</span><span class="dl">'</span><span class="p">)</span>
+<span class="kd">class</span> <span class="nx">WebpackConfigResetPlugin</span> <span class="p">{</span>
+    <span class="kd">constructor</span><span class="p">(</span><span class="nx">options</span> <span class="o">=</span> <span class="p">{})</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">remarks</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">remarks</span> <span class="o">||</span> <span class="dl">'</span><span class="s1">&lt;!-- 这是一条由WebpackConfigResetPlugin生成的默认备注  --&gt;</span><span class="dl">'</span>
+    <span class="p">}</span>
+    <span class="nx">apply</span><span class="p">(</span><span class="nx">compiler</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="p">{</span> <span class="nx">hooks</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">webpack</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">compiler</span><span class="p">;</span>
+        <span class="kd">const</span> <span class="nx">outputPath</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">output</span><span class="p">.</span><span class="nx">path</span>
+        <span class="c1">// options.plugins.forEach(plugin =&gt; {</span>
+        <span class="c1">//     if('AddRemarksPlugin' === plugin.constructor.name){</span>
+        <span class="c1">//         plugin.remarks = this.remarks</span>
+        <span class="c1">//     }</span>
+        <span class="c1">// });</span>
+        <span class="nx">compiler</span><span class="p">.</span><span class="nx">hooks</span><span class="p">.</span><span class="nx">thisCompilation</span><span class="p">.</span><span class="nx">tap</span><span class="p">(</span><span class="nx">pluginName</span><span class="p">,</span> <span class="p">(</span><span class="nx">compilation</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="nx">getHooks</span><span class="p">(</span><span class="nx">compilation</span><span class="p">).</span><span class="nx">beforeCompilation</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+        <span class="p">});</span>
+        <span class="nx">compiler</span><span class="p">.</span><span class="nx">hooks</span><span class="p">.</span><span class="nx">compilation</span><span class="p">.</span><span class="nx">tap</span><span class="p">(</span><span class="nx">pluginName</span><span class="p">,</span> <span class="p">(</span><span class="nx">compilation</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="nx">options</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">plugin</span> <span class="o">=&gt;</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="dl">'</span><span class="s1">AddRemarksPlugin</span><span class="dl">'</span> <span class="o">===</span> <span class="nx">plugin</span><span class="p">.</span><span class="kd">constructor</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">plugin</span><span class="p">.</span><span class="nx">remarks</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">remarks</span>
+                <span class="p">}</span>
+            <span class="p">});</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">WebpackConfigResetPlugin</span><span class="p">.</span><span class="nx">getHooks</span> <span class="o">=</span> <span class="nx">getHooks</span><span class="p">;</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">WebpackConfigResetPlugin</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="调用本插件hook的插件实现">调用本插件Hook的插件实现</h2>
+<p>插件对外暴露的功能都写好了，总得写个例子看看情况吧。<br />
+这个插件关注的是<strong>事件3</strong>和<strong>事件5</strong>。<br />
+<strong>事件3</strong>很好办，就一个回调函数的事儿。</p>
+<ul>
+  <li>(plugin) =&gt; plugin.remarks = ‘一个备注’</li>
+</ul>
+
+<p><strong>事件5</strong>有点难办，因为要获取compilation对象，最早的hook是hooks.thisCompilation，但是<strong>事件4</strong>也是发生在这里。
+<strong>事件4</strong>和<strong>事件5</strong>都挂在hooks.thisCompilation上，怎么保证<strong>事件5</strong>先来呢？<br />
+这就是一拍脑袋就下决定的后遗症了，当然，也可以说是经验不足，理解也不到位。<br />
+不过，也不是没有解决办法。我们确保插件实例在webpack配置plugin数组里的位置比WebpackConfigResetPlugin的实例靠前就是了。<br />
+以下是实现：</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">pluginName</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">HookPlugin</span><span class="dl">'</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">WebpackConfigResetPlugin</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./5.changeWebpackConfig</span><span class="dl">'</span><span class="p">)</span>
+<span class="kd">class</span> <span class="nx">HookPlugin</span> <span class="p">{</span>
+    <span class="kd">constructor</span><span class="p">(</span><span class="nx">options</span> <span class="o">=</span> <span class="p">{})</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">remarks</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">remarks</span> <span class="o">||</span> <span class="dl">'</span><span class="s1">&lt;!-- 这是一条由HookPlugin hook WebpackConfigResetPlugin 生成的默认备注  --&gt;</span><span class="dl">'</span>
+    <span class="p">}</span>
+    <span class="nx">apply</span><span class="p">(</span><span class="nx">compiler</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="p">{</span> <span class="nx">hooks</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">webpack</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">compiler</span><span class="p">;</span>
+        <span class="kd">const</span> <span class="nx">outputPath</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">output</span><span class="p">.</span><span class="nx">path</span>
+        <span class="nx">compiler</span><span class="p">.</span><span class="nx">hooks</span><span class="p">.</span><span class="nx">thisCompilation</span><span class="p">.</span><span class="nx">tap</span><span class="p">(</span><span class="nx">pluginName</span><span class="p">,</span> <span class="p">(</span><span class="nx">compilation</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="nx">WebpackConfigResetPlugin</span><span class="p">.</span><span class="nx">getHooks</span><span class="p">(</span><span class="nx">compilation</span><span class="p">)</span>
+                <span class="p">.</span><span class="nx">beforeCompilation</span><span class="p">.</span><span class="nx">tap</span><span class="p">(</span>
+                    <span class="nx">pluginName</span><span class="p">,</span>
+                    <span class="p">(</span><span class="nx">plugin</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">plugin</span><span class="p">.</span><span class="nx">remarks</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">remarks</span>
+                <span class="p">)</span>
+        <span class="p">})</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">HookPlugin</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>这里专门提一下在webpack里面的配置：</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">plugins</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">...</span> 
+    <span class="k">new</span> <span class="nx">HookPlugin</span><span class="p">(),</span>
+    <span class="k">new</span> <span class="nx">WebpackConfigResetPlugin</span><span class="p">(),</span>
+<span class="p">],</span>
+</code></pre></div></div>
+
+<h2 id="源代码">源代码</h2>
+<p><a href="https://github.com/nicennnnnnnlee/webpack-plugin-loader-examples">https://github.com/nicennnnnnnlee/webpack-plugin-loader-examples</a></p>
+
+<h2 id="系列文章">系列文章</h2>
+<p><a href="/blog/2021/10/12/webpack-diy-plugins-and-loaders-0/">0-序</a><br />
+<a href="/blog/2021/10/12/webpack-diy-plugins-and-loaders-1/">1-将LICENSE打包到目的文件夹</a><br />
+<a href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-2/">2-在打包目录输出文件列表</a><br />
+<a href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-3/">3-重写LICENSE打包插件</a><br />
+<a href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-4/">4-在index.html里添加一条备注</a><br />
+<a href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-5/">5-与其它插件进行交互</a><br />
+<a href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-6/">6-修改其它插件的配置</a><br />
+<a href="/blog/2021/10/14/webpack-diy-plugins-and-loaders-7/">7-做一个自定义类型的loader</a></p>
+
+
+        </article>
+        <hr>
+
+        
+        
+            
+            
+                
+                    
+                        
+                        <h2 id="similar_posts">相似文章</h2>
+                        <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2021/10/14/webpack-diy-plugins-and-loaders-7/">Webpack Plugin制作7-做一个自定义类型的loader
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-5/">Webpack Plugin制作5-与其它插件进行交互
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-4/">Webpack Plugin制作4-在index.html里添加一条备注
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-3/">Webpack Plugin制作3-重写LICENSE打包插件
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-2/">Webpack Plugin制作2-在打包目录输出文件列表
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2021/10/12/webpack-diy-plugins-and-loaders-1/">Webpack Plugin制作1-将LICENSE打包到目的文件夹
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+        
+            </ul>
+        
+
+        <div class="post-recent">
+    <div class="pre">
+        
+        <p><strong>上一篇</strong> <a href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-5/">Webpack Plugin制作5-与其它插件进行交互</a></p>
+        
+    </div>
+    <div class="nex">
+
+        
+        <p><strong>下一篇</strong> <a href="/blog/2021/10/14/webpack-diy-plugins-and-loaders-7/">Webpack Plugin制作7-做一个自定义类型的loader</a></p>
+        
+    </div>
+</div>
+
+
+        <!-- <h2 id="comments">评论</h2>  
+        
+
+
+
+ -->
+
+
+    </div>
+    <button class="anchor"><i class="fa fa-anchor"></i></button>
+    <div class="right">
+        <div class="wrap">
+
+            <!-- Content -->
+            <div class="side content">
+                <div>
+                    内容
+                </div>
+                <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#similar_posts">相似文章</a></li>
+                    
+                    <!-- <li><a href="#comments">评论</a></li> -->
+                </ul>
+            </div>
+			
+            <!-- 其他div框放到这里 -->
+            <!-- <div class="side">bbbb</div> -->
+        </div>
+    </div>
+</div>
+<script>
+/**
+ * target _blank
+ */
+(function() {
+    var aTags = document.querySelectorAll('article a:not([id])')
+    for (var i = 0; i < aTags.length; i++) {
+        aTags[i].setAttribute('target', '_blank')
+    }
+
+}());
+</script>
+<script src="/js/pageContent.js " charset="utf-8"></script>
+
+
+    <footer class="site-footer">
+
+
+    <div class="wrapper">
+        <p class="description">
+             这是一个缺爱的博客(๑‾ ꇴ ‾๑)！ 
+        </p>
+        <p class="contact">
+            联系我: 
+            <a href="https://github.com/nICEnnnnnnnLee" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
+            <a href="mailto:lijia0732@sina.com" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>  
+            <a href="https://weibo.com/blackhigh" title="Weibo"><i class="fa fa-weibo" aria-hidden="true"></i></a>       
+			<span onclick="copyToClipboard('https://nicelee.top/feed.xml')"><a href="#">订阅我<i class="fa fa-gg"></i></a></span>
+        </p>
+        <p>
+            总pv:<span id="busuanzi_value_site_pv"></span>，uv:<span id="busuanzi_value_site_uv"></span>，本页pv:<span id="busuanzi_value_page_pv"></span>
+        </p>
+        <p class="power">
+            <span>
+            有用链接：
+                <a href="http://www.bejson.com/" target="_blank">BeJSON</a> &nbsp;&nbsp;
+                <a href="http://site.ip138.com/"  target="_blank">IP或域名查询</a> &nbsp;&nbsp;
+                <a href="http://ping.chinaz.com/"  target="_blank">各地ping</a> &nbsp;&nbsp;
+                <a href="https://tool.lu/"  target="_blank">在线工具</a> &nbsp;&nbsp; 
+                <a href="https://www.aliyun.com/"  target="_blank">阿里云</a> &nbsp;&nbsp; 
+                <a href="http://patorjk.com/software/taag/"  target="_blank">Text转FIGlet</a> &nbsp;&nbsp; 
+                <a href="https://vercel.com/dashboard"  target="_blank">Vercel</a> &nbsp;&nbsp;
+                <a href="https://dash.cloudflare.com/"  target="_blank">Cloudflare</a> &nbsp;&nbsp;
+                <a href="https://www.webfx.com/tools/emoji-cheat-sheet/"  target="_blank">Emoji😳</a> &nbsp;&nbsp;
+                <a href="https://www.color-hex.com/"  target="_blank">Color-hex</a> &nbsp;&nbsp;
+                <a href="https://hub.fastgit.org/"  target="_blank">Github镜像fastgit</a> &nbsp;&nbsp;
+            </span>
+        </p>
+        <p class="power">
+            <span>
+            除非另有注明，否则本网站上的内容可按 <a href="http://creativecommons.org/licenses/by-nc/4.0/"  target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议许可</a> 或更新版本使用。
+            </span>
+        </p>
+        <p class="power">
+            <span>
+                建站声明详见 <a href="/about/#关于个人博客">[关于]</a>. <a href="/sitemap.xml">[站点地图]</a>. 
+            </span>
+            
+        </p>
+        <p class="power beian">
+        </p>
+		<p class="power">
+            <span>
+                Site powered by <a href="https://jekyllrb.com/">Jekyll</a>.
+            </span>
+            <span>
+                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
+            </span>
+        </p>
+        
+		
+    </div>
+</footer>
+
+
+<!-- mask start -->
+<div id="searchBg"></div>
+<div id="searchDiv">
+	<input id="searchContent" type="text" onkeypress="if(event.keyCode==13) { search();return false;}" value=""/></input>
+    <div id="searchBtn" onclick="search();" /><i class="fa fa-search"></i></div>
+	<span onclick="hidediv();" class="close"></span>
+</div>
+<!-- mask end -->
+<!-- live2d begin -->
+<div id="landlord">
+    <div class="message" style="opacity:0"></div>
+    <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+    <div class="hide-button">隐藏</div>
+</div>
+<!-- live2d end -->
+<script type='text/javascript' src='/js/jquery.min.js '></script>
+<script type='text/javascript'>
+function search(){	
+	var str = document.getElementById("searchContent").value;
+	//console.log(str);
+	setLocalStorage("blogSearchKey",str);
+	hidediv();
+	window.location.href="/blog/archive/";
+}
+function showdiv() {
+	//alert("调用了showdiv()函数");
+	document.getElementById("searchBg").style.display ="block";
+	document.getElementById("searchDiv").style.display ="block";
+
+	//$('body').css("overflow", "hidden");
+	document.getElementsByTagName('body')[0].setAttribute("overflow", "hidden");
+}
+function hidediv() {
+	document.getElementById("searchBg").style.display = 'none';
+	document.getElementById("searchDiv").style.display = 'none';
+	//$('body').css("overflow", "auto");
+	document.getElementsByTagName('body')[0].setAttribute("overflow", "hidden");
+}
+////////////////////////////useful function //////////////////////////////////////
+//写cookies
+function setLocalStorage(name,value)
+{
+	localStorage.setItem(name, JSON.stringify(value));
+}
+//读cookies
+function getLocalStorage(name)
+{
+	return JSON.parse(localStorage.getItem(name));
+}
+//删cookies
+function delLocalStorage(name)
+{
+	localStorage.setItem(name, JSON.stringify(""));
+}
+function copyToClipboard (text) {
+    if(text.indexOf('-') !== -1) {
+        var arr = text.split('-');
+        text = arr[0] + arr[1];
+    }
+    var textArea = document.createElement("textarea");
+      textArea.style.position = 'fixed';
+      textArea.style.top = '0';
+      textArea.style.left = '0';
+      textArea.style.width = '2em';
+      textArea.style.height = '2em';
+      textArea.style.padding = '0';
+      textArea.style.border = 'none';
+      textArea.style.outline = 'none';
+      textArea.style.boxShadow = 'none';
+      textArea.style.background = 'transparent';
+      textArea.value = text;
+      document.body.appendChild(textArea);
+      textArea.select();
+	//alert("调用了复制剪贴板函数");
+      try {
+        var successful = document.execCommand('copy');
+        var msg = successful ? 'Rss源已成功复制到剪贴板' : 'RSS源为:https://nicelee.top/feed.xml';
+		//alert(msg);
+		showTips(msg);
+      } catch (err) {
+		//console.log(err);
+        //alert('该浏览器不支持点击复制到剪贴板');
+		showTips('RSS源为:https://nicelee.top/feed.xml');
+      }
+
+      document.body.removeChild(textArea);
+}
+/*
+<!--  版权维护  -->
+function addLink() {
+//alert("!!!");
+    var body_element = document.body;
+    var selection;
+    selection = window.getSelection();
+    if((selection + "").indexOf("/feed.xml") != -1){
+        return;
+    }
+	if(selection == ""){
+		return;
+	}
+    var locationHref=document.location.href;
+    var appendLink="\r\n------------------------------\r\n 原文出自[ NiceLee的个人博客 ] 转载请保留原文链接: <a href='"+locationHref+"'>"+locationHref+"</a>";
+    if (window.clipboardData) { // Internet Explorer
+        //console.log("调用原生函数");
+        var copytext = selection + appendLink;
+        window.clipboardData.setData ("Text", copytext);
+        return false;
+    } else {
+        //console.log("复杂的套路");
+        var copytext = selection + appendLink;
+        var newdiv = document.createElement('div');
+        newdiv.style.position='absolute';
+        newdiv.style.left='-99999px';
+        body_element.appendChild(newdiv);
+        newdiv.innerHTML = "<pre>" +copytext + "</pre>";
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function() {
+        	body_element.removeChild(newdiv);
+        },0);
+    }
+}
+document.oncopy = addLink;
+*/
+
+//contetn为要显示的内容  
+function showTips( content ){  
+	//alert("调用了复制提示消息函数");
+	//alert("内容为"+ content);
+    //窗口的宽度  
+	//alert(content);
+	var width = 250;
+	var x  = $(window).width()/2 - width/2;	
+	var y = $(window).height()/2 -20;
+	var $i = $("<span/>").text(content);
+	$i.css({
+		"z-index": 999999999999999999999999999,
+		"top": y,
+		"left": x,
+		"position": "absolute",
+		"font-weight": "bold",
+		'padding'   : '3px 5px',  
+		'background': '#8FBC8F',  
+		'font-size' : 12 + 'px',  
+		'margin'    : '0 auto',  
+		'text-align': 'center',  
+		'width'     : width + 'px',  
+		'height'    : 'auto',  
+		'color'     : '#fff'
+	});
+	$("body").append($i);
+	$i.animate({
+		"opacity": 0
+	},
+	3000,
+	function() {
+		//console.log($i.css());
+		$i.remove();
+		//alert('');
+	});
+}     
+</script>
+
+<!-- 窗口失去焦点 -- 别走啊 -->
+<!-- 窗口获得焦点 -- 恢复 -->
+<!-- console 打印figlet-->
+<script>
+var titleOnFocus = document.title;
+var titleOnBlur = "...(*￣０￣)ノ[别走啊…]";
+window.onfocus =function(){
+    document.title = titleOnFocus;
+    //console.log(titleOnFocus);
+}
+window.onblur = function(){
+    document.title = titleOnBlur;
+    //console.log(titleOnBlur);
+}
+
+var figlet = "\n" +
+"        _          _            _               \n" +
+"       (_)        | |          | |              \n" +
+"  _ __  _  ___ ___| | ___  ___ | |_ ___  _ __   \n" +
+" | '_ \\| |/ __/ _ \\ |/ _ \\/ _ \\| __/ _ \\| '_ \\  \n" +
+" | | | | | (_|  __/ |  __/  __/| || (_) | |_) | \n" +
+" |_| |_|_|\\___\\___|_|\\___|\\___(_)__\\___/| .__/  \n" +
+"                                        | |     \n" +
+"                                        |_|     \n" ;
+console.log(figlet);
+console.log("%c小改改爆个照呗\n hentai女个装呗", "color:red;font-size: 50px;font-weight:bold;");
+
+/* 防hentai
+document.onkeydown=function(){
+    var e = window.event||arguments[0];
+    if(e.keyCode==123){
+    	alert('请尊重劳动成果！');
+            return false;
+    }else if((e.ctrlKey)&&(e.shiftKey)&&(e.keyCode==73)){
+    	alert('请尊重劳动成果！');
+            return false;
+    }else if((e.ctrlKey)&&(e.keyCode==85)){
+            alert('请尊重劳动成果！');
+            return false;
+    }else if((e.ctrlKey)&&(e.keyCode==83)){
+           alert('请尊重劳动成果！');
+           return false;
+    }
+}
+document.oncontextmenu=function(){
+	alert('请尊重劳动成果！');
+    return false;
+}*/
+</script>
+
+<!-- live2d Begin-->
+<script type="text/javascript">
+    var message_Path = '/sources/live2d/'
+    var home_Path = 'https://nicelee.top/'
+</script>
+<script type="text/javascript" src="/sources/live2d/js/live2d.js"></script>
+<script type="text/javascript" src="/sources/live2d/js/message.js"></script>
+<script type="text/javascript">
+    var modelList = ["kesshouban_v2", "tia", "wanko", "index", "kanna", "koharu", "umaru", 
+	"22.closet.default.v2", 
+	"22.closet.2018.bls-summer", 
+	"22.closet.2019.summer", 
+	"33.closet.2016.xmas", 
+	"33.closet.2017.tomo-bukatsu", 
+	"33.closet.2018.bls-summer", 
+	"33.closet.2018.bls-winter", 
+	"33.closet.default.v2" ];    
+    var model = modelList[12]; 
+    // kesshouban_v2 血小板
+    // tia  小改改
+    // wanko 小狗狗 
+    // index 魔禁-茵蒂克丝
+    // kanna 康娜龙
+    // koharu 卡哇伊的Q版模型
+    // umaru 干物妹小埋 带声音
+    // 22 哔哩哔哩22娘
+    // 22.v2 哔哩哔哩22娘
+    console.log("live2d模型(小部分)来自官网: http://www.live2d.com/usermanual/cubism2_cn/samples.html");
+    console.log("live2d模型(大部分)来自梦象: https://mx-model.ga/");
+    if( window.document.body.offsetWidth >= 666){
+        loadlive2d("live2d", "/sources/live2d/model/"+ model +"/model.json");
+    }else{
+        //loadlive2d("live2d", "/sources/live2d/model/tia/model_tiny.json");
+        loadlive2d("live2d", "/sources/live2d/model/"+ model +"/model_tiny.json");
+    }
+</script>
+<!-- live2d End-->
+
+<script type="text/javascript">
+	var a_idx = 0;
+	jQuery(document).ready(function($) {
+		$("body").click(function(e) {
+			var a = new Array("大吉大利，今晚吃鸡！", "惊不惊喜，意不意外", "还有这种操作？", "小猪佩奇身上纹，掌声送给社会人", "确认过眼神", "皮一下，很开心", "很好很强大", "C位出道", "你若盛开，清风自来", "如果帅也是一种罪，那我已罪无可赦", "别看资料 ，看聊效！", "感动吗，不敢动", "打call", "我是你的超级英雄");
+			var $i = $("<span/>").text(a[a_idx]);
+			a_idx = (a_idx + 1) % a.length;
+			var x = e.pageX,
+			y = e.pageY;
+			$i.css({
+				"z-index": 999999999999999999999999999,
+				"top": y - 20,
+				"left": x,
+				"position": "absolute",
+				"font-weight": "bold",
+				"color": "#dd3333"
+			});
+			$("body").append($i);
+			$i.animate({
+				"top": y - 180,
+				"opacity": 0
+			},
+			1500,
+			function() {
+				$i.remove();
+				//alert('');
+			});
+		});
+	});
+</script>
+
+
+<script async src="/js/busuanzi.pure.mini.js "></script>
+
+
+    <div class="back-to-top">
+    <a href="#top" data-scroll>
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+    <script src="/js/main.js " charset="utf-8"></script>
+    <script src="/js/smooth-scroll.min.js " charset="utf-8"></script>
+    <script type="text/javascript">
+      smoothScroll.init({
+        speed: 500, // Integer. How fast to complete the scroll in milliseconds
+        easing: 'easeInOutCubic', // Easing pattern to use
+        offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
+      });
+      // 为了底部内容不被遮住
+      $(document).ready(function () {
+        resizeBody();
+      });
+      window.onresize = resizeBody;
+      function resizeBody(){
+        //console.log("resizing Body...");
+        if (window.innerWidth <= 770) {
+            var totalHeight = $("header#top").height() + $(".page.clearfix").height() + $("footer.site-footer").height() +80;
+            document.body.style.height = totalHeight + "px";
+        }else{
+            document.body.style.height = "auto";
+        }
+      }
+    </script>
+	
+	
+    <!-- <script src=" /js/scroll.min.js " charset="utf-8"></script> -->
+  </body>
+
+</html>
