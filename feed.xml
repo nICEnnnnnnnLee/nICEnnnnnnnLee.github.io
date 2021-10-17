@@ -5,9 +5,50 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 14 Oct 2021 16:07:31 +0800</pubDate>
-    <lastBuildDate>Thu, 14 Oct 2021 16:07:31 +0800</lastBuildDate>
+    <pubDate>Sun, 17 Oct 2021 16:46:09 +0800</pubDate>
+    <lastBuildDate>Sun, 17 Oct 2021 16:46:09 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>Windows下cmd脚本关闭进程和服务</title>
+        <description>&lt;blockquote&gt;
+  应该不算是一个伪需求吧。。。
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Sun, 17 Oct 2021 15:59:01 +0800</pubDate>
+        <pubDateFormat>2021-10-17</pubDateFormat>
+        <link>https://nicelee.top/blog/2021/10/17/win-stop-service/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/10/17/win-stop-service/</guid>
+        
+        <category>Windows</category>
+        
+        
+        <category>小技巧</category>
+        
+      </item>
+    
+      <item>
+        <title>Java 爬虫练习-bilibili视频下载 补充</title>
+        <description>&lt;blockquote&gt;
+  距离以前的&lt;a href=&quot;/blog/2019/03/02/java-spider-bilibili-down-index/&quot;&gt;总结&lt;/a&gt;过去了很久，久到以前的东西有些不再奏效，现在来补充几个思路。     &lt;br /&gt;
+不得不说，阿B对新手最友好了。
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Sun, 17 Oct 2021 14:59:01 +0800</pubDate>
+        <pubDateFormat>2021-10-17</pubDateFormat>
+        <link>https://nicelee.top/blog/2021/10/17/java-spider-bilibili-down-7/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/10/17/java-spider-bilibili-down-7/</guid>
+        
+        <category>Java</category>
+        
+        <category>html</category>
+        
+        <category>bilibili</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
     
       <item>
         <title>Webpack Plugin制作7-做一个自定义类型的loader</title>
@@ -139,38 +180,6 @@
         <guid isPermaLink="true">https://nicelee.top/blog/2021/10/12/webpack-diy-plugins-and-loaders-0/</guid>
         
         <category>JavaScript</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>备忘录 根据Dockerfile新建并发布镜像</title>
-        <description>简单的新建并发布镜像。
-</description>
-        <pubDate>Sun, 10 Oct 2021 12:59:01 +0800</pubDate>
-        <pubDateFormat>2021-10-10</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/10/10/docker-notes-3/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/10/10/docker-notes-3/</guid>
-        
-        <category>Docker</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>备忘录 Docker镜像的修改更新</title>
-        <description>在现有的镜像上进行修改。
-</description>
-        <pubDate>Sun, 10 Oct 2021 11:59:01 +0800</pubDate>
-        <pubDateFormat>2021-10-10</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/10/10/docker-notes-2/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/10/10/docker-notes-2/</guid>
-        
-        <category>Docker</category>
         
         
         <category>技术学习</category>

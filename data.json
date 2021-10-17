@@ -2,6 +2,20 @@
 	"code" : 0 ,
 	"data" : [
 	{
+		"title" : "Windows下cmd脚本关闭进程和服务",
+		"tags" : "Windows",
+		"url" : "/blog/2021/10/17/win-stop-service/"
+		"brief" : "应该不算是一个伪需求吧。。。"
+	},
+    
+	{
+		"title" : "Java 爬虫练习-bilibili视频下载 补充",
+		"tags" : "Java_html_bilibili",
+		"url" : "/blog/2021/10/17/java-spider-bilibili-down-7/"
+		"brief" : "距离以前的总结过去了很久，久到以前的东西有些不再奏效，现在来补充几个思路。不得不说，阿B对新手最友好了。"
+	},
+    
+	{
 		"title" : "Webpack Plugin制作7-做一个自定义类型的loader",
 		"tags" : "JavaScript",
 		"url" : "/blog/2021/10/14/webpack-diy-plugins-and-loaders-7/"

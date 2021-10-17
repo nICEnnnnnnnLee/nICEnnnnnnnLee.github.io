@@ -370,7 +370,7 @@
 <p>    这很正常，因为我们写插件的时候实际上是撇开webpack单干，和它的交互仅仅是初始化传递参数和被调用。
                         这相当于另起炉灶了，这样子显然webpack不会知道你悄悄的对输出目录做了什么手脚。
                         现在看起来没什么，但是当情况复杂，在你开发调试的时候，会发现问题很大。
-                        例如，webDevServer，它对接的是webpack放在内存里的内容；以及模块热重载、sourcemap等等。
+                        例如，devServer，它对接的是webpack放在内存里的内容；以及模块热重载、sourcemap等等。
                         要利用这些强大的特性，我们必须理解并follow这一套流程。<br />
     具体要怎么做呢？<br />
     我们可以参考上一节的官方示例，依葫芦画瓢。</p>
@@ -426,20 +426,44 @@
 <p><a href="https://github.com/nicennnnnnnlee/webpack-plugin-loader-examples">https://github.com/nicennnnnnnlee/webpack-plugin-loader-examples</a></p>
 
 <h2 id="系列文章">系列文章</h2>
-<p><a href="/blog/2021/10/12/webpack-diy-plugins-and-loaders-0/">0-序</a><br />
-<a href="/blog/2021/10/12/webpack-diy-plugins-and-loaders-1/">1-将LICENSE打包到目的文件夹</a><br />
-<a href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-2/">2-在打包目录输出文件列表</a><br />
-<a href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-3/">3-重写LICENSE打包插件</a><br />
-<a href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-4/">4-在index.html里添加一条备注</a><br />
-<a href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-5/">5-与其它插件进行交互</a><br />
-<a href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-6/">6-修改其它插件的配置</a><br />
-<a href="/blog/2021/10/14/webpack-diy-plugins-and-loaders-7/">7-做一个自定义类型的loader</a></p>
+<ul>
+  <li><a href="/blog/2021/10/12/webpack-diy-plugins-and-loaders-0/">0-序</a></li>
+  <li><a href="/blog/2021/10/12/webpack-diy-plugins-and-loaders-1/">1-将LICENSE打包到目的文件夹</a></li>
+  <li><a href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-2/">2-在打包目录输出文件列表</a></li>
+  <li><a href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-3/">3-重写LICENSE打包插件</a></li>
+  <li><a href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-4/">4-在index.html里添加一条备注</a></li>
+  <li><a href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-5/">5-与其它插件进行交互</a></li>
+  <li><a href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-6/">6-修改其它插件的配置</a></li>
+  <li><a href="/blog/2021/10/14/webpack-diy-plugins-and-loaders-7/">7-做一个自定义类型的loader</a></li>
+</ul>
 
 
         </article>
         <hr>
 
         
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
         
             
             
@@ -536,20 +560,6 @@
                         </li>
                         
                         
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-            
-        
-            
-            
-                
                     
                 
             
