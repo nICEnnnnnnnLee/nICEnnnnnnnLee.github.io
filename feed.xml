@@ -5,9 +5,32 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 17 Oct 2021 16:46:09 +0800</pubDate>
-    <lastBuildDate>Sun, 17 Oct 2021 16:46:09 +0800</lastBuildDate>
+    <pubDate>Mon, 25 Oct 2021 20:44:33 +0800</pubDate>
+    <lastBuildDate>Mon, 25 Oct 2021 20:44:33 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>关于TLS加密实现中不可忽略的部分：校验证书的域名</title>
+        <description>&lt;blockquote&gt;
+  做个笔记。&lt;br /&gt;
+对TCP连接进行SSL/TLS加密时，应当注意这个问题。
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Mon, 25 Oct 2021 15:59:01 +0800</pubDate>
+        <pubDateFormat>2021-10-25</pubDateFormat>
+        <link>https://nicelee.top/blog/2021/10/25/hostname-verify-on-ssl-socket/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2021/10/25/hostname-verify-on-ssl-socket/</guid>
+        
+        <category>Java</category>
+        
+        <category>Go</category>
+        
+        <category>Python</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
     
       <item>
         <title>Windows下cmd脚本关闭进程和服务</title>
@@ -162,22 +185,6 @@
         <pubDateFormat>2021-10-12</pubDateFormat>
         <link>https://nicelee.top/blog/2021/10/12/webpack-diy-plugins-and-loaders-1/</link>
         <guid isPermaLink="true">https://nicelee.top/blog/2021/10/12/webpack-diy-plugins-and-loaders-1/</guid>
-        
-        <category>JavaScript</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>Webpack Plugin制作0-序</title>
-        <description>拟通过制作Plugin和Loader加深对Webpack的认知。
-</description>
-        <pubDate>Tue, 12 Oct 2021 12:59:01 +0800</pubDate>
-        <pubDateFormat>2021-10-12</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/10/12/webpack-diy-plugins-and-loaders-0/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/10/12/webpack-diy-plugins-and-loaders-0/</guid>
         
         <category>JavaScript</category>
         
