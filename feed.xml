@@ -5,9 +5,27 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 25 Oct 2021 20:44:33 +0800</pubDate>
-    <lastBuildDate>Mon, 25 Oct 2021 20:44:33 +0800</lastBuildDate>
+    <pubDate>Mon, 16 May 2022 14:46:38 +0800</pubDate>
+    <lastBuildDate>Mon, 16 May 2022 14:46:38 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>Windows下创建/运行服务或者计划任务</title>
+        <description>&lt;blockquote&gt;
+  有时候想把某些操作开机启动、登录启动、定时启动或者周期启动，应该不算是一个伪需求吧。。。
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Sat, 14 May 2022 15:59:01 +0800</pubDate>
+        <pubDateFormat>2022-05-14</pubDateFormat>
+        <link>https://nicelee.top/blog/2022/05/14/win-plan-andservice/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2022/05/14/win-plan-andservice/</guid>
+        
+        <category>Windows</category>
+        
+        
+        <category>小技巧</category>
+        
+      </item>
     
       <item>
         <title>关于TLS加密实现中不可忽略的部分：校验证书的域名</title>
@@ -169,22 +187,6 @@
         <pubDateFormat>2021-10-13</pubDateFormat>
         <link>https://nicelee.top/blog/2021/10/13/webpack-diy-plugins-and-loaders-2/</link>
         <guid isPermaLink="true">https://nicelee.top/blog/2021/10/13/webpack-diy-plugins-and-loaders-2/</guid>
-        
-        <category>JavaScript</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>Webpack Plugin制作1-将LICENSE打包到目的文件夹</title>
-        <description>现在制作一个插件，它会在打包的时候将LICENSE放到目的文件夹中。
-</description>
-        <pubDate>Tue, 12 Oct 2021 13:59:01 +0800</pubDate>
-        <pubDateFormat>2021-10-12</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/10/12/webpack-diy-plugins-and-loaders-1/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/10/12/webpack-diy-plugins-and-loaders-1/</guid>
         
         <category>JavaScript</category>
         
