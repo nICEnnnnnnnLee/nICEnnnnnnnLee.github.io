@@ -266,6 +266,8 @@
                     
                 
                     
+                
+                    
                 				
 				
             </ul>
@@ -405,6 +407,7 @@
 <span class="p">}</span>
 
 <span class="c1">// 下载url的内容</span>
+<span class="c1">// 实际上是缓存完毕以后再生成blob，仅适用于媒体资源较小的时候</span>
 <span class="kd">function</span> <span class="nx">__download</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">filename</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">let</span> <span class="nx">xhr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
     <span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="dl">'</span><span class="s1">GET</span><span class="dl">'</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
@@ -417,7 +420,7 @@
             <span class="nx">a</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="dl">"</span><span class="s2">download</span><span class="dl">"</span><span class="p">,</span> <span class="nx">filename</span><span class="p">);</span>
             <span class="nx">a</span><span class="p">.</span><span class="nx">click</span><span class="p">();</span>
         <span class="p">}</span>
-    <span class="p">}</span>
+    <span class="p">};</span>
     <span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">();</span>
 <span class="p">};</span>
 
@@ -435,6 +438,13 @@
         <hr>
 
         
+        
+            
+            
+                
+                    
+                
+            
         
             
             
@@ -558,22 +568,6 @@
                 
             
         
-            
-            
-                
-                    
-                        
-                        <li class="relatedPost">
-                            <a href="/blog/2021/10/13/webpack-diy-plugins-and-loaders-3/">Webpack Plugin制作3-重写LICENSE打包插件
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-            
-        
         
             </ul>
         
@@ -586,6 +580,8 @@
     </div>
     <div class="nex">
 
+        
+        <p><strong>下一篇</strong> <a href="/blog/2022/07/05/win-key-shortcut/">Windows下常用快捷键记录</a></p>
         
     </div>
 </div>

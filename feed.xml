@@ -5,9 +5,27 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 14 Jun 2022 19:31:39 +0800</pubDate>
-    <lastBuildDate>Tue, 14 Jun 2022 19:31:39 +0800</lastBuildDate>
+    <pubDate>Tue, 05 Jul 2022 21:07:52 +0800</pubDate>
+    <lastBuildDate>Tue, 05 Jul 2022 21:07:52 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>Windows下常用快捷键记录</title>
+        <description>&lt;blockquote&gt;
+  有些快捷键功能蛮实用的，但每次要用的时候就记不起来，做个备忘录
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Tue, 05 Jul 2022 15:59:01 +0800</pubDate>
+        <pubDateFormat>2022-07-05</pubDateFormat>
+        <link>https://nicelee.top/blog/2022/07/05/win-key-shortcut/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2022/07/05/win-key-shortcut/</guid>
+        
+        <category>Windows</category>
+        
+        
+        <category>小技巧</category>
+        
+      </item>
     
       <item>
         <title>通过书签来获取视频地址或其它数据</title>
@@ -181,22 +199,6 @@
         <pubDateFormat>2021-10-13</pubDateFormat>
         <link>https://nicelee.top/blog/2021/10/13/webpack-diy-plugins-and-loaders-5/</link>
         <guid isPermaLink="true">https://nicelee.top/blog/2021/10/13/webpack-diy-plugins-and-loaders-5/</guid>
-        
-        <category>JavaScript</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>Webpack Plugin制作4-在index.html里添加一条备注</title>
-        <description>举一反三。
-</description>
-        <pubDate>Wed, 13 Oct 2021 11:59:01 +0800</pubDate>
-        <pubDateFormat>2021-10-13</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/10/13/webpack-diy-plugins-and-loaders-4/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/10/13/webpack-diy-plugins-and-loaders-4/</guid>
         
         <category>JavaScript</category>
         

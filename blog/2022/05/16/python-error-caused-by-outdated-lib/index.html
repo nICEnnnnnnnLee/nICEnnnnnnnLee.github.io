@@ -266,6 +266,8 @@
                     
                 
                     
+                
+                    
                 				
 				
             </ul>
@@ -353,46 +355,46 @@
 
 <p>于是修改<code class="language-plaintext highlighter-rouge">requirements.txt</code></p>
 
-<pre><code class="language-txt">flask==1.0.2
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flask==1.0.2
 ...
-</code></pre>
+</code></pre></div></div>
 
 <p>变为</p>
-<pre><code class="language-txt">flask==1.0.2
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flask==1.0.2
 Jinja2==2.11.2
 ...
-</code></pre>
+</code></pre></div></div>
 
 <h2 id="importerror-cannot-import-name-soft_unicode-from-markupsafe">ImportError: cannot import name ‘soft_unicode’ from ‘markupsafe’</h2>
 <p>同理</p>
-<pre><code class="language-txt">flask==1.0.2
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flask==1.0.2
 Jinja2==2.11.2
 ...
-</code></pre>
+</code></pre></div></div>
 
 <p>变为</p>
-<pre><code class="language-txt">flask==1.0.2
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flask==1.0.2
 Jinja2==2.11.2
 MarkupSafe==1.1.1
 ...
-</code></pre>
+</code></pre></div></div>
 
 <h2 id="importerror-cannot-import-name-json-from-itsdangerous">ImportError: cannot import name ‘json’ from ‘itsdangerous’</h2>
 
 <p>同理</p>
-<pre><code class="language-txt">flask==1.0.2
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flask==1.0.2
 Jinja2==2.11.2
 MarkupSafe==1.1.1
 ...
-</code></pre>
+</code></pre></div></div>
 
 <p>变为</p>
-<pre><code class="language-txt">flask==1.0.2
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flask==1.0.2
 Jinja2==2.11.2
 MarkupSafe==1.1.1
 itsdangerous==1.1.0
 ...
-</code></pre>
+</code></pre></div></div>
 
 <h2 id="总结">总结</h2>
 <p>看了一下flask的依赖，基本上都是用的大于等于号，
@@ -424,6 +426,15 @@ itsdangerous==1.1.0
         <hr>
 
         
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
         
             
             
@@ -498,15 +509,6 @@ itsdangerous==1.1.0
                 
                     
                 
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
             
                 
                     

@@ -2,6 +2,13 @@
 	"code" : 0 ,
 	"data" : [
 	{
+		"title" : "Windows下常用快捷键记录",
+		"tags" : "Windows",
+		"url" : "/blog/2022/07/05/win-key-shortcut/"
+		"brief" : "有些快捷键功能蛮实用的，但每次要用的时候就记不起来，做个备忘录"
+	},
+    
+	{
 		"title" : "通过书签来获取视频地址或其它数据",
 		"tags" : "JavaScript",
 		"url" : "/blog/2022/06/14/js-bookmarks/"
