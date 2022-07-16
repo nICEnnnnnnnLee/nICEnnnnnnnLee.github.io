@@ -2,6 +2,20 @@
 	"code" : 0 ,
 	"data" : [
 	{
+		"title" : "备忘录 ffmpeg去水印功能delogo的使用",
+		"tags" : "ffmpeg",
+		"url" : "/blog/2022/07/16/ffmpeg-delogo-notes/"
+		"brief" : "有总比没有好，做个笔记"
+	},
+    
+	{
+		"title" : "备忘录 关于正则匹配的一些笔记",
+		"tags" : "",
+		"url" : "/blog/2022/07/16/regx-notes/"
+		"brief" : "简单的正则还行，复杂一点的每次要搜索一下就很尴尬"
+	},
+    
+	{
 		"title" : "Windows下常用快捷键记录",
 		"tags" : "Windows",
 		"url" : "/blog/2022/07/05/win-key-shortcut/"

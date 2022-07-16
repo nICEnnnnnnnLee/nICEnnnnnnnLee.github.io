@@ -5,9 +5,43 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 05 Jul 2022 21:07:52 +0800</pubDate>
-    <lastBuildDate>Tue, 05 Jul 2022 21:07:52 +0800</lastBuildDate>
+    <pubDate>Sat, 16 Jul 2022 11:23:58 +0800</pubDate>
+    <lastBuildDate>Sat, 16 Jul 2022 11:23:58 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>备忘录 ffmpeg去水印功能delogo的使用</title>
+        <description>&lt;blockquote&gt;
+  有总比没有好，做个笔记
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Sat, 16 Jul 2022 10:59:01 +0800</pubDate>
+        <pubDateFormat>2022-07-16</pubDateFormat>
+        <link>https://nicelee.top/blog/2022/07/16/ffmpeg-delogo-notes/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2022/07/16/ffmpeg-delogo-notes/</guid>
+        
+        <category>ffmpeg</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
+    
+      <item>
+        <title>备忘录 关于正则匹配的一些笔记</title>
+        <description>&lt;blockquote&gt;
+  简单的正则还行，复杂一点的每次要搜索一下就很尴尬
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Sat, 16 Jul 2022 09:59:01 +0800</pubDate>
+        <pubDateFormat>2022-07-16</pubDateFormat>
+        <link>https://nicelee.top/blog/2022/07/16/regx-notes/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2022/07/16/regx-notes/</guid>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
     
       <item>
         <title>Windows下常用快捷键记录</title>
@@ -163,42 +197,6 @@
         <pubDateFormat>2021-10-14</pubDateFormat>
         <link>https://nicelee.top/blog/2021/10/14/webpack-diy-plugins-and-loaders-7/</link>
         <guid isPermaLink="true">https://nicelee.top/blog/2021/10/14/webpack-diy-plugins-and-loaders-7/</guid>
-        
-        <category>JavaScript</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>Webpack Plugin制作6-修改其它插件的配置</title>
-        <description>现在我们要干两件事情：
-&lt;ul&gt;
-  &lt;li&gt;对上一节的备注插件的&lt;strong&gt;备注1&lt;/strong&gt;进行修改，让它把我们的&lt;strong&gt;备注2&lt;/strong&gt;写到index.html里面去&lt;/li&gt;
-  &lt;li&gt;提供一个对外的hook，让其它插件可以把他们的&lt;strong&gt;备注3&lt;/strong&gt;传过来，然后修改上一节的备注插件，把&lt;strong&gt;备注3&lt;/strong&gt;写到index.html里面去&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Wed, 13 Oct 2021 13:59:01 +0800</pubDate>
-        <pubDateFormat>2021-10-13</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/10/13/webpack-diy-plugins-and-loaders-6/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/10/13/webpack-diy-plugins-and-loaders-6/</guid>
-        
-        <category>JavaScript</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>Webpack Plugin制作5-与其它插件进行交互</title>
-        <description>我们换一种思路，对添加备注进行实现。
-</description>
-        <pubDate>Wed, 13 Oct 2021 12:59:01 +0800</pubDate>
-        <pubDateFormat>2021-10-13</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/10/13/webpack-diy-plugins-and-loaders-5/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/10/13/webpack-diy-plugins-and-loaders-5/</guid>
         
         <category>JavaScript</category>
         
