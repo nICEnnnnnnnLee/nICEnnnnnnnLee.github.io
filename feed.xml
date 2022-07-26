@@ -5,9 +5,28 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 16 Jul 2022 11:23:58 +0800</pubDate>
-    <lastBuildDate>Sat, 16 Jul 2022 11:23:58 +0800</lastBuildDate>
+    <pubDate>Tue, 26 Jul 2022 21:04:57 +0800</pubDate>
+    <lastBuildDate>Tue, 26 Jul 2022 21:04:57 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>关于LOL 牛马上等马插件的开发</title>
+        <description>&lt;blockquote&gt;
+  看直播的时候，发现进入英雄选择界面的时候，有时候会遇见憨批发言“我方上等马… 我方牛马…敌方…”。&lt;br /&gt;
+当时好奇是怎么做到的，如果实现的助手插件是通过逆向解析，难道不会被封号吗？&lt;br /&gt;
+直到我发现拳头公司本身有提供给开发者的api。。。&lt;br /&gt;
+果然，信息开阔眼界，有些事情难度一下子下降N个量级。
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Tue, 26 Jul 2022 15:59:01 +0800</pubDate>
+        <pubDateFormat>2022-07-26</pubDateFormat>
+        <link>https://nicelee.top/blog/2022/07/26/lol-plugins/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2022/07/26/lol-plugins/</guid>
+        
+        
+        <category>娱乐</category>
+        
+      </item>
     
       <item>
         <title>备忘录 ffmpeg去水印功能delogo的使用</title>
@@ -179,26 +198,6 @@
         <category>html</category>
         
         <category>bilibili</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>Webpack Plugin制作7-做一个自定义类型的loader</title>
-        <description>现在我们来做一个loader。&lt;br /&gt;
-我们自定义一个格式文件，其后缀是&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.b64&lt;/code&gt;。  &lt;br /&gt;
-我们把写好的js内容通过base64编码转换放到&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.b64&lt;/code&gt;中；&lt;br /&gt;
-通过对&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.b64&lt;/code&gt;内容的base64解码，我们可以获取到js内容。&lt;br /&gt;
-我希望在开发中能和&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.js&lt;/code&gt;一样import使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.b64&lt;/code&gt;资源，这就是loader要做的事情。
-</description>
-        <pubDate>Thu, 14 Oct 2021 10:59:01 +0800</pubDate>
-        <pubDateFormat>2021-10-14</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/10/14/webpack-diy-plugins-and-loaders-7/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/10/14/webpack-diy-plugins-and-loaders-7/</guid>
-        
-        <category>JavaScript</category>
         
         
         <category>技术学习</category>

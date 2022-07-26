@@ -7,13 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Acfun接口(三) - 番剧合集下载</title>
-    <meta name="description" content="  做个笔记，A站bangumi应该如何下载(๑•̀ㅂ•́)و✧">
+    <title>关于LOL 牛马上等马插件的开发</title>
+    <meta name="description" content="  看直播的时候，发现进入英雄选择界面的时候，有时候会遇见憨批发言“我方上等马… 我方牛马…敌方…”。当时好奇是怎么做到的，如果实现的助手插件是通过逆向解析，难道不会被封号吗？直到我发现拳头公司本身有提供给开发者的api。。。果然，信息开阔眼界，有些事情难度一下子下降N个量级。">
 
-    <meta property="og:url" content="https://nicelee.top/blog/2019/08/02/java-spider-acfun-down-3/">
+    <meta property="og:url" content="https://nicelee.top/blog/2022/07/26/lol-plugins/">
     <meta property="og:site_name" content="NiceLee的博客">
-    <meta property="og:title" content="Acfun接口(三) - 番剧合集下载">
-    <meta property="og:description" content="  做个笔记，A站bangumi应该如何下载(๑•̀ㅂ•́)و✧">
+    <meta property="og:title" content="关于LOL 牛马上等马插件的开发">
+    <meta property="og:description" content="  看直播的时候，发现进入英雄选择界面的时候，有时候会遇见憨批发言“我方上等马… 我方牛马…敌方…”。当时好奇是怎么做到的，如果实现的助手插件是通过逆向解析，难道不会被封号吗？直到我发现拳头公司本身有提供给开发者的api。。。果然，信息开阔眼界，有些事情难度一下子下降N个量级。">
     <meta property="og:image" content="https://nicelee.top/favicon.ico?">
     <meta property="og:image:type" content="image/x-icon">
     
@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="/css/font-awesome.min.css ">
     <link rel="stylesheet" href="/css/font-ali.css?v=1.2 ">
     <link rel="stylesheet" href="/css/main.css?v=1.1 ">
-    <link rel="canonical" href="https://nicelee.top/blog/2019/08/02/java-spider-acfun-down-3/">
+    <link rel="canonical" href="https://nicelee.top/blog/2022/07/26/lol-plugins/">
     <link rel="alternate" type="application/rss+xml" title="NiceLeeのBlog" href="https://nicelee.top/feed.xml ">
 
 	
@@ -280,11 +280,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>Acfun接口(三) - 番剧合集下载</h1>
+        <h1>关于LOL 牛马上等马插件的开发</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2019-08-02
+                <i class="fa fa-calendar"></i>2022-07-26
             </div>
 
             <div class="label-card">
@@ -307,7 +307,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#娱乐" title="Category: 娱乐" rel="category">娱乐</a>
     
   
 
@@ -324,18 +324,6 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
-    
-        <!--a href="/blog/tag/#html" title="Tag: html" rel="tag">html</a-->
-        <a href="/blog/tag/#html" title="Tag: html" rel="tag">html</a>&nbsp;
-    
-        <!--a href="/blog/tag/#%E7%88%AC%E8%99%AB" title="Tag: 爬虫" rel="tag">爬虫</a-->
-        <a href="/blog/tag/#爬虫" title="Tag: 爬虫" rel="tag">爬虫</a>&nbsp;
-    
-        <!--a href="/blog/tag/#AcFun" title="Tag: AcFun" rel="tag">AcFun</a-->
-        <a href="/blog/tag/#AcFun" title="Tag: AcFun" rel="tag">AcFun</a>
-    
   
 
 </span>
@@ -346,35 +334,118 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#要做的事情" id="markdown-toc-要做的事情">要做的事情</a></li>
-  <li><a href="#已知网址如何获取番剧所有的集数对应信息" id="markdown-toc-已知网址如何获取番剧所有的集数对应信息">已知网址如何获取番剧所有的集数对应信息</a>    <ul>
-      <li><a href="#网址示例" id="markdown-toc-网址示例">网址示例</a></li>
-      <li><a href="#访问网址直接抠出各id" id="markdown-toc-访问网址直接抠出各id">访问网址，直接抠出各id</a></li>
-      <li><a href="#发起api请求得到各p详细信息" id="markdown-toc-发起api请求得到各p详细信息">发起API请求，得到各P详细信息</a></li>
-    </ul>
-  </li>
+  <li><a href="#简单介绍" id="markdown-toc-简单介绍">简单介绍</a></li>
 </ul>
 <blockquote>
-  <p>做个笔记，A站bangumi应该如何下载(๑•̀ㅂ•́)و✧</p>
+  <p>看直播的时候，发现进入英雄选择界面的时候，有时候会遇见憨批发言“我方上等马… 我方牛马…敌方…”。<br />
+当时好奇是怎么做到的，如果实现的助手插件是通过逆向解析，难道不会被封号吗？<br />
+直到我发现拳头公司本身有提供给开发者的api。。。<br />
+果然，信息开阔眼界，有些事情难度一下子下降N个量级。</p>
 </blockquote>
 
-<h2 id="要做的事情">要做的事情</h2>
+<h2 id="简单介绍">简单介绍</h2>
+<p>内容参考：<br />
+<a href="https://p00q.cn/?p=327">通过拳头lucAPI来拉人进游戏</a><br />
+<a href="https://github.com/Java-S12138/frank">Java-S12138/frank</a></p>
+
 <ul>
-  <li>已知网址如何获取番剧所有的集数对应信息</li>
+  <li>通过lockfile文件读取配置【过时】<br />
+英雄联盟\LeagueClient目录下会出现lockfile。该文件内容参考
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>LeagueClient:13808:1667:p4Sw2_-_uUcKIeHhPmvoMQ:https
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>通过任务管理器查看配置【过时?】  <br />
+查看<code class="language-plaintext highlighter-rouge">LeagueClientUx.exe</code>命令行这一列的信息，取出<code class="language-plaintext highlighter-rouge">-app-port</code>和<code class="language-plaintext highlighter-rouge">--remoting-auth-token</code></p>
+  </li>
+  <li>通过cmd或者powershell实现【过时?】
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// https://github.com/Java-S12138/frank/blob/d7e20528e74511850a33d0f0a6117df06eea761e/src/utils/league-connect/authentication.js
+if (isWindows &amp;&amp; (options === null || options === void 0 ? void 0 : options.useDeprecatedWmic) === true) {
+  command = `wmic process where caption='${name}.exe' get commandline`;
+}
+else {
+  command = `Get-CimInstance -Query "SELECT * from Win32_Process WHERE name LIKE '${name}.exe'" | Select-Object CommandLine | fl`;
+}
+</code></pre></div>    </div>
+  </li>
+  <li>通过log读取配置  <br />
+已经有较长的那么一段时间，riot并没有将配置写入上述的<code class="language-plaintext highlighter-rouge">lockfile</code>。但是log仍然是存在的。  <br />
+英雄联盟\LeagueClient目录下会出现log文件，比如:<br />
+<code class="language-plaintext highlighter-rouge">2022-07-26T14-15-28_8736_LeagueClientUx.log</code>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>000000.000| ALWAYS| Logging started at 2022-07-26T14:15:28.264
+000000.000| ALWAYS| Application Version:12.13.453.3037 - CL:4533037 - Build Date: Jul 11 2022 - Build Time:18:39:22
+000000.000| ALWAYS| Log file 2022-07-26T14-15-28_8736_LeagueClientUx.log
+000000.000| ALWAYS| Running LeagueClientUx version 12.13.453.3037
+000000.000|   OKAY| Using initial working directory: "d:\program files\腾讯游戏\英雄联盟\LeagueClient"
+000000.000|   OKAY| Current process: "D:\Program Files\鑵捐娓告垙\鑻遍泟鑱旂洘\LeagueClient\LeagueClientUx.exe"
+000000.000|   OKAY| Command line arguments: 
+      --riotclient-auth-token=j9J5mFu7rsICgZqcJRSo4A 
+      --riotclient-app-port=63154 
+      --riotclient-tencent --no-rads 
+      --disable-self-update 
+      --region=TENCENT 
+      --locale=zh_CN 
+      --t.lcdshost=hn1-sz-feapp.lol.qq.com 
+      --t.chathost=hn1-sz-ejabberd.lol.qq.com 
+      --t.lq=https://hn1-sz-login.lol.qq.com:8443 
+      --t.storeurl=https://hn1-sr.lol.qq.com:8443 
+      --t.rmsurl=wss://sz-rms-bcs.lol.qq.com:443 
+      --rso-auth.url=https://prod-rso.lol.qq.com:3000 
+      --rso_platform_id=HN1 
+      --rso-auth.client=lol 
+      --t.location=loltencent.sz.HN1 
+      --tglog-endpoint=https://tglogsz.datamore.qq.com/lolcli/report/ 
+      --t.league_edge_url=https://ledge-hn1.lol.qq.com:22019 
+      --ccs=https://cc-hn1.lol.qq.com:8093 
+      --dradis-endpoint=http://some.url 
+      --remoting-auth-token=MmjujFMHhdwKWFhlK9aOsQ 
+      --app-port=63190 
+      --install-directory=d:\program files\閼垫崘顔嗗〒鍛婂灆\閼婚亶娉熼懕鏃傛礃\LeagueClient 
+      --app-name=LeagueClient 
+      --ux-name=LeagueClientUx 
+      --ux-helper-name=LeagueClientUxHelper 
+      --log-dir=LeagueClient Logs 
+      --crash-reporting= 
+      --crash-environment=HN1 
+      --app-log-file-path=d:/program files/鑵捐娓告垙/鑻遍泟鑱旂洘/LeagueClient/../Game/Logs/LeagueClient Logs/2022-07-26T14-15-27_9788_LeagueClient.log 
+      --app-pid=9788 --output-base-dir=d:/program files/閼垫崘顔嗗〒鍛婂灆/閼婚亶娉熼懕鏃傛礃/LeagueClient/../Game 
+      --no-proxy-server
+</code></pre></div>    </div>
+    <p>可以从上面取出<code class="language-plaintext highlighter-rouge">--app-port</code>和<code class="language-plaintext highlighter-rouge">--remoting-auth-token</code>，这里注意端口授权不要和<code class="language-plaintext highlighter-rouge">--riotclient-app-port</code>和<code class="language-plaintext highlighter-rouge">--riotclient-auth-token</code>搞混了。</p>
+  </li>
+  <li>通过http请求调用API  <br />
+参考<a href="https://www.mingweisamuel.com/lcu-schema/tool/">apiSwagger文档</a>获取想要的API。<br />
+例如，获取好友信息或者查看符文页，大概一两个HTTP请求就能搞定。<br />
+需要注意的是，协议请使用HTTP1.1，这导致浏览器使用HTTP2直接访问的话可能报错
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>好友信息
+GET https://riot:{remoting-auth-token}@127.0.0.1:{app-port}/lol-chat/v1/friends
+符文页
+GET https://riot:{remoting-auth-token}@127.0.0.1:{app-port}/lol-perks/v1/pages
+</code></pre></div>    </div>
+  </li>
 </ul>
 
-<h2 id="已知网址如何获取番剧所有的集数对应信息">已知网址如何获取番剧所有的集数对应信息</h2>
-<h3 id="网址示例">网址示例</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://www.acfun.cn/bangumi/aa5020013
-</code></pre></div></div>
+<p>以下为python示例</p>
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">base64</span>
 
-<h3 id="访问网址直接抠出各id">访问网址，直接抠出各id</h3>
-<p>略</p>
-
-<h3 id="发起api请求得到各p详细信息">发起API请求，得到各P详细信息</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://www.acfun.cn/album/abm/bangumis/video?albumId={albumId}&amp;groupId={groupId}&amp;num=1&amp;size=1000&amp;_={System.currentTimeMillis()}
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="n">token</span> <span class="o">=</span> <span class="s">'MmjujFMHhdwKWFhlK9aOsQ'</span> 
+    <span class="n">port</span> <span class="o">=</span><span class="mi">63190</span>
+    <span class="n">url_prefix</span> <span class="o">=</span> <span class="s">'https://127.0.0.1:%d'</span><span class="o">%</span><span class="n">port</span>
+    
+    <span class="n">token_encode</span> <span class="o">=</span> <span class="n">base64</span><span class="p">.</span><span class="n">b64encode</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="s">'riot:'</span> <span class="o">+</span> <span class="n">token</span><span class="p">,</span> <span class="s">'utf-8'</span><span class="p">))</span>
+    <span class="n">basic_auth</span> <span class="o">=</span> <span class="s">'Basic '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">token_encode</span><span class="p">,</span> <span class="s">'utf-8'</span><span class="p">)</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">url_prefix</span> <span class="o">+</span> <span class="s">"/lol-chat/v1/friends"</span>
+    <span class="c1">#url = url_prefix + "/lol-perks/v1/pages"
+</span>    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json, text/plain, */*'</span><span class="p">,</span>
+        <span class="s">'Authorization'</span><span class="p">:</span> <span class="n">basic_auth</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">text</span><span class="p">)</span>
 </code></pre></div></div>
-<p>由返回结果很容易构造对应的<code class="language-plaintext highlighter-rouge">albumId_groupId_id</code>，那么单P对应的链接已知，接下来操作已知。</p>
 
         </article>
         <hr>
@@ -383,17 +454,6 @@
         
             
             
-        
-            
-            
-                
-                    
-                
-                    
-                
-                    
-                
-                    
                 
             
         
@@ -403,179 +463,63 @@
             
             
                 
-                    
-                
-                    
-                
-                    
-                
-                    
+            
+        
+            
+            
                 
             
         
             
             
                 
-                    
-                
-                    
-                
-                    
-                
-                    
+            
                 
             
         
             
             
                 
-                    
-                
-                    
-                
-                    
-                
-                    
+            
+        
+            
+            
                 
             
                 
-                    
-                
-                    
-                
-                    
-                
-                    
+            
                 
             
         
             
             
                 
-                    
+            
+        
+            
+            
                 
-                    
+            
                 
-                    
-                
-                    
+            
                 
             
         
             
             
                 
-                    
-                        
-                        <h2 id="similar_posts">相似文章</h2>
-                        <ul>
-                        
-                        <li class="relatedPost">
-                            <a href="/blog/2021/10/25/hostname-verify-on-ssl-socket/">关于TLS加密实现中不可忽略的部分：校验证书的域名
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
             
         
-            
-            
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                        
-                        <li class="relatedPost">
-                            <a href="/blog/2021/10/17/java-spider-bilibili-down-7/">Java 爬虫练习-bilibili视频下载 补充
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-            
-        
-        
-            </ul>
         
 
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/blog/2019/07/28/java-spider-acfun-down-2/">Acfun接口(二) - 番剧单集下载</a></p>
+        <p><strong>上一篇</strong> <a href="/blog/2022/07/16/ffmpeg-delogo-notes/">备忘录 ffmpeg去水印功能delogo的使用</a></p>
         
     </div>
     <div class="nex">
 
-        
-        <p><strong>下一篇</strong> <a href="/blog/2019/08/02/java-spider-acfun-down-4/">Acfun接口(四) - 模拟扫码登录</a></p>
         
     </div>
 </div>
@@ -600,8 +544,6 @@
                     内容
                 </div>
                 <ul id="content-side" class="content-ul">
-                    
-                    <li><a href="#similar_posts">相似文章</a></li>
                     
                     <!-- <li><a href="#comments">评论</a></li> -->
                 </ul>
