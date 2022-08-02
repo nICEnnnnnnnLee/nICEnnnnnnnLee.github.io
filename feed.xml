@@ -5,9 +5,25 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 26 Jul 2022 21:04:57 +0800</pubDate>
-    <lastBuildDate>Tue, 26 Jul 2022 21:04:57 +0800</lastBuildDate>
+    <pubDate>Tue, 02 Aug 2022 11:24:25 +0800</pubDate>
+    <lastBuildDate>Tue, 02 Aug 2022 11:24:25 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>关于字体加密的简单研究</title>
+        <description>&lt;blockquote&gt;
+  字体加密，懂的都懂，不懂的可以看&lt;a href=&quot;/sources/obfuscate-font/&quot;&gt;示例&lt;/a&gt;。
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Tue, 02 Aug 2022 07:59:01 +0800</pubDate>
+        <pubDateFormat>2022-08-02</pubDateFormat>
+        <link>https://nicelee.top/blog/2022/08/02/font-obfuscator/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2022/08/02/font-obfuscator/</guid>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
     
       <item>
         <title>关于LOL 牛马上等马插件的开发</title>
@@ -178,29 +194,6 @@
         
         
         <category>小技巧</category>
-        
-      </item>
-    
-      <item>
-        <title>Java 爬虫练习-bilibili视频下载 补充</title>
-        <description>&lt;blockquote&gt;
-  距离以前的&lt;a href=&quot;/blog/2019/03/02/java-spider-bilibili-down-index/&quot;&gt;总结&lt;/a&gt;过去了很久，久到以前的东西有些不再奏效，现在来补充几个思路。     &lt;br /&gt;
-不得不说，阿B对新手最友好了。
-&lt;/blockquote&gt;
-</description>
-        <pubDate>Sun, 17 Oct 2021 14:59:01 +0800</pubDate>
-        <pubDateFormat>2021-10-17</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/10/17/java-spider-bilibili-down-7/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/10/17/java-spider-bilibili-down-7/</guid>
-        
-        <category>Java</category>
-        
-        <category>html</category>
-        
-        <category>bilibili</category>
-        
-        
-        <category>技术学习</category>
         
       </item>
     

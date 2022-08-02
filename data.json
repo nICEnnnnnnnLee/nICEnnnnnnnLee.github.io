@@ -2,6 +2,13 @@
 	"code" : 0 ,
 	"data" : [
 	{
+		"title" : "关于字体加密的简单研究",
+		"tags" : "",
+		"url" : "/blog/2022/08/02/font-obfuscator/"
+		"brief" : "字体加密，懂的都懂，不懂的可以看示例。"
+	},
+    
+	{
 		"title" : "关于LOL 牛马上等马插件的开发",
 		"tags" : "",
 		"url" : "/blog/2022/07/26/lol-plugins/"
