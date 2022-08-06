@@ -2,6 +2,13 @@
 	"code" : 0 ,
 	"data" : [
 	{
+		"title" : "javaagent简单使用： 为类对象添加toString方法",
+		"tags" : "Java_html_bilibili",
+		"url" : "/blog/2022/08/05/java-agent/"
+		"brief" : "简单来说，Javaagent可以让我们在不修改程序代码的前提下通过InstrumentationAPI改变运行中的java程序。当Java虚拟机启动时，在执行main函数之前，JVM会先运行-javaagent所指定jar包内Premain-Class这个类的premain方法。这个premain方法应该怎么写呢？这就是我们要讲的。"
+	},
+    
+	{
 		"title" : "关于字体加密的简单研究",
 		"tags" : "",
 		"url" : "/blog/2022/08/02/font-obfuscator/"

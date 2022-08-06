@@ -5,9 +5,33 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 02 Aug 2022 11:24:25 +0800</pubDate>
-    <lastBuildDate>Tue, 02 Aug 2022 11:24:25 +0800</lastBuildDate>
+    <pubDate>Sat, 06 Aug 2022 11:45:34 +0800</pubDate>
+    <lastBuildDate>Sat, 06 Aug 2022 11:45:34 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>javaagent简单使用： 为类对象添加toString方法</title>
+        <description>&lt;blockquote&gt;
+  简单来说，Javaagent可以让我们在不修改程序代码的前提下通过Instrumentation API改变运行中的java程序。&lt;br /&gt;
+当Java虚拟机启动时，在执行 main 函数之前，JVM会先运行-javaagent所指定jar包内Premain-Class这个类的premain方法。&lt;br /&gt;
+这个premain方法应该怎么写呢？这就是我们要讲的。
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Fri, 05 Aug 2022 14:59:01 +0800</pubDate>
+        <pubDateFormat>2022-08-05</pubDateFormat>
+        <link>https://nicelee.top/blog/2022/08/05/java-agent/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2022/08/05/java-agent/</guid>
+        
+        <category>Java</category>
+        
+        <category>html</category>
+        
+        <category>bilibili</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
     
       <item>
         <title>关于字体加密的简单研究</title>
@@ -176,24 +200,6 @@
         
         
         <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>Windows下cmd脚本关闭进程和服务</title>
-        <description>&lt;blockquote&gt;
-  应该不算是一个伪需求吧。。。
-&lt;/blockquote&gt;
-</description>
-        <pubDate>Sun, 17 Oct 2021 15:59:01 +0800</pubDate>
-        <pubDateFormat>2021-10-17</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/10/17/win-stop-service/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/10/17/win-stop-service/</guid>
-        
-        <category>Windows</category>
-        
-        
-        <category>小技巧</category>
         
       </item>
     
