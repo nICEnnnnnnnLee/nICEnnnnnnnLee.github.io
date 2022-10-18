@@ -2,8 +2,15 @@
 	"code" : 0 ,
 	"data" : [
 	{
+		"title" : "电源键失灵之后，Android手机的日常使用",
+		"tags" : "Android",
+		"url" : "/blog/2022/10/18/android-daily-use-without-power-key/"
+		"brief" : "嗯。。。旧手机回收价格简直白给，还不如留着用做它用。记录下来，总该有点用处吧囧"
+	},
+    
+	{
 		"title" : "javaagent简单使用： 为类对象添加toString方法",
-		"tags" : "Java_html_bilibili",
+		"tags" : "Java",
 		"url" : "/blog/2022/08/05/java-agent/"
 		"brief" : "简单来说，Javaagent可以让我们在不修改程序代码的前提下通过InstrumentationAPI改变运行中的java程序。当Java虚拟机启动时，在执行main函数之前，JVM会先运行-javaagent所指定jar包内Premain-Class这个类的premain方法。这个premain方法应该怎么写呢？这就是我们要讲的。"
 	},

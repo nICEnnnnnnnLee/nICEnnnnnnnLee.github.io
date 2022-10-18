@@ -5,9 +5,28 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 06 Aug 2022 11:45:34 +0800</pubDate>
-    <lastBuildDate>Sat, 06 Aug 2022 11:45:34 +0800</lastBuildDate>
+    <pubDate>Tue, 18 Oct 2022 10:34:07 +0800</pubDate>
+    <lastBuildDate>Tue, 18 Oct 2022 10:34:07 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>电源键失灵之后，Android手机的日常使用</title>
+        <description>&lt;blockquote&gt;
+  嗯。。。旧手机回收价格简直白给，还不如留着用做它用。&lt;br /&gt;
+记录下来，总该有点用处吧囧
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Tue, 18 Oct 2022 08:59:01 +0800</pubDate>
+        <pubDateFormat>2022-10-18</pubDateFormat>
+        <link>https://nicelee.top/blog/2022/10/18/android-daily-use-without-power-key/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2022/10/18/android-daily-use-without-power-key/</guid>
+        
+        <category>Android</category>
+        
+        
+        <category>杂七杂八</category>
+        
+      </item>
     
       <item>
         <title>javaagent简单使用： 为类对象添加toString方法</title>
@@ -23,10 +42,6 @@
         <guid isPermaLink="true">https://nicelee.top/blog/2022/08/05/java-agent/</guid>
         
         <category>Java</category>
-        
-        <category>html</category>
-        
-        <category>bilibili</category>
         
         
         <category>技术学习</category>
@@ -177,29 +192,6 @@
         
         
         <category>小技巧</category>
-        
-      </item>
-    
-      <item>
-        <title>关于TLS加密实现中不可忽略的部分：校验证书的域名</title>
-        <description>&lt;blockquote&gt;
-  做个笔记。&lt;br /&gt;
-对TCP连接进行SSL/TLS加密时，应当注意这个问题。
-&lt;/blockquote&gt;
-</description>
-        <pubDate>Mon, 25 Oct 2021 15:59:01 +0800</pubDate>
-        <pubDateFormat>2021-10-25</pubDateFormat>
-        <link>https://nicelee.top/blog/2021/10/25/hostname-verify-on-ssl-socket/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2021/10/25/hostname-verify-on-ssl-socket/</guid>
-        
-        <category>Java</category>
-        
-        <category>Go</category>
-        
-        <category>Python</category>
-        
-        
-        <category>技术学习</category>
         
       </item>
     
