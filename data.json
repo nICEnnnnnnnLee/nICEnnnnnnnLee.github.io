@@ -2,6 +2,20 @@
 	"code" : 0 ,
 	"data" : [
 	{
+		"title" : "如何使IPv6 Only的VPS拥有IPv4能力",
+		"tags" : "Linux",
+		"url" : "/blog/2022/10/22/ipv6-only-vps-tips/"
+		"brief" : "嗯。。。仅仅考虑连通性囧"
+	},
+    
+	{
+		"title" : "【资源】关于对象存储与网络分发",
+		"tags" : "Linux",
+		"url" : "/blog/2022/10/21/object-storage-distribution/"
+		"brief" : "因为Github的直连一直断断续续的，Release的附件并不能很好的分发，所以想找一找备选方案。"
+	},
+    
+	{
 		"title" : "电源键失灵之后，Android手机的日常使用",
 		"tags" : "Android",
 		"url" : "/blog/2022/10/18/android-daily-use-without-power-key/"
