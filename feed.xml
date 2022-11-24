@@ -5,9 +5,181 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 22 Oct 2022 15:56:21 +0800</pubDate>
-    <lastBuildDate>Sat, 22 Oct 2022 15:56:21 +0800</lastBuildDate>
+    <pubDate>Thu, 24 Nov 2022 22:24:16 +0800</pubDate>
+    <lastBuildDate>Thu, 24 Nov 2022 22:24:16 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>Rust 比较时差大小犯的错误😳</title>
+        <description>&lt;blockquote&gt;
+  时间戳是&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;u128&lt;/code&gt;类型，unsigned无符号，这个问题卡了我很久，就很郁闷。
+&lt;/blockquote&gt;
+
+</description>
+        <pubDate>Thu, 24 Nov 2022 09:59:01 +0800</pubDate>
+        <pubDateFormat>2022-11-24</pubDateFormat>
+        <link>https://nicelee.top/blog/2022/11/24/rust-compare-unsigned/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2022/11/24/rust-compare-unsigned/</guid>
+        
+        <category>Rust</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
+    
+      <item>
+        <title>Rust 交叉编译</title>
+        <description>&lt;blockquote&gt;
+  如何编译不同平台的可执行程序？
+&lt;/blockquote&gt;
+
+</description>
+        <pubDate>Wed, 23 Nov 2022 09:59:01 +0800</pubDate>
+        <pubDateFormat>2022-11-23</pubDateFormat>
+        <link>https://nicelee.top/blog/2022/11/23/rust-cross-compile/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2022/11/23/rust-cross-compile/</guid>
+        
+        <category>Rust</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
+    
+      <item>
+        <title>Rust 利用HTTPS WebSocket通道转发流量</title>
+        <description>&lt;blockquote&gt;
+  前面我们已经实现了HTTP(S)代理。  &lt;br /&gt;
+该代理获得(host,port)后，是尝试直接与目的socket建立连接。&lt;br /&gt;
+假设我们在远端有一台服务器。&lt;br /&gt;
+我们想代理在获得(host,port)后，与服务器建立连接，并告知它(host,port)。&lt;br /&gt;
+由服务器建立与目的socket建立连接，继而充当管道工，转发各自流量。
+&lt;/blockquote&gt;
+
+</description>
+        <pubDate>Tue, 15 Nov 2022 09:59:01 +0800</pubDate>
+        <pubDateFormat>2022-11-15</pubDateFormat>
+        <link>https://nicelee.top/blog/2022/11/15/rust-async-websocket/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2022/11/15/rust-async-websocket/</guid>
+        
+        <category>Rust</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
+    
+      <item>
+        <title>Rust 基于tokio-rustls的简单的HTTPS Client/Server实现</title>
+        <description>&lt;blockquote&gt;
+  使用tokio实现异步的HTTP client和server比较简单。&lt;br /&gt;
+那么，进一步的，基于现有的库套上一层TLS应该也没有问题。
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Sat, 12 Nov 2022 09:59:01 +0800</pubDate>
+        <pubDateFormat>2022-11-12</pubDateFormat>
+        <link>https://nicelee.top/blog/2022/11/12/rust-async-https-client-server/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2022/11/12/rust-async-https-client-server/</guid>
+        
+        <category>Rust</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
+    
+      <item>
+        <title>Rust HTTP代理的实现(异步)</title>
+        <description>&lt;blockquote&gt;
+  实现HTTP + HTTPS代理(异步)
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Fri, 11 Nov 2022 09:59:01 +0800</pubDate>
+        <pubDateFormat>2022-11-11</pubDateFormat>
+        <link>https://nicelee.top/blog/2022/11/11/rust-async-http-proxy/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2022/11/11/rust-async-http-proxy/</guid>
+        
+        <category>Rust</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
+    
+      <item>
+        <title>Rust HTTP代理的实现(同步)</title>
+        <description>&lt;blockquote&gt;
+  实现HTTP + HTTPS代理(同步)
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Thu, 10 Nov 2022 09:59:01 +0800</pubDate>
+        <pubDateFormat>2022-11-10</pubDateFormat>
+        <link>https://nicelee.top/blog/2022/11/10/rust-sync-http-proxy/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2022/11/10/rust-sync-http-proxy/</guid>
+        
+        <category>Rust</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
+    
+      <item>
+        <title>Rust 全局配置的最佳实践</title>
+        <description>&lt;blockquote&gt;
+  虽然全局并不一定是个必须的场景，但关于这一点的实践有点意思。
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Wed, 09 Nov 2022 09:59:01 +0800</pubDate>
+        <pubDateFormat>2022-11-09</pubDateFormat>
+        <link>https://nicelee.top/blog/2022/11/09/rust-global-config/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2022/11/09/rust-global-config/</guid>
+        
+        <category>Rust</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
+    
+      <item>
+        <title>Rust 更换镜像源</title>
+        <description>&lt;blockquote&gt;
+  更换Rust镜像源(crates.io)，这里说的是包的依赖下载crates，不是rustup
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Tue, 08 Nov 2022 09:59:01 +0800</pubDate>
+        <pubDateFormat>2022-11-08</pubDateFormat>
+        <link>https://nicelee.top/blog/2022/11/08/rust-mirror/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2022/11/08/rust-mirror/</guid>
+        
+        <category>Rust</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
+    
+      <item>
+        <title>Rust 学习规划/总结</title>
+        <description>&lt;blockquote&gt;
+  嗯。。。最近在学习Rust这门语言。 &lt;br /&gt;
+在这之前就有个规划，先抱着做一个小项目的目标学一遍，然后把这个想法实现(肯定会遇到很多实际问题然后解决)，然后再回顾一遍查漏补缺。    &lt;br /&gt;
+本篇既是之前的规划，也是项目实现之后的总结。
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Tue, 08 Nov 2022 08:59:01 +0800</pubDate>
+        <pubDateFormat>2022-11-08</pubDateFormat>
+        <link>https://nicelee.top/blog/2022/11/08/learning-rust/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2022/11/08/learning-rust/</guid>
+        
+        <category>Rust</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
     
       <item>
         <title>如何使IPv6 Only的VPS拥有IPv4能力</title>
@@ -21,171 +193,6 @@
         <guid isPermaLink="true">https://nicelee.top/blog/2022/10/22/ipv6-only-vps-tips/</guid>
         
         <category>Linux</category>
-        
-        
-        <category>小技巧</category>
-        
-      </item>
-    
-      <item>
-        <title>【资源】关于对象存储与网络分发</title>
-        <description>&lt;blockquote&gt;
-  因为Github的直连一直断断续续的，Release的附件并不能很好的分发，所以想找一找备选方案。
-&lt;/blockquote&gt;
-</description>
-        <pubDate>Fri, 21 Oct 2022 08:59:01 +0800</pubDate>
-        <pubDateFormat>2022-10-21</pubDateFormat>
-        <link>https://nicelee.top/blog/2022/10/21/object-storage-distribution/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2022/10/21/object-storage-distribution/</guid>
-        
-        <category>Linux</category>
-        
-        
-        <category>工具与资源</category>
-        
-      </item>
-    
-      <item>
-        <title>电源键失灵之后，Android手机的日常使用</title>
-        <description>&lt;blockquote&gt;
-  嗯。。。旧手机回收价格简直白给，还不如留着用做它用。&lt;br /&gt;
-记录下来，总该有点用处吧囧
-&lt;/blockquote&gt;
-</description>
-        <pubDate>Tue, 18 Oct 2022 08:59:01 +0800</pubDate>
-        <pubDateFormat>2022-10-18</pubDateFormat>
-        <link>https://nicelee.top/blog/2022/10/18/android-daily-use-without-power-key/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2022/10/18/android-daily-use-without-power-key/</guid>
-        
-        <category>Android</category>
-        
-        
-        <category>杂七杂八</category>
-        
-      </item>
-    
-      <item>
-        <title>javaagent简单使用： 为类对象添加toString方法</title>
-        <description>&lt;blockquote&gt;
-  简单来说，Javaagent可以让我们在不修改程序代码的前提下通过Instrumentation API改变运行中的java程序。&lt;br /&gt;
-当Java虚拟机启动时，在执行 main 函数之前，JVM会先运行-javaagent所指定jar包内Premain-Class这个类的premain方法。&lt;br /&gt;
-这个premain方法应该怎么写呢？这就是我们要讲的。
-&lt;/blockquote&gt;
-</description>
-        <pubDate>Fri, 05 Aug 2022 14:59:01 +0800</pubDate>
-        <pubDateFormat>2022-08-05</pubDateFormat>
-        <link>https://nicelee.top/blog/2022/08/05/java-agent/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2022/08/05/java-agent/</guid>
-        
-        <category>Java</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>关于字体加密的简单研究</title>
-        <description>&lt;blockquote&gt;
-  字体加密，懂的都懂，不懂的可以看&lt;a href=&quot;/sources/obfuscate-font/&quot;&gt;示例&lt;/a&gt;。
-&lt;/blockquote&gt;
-</description>
-        <pubDate>Tue, 02 Aug 2022 07:59:01 +0800</pubDate>
-        <pubDateFormat>2022-08-02</pubDateFormat>
-        <link>https://nicelee.top/blog/2022/08/02/font-obfuscator/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2022/08/02/font-obfuscator/</guid>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>关于LOL 牛马上等马插件的开发</title>
-        <description>&lt;blockquote&gt;
-  看直播的时候，发现进入英雄选择界面的时候，有时候会遇见憨批发言“我方上等马… 我方牛马…敌方…”。&lt;br /&gt;
-当时好奇是怎么做到的，如果实现的助手插件是通过逆向解析，难道不会被封号吗？&lt;br /&gt;
-直到我发现拳头公司本身有提供给开发者的api。。。&lt;br /&gt;
-果然，信息开阔眼界，有些事情难度一下子下降N个量级。
-&lt;/blockquote&gt;
-</description>
-        <pubDate>Tue, 26 Jul 2022 15:59:01 +0800</pubDate>
-        <pubDateFormat>2022-07-26</pubDateFormat>
-        <link>https://nicelee.top/blog/2022/07/26/lol-plugins/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2022/07/26/lol-plugins/</guid>
-        
-        
-        <category>娱乐</category>
-        
-      </item>
-    
-      <item>
-        <title>备忘录 ffmpeg去水印功能delogo的使用</title>
-        <description>&lt;blockquote&gt;
-  有总比没有好，做个笔记
-&lt;/blockquote&gt;
-</description>
-        <pubDate>Sat, 16 Jul 2022 10:59:01 +0800</pubDate>
-        <pubDateFormat>2022-07-16</pubDateFormat>
-        <link>https://nicelee.top/blog/2022/07/16/ffmpeg-delogo-notes/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2022/07/16/ffmpeg-delogo-notes/</guid>
-        
-        <category>ffmpeg</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>备忘录 关于正则匹配的一些笔记</title>
-        <description>&lt;blockquote&gt;
-  简单的正则还行，复杂一点的每次要搜索一下就很尴尬
-&lt;/blockquote&gt;
-</description>
-        <pubDate>Sat, 16 Jul 2022 09:59:01 +0800</pubDate>
-        <pubDateFormat>2022-07-16</pubDateFormat>
-        <link>https://nicelee.top/blog/2022/07/16/regx-notes/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2022/07/16/regx-notes/</guid>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>Windows下常用快捷键记录</title>
-        <description>&lt;blockquote&gt;
-  有些快捷键功能蛮实用的，但每次要用的时候就记不起来，做个备忘录
-&lt;/blockquote&gt;
-</description>
-        <pubDate>Tue, 05 Jul 2022 15:59:01 +0800</pubDate>
-        <pubDateFormat>2022-07-05</pubDateFormat>
-        <link>https://nicelee.top/blog/2022/07/05/win-key-shortcut/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2022/07/05/win-key-shortcut/</guid>
-        
-        <category>Windows</category>
-        
-        
-        <category>小技巧</category>
-        
-      </item>
-    
-      <item>
-        <title>通过书签来获取视频地址或其它数据</title>
-        <description>&lt;blockquote&gt;
-  在某些情况下，需要我们打开视频播放页面、按F12、查看Network网络请求来获取某个特定的地址。&lt;br /&gt;
-当然，量大的话，我们可以直接上代码来避免不必要的重复工作，但这不是唯一的操作。&lt;br /&gt;
-这里做个笔记，记录一种还算简便的折中办法。&lt;br /&gt;
-如何取舍自己衡量。
-&lt;/blockquote&gt;
-</description>
-        <pubDate>Tue, 14 Jun 2022 15:59:01 +0800</pubDate>
-        <pubDateFormat>2022-06-14</pubDateFormat>
-        <link>https://nicelee.top/blog/2022/06/14/js-bookmarks/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2022/06/14/js-bookmarks/</guid>
-        
-        <category>JavaScript</category>
         
         
         <category>小技巧</category>
