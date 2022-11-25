@@ -5,9 +5,30 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 24 Nov 2022 22:24:16 +0800</pubDate>
-    <lastBuildDate>Thu, 24 Nov 2022 22:24:16 +0800</lastBuildDate>
+    <pubDate>Fri, 25 Nov 2022 21:44:53 +0800</pubDate>
+    <lastBuildDate>Fri, 25 Nov 2022 21:44:53 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>Rust 使用wasm实现path签名sign</title>
+        <description>&lt;blockquote&gt;
+  一般网络请求的path后面都会跟一个&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;amp;sign=...&lt;/code&gt;，用于验证该request的合法性。&lt;br /&gt;
+通常情况下，这个步骤是隐藏在各种js加密混淆里的。  &lt;br /&gt;
+这里，我们尝试使用wasm将该步骤实现。
+&lt;/blockquote&gt;
+
+</description>
+        <pubDate>Fri, 25 Nov 2022 09:59:01 +0800</pubDate>
+        <pubDateFormat>2022-11-25</pubDateFormat>
+        <link>https://nicelee.top/blog/2022/11/25/rust-wasm-digest/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2022/11/25/rust-wasm-digest/</guid>
+        
+        <category>Rust</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
     
       <item>
         <title>Rust 比较时差大小犯的错误😳</title>
@@ -178,24 +199,6 @@
         
         
         <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>如何使IPv6 Only的VPS拥有IPv4能力</title>
-        <description>&lt;blockquote&gt;
-  嗯。。。仅仅考虑连通性囧
-&lt;/blockquote&gt;
-</description>
-        <pubDate>Sat, 22 Oct 2022 08:59:01 +0800</pubDate>
-        <pubDateFormat>2022-10-22</pubDateFormat>
-        <link>https://nicelee.top/blog/2022/10/22/ipv6-only-vps-tips/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2022/10/22/ipv6-only-vps-tips/</guid>
-        
-        <category>Linux</category>
-        
-        
-        <category>小技巧</category>
         
       </item>
     

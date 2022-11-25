@@ -7,13 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Rust 交叉编译</title>
-    <meta name="description" content="  如何编译不同平台的可执行程序？">
+    <title>Rust 使用wasm实现path签名sign</title>
+    <meta name="description" content="  一般网络请求的path后面都会跟一个&amp;sign=...，用于验证该request的合法性。通常情况下，这个步骤是隐藏在各种js加密混淆里的。  这里，我们尝试使用wasm将该步骤实现。">
 
-    <meta property="og:url" content="https://nicelee.top/blog/2022/11/23/rust-cross-compile/">
+    <meta property="og:url" content="https://nicelee.top/blog/2022/11/25/rust-wasm-digest/">
     <meta property="og:site_name" content="NiceLee的博客">
-    <meta property="og:title" content="Rust 交叉编译">
-    <meta property="og:description" content="  如何编译不同平台的可执行程序？">
+    <meta property="og:title" content="Rust 使用wasm实现path签名sign">
+    <meta property="og:description" content="  一般网络请求的path后面都会跟一个&amp;sign=...，用于验证该request的合法性。通常情况下，这个步骤是隐藏在各种js加密混淆里的。  这里，我们尝试使用wasm将该步骤实现。">
     <meta property="og:image" content="https://nicelee.top/favicon.ico?">
     <meta property="og:image:type" content="image/x-icon">
     
@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="/css/font-awesome.min.css ">
     <link rel="stylesheet" href="/css/font-ali.css?v=1.2 ">
     <link rel="stylesheet" href="/css/main.css?v=1.1 ">
-    <link rel="canonical" href="https://nicelee.top/blog/2022/11/23/rust-cross-compile/">
+    <link rel="canonical" href="https://nicelee.top/blog/2022/11/25/rust-wasm-digest/">
     <link rel="alternate" type="application/rss+xml" title="NiceLeeのBlog" href="https://nicelee.top/feed.xml ">
 
 	
@@ -286,11 +286,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>Rust 交叉编译</h1>
+        <h1>Rust 使用wasm实现path签名sign</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2022-11-23
+                <i class="fa fa-calendar"></i>2022-11-25
             </div>
 
             <div class="label-card">
@@ -343,28 +343,222 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#实现方法" id="markdown-toc-实现方法">实现方法</a></li>
+  <li><a href="#quick-start" id="markdown-toc-quick-start">Quick Start</a></li>
+  <li><a href="#目标" id="markdown-toc-目标">目标</a></li>
+  <li><a href="#rust实现" id="markdown-toc-rust实现">Rust实现</a></li>
+  <li><a href="#如何使用" id="markdown-toc-如何使用">如何使用</a>    <ul>
+      <li><a href="#--target-web" id="markdown-toc---target-web"><code class="language-plaintext highlighter-rouge">--target web</code></a></li>
+      <li><a href="#---target-no-modules" id="markdown-toc----target-no-modules"><code class="language-plaintext highlighter-rouge"> --target no-modules</code></a></li>
+    </ul>
+  </li>
+  <li><a href="#示例" id="markdown-toc-示例">示例</a></li>
 </ul>
 <blockquote>
-  <p>如何编译不同平台的可执行程序？</p>
+  <p>一般网络请求的path后面都会跟一个<code class="language-plaintext highlighter-rouge">&amp;sign=...</code>，用于验证该request的合法性。<br />
+通常情况下，这个步骤是隐藏在各种js加密混淆里的。  <br />
+这里，我们尝试使用wasm将该步骤实现。</p>
 </blockquote>
 
-<h2 id="实现方法">实现方法</h2>
+<h2 id="quick-start">Quick Start</h2>
+<p>我们可以参考<a href="https://rustwasm.github.io/docs/wasm-pack/quickstart.html">rustwasm</a>，快速开始一个wasm的Hello world项目。</p>
 <ul>
-  <li>
-    <p>在目标平台环境下编译<br />
-直接在windows/linux/macos容器下编译，适用于目标平台为常见OS的情况</p>
-  </li>
-  <li>
-    <p><a href="https://github.com/nicolas-van/rust-cross-compile-example">rust-cross-compile-example</a><br />
-该方法下linux GNU libc编译的程序无法在较旧版本的linux系统上运行。<br />
-该问题可以通过降级容器的Ubuntu版本解决</p>
-  </li>
-  <li>
-    <p>使用搭建好交叉编译环境的容器<br />
-<a href="https://github.com/cross-rs/cross">cross-rs</a></p>
-  </li>
+  <li>安装 rust 环境</li>
+  <li>安装 <a href="https://rustwasm.github.io/wasm-pack/installer/">wasm-pack</a></li>
+  <li>运行<code class="language-plaintext highlighter-rouge">wasm-pack new hello-wasm</code></li>
+  <li><code class="language-plaintext highlighter-rouge">cd hello-wasm</code></li>
+  <li>运行<code class="language-plaintext highlighter-rouge">wasm-pack build</code></li>
+  <li>生成的wasm相关文件在<code class="language-plaintext highlighter-rouge">pkg</code>文件夹下</li>
 </ul>
+
+<h2 id="目标">目标</h2>
+<p>我们要用Rust来大致实现下面这个东西。</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// let salt = "asy8";</span>
+<span class="c1">// let randomUint8Array = new Uint8Array(8);</span>
+<span class="c1">// crypto.getRandomValues(randomUint8Array);</span>
+<span class="c1">// let random = randomUint8Array.map((b) =&gt; b.toString(16).padStart(2, '0')).join('');</span>
+
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">digestMessage</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nx">salt</span><span class="p">,</span> <span class="nx">random</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">msgUint8</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TextEncoder</span><span class="p">().</span><span class="nx">encode</span><span class="p">(</span><span class="nx">random</span> <span class="o">+</span> <span class="nx">message</span> <span class="o">+</span> <span class="nx">salt</span><span class="p">);</span>           <span class="c1">// encode as (utf-8) Uint8Array</span>
+  <span class="kd">const</span> <span class="nx">hashBuffer</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">crypto</span><span class="p">.</span><span class="nx">subtle</span><span class="p">.</span><span class="nx">digest</span><span class="p">(</span><span class="dl">'</span><span class="s1">SHA-256</span><span class="dl">'</span><span class="p">,</span> <span class="nx">msgUint8</span><span class="p">);</span>           <span class="c1">// hash the message</span>
+  <span class="kd">const</span> <span class="nx">hashArray</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="k">from</span><span class="p">(</span><span class="k">new</span> <span class="nb">Uint8Array</span><span class="p">(</span><span class="nx">hashBuffer</span><span class="p">));</span>                     <span class="c1">// convert buffer to byte array</span>
+  <span class="kd">const</span> <span class="nx">hashHex</span> <span class="o">=</span> <span class="nx">hashArray</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">b</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="mi">16</span><span class="p">).</span><span class="nx">padStart</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="dl">'</span><span class="s1">0</span><span class="dl">'</span><span class="p">)).</span><span class="nx">join</span><span class="p">(</span><span class="dl">''</span><span class="p">);</span> <span class="c1">// convert bytes to hex string</span>
+  <span class="k">return</span> <span class="nx">random</span> <span class="o">+</span> <span class="nx">hashHex</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="rust实现">Rust实现</h2>
+<p>我们将要在rust里面调用某些js内置函数:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">window.crypto.subtle.digest(algorithm, data)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">window.crypto.getRandomValues(dataUint8Array)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">console.log(content)</code></li>
+</ul>
+
+<p>我们将暴露给js某些rust函数实现:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">async function sign(data)</code></li>
+</ul>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">#[wasm_bindgen]</span>
+<span class="k">extern</span> <span class="s">"C"</span> <span class="p">{</span>
+    <span class="nd">#[wasm_bindgen(js_namespace</span> <span class="nd">=</span> <span class="err">[</span><span class="s">"window"</span><span class="nd">,</span> <span class="s">"crypto"</span><span class="nd">,</span> <span class="s">"subtle"</span><span class="nd">]</span><span class="p">)]</span>
+    <span class="k">async</span> <span class="k">fn</span> <span class="nf">digest</span><span class="p">(</span><span class="n">algorithm</span><span class="p">:</span> <span class="o">&amp;</span><span class="nb">str</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nn">js_sys</span><span class="p">::</span><span class="n">Uint8Array</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="n">JsValue</span><span class="p">;</span>
+
+    <span class="nd">#[wasm_bindgen(js_namespace</span> <span class="nd">=</span> <span class="err">[</span><span class="s">"window"</span><span class="nd">,</span> <span class="s">"crypto"</span><span class="nd">]</span><span class="p">)]</span>
+    <span class="k">fn</span> <span class="nf">getRandomValues</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="p">[</span><span class="nb">u8</span><span class="p">]);</span>
+
+    <span class="c">// #[wasm_bindgen(js_namespace = ["window"])]</span>
+    <span class="c">// fn buffer2str(buffer: JsValue) -&gt; JsValue;</span>
+<span class="p">}</span>
+
+<span class="nd">#[wasm_bindgen]</span>
+<span class="k">extern</span> <span class="s">"C"</span> <span class="p">{</span>
+    <span class="nd">#[wasm_bindgen(js_namespace</span> <span class="nd">=</span> <span class="nd">console)]</span>
+    <span class="k">fn</span> <span class="k">log</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="o">&amp;</span><span class="nb">str</span><span class="p">);</span>
+<span class="p">}</span>
+
+
+<span class="nd">#[wasm_bindgen]</span>
+<span class="k">pub</span> <span class="k">async</span> <span class="k">fn</span> <span class="nf">sign</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="o">&amp;</span><span class="nb">str</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="n">JsValue</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">salt</span> <span class="o">=</span> <span class="s">"asy8"</span><span class="p">;</span>
+    <span class="k">unsafe</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="k">mut</span> <span class="n">random</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0u8</span><span class="p">;</span> <span class="mi">8</span><span class="p">];</span>
+        <span class="nf">getRandomValues</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="n">random</span><span class="p">);</span>
+        <span class="k">let</span> <span class="n">random_str</span> <span class="o">=</span> <span class="nn">hex</span><span class="p">::</span><span class="nf">encode</span><span class="p">(</span><span class="n">random</span><span class="nf">.to_vec</span><span class="p">());</span>
+        <span class="k">let</span> <span class="n">data_to_hash</span> <span class="o">=</span> <span class="n">random_str</span> <span class="o">+</span> <span class="n">url</span> <span class="o">+</span> <span class="n">salt</span><span class="p">;</span>
+        <span class="c">// log(&amp;data_to_hash);</span>
+        <span class="k">let</span> <span class="n">data_to_hash</span> <span class="o">=</span> <span class="nn">js_sys</span><span class="p">::</span><span class="nn">Uint8Array</span><span class="p">::</span><span class="nf">view</span><span class="p">(</span><span class="n">data_to_hash</span><span class="nf">.as_bytes</span><span class="p">());</span>
+        <span class="k">let</span> <span class="n">result</span> <span class="o">=</span> <span class="nf">digest</span><span class="p">(</span><span class="s">"SHA-256"</span><span class="p">,</span> <span class="n">data_to_hash</span><span class="p">)</span><span class="k">.await</span><span class="p">;</span>
+        <span class="k">let</span> <span class="n">result</span> <span class="o">=</span> <span class="nn">js_sys</span><span class="p">::</span><span class="nn">ArrayBuffer</span><span class="p">::</span><span class="nf">from</span><span class="p">(</span><span class="n">result</span><span class="p">);</span>
+        <span class="k">let</span> <span class="n">result</span> <span class="o">=</span> <span class="nn">js_sys</span><span class="p">::</span><span class="nn">Uint8Array</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="o">&amp;</span><span class="n">result</span><span class="p">);</span>
+        <span class="k">let</span> <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="nf">.to_vec</span><span class="p">();</span>
+        <span class="k">let</span> <span class="n">result</span> <span class="o">=</span> <span class="nn">hex</span><span class="p">::</span><span class="nf">encode</span><span class="p">(</span><span class="n">random</span><span class="nf">.to_vec</span><span class="p">())</span> <span class="o">+</span> <span class="o">&amp;</span><span class="nn">hex</span><span class="p">::</span><span class="nf">encode</span><span class="p">(</span><span class="n">result</span><span class="p">);</span>
+        <span class="c">// log(&amp;result);</span>
+        <span class="nn">JsValue</span><span class="p">::</span><span class="nf">from_str</span><span class="p">(</span><span class="o">&amp;</span><span class="n">result</span><span class="p">)</span>
+        <span class="c">// let buffer = digest("SHA-256", data_to_hash).await;</span>
+        <span class="c">// buffer2str(buffer)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="如何使用">如何使用</h2>
+<p>默认生成的是<code class="language-plaintext highlighter-rouge">bundler</code>，可以像js模块一样引入并使用，这个比较简单，没啥好讲。<br />
+这里参考<a href="https://rustwasm.github.io/docs/wasm-bindgen/examples/without-a-bundler.html"></a>，如何在没有Webpack等打包工具的情况下，生成可以直接在html里使用的实现。</p>
+
+<h3 id="--target-web"><code class="language-plaintext highlighter-rouge">--target web</code></h3>
+<p>wasm-pack build –target web</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Wasm Sign<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;style&gt;</span>
+        <span class="nc">.center</span> <span class="p">{</span>
+            <span class="nl">width</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+            <span class="nl">text-align</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+            <span class="nl">margin-top</span><span class="p">:</span> <span class="m">50px</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="nt">&lt;/style&gt;</span>
+
+<span class="nt">&lt;/head&gt;</span>
+
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"center"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div&gt;</span>
+            <span class="nt">&lt;span&gt;</span>Data: <span class="nt">&lt;/span&gt;</span>
+            <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">id=</span><span class="s">"dataInput"</span> <span class="na">size=</span><span class="s">"100"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+
+        <span class="nt">&lt;div&gt;</span>
+            <span class="nt">&lt;span&gt;</span>Sign: <span class="nt">&lt;/span&gt;</span>
+            <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">readonly</span> <span class="na">disabled=</span><span class="s">"disabled"</span> <span class="na">id=</span><span class="s">"dataOutput"</span> <span class="na">size=</span><span class="s">"100"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"Get Sign"</span> <span class="na">onclick=</span><span class="s">"genSign();"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+
+    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"module"</span><span class="nt">&gt;</span>
+        <span class="k">import</span> <span class="p">{</span> <span class="k">default</span> <span class="k">as</span> <span class="nx">wasm</span><span class="p">,</span> <span class="nx">sign</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./pkg/wasm_digest.js</span><span class="dl">"</span><span class="p">;</span>
+        <span class="k">await</span> <span class="nx">wasm</span><span class="p">();</span>
+
+        <span class="kd">let</span> <span class="nx">dataInput</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">dataInput</span><span class="dl">"</span><span class="p">);</span>
+        <span class="kd">let</span> <span class="nx">dataOutput</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">dataOutput</span><span class="dl">"</span><span class="p">);</span>
+        <span class="nb">window</span><span class="p">.</span><span class="nx">genSign</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="kd">let</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">dataInput</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+            <span class="nx">sign</span><span class="p">(</span><span class="nx">data</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">sign</span> <span class="o">=&gt;</span> <span class="nx">dataOutput</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">sign</span><span class="p">);</span>
+        <span class="p">}</span>
+        
+    <span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<h3 id="---target-no-modules"><code class="language-plaintext highlighter-rouge"> --target no-modules</code></h3>
+<p>wasm-pack build –target no-modules –out-name without_a_bundler_no_modules</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Wasm Sign<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;style&gt;</span>
+        <span class="nc">.center</span> <span class="p">{</span>
+            <span class="nl">width</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+            <span class="nl">text-align</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+            <span class="nl">margin-top</span><span class="p">:</span> <span class="m">50px</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="nt">&lt;/style&gt;</span>
+
+<span class="nt">&lt;/head&gt;</span>
+
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"center"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div&gt;</span>
+            <span class="nt">&lt;span&gt;</span>Data: <span class="nt">&lt;/span&gt;</span>
+            <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">id=</span><span class="s">"dataInput"</span> <span class="na">size=</span><span class="s">"100"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+
+        <span class="nt">&lt;div&gt;</span>
+            <span class="nt">&lt;span&gt;</span>Sign: <span class="nt">&lt;/span&gt;</span>
+            <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">readonly</span> <span class="na">disabled=</span><span class="s">"disabled"</span> <span class="na">id=</span><span class="s">"dataOutput"</span> <span class="na">size=</span><span class="s">"100"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"Get Sign"</span> <span class="na">onclick=</span><span class="s">"genSign();"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+
+    <span class="c">&lt;!-- Include the JS generated by `wasm-pack build` --&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">'pkg/without_a_bundler_no_modules.js'</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+    <span class="nt">&lt;script&gt;</span>
+        <span class="c1">// Like with the `--target web` output the exports are immediately</span>
+        <span class="c1">// available but they won't work until we initialize the module. Unlike</span>
+        <span class="c1">// `--target web`, however, the globals are all stored on a</span>
+        <span class="c1">// `wasm_bindgen` global. The global itself is the initialization</span>
+        <span class="c1">// function and then the properties of the global are all the exported</span>
+        <span class="c1">// functions.</span>
+        <span class="c1">//</span>
+        <span class="c1">// Note that the name `wasm_bindgen` can be configured with the</span>
+        <span class="c1">// `--no-modules-global` CLI flag</span>
+        <span class="kd">const</span> <span class="p">{</span> <span class="nx">sign</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">wasm_bindgen</span><span class="p">;</span>
+        <span class="k">async</span> <span class="kd">function</span> <span class="nx">init</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">await</span> <span class="nx">wasm_bindgen</span><span class="p">(</span><span class="dl">'</span><span class="s1">./pkg/without_a_bundler_no_modules_bg.wasm</span><span class="dl">'</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="nx">init</span><span class="p">();</span>
+
+        <span class="kd">let</span> <span class="nx">dataInput</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">dataInput</span><span class="dl">"</span><span class="p">);</span>
+        <span class="kd">let</span> <span class="nx">dataOutput</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">dataOutput</span><span class="dl">"</span><span class="p">);</span>
+        <span class="kd">function</span> <span class="nx">genSign</span><span class="p">()</span> <span class="p">{</span>
+            <span class="kd">let</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">dataInput</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+            <span class="nx">sign</span><span class="p">(</span><span class="nx">data</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">sign</span> <span class="o">=&gt;</span> <span class="nx">dataOutput</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">sign</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<h2 id="示例">示例</h2>
+<p><a href="https://nicennnnnnnlee.github.io/rust-wasm-digest/">https://nicennnnnnnlee.github.io/rust-wasm-digest/</a></p>
 
         </article>
         <hr>
@@ -380,7 +574,7 @@
                         <ul>
                         
                         <li class="relatedPost">
-                            <a href="/blog/2022/11/25/rust-wasm-digest/">Rust 使用wasm实现path签名sign
+                            <a href="/blog/2022/11/24/rust-compare-unsigned/">Rust 比较时差大小犯的错误😳
                             
                             </a>
                         </li>
@@ -396,7 +590,7 @@
                     
                         
                         <li class="relatedPost">
-                            <a href="/blog/2022/11/24/rust-compare-unsigned/">Rust 比较时差大小犯的错误😳
+                            <a href="/blog/2022/11/23/rust-cross-compile/">Rust 交叉编译
                             
                             </a>
                         </li>
@@ -505,13 +699,11 @@
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/blog/2022/11/15/rust-async-websocket/">Rust 利用HTTPS WebSocket通道转发流量</a></p>
+        <p><strong>上一篇</strong> <a href="/blog/2022/11/24/rust-compare-unsigned/">Rust 比较时差大小犯的错误😳</a></p>
         
     </div>
     <div class="nex">
 
-        
-        <p><strong>下一篇</strong> <a href="/blog/2022/11/24/rust-compare-unsigned/">Rust 比较时差大小犯的错误😳</a></p>
         
     </div>
 </div>
