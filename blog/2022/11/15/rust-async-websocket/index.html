@@ -364,9 +364,9 @@
 <p>先来思考一个问题，建立一个HTTP连接后，如何确保不受限制上下行？<br />
 对于下行，一个简单的做法是<code class="language-plaintext highlighter-rouge">Transfer-Encoding:chunked</code>；<br />
 对于上行，考虑到HTTP 1.1发送完毕后该TCP连接实际上并未关闭，可以每次在发送数据时加上一个HTTP请求头，但一个请求头意味着一个HTTP回复，而且上下行时序上必须一致，容易阻塞。<br />
-HTTP 2分层传输也存在类似问题。  <br />
-而且始终存在一个问题，只能一上一下轮流传输。<br />
-考虑到这一点，使用Websocket是一个最现实的选择。<br />
+上述始终存在一个问题，即只能一上一下轮流传输。<br />
+考虑到这一点，使用Websocket是一个最现实的最容易的选择。<br />
+（至少比起这个，基于HTTP2的grpc要更复杂一点。）  <br />
 实现上，客户端发一个<code class="language-plaintext highlighter-rouge">Upgrade: websocket</code>升级请求，服务端回一个<code class="language-plaintext highlighter-rouge">101 Switching Protocols</code>即可。<br />
 之后的数据可以直接传输，不必按照Websocket的帧格式来了。</p>
 
