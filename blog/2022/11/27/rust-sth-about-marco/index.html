@@ -7,13 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Rust HTTP代理的实现(同步)</title>
-    <meta name="description" content="  实现HTTP + HTTPS代理(同步)">
+    <title>Rust 入门时容易迷惑的技术细节(macro篇)</title>
+    <meta name="description" content="  接上文。">
 
-    <meta property="og:url" content="https://nicelee.top/blog/2022/11/10/rust-sync-http-proxy/">
+    <meta property="og:url" content="https://nicelee.top/blog/2022/11/27/rust-sth-about-marco/">
     <meta property="og:site_name" content="NiceLee的博客">
-    <meta property="og:title" content="Rust HTTP代理的实现(同步)">
-    <meta property="og:description" content="  实现HTTP + HTTPS代理(同步)">
+    <meta property="og:title" content="Rust 入门时容易迷惑的技术细节(macro篇)">
+    <meta property="og:description" content="  接上文。">
     <meta property="og:image" content="https://nicelee.top/favicon.ico?">
     <meta property="og:image:type" content="image/x-icon">
     
@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="/css/font-awesome.min.css ">
     <link rel="stylesheet" href="/css/font-ali.css?v=1.2 ">
     <link rel="stylesheet" href="/css/main.css?v=1.1 ">
-    <link rel="canonical" href="https://nicelee.top/blog/2022/11/10/rust-sync-http-proxy/">
+    <link rel="canonical" href="https://nicelee.top/blog/2022/11/27/rust-sth-about-marco/">
     <link rel="alternate" type="application/rss+xml" title="NiceLeeのBlog" href="https://nicelee.top/feed.xml ">
 
 	
@@ -286,11 +286,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>Rust HTTP代理的实现(同步)</h1>
+        <h1>Rust 入门时容易迷惑的技术细节(macro篇)</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2022-11-10
+                <i class="fa fa-calendar"></i>2022-11-27
             </div>
 
             <div class="label-card">
@@ -343,155 +343,316 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#前言" id="markdown-toc-前言">前言</a>    <ul>
-      <li><a href="#代理https请求" id="markdown-toc-代理https请求">代理HTTPS请求</a></li>
-      <li><a href="#代理http请求" id="markdown-toc-代理http请求">代理HTTP请求</a></li>
+  <li><a href="#宏的分类与实现举例" id="markdown-toc-宏的分类与实现举例">宏的分类与实现举例</a></li>
+  <li><a href="#声明宏" id="markdown-toc-声明宏">声明宏</a></li>
+  <li><a href="#自定义derive宏" id="markdown-toc-自定义derive宏">自定义derive宏</a>    <ul>
+      <li><a href="#s06_macro" id="markdown-toc-s06_macro"><code class="language-plaintext highlighter-rouge">s06_macro</code></a></li>
+      <li><a href="#s06_macro_derive" id="markdown-toc-s06_macro_derive"><code class="language-plaintext highlighter-rouge">s06_macro_derive</code></a></li>
+      <li><a href="#示例" id="markdown-toc-示例">示例</a></li>
     </ul>
   </li>
-  <li><a href="#实现" id="markdown-toc-实现">实现</a>    <ul>
-      <li><a href="#依赖" id="markdown-toc-依赖">依赖</a></li>
-      <li><a href="#实现-1" id="markdown-toc-实现-1">实现</a></li>
+  <li><a href="#属性宏" id="markdown-toc-属性宏">属性宏</a></li>
+  <li><a href="#函数宏" id="markdown-toc-函数宏">函数宏</a></li>
+  <li><a href="#常见的宏应用举例" id="markdown-toc-常见的宏应用举例">常见的宏应用举例</a>    <ul>
+      <li><a href="#features" id="markdown-toc-features">features</a></li>
+      <li><a href="#条件编译" id="markdown-toc-条件编译">条件编译</a></li>
     </ul>
   </li>
-  <li><a href="#代码" id="markdown-toc-代码">代码</a></li>
 </ul>
 <blockquote>
-  <p>实现HTTP + HTTPS代理(同步)</p>
+  <p>接上文。</p>
 </blockquote>
 
-<h2 id="前言">前言</h2>
-<h3 id="代理https请求">代理HTTPS请求</h3>
+<h2 id="宏的分类与实现举例">宏的分类与实现举例</h2>
 <ul>
-  <li>
-    <p>正常情况<br />
-  浏览器与(host, port)建立TCP连接，套上加密TLS，发送HTTP请求</p>
-  </li>
-  <li>
-    <p>代理HTTPS</p>
+  <li>声明宏(Declarative Macro)</li>
+  <li>过程宏 (Procedural Macro)
     <ul>
-      <li>浏览器与代理Server建立TCP连接</li>
-      <li>浏览器发送<code class="language-plaintext highlighter-rouge">HTTP CONNECT</code>消息</li>
-      <li>代理Server从<code class="language-plaintext highlighter-rouge">HTTP CONNECT</code>消息中提取出host、port，并与(host, port)建立TCP连接</li>
-      <li>代理Server给浏览器返回<code class="language-plaintext highlighter-rouge">Connection Established</code>消息</li>
-      <li>代理Server充当浏览器与(host, port)之间的管道，来什么转发什么</li>
-      <li>浏览器套上加密TLS，发送HTTP请求</li>
+      <li>自定义derive宏 (Custom derive)</li>
+      <li>属性宏 (Attribute-like macros)</li>
+      <li>函数宏 (Function-like macros)</li>
     </ul>
   </li>
 </ul>
 
-<h3 id="代理http请求">代理HTTP请求</h3>
+<h2 id="声明宏">声明宏</h2>
+<p>像<code class="language-plaintext highlighter-rouge">vec!</code>、<code class="language-plaintext highlighter-rouge">concat!</code>这类常用的宏就是用声明宏实现的，可以方便coding，减少代码量。<br />
+这里我们举个例子，rust实现里面是不允许出现<code class="language-plaintext highlighter-rouge">let a=b=c="1+2";</code>这类代码的。<br />
+我们考虑实现一个宏<code class="language-plaintext highlighter-rouge">assign</code>，可以<code class="language-plaintext highlighter-rouge">assign!("1+2", a, b, c)</code>来达到上述目的。<br />
+考虑到刚刚入门，可以从简单的开始实现。</p>
 <ul>
-  <li>
-    <p>正常情况<br />
-  浏览器与(host, port)建立TCP连接，发送HTTP请求</p>
-  </li>
-  <li>
-    <p>代理HTTP</p>
-    <ul>
-      <li>浏览器与代理Server建立TCP连接，发送HTTP请求</li>
-      <li>代理Server从HTTP请求头部提取出host、port，与(host, port)建立TCP连接，并发送HTTP请求头部</li>
-      <li>代理Server充当浏览器与(host, port)之间的管道，来什么转发什么</li>
-    </ul>
-  </li>
+  <li><code class="language-plaintext highlighter-rouge">assign!(a, "1+2")</code></li>
+  <li><code class="language-plaintext highlighter-rouge">assign!("1+2", a)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">assign!("1+2", a, b)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">assign!("1+2", a, b, c, ...)</code></li>
 </ul>
 
-<h2 id="实现">实现</h2>
-<p>理清原理，并没有实现难度。<br />
-需要注意的地方是从收到的消息中判断该请求是HTTPS代理还是HTTP代理。</p>
-
-<h3 id="依赖">依赖</h3>
-<div class="language-toml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[dependencies]</span>
-<span class="py">regex</span> <span class="p">=</span> <span class="s">"1.5.4"</span>
-</code></pre></div></div>
-
-<h3 id="实现-1">实现</h3>
-
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">use</span> <span class="nn">std</span><span class="p">::{</span><span class="nn">net</span><span class="p">::</span><span class="n">TcpListener</span><span class="p">,</span> <span class="n">thread</span><span class="p">};</span>
-<span class="k">use</span> <span class="nn">s02_sync_http_proxy</span><span class="p">::</span><span class="nn">http_proxy</span><span class="p">::</span><span class="n">handle_connection</span><span class="p">;</span>
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">#[macro_export]</span>
+<span class="nd">macro_rules!</span> <span class="n">assign</span> <span class="p">{</span>
+    <span class="c">// 实现 assign!("1+2", a) 类型</span>
+    <span class="p">(</span> <span class="nv">$val:expr</span><span class="p">,</span> <span class="nv">$it:ident</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="nv">$it</span> <span class="o">=</span> <span class="nv">$val</span><span class="p">;</span>
+    <span class="p">};</span>
+    <span class="c">// 实现 assign!("1+2", a, b) 类型</span>
+    <span class="p">(</span> <span class="nv">$val:expr</span><span class="p">,</span> <span class="nv">$it:ident</span><span class="p">,</span> <span class="nv">$it2:ident</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="nv">$it</span> <span class="o">=</span> <span class="nv">$val</span><span class="p">;</span>
+        <span class="k">let</span> <span class="nv">$it2</span> <span class="o">=</span> <span class="nv">$val</span><span class="p">;</span>
+    <span class="p">};</span>
+    <span class="c">// 实现 assign!("1+2", a, b, c, d, ...) 任意个参数类型</span>
+    <span class="p">(</span> <span class="nv">$val:expr</span><span class="p">,</span> <span class="nv">$</span><span class="p">(</span> <span class="nv">$it:ident</span> <span class="p">),</span><span class="o">*</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="p">{</span>
+        <span class="nv">$</span><span class="p">(</span>
+            <span class="k">let</span> <span class="nv">$it</span> <span class="o">=</span> <span class="nv">$val</span><span class="p">;</span>
+        <span class="p">)</span><span class="o">*</span>
+    <span class="p">};</span>
+<span class="p">}</span>
 
 <span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="n">listener</span> <span class="o">=</span> <span class="nn">TcpListener</span><span class="p">::</span><span class="nf">bind</span><span class="p">(</span><span class="s">"127.0.0.1:1081"</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
-    <span class="k">for</span> <span class="n">stream</span> <span class="n">in</span> <span class="n">listener</span><span class="nf">.incoming</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">let</span> <span class="n">stream</span> <span class="o">=</span> <span class="n">stream</span><span class="nf">.unwrap</span><span class="p">();</span>
-        <span class="nn">thread</span><span class="p">::</span><span class="nf">spawn</span><span class="p">(</span><span class="k">move</span> <span class="p">||</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="k">let</span> <span class="nf">Err</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="nf">handle_connection</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nd">println!</span><span class="p">(</span><span class="s">"{:?}"</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
-            <span class="p">}</span>
-        <span class="p">});</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+    <span class="nd">assign!</span><span class="p">(</span><span class="s">"1+2"</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"a: {}"</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span>
+    <span class="nd">assign!</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"a: {}"</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span>
 
+    <span class="nd">assign!</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"a = b = {} = {}"</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+
+    <span class="nd">assign!</span><span class="p">(</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">);</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"a = b = c = {} = {} = {}"</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">);</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// http_proxy.rs</span>
-<span class="k">use</span> <span class="nn">std</span><span class="p">::{</span>
-    <span class="nn">io</span><span class="p">::{</span><span class="nn">prelude</span><span class="p">::</span><span class="o">*</span><span class="p">,</span> <span class="n">Error</span><span class="p">,</span> <span class="n">ErrorKind</span><span class="p">},</span>
-    <span class="nn">net</span><span class="p">::</span><span class="n">TcpStream</span><span class="p">,</span>
-    <span class="n">thread</span><span class="p">,</span>
-<span class="p">};</span>
+<h2 id="自定义derive宏">自定义derive宏</h2>
+<p>我们在打印的时候，常常会被提示没有实现<code class="language-plaintext highlighter-rouge">Debug</code> trait，建议添加<code class="language-plaintext highlighter-rouge">#[derive(Debug)]</code>。<br />
+也就是说，derive宏可以帮我们实现指定的trait。具体如何实现呢？</p>
 
-<span class="k">use</span> <span class="nn">regex</span><span class="p">::</span><span class="n">Regex</span><span class="p">;</span>
+<p>举个例子，我们将要实现3个trait：</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">s06_macro</code>: 任意名称，定义trait<code class="language-plaintext highlighter-rouge">HelloMacro</code></li>
+  <li><code class="language-plaintext highlighter-rouge">s06_macro_derive</code>: 前一个crate名称 + <code class="language-plaintext highlighter-rouge">_derive</code>，实现trait<code class="language-plaintext highlighter-rouge">HelloMacro</code></li>
+  <li><code class="language-plaintext highlighter-rouge">asdssafsfs</code>： 任意名称，引用trait<code class="language-plaintext highlighter-rouge">HelloMacro</code>并使用derive宏实现它</li>
+</ul>
 
-<span class="k">fn</span> <span class="nf">pip</span><span class="p">(</span><span class="k">mut</span> <span class="n">from</span><span class="p">:</span> <span class="n">TcpStream</span><span class="p">,</span> <span class="k">mut</span> <span class="n">to</span><span class="p">:</span> <span class="n">TcpStream</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="n">Result</span><span class="o">&lt;</span><span class="p">(),</span> <span class="n">Error</span><span class="o">&gt;</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="k">mut</span> <span class="n">buffer</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0u8</span><span class="p">;</span> <span class="mi">1024</span><span class="p">];</span>
-    <span class="k">let</span> <span class="k">mut</span> <span class="n">n</span> <span class="o">=</span> <span class="n">from</span><span class="nf">.read</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="n">buffer</span><span class="p">[</span><span class="o">..</span><span class="p">])</span><span class="o">?</span><span class="p">;</span>
-    <span class="k">while</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">{</span>
-        <span class="n">to</span><span class="nf">.write_all</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="n">buffer</span><span class="p">[</span><span class="o">..</span><span class="n">n</span><span class="p">])</span><span class="o">?</span><span class="p">;</span>
-        <span class="n">n</span> <span class="o">=</span> <span class="n">from</span><span class="nf">.read</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="n">buffer</span><span class="p">[</span><span class="o">..</span><span class="p">])</span><span class="o">?</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="nf">Ok</span><span class="p">(())</span>
+<h3 id="s06_macro"><code class="language-plaintext highlighter-rouge">s06_macro</code></h3>
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// src/lib.rs</span>
+<span class="k">pub</span> <span class="k">trait</span> <span class="n">HelloMacro</span> <span class="p">{</span>
+    <span class="k">fn</span> <span class="nf">hello_macro</span><span class="p">();</span>
 <span class="p">}</span>
-<span class="k">pub</span> <span class="k">fn</span> <span class="nf">handle_connection</span><span class="p">(</span><span class="k">mut</span> <span class="n">stream</span><span class="p">:</span> <span class="n">TcpStream</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="n">Result</span><span class="o">&lt;</span><span class="p">(),</span> <span class="n">Error</span><span class="o">&gt;</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="n">local_stream_read</span> <span class="o">=</span> <span class="n">stream</span><span class="nf">.try_clone</span><span class="p">()</span><span class="o">?</span><span class="p">;</span>
-    <span class="k">let</span> <span class="k">mut</span> <span class="n">local_stream_write</span> <span class="o">=</span> <span class="n">stream</span><span class="nf">.try_clone</span><span class="p">()</span><span class="o">?</span><span class="p">;</span>
+</code></pre></div></div>
 
-    <span class="k">let</span> <span class="k">mut</span> <span class="n">head</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0u8</span><span class="p">;</span> <span class="mi">2048</span><span class="p">];</span>
-    <span class="k">let</span> <span class="n">n</span> <span class="o">=</span> <span class="n">stream</span><span class="nf">.read</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="n">head</span><span class="p">[</span><span class="o">..</span><span class="p">])</span><span class="o">?</span><span class="p">;</span>
+<h3 id="s06_macro_derive"><code class="language-plaintext highlighter-rouge">s06_macro_derive</code></h3>
 
-    <span class="k">let</span> <span class="n">head_str</span> <span class="o">=</span>
-        <span class="nn">std</span><span class="p">::</span><span class="nn">str</span><span class="p">::</span><span class="nf">from_utf8</span><span class="p">(</span><span class="o">&amp;</span><span class="n">head</span><span class="p">[</span><span class="o">..</span><span class="n">n</span><span class="p">])</span><span class="nf">.map_err</span><span class="p">(|</span><span class="n">x</span><span class="p">|</span> <span class="nn">Error</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="nn">ErrorKind</span><span class="p">::</span><span class="n">Interrupted</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span><span class="o">?</span><span class="p">;</span>
-    <span class="k">let</span> <span class="n">reg</span> <span class="o">=</span> <span class="nn">Regex</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="s">r"(CONNECT|Host:) ([^ :\r\n]+)(?::(\d+))?"</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
-    <span class="k">if</span> <span class="k">let</span> <span class="nf">Some</span><span class="p">(</span><span class="n">caps</span><span class="p">)</span> <span class="o">=</span> <span class="n">reg</span><span class="nf">.captures</span><span class="p">(</span><span class="n">head_str</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">let</span> <span class="n">host</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">caps</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
-        <span class="k">let</span> <span class="n">port</span> <span class="o">=</span> <span class="n">caps</span><span class="nf">.get</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="nf">.map_or</span><span class="p">(</span><span class="s">"80"</span><span class="p">,</span> <span class="p">|</span><span class="n">m</span><span class="p">|</span> <span class="n">m</span><span class="nf">.as_str</span><span class="p">());</span>
-        <span class="nd">println!</span><span class="p">(</span><span class="s">"{} {}"</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">);</span>
-        <span class="k">let</span> <span class="n">dst_addr</span> <span class="o">=</span> <span class="nd">format!</span><span class="p">(</span><span class="s">"{}:{}"</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">);</span>
-        <span class="k">let</span> <span class="n">remote_stream_read</span> <span class="o">=</span> <span class="nn">TcpStream</span><span class="p">::</span><span class="nf">connect</span><span class="p">(</span><span class="n">dst_addr</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
-        <span class="k">let</span> <span class="k">mut</span> <span class="n">remote_stream_write</span> <span class="o">=</span> <span class="n">remote_stream_read</span><span class="nf">.try_clone</span><span class="p">()</span><span class="nf">.unwrap</span><span class="p">();</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Cargo.toml
+[lib]
+proc-macro = true
 
-        <span class="k">if</span> <span class="n">head_str</span><span class="nf">.starts_with</span><span class="p">(</span><span class="s">"CONNECT"</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">local_stream_write</span>
-                <span class="nf">.write_all</span><span class="p">(</span><span class="s">"HTTP/1.1 200 Connection Established</span><span class="se">\r\n\r\n</span><span class="s">"</span><span class="nf">.as_bytes</span><span class="p">())</span><span class="o">?</span><span class="p">;</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="n">remote_stream_write</span><span class="nf">.write_all</span><span class="p">(</span><span class="o">&amp;</span><span class="n">head</span><span class="p">[</span><span class="o">..</span><span class="n">n</span><span class="p">])</span><span class="o">?</span><span class="p">;</span>
+[dependencies]
+# 用于将TokenStream转化为Rust语法树
+syn = "1.0"
+# 用于将内容转化为TokenStream
+quote = "1.0"
+</code></pre></div></div>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">se</span> <span class="nn">proc_macro</span><span class="p">::</span><span class="n">TokenStream</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">quote</span><span class="p">::</span><span class="n">quote</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">syn</span><span class="p">::{</span><span class="k">self</span><span class="p">};</span>
+
+<span class="nd">#[proc_macro_derive(HelloMacro)]</span>
+<span class="k">pub</span> <span class="k">fn</span> <span class="nf">hello_macro_derive</span><span class="p">(</span><span class="n">input</span><span class="p">:</span> <span class="n">TokenStream</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="n">TokenStream</span> <span class="p">{</span>
+    <span class="c">// Construct a representation of Rust code as a syntax tree</span>
+    <span class="c">// that we can manipulate</span>
+    <span class="k">let</span> <span class="n">ast</span> <span class="o">=</span> <span class="nn">syn</span><span class="p">::</span><span class="nf">parse</span><span class="p">(</span><span class="n">input</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
+
+    <span class="c">// Build the trait implementation</span>
+    <span class="nf">impl_hello_macro</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ast</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">impl_hello_macro</span><span class="p">(</span><span class="n">ast</span><span class="p">:</span> <span class="o">&amp;</span><span class="nn">syn</span><span class="p">::</span><span class="n">DeriveInput</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="n">TokenStream</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">name</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">ast</span><span class="py">.ident</span><span class="p">;</span>
+    <span class="k">let</span> <span class="n">gen</span> <span class="o">=</span> <span class="nd">quote!</span> <span class="p">{</span>
+        <span class="k">impl</span> <span class="n">HelloMacro</span> <span class="k">for</span> #<span class="n">name</span> <span class="p">{</span>
+            <span class="k">fn</span> <span class="nf">hello_macro</span><span class="p">()</span> <span class="p">{</span>
+                <span class="nd">println!</span><span class="p">(</span><span class="s">"Hello, Macro! My name is {}!"</span><span class="p">,</span> <span class="nd">stringify!</span><span class="p">(</span>#<span class="n">name</span><span class="p">));</span>
+            <span class="p">}</span>
         <span class="p">}</span>
-
-        <span class="nn">thread</span><span class="p">::</span><span class="nf">spawn</span><span class="p">(</span><span class="k">move</span> <span class="p">||</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="k">let</span> <span class="nf">Err</span><span class="p">(</span><span class="mi">_</span><span class="p">)</span> <span class="o">=</span> <span class="nf">pip</span><span class="p">(</span><span class="n">remote_stream_read</span><span class="p">,</span> <span class="n">local_stream_write</span><span class="p">)</span> <span class="p">{</span>
-                <span class="p">()</span>
-            <span class="p">}</span>
-        <span class="p">});</span>
-        <span class="nn">thread</span><span class="p">::</span><span class="nf">spawn</span><span class="p">(</span><span class="k">move</span> <span class="p">||</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="k">let</span> <span class="nf">Err</span><span class="p">(</span><span class="mi">_</span><span class="p">)</span> <span class="o">=</span> <span class="nf">pip</span><span class="p">(</span><span class="n">local_stream_read</span><span class="p">,</span> <span class="n">remote_stream_write</span><span class="p">)</span> <span class="p">{</span>
-                <span class="p">()</span>
-            <span class="p">}</span>
-        <span class="p">});</span>
-        <span class="c">// Ok(())</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="c">// let err_msg = format!("TCP 头部不是HTTPS CONNECT请求 或者 HTTP消息:\r\n {}", head_str);</span>
-        <span class="c">// Err(Error::new(</span>
-        <span class="c">//     ErrorKind::Other,</span>
-        <span class="c">//     err_msg,</span>
-        <span class="c">// ))</span>
-    <span class="p">}</span>
-    <span class="nf">Ok</span><span class="p">(())</span>
-    <span class="c">// println!("Request: {:#?}", http_request);</span>
+    <span class="p">};</span>
+    <span class="n">gen</span><span class="nf">.into</span><span class="p">()</span>
 <span class="p">}</span>
-
 </code></pre></div></div>
 
-<h2 id="代码">代码</h2>
-<p><a href="https://github.com/nICEnnnnnnnLee/rust-http-proxy-demo">rust-http-proxy-demo</a></p>
+<h3 id="示例">示例</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Cargo.toml
+[dependencies]
+s06_macro = { path = "../s06_macro" }
+s06_macro_derive = { path = "../s06_macro_derive" }
+</code></pre></div></div>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// src/main.rs</span>
+<span class="nd">#[derive(s06_macro_derive::HelloMacro)]</span>
+<span class="k">struct</span> <span class="n">Test</span><span class="p">;</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nn">Test</span><span class="p">::</span><span class="nf">hello_macro</span><span class="p">();</span>
+    <span class="c">// 将会打印`Hello, Macro! My name is Test!`</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="属性宏">属性宏</h2>
+<p>我看的教程举例用的是路由：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#[route(GET, "/")]
+fn index() {
+</code></pre></div></div>
+
+<p>找到了一个最简单的例子，它会把<code class="language-plaintext highlighter-rouge">宏的参数</code>和<code class="language-plaintext highlighter-rouge">加宏的函数</code>在编译的时候全打印出来，<code class="language-plaintext highlighter-rouge">加宏的函数</code>仍然是原来的功能。<br />
+如果你要想更复杂的实现，需要参照前面一样，将<code class="language-plaintext highlighter-rouge">TokenStream</code>转为语法树，再来一顿猛如虎的操作，然后转化为<code class="language-plaintext highlighter-rouge">TokenStream</code>返回。</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// src/lib.rs</span>
+
+<span class="nd">#[proc_macro_attribute]</span>
+<span class="k">pub</span> <span class="k">fn</span> <span class="nf">show_streams</span><span class="p">(</span><span class="n">attr</span><span class="p">:</span> <span class="n">TokenStream</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">TokenStream</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="n">TokenStream</span> <span class="p">{</span>
+    <span class="c">// 下面的打印发生在编译时期</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"attr: </span><span class="se">\"</span><span class="s">{}</span><span class="se">\"</span><span class="s">"</span><span class="p">,</span> <span class="n">attr</span><span class="nf">.to_string</span><span class="p">());</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"item: </span><span class="se">\"</span><span class="s">{}</span><span class="se">\"</span><span class="s">"</span><span class="p">,</span> <span class="n">item</span><span class="nf">.to_string</span><span class="p">());</span>
+    <span class="n">item</span>
+<span class="p">}</span>
+
+<span class="c">// Attribute macros - #[CustomAttribute]</span>
+<span class="c">// Example: Basic function</span>
+<span class="nd">#[show_streams]</span>
+<span class="k">fn</span> <span class="nf">invoke1</span><span class="p">()</span> <span class="p">{}</span>
+<span class="c">// out: attr: ""</span>
+<span class="c">// out: item: "fn invoke1() { }"</span>
+
+<span class="c">// Example: Attribute with input</span>
+<span class="nd">#[show_streams(bar)]</span>
+<span class="k">fn</span> <span class="nf">invoke2</span><span class="p">()</span> <span class="p">{}</span>
+<span class="c">// out: attr: "bar"</span>
+<span class="c">// out: item: "fn invoke2() {}"</span>
+
+<span class="c">// Example: Multiple tokens in the input</span>
+<span class="nd">#[show_streams(multiple</span> <span class="nd">=</span><span class="err">&gt;</span> <span class="nd">tokens)]</span>
+<span class="k">fn</span> <span class="nf">invoke3</span><span class="p">()</span> <span class="p">{}</span>
+<span class="c">// out: attr: "multiple =&gt; tokens"</span>
+<span class="c">// out: item: "fn invoke3() {}"</span>
+
+<span class="c">// Example:</span>
+<span class="nd">#[show_streams</span> <span class="err">{</span> <span class="nd">delimiters</span> <span class="err">}</span><span class="nd">]</span>
+<span class="k">fn</span> <span class="nf">invoke4</span><span class="p">()</span> <span class="p">{}</span>
+<span class="c">// out: attr: "delimiters"</span>
+<span class="c">// out: item: "fn invoke4() {}"</span>
+</code></pre></div></div>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// src/main.rs</span>
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nn">Test</span><span class="p">::</span><span class="nf">hello_macro</span><span class="p">();</span>
+
+    <span class="nf">invoke1</span><span class="p">();</span>
+    <span class="nf">invoke2</span><span class="p">();</span>
+    <span class="nf">invoke3</span><span class="p">();</span>
+    <span class="nf">invoke4</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="函数宏">函数宏</h2>
+<p>我看的教程举例用的是<code class="language-plaintext highlighter-rouge">sql</code>，它返回的是一个值：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let sql = sql!(SELECT * FROM posts WHERE id=1);
+</code></pre></div></div>
+
+<p>实际上，脑洞还可以放开一点</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">make_answer!</span><span class="p">(</span><span class="n">xxx</span><span class="p">);</span> <span class="c">// 创建一个answer函数</span>
+<span class="k">let</span> <span class="n">answer0</span> <span class="o">=</span> <span class="nf">answer</span><span class="p">();</span>
+
+<span class="nd">print_hello!</span><span class="p">();</span> <span class="c">// 打印hello输出</span>
+</code></pre></div></div>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// src/lib.rs</span>
+
+<span class="nd">#[proc_macro]</span>
+<span class="k">pub</span> <span class="k">fn</span> <span class="nf">make_answer</span><span class="p">(</span><span class="mi">_</span><span class="n">item</span><span class="p">:</span> <span class="n">TokenStream</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="n">TokenStream</span> <span class="p">{</span>
+    <span class="s">"fn answer() -&gt; u32 { 42 }"</span><span class="nf">.parse</span><span class="p">()</span><span class="nf">.unwrap</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="nd">#[proc_macro]</span>
+<span class="k">pub</span> <span class="k">fn</span> <span class="nf">print_hello</span><span class="p">(</span><span class="mi">_</span><span class="n">item</span><span class="p">:</span> <span class="n">TokenStream</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="n">TokenStream</span> <span class="p">{</span>
+    <span class="s">"println!(</span><span class="se">\"</span><span class="s">hello</span><span class="se">\"</span><span class="s">)"</span><span class="nf">.parse</span><span class="p">()</span><span class="nf">.unwrap</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="常见的宏应用举例">常见的宏应用举例</h2>
+<h3 id="features">features</h3>
+
+<ul>
+  <li>定义features</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Cargo.toml
+
+[dependencies]
+gif = { version = "0.11.1", optional = true }
+
+[features]
+default = ["bmp"]
+bmp = []
+png = []
+ico = ["bmp", "png"]
+webp = []
+gif = ["dep:gif"] # gif feature开启才会引入依赖gif
+</code></pre></div></div>
+
+<ul>
+  <li>实现features</li>
+</ul>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">#[cfg(feature</span> <span class="nd">=</span> <span class="s">"png"</span><span class="nd">)]</span>
+<span class="k">pub</span> <span class="k">mod</span> <span class="n">PNG</span><span class="p">;</span>
+
+<span class="c">// ...</span>
+
+<span class="nd">#[cfg(feature</span> <span class="nd">=</span> <span class="s">"webp"</span><span class="nd">)]</span>
+<span class="k">pub</span> <span class="k">struct</span> <span class="n">Webp</span><span class="p">{}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>使用</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Cargo.toml
+[dependencies]
+s06_macro = {features=["png", "gif"]}
+</code></pre></div></div>
+
+<h3 id="条件编译">条件编译</h3>
+<p>features实际上就是运用了条件编译。<br />
+具体来说，就是对<code class="language-plaintext highlighter-rouge">cfg</code>宏的使用。</p>
+
+<ul>
+  <li>cfg属性：在属性位置中使用<code class="language-plaintext highlighter-rouge">#[cfg(…)]</code></li>
+  <li>cfg!宏：在布尔表达式中使用<code class="language-plaintext highlighter-rouge">cfg!(…)</code></li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 参考 https://blog.csdn.net/lcloveyou/article/details/105004181
+// 仅当目标系统为Linux 的时候才会编译
+#[cfg(target_os = "linux")]
+fn are_you_on_linux() {
+	println!("linux!")
+}
+
+// 仅当目标系统不是Linux 时才会编译
+#[cfg(not(target_os = "linux"))]
+fn are_you_on_linux() {
+	println!("not linux!")
+}
+
+fn main() {
+	are_you_on_linux();
+	println!("Are you sure?");
+	if cfg!(target_os = "linux") {
+		println!("Yes. It's linux!");
+	} else {
+		println!("Yes. It's not linux!");
+	}
+}
+</code></pre></div></div>
 
         </article>
         <hr>
@@ -505,22 +666,6 @@
                         
                         <h2 id="similar_posts">相似文章</h2>
                         <ul>
-                        
-                        <li class="relatedPost">
-                            <a href="/blog/2022/11/27/rust-sth-about-marco/">Rust 入门时容易迷惑的技术细节(macro篇)
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-            
-        
-            
-            
-                
-                    
                         
                         <li class="relatedPost">
                             <a href="/blog/2022/11/27/rust-sth-about-trait/">Rust 入门时容易迷惑的技术细节(trait篇)
@@ -601,6 +746,22 @@
             
                 
                     
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2022/11/12/rust-async-https-client-server/">Rust 基于tokio-rustls的简单的HTTPS Client/Server实现
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
                 
             
         
@@ -632,13 +793,11 @@
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/blog/2022/11/09/rust-global-config/">Rust 全局配置的最佳实践</a></p>
+        <p><strong>上一篇</strong> <a href="/blog/2022/11/27/rust-sth-about-trait/">Rust 入门时容易迷惑的技术细节(trait篇)</a></p>
         
     </div>
     <div class="nex">
 
-        
-        <p><strong>下一篇</strong> <a href="/blog/2022/11/11/rust-async-http-proxy/">Rust HTTP代理的实现(异步)</a></p>
         
     </div>
 </div>

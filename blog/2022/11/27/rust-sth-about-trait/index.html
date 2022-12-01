@@ -7,13 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Rust HTTP代理的实现(同步)</title>
-    <meta name="description" content="  实现HTTP + HTTPS代理(同步)">
+    <title>Rust 入门时容易迷惑的技术细节(trait篇)</title>
+    <meta name="description" content="  在入门的时候并不能全方位地看待问题，有时候会忽略一些显而易见的知识，现在回过头梳理，把前面的补起来。">
 
-    <meta property="og:url" content="https://nicelee.top/blog/2022/11/10/rust-sync-http-proxy/">
+    <meta property="og:url" content="https://nicelee.top/blog/2022/11/27/rust-sth-about-trait/">
     <meta property="og:site_name" content="NiceLee的博客">
-    <meta property="og:title" content="Rust HTTP代理的实现(同步)">
-    <meta property="og:description" content="  实现HTTP + HTTPS代理(同步)">
+    <meta property="og:title" content="Rust 入门时容易迷惑的技术细节(trait篇)">
+    <meta property="og:description" content="  在入门的时候并不能全方位地看待问题，有时候会忽略一些显而易见的知识，现在回过头梳理，把前面的补起来。">
     <meta property="og:image" content="https://nicelee.top/favicon.ico?">
     <meta property="og:image:type" content="image/x-icon">
     
@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="/css/font-awesome.min.css ">
     <link rel="stylesheet" href="/css/font-ali.css?v=1.2 ">
     <link rel="stylesheet" href="/css/main.css?v=1.1 ">
-    <link rel="canonical" href="https://nicelee.top/blog/2022/11/10/rust-sync-http-proxy/">
+    <link rel="canonical" href="https://nicelee.top/blog/2022/11/27/rust-sth-about-trait/">
     <link rel="alternate" type="application/rss+xml" title="NiceLeeのBlog" href="https://nicelee.top/feed.xml ">
 
 	
@@ -286,11 +286,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>Rust HTTP代理的实现(同步)</h1>
+        <h1>Rust 入门时容易迷惑的技术细节(trait篇)</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2022-11-10
+                <i class="fa fa-calendar"></i>2022-11-27
             </div>
 
             <div class="label-card">
@@ -343,155 +343,181 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#前言" id="markdown-toc-前言">前言</a>    <ul>
-      <li><a href="#代理https请求" id="markdown-toc-代理https请求">代理HTTPS请求</a></li>
-      <li><a href="#代理http请求" id="markdown-toc-代理http请求">代理HTTP请求</a></li>
-    </ul>
-  </li>
-  <li><a href="#实现" id="markdown-toc-实现">实现</a>    <ul>
-      <li><a href="#依赖" id="markdown-toc-依赖">依赖</a></li>
-      <li><a href="#实现-1" id="markdown-toc-实现-1">实现</a></li>
-    </ul>
-  </li>
-  <li><a href="#代码" id="markdown-toc-代码">代码</a></li>
+  <li><a href="#let-ident--expr发生的是复制还是移动" id="markdown-toc-let-ident--expr发生的是复制还是移动"><code class="language-plaintext highlighter-rouge">let ident = expr;</code>发生的是复制还是移动?</a></li>
+  <li><a href="#为类型实现等操作" id="markdown-toc-为类型实现等操作">为类型实现<code class="language-plaintext highlighter-rouge">+</code>、<code class="language-plaintext highlighter-rouge">==</code>等操作</a></li>
+  <li><a href="#为a-trait相关的的类型实现b-trait" id="markdown-toc-为a-trait相关的的类型实现b-trait">为<code class="language-plaintext highlighter-rouge">A trait</code>相关的的类型实现<code class="language-plaintext highlighter-rouge">B trait</code></a></li>
 </ul>
 <blockquote>
-  <p>实现HTTP + HTTPS代理(同步)</p>
+  <p>在入门的时候并不能全方位地看待问题，有时候会忽略一些显而易见的知识，现在回过头梳理，把前面的补起来。</p>
 </blockquote>
 
-<h2 id="前言">前言</h2>
-<h3 id="代理https请求">代理HTTPS请求</h3>
+<h2 id="let-ident--expr发生的是复制还是移动"><code class="language-plaintext highlighter-rouge">let ident = expr;</code>发生的是复制还是移动?</h2>
 <ul>
-  <li>
-    <p>正常情况<br />
-  浏览器与(host, port)建立TCP连接，套上加密TLS，发送HTTP请求</p>
-  </li>
-  <li>
-    <p>代理HTTPS</p>
-    <ul>
-      <li>浏览器与代理Server建立TCP连接</li>
-      <li>浏览器发送<code class="language-plaintext highlighter-rouge">HTTP CONNECT</code>消息</li>
-      <li>代理Server从<code class="language-plaintext highlighter-rouge">HTTP CONNECT</code>消息中提取出host、port，并与(host, port)建立TCP连接</li>
-      <li>代理Server给浏览器返回<code class="language-plaintext highlighter-rouge">Connection Established</code>消息</li>
-      <li>代理Server充当浏览器与(host, port)之间的管道，来什么转发什么</li>
-      <li>浏览器套上加密TLS，发送HTTP请求</li>
-    </ul>
-  </li>
+  <li>当赋值时，所有实现了<code class="language-plaintext highlighter-rouge">Copy</code> trait的赋值会发生复制，它会复制一份在栈上的值。</li>
+  <li>当赋值时，其它情况会发生转移。这时栈上会复制一份指针，但指向的堆上的实际值不变，会发生所有权的转移。</li>
+  <li>如果某个类型或它的任意一部分实现了<code class="language-plaintext highlighter-rouge">Drop</code> trait，那么就不能再实现<code class="language-plaintext highlighter-rouge">Copy</code> trait。</li>
 </ul>
 
-<h3 id="代理http请求">代理HTTP请求</h3>
+<p>我们来看一个新手很容易碰到的问题：</p>
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">pub</span> <span class="k">fn</span> <span class="nf">copy_test</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c">// 复制</span>
+    <span class="k">let</span> <span class="n">num1</span><span class="p">:</span> <span class="nb">i32</span> <span class="o">=</span> <span class="mi">666</span><span class="p">;</span>
+    <span class="k">let</span> <span class="n">num2</span><span class="p">:</span> <span class="nb">i32</span> <span class="o">=</span> <span class="n">num1</span><span class="p">;</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">num1</span><span class="p">);</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">num2</span><span class="p">);</span>
+<span class="p">}</span>
+
+    
+<span class="k">pub</span> <span class="k">fn</span> <span class="nf">move_test</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c">// 移动</span>
+    <span class="nd">#[derive(Debug)]</span>
+    <span class="k">struct</span> <span class="nf">Point</span><span class="p">(</span><span class="nb">i32</span><span class="p">,</span> <span class="nb">i32</span><span class="p">);</span>
+    <span class="k">let</span> <span class="n">p1</span> <span class="o">=</span> <span class="nf">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="k">let</span> <span class="n">p2</span> <span class="o">=</span> <span class="n">p1</span><span class="p">;</span>
+    <span class="c">// println!("{:?}", p1); // 这一句去掉注释会报错</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"{:?}"</span><span class="p">,</span> <span class="n">p2</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>为了解决以上问题，有三种常见的解决办法。</p>
 <ul>
-  <li>
-    <p>正常情况<br />
-  浏览器与(host, port)建立TCP连接，发送HTTP请求</p>
-  </li>
-  <li>
-    <p>代理HTTP</p>
-    <ul>
-      <li>浏览器与代理Server建立TCP连接，发送HTTP请求</li>
-      <li>代理Server从HTTP请求头部提取出host、port，与(host, port)建立TCP连接，并发送HTTP请求头部</li>
-      <li>代理Server充当浏览器与(host, port)之间的管道，来什么转发什么</li>
-    </ul>
-  </li>
+  <li>使用引用</li>
 </ul>
 
-<h2 id="实现">实现</h2>
-<p>理清原理，并没有实现难度。<br />
-需要注意的地方是从收到的消息中判断该请求是HTTPS代理还是HTTP代理。</p>
-
-<h3 id="依赖">依赖</h3>
-<div class="language-toml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[dependencies]</span>
-<span class="py">regex</span> <span class="p">=</span> <span class="s">"1.5.4"</span>
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">pub</span> <span class="k">fn</span> <span class="nf">ref_test</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c">// 移动</span>
+    <span class="nd">#[derive(Debug)]</span>
+    <span class="k">struct</span> <span class="nf">Point</span><span class="p">(</span><span class="nb">i32</span><span class="p">,</span> <span class="nb">i32</span><span class="p">);</span>
+    <span class="k">let</span> <span class="n">p1</span> <span class="o">=</span> <span class="o">&amp;</span><span class="nf">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="k">let</span> <span class="n">p2</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">p1</span><span class="p">;</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"{:?}"</span><span class="p">,</span> <span class="n">p1</span><span class="p">);</span> <span class="c">// </span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"{:?}"</span><span class="p">,</span> <span class="n">p2</span><span class="p">);</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
-<h3 id="实现-1">实现</h3>
+<ul>
+  <li>克隆该值再赋值</li>
+</ul>
 
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">use</span> <span class="nn">std</span><span class="p">::{</span><span class="nn">net</span><span class="p">::</span><span class="n">TcpListener</span><span class="p">,</span> <span class="n">thread</span><span class="p">};</span>
-<span class="k">use</span> <span class="nn">s02_sync_http_proxy</span><span class="p">::</span><span class="nn">http_proxy</span><span class="p">::</span><span class="n">handle_connection</span><span class="p">;</span>
-
-<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="n">listener</span> <span class="o">=</span> <span class="nn">TcpListener</span><span class="p">::</span><span class="nf">bind</span><span class="p">(</span><span class="s">"127.0.0.1:1081"</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
-    <span class="k">for</span> <span class="n">stream</span> <span class="n">in</span> <span class="n">listener</span><span class="nf">.incoming</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">let</span> <span class="n">stream</span> <span class="o">=</span> <span class="n">stream</span><span class="nf">.unwrap</span><span class="p">();</span>
-        <span class="nn">thread</span><span class="p">::</span><span class="nf">spawn</span><span class="p">(</span><span class="k">move</span> <span class="p">||</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="k">let</span> <span class="nf">Err</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="nf">handle_connection</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nd">println!</span><span class="p">(</span><span class="s">"{:?}"</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
-            <span class="p">}</span>
-        <span class="p">});</span>
-    <span class="p">}</span>
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">pub</span> <span class="k">fn</span> <span class="nf">clone_test</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nd">#[derive(Debug,Clone)]</span>
+    <span class="k">struct</span> <span class="nf">Point</span><span class="p">(</span><span class="nb">i32</span><span class="p">,</span> <span class="nb">i32</span><span class="p">);</span>
+    <span class="k">let</span> <span class="n">p1</span> <span class="o">=</span> <span class="nf">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="k">let</span> <span class="n">p2</span> <span class="o">=</span> <span class="n">p1</span><span class="nf">.clone</span><span class="p">();</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"{:?}"</span><span class="p">,</span> <span class="n">p1</span><span class="p">);</span> <span class="c">// </span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"{:?}"</span><span class="p">,</span> <span class="n">p2</span><span class="p">);</span>
 <span class="p">}</span>
-
 </code></pre></div></div>
 
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// http_proxy.rs</span>
-<span class="k">use</span> <span class="nn">std</span><span class="p">::{</span>
-    <span class="nn">io</span><span class="p">::{</span><span class="nn">prelude</span><span class="p">::</span><span class="o">*</span><span class="p">,</span> <span class="n">Error</span><span class="p">,</span> <span class="n">ErrorKind</span><span class="p">},</span>
-    <span class="nn">net</span><span class="p">::</span><span class="n">TcpStream</span><span class="p">,</span>
-    <span class="n">thread</span><span class="p">,</span>
-<span class="p">};</span>
+<ul>
+  <li>为该类型实现<code class="language-plaintext highlighter-rouge">Copy</code> trait</li>
+</ul>
 
-<span class="k">use</span> <span class="nn">regex</span><span class="p">::</span><span class="n">Regex</span><span class="p">;</span>
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">pub</span> <span class="k">fn</span> <span class="nf">move_copy_test</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="nf">Point</span><span class="p">(</span><span class="nb">i32</span><span class="p">,</span> <span class="nb">i32</span><span class="p">);</span>
 
-<span class="k">fn</span> <span class="nf">pip</span><span class="p">(</span><span class="k">mut</span> <span class="n">from</span><span class="p">:</span> <span class="n">TcpStream</span><span class="p">,</span> <span class="k">mut</span> <span class="n">to</span><span class="p">:</span> <span class="n">TcpStream</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="n">Result</span><span class="o">&lt;</span><span class="p">(),</span> <span class="n">Error</span><span class="o">&gt;</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="k">mut</span> <span class="n">buffer</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0u8</span><span class="p">;</span> <span class="mi">1024</span><span class="p">];</span>
-    <span class="k">let</span> <span class="k">mut</span> <span class="n">n</span> <span class="o">=</span> <span class="n">from</span><span class="nf">.read</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="n">buffer</span><span class="p">[</span><span class="o">..</span><span class="p">])</span><span class="o">?</span><span class="p">;</span>
-    <span class="k">while</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">{</span>
-        <span class="n">to</span><span class="nf">.write_all</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="n">buffer</span><span class="p">[</span><span class="o">..</span><span class="n">n</span><span class="p">])</span><span class="o">?</span><span class="p">;</span>
-        <span class="n">n</span> <span class="o">=</span> <span class="n">from</span><span class="nf">.read</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="n">buffer</span><span class="p">[</span><span class="o">..</span><span class="p">])</span><span class="o">?</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="nf">Ok</span><span class="p">(())</span>
-<span class="p">}</span>
-<span class="k">pub</span> <span class="k">fn</span> <span class="nf">handle_connection</span><span class="p">(</span><span class="k">mut</span> <span class="n">stream</span><span class="p">:</span> <span class="n">TcpStream</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="n">Result</span><span class="o">&lt;</span><span class="p">(),</span> <span class="n">Error</span><span class="o">&gt;</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="n">local_stream_read</span> <span class="o">=</span> <span class="n">stream</span><span class="nf">.try_clone</span><span class="p">()</span><span class="o">?</span><span class="p">;</span>
-    <span class="k">let</span> <span class="k">mut</span> <span class="n">local_stream_write</span> <span class="o">=</span> <span class="n">stream</span><span class="nf">.try_clone</span><span class="p">()</span><span class="o">?</span><span class="p">;</span>
-
-    <span class="k">let</span> <span class="k">mut</span> <span class="n">head</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0u8</span><span class="p">;</span> <span class="mi">2048</span><span class="p">];</span>
-    <span class="k">let</span> <span class="n">n</span> <span class="o">=</span> <span class="n">stream</span><span class="nf">.read</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="n">head</span><span class="p">[</span><span class="o">..</span><span class="p">])</span><span class="o">?</span><span class="p">;</span>
-
-    <span class="k">let</span> <span class="n">head_str</span> <span class="o">=</span>
-        <span class="nn">std</span><span class="p">::</span><span class="nn">str</span><span class="p">::</span><span class="nf">from_utf8</span><span class="p">(</span><span class="o">&amp;</span><span class="n">head</span><span class="p">[</span><span class="o">..</span><span class="n">n</span><span class="p">])</span><span class="nf">.map_err</span><span class="p">(|</span><span class="n">x</span><span class="p">|</span> <span class="nn">Error</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="nn">ErrorKind</span><span class="p">::</span><span class="n">Interrupted</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span><span class="o">?</span><span class="p">;</span>
-    <span class="k">let</span> <span class="n">reg</span> <span class="o">=</span> <span class="nn">Regex</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="s">r"(CONNECT|Host:) ([^ :\r\n]+)(?::(\d+))?"</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
-    <span class="k">if</span> <span class="k">let</span> <span class="nf">Some</span><span class="p">(</span><span class="n">caps</span><span class="p">)</span> <span class="o">=</span> <span class="n">reg</span><span class="nf">.captures</span><span class="p">(</span><span class="n">head_str</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">let</span> <span class="n">host</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">caps</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
-        <span class="k">let</span> <span class="n">port</span> <span class="o">=</span> <span class="n">caps</span><span class="nf">.get</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="nf">.map_or</span><span class="p">(</span><span class="s">"80"</span><span class="p">,</span> <span class="p">|</span><span class="n">m</span><span class="p">|</span> <span class="n">m</span><span class="nf">.as_str</span><span class="p">());</span>
-        <span class="nd">println!</span><span class="p">(</span><span class="s">"{} {}"</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">);</span>
-        <span class="k">let</span> <span class="n">dst_addr</span> <span class="o">=</span> <span class="nd">format!</span><span class="p">(</span><span class="s">"{}:{}"</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">);</span>
-        <span class="k">let</span> <span class="n">remote_stream_read</span> <span class="o">=</span> <span class="nn">TcpStream</span><span class="p">::</span><span class="nf">connect</span><span class="p">(</span><span class="n">dst_addr</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
-        <span class="k">let</span> <span class="k">mut</span> <span class="n">remote_stream_write</span> <span class="o">=</span> <span class="n">remote_stream_read</span><span class="nf">.try_clone</span><span class="p">()</span><span class="nf">.unwrap</span><span class="p">();</span>
-
-        <span class="k">if</span> <span class="n">head_str</span><span class="nf">.starts_with</span><span class="p">(</span><span class="s">"CONNECT"</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">local_stream_write</span>
-                <span class="nf">.write_all</span><span class="p">(</span><span class="s">"HTTP/1.1 200 Connection Established</span><span class="se">\r\n\r\n</span><span class="s">"</span><span class="nf">.as_bytes</span><span class="p">())</span><span class="o">?</span><span class="p">;</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="n">remote_stream_write</span><span class="nf">.write_all</span><span class="p">(</span><span class="o">&amp;</span><span class="n">head</span><span class="p">[</span><span class="o">..</span><span class="n">n</span><span class="p">])</span><span class="o">?</span><span class="p">;</span>
+    <span class="k">impl</span> <span class="nn">std</span><span class="p">::</span><span class="nn">fmt</span><span class="p">::</span><span class="n">Display</span> <span class="k">for</span> <span class="n">Point</span> <span class="p">{</span>
+        <span class="k">fn</span> <span class="nf">fmt</span><span class="p">(</span><span class="o">&amp;</span><span class="k">self</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="nn">std</span><span class="p">::</span><span class="nn">fmt</span><span class="p">::</span><span class="n">Formatter</span><span class="o">&lt;</span><span class="nv">'_</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nn">std</span><span class="p">::</span><span class="nn">fmt</span><span class="p">::</span><span class="n">Result</span> <span class="p">{</span>
+            <span class="n">f</span><span class="nf">.write_fmt</span><span class="p">(</span><span class="nd">format_args!</span><span class="p">(</span><span class="s">"Point:({}, {})"</span><span class="p">,</span> <span class="k">self</span><span class="na">.0</span><span class="p">,</span> <span class="k">self</span><span class="na">.1</span><span class="p">))</span>
         <span class="p">}</span>
-
-        <span class="nn">thread</span><span class="p">::</span><span class="nf">spawn</span><span class="p">(</span><span class="k">move</span> <span class="p">||</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="k">let</span> <span class="nf">Err</span><span class="p">(</span><span class="mi">_</span><span class="p">)</span> <span class="o">=</span> <span class="nf">pip</span><span class="p">(</span><span class="n">remote_stream_read</span><span class="p">,</span> <span class="n">local_stream_write</span><span class="p">)</span> <span class="p">{</span>
-                <span class="p">()</span>
-            <span class="p">}</span>
-        <span class="p">});</span>
-        <span class="nn">thread</span><span class="p">::</span><span class="nf">spawn</span><span class="p">(</span><span class="k">move</span> <span class="p">||</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="k">let</span> <span class="nf">Err</span><span class="p">(</span><span class="mi">_</span><span class="p">)</span> <span class="o">=</span> <span class="nf">pip</span><span class="p">(</span><span class="n">local_stream_read</span><span class="p">,</span> <span class="n">remote_stream_write</span><span class="p">)</span> <span class="p">{</span>
-                <span class="p">()</span>
-            <span class="p">}</span>
-        <span class="p">});</span>
-        <span class="c">// Ok(())</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="c">// let err_msg = format!("TCP 头部不是HTTPS CONNECT请求 或者 HTTP消息:\r\n {}", head_str);</span>
-        <span class="c">// Err(Error::new(</span>
-        <span class="c">//     ErrorKind::Other,</span>
-        <span class="c">//     err_msg,</span>
-        <span class="c">// ))</span>
     <span class="p">}</span>
-    <span class="nf">Ok</span><span class="p">(())</span>
-    <span class="c">// println!("Request: {:#?}", http_request);</span>
-<span class="p">}</span>
 
+    <span class="k">impl</span> <span class="n">Clone</span> <span class="k">for</span> <span class="n">Point</span> <span class="p">{</span>
+        <span class="k">fn</span> <span class="nf">clone</span><span class="p">(</span><span class="o">&amp;</span><span class="k">self</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="n">Self</span> <span class="p">{</span>
+            <span class="nf">Self</span><span class="p">(</span><span class="k">self</span><span class="na">.0</span><span class="nf">.clone</span><span class="p">(),</span> <span class="k">self</span><span class="na">.1</span><span class="nf">.clone</span><span class="p">())</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">impl</span> <span class="nb">Copy</span> <span class="k">for</span> <span class="n">Point</span> <span class="p">{}</span>
+    <span class="k">let</span> <span class="n">p1</span> <span class="o">=</span> <span class="nf">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="k">let</span> <span class="n">p2</span> <span class="o">=</span> <span class="n">p1</span><span class="p">;</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"p1: {}"</span><span class="p">,</span> <span class="n">p1</span><span class="p">);</span> <span class="c">// 不实现 Copy trait 此处会报错</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"p2: {}"</span><span class="p">,</span> <span class="n">p2</span><span class="p">);</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
-<h2 id="代码">代码</h2>
-<p><a href="https://github.com/nICEnnnnnnnLee/rust-http-proxy-demo">rust-http-proxy-demo</a></p>
+<h2 id="为类型实现等操作">为类型实现<code class="language-plaintext highlighter-rouge">+</code>、<code class="language-plaintext highlighter-rouge">==</code>等操作</h2>
+<p>这个比较简单，实现相应的trait即可。</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">pub</span> <span class="k">fn</span> <span class="nf">implement_symbol_add_eq_trait</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c">// #[derive(Debug)]</span>
+    <span class="k">struct</span> <span class="n">Point</span> <span class="p">{</span>
+        <span class="n">x</span><span class="p">:</span> <span class="nb">i32</span><span class="p">,</span>
+        <span class="n">y</span><span class="p">:</span> <span class="nb">i32</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="k">impl</span> <span class="nn">std</span><span class="p">::</span><span class="nn">fmt</span><span class="p">::</span><span class="n">Debug</span> <span class="k">for</span> <span class="n">Point</span> <span class="p">{</span>
+        <span class="k">fn</span> <span class="nf">fmt</span><span class="p">(</span><span class="o">&amp;</span><span class="k">self</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="nn">std</span><span class="p">::</span><span class="nn">fmt</span><span class="p">::</span><span class="n">Formatter</span><span class="o">&lt;</span><span class="nv">'_</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nn">std</span><span class="p">::</span><span class="nn">fmt</span><span class="p">::</span><span class="n">Result</span> <span class="p">{</span>
+            <span class="n">f</span><span class="nf">.debug_struct</span><span class="p">(</span><span class="s">"Point"</span><span class="p">)</span>
+                <span class="nf">.field</span><span class="p">(</span><span class="s">"x"</span><span class="p">,</span> <span class="o">&amp;</span><span class="k">self</span><span class="py">.x</span><span class="p">)</span>
+                <span class="nf">.field</span><span class="p">(</span><span class="s">"y"</span><span class="p">,</span> <span class="o">&amp;</span><span class="k">self</span><span class="py">.y</span><span class="p">)</span>
+                <span class="nf">.finish</span><span class="p">()</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">impl</span> <span class="n">PartialEq</span><span class="o">&lt;</span><span class="n">Point</span><span class="o">&gt;</span> <span class="k">for</span> <span class="n">Point</span> <span class="p">{</span>
+        <span class="k">fn</span> <span class="nf">eq</span><span class="p">(</span><span class="o">&amp;</span><span class="k">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">Point</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">bool</span> <span class="p">{</span>
+            <span class="k">self</span><span class="py">.x</span> <span class="o">==</span> <span class="n">other</span><span class="py">.x</span> <span class="o">&amp;&amp;</span> <span class="k">self</span><span class="py">.y</span> <span class="o">==</span> <span class="n">other</span><span class="py">.y</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">impl</span> <span class="nn">std</span><span class="p">::</span><span class="nn">ops</span><span class="p">::</span><span class="nb">Add</span><span class="o">&lt;&amp;</span><span class="n">Point</span><span class="o">&gt;</span> <span class="k">for</span> <span class="n">Point</span> <span class="p">{</span>
+        <span class="k">type</span> <span class="n">Output</span> <span class="o">=</span> <span class="n">Self</span><span class="p">;</span>
+
+        <span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">Point</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="n">Self</span> <span class="p">{</span>
+            <span class="n">Self</span> <span class="p">{</span>
+                <span class="n">x</span><span class="p">:</span> <span class="k">self</span><span class="py">.x</span> <span class="o">+</span> <span class="n">other</span><span class="py">.x</span><span class="p">,</span>
+                <span class="n">y</span><span class="p">:</span> <span class="k">self</span><span class="py">.y</span> <span class="o">+</span> <span class="n">other</span><span class="py">.y</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">let</span> <span class="n">p1</span> <span class="o">=</span> <span class="n">Point</span> <span class="p">{</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="mi">1</span> <span class="p">};</span>
+    <span class="k">let</span> <span class="n">p2</span> <span class="o">=</span> <span class="n">Point</span> <span class="p">{</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="mi">1</span> <span class="p">};</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"p1 == p2: {}"</span><span class="p">,</span> <span class="n">p1</span> <span class="o">==</span> <span class="n">p2</span><span class="p">);</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"p1 + &amp;p2: {:?}"</span><span class="p">,</span> <span class="n">p1</span> <span class="o">+</span> <span class="o">&amp;</span><span class="n">p2</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="为a-trait相关的的类型实现b-trait">为<code class="language-plaintext highlighter-rouge">A trait</code>相关的的类型实现<code class="language-plaintext highlighter-rouge">B trait</code></h2>
+<p>举个例子，类型A实现了<code class="language-plaintext highlighter-rouge">From&lt;i32&gt;</code> trait，这个trait干什么呢？<br />
+它有个从i32产生的“构造函数”<code class="language-plaintext highlighter-rouge">TypeA::from(i32)</code>。<br />
+那么我们很可能有另外一种<code class="language-plaintext highlighter-rouge">into</code>写法，如下：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let ta: TypeA = TypeA::from(666);
+let ta: TypeA = 666.into();
+</code></pre></div></div>
+<p>这是怎么实现的呢？</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">pub</span> <span class="k">fn</span> <span class="nf">implement_into_for_from_trait</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">trait</span> <span class="n">From</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">:</span> <span class="n">Sized</span> <span class="p">{</span>
+        <span class="k">fn</span> <span class="nf">from0</span><span class="p">(</span><span class="n">val</span><span class="p">:</span> <span class="n">T</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="n">Self</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">trait</span> <span class="n">Into</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">:</span> <span class="n">Sized</span> <span class="p">{</span>
+        <span class="k">fn</span> <span class="nf">into0</span><span class="p">(</span><span class="o">&amp;</span><span class="k">self</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="n">T</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c">// 假设T1实现了From&lt;T2&gt;, 且T2实现了Clone</span>
+    <span class="c">// 我们为T2实现Into&lt;T1&gt;</span>
+    <span class="k">impl</span><span class="o">&lt;</span><span class="n">T1</span><span class="p">:</span> <span class="n">From</span><span class="o">&lt;</span><span class="n">T2</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">T2</span><span class="p">:</span> <span class="n">Clone</span><span class="o">&gt;</span> <span class="n">Into</span><span class="o">&lt;</span><span class="n">T1</span><span class="o">&gt;</span> <span class="k">for</span> <span class="n">T2</span> <span class="p">{</span>
+        <span class="k">fn</span> <span class="nf">into0</span><span class="p">(</span><span class="o">&amp;</span><span class="k">self</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="n">T1</span> <span class="p">{</span>
+            <span class="nn">T1</span><span class="p">::</span><span class="nf">from0</span><span class="p">(</span><span class="k">self</span><span class="nf">.clone</span><span class="p">())</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="nd">#[derive(Debug)]</span>
+    <span class="k">struct</span> <span class="nf">TypeA</span><span class="p">(</span><span class="nb">i32</span><span class="p">);</span>
+    <span class="c">// TypeA实现了From&lt;i32&gt;</span>
+    <span class="c">// 于是i32自动实现了Into&lt;TypeA&gt;</span>
+    <span class="k">impl</span> <span class="n">From</span><span class="o">&lt;</span><span class="nb">i32</span><span class="o">&gt;</span> <span class="k">for</span> <span class="n">TypeA</span> <span class="p">{</span>
+        <span class="k">fn</span> <span class="nf">from0</span><span class="p">(</span><span class="n">val</span><span class="p">:</span> <span class="nb">i32</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="n">Self</span> <span class="p">{</span>
+            <span class="nf">TypeA</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">let</span> <span class="n">ta</span><span class="p">:</span> <span class="n">TypeA</span> <span class="o">=</span> <span class="nn">TypeA</span><span class="p">::</span><span class="nf">from0</span><span class="p">(</span><span class="mi">666</span><span class="p">);</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"{:?}"</span><span class="p">,</span> <span class="n">ta</span><span class="p">);</span>
+    <span class="k">let</span> <span class="n">ta</span><span class="p">:</span> <span class="n">TypeA</span> <span class="o">=</span> <span class="mi">666</span><span class="nf">.into0</span><span class="p">();</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"{:?}"</span><span class="p">,</span> <span class="n">ta</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
 
         </article>
         <hr>
@@ -508,22 +534,6 @@
                         
                         <li class="relatedPost">
                             <a href="/blog/2022/11/27/rust-sth-about-marco/">Rust 入门时容易迷惑的技术细节(macro篇)
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-            
-        
-            
-            
-                
-                    
-                        
-                        <li class="relatedPost">
-                            <a href="/blog/2022/11/27/rust-sth-about-trait/">Rust 入门时容易迷惑的技术细节(trait篇)
                             
                             </a>
                         </li>
@@ -601,6 +611,22 @@
             
                 
                     
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2022/11/12/rust-async-https-client-server/">Rust 基于tokio-rustls的简单的HTTPS Client/Server实现
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
                 
             
         
@@ -632,13 +658,13 @@
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/blog/2022/11/09/rust-global-config/">Rust 全局配置的最佳实践</a></p>
+        <p><strong>上一篇</strong> <a href="/blog/2022/11/25/rust-wasm-digest/">Rust 使用wasm实现path签名sign</a></p>
         
     </div>
     <div class="nex">
 
         
-        <p><strong>下一篇</strong> <a href="/blog/2022/11/11/rust-async-http-proxy/">Rust HTTP代理的实现(异步)</a></p>
+        <p><strong>下一篇</strong> <a href="/blog/2022/11/27/rust-sth-about-marco/">Rust 入门时容易迷惑的技术细节(macro篇)</a></p>
         
     </div>
 </div>

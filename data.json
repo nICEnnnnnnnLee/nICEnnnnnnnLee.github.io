@@ -2,6 +2,20 @@
 	"code" : 0 ,
 	"data" : [
 	{
+		"title" : "Rust 入门时容易迷惑的技术细节(macro篇)",
+		"tags" : "Rust",
+		"url" : "/blog/2022/11/27/rust-sth-about-marco/"
+		"brief" : "接上文。"
+	},
+    
+	{
+		"title" : "Rust 入门时容易迷惑的技术细节(trait篇)",
+		"tags" : "Rust",
+		"url" : "/blog/2022/11/27/rust-sth-about-trait/"
+		"brief" : "在入门的时候并不能全方位地看待问题，有时候会忽略一些显而易见的知识，现在回过头梳理，把前面的补起来。"
+	},
+    
+	{
 		"title" : "Rust 使用wasm实现path签名sign",
 		"tags" : "Rust",
 		"url" : "/blog/2022/11/25/rust-wasm-digest/"

@@ -5,9 +5,47 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 26 Nov 2022 15:16:26 +0800</pubDate>
-    <lastBuildDate>Sat, 26 Nov 2022 15:16:26 +0800</lastBuildDate>
+    <pubDate>Thu, 01 Dec 2022 16:34:38 +0800</pubDate>
+    <lastBuildDate>Thu, 01 Dec 2022 16:34:38 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>Rust 入门时容易迷惑的技术细节(macro篇)</title>
+        <description>&lt;blockquote&gt;
+  接上文。
+&lt;/blockquote&gt;
+
+</description>
+        <pubDate>Sun, 27 Nov 2022 09:59:01 +0800</pubDate>
+        <pubDateFormat>2022-11-27</pubDateFormat>
+        <link>https://nicelee.top/blog/2022/11/27/rust-sth-about-marco/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2022/11/27/rust-sth-about-marco/</guid>
+        
+        <category>Rust</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
+    
+      <item>
+        <title>Rust 入门时容易迷惑的技术细节(trait篇)</title>
+        <description>&lt;blockquote&gt;
+  在入门的时候并不能全方位地看待问题，有时候会忽略一些显而易见的知识，现在回过头梳理，把前面的补起来。
+&lt;/blockquote&gt;
+
+</description>
+        <pubDate>Sun, 27 Nov 2022 09:59:01 +0800</pubDate>
+        <pubDateFormat>2022-11-27</pubDateFormat>
+        <link>https://nicelee.top/blog/2022/11/27/rust-sth-about-trait/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2022/11/27/rust-sth-about-trait/</guid>
+        
+        <category>Rust</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
     
       <item>
         <title>Rust 使用wasm实现path签名sign</title>
@@ -156,44 +194,6 @@
         <pubDateFormat>2022-11-09</pubDateFormat>
         <link>https://nicelee.top/blog/2022/11/09/rust-global-config/</link>
         <guid isPermaLink="true">https://nicelee.top/blog/2022/11/09/rust-global-config/</guid>
-        
-        <category>Rust</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>Rust 更换镜像源</title>
-        <description>&lt;blockquote&gt;
-  更换Rust镜像源(crates.io)，这里说的是包的依赖下载crates，不是rustup
-&lt;/blockquote&gt;
-</description>
-        <pubDate>Tue, 08 Nov 2022 09:59:01 +0800</pubDate>
-        <pubDateFormat>2022-11-08</pubDateFormat>
-        <link>https://nicelee.top/blog/2022/11/08/rust-mirror/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2022/11/08/rust-mirror/</guid>
-        
-        <category>Rust</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>Rust 学习规划/总结</title>
-        <description>&lt;blockquote&gt;
-  嗯。。。最近在学习Rust这门语言。 &lt;br /&gt;
-在这之前就有个规划，先抱着做一个小项目的目标学一遍，然后把这个想法实现(肯定会遇到很多实际问题然后解决)，然后再回顾一遍查漏补缺。    &lt;br /&gt;
-本篇既是之前的规划，也是项目实现之后的总结。
-&lt;/blockquote&gt;
-</description>
-        <pubDate>Tue, 08 Nov 2022 08:59:01 +0800</pubDate>
-        <pubDateFormat>2022-11-08</pubDateFormat>
-        <link>https://nicelee.top/blog/2022/11/08/learning-rust/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2022/11/08/learning-rust/</guid>
         
         <category>Rust</category>
         

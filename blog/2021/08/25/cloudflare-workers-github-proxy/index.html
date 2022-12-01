@@ -377,9 +377,9 @@ demo参见<a href="https://git.n1cee.workers.dev">https://git.n1cee.workers.dev<
     <div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">your_domain</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">&lt;你的自定义域名&gt;.workers.dev</span><span class="dl">'</span>
 </code></pre></div>    </div>
   </li>
-  <li>新建7个CF workers，内容为上面修改过的js   <br />
+  <li>新建8个CF workers，内容为上面修改过的js   <br />
 <a href="#如何新建cf-workers" target="_self"><strong>不会点我</strong></a></li>
-  <li>将7个workers分别重命名为<code class="language-plaintext highlighter-rouge">git</code>、<code class="language-plaintext highlighter-rouge">raw</code>、<code class="language-plaintext highlighter-rouge">assets</code>、<code class="language-plaintext highlighter-rouge">avatars</code>、<code class="language-plaintext highlighter-rouge">camo</code>、<code class="language-plaintext highlighter-rouge">codeload</code>、<code class="language-plaintext highlighter-rouge">releases</code>   <br />
+  <li>将8个workers分别重命名为<code class="language-plaintext highlighter-rouge">git</code>、<code class="language-plaintext highlighter-rouge">raw</code>、<code class="language-plaintext highlighter-rouge">assets</code>、<code class="language-plaintext highlighter-rouge">avatars</code>、<code class="language-plaintext highlighter-rouge">camo</code>、<code class="language-plaintext highlighter-rouge">codeload</code>、<code class="language-plaintext highlighter-rouge">releases</code>、<code class="language-plaintext highlighter-rouge">object</code>   <br />
 <a href="#如何重命名cf-workers" target="_self"><strong>不会点我</strong></a></li>
 </ul>
 
@@ -391,7 +391,7 @@ demo参见<a href="https://git.n1cee.workers.dev">https://git.n1cee.workers.dev<
   </li>
   <li>新建CF workers，内容为上面修改过的js  <br />
  <a href="#如何新建cf-workers" target="_self"><strong>不会点我</strong></a></li>
-  <li>新建<code class="language-plaintext highlighter-rouge">git.xxx.com</code>、<code class="language-plaintext highlighter-rouge">rawxxx.com</code>、<code class="language-plaintext highlighter-rouge">assets</code>(后面缩写)、<code class="language-plaintext highlighter-rouge">avatars</code>、<code class="language-plaintext highlighter-rouge">camo</code>、<code class="language-plaintext highlighter-rouge">codeload</code>、<code class="language-plaintext highlighter-rouge">releases</code>的DNS记录，指向ip随意，但是要有。</li>
+  <li>新建<code class="language-plaintext highlighter-rouge">git.xxx.com</code>、<code class="language-plaintext highlighter-rouge">raw.xxx.com</code>、<code class="language-plaintext highlighter-rouge">assets</code>(后面缩写)、<code class="language-plaintext highlighter-rouge">avatars</code>、<code class="language-plaintext highlighter-rouge">camo</code>、<code class="language-plaintext highlighter-rouge">codeload</code>、<code class="language-plaintext highlighter-rouge">releases</code>、<code class="language-plaintext highlighter-rouge">object</code> 的DNS记录，指向ip随意，但是要有。</li>
   <li>将<code class="language-plaintext highlighter-rouge">git.xxx.com/*</code>、<code class="language-plaintext highlighter-rouge">raw.xxx.com/*</code>等建立路由到CF workers上。   <br />
 <a href="#如何将自己的域名解析到wokers上" target="_self"><strong>不会点我</strong></a></li>
 </ul>
