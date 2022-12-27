@@ -7,13 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Rust 利用HTTPS WebSocket通道转发流量</title>
-    <meta name="description" content="  前面我们已经实现了HTTP(S)代理。  该代理获得(host,port)后，是尝试直接与目的socket建立连接。假设我们在远端有一台服务器。我们想代理在获得(host,port)后，与服务器建立连接，并告知它(host,port)。由服务器建立与目的socket建立连接，继而充当管道工，转发各自流量。">
+    <title>备忘录 关于Firefox的二三事</title>
+    <meta name="description" content="  有两个使用场景：      PC端禁止火狐更新已经有2年了，现在想升一下级(然后再禁止😳)。    Android端使用Beta版本，通过about:config设置DoH，绕过某些DNS污染(主要是不需要开其它的东西，也不是手机的全局配置，省电)。    正好有点关联（都是火狐），放在一起做个笔记。">
 
-    <meta property="og:url" content="https://nicelee.top/blog/2022/11/15/rust-async-websocket/">
+    <meta property="og:url" content="https://nicelee.top/blog/2022/12/01/sth-about-mozilla-firefox/">
     <meta property="og:site_name" content="NiceLee的博客">
-    <meta property="og:title" content="Rust 利用HTTPS WebSocket通道转发流量">
-    <meta property="og:description" content="  前面我们已经实现了HTTP(S)代理。  该代理获得(host,port)后，是尝试直接与目的socket建立连接。假设我们在远端有一台服务器。我们想代理在获得(host,port)后，与服务器建立连接，并告知它(host,port)。由服务器建立与目的socket建立连接，继而充当管道工，转发各自流量。">
+    <meta property="og:title" content="备忘录 关于Firefox的二三事">
+    <meta property="og:description" content="  有两个使用场景：      PC端禁止火狐更新已经有2年了，现在想升一下级(然后再禁止😳)。    Android端使用Beta版本，通过about:config设置DoH，绕过某些DNS污染(主要是不需要开其它的东西，也不是手机的全局配置，省电)。    正好有点关联（都是火狐），放在一起做个笔记。">
     <meta property="og:image" content="https://nicelee.top/favicon.ico?">
     <meta property="og:image:type" content="image/x-icon">
     
@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="/css/font-awesome.min.css ">
     <link rel="stylesheet" href="/css/font-ali.css?v=1.2 ">
     <link rel="stylesheet" href="/css/main.css?v=1.1 ">
-    <link rel="canonical" href="https://nicelee.top/blog/2022/11/15/rust-async-websocket/">
+    <link rel="canonical" href="https://nicelee.top/blog/2022/12/01/sth-about-mozilla-firefox/">
     <link rel="alternate" type="application/rss+xml" title="NiceLeeのBlog" href="https://nicelee.top/feed.xml ">
 
 	
@@ -286,11 +286,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>Rust 利用HTTPS WebSocket通道转发流量</h1>
+        <h1>备忘录 关于Firefox的二三事</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2022-11-15
+                <i class="fa fa-calendar"></i>2022-12-01
             </div>
 
             <div class="label-card">
@@ -343,42 +343,59 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#实现细节" id="markdown-toc-实现细节">实现细节</a>    <ul>
-      <li><a href="#为什么要用websocket" id="markdown-toc-为什么要用websocket">为什么要用Websocket?</a></li>
-      <li><a href="#代理如何告知服务器hostport" id="markdown-toc-代理如何告知服务器hostport">代理如何告知服务器(host,port)?</a></li>
-      <li><a href="#代理与服务器之间如何鉴权认证" id="markdown-toc-代理与服务器之间如何鉴权认证">代理与服务器之间如何鉴权认证?</a></li>
-    </ul>
-  </li>
-  <li><a href="#代码" id="markdown-toc-代码">代码</a></li>
+  <li><a href="#使用企业策略禁用firefox更新" id="markdown-toc-使用企业策略禁用firefox更新">使用企业策略，禁用Firefox更新</a></li>
+  <li><a href="#使用dns-over-https而不是dns-over-udp" id="markdown-toc-使用dns-over-https而不是dns-over-udp">使用DNS over HTTPS，而不是DNS over UDP</a></li>
 </ul>
 <blockquote>
-  <p>前面我们已经实现了HTTP(S)代理。  <br />
-该代理获得(host,port)后，是尝试直接与目的socket建立连接。<br />
-假设我们在远端有一台服务器。<br />
-我们想代理在获得(host,port)后，与服务器建立连接，并告知它(host,port)。<br />
-由服务器建立与目的socket建立连接，继而充当管道工，转发各自流量。</p>
+  <p>有两个使用场景：</p>
+  <ul>
+    <li>PC端禁止火狐更新已经有2年了，现在想升一下级(然后再禁止😳)。</li>
+    <li>Android端使用Beta版本，通过<code class="language-plaintext highlighter-rouge">about:config</code>设置DoH，绕过某些DNS污染(主要是不需要开其它的东西，也不是手机的全局配置，省电)。</li>
+  </ul>
+
+  <p>正好有点关联（都是火狐），放在一起做个笔记。</p>
 </blockquote>
 
-<h2 id="实现细节">实现细节</h2>
-<h3 id="为什么要用websocket">为什么要用Websocket?</h3>
-<p>先来思考一个问题，建立一个HTTP连接后，如何确保不受限制上下行？<br />
-对于下行，一个简单的做法是<code class="language-plaintext highlighter-rouge">Transfer-Encoding:chunked</code>；<br />
-对于上行，考虑到HTTP 1.1发送完毕后该TCP连接实际上并未关闭，可以每次在发送数据时加上一个HTTP请求头，但一个请求头意味着一个HTTP回复，而且上下行时序上必须一致，容易阻塞。<br />
-上述始终存在一个问题，即只能一上一下轮流传输。<br />
-考虑到这一点，使用Websocket是一个最现实的最容易的选择。<br />
-（至少比起这个，基于HTTP2的grpc要更复杂一点。）  <br />
-实现上，客户端发一个<code class="language-plaintext highlighter-rouge">Upgrade: websocket</code>升级请求，服务端回一个<code class="language-plaintext highlighter-rouge">101 Switching Protocols</code>即可。<br />
-之后的数据可以直接传输，不必按照Websocket的帧格式来了。</p>
+<h2 id="使用企业策略禁用firefox更新">使用企业策略，禁用Firefox更新</h2>
+<ul>
+  <li>找到Firefox的安装目录（有firefox.exe的文件夹）</li>
+  <li>找到distribution文件夹（没有的自己建一个）</li>
+  <li>新建一个txt文件，保存以下内容，并重命名为<code class="language-plaintext highlighter-rouge">policies.json</code>
+    <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"policies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"DisableAppUpdate"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>    </div>
+  </li>
+  <li>重启浏览器，输入<code class="language-plaintext highlighter-rouge">about:policies</code>查看</li>
+  <li>实际上，该配置还有很多其它配置项，你可以访问<a href="https://github.com/mozilla/policy-templates">https://github.com/mozilla/policy-templates</a>进行查看。</li>
+</ul>
 
-<h3 id="代理如何告知服务器hostport">代理如何告知服务器(host,port)?</h3>
-<p>在建立HTTP Websocket时，需要发送一个升级请求，我们可以把信息放在HTTP消息的header里面。<br />
-在本项目中，我们放在了Cookie里。</p>
+<h2 id="使用dns-over-https而不是dns-over-udp">使用DNS over HTTPS，而不是DNS over UDP</h2>
+<p>一般来说，这个功能用于移动端最好，因为PC端改host更加快捷省事。<br />
+当然，PC端也不是不能用。</p>
 
-<h3 id="代理与服务器之间如何鉴权认证">代理与服务器之间如何鉴权认证?</h3>
-<p>同上，可以约定鉴权方式，把信息放在header里。</p>
-
-<h2 id="代码">代码</h2>
-<p><a href="https://github.com/nICEnnnnnnnLee/freedomRust">freedomRust</a></p>
+<ul>
+  <li>下载Firefox Android <strong>Beta</strong>版本。<a href="https://github.com/mozilla-mobile/fenix/releases">https://github.com/mozilla-mobile/fenix/releases</a>
+    <ul>
+      <li>注意必须是Beta版本，因为正式版打不开<code class="language-plaintext highlighter-rouge">about:config</code></li>
+    </ul>
+  </li>
+  <li>地址栏输入<code class="language-plaintext highlighter-rouge">about:config</code></li>
+  <li>修改<code class="language-plaintext highlighter-rouge">network.trr.mode</code>为 <code class="language-plaintext highlighter-rouge">2</code>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0：关闭 DoH 功能
+2：使用 DoH 功能
+3：始终使用 DoH 查询 DNS
+5：从不使用 DoH 查询 DNS
+</code></pre></div>    </div>
+  </li>
+  <li>修改<code class="language-plaintext highlighter-rouge">network.trr.uri</code>为可用的 DNS 服务器
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>建议https://1.1.1.1/dns-query
+</code></pre></div>    </div>
+  </li>
+  <li>地址栏输入<code class="language-plaintext highlighter-rouge">about:networking</code> 查看 DNS 查询情况。</li>
+</ul>
 
         </article>
         <hr>
@@ -392,22 +409,6 @@
                         
                         <h2 id="similar_posts">相似文章</h2>
                         <ul>
-                        
-                        <li class="relatedPost">
-                            <a href="/blog/2022/12/01/sth-about-mozilla-firefox/">备忘录 关于Firefox的二三事
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-            
-        
-            
-            
-                
-                    
                         
                         <li class="relatedPost">
                             <a href="/blog/2022/12/01/rust-sth-about-marco/">Rust 入门时容易迷惑的技术细节(macro篇)
@@ -488,6 +489,22 @@
             
                 
                     
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2022/11/15/rust-async-websocket/">Rust 利用HTTPS WebSocket通道转发流量
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
                 
             
         
@@ -519,13 +536,11 @@
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/blog/2022/11/12/rust-async-https-client-server/">Rust 基于tokio-rustls的简单的HTTPS Client/Server实现</a></p>
+        <p><strong>上一篇</strong> <a href="/blog/2022/12/01/rust-sth-about-marco/">Rust 入门时容易迷惑的技术细节(macro篇)</a></p>
         
     </div>
     <div class="nex">
 
-        
-        <p><strong>下一篇</strong> <a href="/blog/2022/11/23/rust-cross-compile/">Rust 交叉编译</a></p>
         
     </div>
 </div>

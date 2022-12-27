@@ -5,9 +5,33 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 01 Dec 2022 16:34:38 +0800</pubDate>
-    <lastBuildDate>Thu, 01 Dec 2022 16:34:38 +0800</lastBuildDate>
+    <pubDate>Tue, 27 Dec 2022 20:02:37 +0800</pubDate>
+    <lastBuildDate>Tue, 27 Dec 2022 20:02:37 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>备忘录 关于Firefox的二三事</title>
+        <description>&lt;blockquote&gt;
+  有两个使用场景：
+  &lt;ul&gt;
+    &lt;li&gt;PC端禁止火狐更新已经有2年了，现在想升一下级(然后再禁止😳)。&lt;/li&gt;
+    &lt;li&gt;Android端使用Beta版本，通过&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;about:config&lt;/code&gt;设置DoH，绕过某些DNS污染(主要是不需要开其它的东西，也不是手机的全局配置，省电)。&lt;/li&gt;
+  &lt;/ul&gt;
+
+  正好有点关联（都是火狐），放在一起做个笔记。
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Thu, 01 Dec 2022 09:59:01 +0800</pubDate>
+        <pubDateFormat>2022-12-01</pubDateFormat>
+        <link>https://nicelee.top/blog/2022/12/01/sth-about-mozilla-firefox/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2022/12/01/sth-about-mozilla-firefox/</guid>
+        
+        <category>Rust</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
     
       <item>
         <title>Rust 入门时容易迷惑的技术细节(macro篇)</title>
@@ -16,10 +40,10 @@
 &lt;/blockquote&gt;
 
 </description>
-        <pubDate>Sun, 27 Nov 2022 09:59:01 +0800</pubDate>
-        <pubDateFormat>2022-11-27</pubDateFormat>
-        <link>https://nicelee.top/blog/2022/11/27/rust-sth-about-marco/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2022/11/27/rust-sth-about-marco/</guid>
+        <pubDate>Thu, 01 Dec 2022 09:59:01 +0800</pubDate>
+        <pubDateFormat>2022-12-01</pubDateFormat>
+        <link>https://nicelee.top/blog/2022/12/01/rust-sth-about-marco/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2022/12/01/rust-sth-about-marco/</guid>
         
         <category>Rust</category>
         
@@ -176,24 +200,6 @@
         <pubDateFormat>2022-11-10</pubDateFormat>
         <link>https://nicelee.top/blog/2022/11/10/rust-sync-http-proxy/</link>
         <guid isPermaLink="true">https://nicelee.top/blog/2022/11/10/rust-sync-http-proxy/</guid>
-        
-        <category>Rust</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>Rust 全局配置的最佳实践</title>
-        <description>&lt;blockquote&gt;
-  虽然全局并不一定是个必须的场景，但关于这一点的实践有点意思。
-&lt;/blockquote&gt;
-</description>
-        <pubDate>Wed, 09 Nov 2022 09:59:01 +0800</pubDate>
-        <pubDateFormat>2022-11-09</pubDateFormat>
-        <link>https://nicelee.top/blog/2022/11/09/rust-global-config/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2022/11/09/rust-global-config/</guid>
         
         <category>Rust</category>
         
