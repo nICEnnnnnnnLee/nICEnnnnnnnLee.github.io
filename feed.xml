@@ -5,8 +5,8 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 27 Dec 2022 20:02:37 +0800</pubDate>
-    <lastBuildDate>Tue, 27 Dec 2022 20:02:37 +0800</lastBuildDate>
+    <pubDate>Tue, 27 Dec 2022 20:10:58 +0800</pubDate>
+    <lastBuildDate>Tue, 27 Dec 2022 20:10:58 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -21,12 +21,12 @@
   正好有点关联（都是火狐），放在一起做个笔记。
 &lt;/blockquote&gt;
 </description>
-        <pubDate>Thu, 01 Dec 2022 09:59:01 +0800</pubDate>
-        <pubDateFormat>2022-12-01</pubDateFormat>
-        <link>https://nicelee.top/blog/2022/12/01/sth-about-mozilla-firefox/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2022/12/01/sth-about-mozilla-firefox/</guid>
+        <pubDate>Tue, 27 Dec 2022 09:59:01 +0800</pubDate>
+        <pubDateFormat>2022-12-27</pubDateFormat>
+        <link>https://nicelee.top/blog/2022/12/27/sth-about-mozilla-firefox/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2022/12/27/sth-about-mozilla-firefox/</guid>
         
-        <category>Rust</category>
+        <category>DNS</category>
         
         
         <category>技术学习</category>
