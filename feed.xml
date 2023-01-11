@@ -5,9 +5,28 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 27 Dec 2022 20:10:58 +0800</pubDate>
-    <lastBuildDate>Tue, 27 Dec 2022 20:10:58 +0800</lastBuildDate>
+    <pubDate>Wed, 11 Jan 2023 11:11:58 +0800</pubDate>
+    <lastBuildDate>Wed, 11 Jan 2023 11:11:58 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>备忘录 关于tauri的二三事</title>
+        <description>
+&lt;a href=&quot;https://tauri.app/v1/guides/debugging/application&quot;&gt;官方文档&lt;/a&gt;已经整理得挺好的，这里额外补充一些注意事项
+</description>
+        <pubDate>Tue, 03 Jan 2023 09:59:01 +0800</pubDate>
+        <pubDateFormat>2023-01-03</pubDateFormat>
+        <link>https://nicelee.top/blog/2023/01/03/tauri-demo/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2023/01/03/tauri-demo/</guid>
+        
+        <category>Rust</category>
+        
+        <category>tauri</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
     
       <item>
         <title>备忘录 关于Firefox的二三事</title>
@@ -182,24 +201,6 @@
         <pubDateFormat>2022-11-11</pubDateFormat>
         <link>https://nicelee.top/blog/2022/11/11/rust-async-http-proxy/</link>
         <guid isPermaLink="true">https://nicelee.top/blog/2022/11/11/rust-async-http-proxy/</guid>
-        
-        <category>Rust</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>Rust HTTP代理的实现(同步)</title>
-        <description>&lt;blockquote&gt;
-  实现HTTP + HTTPS代理(同步)
-&lt;/blockquote&gt;
-</description>
-        <pubDate>Thu, 10 Nov 2022 09:59:01 +0800</pubDate>
-        <pubDateFormat>2022-11-10</pubDateFormat>
-        <link>https://nicelee.top/blog/2022/11/10/rust-sync-http-proxy/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2022/11/10/rust-sync-http-proxy/</guid>
         
         <category>Rust</category>
         

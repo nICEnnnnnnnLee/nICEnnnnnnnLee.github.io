@@ -2,6 +2,13 @@
 	"code" : 0 ,
 	"data" : [
 	{
+		"title" : "备忘录 关于tauri的二三事",
+		"tags" : "Rust_tauri",
+		"url" : "/blog/2023/01/03/tauri-demo/"
+		"brief" : "官方文档已经整理得挺好的，这里额外补充一些注意事项"
+	},
+    
+	{
 		"title" : "备忘录 关于Firefox的二三事",
 		"tags" : "DNS",
 		"url" : "/blog/2022/12/27/sth-about-mozilla-firefox/"
