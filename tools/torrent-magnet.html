@@ -56,7 +56,7 @@
 </div>
 
 
-<textarea id="result" rows="10" >
+<textarea id="result" rows="10" readonly>
 </textarea>
 <script>
 // https://github.com/deparsoul/torrent-info-hash
@@ -75,11 +75,10 @@ function handleFiles(files){
 		reader.onload = (e) => {
             const buffer = new Uint8Array(reader.result);
 			//let text = new TextDecoder('utf-8').decode(buffer);
-            // magnet:?xt=urn:btih:A3FCA74F1DB8F6B43A01344FAE641375809C2986&dn=POVPerv.23.01.05.Willow.Ryder.XXX.SD.MP4-KLEENEX
             const torrent = parseTorrent(buffer);
             const magnet = 'magnet:?xt=urn:btih:' + torrent.infoHash + '&dn=' + torrent.name
             const resultDom = document.getElementById('result');
-            resultDom.textContent +=  magnet + '\n'
+            resultDom.value +=  magnet + '\n'
             console.log(torrent);
             
 		}
