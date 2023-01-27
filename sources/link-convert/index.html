@@ -17,157 +17,228 @@ var result = Base.encode('125中文');  //--> "MTI15Lit5paH"
 var result2 = Base.decode(result); //--> '125中文'
 */
 
-~(function(root, factory) {
-  if (typeof define === "function" && define.amd) {
-    define([], factory);
-  } else if (typeof module === "object" && module.exports) {
-    module.exports = factory();
-  } else {
-    root.Base = factory();
+"use strict";
+// Array of bytes to Base64 string decoding
+function b64ToUint6(nChr) {
+  return nChr > 64 && nChr < 91
+    ? nChr - 65
+    : nChr > 96 && nChr < 123
+    ? nChr - 71
+    : nChr > 47 && nChr < 58
+    ? nChr + 4
+    : nChr === 43
+    ? 62
+    : nChr === 47
+    ? 63
+    : 0;
+}
+
+function base64DecToArr(sBase64, nBlocksSize) {
+  const sB64Enc = sBase64.replace(/[^A-Za-z0-9+/]/g, "");
+  const nInLen = sB64Enc.length;
+  const nOutLen = nBlocksSize
+    ? Math.ceil(((nInLen * 3 + 1) >> 2) / nBlocksSize) * nBlocksSize
+    : (nInLen * 3 + 1) >> 2;
+  const taBytes = new Uint8Array(nOutLen);
+
+  let nMod3;
+  let nMod4;
+  let nUint24 = 0;
+  let nOutIdx = 0;
+  for (let nInIdx = 0; nInIdx < nInLen; nInIdx++) {
+    nMod4 = nInIdx & 3;
+    nUint24 |= b64ToUint6(sB64Enc.charCodeAt(nInIdx)) << (6 * (3 - nMod4));
+    if (nMod4 === 3 || nInLen - nInIdx === 1) {
+      nMod3 = 0;
+      while (nMod3 < 3 && nOutIdx < nOutLen) {
+        taBytes[nOutIdx] = (nUint24 >>> ((16 >>> nMod3) & 24)) & 255;
+        nMod3++;
+        nOutIdx++;
+      }
+      nUint24 = 0;
+    }
   }
-}(this, function() {
-   'use strict';
-    String.prototype.replaceAll = function(s1,s2){
-        var reg=new RegExp(s1,"g"); //创建正则RegExp对象  
-        return this.replace(reg,s2); 
-    }   
-    String.prototype.getValue = function(key) {  
-        var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)", "i");  
-        var r = this.match(reg);  //获取url中"?"符后的字符串并正则匹配
-        var context = "";  
-        if (r != null)  
-             context = r[2];  
-        reg = null;  
-        r = null;  
-        return context == null || context == "" || context == "undefined" ? "" : context;  
-    }
-    function Base64() {
-        // private property
-        this._keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
-    }
-    //public method for encoding
-    Base64.prototype.encode = function (input) {
-        var output = "", chr1, chr2, chr3, enc1, enc2, enc3, enc4, i = 0;
-        input = this._utf8_encode(input);
-        while (i < input.length) {
-            chr1 = input.charCodeAt(i++);
-            chr2 = input.charCodeAt(i++);
-            chr3 = input.charCodeAt(i++);
-            enc1 = chr1 >> 2;
-            enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
-            enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
-            enc4 = chr3 & 63;
-            if (isNaN(chr2)) {
-                enc3 = enc4 = 64;
-            } else if (isNaN(chr3)) {
-                enc4 = 64;
-            }
-            output = output +
-            this._keyStr.charAt(enc1) + this._keyStr.charAt(enc2) +
-            this._keyStr.charAt(enc3) + this._keyStr.charAt(enc4);
-        }
-        //console.log(output);
-        //不带padding（没有末尾的等于号）
-        if( output.endsWith("===") ){
-            output = output.substr(0 , output.length - 3 );
-        }else if( output.endsWith("==") ){
-            output = output.substr(0 , output.length - 2 );
-        }else if( output.endsWith("=") ){
-            output = output.substr(0 , output.length - 1 );
-        }
-        //console.log(output);
-        // url_safe  Base64 编码
-        //把编码内容中的 + 和 / 分别替换为 – 和 _ 这两个字符
-        output = output.replaceAll("/","_");
-        output = output.replaceAll("\\\+","-");
-        //output = output.replace(/\+/g,"-");     
-        return output;
+
+  return taBytes;
+}
+
+/* Base64 string to array encoding */
+function uint6ToB64(nUint6) {
+  return nUint6 < 26
+    ? nUint6 + 65
+    : nUint6 < 52
+    ? nUint6 + 71
+    : nUint6 < 62
+    ? nUint6 - 4
+    : nUint6 === 62
+    ? 43
+    : nUint6 === 63
+    ? 47
+    : 65;
+}
+
+function base64EncArr(aBytes) {
+  let nMod3 = 2;
+  let sB64Enc = "";
+
+  const nLen = aBytes.length;
+  let nUint24 = 0;
+  for (let nIdx = 0; nIdx < nLen; nIdx++) {
+    nMod3 = nIdx % 3;
+    if (nIdx > 0 && ((nIdx * 4) / 3) % 76 === 0) {
+      sB64Enc += "\r\n";
     }
 
-    // public method for decoding
-    Base64.prototype.decode = function (input) {
-        // url_safe  Base64 编码
-        //把编码内容中的 + 和 / 分别替换为 – 和 _ 这两个字符
-        //console.log(input);
-        //不带padding（没有末尾的等于号）
-        var left = input.length % 4;
-        if( left !=0 ){
-            for(var cnt=0; cnt< 4-left; cnt++){
-                input += '=';
-            }
-        }
-        input = input.replaceAll("-","\+");
-        input = input.replaceAll("_","/");
-        //console.log(input);
-        var output = "", chr1, chr2, chr3, enc1, enc2, enc3, enc4, i = 0;
-        input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
-        while (i < input.length) {
-            enc1 = this._keyStr.indexOf(input.charAt(i++));
-            enc2 = this._keyStr.indexOf(input.charAt(i++));
-            enc3 = this._keyStr.indexOf(input.charAt(i++));
-            enc4 = this._keyStr.indexOf(input.charAt(i++));
-            chr1 = (enc1 << 2) | (enc2 >> 4);
-            chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
-            chr3 = ((enc3 & 3) << 6) | enc4;
-            output = output + String.fromCharCode(chr1);
-            if (enc3 != 64) {
-                output = output + String.fromCharCode(chr2);
-            }
-            if (enc4 != 64) {
-                output = output + String.fromCharCode(chr3);
-            }
-        }
-        output = this._utf8_decode(output);   
-        return output;
+    nUint24 |= aBytes[nIdx] << ((16 >>> nMod3) & 24);
+    if (nMod3 === 2 || aBytes.length - nIdx === 1) {
+      sB64Enc += String.fromCodePoint(
+        uint6ToB64((nUint24 >>> 18) & 63),
+        uint6ToB64((nUint24 >>> 12) & 63),
+        uint6ToB64((nUint24 >>> 6) & 63),
+        uint6ToB64(nUint24 & 63)
+      );
+      nUint24 = 0;
+    }
+  }
+  return (
+    sB64Enc.substr(0, sB64Enc.length - 2 + nMod3) +
+    (nMod3 === 2 ? "" : nMod3 === 1 ? "=" : "==")
+  );
+}
+
+/* UTF-8 array to JS string and vice versa */
+
+function UTF8ArrToStr(aBytes) {
+  let sView = "";
+  let nPart;
+  const nLen = aBytes.length;
+  for (let nIdx = 0; nIdx < nLen; nIdx++) {
+    nPart = aBytes[nIdx];
+    sView += String.fromCodePoint(
+      nPart > 251 && nPart < 254 && nIdx + 5 < nLen /* six bytes */
+        ? /* (nPart - 252 << 30) may be not so safe in ECMAScript! So…: */
+          (nPart - 252) * 1073741824 +
+            ((aBytes[++nIdx] - 128) << 24) +
+            ((aBytes[++nIdx] - 128) << 18) +
+            ((aBytes[++nIdx] - 128) << 12) +
+            ((aBytes[++nIdx] - 128) << 6) +
+            aBytes[++nIdx] -
+            128
+        : nPart > 247 && nPart < 252 && nIdx + 4 < nLen /* five bytes */
+        ? ((nPart - 248) << 24) +
+          ((aBytes[++nIdx] - 128) << 18) +
+          ((aBytes[++nIdx] - 128) << 12) +
+          ((aBytes[++nIdx] - 128) << 6) +
+          aBytes[++nIdx] -
+          128
+        : nPart > 239 && nPart < 248 && nIdx + 3 < nLen /* four bytes */
+        ? ((nPart - 240) << 18) +
+          ((aBytes[++nIdx] - 128) << 12) +
+          ((aBytes[++nIdx] - 128) << 6) +
+          aBytes[++nIdx] -
+          128
+        : nPart > 223 && nPart < 240 && nIdx + 2 < nLen /* three bytes */
+        ? ((nPart - 224) << 12) +
+          ((aBytes[++nIdx] - 128) << 6) +
+          aBytes[++nIdx] -
+          128
+        : nPart > 191 && nPart < 224 && nIdx + 1 < nLen /* two bytes */
+        ? ((nPart - 192) << 6) + aBytes[++nIdx] - 128
+        : /* nPart < 127 ? */ /* one byte */
+          nPart
+    );
+  }
+  return sView;
+}
+
+function strToUTF8Arr(sDOMStr) {
+  let aBytes;
+  let nChr;
+  const nStrLen = sDOMStr.length;
+  let nArrLen = 0;
+
+  /* mapping… */
+  for (let nMapIdx = 0; nMapIdx < nStrLen; nMapIdx++) {
+    nChr = sDOMStr.codePointAt(nMapIdx);
+
+    if (nChr > 65536) {
+      nMapIdx++;
     }
 
-    // private method for UTF-8 encoding
-    Base64.prototype._utf8_encode = function (string) {
-        string = string.replace(/\r\n/g,"\n");
-        var utftext = "";
-        for (var n = 0; n < string.length; n++) {
-            var c = string.charCodeAt(n);
-            if (c < 128) {
-                utftext += String.fromCharCode(c);
-            } else if((c > 127) && (c < 2048)) {
-                utftext += String.fromCharCode((c >> 6) | 192);
-                utftext += String.fromCharCode((c & 63) | 128);
-            } else {
-                utftext += String.fromCharCode((c >> 12) | 224);
-                utftext += String.fromCharCode(((c >> 6) & 63) | 128);
-                utftext += String.fromCharCode((c & 63) | 128);
-            }
-    
-        }
-        return utftext;
-    }
+    nArrLen +=
+      nChr < 0x80
+        ? 1
+        : nChr < 0x800
+        ? 2
+        : nChr < 0x10000
+        ? 3
+        : nChr < 0x200000
+        ? 4
+        : nChr < 0x4000000
+        ? 5
+        : 6;
+  }
 
-    // private method for UTF-8 decoding
-    Base64.prototype._utf8_decode = function (utftext) {
-        var string = "", i = 0, c = 0, c1 = 0, c2 = 0, c3 = 0;
-        while ( i < utftext.length ) {
-            c = utftext.charCodeAt(i);
-            if (c < 128) {
-                string += String.fromCharCode(c);
-                i++;
-            } else if((c > 191) && (c < 224)) {
-                c2 = utftext.charCodeAt(i+1);
-                string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
-                i += 2;
-            } else {
-                c2 = utftext.charCodeAt(i+1);
-                c3 = utftext.charCodeAt(i+2);
-                string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
-                i += 3;
-            }
-        }
-        return string;
+  aBytes = new Uint8Array(nArrLen);
+
+  /* transcription… */
+  let nIdx = 0;
+  let nChrIdx = 0;
+  while (nIdx < nArrLen) {
+    nChr = sDOMStr.codePointAt(nChrIdx);
+    if (nChr < 128) {
+      /* one byte */
+      aBytes[nIdx++] = nChr;
+    } else if (nChr < 0x800) {
+      /* two bytes */
+      aBytes[nIdx++] = 192 + (nChr >>> 6);
+      aBytes[nIdx++] = 128 + (nChr & 63);
+    } else if (nChr < 0x10000) {
+      /* three bytes */
+      aBytes[nIdx++] = 224 + (nChr >>> 12);
+      aBytes[nIdx++] = 128 + ((nChr >>> 6) & 63);
+      aBytes[nIdx++] = 128 + (nChr & 63);
+    } else if (nChr < 0x200000) {
+      /* four bytes */
+      aBytes[nIdx++] = 240 + (nChr >>> 18);
+      aBytes[nIdx++] = 128 + ((nChr >>> 12) & 63);
+      aBytes[nIdx++] = 128 + ((nChr >>> 6) & 63);
+      aBytes[nIdx++] = 128 + (nChr & 63);
+      nChrIdx++;
+    } else if (nChr < 0x4000000) {
+      /* five bytes */
+      aBytes[nIdx++] = 248 + (nChr >>> 24);
+      aBytes[nIdx++] = 128 + ((nChr >>> 18) & 63);
+      aBytes[nIdx++] = 128 + ((nChr >>> 12) & 63);
+      aBytes[nIdx++] = 128 + ((nChr >>> 6) & 63);
+      aBytes[nIdx++] = 128 + (nChr & 63);
+      nChrIdx++;
+    } /* if (nChr <= 0x7fffffff) */ else {
+      /* six bytes */
+      aBytes[nIdx++] = 252 + (nChr >>> 30);
+      aBytes[nIdx++] = 128 + ((nChr >>> 24) & 63);
+      aBytes[nIdx++] = 128 + ((nChr >>> 18) & 63);
+      aBytes[nIdx++] = 128 + ((nChr >>> 12) & 63);
+      aBytes[nIdx++] = 128 + ((nChr >>> 6) & 63);
+      aBytes[nIdx++] = 128 + (nChr & 63);
+      nChrIdx++;
     }
-    
-    var Base = new Base64();
-    
-    return Base;
-}));
+    nChrIdx++;
+  }
+
+  return aBytes;
+}
+
+window.Base = {}
+
+Base.encode = function(data){
+    const aMyUTF8Input = strToUTF8Arr(data);
+    return base64EncArr(aMyUTF8Input);
+}
+Base.decode = function(data){
+    const aMyUTF8Output = base64DecToArr(data);
+    return UTF8ArrToStr(aMyUTF8Output);
+}
 </script>	
 <script>
 //迅雷编码
