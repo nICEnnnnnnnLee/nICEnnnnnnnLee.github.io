@@ -47,8 +47,9 @@
 <div id="dropBox">
     <div>
         <div>
-            <input type="file" id="fileInput" hidden>
+            <input type="file" id="fileInput" hidden multiple>
             <button onclick="document.getElementById('fileInput').click();">选择文件</button>
+            <button onclick="document.getElementById('result').value = '';">清空结果</button>
         </div>
         <div><span>文件拖拽至此处</span></div>
     </div>
@@ -70,6 +71,7 @@ function handleFiles(files){
         if(!file.name.endsWith('.torrent')){
             return;
         }
+        //resultDom.value = '';
 		const reader = new FileReader();
 		reader.readAsArrayBuffer(file);
 		reader.onload = (e) => {
