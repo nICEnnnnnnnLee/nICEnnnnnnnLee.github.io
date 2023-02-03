@@ -5,9 +5,74 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 27 Jan 2023 17:15:42 +0800</pubDate>
-    <lastBuildDate>Fri, 27 Jan 2023 17:15:42 +0800</lastBuildDate>
+    <pubDate>Fri, 03 Feb 2023 20:37:09 +0800</pubDate>
+    <lastBuildDate>Fri, 03 Feb 2023 20:37:09 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>Windows下打开文件夹的加速技巧</title>
+        <description>
+主要是默认为常规文件夹，以及去除文件预览
+</description>
+        <pubDate>Fri, 03 Feb 2023 09:59:01 +0800</pubDate>
+        <pubDateFormat>2023-02-03</pubDateFormat>
+        <link>https://nicelee.top/blog/2023/02/03/win-speed-up/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2023/02/03/win-speed-up/</guid>
+        
+        <category>Windows</category>
+        
+        
+        <category>小技巧</category>
+        
+      </item>
+    
+      <item>
+        <title>Go 在Web框架中嵌入伪装数据流</title>
+        <description>
+总的来说，经典的Web框架会将每个HTTP请求回复抽象为两部分： &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Request&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Response&lt;/code&gt;。&lt;br /&gt;
+其中&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Request&lt;/code&gt;包括&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Scheme&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Method&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HTTP Version&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Url&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Headers&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Body&lt;/code&gt;等；&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Response&lt;/code&gt;包括&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Status&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Headers&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Body&lt;/code&gt;等等。&lt;br /&gt;
+像&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Cookie&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;User-Agent&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Host&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Query/Post参数&lt;/code&gt;等则更加细节，是对&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Url&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Headers&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Body&lt;/code&gt;的进一步处理。
+
+但有一个问题，这些框架的逻辑，每一次请求更加像是单向的数据流。Client每一次将请求发送(至少是除了&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Body&lt;/code&gt;以外的部分)给Server端完毕后，Server端再处理给出回应。
+
+像特殊情况，上传超大文件这种，一般都是要自己实现的，主要是针对&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Request&lt;/code&gt;的&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Body&lt;/code&gt;进行一些解析实现。
+不过虽然开始处理时没有收到完整的数据，但是&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Body&lt;/code&gt;的大小其实在&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Content-length&lt;/code&gt;里是已知的。Server也是在保存文件成功或者失败以后再给Client答复。
+
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Request&lt;/code&gt;的Body大小一般来说是已知的，写在&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Content-length&lt;/code&gt;里，当然也可以未知，例如&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Transfer-Encoding: Chunked&lt;/code&gt;通过指示每一份内容来做分割和控制，不过极其少见，估计也没多少场景中会用到这个。
+
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Response&lt;/code&gt;的Body大小一般来说也是已知的，写在&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Content-length&lt;/code&gt;里，当然也可以未知，通过&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Transfer-Encoding: Chunked&lt;/code&gt;一段一段的写。
+
+(&lt;del&gt;当然http2里面这个被禁止使用了，详见&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Transfer-Encoding&quot;&gt;MDN&lt;/a&gt;&lt;/del&gt;)
+
+是的，理论上你可以通过&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Chunked&lt;/code&gt;+ &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Chunked&lt;/code&gt;来实现一个双向数据流，至少本地可以跑通。但是会有缺陷，就像TCP的粘包一样，中间层可能会缓存&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Chunked0&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Chunked1&lt;/code&gt;、…&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ChunkedN&lt;/code&gt;甚至等到结尾再传给你。
+毕竟逻辑上的普遍情况是Server端收到完整&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Request&lt;/code&gt;后，再返回&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Response&lt;/code&gt;，之后当次HTTP请求算是跑完了一整个流程。
+
+我们考虑以下场景：
+&lt;ul&gt;
+  &lt;li&gt;Client发送 cChunked0，cChunked1&lt;/li&gt;
+  &lt;li&gt;Server接收到 cChunked0，cChunked1，处理后返回 sChunked0、sChunked1&lt;/li&gt;
+  &lt;li&gt;Client接收到 sChunked0、sChunked1，处理后再发送 cChunked2，cChunked结束边界&lt;/li&gt;
+  &lt;li&gt;Server接收到 cChunked2，cChunked结束边界, 处理后返回sChunked结束边界&lt;/li&gt;
+  &lt;li&gt;HTTP请求结束&lt;/li&gt;
+&lt;/ul&gt;
+
+实际上，可能在上述第二步和第三步就会卡住，无法实现。
+
+所以，讲这么多最简单的还是Websocket。 通过Client通过HTTP GET附带&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Upgrade&lt;/code&gt;请求, Server 回复 101消息表示请求升级。接下来则完全不必按照Websocket来了，因为中间层不会浪费资源去解析或截留缓存接下来的内容。
+</description>
+        <pubDate>Wed, 01 Feb 2023 09:59:01 +0800</pubDate>
+        <pubDateFormat>2023-02-01</pubDateFormat>
+        <link>https://nicelee.top/blog/2023/02/01/go-http-hijack/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2023/02/01/go-http-hijack/</guid>
+        
+        <category>Go</category>
+        
+        <category>代理</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
     
       <item>
         <title>备忘录 关于tauri的二三事</title>
@@ -164,43 +229,6 @@
         <pubDateFormat>2022-11-15</pubDateFormat>
         <link>https://nicelee.top/blog/2022/11/15/rust-async-websocket/</link>
         <guid isPermaLink="true">https://nicelee.top/blog/2022/11/15/rust-async-websocket/</guid>
-        
-        <category>Rust</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>Rust 基于tokio-rustls的简单的HTTPS Client/Server实现</title>
-        <description>&lt;blockquote&gt;
-  使用tokio实现异步的HTTP client和server比较简单。&lt;br /&gt;
-那么，进一步的，基于现有的库套上一层TLS应该也没有问题。
-&lt;/blockquote&gt;
-</description>
-        <pubDate>Sat, 12 Nov 2022 09:59:01 +0800</pubDate>
-        <pubDateFormat>2022-11-12</pubDateFormat>
-        <link>https://nicelee.top/blog/2022/11/12/rust-async-https-client-server/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2022/11/12/rust-async-https-client-server/</guid>
-        
-        <category>Rust</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>Rust HTTP代理的实现(异步)</title>
-        <description>&lt;blockquote&gt;
-  实现HTTP + HTTPS代理(异步)
-&lt;/blockquote&gt;
-</description>
-        <pubDate>Fri, 11 Nov 2022 09:59:01 +0800</pubDate>
-        <pubDateFormat>2022-11-11</pubDateFormat>
-        <link>https://nicelee.top/blog/2022/11/11/rust-async-http-proxy/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2022/11/11/rust-async-http-proxy/</guid>
         
         <category>Rust</category>
         

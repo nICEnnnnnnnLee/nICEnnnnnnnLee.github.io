@@ -282,6 +282,8 @@
                     
                 
                     
+                
+                    
                 				
 				
             </ul>
@@ -304,6 +306,159 @@
 		</div>
 		<hr>	
         <ul>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/blog/2023/02/03/win-speed-up/" style="overflow:hidden;text-overflow:ellipsis;">Windows下打开文件夹的加速技巧</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2023-02-03
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>nIceLee
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/blog/category/#小技巧" title="Category: 小技巧" rel="category">小技巧</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/blog/tag/#Windows" title="Tag: Windows" rel="tag">Windows</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>主要是默认为常规文件夹，以及去除文件预览</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/blog/2023/02/03/win-speed-up/"><i class="fa fa-newspaper-o"></i>阅读全文</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/blog/2023/02/01/go-http-hijack/" style="overflow:hidden;text-overflow:ellipsis;">Go 在Web框架中嵌入伪装数据流</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2023-02-01
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>nIceLee
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/blog/tag/#Go" title="Tag: Go" rel="tag">Go</a>&nbsp;
+    
+        <a href="/blog/tag/#代理" title="Tag: 代理" rel="tag">代理</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>总的来说，经典的Web框架会将每个HTTP请求回复抽象为两部分： <code class="language-plaintext highlighter-rouge">Request</code>, <code class="language-plaintext highlighter-rouge">Response</code>。<br />
+其中<code class="language-plaintext highlighter-rouge">Request</code>包括<code class="language-plaintext highlighter-rouge">Scheme</code>、<code class="language-plaintext highlighter-rouge">Method</code>、<code class="language-plaintext highlighter-rouge">HTTP Version</code>、<code class="language-plaintext highlighter-rouge">Url</code>、<code class="language-plaintext highlighter-rouge">Headers</code>、<code class="language-plaintext highlighter-rouge">Body</code>等；<code class="language-plaintext highlighter-rouge">Response</code>包括<code class="language-plaintext highlighter-rouge">Status</code>、<code class="language-plaintext highlighter-rouge">Headers</code>、<code class="language-plaintext highlighter-rouge">Body</code>等等。<br />
+像<code class="language-plaintext highlighter-rouge">Cookie</code>、<code class="language-plaintext highlighter-rouge">User-Agent</code>、<code class="language-plaintext highlighter-rouge">Host</code>、<code class="language-plaintext highlighter-rouge">Query/Post参数</code>等则更加细节，是对<code class="language-plaintext highlighter-rouge">Url</code>、<code class="language-plaintext highlighter-rouge">Headers</code>、<code class="language-plaintext highlighter-rouge">Body</code>的进一步处理。</p>
+
+<p>但有一个问题，这些框架的逻辑，每一次请求更加像是单向的数据流。Client每一次将请求发送(至少是除了<code class="language-plaintext highlighter-rouge">Body</code>以外的部分)给Server端完毕后，Server端再处理给出回应。</p>
+
+<p>像特殊情况，上传超大文件这种，一般都是要自己实现的，主要是针对<code class="language-plaintext highlighter-rouge">Request</code>的<code class="language-plaintext highlighter-rouge">Body</code>进行一些解析实现。
+不过虽然开始处理时没有收到完整的数据，但是<code class="language-plaintext highlighter-rouge">Body</code>的大小其实在<code class="language-plaintext highlighter-rouge">Content-length</code>里是已知的。Server也是在保存文件成功或者失败以后再给Client答复。</p>
+
+<p><code class="language-plaintext highlighter-rouge">Request</code>的Body大小一般来说是已知的，写在<code class="language-plaintext highlighter-rouge">Content-length</code>里，当然也可以未知，例如<code class="language-plaintext highlighter-rouge">Transfer-Encoding: Chunked</code>通过指示每一份内容来做分割和控制，不过极其少见，估计也没多少场景中会用到这个。</p>
+
+<p><code class="language-plaintext highlighter-rouge">Response</code>的Body大小一般来说也是已知的，写在<code class="language-plaintext highlighter-rouge">Content-length</code>里，当然也可以未知，通过<code class="language-plaintext highlighter-rouge">Transfer-Encoding: Chunked</code>一段一段的写。</p>
+
+<p>(<del>当然http2里面这个被禁止使用了，详见<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Transfer-Encoding">MDN</a></del>)</p>
+
+<p>是的，理论上你可以通过<code class="language-plaintext highlighter-rouge">Chunked</code>+ <code class="language-plaintext highlighter-rouge">Chunked</code>来实现一个双向数据流，至少本地可以跑通。但是会有缺陷，就像TCP的粘包一样，中间层可能会缓存<code class="language-plaintext highlighter-rouge">Chunked0</code>、<code class="language-plaintext highlighter-rouge">Chunked1</code>、…<code class="language-plaintext highlighter-rouge">ChunkedN</code>甚至等到结尾再传给你。
+毕竟逻辑上的普遍情况是Server端收到完整<code class="language-plaintext highlighter-rouge">Request</code>后，再返回<code class="language-plaintext highlighter-rouge">Response</code>，之后当次HTTP请求算是跑完了一整个流程。</p>
+
+<p>我们考虑以下场景：</p>
+<ul>
+  <li>Client发送 cChunked0，cChunked1</li>
+  <li>Server接收到 cChunked0，cChunked1，处理后返回 sChunked0、sChunked1</li>
+  <li>Client接收到 sChunked0、sChunked1，处理后再发送 cChunked2，cChunked结束边界</li>
+  <li>Server接收到 cChunked2，cChunked结束边界, 处理后返回sChunked结束边界</li>
+  <li>HTTP请求结束</li>
+</ul>
+
+<p>实际上，可能在上述第二步和第三步就会卡住，无法实现。</p>
+
+<p>所以，讲这么多最简单的还是Websocket。 通过Client通过HTTP GET附带<code class="language-plaintext highlighter-rouge">Upgrade</code>请求, Server 回复 101消息表示请求升级。接下来则完全不必按照Websocket来了，因为中间层不会浪费资源去解析或截留缓存接下来的内容。</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/blog/2023/02/01/go-http-hijack/"><i class="fa fa-newspaper-o"></i>阅读全文</a>
+                </div>
+                <hr>
+              </li>
             
               <li>
                 <h2>
@@ -690,136 +845,6 @@
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/blog/2022/11/23/rust-cross-compile/" style="overflow:hidden;text-overflow:ellipsis;">Rust 交叉编译</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2022-11-23
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>nIceLee
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/blog/tag/#Rust" title="Tag: Rust" rel="tag">Rust</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    <blockquote>
-  <p>如何编译不同平台的可执行程序？</p>
-</blockquote>
-
-
-                </div>
-                <div class="read-all">
-                    <a  href="/blog/2022/11/23/rust-cross-compile/"><i class="fa fa-newspaper-o"></i>阅读全文</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/blog/2022/11/15/rust-async-websocket/" style="overflow:hidden;text-overflow:ellipsis;">Rust 利用HTTPS WebSocket通道转发流量</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2022-11-15
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>nIceLee
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/blog/tag/#Rust" title="Tag: Rust" rel="tag">Rust</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    <blockquote>
-  <p>前面我们已经实现了HTTP(S)代理。  <br />
-该代理获得(host,port)后，是尝试直接与目的socket建立连接。<br />
-假设我们在远端有一台服务器。<br />
-我们想代理在获得(host,port)后，与服务器建立连接，并告知它(host,port)。<br />
-由服务器建立与目的socket建立连接，继而充当管道工，转发各自流量。</p>
-</blockquote>
-
-
-                </div>
-                <div class="read-all">
-                    <a  href="/blog/2022/11/15/rust-async-websocket/"><i class="fa fa-newspaper-o"></i>阅读全文</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 		
 
@@ -829,10 +854,10 @@
             <span class="previous disable"><i class="fa fa-angle-double-left"></i></span>
             <span class="previous disable"><i class="fa fa-angle-left"></i></span>
           
-          <span class="page_number ">1/28</span>
+          <span class="page_number ">1/29</span>
           
             <a href="/blog/2" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/blog/28" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/blog/29" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -845,6 +870,10 @@
                     最近上传
                 </div>
                 <ul class="content-ul" recent>
+                    
+                        <li><a href="/blog/2023/02/03/win-speed-up/">Windows下打开文件夹的加速技巧</a></li>
+                    
+                        <li><a href="/blog/2023/02/01/go-http-hijack/">Go 在Web框架中嵌入伪装数据流</a></li>
                     
                         <li><a href="/blog/2023/01/03/tauri-demo/">备忘录 关于tauri的二三事</a></li>
                     
@@ -862,10 +891,6 @@
                     
                         <li><a href="/blog/2022/11/15/rust-async-websocket/">Rust 利用HTTPS WebSocket通道转发流量</a></li>
                     
-                        <li><a href="/blog/2022/11/12/rust-async-https-client-server/">Rust 基于tokio-rustls的简单的HTTPS Client/Server实现</a></li>
-                    
-                        <li><a href="/blog/2022/11/11/rust-async-http-proxy/">Rust HTTP代理的实现(异步)</a></li>
-                    
                 </ul>
             </div>
 
@@ -882,7 +907,7 @@
                             <span class="name">
                                 技术学习
                             </span>
-                            <span class="badge">163</span>
+                            <span class="badge">164</span>
                         </a>
                     </li>
                     
@@ -900,7 +925,7 @@
                             <span class="name">
                                 小技巧
                             </span>
-                            <span class="badge">29</span>
+                            <span class="badge">30</span>
                         </a>
                     </li>
                     
@@ -1079,7 +1104,7 @@
                       
                       
                       
-                      <a href="/blog/tag/#Windows" style="font-size: 9.5pt; color: #888;">Windows</a>
+                      <a href="/blog/tag/#Windows" style="font-size: 10pt; color: #888;">Windows</a>
                     
                       
                       
