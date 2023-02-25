@@ -5,9 +5,27 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 03 Feb 2023 20:37:09 +0800</pubDate>
-    <lastBuildDate>Fri, 03 Feb 2023 20:37:09 +0800</lastBuildDate>
+    <pubDate>Sat, 25 Feb 2023 21:47:01 +0800</pubDate>
+    <lastBuildDate>Sat, 25 Feb 2023 21:47:01 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>关于Cloudflare CDN与 Zero Trust tunnel与 WARP</title>
+        <description>
+简单介绍向。&lt;br /&gt;
+关键词： 免费、个人用户、拥有域名 + 主机
+</description>
+        <pubDate>Sat, 25 Feb 2023 09:59:01 +0800</pubDate>
+        <pubDateFormat>2023-02-25</pubDateFormat>
+        <link>https://nicelee.top/blog/2023/02/25/cloudflare-cdn-tunnel-warp/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2023/02/25/cloudflare-cdn-tunnel-warp/</guid>
+        
+        <category>cloudflare</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
     
       <item>
         <title>Windows下打开文件夹的加速技巧</title>
@@ -206,29 +224,6 @@
         <pubDateFormat>2022-11-23</pubDateFormat>
         <link>https://nicelee.top/blog/2022/11/23/rust-cross-compile/</link>
         <guid isPermaLink="true">https://nicelee.top/blog/2022/11/23/rust-cross-compile/</guid>
-        
-        <category>Rust</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>Rust 利用HTTPS WebSocket通道转发流量</title>
-        <description>&lt;blockquote&gt;
-  前面我们已经实现了HTTP(S)代理。  &lt;br /&gt;
-该代理获得(host,port)后，是尝试直接与目的socket建立连接。&lt;br /&gt;
-假设我们在远端有一台服务器。&lt;br /&gt;
-我们想代理在获得(host,port)后，与服务器建立连接，并告知它(host,port)。&lt;br /&gt;
-由服务器建立与目的socket建立连接，继而充当管道工，转发各自流量。
-&lt;/blockquote&gt;
-
-</description>
-        <pubDate>Tue, 15 Nov 2022 09:59:01 +0800</pubDate>
-        <pubDateFormat>2022-11-15</pubDateFormat>
-        <link>https://nicelee.top/blog/2022/11/15/rust-async-websocket/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2022/11/15/rust-async-websocket/</guid>
         
         <category>Rust</category>
         

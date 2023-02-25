@@ -66,9 +66,17 @@
 <script>
 
 function handleFiles(files){
-    Object.entries(files).forEach(([_,file]) => {
-        //console.log(file);
+    let entries = Object.entries(files)
+    let result = new Array(entries.length)
+    let taskRemain = entries.length
+    const resultDom = document.getElementById('result');
+    
+    entries.forEach(([idx,file]) => {
         if(!file.name.endsWith('.torrent')){
+            taskRemain--
+            if(taskRemain == 0){
+                resultDom.value += result.filter(o => o).join('\n') + '\n'
+            }
             return;
         }
         //resultDom.value = '';
@@ -79,10 +87,12 @@ function handleFiles(files){
 			//let text = new TextDecoder('utf-8').decode(buffer);
             const torrent = parseTorrent(buffer);
             const magnet = 'magnet:?xt=urn:btih:' + torrent.infoHash + '&dn=' + torrent.name
-            const resultDom = document.getElementById('result');
-            resultDom.value +=  magnet + '\n'
-            console.log(torrent);
-            
+            result[idx] = magnet
+            taskRemain--
+            if(taskRemain == 0){
+                resultDom.value += result.filter(o => o).join('\n') + '\n'
+            }
+            console.log(taskRemain, torrent);
 		}
 	});
 }

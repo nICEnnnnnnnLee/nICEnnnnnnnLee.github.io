@@ -77,7 +77,7 @@ $(function () {
                                 $arrow.addClass('active');
 
                                 stepTimeout = setTimeout(function () {
-                                    window.location = 'https://g.dappwind.com/search?q=' + encodeURIComponent(query);
+                                    window.location = 'https://www.google.com/search?q=' + encodeURIComponent(query);
                                 }, 1000);
                             });
                         }

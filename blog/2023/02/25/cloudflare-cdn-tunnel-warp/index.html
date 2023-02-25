@@ -7,13 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>杂七杂八 不知道要说什么</title>
-    <meta name="description" content="  但是，很烦就要说出来😭">
+    <title>关于Cloudflare CDN与 Zero Trust tunnel与 WARP</title>
+    <meta name="description" content="简单介绍向。关键词： 免费、个人用户、拥有域名 + 主机">
 
-    <meta property="og:url" content="https://nicelee.top/blog/2019/03/14/little-talk-4/">
+    <meta property="og:url" content="https://nicelee.top/blog/2023/02/25/cloudflare-cdn-tunnel-warp/">
     <meta property="og:site_name" content="NiceLee的博客">
-    <meta property="og:title" content="杂七杂八 不知道要说什么">
-    <meta property="og:description" content="  但是，很烦就要说出来😭">
+    <meta property="og:title" content="关于Cloudflare CDN与 Zero Trust tunnel与 WARP">
+    <meta property="og:description" content="简单介绍向。关键词： 免费、个人用户、拥有域名 + 主机">
     <meta property="og:image" content="https://nicelee.top/favicon.ico?">
     <meta property="og:image:type" content="image/x-icon">
     
@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="/css/font-awesome.min.css ">
     <link rel="stylesheet" href="/css/font-ali.css?v=1.2 ">
     <link rel="stylesheet" href="/css/main.css?v=1.1 ">
-    <link rel="canonical" href="https://nicelee.top/blog/2019/03/14/little-talk-4/">
+    <link rel="canonical" href="https://nicelee.top/blog/2023/02/25/cloudflare-cdn-tunnel-warp/">
     <link rel="alternate" type="application/rss+xml" title="NiceLeeのBlog" href="https://nicelee.top/feed.xml ">
 
 	
@@ -294,11 +294,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>杂七杂八 不知道要说什么</h1>
+        <h1>关于Cloudflare CDN与 Zero Trust tunnel与 WARP</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2019-03-14
+                <i class="fa fa-calendar"></i>2023-02-25
             </div>
 
             <div class="label-card">
@@ -321,7 +321,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/blog/category/#杂七杂八" title="Category: 杂七杂八" rel="category">杂七杂八</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -338,8 +338,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/blog/tag/#%E9%97%B2%E8%AF%9D" title="Tag: 闲话" rel="tag">闲话</a-->
-        <a href="/blog/tag/#闲话" title="Tag: 闲话" rel="tag">闲话</a>
+        <!--a href="/blog/tag/#cloudflare" title="Tag: cloudflare" rel="tag">cloudflare</a-->
+        <a href="/blog/tag/#cloudflare" title="Tag: cloudflare" rel="tag">cloudflare</a>
     
   
 
@@ -351,36 +351,121 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#过几天的我会觉得矫情" id="markdown-toc-过几天的我会觉得矫情">过几天的我会觉得矫情</a></li>
-  <li><a href="#睡觉前会想些什么呢" id="markdown-toc-睡觉前会想些什么呢">睡觉前会想些什么呢？</a></li>
+  <li><a href="#cdn" id="markdown-toc-cdn">CDN</a>    <ul>
+      <li><a href="#能做什么" id="markdown-toc-能做什么">能做什么</a></li>
+      <li><a href="#不能做什么" id="markdown-toc-不能做什么">不能做什么</a></li>
+      <li><a href="#前置条件" id="markdown-toc-前置条件">前置条件</a></li>
+      <li><a href="#如何实现" id="markdown-toc-如何实现">如何实现</a></li>
+    </ul>
+  </li>
+  <li><a href="#zero-trust-tunnel" id="markdown-toc-zero-trust-tunnel">Zero Trust Tunnel</a>    <ul>
+      <li><a href="#能做什么-1" id="markdown-toc-能做什么-1">能做什么</a></li>
+      <li><a href="#不能做什么-1" id="markdown-toc-不能做什么-1">不能做什么</a></li>
+      <li><a href="#前置条件-1" id="markdown-toc-前置条件-1">前置条件</a></li>
+      <li><a href="#如何实现-1" id="markdown-toc-如何实现-1">如何实现</a></li>
+    </ul>
+  </li>
+  <li><a href="#warp" id="markdown-toc-warp">WARP</a>    <ul>
+      <li><a href="#能做什么-2" id="markdown-toc-能做什么-2">能做什么</a></li>
+      <li><a href="#前置条件-2" id="markdown-toc-前置条件-2">前置条件</a></li>
+      <li><a href="#如何实现-2" id="markdown-toc-如何实现-2">如何实现</a></li>
+    </ul>
+  </li>
 </ul>
-<blockquote>
-  <p>但是，很烦就要说出来😭</p>
-</blockquote>
 
-<h2 id="过几天的我会觉得矫情">过几天的我会觉得矫情</h2>
-<p>内心有点迷茫，说实话，瞎捣鼓了这么多东西，虽然过程很充实，就结果而言也达到了预期，然而似乎并没有什么成就感，或者说一闪而逝。因为我没法说服自己这段日子是干了一件或几件很牛b的事情。 <br />
-因为刨根揭底原理并不复杂，明白原理实现也仅仅是有点甚至没点难度。 <br />
-因为有些东西人家即使是新手，熟悉框架后花不了多少功夫就可以实现，做得更好，比如<strong>Netty</strong>。<br />
-因为我现在还有一大波功课要补😡</p>
+<p>简单介绍向。<br />
+关键词： 免费、个人用户、拥有域名 + 主机</p>
 
-<h2 id="睡觉前会想些什么呢">睡觉前会想些什么呢？</h2>
-<p>写个爬虫Python真心很少行就完事了，而Java似乎有点重？</p>
+<p>简单来说一下，这三者能做些什么，以及相关的需要注意的地方。</p>
 
-<p>呵呵🙂 这个东西有没有库？ 大神给个关键词啊？</p>
+<h2 id="cdn">CDN</h2>
+<h4 id="能做什么">能做什么</h4>
+<ul>
+  <li>缓存/代理主机的HTTP流量</li>
+  <li>可以开启防护筛选机器人</li>
+  <li>可以隐藏主机IP</li>
+  <li>在主机IP被Block后的备用复活选项</li>
+</ul>
 
-<p>框架的意义在于能让一个新手花不了多少时间就能干老手同样的事情，至于问题，谁又能保证不出bug呢？</p>
+<h4 id="不能做什么">不能做什么</h4>
+<ul>
+  <li>只能转发HTTP流量</li>
+  <li>只能转发特定的端口</li>
+</ul>
 
-<p>为了避免很low的错误造成不必要的损失，</p>
+<h4 id="前置条件">前置条件</h4>
+<p>域名托管在 Cloudflare</p>
 
-<p>源码看了没？？</p>
+<h4 id="如何实现">如何实现</h4>
+<p>在DNS设置里面点亮云朵使之Proxied即可。<br />
+也可以选择使用国内的Cloudflare Partener，速度会有提升。</p>
 
-<p>我也带过徒弟，和合作方打过交道，，</p>
+<hr />
 
-<p>我有什么是不可替代的呢？？？</p>
+<h2 id="zero-trust-tunnel">Zero Trust Tunnel</h2>
+<h4 id="能做什么-1">能做什么</h4>
+<ul>
+  <li>类似于frp内网穿透，能把没有公网ip的机器利用起来当成服务器。</li>
+  <li>相较于CDN来说，没有了端口限制。</li>
+  <li>可以配合Zero Trust Application对 Tunnel的相关流量进行保护。具体的，通过往合法的邮箱发验证码进行验证。(也可以通过设置相关Header以使api调用免于验证)</li>
+  <li>支持VNC远程桌面、SSH(Web based，即只能在浏览器中使用)</li>
+  <li>支持RDP、SSH、TCP等等协议，但需要客户端也安装相应软件(性价比不高，比较鸡肋所以不太关注，只是扫了一眼，可能描述不太准确)</li>
+</ul>
 
-<p>我曾以为自己还算年轻，还有资本，但算算其实老大不小了</p>
+<h4 id="不能做什么-1">不能做什么</h4>
+<p>如果你不能，或者不太想对客户端动手脚，那么可以忽略HTTP、SSH、VNC协议之外的想法了。 <br />
+后两者也只能通过浏览器来访问。</p>
 
+<h4 id="前置条件-1">前置条件</h4>
+<ul>
+  <li>域名托管在 Cloudflare</li>
+  <li>主机安装cloudflared程序</li>
+</ul>
+
+<h4 id="如何实现-1">如何实现</h4>
+<ul>
+  <li>
+    <p>关于HTTP<br />
+Cloudflare Dash Board -&gt; Cloudflare Zero Trust -&gt; Access -&gt; Tunnel <br />
+没有复杂配置，基本上是傻瓜式操作。选择相应的平台，命令行都给你写好了，复制运行即可。</p>
+  </li>
+  <li>
+    <p>关于SSH、VNC(浏览器可以打开的那种)<br />
+Cloudflare Zero Trust -&gt; Access -&gt; Applications  <br />
+新建的时候选Self-hosted，后面基本上是傻瓜式操作。<br />
+其它怎么改问题都不大，需要注意两点：</p>
+    <ol>
+      <li>最好不要授权Every one，那样随便填邮箱都能接收验证码，相当于裸了</li>
+      <li>Settings -&gt; Additional settings -&gt; Browser rendering -&gt; Disabled/SSH/VNC 该选就选</li>
+    </ol>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="warp">WARP</h2>
+<h4 id="能做什么-2">能做什么</h4>
+<ul>
+  <li>能让主机通过Cloudflare网络来访问目标网络   <br />
+举例，访问google.com
+    <ul>
+      <li>安装WARP前：   <br />
+  主机  -&gt;  google.com, Google看到的是主机ip</li>
+      <li>安装WARP后：   <br />
+  主机  -&gt; Cloudflare网络  -&gt; google.com, Google看到的是Cloudflare分配给你的ip</li>
+    </ul>
+  </li>
+  <li>能够让主机由ipv4/ipv6单栈变成双栈</li>
+</ul>
+
+<h4 id="前置条件-2">前置条件</h4>
+<ul>
+  <li>域名托管在 Cloudflare</li>
+  <li>主机安装相关程序</li>
+</ul>
+
+<h4 id="如何实现-2">如何实现</h4>
+<p>参考<a href="/blog/2022/10/22/ipv6-only-vps-tips/">如何使IPv6 Only的VPS拥有IPv4能力</a></p>
 
         </article>
         <hr>
@@ -400,13 +485,6 @@
                     
                 
             
-        
-            
-            
-                
-                    
-                
-            
                 
                     
                 
@@ -417,6 +495,13 @@
                 
                     
                 
+            
+                
+                    
+                
+            
+        
+            
             
                 
                     
@@ -470,13 +555,11 @@
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/blog/2019/03/13/weibo-location/">一种伪装微博位置的方法</a></p>
+        <p><strong>上一篇</strong> <a href="/blog/2023/02/03/win-speed-up/">Windows下打开文件夹的加速技巧</a></p>
         
     </div>
     <div class="nex">
 
-        
-        <p><strong>下一篇</strong> <a href="/blog/2019/03/22/weixin-step-counter-cheater/">N种微信运动的作弊方法</a></p>
         
     </div>
 </div>

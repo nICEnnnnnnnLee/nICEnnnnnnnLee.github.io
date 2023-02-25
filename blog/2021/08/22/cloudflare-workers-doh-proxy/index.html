@@ -351,6 +351,7 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
+  <li><a href="#20230225更新" id="markdown-toc-20230225更新">2023/02/25更新</a></li>
   <li><a href="#前言" id="markdown-toc-前言">前言</a>    <ul>
       <li><a href="#doh与普通dns的比较" id="markdown-toc-doh与普通dns的比较">DoH与普通DNS的比较</a></li>
       <li><a href="#实现原理" id="markdown-toc-实现原理">实现原理</a></li>
@@ -361,6 +362,28 @@
 </ul>
 <p>许多支持DoH加密公共DNS在国内基本无法使用。<br />
 在此，我们考虑使用CF workers进行转发，搭建个人使用的DoH服务。</p>
+
+<h2 id="20230225更新">2023/02/25更新</h2>
+<p>先不考虑速度，下面实现的实际上是DNS转发，最终实际上是以CF Worker的IP为基准返回的结果。</p>
+
+<p>我们可以考虑Cloudflare的定制DNS(不是域名cloudflare-dns.com或者1.1.1.1，在国内会被卡)。</p>
+
+<p>Cloudflare控制面板  -&gt; Cloudflare Zero Trust   -&gt; Gateway -&gt; DNS Locations</p>
+
+<p>添加当前的ip对应的location，可以获得对应的ipv4/ipv6 DNS服务器以及DoH/DoT地址。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>IPv4
+172.64.36.1
+172.64.36.2
+
+IPv6
+2a06:98c1:54::3:828a
+
+DNS over HTTPS
+https://xxx.cloudflare-gateway.com/dns-query
+
+DNS over TLS
+xxx.cloudflare-gateway.com
+</code></pre></div></div>
 
 <h2 id="前言">前言</h2>
 <h3 id="doh与普通dns的比较">DoH与普通DNS的比较</h3>
@@ -439,27 +462,17 @@
             
                 
                     
-                
-            
-        
-            
-            
-                
-                    
-                
-            
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-            
-                
+                        
+                        <h2 id="similar_posts">相似文章</h2>
+                        <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2023/02/25/cloudflare-cdn-tunnel-warp/">关于Cloudflare CDN与 Zero Trust tunnel与 WARP
+                            
+                            </a>
+                        </li>
+                        
+                        
                     
                 
             
@@ -477,15 +490,16 @@
                     
                 
             
-        
-            
-            
                 
                     
                 
             
         
             
+            
+                
+                    
+                
             
                 
                     
@@ -513,6 +527,29 @@
                 
             
         
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+        
+            </ul>
         
 
         <div class="post-recent">
@@ -549,6 +586,8 @@
                     内容
                 </div>
                 <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#similar_posts">相似文章</a></li>
                     
                     <!-- <li><a href="#comments">评论</a></li> -->
                 </ul>
