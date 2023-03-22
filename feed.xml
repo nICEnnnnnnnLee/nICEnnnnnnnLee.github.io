@@ -5,9 +5,27 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 25 Feb 2023 21:47:01 +0800</pubDate>
-    <lastBuildDate>Sat, 25 Feb 2023 21:47:01 +0800</lastBuildDate>
+    <pubDate>Wed, 22 Mar 2023 20:28:47 +0800</pubDate>
+    <lastBuildDate>Wed, 22 Mar 2023 20:28:47 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>备忘录 Git 忽略对Versioned文件的修改</title>
+        <description>
+我们知道，对于没有纳入版本控制的文件，我们可以使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.gitignore&lt;/code&gt;文件来忽略它们。&lt;br /&gt;
+但是，对于已经纳入版本控制的文件，我们要怎样忽略对它们的修改呢？
+</description>
+        <pubDate>Wed, 22 Mar 2023 09:59:01 +0800</pubDate>
+        <pubDateFormat>2023-03-22</pubDateFormat>
+        <link>https://nicelee.top/blog/2023/03/22/git-ignore-versioned-file-changes/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2023/03/22/git-ignore-versioned-file-changes/</guid>
+        
+        <category>git</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
     
       <item>
         <title>关于Cloudflare CDN与 Zero Trust tunnel与 WARP</title>
@@ -205,25 +223,6 @@
         <pubDateFormat>2022-11-24</pubDateFormat>
         <link>https://nicelee.top/blog/2022/11/24/rust-compare-unsigned/</link>
         <guid isPermaLink="true">https://nicelee.top/blog/2022/11/24/rust-compare-unsigned/</guid>
-        
-        <category>Rust</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>Rust 交叉编译</title>
-        <description>&lt;blockquote&gt;
-  如何编译不同平台的可执行程序？
-&lt;/blockquote&gt;
-
-</description>
-        <pubDate>Wed, 23 Nov 2022 09:59:01 +0800</pubDate>
-        <pubDateFormat>2022-11-23</pubDateFormat>
-        <link>https://nicelee.top/blog/2022/11/23/rust-cross-compile/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2022/11/23/rust-cross-compile/</guid>
         
         <category>Rust</category>
         
