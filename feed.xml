@@ -5,9 +5,27 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 22 Mar 2023 20:28:47 +0800</pubDate>
-    <lastBuildDate>Wed, 22 Mar 2023 20:28:47 +0800</lastBuildDate>
+    <pubDate>Fri, 11 Aug 2023 16:24:39 +0800</pubDate>
+    <lastBuildDate>Fri, 11 Aug 2023 16:24:39 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>备忘录 Git 忽略SSL证书检查</title>
+        <description>
+我们知道，对于没有纳入版本控制的文件，我们可以使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.gitignore&lt;/code&gt;文件来忽略它们。&lt;br /&gt;
+但是，对于已经纳入版本控制的文件，我们要怎样忽略对它们的修改呢？
+</description>
+        <pubDate>Thu, 10 Aug 2023 09:59:01 +0800</pubDate>
+        <pubDateFormat>2023-08-10</pubDateFormat>
+        <link>https://nicelee.top/blog/2023/08/10/git-ignore-ssl-cert-err/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2023/08/10/git-ignore-ssl-cert-err/</guid>
+        
+        <category>git</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
     
       <item>
         <title>备忘录 Git 忽略对Versioned文件的修改</title>
@@ -204,25 +222,6 @@
         <pubDateFormat>2022-11-25</pubDateFormat>
         <link>https://nicelee.top/blog/2022/11/25/rust-wasm-digest/</link>
         <guid isPermaLink="true">https://nicelee.top/blog/2022/11/25/rust-wasm-digest/</guid>
-        
-        <category>Rust</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>Rust 比较时差大小犯的错误😳</title>
-        <description>&lt;blockquote&gt;
-  时间戳是&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;u128&lt;/code&gt;类型，unsigned无符号，这个问题卡了我很久，就很郁闷。
-&lt;/blockquote&gt;
-
-</description>
-        <pubDate>Thu, 24 Nov 2022 09:59:01 +0800</pubDate>
-        <pubDateFormat>2022-11-24</pubDateFormat>
-        <link>https://nicelee.top/blog/2022/11/24/rust-compare-unsigned/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2022/11/24/rust-compare-unsigned/</guid>
         
         <category>Rust</category>
         

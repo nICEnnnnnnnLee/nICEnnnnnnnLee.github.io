@@ -2,6 +2,13 @@
 	"code" : 0 ,
 	"data" : [
 	{
+		"title" : "备忘录 Git 忽略SSL证书检查",
+		"tags" : "git",
+		"url" : "/blog/2023/08/10/git-ignore-ssl-cert-err/"
+		"brief" : "我们知道，对于没有纳入版本控制的文件，我们可以使用.gitignore文件来忽略它们。但是，对于已经纳入版本控制的文件，我们要怎样忽略对它们的修改呢？"
+	},
+    
+	{
 		"title" : "备忘录 Git 忽略对Versioned文件的修改",
 		"tags" : "git",
 		"url" : "/blog/2023/03/22/git-ignore-versioned-file-changes/"
