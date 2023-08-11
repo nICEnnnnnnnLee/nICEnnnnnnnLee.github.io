@@ -5,15 +5,14 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 11 Aug 2023 16:24:39 +0800</pubDate>
-    <lastBuildDate>Fri, 11 Aug 2023 16:24:39 +0800</lastBuildDate>
+    <pubDate>Fri, 11 Aug 2023 16:44:57 +0800</pubDate>
+    <lastBuildDate>Fri, 11 Aug 2023 16:44:57 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
         <title>备忘录 Git 忽略SSL证书检查</title>
         <description>
-我们知道，对于没有纳入版本控制的文件，我们可以使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.gitignore&lt;/code&gt;文件来忽略它们。&lt;br /&gt;
-但是，对于已经纳入版本控制的文件，我们要怎样忽略对它们的修改呢？
+如题。
 </description>
         <pubDate>Thu, 10 Aug 2023 09:59:01 +0800</pubDate>
         <pubDateFormat>2023-08-10</pubDateFormat>
