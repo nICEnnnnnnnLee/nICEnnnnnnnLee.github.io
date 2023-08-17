@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="content-type" content="text/html"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Cookie Quick Manager导出专用</title>
+<script src="https://libs.baidu.com/jquery/1.2.3/jquery.min.js"></script>
+
+<script>
+
+let utf8decoder = new TextDecoder();
+let utf8encoder = new TextEncoder();
+
+function exportCookie(){
+  const src = $("#src").val();
+  const arr = JSON.parse(src);
+  const data = arr.reduce(function(preResult,cookie,index,arr){
+        let content = "; " + cookie["Name raw"] + "=" + cookie["Content raw"];
+        console.log(preResult, content);
+        if(preResult["Name raw"]){
+            return preResult["Name raw"] + "=" + preResult["Content raw"] + content;
+        }else{
+            return preResult + content;
+        }
+    });
+  $("#dst").val(data);
+}
+function reset(){
+    $("#dst").val('');
+    $("#src").val('');
+}
+$(document).ready(function(){
+    exportCookie();
+});
+</script>
+<style>
+</style>
+</head>
+<body style="text-align:center;background: url(/sources/pics/FPyBWV.gif);">
+
+<h3>Cookie Quick Manager导出专用</h3>
+<div style="display:block">
+<textarea id="src" rows="10" cols="50" >
+[{
+	"Host raw": "http://test.net/",
+	"Name raw": "Name1",
+	"Path raw": "/",
+	"Content raw": "Content1",
+	"Expires": "27-12-2023 22:36:48",
+	"Expires raw": "1703687808",
+	"Send for": "Any type of connection",
+	"Send for raw": "false",
+	"HTTP only raw": "true",
+	"SameSite raw": "lax",
+	"This domain only": "Valid for host only",
+	"This domain only raw": "true",
+	"Store raw": "firefox-default",
+	"First Party Domain": ""
+},
+{
+	"Host raw": "http://test.net/",
+	"Name raw": "Name2",
+	"Path raw": "/",
+	"Content raw": "Content2",
+	"Expires": "27-12-2023 22:36:48",
+	"Expires raw": "1703687808",
+	"Send for": "Any type of connection",
+	"Send for raw": "false",
+	"HTTP only raw": "true",
+	"SameSite raw": "lax",
+	"This domain only": "Valid for host only",
+	"This domain only raw": "true",
+	"Store raw": "firefox-default",
+	"First Party Domain": ""
+}]
+</textarea>
+</div>
+<div><input type="button"  onclick=exportCookie() value= "导出"></input> 
+<input type="button" onclick=reset() value= "重置"></input>
+ </div>
+<div style="display:block;float:top;margin:0 auto">
+<textarea id="dst" rows="10" cols="50" >
+
+</textarea>
+</div>
+</body>
+</html>
