@@ -7,13 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Java 真香！如何给Gif添加对白(一)</title>
-    <meta name="description" content="王境则·真香.gif、谁赞成谁反对.gif、为所欲为.gif… 网络上有很多搞笑的gif图片，里面的对白还是可以自定义的。  想搞这个想了很久了，最近终于把它实现了。">
+    <title>备忘录 如何在Firefox Android上使用扩展插件</title>
+    <meta name="description" content="一般来说，手机端的火狐浏览器只能使用官方推荐的扩展，这样很多其它的好东西就没法用了，不太方便。   那么该如何解决这个问题呢？">
 
-    <meta property="og:url" content="https://nicelee.top/blog/2020/06/14/java-add-text-to-gif/">
+    <meta property="og:url" content="https://nicelee.top/blog/2023/08/20/addons-firefox-android/">
     <meta property="og:site_name" content="NiceLee的博客">
-    <meta property="og:title" content="Java 真香！如何给Gif添加对白(一)">
-    <meta property="og:description" content="王境则·真香.gif、谁赞成谁反对.gif、为所欲为.gif… 网络上有很多搞笑的gif图片，里面的对白还是可以自定义的。  想搞这个想了很久了，最近终于把它实现了。">
+    <meta property="og:title" content="备忘录 如何在Firefox Android上使用扩展插件">
+    <meta property="og:description" content="一般来说，手机端的火狐浏览器只能使用官方推荐的扩展，这样很多其它的好东西就没法用了，不太方便。   那么该如何解决这个问题呢？">
     <meta property="og:image" content="https://nicelee.top/favicon.ico?">
     <meta property="og:image:type" content="image/x-icon">
     
@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="/css/font-awesome.min.css ">
     <link rel="stylesheet" href="/css/font-ali.css?v=1.2 ">
     <link rel="stylesheet" href="/css/main.css?v=1.1 ">
-    <link rel="canonical" href="https://nicelee.top/blog/2020/06/14/java-add-text-to-gif/">
+    <link rel="canonical" href="https://nicelee.top/blog/2023/08/20/addons-firefox-android/">
     <link rel="alternate" type="application/rss+xml" title="NiceLeeのBlog" href="https://nicelee.top/feed.xml ">
 
 	
@@ -296,11 +296,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>Java 真香！如何给Gif添加对白(一)</h1>
+        <h1>备忘录 如何在Firefox Android上使用扩展插件</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2020-06-14
+                <i class="fa fa-calendar"></i>2023-08-20
             </div>
 
             <div class="label-card">
@@ -340,8 +340,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>
+        <!--a href="/blog/tag/#%E6%B5%8F%E8%A7%88%E5%99%A8%E6%89%A9%E5%B1%95" title="Tag: 浏览器扩展" rel="tag">浏览器扩展</a-->
+        <a href="/blog/tag/#浏览器扩展" title="Tag: 浏览器扩展" rel="tag">浏览器扩展</a>
     
   
 
@@ -354,52 +354,45 @@
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
   <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
-  <li><a href="#实现" id="markdown-toc-实现">实现</a></li>
-  <li><a href="#源码" id="markdown-toc-源码">源码</a></li>
+  <li><a href="#一个简单的概念" id="markdown-toc-一个简单的概念">一个简单的概念</a></li>
+  <li><a href="#如何修改扩展源列表" id="markdown-toc-如何修改扩展源列表">如何修改扩展源列表</a></li>
+  <li><a href="#如何新建自己的扩展源列表" id="markdown-toc-如何新建自己的扩展源列表">如何新建自己的扩展源列表</a></li>
 </ul>
-<p><code class="language-plaintext highlighter-rouge">王境则·真香.gif</code>、<code class="language-plaintext highlighter-rouge">谁赞成谁反对.gif</code>、<code class="language-plaintext highlighter-rouge">为所欲为.gif</code>…<br />
- 网络上有很多搞笑的gif图片，里面的对白还是可以自定义的。 <br />
- 想搞这个想了很久了，最近终于把它实现了。</p>
+<p>一般来说，手机端的火狐浏览器只能使用官方推荐的扩展，这样很多其它的好东西就没法用了，不太方便。   <br />
+那么该如何解决这个问题呢？</p>
 
 <h2 id="前言">前言</h2>
+<p>相对而言，Firefox Android阉割了许多特性，比如没法打开<code class="language-plaintext highlighter-rouge">about:config</code>进行个性化配置等等。<br />
+一般来说，我们使用<strong>Beta</strong>或者<strong>Nightly</strong>版本。<br />
+对于这篇文章要做的事情来说，这是必须的。</p>
+
+<h2 id="一个简单的概念">一个简单的概念</h2>
+<p>首先我们要明确一下，浏览器安装扩展的流程。</p>
 <ul>
-  <li>光是文字没啥具体指向，先把网上的一个成品贴出来：
-    <ul>
-      <li><a href="https://www.gifhome.com/diy/8.html">王境泽吃饭对话表情包</a></li>
-    </ul>
-  </li>
-  <li>要实现这个功能，得先搞清楚大致原理，其中最主要的实际上就是对GIF这种格式的文件进行操作。 <br />
-当然，在这里我们可以细分：
-    <ul>
-      <li>从GIF里面读取每一帧的图像</li>
-      <li>对图像进行处理，比如缩放/拉伸、添加文字等等</li>
-      <li>有了若干图像帧，如何按照恒定帧率生成GIF</li>
-    </ul>
-  </li>
+  <li>浏览器维护一个可用的扩展源列表的url地址，默认的是官方推荐列表</li>
+  <li>新增扩展时，先从扩展源拿到所有可用的扩展</li>
+  <li>选择一个扩展进行安装</li>
 </ul>
 
-<h2 id="实现">实现</h2>
+<h2 id="如何修改扩展源列表">如何修改扩展源列表</h2>
+<p>对于小伙伴们来说，Android如何进入开发者模式应该有个概念，经典操作就是连续点击5下。<br />
+而要出现修改扩展源列表的配置，也要进行类似的操作，具体的，参考<a href="https://support.mozilla.org/en-US/kb/extended-add-support">extended-add-support</a></p>
 <ul>
-  <li>这里先讲如何从GIF里面读取每一帧的图像  <br />
-下面的实现是将<code class="language-plaintext highlighter-rouge">sample.gif</code>中每一帧都保存下来
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">File</span> <span class="n">gif</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="s">"sample.gif"</span><span class="o">);</span>
-<span class="nc">ImageReader</span> <span class="n">reader</span> <span class="o">=</span> <span class="o">(</span><span class="nc">ImageReader</span><span class="o">)</span> <span class="nc">ImageIO</span><span class="o">.</span><span class="na">getImageReadersByFormatName</span><span class="o">(</span><span class="s">"gif"</span><span class="o">).</span><span class="na">next</span><span class="o">();</span>
-<span class="nc">ImageInputStream</span> <span class="n">ciis</span> <span class="o">=</span> <span class="nc">ImageIO</span><span class="o">.</span><span class="na">createImageInputStream</span><span class="o">(</span><span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="n">gif</span><span class="o">));</span>
-<span class="n">reader</span><span class="o">.</span><span class="na">setInput</span><span class="o">(</span><span class="n">ciis</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
-<span class="k">try</span> <span class="o">{</span>
-  <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-      <span class="nc">BufferedImage</span> <span class="n">image</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
-      <span class="nc">ImageIO</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">image</span><span class="o">,</span> <span class="s">"jpg"</span><span class="o">,</span> <span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"%03d.jpg"</span><span class="o">,</span> <span class="n">i</span><span class="o">)));</span>
-  <span class="o">}</span>
-<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IndexOutOfBoundsException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-<span class="o">}</span>
-<span class="n">ciis</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-</code></pre></div>    </div>
-  </li>
+  <li>点击右上角“三个点”，选择<code class="language-plaintext highlighter-rouge">设置</code></li>
+  <li>点击<code class="language-plaintext highlighter-rouge">关于Firefox Nightly/Beta</code></li>
+  <li>连续点击5下Firefox logo，这时候会出现调试菜单开启的提示</li>
+  <li>返回<code class="language-plaintext highlighter-rouge">设置</code>菜单，会发现定制扩展源的按钮</li>
 </ul>
 
-<h2 id="源码">源码</h2>
-<p><a href="https://github.com/ButterAndButterfly/Q-Gif">https://github.com/ButterAndButterfly/Q-Gif</a></p>
+<p>现在，你需要知道如何获得<code class="language-plaintext highlighter-rouge">Collection Owner (User ID)</code>和<code class="language-plaintext highlighter-rouge">Collection name</code>。<br />
+举个例子，这是我创建的一个扩展集合，里面只有一个Cookie管理插件。<br />
+<a href="https://addons.mozilla.org/zh-CN/firefox/collections/14567953/test/">https://addons.mozilla.org/zh-CN/firefox/collections/14567953/test/</a><br />
+要使用这个扩展源的话，User ID为<code class="language-plaintext highlighter-rouge">14567953</code>，Collection name为<code class="language-plaintext highlighter-rouge">test</code>。怎么得到的就没必要再细说了。</p>
+
+<h2 id="如何新建自己的扩展源列表">如何新建自己的扩展源列表</h2>
+<p>参考<a href="https://support.mozilla.org/en-US/kb/how-use-collections-addonsmozillaorg#">How to use collections on addons.mozilla.org</a><br />
+在<a href="https://addons.mozilla.org">https://addons.mozilla.org</a>登录以后，右上角查看我的收藏集，接下来傻瓜式操作，没啥好说的。</p>
+
 
         </article>
         <hr>
@@ -440,13 +433,6 @@
                     
                 
             
-        
-            
-            
-                
-                    
-                
-            
                 
                     
                 
@@ -457,6 +443,13 @@
                 
                     
                 
+            
+                
+                    
+                
+            
+        
+            
             
                 
                     
@@ -489,13 +482,11 @@
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/blog/2020/06/13/java-host/">Java 如何简便地实现host更改功能</a></p>
+        <p><strong>上一篇</strong> <a href="/blog/2023/08/10/git-ignore-ssl-cert-err/">备忘录 Git 忽略SSL证书检查</a></p>
         
     </div>
     <div class="nex">
 
-        
-        <p><strong>下一篇</strong> <a href="/blog/2020/06/14/java-add-text-to-gif-2/">Java 真香！如何给Gif添加对白(二)</a></p>
         
     </div>
 </div>

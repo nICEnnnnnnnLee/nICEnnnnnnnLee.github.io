@@ -5,9 +5,26 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 17 Aug 2023 21:25:59 +0800</pubDate>
-    <lastBuildDate>Thu, 17 Aug 2023 21:25:59 +0800</lastBuildDate>
+    <pubDate>Mon, 21 Aug 2023 15:43:33 +0800</pubDate>
+    <lastBuildDate>Mon, 21 Aug 2023 15:43:33 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>备忘录 如何在Firefox Android上使用扩展插件</title>
+        <description>一般来说，手机端的火狐浏览器只能使用官方推荐的扩展，这样很多其它的好东西就没法用了，不太方便。   &lt;br /&gt;
+那么该如何解决这个问题呢？
+</description>
+        <pubDate>Sun, 20 Aug 2023 09:59:01 +0800</pubDate>
+        <pubDateFormat>2023-08-20</pubDateFormat>
+        <link>https://nicelee.top/blog/2023/08/20/addons-firefox-android/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2023/08/20/addons-firefox-android/</guid>
+        
+        <category>浏览器扩展</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
     
       <item>
         <title>备忘录 Git 忽略SSL证书检查</title>
@@ -200,27 +217,6 @@
         <pubDateFormat>2022-11-27</pubDateFormat>
         <link>https://nicelee.top/blog/2022/11/27/rust-sth-about-trait/</link>
         <guid isPermaLink="true">https://nicelee.top/blog/2022/11/27/rust-sth-about-trait/</guid>
-        
-        <category>Rust</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>Rust 使用wasm实现path签名sign</title>
-        <description>&lt;blockquote&gt;
-  一般网络请求的path后面都会跟一个&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;amp;sign=...&lt;/code&gt;，用于验证该request的合法性。&lt;br /&gt;
-通常情况下，这个步骤是隐藏在各种js加密混淆里的。  &lt;br /&gt;
-这里，我们尝试使用wasm将该步骤实现。
-&lt;/blockquote&gt;
-
-</description>
-        <pubDate>Fri, 25 Nov 2022 09:59:01 +0800</pubDate>
-        <pubDateFormat>2022-11-25</pubDateFormat>
-        <link>https://nicelee.top/blog/2022/11/25/rust-wasm-digest/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2022/11/25/rust-wasm-digest/</guid>
         
         <category>Rust</category>
         

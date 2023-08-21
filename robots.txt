@@ -5,4 +5,6 @@ Disallow: /css/
 Disallow: /fonts/
 Disallow: /js/
 Disallow: /novel/
+Disallow: /tools/
+Disallow: /r/
 Sitemap: https://nicelee.top/sitemap.xml
