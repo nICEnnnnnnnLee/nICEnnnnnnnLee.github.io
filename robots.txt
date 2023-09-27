@@ -7,4 +7,5 @@ Disallow: /js/
 Disallow: /novel/
 Disallow: /tools/
 Disallow: /r/
+Disallow: /r
 Sitemap: https://nicelee.top/sitemap.xml
