@@ -5,9 +5,27 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 07 Sep 2023 14:40:05 +0800</pubDate>
-    <lastBuildDate>Thu, 07 Sep 2023 14:40:05 +0800</lastBuildDate>
+    <pubDate>Wed, 29 Nov 2023 14:32:40 +0800</pubDate>
+    <lastBuildDate>Wed, 29 Nov 2023 14:32:40 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>浏览器是怎样访问支持HTTP3协议的网站的？</title>
+        <description>就现阶段而言，大部分浏览器的默认行为应该是这样的：&lt;br /&gt;
+默认是以HTTP2优先于HTTP1.1建立TCP连接，当发现网站支持HTTP3时，转而建立QUIC连接。 &lt;br /&gt;
+那么，具体又是如何的呢？
+</description>
+        <pubDate>Wed, 29 Nov 2023 09:59:01 +0800</pubDate>
+        <pubDateFormat>2023-11-29</pubDateFormat>
+        <link>https://nicelee.top/blog/2023/11/29/how-explorer-knows-the-website-support-http3/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2023/11/29/how-explorer-knows-the-website-support-http3/</guid>
+        
+        <category>Http</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
     
       <item>
         <title>备忘录 如何在Firefox Android上使用扩展插件</title>
@@ -198,25 +216,6 @@
         <pubDateFormat>2022-12-01</pubDateFormat>
         <link>https://nicelee.top/blog/2022/12/01/rust-sth-about-marco/</link>
         <guid isPermaLink="true">https://nicelee.top/blog/2022/12/01/rust-sth-about-marco/</guid>
-        
-        <category>Rust</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>Rust 入门时容易迷惑的技术细节(trait篇)</title>
-        <description>&lt;blockquote&gt;
-  在入门的时候并不能全方位地看待问题，有时候会忽略一些显而易见的知识，现在回过头梳理，把前面的补起来。
-&lt;/blockquote&gt;
-
-</description>
-        <pubDate>Sun, 27 Nov 2022 09:59:01 +0800</pubDate>
-        <pubDateFormat>2022-11-27</pubDateFormat>
-        <link>https://nicelee.top/blog/2022/11/27/rust-sth-about-trait/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2022/11/27/rust-sth-about-trait/</guid>
         
         <category>Rust</category>
         
