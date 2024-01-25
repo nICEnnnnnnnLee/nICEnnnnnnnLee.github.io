@@ -5,9 +5,26 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 29 Nov 2023 14:32:40 +0800</pubDate>
-    <lastBuildDate>Wed, 29 Nov 2023 14:32:40 +0800</lastBuildDate>
+    <pubDate>Thu, 25 Jan 2024 11:43:45 +0800</pubDate>
+    <lastBuildDate>Thu, 25 Jan 2024 11:43:45 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>备忘录 Git CA证书设置</title>
+        <description>
+Git设置忽略证书后续。
+</description>
+        <pubDate>Thu, 25 Jan 2024 09:59:01 +0800</pubDate>
+        <pubDateFormat>2024-01-25</pubDateFormat>
+        <link>https://nicelee.top/blog/2024/01/25/git-ca-err/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2024/01/25/git-ca-err/</guid>
+        
+        <category>git</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
     
       <item>
         <title>浏览器是怎样访问支持HTTP3协议的网站的？</title>
@@ -199,25 +216,6 @@
         <guid isPermaLink="true">https://nicelee.top/blog/2022/12/27/sth-about-mozilla-firefox/</guid>
         
         <category>DNS</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>Rust 入门时容易迷惑的技术细节(macro篇)</title>
-        <description>&lt;blockquote&gt;
-  接上文。
-&lt;/blockquote&gt;
-
-</description>
-        <pubDate>Thu, 01 Dec 2022 09:59:01 +0800</pubDate>
-        <pubDateFormat>2022-12-01</pubDateFormat>
-        <link>https://nicelee.top/blog/2022/12/01/rust-sth-about-marco/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2022/12/01/rust-sth-about-marco/</guid>
-        
-        <category>Rust</category>
         
         
         <category>技术学习</category>

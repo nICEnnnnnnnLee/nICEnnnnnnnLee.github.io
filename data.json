@@ -2,6 +2,13 @@
 	"code" : 0 ,
 	"data" : [
 	{
+		"title" : "备忘录 Git CA证书设置",
+		"tags" : "git",
+		"url" : "/blog/2024/01/25/git-ca-err/"
+		"brief" : "Git设置忽略证书后续。"
+	},
+    
+	{
 		"title" : "浏览器是怎样访问支持HTTP3协议的网站的？",
 		"tags" : "Http",
 		"url" : "/blog/2023/11/29/how-explorer-knows-the-website-support-http3/"
