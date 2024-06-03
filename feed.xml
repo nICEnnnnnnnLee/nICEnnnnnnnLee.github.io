@@ -5,9 +5,32 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 25 Jan 2024 11:43:45 +0800</pubDate>
-    <lastBuildDate>Thu, 25 Jan 2024 11:43:45 +0800</lastBuildDate>
+    <pubDate>Mon, 03 Jun 2024 17:03:49 +0800</pubDate>
+    <lastBuildDate>Mon, 03 Jun 2024 17:03:49 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>备忘录 在headless服务器上运行GUI程序，并通过浏览器访问控制</title>
+        <description>
+实现这个目标需要四步。
+&lt;ul&gt;
+  &lt;li&gt;Step 1. 创建虚拟屏幕&lt;/li&gt;
+  &lt;li&gt;Step 2. 将指定屏幕交互转为VNC协议传输&lt;/li&gt;
+  &lt;li&gt;Step 3. 将VNC协议传输转为浏览器交互&lt;/li&gt;
+  &lt;li&gt;Step 4. 在虚拟屏幕运行GUI程序&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sat, 24 Feb 2024 09:59:01 +0800</pubDate>
+        <pubDateFormat>2024-02-24</pubDateFormat>
+        <link>https://nicelee.top/blog/2024/02/24/headless-vnc-browser/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2024/02/24/headless-vnc-browser/</guid>
+        
+        <category>git</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
     
       <item>
         <title>备忘录 Git CA证书设置</title>
@@ -192,30 +215,6 @@ Git设置忽略证书后续。
         <category>Rust</category>
         
         <category>tauri</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>备忘录 关于Firefox的二三事</title>
-        <description>&lt;blockquote&gt;
-  有两个使用场景：
-  &lt;ul&gt;
-    &lt;li&gt;PC端禁止火狐更新已经有2年了，现在想升一下级(然后再禁止😳)。&lt;/li&gt;
-    &lt;li&gt;Android端使用Beta版本，通过&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;about:config&lt;/code&gt;设置DoH，绕过某些DNS污染(主要是不需要开其它的东西，也不是手机的全局配置，省电)。&lt;/li&gt;
-  &lt;/ul&gt;
-
-  正好有点关联（都是火狐），放在一起做个笔记。
-&lt;/blockquote&gt;
-</description>
-        <pubDate>Tue, 27 Dec 2022 09:59:01 +0800</pubDate>
-        <pubDateFormat>2022-12-27</pubDateFormat>
-        <link>https://nicelee.top/blog/2022/12/27/sth-about-mozilla-firefox/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2022/12/27/sth-about-mozilla-firefox/</guid>
-        
-        <category>DNS</category>
         
         
         <category>技术学习</category>

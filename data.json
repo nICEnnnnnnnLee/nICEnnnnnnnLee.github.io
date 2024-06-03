@@ -2,6 +2,13 @@
 	"code" : 0 ,
 	"data" : [
 	{
+		"title" : "备忘录 在headless服务器上运行GUI程序，并通过浏览器访问控制",
+		"tags" : "git",
+		"url" : "/blog/2024/02/24/headless-vnc-browser/"
+		"brief" : "实现这个目标需要四步。Step1.创建虚拟屏幕Step2.将指定屏幕交互转为VNC协议传输Step3.将VNC协议传输转为浏览器交互Step4.在虚拟屏幕运行GUI程序"
+	},
+    
+	{
 		"title" : "备忘录 Git CA证书设置",
 		"tags" : "git",
 		"url" : "/blog/2024/01/25/git-ca-err/"

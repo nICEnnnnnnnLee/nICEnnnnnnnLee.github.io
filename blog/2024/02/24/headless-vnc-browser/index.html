@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>备忘录 在headless服务器上运行GUI程序，并通过浏览器访问控制</title>
+    <meta name="description" content="实现这个目标需要四步。  Step 1. 创建虚拟屏幕  Step 2. 将指定屏幕交互转为VNC协议传输  Step 3. 将VNC协议传输转为浏览器交互  Step 4. 在虚拟屏幕运行GUI程序">
+
+    <meta property="og:url" content="https://nicelee.top/blog/2024/02/24/headless-vnc-browser/">
+    <meta property="og:site_name" content="NiceLee的博客">
+    <meta property="og:title" content="备忘录 在headless服务器上运行GUI程序，并通过浏览器访问控制">
+    <meta property="og:description" content="实现这个目标需要四步。  Step 1. 创建虚拟屏幕  Step 2. 将指定屏幕交互转为VNC协议传输  Step 3. 将VNC协议传输转为浏览器交互  Step 4. 在虚拟屏幕运行GUI程序">
+    <meta property="og:image" content="https://nicelee.top/favicon.ico?">
+    <meta property="og:image:type" content="image/x-icon">
+    
+    <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="stylesheet" href="/css/font-awesome.min.css ">
+    <link rel="stylesheet" href="/css/font-ali.css?v=1.2 ">
+    <link rel="stylesheet" href="/css/main.css?v=1.1 ">
+    <link rel="canonical" href="https://nicelee.top/blog/2024/02/24/headless-vnc-browser/">
+    <link rel="alternate" type="application/rss+xml" title="NiceLeeのBlog" href="https://nicelee.top/feed.xml ">
+
+	
+
+    <script>
+    // 百度统计代码
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?11f780e4e4ccd4e99b101eac776e93e4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script type='text/javascript'>
+  // smartlook统计代码
+  window.smartlook||(function(d) {
+    var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
+    var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
+    c.charset='utf-8';c.src='https://web-sdk.smartlook.com/recorder.js';h.appendChild(c);
+    })(document);
+    smartlook('init', '19ece82e2fc254b6b9cb148c545244ca1fc2ade2', { region: 'eu' });
+</script>
+
+
+
+</head>
+
+    <link rel="stylesheet" href="/sources/live2d/css/live2d.css" />
+  <body>
+	
+		
+		<script type="text/javascript" src="/js/ribbon.min.js "></script>
+		
+	
+	
+    <header id="top">
+    <div class="wrapper">
+        <a href="/blog/" class="brand awsome-font">NiceLeeのBlog</a>
+        <small>用爱发电 bilibili~</small>
+        <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
+        <nav id="headerNav">
+            <ul>
+				<li onclick="showdiv()" >
+                    <a href="#">
+                    <i class="fa fa-search">搜索</i>
+                    </a>
+                </li>
+                <li>
+                    
+                    <a href="/blog/">
+                    
+                        <i class="fa fa-home"></i>主页
+                    </a>
+                </li>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <a href="/blog/archive/">
+                        
+                            <i class="fa fa-archive"></i>归档
+                        </a>
+                    </li>
+                
+                    
+                    <li>
+                        <a href="/ilikemusic/">
+                        
+                            <i class="fa fa-music"></i>音乐
+                        </a>
+                    </li>
+                
+                    
+                    <li>
+                        <a href="/collect/">
+                        
+                            <i class="fa fa-bookmark"></i>收藏
+                        </a>
+                    </li>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <a href="/blog/timeline/">
+                        
+                            <i class="fa fa-clock-o"></i>时间轴
+                        </a>
+                    </li>
+                
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <a href="/about/">
+                        
+                            <i class="fa fa-info-circle"></i>关于
+                        </a>
+                    </li>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                				
+				
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+        <div class="page clearfix" post>
+    <div class="left">
+        <h1>备忘录 在headless服务器上运行GUI程序，并通过浏览器访问控制</h1>
+        <div class="label">
+
+            <div class="label-card">
+                <i class="fa fa-calendar"></i>2024-02-24
+            </div>
+
+            <div class="label-card">
+                <i class="fa fa-user"></i>nIceLee
+                
+            </div>
+            <div class="label-card">
+                <p>阅读：<span id="busuanzi_value_page_pv1"></span></p>
+            </div>
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+            
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+            </div>
+
+            <div class="label-card">
+            
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <!--a href="/blog/tag/#git" title="Tag: git" rel="tag">git</a-->
+        <a href="/blog/tag/#git" title="Tag: git" rel="tag">git</a>
+    
+  
+
+</span>
+
+            </div>
+
+        </div>
+        <hr>
+        <article itemscope itemtype="http://schema.org/BlogPosting">
+        <ul id="markdown-toc">
+  <li><a href="#step-12" id="markdown-toc-step-12">Step 1~2</a>    <ul>
+      <li><a href="#xvfb--tigervnc" id="markdown-toc-xvfb--tigervnc"><code class="language-plaintext highlighter-rouge">xvfb</code> + <code class="language-plaintext highlighter-rouge">tigervnc</code></a></li>
+      <li><a href="#tigervnc" id="markdown-toc-tigervnc"><code class="language-plaintext highlighter-rouge">tigervnc</code></a></li>
+      <li><a href="#tightvncserver" id="markdown-toc-tightvncserver"><code class="language-plaintext highlighter-rouge">tightvncserver</code></a></li>
+    </ul>
+  </li>
+  <li><a href="#step-3" id="markdown-toc-step-3">Step 3</a></li>
+  <li><a href="#step-4" id="markdown-toc-step-4">Step 4</a></li>
+</ul>
+
+<p>实现这个目标需要四步。</p>
+<ul>
+  <li>Step 1. 创建虚拟屏幕</li>
+  <li>Step 2. 将指定屏幕交互转为VNC协议传输</li>
+  <li>Step 3. 将VNC协议传输转为浏览器交互</li>
+  <li>Step 4. 在虚拟屏幕运行GUI程序</li>
+</ul>
+
+<h2 id="step-12">Step 1~2</h2>
+<p>Step 1和Step 2之所以没有分开，是因为有很多工具把这两步合在一起的。<br />
+实现Step 1和2的工具有很多，可以参考<a href="https://help.ubuntu.com/community/VNC/Servers">ubuntu/VNC/Servers</a>。<br />
+这里不一一列出，主要讲一下<code class="language-plaintext highlighter-rouge">xvfb</code>、<code class="language-plaintext highlighter-rouge">tightvncserver</code>、<code class="language-plaintext highlighter-rouge">tigervnc</code>的几种组合。</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">xvfb</code>只能实现Step 1</li>
+  <li><code class="language-plaintext highlighter-rouge">tightvncserver</code>支持Step 1和Step 2</li>
+  <li><code class="language-plaintext highlighter-rouge">tigervnc</code>支持Step 1和Step 2，通过不同的程序实现对应功能</li>
+</ul>
+
+<h3 id="xvfb--tigervnc"><code class="language-plaintext highlighter-rouge">xvfb</code> + <code class="language-plaintext highlighter-rouge">tigervnc</code></h3>
+<p>本来经典的是 <code class="language-plaintext highlighter-rouge">xvfb</code> + <code class="language-plaintext highlighter-rouge">x11vnc</code>，但是<code class="language-plaintext highlighter-rouge">x11vnc</code>太老了，想要使用还需要些额外的操作，所以不提了。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 安装 xvfb
+sudo apt-get install xvfb
+
+# 启动xvfb模拟虚拟屏幕2 下面的参数24指的是色彩深度
+Xvfb :2 -screen 0 1280x720x24
+
+# 安装 tigervnc
+sudo apt-get install tigervnc-scraping-server
+
+# 启动x0vncserver将虚拟屏幕2暴露给端口5902(VNC协议)
+## 参数可以查看 https://tigervnc.org/doc/x0vncserver.html
+x0vncserver -localhost no -rfbport=5902 -PasswordFile=/home/lijia/.vnc/passwd -display :2
+
+# 密码文件可以有 vncpasswd生成，一般保存在~/.vnc/passwd
+# 关闭可以直接 kill -2 [pid]
+</code></pre></div></div>
+
+<h3 id="tigervnc"><code class="language-plaintext highlighter-rouge">tigervnc</code></h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 安装 tigervnc
+sudo apt-get install tigervnc-standalone-server
+
+# 启动Xvnc 新建虚拟屏幕2并暴露给端口5902(VNC协议)
+## 参数可以查看 https://tigervnc.org/doc/Xvnc.html
+Xvnc --localhost -rfbport=5902 -PasswordFile=/home/lijia/.vnc/passwd -geometry 1280x720 :2 
+
+# 密码文件可以有 vncpasswd生成，一般保存在~/.vnc/passwd
+# 关闭可以直接 kill -2 [pid]
+</code></pre></div></div>
+
+<h3 id="tightvncserver"><code class="language-plaintext highlighter-rouge">tightvncserver</code></h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 安装 tightvncserver
+sudo apt-get install tightvncserver
+
+# 启动tightvncserver 新建虚拟屏幕2并暴露给端口5902(默认端口为 5900 + 2)
+tightvncserver -localhost -depth 16 -geometry 1280x720 :2 
+
+# 关闭屏幕2
+tightvncserver -kill :2
+</code></pre></div></div>
+
+<p>看具体的目的吧，以上需要注意是不是监听本地localhost，防止暴露</p>
+
+<h2 id="step-3">Step 3</h2>
+<p>使用<a href="https://github.com/novnc/noVNC">noVNC</a>。拷贝项目源码即可运行。<br />
+如果没有git环境的话，还需要将<a href="https://github.com/novnc/websockify">websockify</a>的源码拷贝并解压到<code class="language-plaintext highlighter-rouge">utils/websockify</code>。</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># utils/novnc_proxy中，有这样一段代码，其中${HERE}指的是 novnc_proxy 所在目录</span>
+git clone https://github.com/novnc/websockify <span class="k">${</span><span class="nv">HERE</span><span class="k">}</span>/websockify
+</code></pre></div></div>
+
+<p>接下来就是运行了。需要注意的是，如果不监听本地的话，必须开启ssl。</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./noVNC-1.4.0/utils/novnc_proxy <span class="nt">--vnc</span> localhost:5902 <span class="nt">--listen</span> localhost:8787
+./noVNC-1.4.0/utils/novnc_proxy <span class="nt">--vnc</span> localhost:5902 <span class="nt">--listen</span> 8787 <span class="nt">--cert</span> /home/lijia/cert.pem <span class="nt">--key</span> /home/lijia/cert.key <span class="nt">--ssl-only</span>
+</code></pre></div></div>
+
+<h2 id="step-4">Step 4</h2>
+<p>主要是设置环境变量<code class="language-plaintext highlighter-rouge">DISPLAY</code></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">DISPLAY</span><span class="o">=</span><span class="s2">":2"</span>
+java <span class="nt">-jar</span> gui_app.jar
+</code></pre></div></div>
+
+        </article>
+        <hr>
+
+        
+        
+            
+            
+                
+                    
+                        
+                        <h2 id="similar_posts">相似文章</h2>
+                        <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2024/01/25/git-ca-err/">备忘录 Git CA证书设置
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2023/08/10/git-ignore-ssl-cert-err/">备忘录 Git 忽略SSL证书检查
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2023/03/22/git-ignore-versioned-file-changes/">备忘录 Git 忽略对Versioned文件的修改
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+        
+            </ul>
+        
+
+        <div class="post-recent">
+    <div class="pre">
+        
+        <p><strong>上一篇</strong> <a href="/blog/2024/01/25/git-ca-err/">备忘录 Git CA证书设置</a></p>
+        
+    </div>
+    <div class="nex">
+
+        
+    </div>
+</div>
+
+
+        <!-- <h2 id="comments">评论</h2>  
+        
+
+
+
+ -->
+
+
+    </div>
+    <button class="anchor"><i class="fa fa-anchor"></i></button>
+    <div class="right">
+        <div class="wrap">
+
+            <!-- Content -->
+            <div class="side content">
+                <div>
+                    内容
+                </div>
+                <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#similar_posts">相似文章</a></li>
+                    
+                    <!-- <li><a href="#comments">评论</a></li> -->
+                </ul>
+            </div>
+			
+            <!-- 其他div框放到这里 -->
+            <!-- <div class="side">bbbb</div> -->
+        </div>
+    </div>
+</div>
+<script>
+/**
+ * target _blank
+ */
+(function() {
+    var aTags = document.querySelectorAll('article a:not([id])')
+    for (var i = 0; i < aTags.length; i++) {
+        aTags[i].setAttribute('target', '_blank')
+    }
+
+}());
+</script>
+<script src="/js/pageContent.js " charset="utf-8"></script>
+
+
+    <footer class="site-footer">
+
+
+    <div class="wrapper">
+        <p class="description">
+             这是一个缺爱的博客(๑‾ ꇴ ‾๑)！ 
+        </p>
+        <p class="contact">
+            联系我: 
+            <a href="https://github.com/nICEnnnnnnnLee" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
+            <a href="mailto:lijia0732@sina.com" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>  
+            <a href="https://weibo.com/blackhigh" title="Weibo"><i class="fa fa-weibo" aria-hidden="true"></i></a>       
+			<span onclick="copyToClipboard('https://nicelee.top/feed.xml')"><a href="#">订阅我<i class="fa fa-gg"></i></a></span>
+        </p>
+        <p>
+            总pv:<span id="busuanzi_value_site_pv"></span>，uv:<span id="busuanzi_value_site_uv"></span>，本页pv:<span id="busuanzi_value_page_pv"></span>
+        </p>
+        <p class="power">
+            <span>
+            有用链接：
+                <a href="http://www.bejson.com/" target="_blank">BeJSON</a> &nbsp;&nbsp;
+                <a href="http://site.ip138.com/"  target="_blank">IP或域名查询</a> &nbsp;&nbsp;
+                <a href="http://ping.chinaz.com/"  target="_blank">各地ping</a> &nbsp;&nbsp;
+                <a href="https://tool.lu/"  target="_blank">在线工具</a> &nbsp;&nbsp; 
+                <a href="https://www.aliyun.com/"  target="_blank">阿里云</a> &nbsp;&nbsp; 
+                <a href="http://patorjk.com/software/taag/"  target="_blank">Text转FIGlet</a> &nbsp;&nbsp; 
+                <a href="https://vercel.com/dashboard"  target="_blank">Vercel</a> &nbsp;&nbsp;
+                <a href="https://dash.cloudflare.com/"  target="_blank">Cloudflare</a> &nbsp;&nbsp;
+                <a href="https://www.webfx.com/tools/emoji-cheat-sheet/"  target="_blank">Emoji😳</a> &nbsp;&nbsp;
+                <a href="https://www.color-hex.com/"  target="_blank">Color-hex</a> &nbsp;&nbsp;
+                <a href="https://hub.fastgit.org/"  target="_blank">Github镜像fastgit</a> &nbsp;&nbsp;
+            </span>
+        </p>
+        <p class="power">
+            <span>
+            除非另有注明，否则本网站上的内容可按 <a href="http://creativecommons.org/licenses/by-nc/4.0/"  target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议许可</a> 或更新版本使用。
+            </span>
+        </p>
+        <p class="power">
+            <span>
+                建站声明详见 <a href="/about/#关于个人博客">[关于]</a>. <a href="/sitemap.xml">[站点地图]</a>. 
+            </span>
+            
+        </p>
+        <p class="power beian">
+        </p>
+		<p class="power">
+            <span>
+                Site powered by <a href="https://jekyllrb.com/">Jekyll</a>.
+            </span>
+            <span>
+                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
+            </span>
+        </p>
+        
+		
+    </div>
+</footer>
+
+
+<!-- mask start -->
+<div id="searchBg"></div>
+<div id="searchDiv">
+	<input id="searchContent" type="text" onkeypress="if(event.keyCode==13) { search();return false;}" value=""/></input>
+    <div id="searchBtn" onclick="search();" /><i class="fa fa-search"></i></div>
+	<span onclick="hidediv();" class="close"></span>
+</div>
+<!-- mask end -->
+<!-- live2d begin -->
+<div id="landlord">
+    <div class="message" style="opacity:0"></div>
+    <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+    <div class="hide-button">隐藏</div>
+</div>
+<!-- live2d end -->
+<script type='text/javascript' src='/js/jquery.min.js '></script>
+<script type='text/javascript'>
+function search(){	
+	var str = document.getElementById("searchContent").value;
+	//console.log(str);
+	setLocalStorage("blogSearchKey",str);
+	hidediv();
+	window.location.href="/blog/archive/";
+}
+function showdiv() {
+	//alert("调用了showdiv()函数");
+	document.getElementById("searchBg").style.display ="block";
+	document.getElementById("searchDiv").style.display ="block";
+
+	//$('body').css("overflow", "hidden");
+	document.getElementsByTagName('body')[0].setAttribute("overflow", "hidden");
+}
+function hidediv() {
+	document.getElementById("searchBg").style.display = 'none';
+	document.getElementById("searchDiv").style.display = 'none';
+	//$('body').css("overflow", "auto");
+	document.getElementsByTagName('body')[0].setAttribute("overflow", "hidden");
+}
+////////////////////////////useful function //////////////////////////////////////
+//写cookies
+function setLocalStorage(name,value)
+{
+	localStorage.setItem(name, JSON.stringify(value));
+}
+//读cookies
+function getLocalStorage(name)
+{
+	return JSON.parse(localStorage.getItem(name));
+}
+//删cookies
+function delLocalStorage(name)
+{
+	localStorage.setItem(name, JSON.stringify(""));
+}
+function copyToClipboard (text) {
+    if(text.indexOf('-') !== -1) {
+        var arr = text.split('-');
+        text = arr[0] + arr[1];
+    }
+    var textArea = document.createElement("textarea");
+      textArea.style.position = 'fixed';
+      textArea.style.top = '0';
+      textArea.style.left = '0';
+      textArea.style.width = '2em';
+      textArea.style.height = '2em';
+      textArea.style.padding = '0';
+      textArea.style.border = 'none';
+      textArea.style.outline = 'none';
+      textArea.style.boxShadow = 'none';
+      textArea.style.background = 'transparent';
+      textArea.value = text;
+      document.body.appendChild(textArea);
+      textArea.select();
+	//alert("调用了复制剪贴板函数");
+      try {
+        var successful = document.execCommand('copy');
+        var msg = successful ? 'Rss源已成功复制到剪贴板' : 'RSS源为:https://nicelee.top/feed.xml';
+		//alert(msg);
+		showTips(msg);
+      } catch (err) {
+		//console.log(err);
+        //alert('该浏览器不支持点击复制到剪贴板');
+		showTips('RSS源为:https://nicelee.top/feed.xml');
+      }
+
+      document.body.removeChild(textArea);
+}
+/*
+<!--  版权维护  -->
+function addLink() {
+//alert("!!!");
+    var body_element = document.body;
+    var selection;
+    selection = window.getSelection();
+    if((selection + "").indexOf("/feed.xml") != -1){
+        return;
+    }
+	if(selection == ""){
+		return;
+	}
+    var locationHref=document.location.href;
+    var appendLink="\r\n------------------------------\r\n 原文出自[ NiceLee的个人博客 ] 转载请保留原文链接: <a href='"+locationHref+"'>"+locationHref+"</a>";
+    if (window.clipboardData) { // Internet Explorer
+        //console.log("调用原生函数");
+        var copytext = selection + appendLink;
+        window.clipboardData.setData ("Text", copytext);
+        return false;
+    } else {
+        //console.log("复杂的套路");
+        var copytext = selection + appendLink;
+        var newdiv = document.createElement('div');
+        newdiv.style.position='absolute';
+        newdiv.style.left='-99999px';
+        body_element.appendChild(newdiv);
+        newdiv.innerHTML = "<pre>" +copytext + "</pre>";
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function() {
+        	body_element.removeChild(newdiv);
+        },0);
+    }
+}
+document.oncopy = addLink;
+*/
+
+//contetn为要显示的内容  
+function showTips( content ){  
+	//alert("调用了复制提示消息函数");
+	//alert("内容为"+ content);
+    //窗口的宽度  
+	//alert(content);
+	var width = 250;
+	var x  = $(window).width()/2 - width/2;	
+	var y = $(window).height()/2 -20;
+	var $i = $("<span/>").text(content);
+	$i.css({
+		"z-index": 999999999999999999999999999,
+		"top": y,
+		"left": x,
+		"position": "absolute",
+		"font-weight": "bold",
+		'padding'   : '3px 5px',  
+		'background': '#8FBC8F',  
+		'font-size' : 12 + 'px',  
+		'margin'    : '0 auto',  
+		'text-align': 'center',  
+		'width'     : width + 'px',  
+		'height'    : 'auto',  
+		'color'     : '#fff'
+	});
+	$("body").append($i);
+	$i.animate({
+		"opacity": 0
+	},
+	3000,
+	function() {
+		//console.log($i.css());
+		$i.remove();
+		//alert('');
+	});
+}     
+</script>
+
+<!-- 窗口失去焦点 -- 别走啊 -->
+<!-- 窗口获得焦点 -- 恢复 -->
+<!-- console 打印figlet-->
+<script>
+var titleOnFocus = document.title;
+var titleOnBlur = "...(*￣０￣)ノ[别走啊…]";
+window.onfocus =function(){
+    document.title = titleOnFocus;
+    //console.log(titleOnFocus);
+}
+window.onblur = function(){
+    document.title = titleOnBlur;
+    //console.log(titleOnBlur);
+}
+
+var figlet = "\n" +
+"        _          _            _               \n" +
+"       (_)        | |          | |              \n" +
+"  _ __  _  ___ ___| | ___  ___ | |_ ___  _ __   \n" +
+" | '_ \\| |/ __/ _ \\ |/ _ \\/ _ \\| __/ _ \\| '_ \\  \n" +
+" | | | | | (_|  __/ |  __/  __/| || (_) | |_) | \n" +
+" |_| |_|_|\\___\\___|_|\\___|\\___(_)__\\___/| .__/  \n" +
+"                                        | |     \n" +
+"                                        |_|     \n" ;
+console.log(figlet);
+console.log("%c小改改爆个照呗\n hentai女个装呗", "color:red;font-size: 50px;font-weight:bold;");
+
+/* 防hentai
+document.onkeydown=function(){
+    var e = window.event||arguments[0];
+    if(e.keyCode==123){
+    	alert('请尊重劳动成果！');
+            return false;
+    }else if((e.ctrlKey)&&(e.shiftKey)&&(e.keyCode==73)){
+    	alert('请尊重劳动成果！');
+            return false;
+    }else if((e.ctrlKey)&&(e.keyCode==85)){
+            alert('请尊重劳动成果！');
+            return false;
+    }else if((e.ctrlKey)&&(e.keyCode==83)){
+           alert('请尊重劳动成果！');
+           return false;
+    }
+}
+document.oncontextmenu=function(){
+	alert('请尊重劳动成果！');
+    return false;
+}*/
+</script>
+
+<!-- live2d Begin-->
+<script type="text/javascript">
+    var message_Path = '/sources/live2d/'
+    var home_Path = 'https://nicelee.top/'
+</script>
+<script type="text/javascript" src="/sources/live2d/js/live2d.js"></script>
+<script type="text/javascript" src="/sources/live2d/js/message.js"></script>
+<script type="text/javascript">
+    var modelList = ["kesshouban_v2", "tia", "wanko", "index", "kanna", "koharu", "umaru", 
+	"22.closet.default.v2", 
+	"22.closet.2018.bls-summer", 
+	"22.closet.2019.summer", 
+	"33.closet.2016.xmas", 
+	"33.closet.2017.tomo-bukatsu", 
+	"33.closet.2018.bls-summer", 
+	"33.closet.2018.bls-winter", 
+	"33.closet.default.v2" ];    
+    var model = modelList[12]; 
+    // kesshouban_v2 血小板
+    // tia  小改改
+    // wanko 小狗狗 
+    // index 魔禁-茵蒂克丝
+    // kanna 康娜龙
+    // koharu 卡哇伊的Q版模型
+    // umaru 干物妹小埋 带声音
+    // 22 哔哩哔哩22娘
+    // 22.v2 哔哩哔哩22娘
+    console.log("live2d模型(小部分)来自官网: http://www.live2d.com/usermanual/cubism2_cn/samples.html");
+    console.log("live2d模型(大部分)来自梦象: https://mx-model.ga/");
+    if( window.document.body.offsetWidth >= 666){
+        loadlive2d("live2d", "/sources/live2d/model/"+ model +"/model.json");
+    }else{
+        //loadlive2d("live2d", "/sources/live2d/model/tia/model_tiny.json");
+        loadlive2d("live2d", "/sources/live2d/model/"+ model +"/model_tiny.json");
+    }
+</script>
+<!-- live2d End-->
+
+<script type="text/javascript">
+	var a_idx = 0;
+	jQuery(document).ready(function($) {
+		$("body").click(function(e) {
+			var a = new Array("大吉大利，今晚吃鸡！", "惊不惊喜，意不意外", "还有这种操作？", "小猪佩奇身上纹，掌声送给社会人", "确认过眼神", "皮一下，很开心", "很好很强大", "C位出道", "你若盛开，清风自来", "如果帅也是一种罪，那我已罪无可赦", "别看资料 ，看聊效！", "感动吗，不敢动", "打call", "我是你的超级英雄");
+			var $i = $("<span/>").text(a[a_idx]);
+			a_idx = (a_idx + 1) % a.length;
+			var x = e.pageX,
+			y = e.pageY;
+			$i.css({
+				"z-index": 999999999999999999999999999,
+				"top": y - 20,
+				"left": x,
+				"position": "absolute",
+				"font-weight": "bold",
+				"color": "#dd3333"
+			});
+			$("body").append($i);
+			$i.animate({
+				"top": y - 180,
+				"opacity": 0
+			},
+			1500,
+			function() {
+				$i.remove();
+				//alert('');
+			});
+		});
+	});
+</script>
+
+
+<script async src="/js/busuanzi.pure.mini.js "></script>
+
+
+    <div class="back-to-top">
+    <a href="#top" data-scroll>
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+    <script src="/js/main.js " charset="utf-8"></script>
+    <script src="/js/smooth-scroll.min.js " charset="utf-8"></script>
+    <script type="text/javascript">
+      smoothScroll.init({
+        speed: 500, // Integer. How fast to complete the scroll in milliseconds
+        easing: 'easeInOutCubic', // Easing pattern to use
+        offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
+      });
+      // 为了底部内容不被遮住
+      $(document).ready(function () {
+        resizeBody();
+      });
+      window.onresize = resizeBody;
+      function resizeBody(){
+        //console.log("resizing Body...");
+        if (window.innerWidth <= 770) {
+            var totalHeight = $("header#top").height() + $(".page.clearfix").height() + $("footer.site-footer").height() +80;
+            document.body.style.height = totalHeight + "px";
+        }else{
+            document.body.style.height = "auto";
+        }
+      }
+    </script>
+	
+	
+    <!-- <script src=" /js/scroll.min.js " charset="utf-8"></script> -->
+  </body>
+
+</html>
