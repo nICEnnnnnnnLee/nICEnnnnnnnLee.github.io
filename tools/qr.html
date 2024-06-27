@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="content-type" content="text/html"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>识别图片二维码</title>
+    <style>
+    textarea{
+        word-wrap: break-word;
+        word-break: break-all;
+        white-space: pre-wrap;
+    }
+  </style>
+<!--
+<script src="https://libs.baidu.com/jquery/1.2.3/jquery.min.js"></script>
+<script src="https://cozmo.github.io/jsQR/jsQR.js"></script>
+-->
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jsQR.js"></script>
+<style>
+#result{
+    margin-top: 10px;
+}
+</style>
+</head>
+<body style="text-align:center;background: url(/sources/pics/FPyBWV.gif);">
+
+<h3>识别图片二维码</h3>
+ 
+		<div class="list-group-item">
+			<h3>选择图片</h3>
+			<input type="file" accept="image/x-png,image/gif,image/jpeg,image/bmp" id="pictureChange"/>
+            <div id="result"></div>
+        </div>
+		
+    <script type="text/javascript">
+        $("body").append('<canvas id="qrcanvas" style="display:none;"></canvas>')
+        $("#pictureChange").change(function (e) {
+            var file = e.target.files[0];
+            if(window.FileReader) {
+                var fr = new FileReader();
+                fr.readAsDataURL(file);
+                fr.onloadend = function(e) {
+                    $('#result').html('开始识别...')
+                    var base64Data = e.target.result;
+                    base64ToqR(base64Data)
+					console.log('loading...')
+                }
+            }
+        })
+        function base64ToqR(data) {
+            var c = document.getElementById("qrcanvas");
+            var ctx = c.getContext("2d");
+    
+            var img = new Image();
+            img.src = data;
+            img.onload = function() {
+                $("#qrcanvas").attr("width",img.width)
+                $("#qrcanvas").attr("height",img.height)
+                ctx.drawImage(img, 0, 0, img.width, img.height);
+                var imageData = ctx.getImageData(0, 0, img.width, img.height);
+                const code = jsQR(imageData.data, imageData.width, imageData.height, {
+                    inversionAttempts: "dontInvert",
+                });
+				
+                if(code){
+                    $('#result').text(code.data)
+                    console.log('code.data...', code.data)
+                }else{
+					$('#result').html('识别错误')
+                }
+            };
+        }
+    </script>
+</body>
+</html>
