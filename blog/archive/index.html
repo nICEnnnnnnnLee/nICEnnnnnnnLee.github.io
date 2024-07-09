@@ -131,6 +131,8 @@
                     
                 
                     
+                
+                    
                     <li>
                         <a class="active" href="/blog/archive/">
                             
@@ -295,6 +297,8 @@
                     
                 
                     
+                
+                    
                 				
 				
             </ul>
@@ -315,6 +319,182 @@
 
             
               <h2 id="y2024">2024</h2>
+            
+
+            <li>
+                <time>
+                2024-07-08 Mon.
+                </time>
+                <a class="title" href="/blog/2024/07/08/jpackage-4-locale/">备忘录 jpackage 关于国际/本地化的坑(四)</a>
+				<brief style="display:none">目标仅仅是生成简体中文安装包，结果过程中发生了很多预料之外的事情。总之，走了很多弯路。感觉思路也有点问题，没转过弯来。虽然做了很多无用功，但还是把它记录下来。</brief>
+                
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>
+    
+  
+
+</span>
+
+            </li>
+
+          
+
+            
+              
+              
+              
+            
+
+            <li>
+                <time>
+                2024-07-07 Sun.
+                </time>
+                <a class="title" href="/blog/2024/07/07/jpackage-3-save-install-dir-download-dir/">备忘录 jpackage 保存安装目录和下载目录(三)</a>
+				<brief style="display:none">默认的安装目录是C盘的ProgramFile文件夹，当下次进行安装(使用其它版本进行升降级)时，我们希望能够获得上一次的选择位置。默认的下载目录也是类似，只是还有更多的东西需要实现：写个界面来获取输入，以及在解压完文件后在config/app.config输出配置结果。以上这些操作其实与jpackage关系不大，主要的关键词是Wix。</brief>
+                
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>
+    
+  
+
+</span>
+
+            </li>
+
+          
+
+            
+              
+              
+              
+            
+
+            <li>
+                <time>
+                2024-07-06 Sat.
+                </time>
+                <a class="title" href="/blog/2024/07/06/jpackage-2-change-jar-path/">备忘录 jpackage 修改jar包所在位置(二)</a>
+				<brief style="display:none">|-- BilibiliDown.exe                         程序入口|-- app                                      Windows下，安装包自动生成。告诉`exe`文件如何正确运行|   |-- .package                             用于指示程序名称|   |-- BilibiliDown.cfg                     用于指示JVM运行的相关配置|   |-- launch.jar                           jar包|   |-- INeedBiliAV.jar                      jar包|-- runtime        打包后的目录默认长上面这样，现在需要将jar包抬上来到根目录（下面这样），并确保程序正常运行|-- BilibiliDown.exe                         程序入口|-- launch.jar                               jar包|-- INeedBiliAV.jar                          jar包|-- app                                      Windows下，安装包自动生成。告诉`exe`文件如何正确运行|   |-- .package                             用于指示程序名称|   |-- BilibiliDown.cfg                     用于指示JVM运行的相关配置|-- runtime        </brief>
+                
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>
+    
+  
+
+</span>
+
+            </li>
+
+          
+
+            
+              
+              
+              
+            
+
+            <li>
+                <time>
+                2024-07-05 Fri.
+                </time>
+                <a class="title" href="/blog/2024/07/05/jpackage-1-intro/">备忘录 jpackage 的简单使用(一)</a>
+				<brief style="display:none">我向来是不觉得通过脚本/命令行运行jar包有什么不好的，但想着使用jpackage生成相关程序也花不了多少工夫。在不想大改代码的情况下，踩了不少坑。也行吧。本来还想试试通过Graalvm进行aot编译，还是不那么折腾了。</brief>
+                
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>
+    
+  
+
+</span>
+
+            </li>
+
+          
+
+            
+              
+              
+              
             
 
             <li>
@@ -10833,7 +11013,27 @@
                           
                           
                           
-                            <li><a data-scroll href="#y2024">2024 (2)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="#y2024">2024 (6)</a></li>
                             
                           
                         

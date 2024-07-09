@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>备忘录 jpackage 的简单使用(一)</title>
+    <meta name="description" content="我向来是不觉得通过脚本/命令行运行jar包有什么不好的，但想着使用jpackage生成相关程序也花不了多少工夫。在不想大改代码的情况下，踩了不少坑。也行吧。本来还想试试通过Graalvm进行aot编译，还是不那么折腾了。">
+
+    <meta property="og:url" content="https://nicelee.top/blog/2024/07/05/jpackage-1-intro/">
+    <meta property="og:site_name" content="NiceLee的博客">
+    <meta property="og:title" content="备忘录 jpackage 的简单使用(一)">
+    <meta property="og:description" content="我向来是不觉得通过脚本/命令行运行jar包有什么不好的，但想着使用jpackage生成相关程序也花不了多少工夫。在不想大改代码的情况下，踩了不少坑。也行吧。本来还想试试通过Graalvm进行aot编译，还是不那么折腾了。">
+    <meta property="og:image" content="https://nicelee.top/favicon.ico?">
+    <meta property="og:image:type" content="image/x-icon">
+    
+    <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="stylesheet" href="/css/font-awesome.min.css ">
+    <link rel="stylesheet" href="/css/font-ali.css?v=1.2 ">
+    <link rel="stylesheet" href="/css/main.css?v=1.1 ">
+    <link rel="canonical" href="https://nicelee.top/blog/2024/07/05/jpackage-1-intro/">
+    <link rel="alternate" type="application/rss+xml" title="NiceLeeのBlog" href="https://nicelee.top/feed.xml ">
+
+	
+
+    <script>
+    // 百度统计代码
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?11f780e4e4ccd4e99b101eac776e93e4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script type='text/javascript'>
+  // smartlook统计代码
+  window.smartlook||(function(d) {
+    var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
+    var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
+    c.charset='utf-8';c.src='https://web-sdk.smartlook.com/recorder.js';h.appendChild(c);
+    })(document);
+    smartlook('init', '19ece82e2fc254b6b9cb148c545244ca1fc2ade2', { region: 'eu' });
+</script>
+
+
+
+</head>
+
+    <link rel="stylesheet" href="/sources/live2d/css/live2d.css" />
+  <body>
+	
+		
+		<script type="text/javascript" src="/js/ribbon.min.js "></script>
+		
+	
+	
+    <header id="top">
+    <div class="wrapper">
+        <a href="/blog/" class="brand awsome-font">NiceLeeのBlog</a>
+        <small>用爱发电 bilibili~</small>
+        <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
+        <nav id="headerNav">
+            <ul>
+				<li onclick="showdiv()" >
+                    <a href="#">
+                    <i class="fa fa-search">搜索</i>
+                    </a>
+                </li>
+                <li>
+                    
+                    <a href="/blog/">
+                    
+                        <i class="fa fa-home"></i>主页
+                    </a>
+                </li>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <a href="/blog/archive/">
+                        
+                            <i class="fa fa-archive"></i>归档
+                        </a>
+                    </li>
+                
+                    
+                    <li>
+                        <a href="/ilikemusic/">
+                        
+                            <i class="fa fa-music"></i>音乐
+                        </a>
+                    </li>
+                
+                    
+                    <li>
+                        <a href="/collect/">
+                        
+                            <i class="fa fa-bookmark"></i>收藏
+                        </a>
+                    </li>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <a href="/blog/timeline/">
+                        
+                            <i class="fa fa-clock-o"></i>时间轴
+                        </a>
+                    </li>
+                
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <a href="/about/">
+                        
+                            <i class="fa fa-info-circle"></i>关于
+                        </a>
+                    </li>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                				
+				
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+        <div class="page clearfix" post>
+    <div class="left">
+        <h1>备忘录 jpackage 的简单使用(一)</h1>
+        <div class="label">
+
+            <div class="label-card">
+                <i class="fa fa-calendar"></i>2024-07-05
+            </div>
+
+            <div class="label-card">
+                <i class="fa fa-user"></i>nIceLee
+                
+            </div>
+            <div class="label-card">
+                <p>阅读：<span id="busuanzi_value_page_pv1"></span></p>
+            </div>
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+            
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+            </div>
+
+            <div class="label-card">
+            
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>
+    
+  
+
+</span>
+
+            </div>
+
+        </div>
+        <hr>
+        <article itemscope itemtype="http://schema.org/BlogPosting">
+        <ul id="markdown-toc">
+  <li><a href="#简介" id="markdown-toc-简介">简介</a></li>
+</ul>
+
+<p>我向来是不觉得通过脚本/命令行运行jar包有什么不好的，但想着使用jpackage生成相关程序也花不了多少工夫。<br />
+在不想大改代码的情况下，踩了不少坑。<br />
+也行吧。<br />
+本来还想试试通过Graalvm进行aot编译，还是不那么折腾了。</p>
+
+<h2 id="简介">简介</h2>
+
+<ul>
+  <li>先上<a href="https://docs.oracle.com/en/java/javase/21/docs/specs/man/jpackage.html">官方文档</a></li>
+  <li>
+    <p>再上命令行用法</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;jpackage --help
+用法：jpackage &lt;options&gt;
+
+示例用法:
+--------------
+    生成适合主机系统的应用程序包：
+        对于模块化应用程序：
+            jpackage -n name -p modulePath -m moduleName/className
+        对于非模块化应用程序：
+            jpackage -i inputDir -n name \
+                --main-class className --main-jar myJar.jar
+        从预构建的应用程序映像：
+            jpackage -n name --app-image appImageDir
+    生成应用程序映像：
+        对于模块化应用程序：
+            jpackage --type app-image -n name -p modulePath \
+                -m moduleName/className
+        对于非模块化应用程序：
+            jpackage --type app-image -i inputDir -n name \
+                --main-class className --main-jar myJar.jar
+        要为 jlink 提供您自己的选项，请单独运行 jlink：
+            jlink --output appRuntimeImage -p modulePath \
+                --add-modules moduleName \
+                --no-header-files [&lt;additional jlink options&gt;...]
+            jpackage --type app-image -n name \
+                -m moduleName/className --runtime-image appRuntimeImage
+    生成 Java 运行时程序包：
+        jpackage -n name --runtime-image &lt;runtime-image&gt;
+
+一般选项：
+  @&lt;filename&gt;
+          从文件读取选项和/或模式
+          可以多次使用此选项。
+  --type -t &lt;type&gt;
+          要创建的程序包的类型
+          有效值为：{"app-image", "exe", "msi"}
+          如果未指定此选项，则将创建与平台相关的
+          默认类型。
+  --app-version &lt;version&gt;
+          应用程序和/或程序包的版本
+  --copyright &lt;copyright string&gt;
+          应用程序的版权
+  --description &lt;description string&gt;
+          应用程序的说明
+  --help -h
+          将用法文本输出到输出流并退出，用法文本中包含
+          适用于当前平台的每个有效选项的列表和说明
+  --icon &lt;file path&gt;
+          应用程序包图标的路径
+          （绝对路径或相对于当前目录的路径）
+  --name -n &lt;name&gt;
+          应用程序和/或程序包的名称
+  --dest -d &lt;destination path&gt;
+          用来放置所生成的输出文件的路径
+          （绝对路径或相对于当前目录的路径）
+          默认为当前的工作目录。
+  --temp &lt;directory path&gt;
+          用来创建临时文件的新目录或空白目录的路径
+          （绝对路径或相对于当前目录的路径）
+          如果指定，则在任务完成时将不删除临时目录，
+          必须手动删除临时目录。
+          如果未指定，则将创建一个临时目录，
+          并在任务完成时删除该临时目录。
+  --vendor &lt;vendor string&gt;
+          应用程序的供应商
+  --verbose
+          启用详细的输出
+  --version
+          将产品版本输出到输出流并退出。
+
+用来创建运行时映像的选项：
+  --add-modules &lt;模块名称&gt;[,&lt;模块名称&gt;...]
+          要添加的模块的逗号 (",") 分隔列表
+          此模块列表连同主模块（如果指定）
+          将作为 --add-module 参数传递到 jlink。
+          如果未指定，则仅使用主模块（如果指定了 --module），
+          或者使用默认的模块集（如果指定了
+          --main-jar）。
+          可以多次使用此选项。
+  --module-path -p &lt;module path&gt;...
+          路径的 ; 分隔列表
+          每个路径要么是模块的目录，要么是
+          模块化 jar 的路径。
+          （每个路径可以是绝对路径，也可以是相对于当前目录的路径。）
+          可以多次使用此选项。
+  --jlink-options &lt;jlink 选项&gt;
+          要传递给 jlink 的选项列表（用空格分隔）
+          如果未指定，则默认为 "--strip-native-commands
+          --strip-debug --no-man-pages --no-header-files"。
+          可以多次使用此选项。
+  --runtime-image &lt;directory path&gt;
+          将复制到应用程序映像的预定义
+          运行时映像的路径
+          （绝对路径或相对于当前目录的路径）
+          如果未指定 --runtime-image，jpackage 将运行 jlink 以
+          使用如下选项创建运行时映像：
+          --strip-debug、--no-header-files、--no-man-pages 和
+          --strip-native-commands。
+
+用来创建应用程序映像的选项：
+  --input -i &lt;directory path&gt;
+          包含要打包的文件的输入目录的路径
+          （绝对路径或相对于当前目录的路径）
+          输入目录中的所有文件将打包到
+          应用程序映像中。
+  --app-content &lt;additional content&gt;[,&lt;additional content&gt;...]
+          要添加到应用程序有效负载中的文件和/或
+          目录的逗号分隔路径列表。
+          此选项可以多次使用。
+
+用来创建应用程序启动程序的选项：
+  --add-launcher &lt;launcher name&gt;=&lt;file path&gt;
+          启动程序的名称和包含关键字-值对列表的
+          属性文件的路径
+          （绝对路径或相对于当前目录的路径）
+          可以使用关键字 "module"、"main-jar"、"main-class"、"description"、
+          "arguments"、"java-options"、"app-version"、"icon"、
+          "launcher-as-service"、
+          "win-console"、"win-shortcut"、"win-menu"、
+          "linux-app-category" 和 "linux-shortcut"。
+          这些选项将添加到原始命令行选项中或者用来覆盖
+          原始命令行选项，以构建额外的替代启动程序。
+          将从命令行选项构建主应用程序启动程序。
+          可以使用此选项构建额外的替代启动程序，
+          可以多次使用此选项来构建
+          多个额外的启动程序。
+  --arguments &lt;main class arguments&gt;
+          在没有为启动程序提供命令行参数时，
+          要传递到主类的命令行参数
+          可以多次使用此选项。
+  --java-options &lt;java options&gt;
+          要传递到 Java 运行时的选项
+          可以多次使用此选项。
+  --main-class &lt;class name&gt;
+          要执行的应用程序主类的限定名称
+          只有在指定了 --main-jar 时才能使用此选项。
+  --main-jar &lt;main jar file&gt;
+          应用程序的主 JAR；包含主类
+          （指定为相对于输入路径的路径）
+          可以指定 --module 或 --main-jar 选项，但是不能同时指定
+          两者。
+  --module -m &lt;module name&gt;[/&lt;main class&gt;]
+          应用程序的主模块（以及可选的主类）
+          此模块必须位于模块路径中。
+          如果指定了此选项，则将在 Java 运行时映像中
+          链接主模块。可以指定 --module 或 --main-jar 选项，
+          但是不能同时指定这两个选项。
+
+用来创建应用程序启动程序的与平台相关的选项：
+  --win-console
+          为应用程序创建控制台启动程序，应当为
+          需要控制台交互的应用程序指定
+
+用来创建应用程序包的选项：
+  --about-url &lt;url&gt;
+          应用程序主页的 URL
+  --app-image &lt;directory path&gt;
+          用来构建可安装程序包的
+          预定义应用程序映像的位置
+          （绝对路径或相对于当前目录的路径）
+  --file-associations &lt;file path&gt;
+          包含关键字-值对列表的属性文件的路径
+          （绝对路径或相对于当前目录的路径）
+          可以使用关键字 "extension"、"mime-type"、"icon" 和 "description"
+          来描述此关联。
+          可以多次使用此选项。
+  --install-dir &lt;directory path&gt;
+          默认安装位置下面的相对子路径
+  --license-file &lt;file path&gt;
+          许可证文件的路径
+          （绝对路径或相对于当前目录的路径）
+  --resource-dir &lt;directory path&gt;
+          覆盖 jpackage 资源的路径
+          可以通过向该目录中添加替代资源来覆盖 jpackage 的
+          图标、模板文件和其他资源。
+          （绝对路径或相对于当前目录的路径）
+  --runtime-image &lt;directory path&gt;
+          要安装的预定义运行时映像的路径
+          （绝对路径或相对于当前目录的路径）
+          在创建运行时程序包时需要使用选项。
+  --launcher-as-service
+          请求创建安装程序，以将主
+          应用程序启动程序注册为后台服务类型应用程序。
+
+用来创建应用程序包的与平台相关的选项：
+  --win-dir-chooser
+          添加一个对话框以允许用户选择
+          产品的安装目录。
+  --win-help-url &lt;url&gt;
+          用户可以从中获取更多信息或技术支持的 URL
+  --win-menu
+          请求为此应用程序添加开始菜单快捷方式
+  --win-menu-group &lt;menu group name&gt;
+          此应用程序所在的开始菜单组
+  --win-per-user-install
+          请求基于每个用户执行安装
+  --win-shortcut
+          请求为此应用程序添加桌面快捷方式
+  --win-shortcut-prompt
+          添加一个对话框以允许用户选择是否将由安装程序
+          创建快捷方式。
+  --win-update-url &lt;url&gt;
+          可用应用程序更新信息的 URL
+  --win-upgrade-uuid &lt;id string&gt;
+          与此程序包的升级相关联的 UUID
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>然后是基础示例</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jpackage ^                              ^后面都是注释，使用前需要删除掉
+  --type msi ^                          打包类型为msi
+  --dest ./target ^                     目标文件夹(最终结果输出在这里)
+  --input ./input ^                     输入目录路径(jar包、配置文件等资源，对应的位置为`{安装目录}/app`)
+  --app-content ./content ^             程序资源目录路径(和`--input`类似，对应的位置为`{安装目录}`)
+  --resource-dir ./resource ^           覆盖 jpackage 资源的路径，这个路径下的配置用于指导jpackage如何打包(具体什么资源可以参考一下`--temp`中的输出)
+  --name BilibiliDown ^
+  --main-class nicelee.memory.App ^     打包后app运行的主类入口
+  --main-jar launch.jar ^               
+  --java-options -Xmx2048m ^            打包后app运行的JVM参数
+  --runtime-image "./minimal-bilibilidown-jre" ^    指定打包后的自定义jre
+  --icon ./config/favicon.ico ^
+  --app-version 1.0.3 ^
+  --vendor "nICEnnnnnnnLee" ^
+  --copyright "Copyright © 2019-2024 nICEnnnnnnnLee" ^
+  --win-dir-chooser ^
+  --win-shortcut-prompt ^
+  --temp ./temp ^                       创建临时文件的目录    
+  --verbose                             输出详细信息
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+        </article>
+        <hr>
+
+        
+        
+            
+            
+                
+                    
+                        
+                        <h2 id="similar_posts">相似文章</h2>
+                        <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2024/07/08/jpackage-4-locale/">备忘录 jpackage 关于国际/本地化的坑(四)
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2024/07/07/jpackage-3-save-install-dir-download-dir/">备忘录 jpackage 保存安装目录和下载目录(三)
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2024/07/06/jpackage-2-change-jar-path/">备忘录 jpackage 修改jar包所在位置(二)
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+        
+            </ul>
+        
+
+        <div class="post-recent">
+    <div class="pre">
+        
+        <p><strong>上一篇</strong> <a href="/blog/2024/02/24/headless-vnc-browser/">备忘录 在headless服务器上运行GUI程序，并通过浏览器访问控制</a></p>
+        
+    </div>
+    <div class="nex">
+
+        
+        <p><strong>下一篇</strong> <a href="/blog/2024/07/06/jpackage-2-change-jar-path/">备忘录 jpackage 修改jar包所在位置(二)</a></p>
+        
+    </div>
+</div>
+
+
+        <!-- <h2 id="comments">评论</h2>  
+        
+
+
+
+ -->
+
+
+    </div>
+    <button class="anchor"><i class="fa fa-anchor"></i></button>
+    <div class="right">
+        <div class="wrap">
+
+            <!-- Content -->
+            <div class="side content">
+                <div>
+                    内容
+                </div>
+                <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#similar_posts">相似文章</a></li>
+                    
+                    <!-- <li><a href="#comments">评论</a></li> -->
+                </ul>
+            </div>
+			
+            <!-- 其他div框放到这里 -->
+            <!-- <div class="side">bbbb</div> -->
+        </div>
+    </div>
+</div>
+<script>
+/**
+ * target _blank
+ */
+(function() {
+    var aTags = document.querySelectorAll('article a:not([id])')
+    for (var i = 0; i < aTags.length; i++) {
+        aTags[i].setAttribute('target', '_blank')
+    }
+
+}());
+</script>
+<script src="/js/pageContent.js " charset="utf-8"></script>
+
+
+    <footer class="site-footer">
+
+
+    <div class="wrapper">
+        <p class="description">
+             这是一个缺爱的博客(๑‾ ꇴ ‾๑)！ 
+        </p>
+        <p class="contact">
+            联系我: 
+            <a href="https://github.com/nICEnnnnnnnLee" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
+            <a href="mailto:lijia0732@sina.com" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>  
+            <a href="https://weibo.com/blackhigh" title="Weibo"><i class="fa fa-weibo" aria-hidden="true"></i></a>       
+			<span onclick="copyToClipboard('https://nicelee.top/feed.xml')"><a href="#">订阅我<i class="fa fa-gg"></i></a></span>
+        </p>
+        <p>
+            总pv:<span id="busuanzi_value_site_pv"></span>，uv:<span id="busuanzi_value_site_uv"></span>，本页pv:<span id="busuanzi_value_page_pv"></span>
+        </p>
+        <p class="power">
+            <span>
+            有用链接：
+                <a href="http://www.bejson.com/" target="_blank">BeJSON</a> &nbsp;&nbsp;
+                <a href="http://site.ip138.com/"  target="_blank">IP或域名查询</a> &nbsp;&nbsp;
+                <a href="http://ping.chinaz.com/"  target="_blank">各地ping</a> &nbsp;&nbsp;
+                <a href="https://tool.lu/"  target="_blank">在线工具</a> &nbsp;&nbsp; 
+                <a href="https://www.aliyun.com/"  target="_blank">阿里云</a> &nbsp;&nbsp; 
+                <a href="http://patorjk.com/software/taag/"  target="_blank">Text转FIGlet</a> &nbsp;&nbsp; 
+                <a href="https://vercel.com/dashboard"  target="_blank">Vercel</a> &nbsp;&nbsp;
+                <a href="https://dash.cloudflare.com/"  target="_blank">Cloudflare</a> &nbsp;&nbsp;
+                <a href="https://www.webfx.com/tools/emoji-cheat-sheet/"  target="_blank">Emoji😳</a> &nbsp;&nbsp;
+                <a href="https://www.color-hex.com/"  target="_blank">Color-hex</a> &nbsp;&nbsp;
+                <a href="https://hub.fastgit.org/"  target="_blank">Github镜像fastgit</a> &nbsp;&nbsp;
+            </span>
+        </p>
+        <p class="power">
+            <span>
+            除非另有注明，否则本网站上的内容可按 <a href="http://creativecommons.org/licenses/by-nc/4.0/"  target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议许可</a> 或更新版本使用。
+            </span>
+        </p>
+        <p class="power">
+            <span>
+                建站声明详见 <a href="/about/#关于个人博客">[关于]</a>. <a href="/sitemap.xml">[站点地图]</a>. 
+            </span>
+            
+        </p>
+        <p class="power beian">
+        </p>
+		<p class="power">
+            <span>
+                Site powered by <a href="https://jekyllrb.com/">Jekyll</a>.
+            </span>
+            <span>
+                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
+            </span>
+        </p>
+        
+		
+    </div>
+</footer>
+
+
+<!-- mask start -->
+<div id="searchBg"></div>
+<div id="searchDiv">
+	<input id="searchContent" type="text" onkeypress="if(event.keyCode==13) { search();return false;}" value=""/></input>
+    <div id="searchBtn" onclick="search();" /><i class="fa fa-search"></i></div>
+	<span onclick="hidediv();" class="close"></span>
+</div>
+<!-- mask end -->
+<!-- live2d begin -->
+<div id="landlord">
+    <div class="message" style="opacity:0"></div>
+    <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+    <div class="hide-button">隐藏</div>
+</div>
+<!-- live2d end -->
+<script type='text/javascript' src='/js/jquery.min.js '></script>
+<script type='text/javascript'>
+function search(){	
+	var str = document.getElementById("searchContent").value;
+	//console.log(str);
+	setLocalStorage("blogSearchKey",str);
+	hidediv();
+	window.location.href="/blog/archive/";
+}
+function showdiv() {
+	//alert("调用了showdiv()函数");
+	document.getElementById("searchBg").style.display ="block";
+	document.getElementById("searchDiv").style.display ="block";
+
+	//$('body').css("overflow", "hidden");
+	document.getElementsByTagName('body')[0].setAttribute("overflow", "hidden");
+}
+function hidediv() {
+	document.getElementById("searchBg").style.display = 'none';
+	document.getElementById("searchDiv").style.display = 'none';
+	//$('body').css("overflow", "auto");
+	document.getElementsByTagName('body')[0].setAttribute("overflow", "hidden");
+}
+////////////////////////////useful function //////////////////////////////////////
+//写cookies
+function setLocalStorage(name,value)
+{
+	localStorage.setItem(name, JSON.stringify(value));
+}
+//读cookies
+function getLocalStorage(name)
+{
+	return JSON.parse(localStorage.getItem(name));
+}
+//删cookies
+function delLocalStorage(name)
+{
+	localStorage.setItem(name, JSON.stringify(""));
+}
+function copyToClipboard (text) {
+    if(text.indexOf('-') !== -1) {
+        var arr = text.split('-');
+        text = arr[0] + arr[1];
+    }
+    var textArea = document.createElement("textarea");
+      textArea.style.position = 'fixed';
+      textArea.style.top = '0';
+      textArea.style.left = '0';
+      textArea.style.width = '2em';
+      textArea.style.height = '2em';
+      textArea.style.padding = '0';
+      textArea.style.border = 'none';
+      textArea.style.outline = 'none';
+      textArea.style.boxShadow = 'none';
+      textArea.style.background = 'transparent';
+      textArea.value = text;
+      document.body.appendChild(textArea);
+      textArea.select();
+	//alert("调用了复制剪贴板函数");
+      try {
+        var successful = document.execCommand('copy');
+        var msg = successful ? 'Rss源已成功复制到剪贴板' : 'RSS源为:https://nicelee.top/feed.xml';
+		//alert(msg);
+		showTips(msg);
+      } catch (err) {
+		//console.log(err);
+        //alert('该浏览器不支持点击复制到剪贴板');
+		showTips('RSS源为:https://nicelee.top/feed.xml');
+      }
+
+      document.body.removeChild(textArea);
+}
+/*
+<!--  版权维护  -->
+function addLink() {
+//alert("!!!");
+    var body_element = document.body;
+    var selection;
+    selection = window.getSelection();
+    if((selection + "").indexOf("/feed.xml") != -1){
+        return;
+    }
+	if(selection == ""){
+		return;
+	}
+    var locationHref=document.location.href;
+    var appendLink="\r\n------------------------------\r\n 原文出自[ NiceLee的个人博客 ] 转载请保留原文链接: <a href='"+locationHref+"'>"+locationHref+"</a>";
+    if (window.clipboardData) { // Internet Explorer
+        //console.log("调用原生函数");
+        var copytext = selection + appendLink;
+        window.clipboardData.setData ("Text", copytext);
+        return false;
+    } else {
+        //console.log("复杂的套路");
+        var copytext = selection + appendLink;
+        var newdiv = document.createElement('div');
+        newdiv.style.position='absolute';
+        newdiv.style.left='-99999px';
+        body_element.appendChild(newdiv);
+        newdiv.innerHTML = "<pre>" +copytext + "</pre>";
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function() {
+        	body_element.removeChild(newdiv);
+        },0);
+    }
+}
+document.oncopy = addLink;
+*/
+
+//contetn为要显示的内容  
+function showTips( content ){  
+	//alert("调用了复制提示消息函数");
+	//alert("内容为"+ content);
+    //窗口的宽度  
+	//alert(content);
+	var width = 250;
+	var x  = $(window).width()/2 - width/2;	
+	var y = $(window).height()/2 -20;
+	var $i = $("<span/>").text(content);
+	$i.css({
+		"z-index": 999999999999999999999999999,
+		"top": y,
+		"left": x,
+		"position": "absolute",
+		"font-weight": "bold",
+		'padding'   : '3px 5px',  
+		'background': '#8FBC8F',  
+		'font-size' : 12 + 'px',  
+		'margin'    : '0 auto',  
+		'text-align': 'center',  
+		'width'     : width + 'px',  
+		'height'    : 'auto',  
+		'color'     : '#fff'
+	});
+	$("body").append($i);
+	$i.animate({
+		"opacity": 0
+	},
+	3000,
+	function() {
+		//console.log($i.css());
+		$i.remove();
+		//alert('');
+	});
+}     
+</script>
+
+<!-- 窗口失去焦点 -- 别走啊 -->
+<!-- 窗口获得焦点 -- 恢复 -->
+<!-- console 打印figlet-->
+<script>
+var titleOnFocus = document.title;
+var titleOnBlur = "...(*￣０￣)ノ[别走啊…]";
+window.onfocus =function(){
+    document.title = titleOnFocus;
+    //console.log(titleOnFocus);
+}
+window.onblur = function(){
+    document.title = titleOnBlur;
+    //console.log(titleOnBlur);
+}
+
+var figlet = "\n" +
+"        _          _            _               \n" +
+"       (_)        | |          | |              \n" +
+"  _ __  _  ___ ___| | ___  ___ | |_ ___  _ __   \n" +
+" | '_ \\| |/ __/ _ \\ |/ _ \\/ _ \\| __/ _ \\| '_ \\  \n" +
+" | | | | | (_|  __/ |  __/  __/| || (_) | |_) | \n" +
+" |_| |_|_|\\___\\___|_|\\___|\\___(_)__\\___/| .__/  \n" +
+"                                        | |     \n" +
+"                                        |_|     \n" ;
+console.log(figlet);
+console.log("%c小改改爆个照呗\n hentai女个装呗", "color:red;font-size: 50px;font-weight:bold;");
+
+/* 防hentai
+document.onkeydown=function(){
+    var e = window.event||arguments[0];
+    if(e.keyCode==123){
+    	alert('请尊重劳动成果！');
+            return false;
+    }else if((e.ctrlKey)&&(e.shiftKey)&&(e.keyCode==73)){
+    	alert('请尊重劳动成果！');
+            return false;
+    }else if((e.ctrlKey)&&(e.keyCode==85)){
+            alert('请尊重劳动成果！');
+            return false;
+    }else if((e.ctrlKey)&&(e.keyCode==83)){
+           alert('请尊重劳动成果！');
+           return false;
+    }
+}
+document.oncontextmenu=function(){
+	alert('请尊重劳动成果！');
+    return false;
+}*/
+</script>
+
+<!-- live2d Begin-->
+<script type="text/javascript">
+    var message_Path = '/sources/live2d/'
+    var home_Path = 'https://nicelee.top/'
+</script>
+<script type="text/javascript" src="/sources/live2d/js/live2d.js"></script>
+<script type="text/javascript" src="/sources/live2d/js/message.js"></script>
+<script type="text/javascript">
+    var modelList = ["kesshouban_v2", "tia", "wanko", "index", "kanna", "koharu", "umaru", 
+	"22.closet.default.v2", 
+	"22.closet.2018.bls-summer", 
+	"22.closet.2019.summer", 
+	"33.closet.2016.xmas", 
+	"33.closet.2017.tomo-bukatsu", 
+	"33.closet.2018.bls-summer", 
+	"33.closet.2018.bls-winter", 
+	"33.closet.default.v2" ];    
+    var model = modelList[12]; 
+    // kesshouban_v2 血小板
+    // tia  小改改
+    // wanko 小狗狗 
+    // index 魔禁-茵蒂克丝
+    // kanna 康娜龙
+    // koharu 卡哇伊的Q版模型
+    // umaru 干物妹小埋 带声音
+    // 22 哔哩哔哩22娘
+    // 22.v2 哔哩哔哩22娘
+    console.log("live2d模型(小部分)来自官网: http://www.live2d.com/usermanual/cubism2_cn/samples.html");
+    console.log("live2d模型(大部分)来自梦象: https://mx-model.ga/");
+    if( window.document.body.offsetWidth >= 666){
+        loadlive2d("live2d", "/sources/live2d/model/"+ model +"/model.json");
+    }else{
+        //loadlive2d("live2d", "/sources/live2d/model/tia/model_tiny.json");
+        loadlive2d("live2d", "/sources/live2d/model/"+ model +"/model_tiny.json");
+    }
+</script>
+<!-- live2d End-->
+
+<script type="text/javascript">
+	var a_idx = 0;
+	jQuery(document).ready(function($) {
+		$("body").click(function(e) {
+			var a = new Array("大吉大利，今晚吃鸡！", "惊不惊喜，意不意外", "还有这种操作？", "小猪佩奇身上纹，掌声送给社会人", "确认过眼神", "皮一下，很开心", "很好很强大", "C位出道", "你若盛开，清风自来", "如果帅也是一种罪，那我已罪无可赦", "别看资料 ，看聊效！", "感动吗，不敢动", "打call", "我是你的超级英雄");
+			var $i = $("<span/>").text(a[a_idx]);
+			a_idx = (a_idx + 1) % a.length;
+			var x = e.pageX,
+			y = e.pageY;
+			$i.css({
+				"z-index": 999999999999999999999999999,
+				"top": y - 20,
+				"left": x,
+				"position": "absolute",
+				"font-weight": "bold",
+				"color": "#dd3333"
+			});
+			$("body").append($i);
+			$i.animate({
+				"top": y - 180,
+				"opacity": 0
+			},
+			1500,
+			function() {
+				$i.remove();
+				//alert('');
+			});
+		});
+	});
+</script>
+
+
+<script async src="/js/busuanzi.pure.mini.js "></script>
+
+
+    <div class="back-to-top">
+    <a href="#top" data-scroll>
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+    <script src="/js/main.js " charset="utf-8"></script>
+    <script src="/js/smooth-scroll.min.js " charset="utf-8"></script>
+    <script type="text/javascript">
+      smoothScroll.init({
+        speed: 500, // Integer. How fast to complete the scroll in milliseconds
+        easing: 'easeInOutCubic', // Easing pattern to use
+        offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
+      });
+      // 为了底部内容不被遮住
+      $(document).ready(function () {
+        resizeBody();
+      });
+      window.onresize = resizeBody;
+      function resizeBody(){
+        //console.log("resizing Body...");
+        if (window.innerWidth <= 770) {
+            var totalHeight = $("header#top").height() + $(".page.clearfix").height() + $("footer.site-footer").height() +80;
+            document.body.style.height = totalHeight + "px";
+        }else{
+            document.body.style.height = "auto";
+        }
+      }
+    </script>
+	
+	
+    <!-- <script src=" /js/scroll.min.js " charset="utf-8"></script> -->
+  </body>
+
+</html>

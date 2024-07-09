@@ -2,6 +2,34 @@
 	"code" : 0 ,
 	"data" : [
 	{
+		"title" : "备忘录 jpackage 关于国际/本地化的坑(四)",
+		"tags" : "Java",
+		"url" : "/blog/2024/07/08/jpackage-4-locale/"
+		"brief" : "目标仅仅是生成简体中文安装包，结果过程中发生了很多预料之外的事情。总之，走了很多弯路。感觉思路也有点问题，没转过弯来。虽然做了很多无用功，但还是把它记录下来。"
+	},
+    
+	{
+		"title" : "备忘录 jpackage 保存安装目录和下载目录(三)",
+		"tags" : "Java",
+		"url" : "/blog/2024/07/07/jpackage-3-save-install-dir-download-dir/"
+		"brief" : "默认的安装目录是C盘的ProgramFile文件夹，当下次进行安装(使用其它版本进行升降级)时，我们希望能够获得上一次的选择位置。默认的下载目录也是类似，只是还有更多的东西需要实现：写个界面来获取输入，以及在解压完文件后在config/app.config输出配置结果。以上这些操作其实与jpackage关系不大，主要的关键词是Wix。"
+	},
+    
+	{
+		"title" : "备忘录 jpackage 修改jar包所在位置(二)",
+		"tags" : "Java",
+		"url" : "/blog/2024/07/06/jpackage-2-change-jar-path/"
+		"brief" : "|--BilibiliDown.exe程序入口|--appWindows下，安装包自动生成。告诉`exe`文件如何正确运行||--.package用于指示程序名称||--BilibiliDown.cfg用于指示JVM运行的相关配置||--launch.jarjar包||--INeedBiliAV.jarjar包|--runtime打包后的目录默认长上面这样，现在需要将jar包抬上来到根目录（下面这样），并确保程序正常运行|--BilibiliDown.exe程序入口|--launch.jarjar包|--INeedBiliAV.jarjar包|--appWindows下，安装包自动生成。告诉`exe`文件如何正确运行||--.package用于指示程序名称||--BilibiliDown.cfg用于指示JVM运行的相关配置|--runtime"
+	},
+    
+	{
+		"title" : "备忘录 jpackage 的简单使用(一)",
+		"tags" : "Java",
+		"url" : "/blog/2024/07/05/jpackage-1-intro/"
+		"brief" : "我向来是不觉得通过脚本/命令行运行jar包有什么不好的，但想着使用jpackage生成相关程序也花不了多少工夫。在不想大改代码的情况下，踩了不少坑。也行吧。本来还想试试通过Graalvm进行aot编译，还是不那么折腾了。"
+	},
+    
+	{
 		"title" : "备忘录 在headless服务器上运行GUI程序，并通过浏览器访问控制",
 		"tags" : "git",
 		"url" : "/blog/2024/02/24/headless-vnc-browser/"
