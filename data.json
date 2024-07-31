@@ -2,6 +2,27 @@
 	"code" : 0 ,
 	"data" : [
 	{
+		"title" : "【资源】通过注册微信公众测试号推送消息",
+		"tags" : "微信",
+		"url" : "/blog/2024/07/29/wechat-push/"
+		"brief" : "想要通过API来给自己推送消息的方法有过很多，比如server酱、pushplus等。但是初始阶段的用爱发电之后(或者说推广策略？)，又是实名认证又是进一步限额免费等等，往往糟心事蛮多的。现在，算是有了替代方案，不需要注册公众号，只需要通过微信注册测试号即可。"
+	},
+    
+	{
+		"title" : "【资源】关于Cloudflare CDN 优选IP",
+		"tags" : "cloudflare",
+		"url" : "/blog/2024/07/26/cloudflare-better-ips/"
+		"brief" : "最终结论：账号绑卡可以走SaaS回源，不绑卡只能人工设置IP。"
+	},
+    
+	{
+		"title" : "备忘录 jpackage 关于其它(五)",
+		"tags" : "Java",
+		"url" : "/blog/2024/07/10/jpackage-5-tips/"
+		"brief" : "一些已知问题或问题的解决方法。"
+	},
+    
+	{
 		"title" : "备忘录 jpackage 关于国际/本地化的坑(四)",
 		"tags" : "Java",
 		"url" : "/blog/2024/07/08/jpackage-4-locale/"
