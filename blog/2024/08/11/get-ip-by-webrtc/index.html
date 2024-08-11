@@ -7,13 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>关于TLS加密实现中不可忽略的部分：校验证书的域名</title>
-    <meta name="description" content="  做个笔记。对TCP连接进行SSL/TLS加密时，应当注意这个问题。">
+    <title>备忘录 通过WebRTC获取客户端真实IP</title>
+    <meta name="description" content="WebRTC是什么不说了。它有个漏洞或者说特性，使得浏览器通过javascript可以获取到客户端的真实IP地址。不论浏览器开了代理与否。">
 
-    <meta property="og:url" content="https://nicelee.top/blog/2021/10/25/hostname-verify-on-ssl-socket/">
+    <meta property="og:url" content="https://nicelee.top/blog/2024/08/11/get-ip-by-webrtc/">
     <meta property="og:site_name" content="NiceLee的博客">
-    <meta property="og:title" content="关于TLS加密实现中不可忽略的部分：校验证书的域名">
-    <meta property="og:description" content="  做个笔记。对TCP连接进行SSL/TLS加密时，应当注意这个问题。">
+    <meta property="og:title" content="备忘录 通过WebRTC获取客户端真实IP">
+    <meta property="og:description" content="WebRTC是什么不说了。它有个漏洞或者说特性，使得浏览器通过javascript可以获取到客户端的真实IP地址。不论浏览器开了代理与否。">
     <meta property="og:image" content="https://nicelee.top/favicon.ico?">
     <meta property="og:image:type" content="image/x-icon">
     
@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="/css/font-awesome.min.css ">
     <link rel="stylesheet" href="/css/font-ali.css?v=1.2 ">
     <link rel="stylesheet" href="/css/main.css?v=1.1 ">
-    <link rel="canonical" href="https://nicelee.top/blog/2021/10/25/hostname-verify-on-ssl-socket/">
+    <link rel="canonical" href="https://nicelee.top/blog/2024/08/11/get-ip-by-webrtc/">
     <link rel="alternate" type="application/rss+xml" title="NiceLeeのBlog" href="https://nicelee.top/feed.xml ">
 
 	
@@ -309,11 +309,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>关于TLS加密实现中不可忽略的部分：校验证书的域名</h1>
+        <h1>备忘录 通过WebRTC获取客户端真实IP</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2021-10-25
+                <i class="fa fa-calendar"></i>2024-08-11
             </div>
 
             <div class="label-card">
@@ -336,7 +336,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#代码片段" title="Category: 代码片段" rel="category">代码片段</a>
     
   
 
@@ -353,14 +353,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
-    
-        <!--a href="/blog/tag/#Go" title="Tag: Go" rel="tag">Go</a-->
-        <a href="/blog/tag/#Go" title="Tag: Go" rel="tag">Go</a>&nbsp;
-    
-        <!--a href="/blog/tag/#Python" title="Tag: Python" rel="tag">Python</a-->
-        <a href="/blog/tag/#Python" title="Tag: Python" rel="tag">Python</a>
+        <!--a href="/blog/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a-->
+        <a href="/blog/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a>
     
   
 
@@ -372,145 +366,142 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
-  <li><a href="#java" id="markdown-toc-java">Java</a>    <ul>
-      <li><a href="#sslsocket" id="markdown-toc-sslsocket">SSLSocket</a></li>
-      <li><a href="#netty-sslhandler" id="markdown-toc-netty-sslhandler">Netty SslHandler</a></li>
-    </ul>
+  <li><a href="#如何禁用webrtc" id="markdown-toc-如何禁用webrtc">如何禁用WebRTC</a></li>
+  <li><a href="#如何获取公共的stun-server" id="markdown-toc-如何获取公共的stun-server">如何获取公共的STUN Server</a></li>
+  <li><a href="#如何检查stun-server是否有效" id="markdown-toc-如何检查stun-server是否有效">如何检查STUN Server是否有效</a></li>
+  <li><a href="#相关代码" id="markdown-toc-相关代码">相关代码</a></li>
+</ul>
+
+<p>WebRTC是什么不说了。<br />
+它有个漏洞或者说特性，使得浏览器通过javascript可以获取到客户端的真实IP地址。<br />
+不论浏览器开了代理与否。</p>
+
+<h2 id="如何禁用webrtc">如何禁用WebRTC</h2>
+
+<ul>
+  <li>
+    <p>FireFox
+  插件 <a href="https://addons.mozilla.org/en-US/firefox/addon/happy-bonobo-disable-webrtc/">DisableWebRTC</a></p>
   </li>
-  <li><a href="#go" id="markdown-toc-go">Go</a></li>
-  <li><a href="#python" id="markdown-toc-python">Python</a></li>
+  <li>
+    <p>Chrome
+  插件 <a href="https://chrome.google.com/webstore/detail/webrtc-network-limiter/npeicpdbkakmehahjeeohfdhnlpdklia">WebRTC Network Limiter</a></p>
+  </li>
 </ul>
-<blockquote>
-  <p>做个笔记。<br />
-对TCP连接进行SSL/TLS加密时，应当注意这个问题。</p>
-</blockquote>
 
-<h2 id="前言">前言</h2>
-<p>我们用Java代码示范，来理一下SSL/TLS加密时的常见问题。</p>
+<h2 id="如何获取公共的stun-server">如何获取公共的STUN Server</h2>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 创建一个ssl上下文，用来管理ssl相关配置</span>
-<span class="c1">// 这里可以自定义证书的合法性校验，或者直接使用默认的实现</span>
-<span class="c1">// 想要忽略证书问题，校验时直接返回true即可</span>
-<span class="nc">SSLContext</span> <span class="n">sslContext</span> <span class="o">=</span> <span class="nc">SSLContext</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="s">"TLS"</span><span class="o">);</span>
-<span class="n">sslContext</span><span class="o">.</span><span class="na">init</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="k">new</span> <span class="nc">SecureRandom</span><span class="o">());</span>
-<span class="c1">// sslContext.init(getKeyManager(), getTrustManager(), new SecureRandom());</span>
-<span class="nc">SSLSocketFactory</span> <span class="n">factory</span> <span class="o">=</span> <span class="n">sslContext</span><span class="o">.</span><span class="na">getSocketFactory</span><span class="o">();</span>
-
-<span class="c1">// 创建一个socket连接</span>
-<span class="nc">Socket</span> <span class="n">socket</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Socket</span><span class="o">();</span>
-<span class="n">socket</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="k">new</span> <span class="nc">InetSocketAddress</span><span class="o">(</span><span class="n">host</span><span class="o">,</span> <span class="n">port</span><span class="o">),</span> <span class="n">timeout</span><span class="o">);</span>
-<span class="c1">// 在现有socket上, 再套一层加密</span>
-<span class="c1">// 因为有的服务器上绑定了很多域名, 我们需要告知它我们的目标是什么, 以返回正确的域名证书  </span>
-<span class="nc">SSLSocket</span> <span class="n">sslSocket</span> <span class="o">=</span> <span class="o">(</span><span class="nc">SSLSocket</span><span class="o">)</span><span class="n">factory</span><span class="o">.</span><span class="na">createSocket</span><span class="o">(</span><span class="n">socket</span><span class="o">,</span> <span class="n">sni</span><span class="o">,</span> <span class="n">port</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
-
-<span class="c1">// 接下来, 进行正常的输入输出</span>
-<span class="nc">InputStream</span> <span class="n">in</span> <span class="o">=</span> <span class="n">sslSocket</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
-<span class="nc">OutputStream</span> <span class="n">out</span> <span class="o">=</span> <span class="n">sslSocket</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">();</span>
-<span class="c1">// ...</span>
-<span class="n">sslSocket</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-</code></pre></div></div>
-
-<p>综上, 根据经验,常见的操作是：</p>
 <ul>
-  <li>跳过证书有效性检查; 或自定义证书校验, 比如SSL pinning</li>
-  <li>SSL双向认证, 客户端也要添加证书</li>
-  <li>设置指定SNI</li>
+  <li><a href="https://gist.github.com/mondain/b0ec1cf5f60ae726202e">Public STUN server list</a></li>
+  <li><a href="https://gist.github.com/sagivo/3a4b2f2c7ac6e1b5267c2f1f59ac6c6b">webRTC stun / turn server list</a></li>
 </ul>
 
-<p>我想当然地认为证书有效性检查默认就包含了域名与证书是否匹配的验证。<br />
-然而并不是。</p>
+<h2 id="如何检查stun-server是否有效">如何检查STUN Server是否有效</h2>
+<p><a href="https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice">WebRTC samples - Trickle ICE</a></p>
 
-<p>广义上的证书有效性检查分为两部分：</p>
-<ul>
-  <li>狭义上的证书有效性检查</li>
-  <li>证书和域名是否匹配</li>
-</ul>
+<h2 id="相关代码">相关代码</h2>
+<p>代码参考了<a href="https://github.com/diafygi/webrtc-ips">diafygi/webrtc-ips</a><br />
+复制代码，浏览器F12可执行。</p>
 
-<p>所有HTTPS请求工具默认都是广义上的检查，但部分SSL/TLS工具默认只进行狭义上的检查。</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">getIPs</span><span class="p">(</span><span class="nx">callback</span><span class="p">){</span>
+    <span class="kd">let</span> <span class="nx">ip_dups</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="kd">let</span> <span class="nx">ip_regex</span> <span class="o">=</span> <span class="sr">/</span><span class="se">([</span><span class="sr">0-9</span><span class="se">]{1,3}(\.[</span><span class="sr">0-9</span><span class="se">]{1,3}){3}</span><span class="sr">|</span><span class="se">[</span><span class="sr">a-f0-9</span><span class="se">]{1,4}(</span><span class="sr">:</span><span class="se">[</span><span class="sr">a-f0-9</span><span class="se">]{1,4}){7})</span><span class="sr">/</span>
+    
+    <span class="kd">let</span> <span class="nx">callbackOnce</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">ip_addr</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">ip_dups</span><span class="p">[</span><span class="nx">ip_addr</span><span class="p">]</span> <span class="o">===</span> <span class="kc">undefined</span><span class="p">)</span>
+            <span class="nx">callback</span><span class="p">(</span><span class="nx">ip_addr</span><span class="p">);</span>
 
-<p>这意味着，你不注意的话，很可能经受MITM攻击而不自知。<br />
-比如，你使用SSLSocket的默认设置建立到A域名的加密连接, 中间人只要使用有效的B域名的证书, 即可窃听甚至篡改该连接内容。</p>
+        <span class="nx">ip_dups</span><span class="p">[</span><span class="nx">ip_addr</span><span class="p">]</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">};</span>
+    <span class="c1">//compatibility for firefox and chrome</span>
+    <span class="kd">let</span> <span class="nx">RTCPeerConnection</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">RTCPeerConnection</span>
+        <span class="o">||</span> <span class="nb">window</span><span class="p">.</span><span class="nx">mozRTCPeerConnection</span>
+        <span class="o">||</span> <span class="nb">window</span><span class="p">.</span><span class="nx">webkitRTCPeerConnection</span><span class="p">;</span>
+    <span class="kd">let</span> <span class="nx">useWebKit</span> <span class="o">=</span> <span class="o">!!</span><span class="nb">window</span><span class="p">.</span><span class="nx">webkitRTCPeerConnection</span><span class="p">;</span>
 
-<p>下面来记一下各种情况下的域名校验实现</p>
+    <span class="c1">//bypass naive webrtc blocking using an iframe</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">RTCPeerConnection</span><span class="p">){</span>
+        <span class="c1">//NOTE: you need to have an iframe in the page right above the script tag</span>
+        <span class="c1">//</span>
+        <span class="c1">//&lt;iframe id="iframe" sandbox="allow-same-origin" style="display: none"&gt;&lt;/iframe&gt;</span>
+        <span class="c1">//&lt;script&gt;...getIPs called in here...</span>
+        <span class="c1">//</span>
+        <span class="kd">let</span> <span class="nx">win</span> <span class="o">=</span> <span class="nx">iframe</span><span class="p">.</span><span class="nx">contentWindow</span><span class="p">;</span>
+        <span class="nx">RTCPeerConnection</span> <span class="o">=</span> <span class="nx">win</span><span class="p">.</span><span class="nx">RTCPeerConnection</span>
+            <span class="o">||</span> <span class="nx">win</span><span class="p">.</span><span class="nx">mozRTCPeerConnection</span>
+            <span class="o">||</span> <span class="nx">win</span><span class="p">.</span><span class="nx">webkitRTCPeerConnection</span><span class="p">;</span>
+        <span class="nx">useWebKit</span> <span class="o">=</span> <span class="o">!!</span><span class="nx">win</span><span class="p">.</span><span class="nx">webkitRTCPeerConnection</span><span class="p">;</span>
+    <span class="p">}</span>
 
-<h2 id="java">Java</h2>
-<h3 id="sslsocket">SSLSocket</h3>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ...</span>
-<span class="nc">SSLSocket</span> <span class="n">sslSocket</span> <span class="o">=</span> <span class="o">(</span><span class="nc">SSLSocket</span><span class="o">)</span><span class="n">factory</span><span class="o">.</span><span class="na">createSocket</span><span class="o">(</span><span class="n">socket</span><span class="o">,</span> <span class="n">sni</span><span class="o">,</span> <span class="n">port</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
-<span class="kd">final</span> <span class="nc">Certificate</span><span class="o">[]</span> <span class="n">certs</span> <span class="o">=</span> <span class="n">sslSocket</span><span class="o">.</span><span class="na">getSession</span><span class="o">().</span><span class="na">getPeerCertificates</span><span class="o">();</span>
-<span class="kd">final</span> <span class="nc">X509Certificate</span> <span class="n">x509</span> <span class="o">=</span> <span class="o">(</span><span class="nc">X509Certificate</span><span class="o">)</span> <span class="n">certs</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
-<span class="k">for</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;?&gt;</span> <span class="nl">entry:</span> <span class="n">x509</span><span class="o">.</span><span class="na">getSubjectAlternativeNames</span><span class="o">())</span> <span class="o">{</span>
-    <span class="k">if</span><span class="o">((</span><span class="nc">Integer</span><span class="o">)</span><span class="n">entry</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span> <span class="o">==</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
-        <span class="nc">String</span> <span class="n">san</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">1</span><span class="o">).</span><span class="na">toString</span><span class="o">();</span>
-        <span class="k">if</span><span class="o">(</span><span class="n">san</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">sni</span><span class="o">))</span>
-            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-        <span class="k">if</span><span class="o">(</span><span class="n">san</span><span class="o">.</span><span class="na">startsWith</span><span class="o">(</span><span class="s">"*"</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">sni</span><span class="o">.</span><span class="na">endsWith</span><span class="o">(</span><span class="n">san</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="mi">1</span><span class="o">)))</span>
-            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
+    <span class="c1">//minimal requirements for data connection</span>
+    <span class="kd">let</span> <span class="nx">mediaConstraints</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="na">optional</span><span class="p">:</span> <span class="p">[{</span><span class="na">RtpDataChannels</span><span class="p">:</span> <span class="kc">true</span><span class="p">}]</span>
+    <span class="p">};</span>
+    
+    <span class="c1">// turn server list  https://gist.github.com/sagivo/3a4b2f2c7ac6e1b5267c2f1f59ac6c6b</span>
+    <span class="c1">// to check if the server works - https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice</span>
+    <span class="c1">// let servers = {iceServers: [{urls: "stun:stun.l.google.com:19302"}]};</span>
+    <span class="kd">let</span> <span class="nx">servers</span> <span class="o">=</span> <span class="p">{</span><span class="na">iceServers</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span><span class="na">urls</span><span class="p">:</span> <span class="dl">"</span><span class="s2">stun:stun.l.google.com:19302</span><span class="dl">"</span><span class="p">},</span>
+    <span class="c1">//   {urls: "stun:stun2.1.google.com:19302"},</span>
+    <span class="c1">//    {urls: "stun:stun3.1.google.com:19302"},</span>
+    <span class="c1">//    {urls: "stun:stun4.1.google.com:19302"},</span>
+    <span class="c1">//    {urls: "stun:stun.sip.us:3478"},</span>
+    <span class="c1">//    {urls: "stun:stun:stun.dus.net:3478"},</span>
+    <span class="c1">//    {urls: "stun:stun:stun.easyvoip.com:3478"},</span>
+    <span class="c1">//    {urls: "stun:stun:stun.easybell.de:3478"},</span>
+    <span class="c1">//    {urls: "stun:stun.freecall.com:3478"},</span>
+    <span class="c1">//    {urls: "stun:stun.freeswitch.org:3478"},</span>
+        <span class="p">{</span><span class="na">urls</span><span class="p">:</span> <span class="dl">"</span><span class="s2">stun:stun.nfon.net:3478</span><span class="dl">"</span><span class="p">},</span>
+    <span class="p">]};</span>
+    
+    
+    <span class="c1">//construct a new RTCPeerConnection</span>
+    <span class="kd">let</span> <span class="nx">pc</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RTCPeerConnection</span><span class="p">(</span><span class="nx">servers</span><span class="p">,</span> <span class="nx">mediaConstraints</span><span class="p">);</span>
 
+    <span class="kd">function</span> <span class="nx">handleCandidate</span><span class="p">(</span><span class="nx">candidate</span><span class="p">){</span>
+        <span class="c1">//match just the IP address</span>
+        <span class="kd">const</span> <span class="nx">m</span> <span class="o">=</span> <span class="nx">candidate</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="nx">ip_regex</span><span class="p">);</span>
+        <span class="nx">m</span> <span class="o">&amp;&amp;</span> <span class="nx">callbackOnce</span><span class="p">(</span><span class="nx">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+    <span class="p">}</span>
 
-<span class="c1">// 接下来, 进行正常的输入输出</span>
-<span class="nc">InputStream</span> <span class="n">in</span> <span class="o">=</span> <span class="n">sslSocket</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
-<span class="nc">OutputStream</span> <span class="n">out</span> <span class="o">=</span> <span class="n">sslSocket</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">();</span>
-<span class="c1">// ...</span>
-</code></pre></div></div>
+    <span class="c1">//listen for candidate events</span>
+    <span class="nx">pc</span><span class="p">.</span><span class="nx">onicecandidate</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">ice</span><span class="p">){</span>
 
-<h3 id="netty-sslhandler">Netty SslHandler</h3>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="nd">@Override</span>
-<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">initChannel</span><span class="o">(</span><span class="nc">SocketChannel</span> <span class="n">ch</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
-    <span class="nc">ChannelPipeline</span> <span class="n">pipeline</span> <span class="o">=</span> <span class="n">ch</span><span class="o">.</span><span class="na">pipeline</span><span class="o">();</span>
-    <span class="c1">// ... </span>
-    <span class="c1">// 假设已经通过各种方式实现了 SslHandler handler</span>
-    <span class="c1">// https://netty.io/4.1/api/io/netty/handler/ssl/SslContext.html#newHandler-io.netty.buffer.ByteBufAllocator-java.util.concurrent.Executor-</span>
-    <span class="nc">SSLEngine</span> <span class="n">sslEngine</span> <span class="o">=</span> <span class="n">handler</span><span class="o">.</span><span class="na">engine</span><span class="o">();</span>
-    <span class="nc">SSLParameters</span> <span class="n">sslParameters</span> <span class="o">=</span> <span class="n">sslEngine</span><span class="o">.</span><span class="na">getSSLParameters</span><span class="o">();</span>
-    <span class="c1">// only available since Java 7</span>
-    <span class="n">sslParameters</span><span class="o">.</span><span class="na">setEndpointIdentificationAlgorithm</span><span class="o">(</span><span class="s">"HTTPS"</span><span class="o">);</span>
-    <span class="n">sslEngine</span><span class="o">.</span><span class="na">setSSLParameters</span><span class="o">(</span><span class="n">sslParameters</span><span class="o">);</span>
-    <span class="n">pipeline</span><span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">"ssl"</span><span class="o">,</span> <span class="n">handler</span><span class="o">);</span>
-    <span class="c1">// ... </span>
-<span class="o">}</span>
-</code></pre></div></div>
+        <span class="c1">//skip non-candidate events</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">ice</span><span class="p">.</span><span class="nx">candidate</span><span class="p">)</span>
+            <span class="nx">handleCandidate</span><span class="p">(</span><span class="nx">ice</span><span class="p">.</span><span class="nx">candidate</span><span class="p">.</span><span class="nx">candidate</span><span class="p">);</span>
+    <span class="p">};</span>
 
-<h2 id="go">Go</h2>
-<div class="language-golang highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">const</span><span class="p">(</span>
-    <span class="n">insecureSkipVerify</span> <span class="o">=</span> <span class="no">false</span>
-    <span class="n">serverName</span> <span class="o">=</span> <span class="s">"www.baidu.com"</span>
-    <span class="n">remoteAddr</span> <span class="o">=</span> <span class="s">"www.baidu.com:443"</span>
-<span class="p">)</span>
-<span class="n">conn2server</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">net</span><span class="o">.</span><span class="n">Dial</span><span class="p">(</span><span class="s">"tcp"</span><span class="p">,</span> <span class="n">remoteAddr</span><span class="p">)</span>
-<span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
-    <span class="nb">panic</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+    <span class="c1">//create a bogus data channel</span>
+    <span class="nx">pc</span><span class="p">.</span><span class="nx">createDataChannel</span><span class="p">(</span><span class="dl">""</span><span class="p">);</span>
+
+    <span class="c1">//create an offer sdp</span>
+    <span class="nx">pc</span><span class="p">.</span><span class="nx">createOffer</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">){</span>
+        <span class="nx">result</span><span class="p">.</span><span class="nx">sdp</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="dl">"</span><span class="se">\n</span><span class="dl">"</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">t</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">const</span> <span class="nx">m</span> <span class="o">=</span> <span class="nx">t</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="nx">ip_regex</span><span class="p">);</span>
+            <span class="nx">m</span> <span class="o">&amp;&amp;</span> <span class="nx">callbackOnce</span><span class="p">(</span><span class="nx">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+        <span class="p">});</span>
+        <span class="c1">//trigger the stun server request</span>
+        <span class="nx">pc</span><span class="p">.</span><span class="nx">setLocalDescription</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){},</span> <span class="kd">function</span><span class="p">(){});</span>
+
+    <span class="p">},</span> <span class="kd">function</span><span class="p">(){});</span>
+
+    <span class="c1">//wait for a while to let everything done</span>
+    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+        <span class="c1">//read candidate info from local description</span>
+        <span class="kd">let</span> <span class="nx">lines</span> <span class="o">=</span> <span class="nx">pc</span><span class="p">.</span><span class="nx">localDescription</span><span class="p">.</span><span class="nx">sdp</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="dl">'</span><span class="se">\n</span><span class="dl">'</span><span class="p">);</span>
+
+        <span class="nx">lines</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">line</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="nx">line</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="dl">'</span><span class="s1">a=candidate:</span><span class="dl">'</span><span class="p">)</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="nx">handleCandidate</span><span class="p">(</span><span class="nx">line</span><span class="p">);</span>
+        <span class="p">});</span>
+    <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
 <span class="p">}</span>
-<span class="n">conn2server</span> <span class="o">=</span> <span class="n">tls</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="n">conn2server</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">tls</span><span class="o">.</span><span class="n">Config</span><span class="p">{</span>
-    <span class="n">InsecureSkipVerify</span><span class="o">:</span> <span class="n">insecureSkipVerify</span><span class="p">,</span>
-    <span class="n">ServerName</span><span class="o">:</span>         <span class="n">serverName</span><span class="p">,</span>
-    <span class="c">// 通过VerifyConnection函数实现域名校验</span>
-    <span class="c">// 该函数只要不为nil, 总会在默认证书校验完毕后执行</span>
-    <span class="n">VerifyConnection</span><span class="o">:</span> <span class="k">func</span><span class="p">(</span><span class="n">connState</span> <span class="n">tls</span><span class="o">.</span><span class="n">ConnectionState</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="n">insecureSkipVerify</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="no">nil</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="n">connState</span><span class="o">.</span><span class="n">PeerCertificates</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">.</span><span class="n">VerifyHostname</span><span class="p">(</span><span class="n">serverName</span><span class="p">)</span>
-    <span class="p">},</span>
-<span class="p">})</span>
+
+<span class="c1">//Test: Print the IP addresses into the console</span>
+<span class="nx">getIPs</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">ip</span><span class="p">){</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">ip</span><span class="p">);});</span>
 </code></pre></div></div>
-
-<h2 id="python">Python</h2>
-<p>就目前看来, Python asyncio的逻辑最符合我的思维习惯。<br />
-指定了sni后, 它默认是会检查证书域名是否匹配的。</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">verify</span> <span class="o">=</span> <span class="bp">True</span>
-<span class="n">host</span><span class="p">,</span> <span class="n">port</span> <span class="o">=</span> <span class="p">(</span><span class="s">"www.baidu.com"</span><span class="p">,</span> <span class="mi">443</span><span class="p">)</span>
-<span class="n">sni</span> <span class="o">=</span> <span class="s">"www.baidu.com"</span>
-
-<span class="n">ssl_context</span> <span class="o">=</span> <span class="bp">True</span> <span class="k">if</span> <span class="n">verify</span> <span class="k">else</span> <span class="n">ssl</span><span class="p">.</span><span class="n">_create_unverified_context</span><span class="p">()</span>
-<span class="n">reader</span><span class="p">,</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">await</span> <span class="n">asyncio</span><span class="p">.</span><span class="n">open_connection</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">server_hostname</span><span class="o">=</span><span class="n">sni</span><span class="p">,</span><span class="n">ssl</span><span class="o">=</span><span class="n">ssl_context</span><span class="p">)</span>
-<span class="c1"># ...
-</span></code></pre></div></div>
 
         </article>
         <hr>
@@ -522,7 +513,10 @@
                 
                     
                 
-                    
+            
+        
+            
+            
                 
                     
                 
@@ -533,7 +527,10 @@
                 
                     
                 
-                    
+            
+        
+            
+            
                 
                     
                 
@@ -544,110 +541,10 @@
                 
                     
                 
-                    
-                
-                    
-                
             
         
             
             
-                
-                    
-                        
-                        <h2 id="similar_posts">相似文章</h2>
-                        <ul>
-                        
-                        <li class="relatedPost">
-                            <a href="/blog/2024/07/10/jpackage-5-tips/">备忘录 jpackage 关于其它(五)
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                        
-                        <li class="relatedPost">
-                            <a href="/blog/2024/07/08/jpackage-4-locale/">备忘录 jpackage 关于国际/本地化的坑(四)
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                        
-                        <li class="relatedPost">
-                            <a href="/blog/2024/07/07/jpackage-3-save-install-dir-download-dir/">备忘录 jpackage 保存安装目录和下载目录(三)
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                        
-                        <li class="relatedPost">
-                            <a href="/blog/2024/07/06/jpackage-2-change-jar-path/">备忘录 jpackage 修改jar包所在位置(二)
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                        
-                        <li class="relatedPost">
-                            <a href="/blog/2024/07/05/jpackage-1-intro/">备忘录 jpackage 的简单使用(一)
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-                    
                 
                     
                 
@@ -658,7 +555,10 @@
                 
                     
                 
-                    
+            
+        
+            
+            
                 
                     
                 
@@ -669,26 +569,25 @@
                 
                     
                 
-                    
+            
+        
+            
+            
                 
                     
                 
             
         
-        
-            </ul>
         
 
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/blog/2021/10/17/win-stop-service/">Windows下cmd脚本关闭进程和服务</a></p>
+        <p><strong>上一篇</strong> <a href="/blog/2024/07/29/wechat-push/">【资源】通过注册微信公众测试号推送消息</a></p>
         
     </div>
     <div class="nex">
 
-        
-        <p><strong>下一篇</strong> <a href="/blog/2022/05/14/win-plan-andservice/">Windows下创建/运行服务或者计划任务</a></p>
         
     </div>
 </div>
@@ -713,8 +612,6 @@
                     内容
                 </div>
                 <ul id="content-side" class="content-ul">
-                    
-                    <li><a href="#similar_posts">相似文章</a></li>
                     
                     <!-- <li><a href="#comments">评论</a></li> -->
                 </ul>

@@ -5,9 +5,28 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 11 Aug 2024 15:42:58 +0800</pubDate>
-    <lastBuildDate>Sun, 11 Aug 2024 15:42:58 +0800</lastBuildDate>
+    <pubDate>Sun, 11 Aug 2024 16:08:56 +0800</pubDate>
+    <lastBuildDate>Sun, 11 Aug 2024 16:08:56 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>备忘录 通过WebRTC获取客户端真实IP</title>
+        <description>
+WebRTC是什么不说了。&lt;br /&gt;
+它有个漏洞或者说特性，使得浏览器通过javascript可以获取到客户端的真实IP地址。&lt;br /&gt;
+不论浏览器开了代理与否。
+</description>
+        <pubDate>Sun, 11 Aug 2024 09:59:01 +0800</pubDate>
+        <pubDateFormat>2024-08-11</pubDateFormat>
+        <link>https://nicelee.top/blog/2024/08/11/get-ip-by-webrtc/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2024/08/11/get-ip-by-webrtc/</guid>
+        
+        <category>JavaScript</category>
+        
+        
+        <category>代码片段</category>
+        
+      </item>
     
       <item>
         <title>【资源】通过注册微信公众测试号推送消息</title>
@@ -188,24 +207,6 @@ Git设置忽略证书后续。
         <guid isPermaLink="true">https://nicelee.top/blog/2024/01/25/git-ca-err/</guid>
         
         <category>git</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>浏览器是怎样访问支持HTTP3协议的网站的？</title>
-        <description>就现阶段而言，大部分浏览器的默认行为应该是这样的：&lt;br /&gt;
-默认是以HTTP2优先于HTTP1.1建立TCP连接，当发现网站支持HTTP3时，转而建立QUIC连接。 &lt;br /&gt;
-那么，具体又是如何的呢？
-</description>
-        <pubDate>Wed, 29 Nov 2023 09:59:01 +0800</pubDate>
-        <pubDateFormat>2023-11-29</pubDateFormat>
-        <link>https://nicelee.top/blog/2023/11/29/how-explorer-knows-the-website-support-http3/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2023/11/29/how-explorer-knows-the-website-support-http3/</guid>
-        
-        <category>Http</category>
         
         
         <category>技术学习</category>
