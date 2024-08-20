@@ -2,6 +2,20 @@
 	"code" : 0 ,
 	"data" : [
 	{
+		"title" : "备忘录 使用Gpg为git的commit签名",
+		"tags" : "git",
+		"url" : "/blog/2024/08/19/gpg-sign-git/"
+		"brief" : "标题其实还有后半部分，并在Github设置Gpg公钥。因为难度过低，以及会导致标题过长，遂作罢。"
+	},
+    
+	{
+		"title" : "备忘录 通过fastly镜像整个Github Pages",
+		"tags" : "JavaScript",
+		"url" : "/blog/2024/08/18/fastly-mirror-github-pages/"
+		"brief" : "现存的GithubPage设置CNAME接受域名A上，但是访问速度有时候不如人意。现在的目标是，在域名B上提供和A相同的服务，在A连接不上时多一个选择。"
+	},
+    
+	{
 		"title" : "备忘录 通过WebRTC获取客户端真实IP",
 		"tags" : "JavaScript",
 		"url" : "/blog/2024/08/11/get-ip-by-webrtc/"

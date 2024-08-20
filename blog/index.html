@@ -299,6 +299,8 @@
                     
                 
                     
+                
+                    
                 				
 				
             </ul>
@@ -321,6 +323,130 @@
 		</div>
 		<hr>	
         <ul>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/blog/2024/08/19/gpg-sign-git/" style="overflow:hidden;text-overflow:ellipsis;">备忘录 使用Gpg为git的commit签名</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2024-08-19
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>nIceLee
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/blog/tag/#git" title="Tag: git" rel="tag">git</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>标题其实还有后半部分，<code class="language-plaintext highlighter-rouge">并在Github设置Gpg公钥</code>。 <br />
+因为难度过低，以及会导致标题过长，遂作罢。</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/blog/2024/08/19/gpg-sign-git/"><i class="fa fa-newspaper-o"></i>阅读全文</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/blog/2024/08/18/fastly-mirror-github-pages/" style="overflow:hidden;text-overflow:ellipsis;">备忘录 通过fastly镜像整个Github Pages</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2024-08-18
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>nIceLee
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/blog/category/#代码片段" title="Category: 代码片段" rel="category">代码片段</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/blog/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>现存的Github Page设置CNAME接受域名<code class="language-plaintext highlighter-rouge">A</code>上，但是访问速度有时候不如人意。<br />
+现在的目标是，在域名<code class="language-plaintext highlighter-rouge">B</code>上提供和<code class="language-plaintext highlighter-rouge">A</code>相同的服务，在<code class="language-plaintext highlighter-rouge">A</code>连接不上时多一个选择。</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/blog/2024/08/18/fastly-mirror-github-pages/"><i class="fa fa-newspaper-o"></i>阅读全文</a>
+                </div>
+                <hr>
+              </li>
             
               <li>
                 <h2>
@@ -697,147 +823,6 @@
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/blog/2024/07/06/jpackage-2-change-jar-path/" style="overflow:hidden;text-overflow:ellipsis;">备忘录 jpackage 修改jar包所在位置(二)</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2024-07-06
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>nIceLee
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>|-- BilibiliDown.exe                         程序入口
-|-- app                                      Windows下，安装包自动生成。告诉`exe`文件如何正确运行
-|   |-- .package                             用于指示程序名称
-|   |-- BilibiliDown.cfg                     用于指示JVM运行的相关配置
-|   |-- launch.jar                           jar包
-|   |-- INeedBiliAV.jar                      jar包
-|-- runtime        
-</code></pre></div></div>
-<p>打包后的目录默认长上面这样，现在需要将jar包抬上来到根目录（下面这样），并确保程序正常运行</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>|-- BilibiliDown.exe                         程序入口
-|-- launch.jar                               jar包
-|-- INeedBiliAV.jar                          jar包
-|-- app                                      Windows下，安装包自动生成。告诉`exe`文件如何正确运行
-|   |-- .package                             用于指示程序名称
-|   |-- BilibiliDown.cfg                     用于指示JVM运行的相关配置
-|-- runtime        
-</code></pre></div></div>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/blog/2024/07/06/jpackage-2-change-jar-path/"><i class="fa fa-newspaper-o"></i>阅读全文</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/blog/2024/07/05/jpackage-1-intro/" style="overflow:hidden;text-overflow:ellipsis;">备忘录 jpackage 的简单使用(一)</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2024-07-05
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>nIceLee
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>我向来是不觉得通过脚本/命令行运行jar包有什么不好的，但想着使用jpackage生成相关程序也花不了多少工夫。<br />
-在不想大改代码的情况下，踩了不少坑。<br />
-也行吧。<br />
-本来还想试试通过Graalvm进行aot编译，还是不那么折腾了。</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/blog/2024/07/05/jpackage-1-intro/"><i class="fa fa-newspaper-o"></i>阅读全文</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 		
 
@@ -847,10 +832,10 @@
             <span class="previous disable"><i class="fa fa-angle-double-left"></i></span>
             <span class="previous disable"><i class="fa fa-angle-left"></i></span>
           
-          <span class="page_number ">1/30</span>
+          <span class="page_number ">1/31</span>
           
             <a href="/blog/2" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/blog/30" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/blog/31" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -863,6 +848,10 @@
                     最近上传
                 </div>
                 <ul class="content-ul" recent>
+                    
+                        <li><a href="/blog/2024/08/19/gpg-sign-git/">备忘录 使用Gpg为git的commit签名</a></li>
+                    
+                        <li><a href="/blog/2024/08/18/fastly-mirror-github-pages/">备忘录 通过fastly镜像整个Github Pages</a></li>
                     
                         <li><a href="/blog/2024/08/11/get-ip-by-webrtc/">备忘录 通过WebRTC获取客户端真实IP</a></li>
                     
@@ -880,10 +869,6 @@
                     
                         <li><a href="/blog/2024/07/05/jpackage-1-intro/">备忘录 jpackage 的简单使用(一)</a></li>
                     
-                        <li><a href="/blog/2024/02/24/headless-vnc-browser/">备忘录 在headless服务器上运行GUI程序，并通过浏览器访问控制</a></li>
-                    
-                        <li><a href="/blog/2024/01/25/git-ca-err/">备忘录 Git CA证书设置</a></li>
-                    
                 </ul>
             </div>
 
@@ -900,7 +885,7 @@
                             <span class="name">
                                 技术学习
                             </span>
-                            <span class="badge">176</span>
+                            <span class="badge">177</span>
                         </a>
                     </li>
                     
@@ -936,7 +921,7 @@
                             <span class="name">
                                 代码片段
                             </span>
-                            <span class="badge">13</span>
+                            <span class="badge">14</span>
                         </a>
                     </li>
                     

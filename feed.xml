@@ -5,9 +5,45 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 11 Aug 2024 16:08:56 +0800</pubDate>
-    <lastBuildDate>Sun, 11 Aug 2024 16:08:56 +0800</lastBuildDate>
+    <pubDate>Tue, 20 Aug 2024 13:55:29 +0800</pubDate>
+    <lastBuildDate>Tue, 20 Aug 2024 13:55:29 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>备忘录 使用Gpg为git的commit签名</title>
+        <description>
+标题其实还有后半部分，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;并在Github设置Gpg公钥&lt;/code&gt;。 &lt;br /&gt;
+因为难度过低，以及会导致标题过长，遂作罢。
+</description>
+        <pubDate>Mon, 19 Aug 2024 09:59:01 +0800</pubDate>
+        <pubDateFormat>2024-08-19</pubDateFormat>
+        <link>https://nicelee.top/blog/2024/08/19/gpg-sign-git/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2024/08/19/gpg-sign-git/</guid>
+        
+        <category>git</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
+    
+      <item>
+        <title>备忘录 通过fastly镜像整个Github Pages</title>
+        <description>
+现存的Github Page设置CNAME接受域名&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;A&lt;/code&gt;上，但是访问速度有时候不如人意。&lt;br /&gt;
+现在的目标是，在域名&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;B&lt;/code&gt;上提供和&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;A&lt;/code&gt;相同的服务，在&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;A&lt;/code&gt;连接不上时多一个选择。
+</description>
+        <pubDate>Sun, 18 Aug 2024 09:59:01 +0800</pubDate>
+        <pubDateFormat>2024-08-18</pubDateFormat>
+        <link>https://nicelee.top/blog/2024/08/18/fastly-mirror-github-pages/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2024/08/18/fastly-mirror-github-pages/</guid>
+        
+        <category>JavaScript</category>
+        
+        
+        <category>代码片段</category>
+        
+      </item>
     
       <item>
         <title>备忘录 通过WebRTC获取客户端真实IP</title>
@@ -167,46 +203,6 @@ WebRTC是什么不说了。&lt;br /&gt;
         <guid isPermaLink="true">https://nicelee.top/blog/2024/07/05/jpackage-1-intro/</guid>
         
         <category>Java</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>备忘录 在headless服务器上运行GUI程序，并通过浏览器访问控制</title>
-        <description>
-实现这个目标需要四步。
-&lt;ul&gt;
-  &lt;li&gt;Step 1. 创建虚拟屏幕&lt;/li&gt;
-  &lt;li&gt;Step 2. 将指定屏幕交互转为VNC协议传输&lt;/li&gt;
-  &lt;li&gt;Step 3. 将VNC协议传输转为浏览器交互&lt;/li&gt;
-  &lt;li&gt;Step 4. 在虚拟屏幕运行GUI程序&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Sat, 24 Feb 2024 09:59:01 +0800</pubDate>
-        <pubDateFormat>2024-02-24</pubDateFormat>
-        <link>https://nicelee.top/blog/2024/02/24/headless-vnc-browser/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2024/02/24/headless-vnc-browser/</guid>
-        
-        <category>git</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>备忘录 Git CA证书设置</title>
-        <description>
-Git设置忽略证书后续。
-</description>
-        <pubDate>Thu, 25 Jan 2024 09:59:01 +0800</pubDate>
-        <pubDateFormat>2024-01-25</pubDateFormat>
-        <link>https://nicelee.top/blog/2024/01/25/git-ca-err/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2024/01/25/git-ca-err/</guid>
-        
-        <category>git</category>
         
         
         <category>技术学习</category>
