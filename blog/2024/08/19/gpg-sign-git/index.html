@@ -370,7 +370,10 @@
         <ul id="markdown-toc">
   <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
   <li><a href="#生成并导入gpg密钥" id="markdown-toc-生成并导入gpg密钥">生成并导入gpg密钥</a></li>
-  <li><a href="#配置git使之每次commit时自动为之签名" id="markdown-toc-配置git使之每次commit时自动为之签名">配置git，使之每次commit时自动为之签名</a></li>
+  <li><a href="#配置git使之每次commit时自动为之签名" id="markdown-toc-配置git使之每次commit时自动为之签名">配置git，使之每次commit时自动为之签名</a>    <ul>
+      <li><a href="#如何设置不让每次签名都弹出密码输入框" id="markdown-toc-如何设置不让每次签名都弹出密码输入框">如何设置不让每次签名都弹出密码输入框</a></li>
+    </ul>
+  </li>
   <li><a href="#在github配置gpg公钥" id="markdown-toc-在github配置gpg公钥">在Github配置gpg公钥</a></li>
 </ul>
 
@@ -409,6 +412,19 @@
 一般安装的git都自带有<code class="language-plaintext highlighter-rouge">gpg.exe</code>，但是版本如果过旧的话，可能签名新格式密钥会有问题。<br />
 使用<code class="language-plaintext highlighter-rouge">gpg4win</code>的程序则肯定没问题，毕竟密钥都是它生成的，配套的签名肯定没事。</p>
 
+<h3 id="如何设置不让每次签名都弹出密码输入框">如何设置不让每次签名都弹出密码输入框</h3>
+<p>在<code class="language-plaintext highlighter-rouge">C:\Users\[USER]\AppData\Roaming\gnupg\</code>创建<code class="language-plaintext highlighter-rouge">gpg.conf</code>:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>use-agent
+</code></pre></div></div>
+
+<p>[可选]在<code class="language-plaintext highlighter-rouge">C:\Users\[USER]\AppData\Roaming\gnupg\</code>创建<code class="language-plaintext highlighter-rouge">gpg-agent.conf</code>:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>default-cache-ttl 6000
+max-cache-ttl 72000
+</code></pre></div></div>
+<p>这意味着密码在上次输入的6000秒(100分钟)内有效，默认是600秒(10分钟)。<br />
+这意味着密码在首次输入的72000秒(20小时)内有效，默认是7200秒(2小时)。<br />
+参考<a href="https://github.com/bfrg/gpg-guide/blob/master/gpg-agent.conf">gpg-agent.conf</a>、<a href="https://www.gnupg.org/documentation/manuals/gnupg/Agent-Options.html">Agent-Options</a></p>
+
 <h2 id="在github配置gpg公钥">在Github配置gpg公钥</h2>
 <p>前往<a href="https://github.com/settings/keys">https://github.com/settings/keys</a></p>
 
@@ -423,9 +439,6 @@
                     
                 
             
-        
-            
-            
                 
                     
                 
@@ -484,23 +497,16 @@
             
                 
                     
-                        
-                        <h2 id="similar_posts">相似文章</h2>
-                        <ul>
-                        
-                        <li class="relatedPost">
-                            <a href="/blog/2024/02/24/headless-vnc-browser/">备忘录 在headless服务器上运行GUI程序，并通过浏览器访问控制
-                            
-                            </a>
-                        </li>
-                        
-                        
+                
+            
+        
+            
+            
+                
                     
                 
             
         
-        
-            </ul>
         
 
         <div class="post-recent">
@@ -511,6 +517,8 @@
     </div>
     <div class="nex">
 
+        
+        <p><strong>下一篇</strong> <a href="/blog/2024/08/21/go-https-client-hello/">Go 如何在http handler中获取client hello的原始数据</a></p>
         
     </div>
 </div>
@@ -535,8 +543,6 @@
                     内容
                 </div>
                 <ul id="content-side" class="content-ul">
-                    
-                    <li><a href="#similar_posts">相似文章</a></li>
                     
                     <!-- <li><a href="#comments">评论</a></li> -->
                 </ul>
@@ -809,7 +815,7 @@ var figlet = "\n" +
 "                                        | |     \n" +
 "                                        |_|     \n" ;
 console.log(figlet);
-console.log("%c小改改爆个照呗\n hentai女个装呗", "color:red;font-size: 50px;font-weight:bold;");
+// console.log("%cline1\nline2", "color:red;font-size: 50px;font-weight:bold;");
 
 /* 防hentai
 document.onkeydown=function(){

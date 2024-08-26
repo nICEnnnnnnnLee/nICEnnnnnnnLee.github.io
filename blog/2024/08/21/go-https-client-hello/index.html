@@ -7,13 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>VBS 一些超简单、超有趣的VBS小应用</title>
-    <meta name="description" content="  VBS是微软支持的一种脚本语言。因为非专业人员用的电脑系统还是Widows较多，所以下面的VBS小应用在平常我们用的电脑上直接用就行，不需要前置什么乱七八糟的安装环境。。 什么，我没讲明白？？直接打开txt文本，复制代码，改下文件名称，程序就能跑起来啦O(∩_∩)O">
+    <title>Go 如何在http handler中获取client hello的原始数据</title>
+    <meta name="description" content="主要是实现思路。">
 
-    <meta property="og:url" content="https://nicelee.top/blog/2018/11/18/win-vbs/">
+    <meta property="og:url" content="https://nicelee.top/blog/2024/08/21/go-https-client-hello/">
     <meta property="og:site_name" content="NiceLee的博客">
-    <meta property="og:title" content="VBS 一些超简单、超有趣的VBS小应用">
-    <meta property="og:description" content="  VBS是微软支持的一种脚本语言。因为非专业人员用的电脑系统还是Widows较多，所以下面的VBS小应用在平常我们用的电脑上直接用就行，不需要前置什么乱七八糟的安装环境。。 什么，我没讲明白？？直接打开txt文本，复制代码，改下文件名称，程序就能跑起来啦O(∩_∩)O">
+    <meta property="og:title" content="Go 如何在http handler中获取client hello的原始数据">
+    <meta property="og:description" content="主要是实现思路。">
     <meta property="og:image" content="https://nicelee.top/favicon.ico?">
     <meta property="og:image:type" content="image/x-icon">
     
@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="/css/font-awesome.min.css ">
     <link rel="stylesheet" href="/css/font-ali.css?v=1.2 ">
     <link rel="stylesheet" href="/css/main.css?v=1.1 ">
-    <link rel="canonical" href="https://nicelee.top/blog/2018/11/18/win-vbs/">
+    <link rel="canonical" href="https://nicelee.top/blog/2024/08/21/go-https-client-hello/">
     <link rel="alternate" type="application/rss+xml" title="NiceLeeのBlog" href="https://nicelee.top/feed.xml ">
 
 	
@@ -311,11 +311,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>VBS 一些超简单、超有趣的VBS小应用</h1>
+        <h1>Go 如何在http handler中获取client hello的原始数据</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2018-11-18
+                <i class="fa fa-calendar"></i>2024-08-21
             </div>
 
             <div class="label-card">
@@ -338,7 +338,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/blog/category/#小技巧" title="Category: 小技巧" rel="category">小技巧</a>
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
     
   
 
@@ -355,11 +355,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/blog/tag/#Windows" title="Tag: Windows" rel="tag">Windows</a-->
-        <a href="/blog/tag/#Windows" title="Tag: Windows" rel="tag">Windows</a>&nbsp;
+        <!--a href="/blog/tag/#Go" title="Tag: Go" rel="tag">Go</a-->
+        <a href="/blog/tag/#Go" title="Tag: Go" rel="tag">Go</a>&nbsp;
     
-        <!--a href="/blog/tag/#VBS" title="Tag: VBS" rel="tag">VBS</a-->
-        <a href="/blog/tag/#VBS" title="Tag: VBS" rel="tag">VBS</a>
+        <!--a href="/blog/tag/#Http" title="Tag: Http" rel="tag">Http</a-->
+        <a href="/blog/tag/#Http" title="Tag: Http" rel="tag">Http</a>
     
   
 
@@ -371,86 +371,157 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#一弹出文字窗口" id="markdown-toc-一弹出文字窗口">一、弹出文字窗口</a></li>
-  <li><a href="#二文字转语音" id="markdown-toc-二文字转语音">二、文字转语音</a></li>
-  <li><a href="#三模拟按键" id="markdown-toc-三模拟按键">三、模拟按键</a></li>
-  <li><a href="#四激活窗口" id="markdown-toc-四激活窗口">四、激活窗口</a></li>
-  <li><a href="#五运行系统命令" id="markdown-toc-五运行系统命令">五、运行系统命令</a></li>
-  <li><a href="#六总结" id="markdown-toc-六总结">六、总结</a></li>
+  <li><a href="#思路" id="markdown-toc-思路">思路</a></li>
 </ul>
-<blockquote>
-  <p>VBS是微软支持的一种脚本语言。因为非专业人员用的电脑系统还是Widows较多，所以下面的VBS小应用在平常我们用的电脑上直接用就行，不需要前置什么乱七八糟的安装环境。。 <br />
-什么，我没讲明白？？直接打开txt文本，复制代码，改下文件名称，程序就能跑起来啦O(∩_∩)O</p>
-</blockquote>
 
-<h2 id="一弹出文字窗口">一、弹出文字窗口</h2>
+<p>主要是实现思路。</p>
+
+<h2 id="思路">思路</h2>
 <ul>
   <li>
-    <p>新建“文本文档”，输入msgbox “一大波病毒正在靠近…” ，点击文件-&gt;另存为-&gt;重命名为“代码.vbs”。文件名不重要，重要的是后缀要是“.vbs”。</p>
+    <p>在函数<code class="language-plaintext highlighter-rouge">func (w http.ResponseWriter, r *http.Request)</code>中，我们可以得到每次请求的<code class="language-plaintext highlighter-rouge">r.Context()</code>。
+接下来我们想办法将数据放到这个<code class="language-plaintext highlighter-rouge">context</code>里面来。</p>
+  </li>
+  <li>在<code class="language-plaintext highlighter-rouge">http.Server</code>的配置中，能够通过<code class="language-plaintext highlighter-rouge">ConnContext</code>，将每次的<code class="language-plaintext highlighter-rouge">net.Conn</code>放到<code class="language-plaintext highlighter-rouge">context</code>里面去。<br />
+接下来我们想办法，将<code class="language-plaintext highlighter-rouge">net.Conn</code>封装，进行二次设计。
+    <div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&amp;</span><span class="n">http</span><span class="o">.</span><span class="n">Server</span><span class="p">{</span>
+  <span class="n">Addr</span><span class="o">:</span> <span class="n">BindAddr</span><span class="p">,</span>
+  <span class="n">TLSConfig</span><span class="o">:</span> <span class="o">&amp;</span><span class="n">tls</span><span class="o">.</span><span class="n">Config</span><span class="p">{</span> <span class="o">...</span> <span class="p">},</span>
+  <span class="n">ConnContext</span><span class="o">:</span> <span class="k">func</span><span class="p">(</span><span class="n">ctx</span> <span class="n">context</span><span class="o">.</span><span class="n">Context</span><span class="p">,</span> <span class="n">c</span> <span class="n">net</span><span class="o">.</span><span class="n">Conn</span><span class="p">)</span> <span class="n">context</span><span class="o">.</span><span class="n">Context</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">context</span><span class="o">.</span><span class="n">WithValue</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">ConnContextKey</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">c</span><span class="p">)</span>
+  <span class="p">},</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
   </li>
   <li>
-    <p>双击保存的文件：代码.vbs，即弹出一个对话框。</p>
-  </li>
-</ul>
+    <p>在原来的<code class="language-plaintext highlighter-rouge">net.Conn</code>的基础上，封装的<code class="language-plaintext highlighter-rouge">conn</code>存储了建立TCP连接后的第一次ClientHello消息。<br />
+接下来我们想办法，让每次<code class="language-plaintext highlighter-rouge">accept</code>的不是原始<code class="language-plaintext highlighter-rouge">net.Conn</code>，而是封装的<code class="language-plaintext highlighter-rouge">conn</code>。<br />
+这需要对<code class="language-plaintext highlighter-rouge">net.Listener</code>进行封装。</p>
 
-<h2 id="二文字转语音">二、文字转语音</h2>
-<ul>
-  <li>还是一样保存文本，两行代码搞定
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Set objVoice = CreateObject("SAPI.SpVoice")
-objVoice.Speak "你好，我也好"
+    <div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span> <span class="n">JA3Capture</span> <span class="k">interface</span> <span class="p">{</span>
+    <span class="n">IsCaptured</span><span class="p">()</span> <span class="kt">bool</span>
+    <span class="n">CapturedBytes</span><span class="p">()</span> <span class="p">[]</span><span class="kt">byte</span>
+    <span class="n">JA3</span><span class="p">()</span> <span class="o">*</span><span class="n">ja3</span><span class="o">.</span><span class="n">JA3</span>
+<span class="p">}</span>
+
+<span class="k">type</span> <span class="n">conn</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">net</span><span class="o">.</span><span class="n">Conn</span>
+    <span class="n">ja3</span>             <span class="o">*</span><span class="n">ja3</span><span class="o">.</span><span class="n">JA3</span>
+    <span class="n">firstFrame</span>      <span class="p">[]</span><span class="kt">byte</span>
+    <span class="n">isNotFirstFrame</span> <span class="kt">bool</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="p">(</span><span class="n">c</span> <span class="o">*</span><span class="n">conn</span><span class="p">)</span> <span class="n">Read</span><span class="p">(</span><span class="n">b</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">)</span> <span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">n</span><span class="p">,</span> <span class="n">e</span> <span class="o">:=</span> <span class="n">c</span><span class="o">.</span><span class="n">Conn</span><span class="o">.</span><span class="n">Read</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">e</span> <span class="o">==</span> <span class="no">nil</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">c</span><span class="o">.</span><span class="n">isNotFirstFrame</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">firstFrame</span> <span class="o">==</span> <span class="no">nil</span> <span class="p">{</span>
+            <span class="n">c</span><span class="o">.</span><span class="n">firstFrame</span> <span class="o">=</span> <span class="n">b</span><span class="p">[</span><span class="o">:</span><span class="n">n</span><span class="p">]</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">c</span><span class="o">.</span><span class="n">firstFrame</span> <span class="o">=</span> <span class="nb">append</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">firstFrame</span><span class="p">,</span> <span class="n">b</span><span class="p">[</span><span class="o">:</span><span class="n">n</span><span class="p">]</span><span class="o">...</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="n">j</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">ja3</span><span class="o">.</span><span class="n">ComputeJA3FromSegment</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">firstFrame</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">err</span> <span class="o">==</span> <span class="no">nil</span> <span class="p">{</span>
+            <span class="n">c</span><span class="o">.</span><span class="n">isNotFirstFrame</span> <span class="o">=</span> <span class="no">true</span>
+            <span class="n">c</span><span class="o">.</span><span class="n">ja3</span> <span class="o">=</span> <span class="n">j</span>
+            <span class="c">// log.Println("Success: len(c.firstFrame):", len(c.firstFrame))</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">firstFrame</span><span class="p">)</span> <span class="o">&gt;</span> <span class="m">2048</span> <span class="p">{</span>
+            <span class="c">// log.Println("Fail: len(c.firstFrame):", len(c.firstFrame))</span>
+            <span class="k">return</span> <span class="n">n</span><span class="p">,</span> <span class="n">err</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">n</span><span class="p">,</span> <span class="n">e</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="p">(</span><span class="n">c</span> <span class="o">*</span><span class="n">conn</span><span class="p">)</span> <span class="n">IsCaptured</span><span class="p">()</span> <span class="kt">bool</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">c</span><span class="o">.</span><span class="n">isNotFirstFrame</span>
+<span class="p">}</span>
+<span class="k">func</span> <span class="p">(</span><span class="n">c</span> <span class="o">*</span><span class="n">conn</span><span class="p">)</span> <span class="n">CapturedBytes</span><span class="p">()</span> <span class="p">[]</span><span class="kt">byte</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">c</span><span class="o">.</span><span class="n">firstFrame</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="p">(</span><span class="n">c</span> <span class="o">*</span><span class="n">conn</span><span class="p">)</span> <span class="n">JA3</span><span class="p">()</span> <span class="o">*</span><span class="n">ja3</span><span class="o">.</span><span class="n">JA3</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">c</span><span class="o">.</span><span class="n">ja3</span>
+<span class="p">}</span>
 </code></pre></div>    </div>
   </li>
-  <li>还可以进行复杂的设置，比如语音、语速
-    <ul>
-      <li>设置朗读速度，取值范围：-10到10，正常为0</li>
-      <li>设置朗读音量，取值范围：0到100，正常为100
-        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Set objVoice = CreateObject("SAPI.SpVoice")
-objVoice.Rate = 0 
-objVoice.Volume = 100
-objVoice.Speak "你好，我也好"
-</code></pre></div>        </div>
-      </li>
-    </ul>
+  <li>
+    <p>在原来的<code class="language-plaintext highlighter-rouge">net.Listener</code>的基础上，封装的<code class="language-plaintext highlighter-rouge">listener</code>每一次连接建立后返回的都是封装的<code class="language-plaintext highlighter-rouge">conn</code>。<br />
+至此，所有关节已经全部打通，无需再想办法了。</p>
+
+    <div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span> <span class="n">listener</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">net</span><span class="o">.</span><span class="n">Listener</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="p">(</span><span class="n">l</span> <span class="o">*</span><span class="n">listener</span><span class="p">)</span> <span class="n">Accept</span><span class="p">()</span> <span class="p">(</span><span class="n">net</span><span class="o">.</span><span class="n">Conn</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">c</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">l</span><span class="o">.</span><span class="n">Listener</span><span class="o">.</span><span class="n">Accept</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="no">nil</span><span class="p">,</span> <span class="n">err</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="o">&amp;</span><span class="n">conn</span><span class="p">{</span><span class="n">Conn</span><span class="o">:</span> <span class="n">c</span><span class="p">},</span> <span class="no">nil</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="n">NewListener</span><span class="p">(</span><span class="n">inner</span> <span class="n">net</span><span class="o">.</span><span class="n">Listener</span><span class="p">)</span> <span class="n">net</span><span class="o">.</span><span class="n">Listener</span> <span class="p">{</span>
+    <span class="n">l</span> <span class="o">:=</span> <span class="nb">new</span><span class="p">(</span><span class="n">listener</span><span class="p">)</span>
+    <span class="n">l</span><span class="o">.</span><span class="n">Listener</span> <span class="o">=</span> <span class="n">inner</span>
+    <span class="k">return</span> <span class="n">l</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
   </li>
-  <li>另外，还可以将语音保存，以下保存成了Test.wav文件
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Const SSFMCreateForWrite = 3
-strText = "你好，我也好"
-Set objVoice = CreateObject("SAPI.SpVoice")
-Set objFile = CreateObject("SAPI.SpFileStream.1")
-objFile.Open ".\Test.wav", SSFMCreateForWrite
-Set objVoice.AudioOutputStream = objFile
-objVoice.Rate = 1 
-objVoice.Volume = 100
-objVoice.AllowAudioOutputFormatChangesOnNextSet=false
-objVoice.Speak strText
+  <li>初始化示例：
+    <div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">srv</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="n">http</span><span class="o">.</span><span class="n">Server</span><span class="p">{</span>
+    <span class="n">Addr</span><span class="o">:</span> <span class="n">BindAddr</span><span class="p">,</span>
+    <span class="n">TLSConfig</span><span class="o">:</span> <span class="o">&amp;</span><span class="n">tls</span><span class="o">.</span><span class="n">Config</span><span class="p">{</span> <span class="o">...</span> <span class="p">},</span>
+    <span class="n">ConnContext</span><span class="o">:</span> <span class="k">func</span><span class="p">(</span><span class="n">ctx</span> <span class="n">context</span><span class="o">.</span><span class="n">Context</span><span class="p">,</span> <span class="n">c</span> <span class="n">net</span><span class="o">.</span><span class="n">Conn</span><span class="p">)</span> <span class="n">context</span><span class="o">.</span><span class="n">Context</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">context</span><span class="o">.</span><span class="n">WithValue</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">ConnContextKey</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">c</span><span class="p">)</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+
+<span class="c">// 监听TCP端口</span>
+<span class="n">ln</span><span class="p">,</span> <span class="n">e</span> <span class="o">:=</span> <span class="n">net</span><span class="o">.</span><span class="n">Listen</span><span class="p">(</span><span class="s">"tcp"</span><span class="p">,</span> <span class="n">BindAddr</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">e</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+    <span class="nb">panic</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="c">// defer ln.Close()</span>
+
+<span class="n">lnWrap</span> <span class="o">:=</span> <span class="n">NewListener</span><span class="p">(</span><span class="n">ln</span><span class="p">)</span>
+<span class="k">defer</span> <span class="n">lnWrap</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span>
+<span class="n">srv</span><span class="o">.</span><span class="n">ServeTLS</span><span class="p">(</span><span class="n">lnWrap</span><span class="p">,</span> <span class="s">""</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Handler举例:
+    <div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span> <span class="n">HandlerCapJSON</span><span class="p">(</span><span class="n">w</span> <span class="n">http</span><span class="o">.</span><span class="n">ResponseWriter</span><span class="p">,</span> <span class="n">r</span> <span class="o">*</span><span class="n">http</span><span class="o">.</span><span class="n">Request</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c">// 尝试获取Client Hello消息</span>
+    <span class="n">netConn</span> <span class="o">:=</span> <span class="n">r</span><span class="o">.</span><span class="n">Context</span><span class="p">()</span><span class="o">.</span><span class="n">Value</span><span class="p">(</span><span class="n">ConnContextKey</span><span class="p">)</span><span class="o">.</span><span class="p">(</span><span class="o">*</span><span class="n">net</span><span class="o">.</span><span class="n">Conn</span><span class="p">)</span>
+    <span class="n">tlsConn</span><span class="p">,</span> <span class="n">ok</span> <span class="o">:=</span> <span class="p">(</span><span class="o">*</span><span class="n">netConn</span><span class="p">)</span><span class="o">.</span><span class="p">(</span><span class="o">*</span><span class="n">tls</span><span class="o">.</span><span class="n">Conn</span><span class="p">)</span>
+    <span class="k">if</span> <span class="o">!</span><span class="n">ok</span> <span class="p">{</span>
+        <span class="n">w</span><span class="o">.</span><span class="n">WriteHeader</span><span class="p">(</span><span class="m">400</span><span class="p">)</span>
+        <span class="n">w</span><span class="o">.</span><span class="n">Write</span><span class="p">([]</span><span class="kt">byte</span><span class="p">(</span><span class="s">"The HTTP should over TLS!!!"</span><span class="p">))</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"The HTTP should over TLS!!!"</span><span class="p">)</span>
+        <span class="k">return</span>
+    <span class="p">}</span>
+    <span class="nb">cap</span><span class="p">,</span> <span class="n">ok</span> <span class="o">:=</span> <span class="n">tlsConn</span><span class="o">.</span><span class="n">NetConn</span><span class="p">()</span><span class="o">.</span><span class="p">(</span><span class="n">JA3Capture</span><span class="p">)</span>
+    <span class="k">if</span> <span class="o">!</span><span class="n">ok</span> <span class="p">{</span>
+        <span class="n">w</span><span class="o">.</span><span class="n">WriteHeader</span><span class="p">(</span><span class="m">400</span><span class="p">)</span>
+        <span class="n">w</span><span class="o">.</span><span class="n">Write</span><span class="p">([]</span><span class="kt">byte</span><span class="p">(</span><span class="s">"There should be a JA3Capture"</span><span class="p">))</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"There should be a JA3Capture"</span><span class="p">)</span>
+        <span class="k">return</span>
+    <span class="p">}</span>
+    <span class="c">// 返回结果</span>
+    <span class="n">w</span><span class="o">.</span><span class="n">Header</span><span class="p">()</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="s">"Content-Type"</span><span class="p">,</span> <span class="s">"application/json"</span><span class="p">)</span>
+    <span class="n">w</span><span class="o">.</span><span class="n">WriteHeader</span><span class="p">(</span><span class="m">200</span><span class="p">)</span>
+    <span class="n">ja3</span> <span class="o">:=</span> <span class="nb">cap</span><span class="o">.</span><span class="n">JA3</span><span class="p">()</span>
+    <span class="n">result</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="k">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">)</span>
+    <span class="n">result</span><span class="p">[</span><span class="s">"sni"</span><span class="p">]</span> <span class="o">=</span> <span class="n">ja3</span><span class="o">.</span><span class="n">GetSNI</span><span class="p">()</span>
+    <span class="n">result</span><span class="p">[</span><span class="s">"ja3_hash"</span><span class="p">]</span> <span class="o">=</span> <span class="n">ja3</span><span class="o">.</span><span class="n">GetJA3Hash</span><span class="p">()</span>
+    <span class="n">result</span><span class="p">[</span><span class="s">"ja3_str"</span><span class="p">]</span> <span class="o">=</span> <span class="n">ja3</span><span class="o">.</span><span class="n">GetJA3String</span><span class="p">()</span>
+    <span class="n">result</span><span class="p">[</span><span class="s">"ua"</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s">"User-Agent"</span><span class="p">)</span>
+
+    <span class="n">re</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">json</span><span class="o">.</span><span class="n">Marshal</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+    <span class="n">w</span><span class="o">.</span><span class="n">Write</span><span class="p">(</span><span class="n">re</span><span class="p">)</span>
+<span class="p">}</span>
 </code></pre></div>    </div>
   </li>
 </ul>
-
-<h2 id="三模拟按键">三、模拟按键</h2>
-<p>以下为模拟F5 刷新桌面，再模拟按Alt+F4组合键</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set ws=createobject("wscript.shell") 
-ws.sendkeys "{f5}" 
-ws.sleep 2500 
-ws.sendkeys "%{F4}" 
-</code></pre></div></div>
-
-<h2 id="四激活窗口">四、激活窗口</h2>
-<p>获取窗口名称即可进行该步操作</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set wsh=createobject("wscript.shell") 
-wsh.AppActivate("窗口名称") 
-</code></pre></div></div>
-
-<h2 id="五运行系统命令">五、运行系统命令</h2>
-<p>举个例子，比如马上关机</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dim WSHshell 
-set WSHshell = wscript.createobject("wscript.shell") 
-WSHshell.run "shutdown -f -s -t 00",0 ,true
-</code></pre></div></div>
-
-<h2 id="六总结">六、总结</h2>
-<p>以上命令可以做一些恶搞、或者自动化。<br />
-它只需要满足系统为windows即可，相较于python、java等需要安装环境（虽然说也不复杂）才能运行可以说是一个不可忽视的优势。</p>
 
         </article>
         <hr>
@@ -458,12 +529,6 @@ WSHshell.run "shutdown -f -s -t 00",0 ,true
         
         
             
-            
-                
-                    
-                
-                    
-                
             
                 
                     
@@ -558,13 +623,11 @@ WSHshell.run "shutdown -f -s -t 00",0 ,true
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/blog/2018/11/13/linux-git-repo/">踩坑记录 - 在服务器上搭建Git仓库</a></p>
+        <p><strong>上一篇</strong> <a href="/blog/2024/08/19/gpg-sign-git/">备忘录 使用Gpg为git的commit签名</a></p>
         
     </div>
     <div class="nex">
 
-        
-        <p><strong>下一篇</strong> <a href="/blog/2018/11/20/awsome-rss/">RSS 一种小众的信息获取方式介绍</a></p>
         
     </div>
 </div>
