@@ -5,9 +5,67 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 20 Aug 2024 13:55:29 +0800</pubDate>
-    <lastBuildDate>Tue, 20 Aug 2024 13:55:29 +0800</lastBuildDate>
+    <pubDate>Wed, 18 Sep 2024 09:23:46 +0800</pubDate>
+    <lastBuildDate>Wed, 18 Sep 2024 09:23:46 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>使用CF Worker检测TLS证书的失败尝试(JS篇)</title>
+        <description>
+都开了一个头了，这个功能不实现我心有不甘。Python不行，那么只好转js继续了。
+</description>
+        <pubDate>Mon, 16 Sep 2024 10:59:01 +0800</pubDate>
+        <pubDateFormat>2024-09-16</pubDateFormat>
+        <link>https://nicelee.top/blog/2024/09/16/fail-attempts-on-cf-worker-js/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2024/09/16/fail-attempts-on-cf-worker-js/</guid>
+        
+        <category>JavaScript</category>
+        
+        <category>cloudflare</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
+    
+      <item>
+        <title>使用CF Worker检测TLS证书的失败尝试(Python篇)</title>
+        <description>
+事情的起因是发现Cloudflare Worker支持&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Python&lt;/code&gt;了，虽然还是在Beta，但就是想用来尝试点什么。&lt;br /&gt;
+于是就想简单的检测一下证书过期时间。
+</description>
+        <pubDate>Mon, 16 Sep 2024 09:59:01 +0800</pubDate>
+        <pubDateFormat>2024-09-16</pubDateFormat>
+        <link>https://nicelee.top/blog/2024/09/16/fail-attempts-on-cf-worker-py/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2024/09/16/fail-attempts-on-cf-worker-py/</guid>
+        
+        <category>python</category>
+        
+        <category>cloudflare</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
+    
+      <item>
+        <title>Go 如何在http handler中获取client hello的原始数据</title>
+        <description>
+主要是实现思路。
+</description>
+        <pubDate>Wed, 21 Aug 2024 09:59:01 +0800</pubDate>
+        <pubDateFormat>2024-08-21</pubDateFormat>
+        <link>https://nicelee.top/blog/2024/08/21/go-https-client-hello/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2024/08/21/go-https-client-hello/</guid>
+        
+        <category>Go</category>
+        
+        <category>Http</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
     
       <item>
         <title>备忘录 使用Gpg为git的commit签名</title>
@@ -30,7 +88,7 @@
       <item>
         <title>备忘录 通过fastly镜像整个Github Pages</title>
         <description>
-现存的Github Page设置CNAME接受域名&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;A&lt;/code&gt;上，但是访问速度有时候不如人意。&lt;br /&gt;
+现存的Github Page设置CNAME域名为&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;A&lt;/code&gt;，但是访问速度有时候不如人意。&lt;br /&gt;
 现在的目标是，在域名&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;B&lt;/code&gt;上提供和&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;A&lt;/code&gt;相同的服务，在&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;A&lt;/code&gt;连接不上时多一个选择。
 </description>
         <pubDate>Sun, 18 Aug 2024 09:59:01 +0800</pubDate>
@@ -129,78 +187,6 @@ WebRTC是什么不说了。&lt;br /&gt;
         <pubDateFormat>2024-07-08</pubDateFormat>
         <link>https://nicelee.top/blog/2024/07/08/jpackage-4-locale/</link>
         <guid isPermaLink="true">https://nicelee.top/blog/2024/07/08/jpackage-4-locale/</guid>
-        
-        <category>Java</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>备忘录 jpackage 保存安装目录和下载目录(三)</title>
-        <description>
-默认的安装目录是C盘的ProgramFile文件夹，当下次进行安装(使用其它版本进行升降级)时，我们希望能够获得上一次的选择位置。&lt;br /&gt;
-默认的下载目录也是类似，只是还有更多的东西需要实现：写个界面来获取输入，以及在解压完文件后在&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;config/app.config&lt;/code&gt;输出配置结果。&lt;br /&gt;
-以上这些操作其实与&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jpackage&lt;/code&gt;关系不大，主要的关键词是&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Wix&lt;/code&gt;。
-</description>
-        <pubDate>Sun, 07 Jul 2024 09:59:01 +0800</pubDate>
-        <pubDateFormat>2024-07-07</pubDateFormat>
-        <link>https://nicelee.top/blog/2024/07/07/jpackage-3-save-install-dir-download-dir/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2024/07/07/jpackage-3-save-install-dir-download-dir/</guid>
-        
-        <category>Java</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>备忘录 jpackage 修改jar包所在位置(二)</title>
-        <description>
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;|-- BilibiliDown.exe                         程序入口
-|-- app                                      Windows下，安装包自动生成。告诉`exe`文件如何正确运行
-|   |-- .package                             用于指示程序名称
-|   |-- BilibiliDown.cfg                     用于指示JVM运行的相关配置
-|   |-- launch.jar                           jar包
-|   |-- INeedBiliAV.jar                      jar包
-|-- runtime        
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-打包后的目录默认长上面这样，现在需要将jar包抬上来到根目录（下面这样），并确保程序正常运行
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;|-- BilibiliDown.exe                         程序入口
-|-- launch.jar                               jar包
-|-- INeedBiliAV.jar                          jar包
-|-- app                                      Windows下，安装包自动生成。告诉`exe`文件如何正确运行
-|   |-- .package                             用于指示程序名称
-|   |-- BilibiliDown.cfg                     用于指示JVM运行的相关配置
-|-- runtime        
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-</description>
-        <pubDate>Sat, 06 Jul 2024 09:59:01 +0800</pubDate>
-        <pubDateFormat>2024-07-06</pubDateFormat>
-        <link>https://nicelee.top/blog/2024/07/06/jpackage-2-change-jar-path/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2024/07/06/jpackage-2-change-jar-path/</guid>
-        
-        <category>Java</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>备忘录 jpackage 的简单使用(一)</title>
-        <description>
-我向来是不觉得通过脚本/命令行运行jar包有什么不好的，但想着使用jpackage生成相关程序也花不了多少工夫。&lt;br /&gt;
-在不想大改代码的情况下，踩了不少坑。&lt;br /&gt;
-也行吧。&lt;br /&gt;
-本来还想试试通过Graalvm进行aot编译，还是不那么折腾了。
-</description>
-        <pubDate>Fri, 05 Jul 2024 09:59:01 +0800</pubDate>
-        <pubDateFormat>2024-07-05</pubDateFormat>
-        <link>https://nicelee.top/blog/2024/07/05/jpackage-1-intro/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2024/07/05/jpackage-1-intro/</guid>
         
         <category>Java</category>
         

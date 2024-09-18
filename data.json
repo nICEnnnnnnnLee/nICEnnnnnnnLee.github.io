@@ -2,6 +2,27 @@
 	"code" : 0 ,
 	"data" : [
 	{
+		"title" : "使用CF Worker检测TLS证书的失败尝试(JS篇)",
+		"tags" : "JavaScript_cloudflare",
+		"url" : "/blog/2024/09/16/fail-attempts-on-cf-worker-js/"
+		"brief" : "都开了一个头了，这个功能不实现我心有不甘。Python不行，那么只好转js继续了。"
+	},
+    
+	{
+		"title" : "使用CF Worker检测TLS证书的失败尝试(Python篇)",
+		"tags" : "python_cloudflare",
+		"url" : "/blog/2024/09/16/fail-attempts-on-cf-worker-py/"
+		"brief" : "事情的起因是发现CloudflareWorker支持Python了，虽然还是在Beta，但就是想用来尝试点什么。于是就想简单的检测一下证书过期时间。"
+	},
+    
+	{
+		"title" : "Go 如何在http handler中获取client hello的原始数据",
+		"tags" : "Go_Http",
+		"url" : "/blog/2024/08/21/go-https-client-hello/"
+		"brief" : "主要是实现思路。"
+	},
+    
+	{
 		"title" : "备忘录 使用Gpg为git的commit签名",
 		"tags" : "git",
 		"url" : "/blog/2024/08/19/gpg-sign-git/"
@@ -12,7 +33,7 @@
 		"title" : "备忘录 通过fastly镜像整个Github Pages",
 		"tags" : "JavaScript",
 		"url" : "/blog/2024/08/18/fastly-mirror-github-pages/"
-		"brief" : "现存的GithubPage设置CNAME接受域名A上，但是访问速度有时候不如人意。现在的目标是，在域名B上提供和A相同的服务，在A连接不上时多一个选择。"
+		"brief" : "现存的GithubPage设置CNAME域名为A，但是访问速度有时候不如人意。现在的目标是，在域名B上提供和A相同的服务，在A连接不上时多一个选择。"
 	},
     
 	{

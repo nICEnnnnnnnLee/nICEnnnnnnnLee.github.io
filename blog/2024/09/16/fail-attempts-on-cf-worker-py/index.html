@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>使用CF Worker检测TLS证书的失败尝试(Python篇)</title>
+    <meta name="description" content="事情的起因是发现Cloudflare Worker支持Python了，虽然还是在Beta，但就是想用来尝试点什么。于是就想简单的检测一下证书过期时间。">
+
+    <meta property="og:url" content="https://nicelee.top/blog/2024/09/16/fail-attempts-on-cf-worker-py/">
+    <meta property="og:site_name" content="NiceLee的博客">
+    <meta property="og:title" content="使用CF Worker检测TLS证书的失败尝试(Python篇)">
+    <meta property="og:description" content="事情的起因是发现Cloudflare Worker支持Python了，虽然还是在Beta，但就是想用来尝试点什么。于是就想简单的检测一下证书过期时间。">
+    <meta property="og:image" content="https://nicelee.top/favicon.ico?">
+    <meta property="og:image:type" content="image/x-icon">
+    
+    <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="stylesheet" href="/css/font-awesome.min.css ">
+    <link rel="stylesheet" href="/css/font-ali.css?v=1.2 ">
+    <link rel="stylesheet" href="/css/main.css?v=1.1 ">
+    <link rel="canonical" href="https://nicelee.top/blog/2024/09/16/fail-attempts-on-cf-worker-py/">
+    <link rel="alternate" type="application/rss+xml" title="NiceLeeのBlog" href="https://nicelee.top/feed.xml ">
+
+	
+
+    <script>
+    // 百度统计代码
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?11f780e4e4ccd4e99b101eac776e93e4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script type='text/javascript'>
+  // smartlook统计代码
+  window.smartlook||(function(d) {
+    var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
+    var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
+    c.charset='utf-8';c.src='https://web-sdk.smartlook.com/recorder.js';h.appendChild(c);
+    })(document);
+    smartlook('init', '19ece82e2fc254b6b9cb148c545244ca1fc2ade2', { region: 'eu' });
+</script>
+
+
+
+</head>
+
+    <link rel="stylesheet" href="/sources/live2d/css/live2d.css" />
+  <body>
+	
+		
+		<script type="text/javascript" src="/js/ribbon.min.js "></script>
+		
+	
+	
+    <header id="top">
+    <div class="wrapper">
+        <a href="/blog/" class="brand awsome-font">NiceLeeのBlog</a>
+        <small>用爱发电 bilibili~</small>
+        <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
+        <nav id="headerNav">
+            <ul>
+				<li onclick="showdiv()" >
+                    <a href="#">
+                    <i class="fa fa-search">搜索</i>
+                    </a>
+                </li>
+                <li>
+                    
+                    <a href="/blog/">
+                    
+                        <i class="fa fa-home"></i>主页
+                    </a>
+                </li>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <a href="/blog/archive/">
+                        
+                            <i class="fa fa-archive"></i>归档
+                        </a>
+                    </li>
+                
+                    
+                    <li>
+                        <a href="/ilikemusic/">
+                        
+                            <i class="fa fa-music"></i>音乐
+                        </a>
+                    </li>
+                
+                    
+                    <li>
+                        <a href="/collect/">
+                        
+                            <i class="fa fa-bookmark"></i>收藏
+                        </a>
+                    </li>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <a href="/blog/timeline/">
+                        
+                            <i class="fa fa-clock-o"></i>时间轴
+                        </a>
+                    </li>
+                
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <a href="/about/">
+                        
+                            <i class="fa fa-info-circle"></i>关于
+                        </a>
+                    </li>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                				
+				
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+        <div class="page clearfix" post>
+    <div class="left">
+        <h1>使用CF Worker检测TLS证书的失败尝试(Python篇)</h1>
+        <div class="label">
+
+            <div class="label-card">
+                <i class="fa fa-calendar"></i>2024-09-16
+            </div>
+
+            <div class="label-card">
+                <i class="fa fa-user"></i>nIceLee
+                
+            </div>
+            <div class="label-card">
+                <p>阅读：<span id="busuanzi_value_page_pv1"></span></p>
+            </div>
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+            
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+            </div>
+
+            <div class="label-card">
+            
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <!--a href="/blog/tag/#python" title="Tag: python" rel="tag">python</a-->
+        <a href="/blog/tag/#python" title="Tag: python" rel="tag">python</a>&nbsp;
+    
+        <!--a href="/blog/tag/#cloudflare" title="Tag: cloudflare" rel="tag">cloudflare</a-->
+        <a href="/blog/tag/#cloudflare" title="Tag: cloudflare" rel="tag">cloudflare</a>
+    
+  
+
+</span>
+
+            </div>
+
+        </div>
+        <hr>
+        <article itemscope itemtype="http://schema.org/BlogPosting">
+        <ul id="markdown-toc">
+  <li><a href="#尝试1----不支持socket建立tcp连接" id="markdown-toc-尝试1----不支持socket建立tcp连接">尝试1  - 不支持socket建立TCP连接</a></li>
+  <li><a href="#尝试2----没有内嵌httpx模块" id="markdown-toc-尝试2----没有内嵌httpx模块">尝试2  - 没有内嵌<code class="language-plaintext highlighter-rouge">httpx</code>模块</a></li>
+  <li><a href="#尝试3---不支持导入依赖" id="markdown-toc-尝试3---不支持导入依赖">尝试3 - 不支持导入依赖</a></li>
+  <li><a href="#尝试4---不需要异步转同步" id="markdown-toc-尝试4---不需要异步转同步">尝试4 - 不需要异步转同步</a></li>
+  <li><a href="#尝试5---不支持asyncio建立tcp连接" id="markdown-toc-尝试5---不支持asyncio建立tcp连接">尝试5 - 不支持asyncio建立TCP连接</a></li>
+  <li><a href="#尝试6---当前场景-pyodide-不支持-loadpackage" id="markdown-toc-尝试6---当前场景-pyodide-不支持-loadpackage">尝试6 - 当前场景 Pyodide 不支持 loadPackage</a></li>
+</ul>
+
+<p>事情的起因是发现Cloudflare Worker支持<code class="language-plaintext highlighter-rouge">Python</code>了，虽然还是在Beta，但就是想用来尝试点什么。<br />
+于是就想简单的检测一下证书过期时间。</p>
+
+<h2 id="尝试1----不支持socket建立tcp连接">尝试1  - 不支持socket建立TCP连接</h2>
+<p>直接socket一把梭</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">socket</span><span class="p">,</span><span class="n">ssl</span>
+
+<span class="k">def</span> <span class="nf">get_server_certificate</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">sni</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="n">ssl</span><span class="p">.</span><span class="n">SSLContext</span><span class="p">()</span>
+    <span class="n">context</span><span class="p">.</span><span class="n">verify_mode</span> <span class="o">=</span> <span class="n">ssl</span><span class="p">.</span><span class="n">CERT_NONE</span>
+    <span class="n">context</span><span class="p">.</span><span class="n">check_hostname</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">socket</span><span class="p">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="p">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="p">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+    <span class="n">s</span><span class="p">.</span><span class="n">settimeout</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">context</span><span class="p">.</span><span class="n">wrap_socket</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">server_hostname</span><span class="o">=</span><span class="n">sni</span><span class="p">)</span> <span class="k">as</span> <span class="n">sslSocket</span><span class="p">:</span>
+        <span class="n">sslSocket</span><span class="p">.</span><span class="n">connect</span><span class="p">((</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">))</span>
+        <span class="n">dercert</span> <span class="o">=</span> <span class="n">sslSocket</span><span class="p">.</span><span class="n">getpeercert</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">dercert</span>
+        
+<span class="kn">from</span> <span class="nn">js</span> <span class="kn">import</span> <span class="n">Response</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="k">def</span> <span class="nf">on_fetch</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s">"host"</span><span class="p">:</span> <span class="s">"www.baidu.com"</span><span class="p">,</span>
+            <span class="s">"port"</span><span class="p">:</span> <span class="mi">443</span><span class="p">,</span>
+            <span class="s">"sni"</span><span class="p">:</span> <span class="s">"www.baidu.com"</span><span class="p">,</span>
+            <span class="s">"remarks"</span><span class="p">:</span> <span class="s">"百度"</span>
+        <span class="p">},</span>
+    <span class="p">]</span>
+    <span class="n">cert</span> <span class="o">=</span> <span class="n">get_server_certificate</span><span class="p">(</span><span class="o">**</span><span class="n">config</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">Response</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">cert</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"notAfter"</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>报错</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error: PythonError: Traceback (most recent call last):
+  File "/lib/python312.zip/pyodide/code.py", line 105, in relaxed_call
+    return _do_call(func, sig, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/lib/python312.zip/pyodide/code.py", line 69, in _do_call
+    return func(*bound.args, **bound.kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/session/metadata/index.py", line 25, in on_fetch
+    cert = get_server_certificate(**config[0])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/session/metadata/index.py", line 9, in get_server_certificate
+    with context.wrap_socket(s, server_hostname=sni) as sslSocket:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/session/lib/python3.12/site-packages/ssl.py", line 455, in wrap_socket
+    return self.sslsocket_class._create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/session/lib/python3.12/site-packages/ssl.py", line 960, in _create
+    if sock.getsockopt(SOL_SOCKET, SO_TYPE) != SOCK_STREAM:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [Errno 50] Protocol not available
+</code></pre></div></div>
+
+<p>看样子并不支持使用Socket发送TCP报文</p>
+
+<h2 id="尝试2----没有内嵌httpx模块">尝试2  - 没有内嵌<code class="language-plaintext highlighter-rouge">httpx</code>模块</h2>
+
+<p><a href="https://developers.cloudflare.com/workers/languages/python/">官方文档</a>说<code class="language-plaintext highlighter-rouge">Built-in packages, including FastAPI ↗, Langchain ↗, httpx ↗ and more.</code><br />
+那么我们使用<code class="language-plaintext highlighter-rouge">httpx</code></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">httpx.backends.base</span> <span class="kn">import</span> <span class="n">lookup_backend</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">_get_server_certificate</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">sni</span><span class="p">):</span>
+    <span class="n">backend</span> <span class="o">=</span> <span class="n">lookup_backend</span><span class="p">(</span><span class="s">"auto"</span><span class="p">)</span> <span class="c1"># auto asyncio trio
+</span>    <span class="n">ssl_context</span> <span class="o">=</span> <span class="n">SSLConfig</span><span class="p">(</span><span class="n">verify</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">http2</span><span class="o">=</span><span class="bp">True</span><span class="p">).</span><span class="n">ssl_context</span>
+    <span class="n">ssl_context</span><span class="p">.</span><span class="n">check_hostname</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">timeout</span> <span class="o">=</span> <span class="n">Timeout</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    
+    <span class="n">socket</span> <span class="o">=</span> <span class="k">await</span> <span class="n">backend</span><span class="p">.</span><span class="n">open_tcp_stream</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">ssl_context</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span>
+    <span class="n">ssl_object</span> <span class="o">=</span> <span class="n">socket</span><span class="p">.</span><span class="n">stream_writer</span><span class="p">.</span><span class="n">get_extra_info</span><span class="p">(</span><span class="s">"ssl_object"</span><span class="p">)</span>
+    <span class="n">peercert</span> <span class="o">=</span> <span class="n">ssl_object</span><span class="p">.</span><span class="n">getpeercert</span><span class="p">()</span>
+    <span class="c1"># peercert = ssl.DER_cert_to_PEM_cert(peercert)
+</span>    <span class="k">await</span> <span class="n">socket</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">peercert</span>
+
+<span class="k">def</span> <span class="nf">get_server_certificate</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">sni</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="p">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+    <span class="n">peercert</span> <span class="o">=</span> <span class="n">loop</span><span class="p">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">_get_server_certificate</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">sni</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">peercert</span>
+
+<span class="kn">from</span> <span class="nn">js</span> <span class="kn">import</span> <span class="n">Response</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="k">def</span> <span class="nf">on_fetch</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s">"host"</span><span class="p">:</span> <span class="s">"www.baidu.com"</span><span class="p">,</span>
+            <span class="s">"port"</span><span class="p">:</span> <span class="mi">443</span><span class="p">,</span>
+            <span class="s">"sni"</span><span class="p">:</span> <span class="s">"www.baidu.com"</span><span class="p">,</span>
+            <span class="s">"remarks"</span><span class="p">:</span> <span class="s">"百度"</span>
+        <span class="p">},</span>
+    <span class="p">]</span>
+    <span class="n">cert</span> <span class="o">=</span> <span class="n">get_server_certificate</span><span class="p">(</span><span class="o">**</span><span class="n">config</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">Response</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">cert</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"notAfter"</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>报错</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error: PythonError: Traceback (most recent call last):
+  File "/lib/python312.zip/_pyodide/_base.py", line 629, in pyimport_impl
+    res = __import__(stem, fromlist=fromlist)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/session/metadata/index.py", line 4, in &lt;module&gt;
+    from httpx.backends.base import lookup_backend
+ModuleNotFoundError: No module named 'httpx'
+</code></pre></div></div>
+
+<p>好吧，说好的<code class="language-plaintext highlighter-rouge">Built-in packages</code>呢？</p>
+
+<h2 id="尝试3---不支持导入依赖">尝试3 - 不支持导入依赖</h2>
+
+<p>参考<a href="https://developers.cloudflare.com/workers/languages/python/packages/">官方文档</a>:</p>
+<blockquote>
+  <p>To import a Python package, add the package name to the <code class="language-plaintext highlighter-rouge">requirements.txt</code> file within the same directory as your <code class="language-plaintext highlighter-rouge">wrangler.toml</code> configuration file.`</p>
+
+</blockquote>
+
+<p>所以，我加上了<code class="language-plaintext highlighter-rouge">requirements.txt</code>,内容为 <code class="language-plaintext highlighter-rouge">httpx</code></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[ERROR] Uncaught (in response) Error: internal error
+
+      at async loadBundle (pyodide-internal:loadPackage:36:22)
+      at async Promise.all (index 7)
+      at async loadPackages (pyodide-internal:loadPackage:75:21)
+      at async pyodide:python-entrypoint-helper:61:9
+      at async setupPackages (pyodide:python-entrypoint-helper:59:12)
+      at async pyodide:python-entrypoint-helper:86:13
+      at async preparePython (pyodide:python-entrypoint-helper:100:24)
+      at async pyodide:python-entrypoint-helper:107:81
+      at async Object.fetch (pyodide:python-entrypoint-helper:107:32)
+</code></pre></div></div>
+
+<p>算了，这依赖不要也罢。<br />
+发现<code class="language-plaintext highlighter-rouge">httpx</code>异步依赖的是<code class="language-plaintext highlighter-rouge">asyncio</code>或者<code class="language-plaintext highlighter-rouge">trio</code>，尝试直接使用<code class="language-plaintext highlighter-rouge">asyncio</code></p>
+
+<h2 id="尝试4---不需要异步转同步">尝试4 - 不需要异步转同步</h2>
+<p>尝试直接使用<code class="language-plaintext highlighter-rouge">asyncio</code></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">asyncio</span><span class="p">,</span><span class="n">ssl</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">_get_server_certificate</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">sni</span><span class="p">):</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="n">ssl</span><span class="p">.</span><span class="n">create_default_context</span><span class="p">()</span>
+    <span class="c1"># context = SSLConfig(verify=False,http2=True).ssl_context
+</span>    <span class="n">context</span><span class="p">.</span><span class="n">check_hostname</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">reader</span><span class="p">,</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">await</span> <span class="n">asyncio</span><span class="p">.</span><span class="n">open_connection</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">server_hostname</span><span class="o">=</span><span class="n">sni</span><span class="p">,</span> <span class="n">ssl</span><span class="o">=</span><span class="n">context</span><span class="p">)</span>
+    <span class="n">ssl_object</span> <span class="o">=</span> <span class="n">writer</span><span class="p">.</span><span class="n">get_extra_info</span><span class="p">(</span><span class="s">'ssl_object'</span><span class="p">)</span>
+    <span class="n">peercert</span> <span class="o">=</span> <span class="n">ssl_object</span><span class="p">.</span><span class="n">getpeercert</span><span class="p">()</span>
+    <span class="c1"># peercert = ssl.DER_cert_to_PEM_cert(peercert)
+</span>    <span class="k">await</span> <span class="n">writer</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="c1"># return pemcert
+</span>    <span class="k">return</span> <span class="n">peercert</span>
+
+<span class="k">def</span> <span class="nf">get_server_certificate</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">sni</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="p">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+    <span class="n">peercert</span> <span class="o">=</span> <span class="n">loop</span><span class="p">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">_get_server_certificate</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">sni</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">peercert</span>
+
+<span class="kn">from</span> <span class="nn">js</span> <span class="kn">import</span> <span class="n">Response</span>
+<span class="k">def</span> <span class="nf">on_fetch</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s">"host"</span><span class="p">:</span> <span class="s">"www.baidu.com"</span><span class="p">,</span>
+            <span class="s">"port"</span><span class="p">:</span> <span class="mi">443</span><span class="p">,</span>
+            <span class="s">"sni"</span><span class="p">:</span> <span class="s">"www.baidu.com"</span><span class="p">,</span>
+            <span class="s">"remarks"</span><span class="p">:</span> <span class="s">"百度"</span>
+        <span class="p">},</span>
+    <span class="p">]</span>
+    <span class="n">cert</span> <span class="o">=</span> <span class="n">get_server_certificate</span><span class="p">(</span><span class="o">**</span><span class="n">config</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">Response</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">cert</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"notAfter"</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>报错</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error: PythonError: Traceback (most recent call last):
+  File "/lib/python312.zip/pyodide/code.py", line 105, in relaxed_call
+    return _do_call(func, sig, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/lib/python312.zip/pyodide/code.py", line 69, in _do_call
+    return func(*bound.args, **bound.kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/session/metadata/index.py", line 37, in on_fetch
+    return Response.new(cert.get("notAfter"))
+                        ^^^^^^^^
+AttributeError: 'PyodideTask' object has no attribute 'get'
+
+</code></pre></div></div>
+
+<p>看了一下，直接异步就行了，我这个属于脱裤子放屁，多此一举</p>
+
+<h2 id="尝试5---不支持asyncio建立tcp连接">尝试5 - 不支持asyncio建立TCP连接</h2>
+<p>尝试直接使用<code class="language-plaintext highlighter-rouge">asyncio</code>，返回异步结果</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">asyncio</span><span class="p">,</span> <span class="n">ssl</span>
+
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">get_server_certificate</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">sni</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="n">ssl</span><span class="p">.</span><span class="n">create_default_context</span><span class="p">()</span>
+    <span class="c1"># context = SSLConfig(verify=False,http2=True).ssl_context
+</span>    <span class="n">context</span><span class="p">.</span><span class="n">check_hostname</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">reader</span><span class="p">,</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">await</span> <span class="n">asyncio</span><span class="p">.</span><span class="n">open_connection</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">server_hostname</span><span class="o">=</span><span class="n">sni</span><span class="p">,</span> <span class="n">ssl</span><span class="o">=</span><span class="n">context</span><span class="p">)</span>
+    <span class="n">ssl_object</span> <span class="o">=</span> <span class="n">writer</span><span class="p">.</span><span class="n">get_extra_info</span><span class="p">(</span><span class="s">'ssl_object'</span><span class="p">)</span>
+    <span class="n">peercert</span> <span class="o">=</span> <span class="n">ssl_object</span><span class="p">.</span><span class="n">getpeercert</span><span class="p">()</span>
+    <span class="c1"># peercert = ssl.DER_cert_to_PEM_cert(peercert)
+</span>    <span class="k">await</span> <span class="n">writer</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="c1"># return pemcert
+</span>    <span class="k">return</span> <span class="n">peercert</span>
+
+<span class="kn">from</span> <span class="nn">js</span> <span class="kn">import</span> <span class="n">Response</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">on_fetch</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s">"host"</span><span class="p">:</span> <span class="s">"www.baidu.com"</span><span class="p">,</span>
+            <span class="s">"port"</span><span class="p">:</span> <span class="mi">443</span><span class="p">,</span>
+            <span class="s">"sni"</span><span class="p">:</span> <span class="s">"www.baidu.com"</span><span class="p">,</span>
+            <span class="s">"remarks"</span><span class="p">:</span> <span class="s">"百度"</span>
+        <span class="p">},</span>
+    <span class="p">]</span>
+    
+    <span class="n">cert</span> <span class="o">=</span> <span class="k">await</span> <span class="n">get_server_certificate</span><span class="p">(</span><span class="o">**</span><span class="n">config</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">Response</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">cert</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"notAfter"</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>报错</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error: PythonError: Traceback (most recent call last):
+  File "/session/metadata/index.py", line 27, in on_fetch
+    cert = await get_server_certificate(**config[0])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/session/metadata/index.py", line 8, in get_server_certificate
+    reader, writer = await asyncio.open_connection(host, port, server_hostname=sni, ssl=context)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/lib/python312.zip/asyncio/streams.py", line 48, in open_connection
+    transport, _ = await loop.create_connection(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/lib/python312.zip/asyncio/events.py", line 312, in create_connection
+    raise NotImplementedError
+NotImplementedError
+</code></pre></div></div>
+
+<p>底层<code class="language-plaintext highlighter-rouge">asyncio</code>根本没有实现</p>
+
+<h2 id="尝试6---当前场景-pyodide-不支持-loadpackage">尝试6 - 当前场景 Pyodide 不支持 loadPackage</h2>
+
+<p>查看<a href="https://pyodide.org/en/latest/usage/loading-packages.html#loading-packages">Pyodide</a>的说明，尝试导入<code class="language-plaintext highlighter-rouge">httpx</code>或其它<code class="language-plaintext highlighter-rouge">aiohttp</code>模块，后者是<code class="language-plaintext highlighter-rouge">Pyodide</code>和<code class="language-plaintext highlighter-rouge">Cloudflare</code>都声称是Built-in的</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span> <span class="nf">_get_server_certificate</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">sni</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="kn">import</span> <span class="nn">pyodide_js</span>
+    <span class="k">await</span> <span class="n">pyodide_js</span><span class="p">.</span><span class="n">loadPackage</span><span class="p">(</span><span class="s">'httpx'</span><span class="p">)</span>
+    <span class="c1"># await pyodide_js.loadPackagesFromImports(pkg);
+</span>    <span class="n">httpx</span> <span class="o">=</span> <span class="n">pyodide_js</span><span class="p">.</span><span class="n">pyimport</span><span class="p">(</span><span class="s">"httpx"</span><span class="p">);</span>
+    <span class="kn">from</span> <span class="nn">httpx.backends.base</span> <span class="kn">import</span> <span class="n">lookup_backend</span>
+    
+    <span class="n">backend</span> <span class="o">=</span> <span class="n">lookup_backend</span><span class="p">(</span><span class="s">"auto"</span><span class="p">)</span> <span class="c1"># auto asyncio trio
+</span>    <span class="n">ssl_context</span> <span class="o">=</span> <span class="n">SSLConfig</span><span class="p">(</span><span class="n">verify</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">http2</span><span class="o">=</span><span class="bp">True</span><span class="p">).</span><span class="n">ssl_context</span>
+    <span class="n">ssl_context</span><span class="p">.</span><span class="n">check_hostname</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">timeout</span> <span class="o">=</span> <span class="n">Timeout</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    
+    <span class="n">socket</span> <span class="o">=</span> <span class="k">await</span> <span class="n">backend</span><span class="p">.</span><span class="n">open_tcp_stream</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">ssl_context</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span>
+    <span class="n">ssl_object</span> <span class="o">=</span> <span class="n">socket</span><span class="p">.</span><span class="n">stream_writer</span><span class="p">.</span><span class="n">get_extra_info</span><span class="p">(</span><span class="s">"ssl_object"</span><span class="p">)</span>
+    <span class="n">peercert</span> <span class="o">=</span> <span class="n">ssl_object</span><span class="p">.</span><span class="n">getpeercert</span><span class="p">()</span>
+    <span class="c1"># peercert = ssl.DER_cert_to_PEM_cert(peercert)
+</span>    <span class="k">await</span> <span class="n">socket</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">peercert</span>
+
+<span class="kn">from</span> <span class="nn">js</span> <span class="kn">import</span> <span class="n">Response</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">on_fetch</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s">"host"</span><span class="p">:</span> <span class="s">"www.baidu.com"</span><span class="p">,</span>
+            <span class="s">"port"</span><span class="p">:</span> <span class="mi">443</span><span class="p">,</span>
+            <span class="s">"sni"</span><span class="p">:</span> <span class="s">"www.baidu.com"</span><span class="p">,</span>
+            <span class="s">"remarks"</span><span class="p">:</span> <span class="s">"百度"</span>
+        <span class="p">},</span>
+    <span class="p">]</span>
+    <span class="n">cert</span> <span class="o">=</span> <span class="k">await</span> <span class="n">_get_server_certificate</span><span class="p">(</span><span class="o">**</span><span class="n">config</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">Response</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">cert</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"notAfter"</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>报错</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error: PythonError: Traceback (most recent call last):
+  File "/session/metadata/index.py", line 34, in on_fetch
+    cert = await _get_server_certificate(**config[0])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/session/metadata/index.py", line 5, in _get_server_certificate
+    await pyodide_js.loadPackage('httpx')
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "pyodide-internal:generated/pyodide.asm", line 20, in JsvFunction_CallBound
+  File "pyodide-internal:setupPackages", line 130, in Object.disabledLoadPackage [as loadPackage]
+pyodide.ffi.JsException: Error: pyodide.loadPackage is disabled because packages are encoded in the binary
+</code></pre></div></div>
+
+<p>没救了，等死吧</p>
+
+
+        </article>
+        <hr>
+
+        
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                        
+                        <h2 id="similar_posts">相似文章</h2>
+                        <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2024/09/16/fail-attempts-on-cf-worker-js/">使用CF Worker检测TLS证书的失败尝试(JS篇)
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2024/07/26/cloudflare-better-ips/">【资源】关于Cloudflare CDN 优选IP
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+        
+        
+            </ul>
+        
+
+        <div class="post-recent">
+    <div class="pre">
+        
+        <p><strong>上一篇</strong> <a href="/blog/2024/08/21/go-https-client-hello/">Go 如何在http handler中获取client hello的原始数据</a></p>
+        
+    </div>
+    <div class="nex">
+
+        
+        <p><strong>下一篇</strong> <a href="/blog/2024/09/16/fail-attempts-on-cf-worker-js/">使用CF Worker检测TLS证书的失败尝试(JS篇)</a></p>
+        
+    </div>
+</div>
+
+
+        <!-- <h2 id="comments">评论</h2>  
+        
+
+
+
+ -->
+
+
+    </div>
+    <button class="anchor"><i class="fa fa-anchor"></i></button>
+    <div class="right">
+        <div class="wrap">
+
+            <!-- Content -->
+            <div class="side content">
+                <div>
+                    内容
+                </div>
+                <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#similar_posts">相似文章</a></li>
+                    
+                    <!-- <li><a href="#comments">评论</a></li> -->
+                </ul>
+            </div>
+			
+            <!-- 其他div框放到这里 -->
+            <!-- <div class="side">bbbb</div> -->
+        </div>
+    </div>
+</div>
+<script>
+/**
+ * target _blank
+ */
+(function() {
+    var aTags = document.querySelectorAll('article a:not([id])')
+    for (var i = 0; i < aTags.length; i++) {
+        aTags[i].setAttribute('target', '_blank')
+    }
+
+}());
+</script>
+<script src="/js/pageContent.js " charset="utf-8"></script>
+
+
+    <footer class="site-footer">
+
+
+    <div class="wrapper">
+        <p class="description">
+             这是一个缺爱的博客(๑‾ ꇴ ‾๑)！ 
+        </p>
+        <p class="contact">
+            联系我: 
+            <a href="https://github.com/nICEnnnnnnnLee" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
+            <a href="mailto:lijia0732@sina.com" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>  
+            <a href="https://weibo.com/blackhigh" title="Weibo"><i class="fa fa-weibo" aria-hidden="true"></i></a>       
+			<span onclick="copyToClipboard('https://nicelee.top/feed.xml')"><a href="#">订阅我<i class="fa fa-gg"></i></a></span>
+        </p>
+        <p>
+            总pv:<span id="busuanzi_value_site_pv"></span>，uv:<span id="busuanzi_value_site_uv"></span>，本页pv:<span id="busuanzi_value_page_pv"></span>
+        </p>
+        <p class="power">
+            <span>
+            有用链接：
+                <a href="http://www.bejson.com/" target="_blank">BeJSON</a> &nbsp;&nbsp;
+                <a href="http://site.ip138.com/"  target="_blank">IP或域名查询</a> &nbsp;&nbsp;
+                <a href="http://ping.chinaz.com/"  target="_blank">各地ping</a> &nbsp;&nbsp;
+                <a href="https://tool.lu/"  target="_blank">在线工具</a> &nbsp;&nbsp; 
+                <a href="https://www.aliyun.com/"  target="_blank">阿里云</a> &nbsp;&nbsp; 
+                <a href="http://patorjk.com/software/taag/"  target="_blank">Text转FIGlet</a> &nbsp;&nbsp; 
+                <a href="https://vercel.com/dashboard"  target="_blank">Vercel</a> &nbsp;&nbsp;
+                <a href="https://dash.cloudflare.com/"  target="_blank">Cloudflare</a> &nbsp;&nbsp;
+                <a href="https://www.webfx.com/tools/emoji-cheat-sheet/"  target="_blank">Emoji😳</a> &nbsp;&nbsp;
+                <a href="https://www.color-hex.com/"  target="_blank">Color-hex</a> &nbsp;&nbsp;
+                <a href="https://hub.fastgit.org/"  target="_blank">Github镜像fastgit</a> &nbsp;&nbsp;
+            </span>
+        </p>
+        <p class="power">
+            <span>
+            除非另有注明，否则本网站上的内容可按 <a href="http://creativecommons.org/licenses/by-nc/4.0/"  target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议许可</a> 或更新版本使用。
+            </span>
+        </p>
+        <p class="power">
+            <span>
+                建站声明详见 <a href="/about/#关于个人博客">[关于]</a>. <a href="/sitemap.xml">[站点地图]</a>. 
+            </span>
+            
+        </p>
+        <p class="power beian">
+        </p>
+		<p class="power">
+            <span>
+                Site powered by <a href="https://jekyllrb.com/">Jekyll</a>.
+            </span>
+            <span>
+                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
+            </span>
+        </p>
+        
+		
+    </div>
+</footer>
+
+
+<!-- mask start -->
+<div id="searchBg"></div>
+<div id="searchDiv">
+	<input id="searchContent" type="text" onkeypress="if(event.keyCode==13) { search();return false;}" value=""/></input>
+    <div id="searchBtn" onclick="search();" /><i class="fa fa-search"></i></div>
+	<span onclick="hidediv();" class="close"></span>
+</div>
+<!-- mask end -->
+<!-- live2d begin -->
+<div id="landlord">
+    <div class="message" style="opacity:0"></div>
+    <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+    <div class="hide-button">隐藏</div>
+</div>
+<!-- live2d end -->
+<script type='text/javascript' src='/js/jquery.min.js '></script>
+<script type='text/javascript'>
+function search(){	
+	var str = document.getElementById("searchContent").value;
+	//console.log(str);
+	setLocalStorage("blogSearchKey",str);
+	hidediv();
+	window.location.href="/blog/archive/";
+}
+function showdiv() {
+	//alert("调用了showdiv()函数");
+	document.getElementById("searchBg").style.display ="block";
+	document.getElementById("searchDiv").style.display ="block";
+
+	//$('body').css("overflow", "hidden");
+	document.getElementsByTagName('body')[0].setAttribute("overflow", "hidden");
+}
+function hidediv() {
+	document.getElementById("searchBg").style.display = 'none';
+	document.getElementById("searchDiv").style.display = 'none';
+	//$('body').css("overflow", "auto");
+	document.getElementsByTagName('body')[0].setAttribute("overflow", "hidden");
+}
+////////////////////////////useful function //////////////////////////////////////
+//写cookies
+function setLocalStorage(name,value)
+{
+	localStorage.setItem(name, JSON.stringify(value));
+}
+//读cookies
+function getLocalStorage(name)
+{
+	return JSON.parse(localStorage.getItem(name));
+}
+//删cookies
+function delLocalStorage(name)
+{
+	localStorage.setItem(name, JSON.stringify(""));
+}
+function copyToClipboard (text) {
+    if(text.indexOf('-') !== -1) {
+        var arr = text.split('-');
+        text = arr[0] + arr[1];
+    }
+    var textArea = document.createElement("textarea");
+      textArea.style.position = 'fixed';
+      textArea.style.top = '0';
+      textArea.style.left = '0';
+      textArea.style.width = '2em';
+      textArea.style.height = '2em';
+      textArea.style.padding = '0';
+      textArea.style.border = 'none';
+      textArea.style.outline = 'none';
+      textArea.style.boxShadow = 'none';
+      textArea.style.background = 'transparent';
+      textArea.value = text;
+      document.body.appendChild(textArea);
+      textArea.select();
+	//alert("调用了复制剪贴板函数");
+      try {
+        var successful = document.execCommand('copy');
+        var msg = successful ? 'Rss源已成功复制到剪贴板' : 'RSS源为:https://nicelee.top/feed.xml';
+		//alert(msg);
+		showTips(msg);
+      } catch (err) {
+		//console.log(err);
+        //alert('该浏览器不支持点击复制到剪贴板');
+		showTips('RSS源为:https://nicelee.top/feed.xml');
+      }
+
+      document.body.removeChild(textArea);
+}
+/*
+<!--  版权维护  -->
+function addLink() {
+//alert("!!!");
+    var body_element = document.body;
+    var selection;
+    selection = window.getSelection();
+    if((selection + "").indexOf("/feed.xml") != -1){
+        return;
+    }
+	if(selection == ""){
+		return;
+	}
+    var locationHref=document.location.href;
+    var appendLink="\r\n------------------------------\r\n 原文出自[ NiceLee的个人博客 ] 转载请保留原文链接: <a href='"+locationHref+"'>"+locationHref+"</a>";
+    if (window.clipboardData) { // Internet Explorer
+        //console.log("调用原生函数");
+        var copytext = selection + appendLink;
+        window.clipboardData.setData ("Text", copytext);
+        return false;
+    } else {
+        //console.log("复杂的套路");
+        var copytext = selection + appendLink;
+        var newdiv = document.createElement('div');
+        newdiv.style.position='absolute';
+        newdiv.style.left='-99999px';
+        body_element.appendChild(newdiv);
+        newdiv.innerHTML = "<pre>" +copytext + "</pre>";
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function() {
+        	body_element.removeChild(newdiv);
+        },0);
+    }
+}
+document.oncopy = addLink;
+*/
+
+//contetn为要显示的内容  
+function showTips( content ){  
+	//alert("调用了复制提示消息函数");
+	//alert("内容为"+ content);
+    //窗口的宽度  
+	//alert(content);
+	var width = 250;
+	var x  = $(window).width()/2 - width/2;	
+	var y = $(window).height()/2 -20;
+	var $i = $("<span/>").text(content);
+	$i.css({
+		"z-index": 999999999999999999999999999,
+		"top": y,
+		"left": x,
+		"position": "absolute",
+		"font-weight": "bold",
+		'padding'   : '3px 5px',  
+		'background': '#8FBC8F',  
+		'font-size' : 12 + 'px',  
+		'margin'    : '0 auto',  
+		'text-align': 'center',  
+		'width'     : width + 'px',  
+		'height'    : 'auto',  
+		'color'     : '#fff'
+	});
+	$("body").append($i);
+	$i.animate({
+		"opacity": 0
+	},
+	3000,
+	function() {
+		//console.log($i.css());
+		$i.remove();
+		//alert('');
+	});
+}     
+</script>
+
+<!-- 窗口失去焦点 -- 别走啊 -->
+<!-- 窗口获得焦点 -- 恢复 -->
+<!-- console 打印figlet-->
+<script>
+var titleOnFocus = document.title;
+var titleOnBlur = "...(*￣０￣)ノ[别走啊…]";
+window.onfocus =function(){
+    document.title = titleOnFocus;
+    //console.log(titleOnFocus);
+}
+window.onblur = function(){
+    document.title = titleOnBlur;
+    //console.log(titleOnBlur);
+}
+
+var figlet = "\n" +
+"        _          _            _               \n" +
+"       (_)        | |          | |              \n" +
+"  _ __  _  ___ ___| | ___  ___ | |_ ___  _ __   \n" +
+" | '_ \\| |/ __/ _ \\ |/ _ \\/ _ \\| __/ _ \\| '_ \\  \n" +
+" | | | | | (_|  __/ |  __/  __/| || (_) | |_) | \n" +
+" |_| |_|_|\\___\\___|_|\\___|\\___(_)__\\___/| .__/  \n" +
+"                                        | |     \n" +
+"                                        |_|     \n" ;
+console.log(figlet);
+// console.log("%cline1\nline2", "color:red;font-size: 50px;font-weight:bold;");
+
+/* 防hentai
+document.onkeydown=function(){
+    var e = window.event||arguments[0];
+    if(e.keyCode==123){
+    	alert('请尊重劳动成果！');
+            return false;
+    }else if((e.ctrlKey)&&(e.shiftKey)&&(e.keyCode==73)){
+    	alert('请尊重劳动成果！');
+            return false;
+    }else if((e.ctrlKey)&&(e.keyCode==85)){
+            alert('请尊重劳动成果！');
+            return false;
+    }else if((e.ctrlKey)&&(e.keyCode==83)){
+           alert('请尊重劳动成果！');
+           return false;
+    }
+}
+document.oncontextmenu=function(){
+	alert('请尊重劳动成果！');
+    return false;
+}*/
+</script>
+
+<!-- live2d Begin-->
+<script type="text/javascript">
+    var message_Path = '/sources/live2d/'
+    var home_Path = 'https://nicelee.top/'
+</script>
+<script type="text/javascript" src="/sources/live2d/js/live2d.js"></script>
+<script type="text/javascript" src="/sources/live2d/js/message.js"></script>
+<script type="text/javascript">
+    var modelList = ["kesshouban_v2", "tia", "wanko", "index", "kanna", "koharu", "umaru", 
+	"22.closet.default.v2", 
+	"22.closet.2018.bls-summer", 
+	"22.closet.2019.summer", 
+	"33.closet.2016.xmas", 
+	"33.closet.2017.tomo-bukatsu", 
+	"33.closet.2018.bls-summer", 
+	"33.closet.2018.bls-winter", 
+	"33.closet.default.v2" ];    
+    var model = modelList[12]; 
+    // kesshouban_v2 血小板
+    // tia  小改改
+    // wanko 小狗狗 
+    // index 魔禁-茵蒂克丝
+    // kanna 康娜龙
+    // koharu 卡哇伊的Q版模型
+    // umaru 干物妹小埋 带声音
+    // 22 哔哩哔哩22娘
+    // 22.v2 哔哩哔哩22娘
+    console.log("live2d模型(小部分)来自官网: http://www.live2d.com/usermanual/cubism2_cn/samples.html");
+    console.log("live2d模型(大部分)来自梦象: https://mx-model.ga/");
+    if( window.document.body.offsetWidth >= 666){
+        loadlive2d("live2d", "/sources/live2d/model/"+ model +"/model.json");
+    }else{
+        //loadlive2d("live2d", "/sources/live2d/model/tia/model_tiny.json");
+        loadlive2d("live2d", "/sources/live2d/model/"+ model +"/model_tiny.json");
+    }
+</script>
+<!-- live2d End-->
+
+<script type="text/javascript">
+	var a_idx = 0;
+	jQuery(document).ready(function($) {
+		$("body").click(function(e) {
+			var a = new Array("大吉大利，今晚吃鸡！", "惊不惊喜，意不意外", "还有这种操作？", "小猪佩奇身上纹，掌声送给社会人", "确认过眼神", "皮一下，很开心", "很好很强大", "C位出道", "你若盛开，清风自来", "如果帅也是一种罪，那我已罪无可赦", "别看资料 ，看聊效！", "感动吗，不敢动", "打call", "我是你的超级英雄");
+			var $i = $("<span/>").text(a[a_idx]);
+			a_idx = (a_idx + 1) % a.length;
+			var x = e.pageX,
+			y = e.pageY;
+			$i.css({
+				"z-index": 999999999999999999999999999,
+				"top": y - 20,
+				"left": x,
+				"position": "absolute",
+				"font-weight": "bold",
+				"color": "#dd3333"
+			});
+			$("body").append($i);
+			$i.animate({
+				"top": y - 180,
+				"opacity": 0
+			},
+			1500,
+			function() {
+				$i.remove();
+				//alert('');
+			});
+		});
+	});
+</script>
+
+
+<script async src="/js/busuanzi.pure.mini.js "></script>
+
+
+    <div class="back-to-top">
+    <a href="#top" data-scroll>
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+    <script src="/js/main.js " charset="utf-8"></script>
+    <script src="/js/smooth-scroll.min.js " charset="utf-8"></script>
+    <script type="text/javascript">
+      smoothScroll.init({
+        speed: 500, // Integer. How fast to complete the scroll in milliseconds
+        easing: 'easeInOutCubic', // Easing pattern to use
+        offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
+      });
+      // 为了底部内容不被遮住
+      $(document).ready(function () {
+        resizeBody();
+      });
+      window.onresize = resizeBody;
+      function resizeBody(){
+        //console.log("resizing Body...");
+        if (window.innerWidth <= 770) {
+            var totalHeight = $("header#top").height() + $(".page.clearfix").height() + $("footer.site-footer").height() +80;
+            document.body.style.height = totalHeight + "px";
+        }else{
+            document.body.style.height = "auto";
+        }
+      }
+    </script>
+	
+	
+    <!-- <script src=" /js/scroll.min.js " charset="utf-8"></script> -->
+  </body>
+
+</html>
