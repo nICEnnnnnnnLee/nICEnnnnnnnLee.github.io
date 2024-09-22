@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html><head><base1 href="https://websim/qr-code-app/" />
+<title>Compact QR Code Generator</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--
+<script1 src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script1 src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<link1 href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+<link1 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet"> -->
+<script src="qrcode.min.js"></script>
+<script src="html2canvas.min.js"></script>
+<link href="css/css2.css?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="css/all.min.css" rel="stylesheet">
+<style>
+  :root {
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+    --background-color: #f5f7fa;
+    --text-color: #34495e;
+  }
+  body {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+  }
+  .container {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+  }
+  h1 {
+    text-align: center;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  #qrcode {
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
+    position: relative;
+  }
+  #qrcode img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+  .form-group {
+    margin-bottom: 0.75rem;
+  }
+  label {
+    display: inline-block;
+    margin-bottom: 0.25rem;
+    font-weight: bold;
+    color: var(--text-color);
+    font-size: 0.9rem;
+  }
+  input, select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    transition: border-color 0.3s ease;
+  }
+  input:focus, select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+  }
+  .color-picker {
+    display: flex;
+    align-items: center;
+  }
+  .color-picker input[type="color"] {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .color-preview {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-left: 5px;
+    border: 1px solid #ddd;
+  }
+  .icon-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 0.25rem;
+  }
+  .icon-option {
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  .icon-option:hover, .icon-option.selected {
+    color: var(--primary-color);
+  }
+  .button-group {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  .button-group button {
+    flex: 1;
+    padding: 0.5rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .button-group button:hover {
+    background-color: #2980b9;
+  }
+  #downloadPngBtn {
+    background-color: var(--secondary-color);
+  }
+  #downloadPngBtn:hover {
+    background-color: #27ae60;
+  }
+  #printBtn {
+    background-color: #9b59b6;
+  }
+  #printBtn:hover {
+    background-color: #8e44ad;
+  }
+  .remove-icon {
+    color: #e74c3c;
+    cursor: pointer;
+    margin-left: 5px;
+    font-size: 0.8rem;
+  }
+  @media print {
+    body * {
+      visibility: hidden;
+    }
+    #qrcode, #qrcode *, #qrText {
+      visibility: visible;
+    }
+    #qrcode {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    #qrText {
+      position: absolute;
+      left: 50%;
+      top: 100%;
+      transform: translateX(-50%);
+      text-align: center;
+      margin-top: 1rem;
+    }
+  }
+  .nodisplay{
+    display: none;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>QR Code Generator</h1>
+    <div id="qrcode"></div>
+    <div class="form-group">
+      <label for="qrText">Content:</label>
+      <input type="text" id="qrText" value="https://websim/qr-code-app/scan">
+    </div>
+    <div class="form-group">
+      <label for="qrSize">Size: <span id="sizeValue">200x200</span></label>
+      <input type="range" id="qrSize" value="200" min="100" max="400" step="10">
+    </div>
+    <div class="form-group">
+      <label for="qrColor">Color:</label>
+      <div class="color-picker">
+        <input type="color" id="qrColor" value="#000000">
+        <div class="color-preview" id="colorPreview"></div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Icon: <span id="removeIcon" class="remove-icon" title="Remove Icon">❌</span></label>
+      <div class="icon-selector">
+        <i class="icon-option fas fa-user" data-icon="user"></i>
+        <i class="icon-option fas fa-home" data-icon="home"></i>
+        <i class="icon-option fas fa-envelope" data-icon="envelope"></i>
+        <i class="icon-option fas fa-phone" data-icon="phone"></i>
+        <i class="icon-option fas fa-link" data-icon="link"></i>
+      </div>
+    </div>
+    <div class="button-group">
+      <button id="downloadSvgBtn" class="nodisplay">SVG</button>
+      <button id="downloadPngBtn">PNG</button>
+      <button id="printBtn">Print</button>
+    </div>
+  </div>
+
+  <script>
+    let qrcode = null;
+    let selectedIcon = null;
+
+    function generateQRCode() {
+      const text = document.getElementById('qrText').value;
+      const size = parseInt(document.getElementById('qrSize').value);
+      const color = document.getElementById('qrColor').value;
+
+      const qrcodeElement = document.getElementById('qrcode');
+      qrcodeElement.innerHTML = '';
+
+      qrcode = new QRCode(qrcodeElement, {
+        text: text,
+        width: size,
+        height: size,
+        colorDark: color,
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+      });
+
+      setTimeout(() => {
+        if (selectedIcon) {
+          const iconOverlay = document.createElement('div');
+          iconOverlay.innerHTML = `<i class="fas fa-${selectedIcon}" style="font-size: ${size * 0.2}px; color: ${color};"></i>`;
+          iconOverlay.style.position = 'absolute';
+          iconOverlay.style.top = '50%';
+          iconOverlay.style.left = '50%';
+          iconOverlay.style.transform = 'translate(-50%, -50%)';
+          iconOverlay.style.backgroundColor = 'white';
+          iconOverlay.style.padding = `${size * 0.05}px`;
+          iconOverlay.style.borderRadius = '50%';
+          qrcodeElement.appendChild(iconOverlay);
+        }
+      }, 50);
+    }
+
+    const debounce = (func, delay) => {
+      let timeoutId;
+      return (...args) => {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => func.apply(null, args), delay);
+      };
+    };
+
+    const updateQRCode = debounce(generateQRCode, 300);
+
+    document.getElementById('qrText').addEventListener('input', updateQRCode);
+    document.getElementById('qrSize').addEventListener('input', (e) => {
+      document.getElementById('sizeValue').textContent = `${e.target.value}x${e.target.value}`;
+      updateQRCode();
+    });
+    document.getElementById('qrColor').addEventListener('input', (e) => {
+      document.getElementById('colorPreview').style.backgroundColor = e.target.value;
+      updateQRCode();
+    });
+
+    document.querySelectorAll('.icon-option').forEach(icon => {
+      icon.addEventListener('click', (e) => {
+        document.querySelectorAll('.icon-option').forEach(i => i.classList.remove('selected'));
+        e.target.classList.add('selected');
+        selectedIcon = e.target.dataset.icon;
+        updateQRCode();
+      });
+    });
+
+    document.getElementById('removeIcon').addEventListener('click', () => {
+      selectedIcon = null;
+      document.querySelectorAll('.icon-option').forEach(i => i.classList.remove('selected'));
+      updateQRCode();
+    });
+
+    generateQRCode();
+
+    document.getElementById('downloadSvgBtn').addEventListener('click', () => {
+      const svgElement = document.querySelector('#qrcode svg');
+      console.log(svgElement)
+      if (svgElement) {
+        const svgData = new XMLSerializer().serializeToString(svgElement);
+        const svgBlob = new Blob([svgData], {type: 'image/svg+xml;charset=utf-8'});
+        const svgUrl = URL.createObjectURL(svgBlob);
+        const downloadLink = document.createElement('a');
+        downloadLink.href = svgUrl;
+        downloadLink.download = 'qrcode.svg';
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+      }
+    });
+
+    document.getElementById('downloadPngBtn').addEventListener('click', () => {
+      html2canvas(document.getElementById('qrcode')).then(canvas => {
+        const link = document.createElement('a');
+        link.download = 'qrcode.png';
+        link.href = canvas.toDataURL();
+        link.click();
+      });
+    });
+
+    document.getElementById('printBtn').addEventListener('click', () => {
+      window.print();
+    });
+  </script>
+</body>
+</html>
