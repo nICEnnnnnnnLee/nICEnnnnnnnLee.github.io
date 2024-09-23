@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在线文本转图片 Text to Image</title>
+    <meta name="description" content="在线将文本实时转换为图片，支持 PNG 格式的生成。">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f0f0f5;
+            color: #333;
+        }
+        h1 {
+            margin-top: 20px;
+            font-size: 28px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        h1:hover {
+            color: #007bff;
+        }
+        textarea {
+            width: 90%;
+            max-width: 600px;
+            height: 150px;
+            padding: 12px;
+            margin: 15px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            resize: vertical;
+        }
+        .controls {
+            display: flex;
+            justify-content: space-between; /* 控件在同一行中均匀分布 */
+            align-items: center; /* 垂直对齐 */
+            gap: 10px; /* 控件之间的间距 */
+            margin-bottom: 20px;
+            width: 90%;
+            max-width: 600px;
+        }
+        .controls label {
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            width: 200px; /* 设定相同宽度以确保对齐 */
+        }
+        .controls input[type="color"],
+        .controls input[type="number"] {
+            width: 60px; /* 调整输入框宽度 */
+            margin-left: 10px;
+        }
+        .preview {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 90%;
+            max-width: 600px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .preview img {
+            max-width: 100%;
+            max-height: 80vh;
+        }
+        .save-options {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+            gap: 20px;
+        }
+        .save-options label {
+            font-size: 16px;
+        }
+        .save-button {
+            padding: 12px 24px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+        .save-button:hover {
+            background-color: #0056b3;
+        }
+        .save-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #ffffff; /* 修改为与背景颜色相近的颜色 */
+            color: #333; /* 修改为与背景颜色对比的颜色 */
+            padding: 12px 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transition: opacity 0.5s;
+            z-index: 1000;
+            max-width: 300px;
+            text-align: center;
+        }
+        .toast.show {
+            opacity: 1;
+        }
+    </style>
+    
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>  -->
+    <script src="FileSaver.min.js"></script> 
+</head>
+<body>
+    <h1 onclick="window.location.reload()">文本转图片</h1>
+    <textarea id="text-input" placeholder="输入文本..."></textarea>
+    <div class="controls">
+        <label>
+            背景颜色
+            <input type="color" id="bg-color" value="#ffffff">
+        </label>
+        <label>
+            字体大小
+            <input type="number" id="font-size" value="16" min="1">
+        </label>
+        <label>
+            字体颜色
+            <input type="color" id="font-color" value="#000000">
+        </label>
+    </div>
+    
+    <div class="save-options">
+        <label>
+            <input type="radio" name="imgType" value="png" checked>
+            PNG
+        </label>
+        <label>
+            <input type="radio" name="imgType" value="jpeg">
+            JPEG
+        </label>
+        <label>
+            <input type="radio" name="imgType" value="webp">
+            WEBP
+        </label>
+    </div>
+    <div class="preview">
+        <img id="preview-img" alt="预览">
+    </div>
+    
+
+    <button id="save-button" class="save-button">保存图片</button>
+    <div id="toast" class="toast"></div>
+    
+    <script>
+        const textInput = document.getElementById('text-input');
+        const bgColorInput = document.getElementById('bg-color');
+        const fontSizeInput = document.getElementById('font-size');
+        const fontColorInput = document.getElementById('font-color');
+        const previewImg = document.getElementById('preview-img');
+        const saveButton = document.getElementById('save-button');
+        const toast = document.getElementById('toast');
+        const imgTypeOptions = document.getElementsByName('imgType');
+        
+        function showToast(message) {
+            toast.innerHTML = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 5000); // 5秒后自动消失
+        }
+
+        function generateImage() {
+            const text = textInput.value;
+            const bgColor = bgColorInput.value;
+            const fontSize = fontSizeInput.value;
+            const fontColor = fontColorInput.value;
+            const padding = 5; // 内边距设置
+
+            // 创建 canvas 元素
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+
+            // 设置 canvas 属性
+            ctx.font = `${fontSize}px Arial`;
+            ctx.fillStyle = bgColor;
+
+            // 测量文本宽度和高度
+            const lines = text.split('\n');
+            const maxWidth = Math.max(...lines.map(line => ctx.measureText(line).width)) + padding * 2;
+            const lineHeight = parseInt(fontSize, 10) * 1.2; // 计算行高
+            const height = lineHeight * lines.length + padding * 2;
+
+            // 设置 canvas 尺寸
+            canvas.width = maxWidth;
+            canvas.height = height;
+
+            // 填充背景色
+            ctx.fillStyle = bgColor;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // 绘制文本
+            ctx.fillStyle = fontColor;
+            ctx.font = `${fontSize}px Arial`;
+            lines.forEach((line, index) => {
+                ctx.fillText(line, padding, (index + 1) * lineHeight - (lineHeight / 4) + padding);
+            });
+
+            // 更新预览图片
+            previewImg.src = canvas.toDataURL();
+            previewImg.dataset.canvas = canvas.toDataURL(); // 保存 canvas 数据
+            previewImg.canvasRaw = canvas; // 保存 canvas 数据
+        }
+
+        function saveImage() {
+            const canvas = previewImg.canvasRaw;
+            if (!canvas) {
+                showToast('请先生成图片！');
+                return;
+            }
+            
+            let format;
+            let mimeType;
+            let fileName;
+            imgTypeOptions.forEach(option => {
+                if (option.checked) {
+                    format = option.value.toLowerCase();
+                }
+            });
+            switch (format) {
+            case 'jpeg':
+              mimeType = 'image/jpeg';
+              fileName = 'converted_image.jpg';
+              break;
+            case 'webp':
+              mimeType = 'image/webp';
+              fileName = 'converted_image.webp';
+              break;
+            case 'png':
+            default:
+              mimeType = 'image/png';
+              fileName = 'converted_image.png';
+              break;
+            }
+
+            canvas.toBlob((blob) => {
+                saveAs(blob, fileName);
+                showToast("图片保存成功: " + fileName);
+                saveButton.disabled = false;
+            }, mimeType);
+        }
+
+        // 添加事件监听器以实时更新预览
+        textInput.addEventListener('input', generateImage);
+        bgColorInput.addEventListener('input', generateImage);
+        fontSizeInput.addEventListener('input', generateImage);
+        fontColorInput.addEventListener('input', generateImage);
+
+        // 添加点击事件以分享图片
+        saveButton.addEventListener('click', () => {
+            saveButton.disabled = true; // 禁用按钮，防止重复点击
+            saveImage();
+        });
+
+        // 初次加载页面时生成默认预览
+        generateImage();
+    </script>
+</body>
+</html>
