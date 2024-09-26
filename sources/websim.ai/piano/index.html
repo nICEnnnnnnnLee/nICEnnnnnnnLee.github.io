@@ -1,0 +1,144 @@
+<html><head><base href="https://piano.app/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piano Interactivo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .piano {
+            background-color: #333;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+        .keys {
+            display: flex;
+        }
+        .key {
+            width: 60px;
+            height: 200px;
+            background-color: white;
+            border: 1px solid #000;
+            margin: 0 2px;
+            border-radius: 0 0 5px 5px;
+            cursor: pointer;
+            position: relative;
+            transition: background-color 0.1s;
+        }
+        .key.black {
+            background-color: #333;
+            width: 40px;
+            height: 120px;
+            margin: 0 -22px;
+            z-index: 2;
+        }
+        .key.active {
+            background-color: #ddd;
+        }
+        .key.black.active {
+            background-color: #666;
+        }
+        .key span {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+            color: #333;
+        }
+        .key.black span {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="piano">
+        <div class="keys">
+            <div class="key" data-note="C"><span>A</span></div>
+            <div class="key black" data-note="C#"><span>W</span></div>
+            <div class="key" data-note="D"><span>S</span></div>
+            <div class="key black" data-note="D#"><span>E</span></div>
+            <div class="key" data-note="E"><span>D</span></div>
+            <div class="key" data-note="F"><span>F</span></div>
+            <div class="key black" data-note="F#"><span>T</span></div>
+            <div class="key" data-note="G"><span>G</span></div>
+            <div class="key black" data-note="G#"><span>Y</span></div>
+            <div class="key" data-note="A"><span>H</span></div>
+            <div class="key black" data-note="A#"><span>U</span></div>
+            <div class="key" data-note="B"><span>J</span></div>
+            <div class="key" data-note="C2"><span>K</span></div>
+        </div>
+    </div>
+
+    <script>
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const keys = document.querySelectorAll('.key');
+        const keyMap = {
+            'a': 'C', 'w': 'C#', 's': 'D', 'e': 'D#', 'd': 'E', 'f': 'F',
+            't': 'F#', 'g': 'G', 'y': 'G#', 'h': 'A', 'u': 'A#', 'j': 'B', 'k': 'C2'
+        };
+
+        const noteFrequencies = {
+            'C': 261.63, 'C#': 277.18, 'D': 293.66, 'D#': 311.13, 'E': 329.63,
+            'F': 349.23, 'F#': 369.99, 'G': 392.00, 'G#': 415.30, 'A': 440.00,
+            'A#': 466.16, 'B': 493.88, 'C2': 523.25
+        };
+
+        function playNote(note) {
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.type = 'sine';
+            oscillator.frequency.setValueAtTime(noteFrequencies[note], audioContext.currentTime);
+            
+            gainNode.gain.setValueAtTime(1, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 1);
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.start();
+            oscillator.stop(audioContext.currentTime + 1);
+        }
+
+        keys.forEach(key => {
+            key.addEventListener('mousedown', () => {
+                const note = key.getAttribute('data-note');
+                playNote(note);
+                key.classList.add('active');
+            });
+
+            key.addEventListener('mouseup', () => {
+                key.classList.remove('active');
+            });
+
+            key.addEventListener('mouseleave', () => {
+                key.classList.remove('active');
+            });
+        });
+
+        document.addEventListener('keydown', (event) => {
+            const key = event.key.toLowerCase();
+            if (keyMap[key]) {
+                const note = keyMap[key];
+                playNote(note);
+                document.querySelector(`[data-note="${note}"]`).classList.add('active');
+            }
+        });
+
+        document.addEventListener('keyup', (event) => {
+            const key = event.key.toLowerCase();
+            if (keyMap[key]) {
+                const note = keyMap[key];
+                document.querySelector(`[data-note="${note}"]`).classList.remove('active');
+            }
+        });
+    </script>
+</body></html>

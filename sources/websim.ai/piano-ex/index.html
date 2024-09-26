@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html><head>
+<!-- <base href="https://websim.io/synth/"> -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WebSim Synthesizer with Larger Keyboard</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #1a1a1a;
+  }
+  .synth {
+    background-color: #2a2a2a;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  }
+  .controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  .control {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .control label {
+    color: #fff;
+    margin-bottom: 5px;
+  }
+  .potentiometer {
+    width: 80px;
+    height: 80px;
+    background-color: #444;
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+  }
+  .knob {
+    width: 70px;
+    height: 70px;
+    background-color: #888;
+    border-radius: 50%;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    transform-origin: center center;
+  }
+  .indicator {
+    width: 2px;
+    height: 30px;
+    background-color: #fff;
+    position: absolute;
+    bottom: 50%;
+    left: calc(50% - 1px);
+    transform-origin: bottom center;
+  }
+  .keyboard {
+    display: flex;
+    justify-content: center;
+  }
+  .key {
+    width: 60px;
+    height: 200px;
+    margin: 0 2px;
+    background-color: #fff;
+    border: 1px solid #000;
+    border-radius: 0 0 5px 5px;
+    cursor: pointer;
+  }
+  .key.black {
+    width: 40px;
+    height: 120px;
+    background-color: #000;
+    margin-left: -20px;
+    margin-right: -20px;
+    z-index: 1;
+  }
+  .key:active, .key.active {
+    background-color: #e0e0e0;
+  }
+  .key.black:active, .key.black.active {
+    background-color: #333;
+  }
+</style>
+</head>
+<body>
+  <div class="synth">
+    <div class="controls">
+      <div class="control">
+        <label for="waveform">Waveform</label>
+        <select id="waveform">
+          <option value="sine">Sine</option>
+          <option value="square">Square</option>
+          <option value="sawtooth">Sawtooth</option>
+          <option value="triangle">Triangle</option>
+        </select>
+      </div>
+      <div class="control">
+        <label for="volume">Volume</label>
+        <div class="potentiometer" id="volume">
+          <div class="knob">
+            <div class="indicator"></div>
+          </div>
+        </div>
+      </div>
+      <div class="control">
+        <label for="attack">Attack</label>
+        <div class="potentiometer" id="attack">
+          <div class="knob">
+            <div class="indicator"></div>
+          </div>
+        </div>
+      </div>
+      <div class="control">
+        <label for="release">Release</label>
+        <div class="potentiometer" id="release">
+          <div class="knob">
+            <div class="indicator"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="keyboard">
+      <div class="key" data-note="C3"></div>
+      <div class="key black" data-note="C#3"></div>
+      <div class="key" data-note="D3"></div>
+      <div class="key black" data-note="D#3"></div>
+      <div class="key" data-note="E3"></div>
+      <div class="key" data-note="F3"></div>
+      <div class="key black" data-note="F#3"></div>
+      <div class="key" data-note="G3"></div>
+      <div class="key black" data-note="G#3"></div>
+      <div class="key" data-note="A3"></div>
+      <div class="key black" data-note="A#3"></div>
+      <div class="key" data-note="B3"></div>
+      <div class="key" data-note="C4"></div>
+      <div class="key black" data-note="C#4"></div>
+      <div class="key" data-note="D4"></div>
+      <div class="key black" data-note="D#4"></div>
+      <div class="key" data-note="E4"></div>
+      <div class="key" data-note="F4"></div>
+      <div class="key black" data-note="F#4"></div>
+      <div class="key" data-note="G4"></div>
+      <div class="key black" data-note="G#4"></div>
+      <div class="key" data-note="A4"></div>
+      <div class="key black" data-note="A#4"></div>
+      <div class="key" data-note="B4"></div>
+    </div>
+  </div>
+
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script> -->
+  <script src="Tone.js"></script>
+  <script>
+    const synth = new Tone.Synth().toDestination();
+    const keyboard = document.querySelector('.keyboard');
+    const waveformSelect = document.getElementById('waveform');
+    const volumePot = document.getElementById('volume');
+    const attackPot = document.getElementById('attack');
+    const releasePot = document.getElementById('release');
+
+    // Set up audio context
+    document.documentElement.addEventListener('mousedown', () => {
+      if (Tone.context.state !== 'running') Tone.context.resume();
+    });
+
+    // Keyboard event listeners
+    keyboard.addEventListener('mousedown', e => {
+      if (e.target.classList.contains('key')) {
+        const note = e.target.dataset.note;
+        playNote(note);
+        e.target.classList.add('active');
+      }
+    });
+
+    keyboard.addEventListener('mouseup', e => {
+      if (e.target.classList.contains('key')) {
+        synth.triggerRelease();
+        e.target.classList.remove('active');
+      }
+    });
+
+    // Control event listeners
+    waveformSelect.addEventListener('change', e => {
+      synth.oscillator.type = e.target.value;
+    });
+
+    // Potentiometer control
+    function setupPotentiometer(element, callback) {
+      let isDragging = false;
+      let startAngle, currentAngle;
+
+      element.addEventListener('mousedown', startDragging);
+      document.addEventListener('mousemove', drag);
+      document.addEventListener('mouseup', stopDragging);
+
+      function startDragging(e) {
+        isDragging = true;
+        startAngle = getAngle(e);
+        currentAngle = parseFloat(element.querySelector('.knob').style.transform.replace('rotate(', '').replace('deg)', '') || 0);
+      }
+
+      function drag(e) {
+        if (!isDragging) return;
+        const newAngle = getAngle(e);
+        const angleDiff = newAngle - startAngle;
+        let rotationAngle = currentAngle + angleDiff;
+        rotationAngle = Math.max(-150, Math.min(150, rotationAngle));
+        element.querySelector('.knob').style.transform = `rotate(${rotationAngle}deg)`;
+        const value = (rotationAngle + 150) / 300;
+        callback(value);
+      }
+
+      function stopDragging() {
+        isDragging = false;
+      }
+
+      function getAngle(e) {
+        const rect = element.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        return Math.atan2(e.clientY - centerY, e.clientX - centerX) * 180 / Math.PI;
+      }
+    }
+
+    setupPotentiometer(volumePot, value => {
+      synth.volume.value = Tone.gainToDb(value);
+    });
+
+    setupPotentiometer(attackPot, value => {
+      synth.envelope.attack = value;
+    });
+
+    setupPotentiometer(releasePot, value => {
+      synth.envelope.release = value;
+    });
+
+    // Play note function
+    function playNote(note) {
+      synth.triggerAttack(note);
+    }
+
+    // Keyboard controls
+    const keyMap = {
+      'z': 'C3', 's': 'C#3', 'x': 'D3', 'd': 'D#3', 'c': 'E3', 'v': 'F3',
+      'g': 'F#3', 'b': 'G3', 'h': 'G#3', 'n': 'A3', 'j': 'A#3', 'm': 'B3',
+      ',': 'C4', 'l': 'C#4', '.': 'D4', ';': 'D#4', '/': 'E4',
+      'q': 'F4', '2': 'F#4', 'w': 'G4', '3': 'G#4', 'e': 'A4',
+      '4': 'A#4', 'r': 'B4'
+    };
+
+    document.addEventListener('keydown', e => {
+      if (!e.repeat && keyMap.hasOwnProperty(e.key)) {
+        const note = keyMap[e.key];
+        playNote(note);
+        const key = document.querySelector(`.key[data-note="${note}"]`);
+        if (key) key.classList.add('active');
+      }
+    });
+
+    document.addEventListener('keyup', e => {
+      if (keyMap.hasOwnProperty(e.key)) {
+        synth.triggerRelease();
+        const note = keyMap[e.key];
+        const key = document.querySelector(`.key[data-note="${note}"]`);
+        if (key) key.classList.remove('active');
+      }
+    });
+  </script>
+</body>
+</html>
