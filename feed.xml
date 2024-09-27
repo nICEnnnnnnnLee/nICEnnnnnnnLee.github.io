@@ -5,9 +5,41 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 23 Sep 2024 10:48:15 +0800</pubDate>
-    <lastBuildDate>Mon, 23 Sep 2024 10:48:15 +0800</lastBuildDate>
+    <pubDate>Fri, 27 Sep 2024 12:15:31 +0800</pubDate>
+    <lastBuildDate>Fri, 27 Sep 2024 12:15:31 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>备忘录 关于Firefox的二三事(二)</title>
+        <description>&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2022/12/27/sth-about-mozilla-firefox/&quot;&gt;备忘录 关于Firefox的二三事&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;使用企业策略，禁用Firefox更新&lt;/li&gt;
+      &lt;li&gt;使用DNS over HTTPS&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href=&quot;/blog/2023/08/20/addons-firefox-android/&quot;&gt;如何在Firefox Android上使用扩展插件&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;本文
+    &lt;ul&gt;
+      &lt;li&gt;禁用频繁误触的&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;快速查找&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;推荐插件&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Firefox Multi-Account Containers&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Fri, 27 Sep 2024 09:59:01 +0800</pubDate>
+        <pubDateFormat>2024-09-27</pubDateFormat>
+        <link>https://nicelee.top/blog/2024/09/27/sth-about-mozilla-firefox-2/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2024/09/27/sth-about-mozilla-firefox-2/</guid>
+        
+        <category>浏览器扩展</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
     
       <item>
         <title>使用CF Worker检测TLS证书的失败尝试(JS篇)</title>
@@ -167,26 +199,6 @@ WebRTC是什么不说了。&lt;br /&gt;
         <pubDateFormat>2024-07-10</pubDateFormat>
         <link>https://nicelee.top/blog/2024/07/10/jpackage-5-tips/</link>
         <guid isPermaLink="true">https://nicelee.top/blog/2024/07/10/jpackage-5-tips/</guid>
-        
-        <category>Java</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>备忘录 jpackage 关于国际/本地化的坑(四)</title>
-        <description>
-目标仅仅是生成简体中文安装包，结果过程中发生了很多预料之外的事情。&lt;br /&gt;
-总之，走了很多弯路。&lt;br /&gt;
-感觉思路也有点问题，没转过弯来。&lt;br /&gt;
-虽然做了很多无用功，但还是把它记录下来。
-</description>
-        <pubDate>Mon, 08 Jul 2024 09:59:01 +0800</pubDate>
-        <pubDateFormat>2024-07-08</pubDateFormat>
-        <link>https://nicelee.top/blog/2024/07/08/jpackage-4-locale/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2024/07/08/jpackage-4-locale/</guid>
         
         <category>Java</category>
         

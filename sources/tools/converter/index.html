@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link Converter</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+</head>
+<body>
+
+    <div id="container">
+        <div id="configJson">
+            <h2>Input JSON Configurations</h2>
+            <textarea id="inputJson" placeholder="Enter JSON configurations">
+[
+    {
+        "protocol": "xxx",
+        "id": "uuid prefered",
+        "add": "host name or ip",
+        "port": 443,
+        "ps": "#remark",
+        "type": "similar to net config in lower version config",
+        "encryption": "none",
+        "host": "aaa.com",
+        "path": "/path specified",
+        "security": "tls",
+        "sni": "aaa.com",
+        "alpn": "h2,http/1.1",
+        "fp": "chrome"
+    }
+]
+            </textarea>
+            
+        </div>
+
+        <div id="btn">
+            <button onclick="encode()">Encode</button>
+            <button onclick="decode()">Decode</button>
+        </div>
+
+        <div id="shareLink">
+            <h2>Encoded Share Link</h2>
+            <textarea id="outputLink" placeholder="Encoded Share Link"></textarea>
+        </div>
+
+        
+
+</body>
+</html>

@@ -2,7 +2,7 @@
 <!--主页-->
 <url>
     <loc>https://nicelee.top</loc>
-    <lastmod>2024-09-23T10:48:15+08:00</lastmod>
+    <lastmod>2024-09-27T12:15:31+08:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
 </url>
@@ -52,7 +52,7 @@
 
 <url>
     <loc>https://nicelee.top/blog/archive/</loc>
-    <lastmod>2024-09-23T10:48:15+08:00</lastmod>
+    <lastmod>2024-09-27T12:15:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
 </url>
@@ -61,7 +61,7 @@
 
 <url>
     <loc>https://nicelee.top/ilikemusic/</loc>
-    <lastmod>2024-09-23T10:48:15+08:00</lastmod>
+    <lastmod>2024-09-27T12:15:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
 </url>
@@ -70,7 +70,7 @@
 
 <url>
     <loc>https://nicelee.top/collect/</loc>
-    <lastmod>2024-09-23T10:48:15+08:00</lastmod>
+    <lastmod>2024-09-27T12:15:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
 </url>
@@ -87,7 +87,7 @@
 
 <url>
     <loc>https://nicelee.top/blog/timeline/</loc>
-    <lastmod>2024-09-23T10:48:15+08:00</lastmod>
+    <lastmod>2024-09-27T12:15:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
 </url>
@@ -100,7 +100,7 @@
 
 <url>
     <loc>https://nicelee.top/about/</loc>
-    <lastmod>2024-09-23T10:48:15+08:00</lastmod>
+    <lastmod>2024-09-27T12:15:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
 </url>
@@ -228,6 +228,13 @@
 
 
 <!--博文链接-->
+
+<url>
+    <loc>https://nicelee.top/blog/2024/09/27/sth-about-mozilla-firefox-2/</loc>
+    <lastmod>2024-09-27T09:59:01+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+</url>
 
 <url>
     <loc>https://nicelee.top/blog/2024/09/16/fail-attempts-on-cf-worker-js/</loc>
@@ -1950,7 +1957,7 @@
 
 <url>
     <loc>https://nicelee.top/tools/cookie-quick-manager-export-firefox-android.html</loc>
-    <lastmod>2024-09-23T10:48:15+08:00</lastmod>
+    <lastmod>2024-09-27T12:15:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -1958,7 +1965,7 @@
 
 <url>
     <loc>https://nicelee.top/tools/json.html</loc>
-    <lastmod>2024-09-23T10:48:15+08:00</lastmod>
+    <lastmod>2024-09-27T12:15:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -1966,7 +1973,7 @@
 
 <url>
     <loc>https://nicelee.top/tools/js_html.html</loc>
-    <lastmod>2024-09-23T10:48:15+08:00</lastmod>
+    <lastmod>2024-09-27T12:15:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -1974,7 +1981,7 @@
 
 <url>
     <loc>https://nicelee.top/tools/torrent-magnet.html</loc>
-    <lastmod>2024-09-23T10:48:15+08:00</lastmod>
+    <lastmod>2024-09-27T12:15:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -1982,7 +1989,7 @@
 
 <url>
     <loc>https://nicelee.top/tools/qr.html</loc>
-    <lastmod>2024-09-23T10:48:15+08:00</lastmod>
+    <lastmod>2024-09-27T12:15:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -1990,7 +1997,7 @@
 
 <url>
     <loc>https://nicelee.top/tools/base64.html</loc>
-    <lastmod>2024-09-23T10:48:15+08:00</lastmod>
+    <lastmod>2024-09-27T12:15:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -2000,7 +2007,7 @@
 
 <url>
     <loc>https://nicelee.top/tools/regx.html</loc>
-    <lastmod>2024-09-23T10:48:15+08:00</lastmod>
+    <lastmod>2024-09-27T12:15:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -2017,7 +2024,7 @@
 
 <url>
     <loc>https://nicelee.top/tools/githubDownCnt.html</loc>
-    <lastmod>2024-09-23T10:48:15+08:00</lastmod>
+    <lastmod>2024-09-27T12:15:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -2025,7 +2032,7 @@
 
 <url>
     <loc>https://nicelee.top/tools/emoji.html</loc>
-    <lastmod>2024-09-23T10:48:15+08:00</lastmod>
+    <lastmod>2024-09-27T12:15:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -2036,7 +2043,7 @@
 
 <url>
     <loc>https://nicelee.top/prototype/11.html</loc>
-    <lastmod>2024-09-23T10:48:15+08:00</lastmod>
+    <lastmod>2024-09-27T12:15:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -2044,7 +2051,7 @@
 
 <url>
     <loc>https://nicelee.top/prototype/12.html</loc>
-    <lastmod>2024-09-23T10:48:15+08:00</lastmod>
+    <lastmod>2024-09-27T12:15:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -2052,7 +2059,7 @@
 
 <url>
     <loc>https://nicelee.top/blog/category/</loc>
-    <lastmod>2024-09-23T10:48:15+08:00</lastmod>
+    <lastmod>2024-09-27T12:15:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -2060,7 +2067,7 @@
 
 <url>
     <loc>https://nicelee.top/blog/tag/</loc>
-    <lastmod>2024-09-23T10:48:15+08:00</lastmod>
+    <lastmod>2024-09-27T12:15:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -2069,7 +2076,7 @@
 
 <url>
     <loc>https://nicelee.top/sources/resume/</loc>
-    <lastmod>2024-09-23T10:48:15+08:00</lastmod>
+    <lastmod>2024-09-27T12:15:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -2077,7 +2084,7 @@
 
 <url>
     <loc>https://nicelee.top/404.html</loc>
-    <lastmod>2024-09-23T10:48:15+08:00</lastmod>
+    <lastmod>2024-09-27T12:15:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -2086,7 +2093,7 @@
 
 <url>
     <loc>https://nicelee.top/prototype/5.html</loc>
-    <lastmod>2024-09-23T10:48:15+08:00</lastmod>
+    <lastmod>2024-09-27T12:15:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -2094,7 +2101,7 @@
 
 <url>
     <loc>https://nicelee.top/prototype/7.html</loc>
-    <lastmod>2024-09-23T10:48:15+08:00</lastmod>
+    <lastmod>2024-09-27T12:15:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -2102,7 +2109,7 @@
 
 <url>
     <loc>https://nicelee.top/prototype/8.html</loc>
-    <lastmod>2024-09-23T10:48:15+08:00</lastmod>
+    <lastmod>2024-09-27T12:15:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -2110,7 +2117,7 @@
 
 <url>
     <loc>https://nicelee.top/prototype/9.html</loc>
-    <lastmod>2024-09-23T10:48:15+08:00</lastmod>
+    <lastmod>2024-09-27T12:15:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -2118,7 +2125,7 @@
 
 <url>
     <loc>https://nicelee.top/ilikemusic/chinese/</loc>
-    <lastmod>2024-09-23T10:48:15+08:00</lastmod>
+    <lastmod>2024-09-27T12:15:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -2126,7 +2133,7 @@
 
 <url>
     <loc>https://nicelee.top/ilikemusic/chinese.json</loc>
-    <lastmod>2024-09-23T10:48:15+08:00</lastmod>
+    <lastmod>2024-09-27T12:15:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -2134,7 +2141,7 @@
 
 <url>
     <loc>https://nicelee.top/ilikemusic/dancing/</loc>
-    <lastmod>2024-09-23T10:48:15+08:00</lastmod>
+    <lastmod>2024-09-27T12:15:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -2142,7 +2149,7 @@
 
 <url>
     <loc>https://nicelee.top/ilikemusic/dancing.json</loc>
-    <lastmod>2024-09-23T10:48:15+08:00</lastmod>
+    <lastmod>2024-09-27T12:15:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -2151,7 +2158,7 @@
 
 <url>
     <loc>https://nicelee.top/ilikemusic/english/</loc>
-    <lastmod>2024-09-23T10:48:15+08:00</lastmod>
+    <lastmod>2024-09-27T12:15:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -2159,7 +2166,7 @@
 
 <url>
     <loc>https://nicelee.top/ilikemusic/english.json</loc>
-    <lastmod>2024-09-23T10:48:15+08:00</lastmod>
+    <lastmod>2024-09-27T12:15:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -2171,7 +2178,7 @@
 
 <url>
     <loc>https://nicelee.top/ilikemusic/japan/</loc>
-    <lastmod>2024-09-23T10:48:15+08:00</lastmod>
+    <lastmod>2024-09-27T12:15:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -2179,7 +2186,7 @@
 
 <url>
     <loc>https://nicelee.top/ilikemusic/japan.json</loc>
-    <lastmod>2024-09-23T10:48:15+08:00</lastmod>
+    <lastmod>2024-09-27T12:15:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -2187,7 +2194,7 @@
 
 <url>
     <loc>https://nicelee.top/ilikemusic/korea/</loc>
-    <lastmod>2024-09-23T10:48:15+08:00</lastmod>
+    <lastmod>2024-09-27T12:15:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -2195,7 +2202,7 @@
 
 <url>
     <loc>https://nicelee.top/ilikemusic/korea.json</loc>
-    <lastmod>2024-09-23T10:48:15+08:00</lastmod>
+    <lastmod>2024-09-27T12:15:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -2206,7 +2213,7 @@
 
 <url>
     <loc>https://nicelee.top/sources/resume_m/</loc>
-    <lastmod>2024-09-23T10:48:15+08:00</lastmod>
+    <lastmod>2024-09-27T12:15:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -2214,7 +2221,7 @@
 
 <url>
     <loc>https://nicelee.top/ilikemusic/rhythm/</loc>
-    <lastmod>2024-09-23T10:48:15+08:00</lastmod>
+    <lastmod>2024-09-27T12:15:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -2222,7 +2229,7 @@
 
 <url>
     <loc>https://nicelee.top/ilikemusic/rhythm.json</loc>
-    <lastmod>2024-09-23T10:48:15+08:00</lastmod>
+    <lastmod>2024-09-27T12:15:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -2233,7 +2240,7 @@
 
 <url>
     <loc>https://nicelee.top/webstack.html</loc>
-    <lastmod>2024-09-23T10:48:15+08:00</lastmod>
+    <lastmod>2024-09-27T12:15:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
 </url>
