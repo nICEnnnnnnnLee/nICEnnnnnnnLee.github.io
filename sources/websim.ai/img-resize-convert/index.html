@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html><head><base1 href="https://websim.io/image-converter-resizer/" />
+<html><head>
+<!-- <base1 href="https://websim.io/image-converter-resizer/" /> -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Image Convert & Resize</title>
@@ -260,6 +261,8 @@
 
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
+      // ctx.globalAlpha = 0.0;
+      // ctx.fillStyle = ('#000000');
       const newWidth = parseInt(widthInput.value) || originalImage.width;
       const newHeight = parseInt(heightInput.value) || originalImage.height;
       canvas.width = newWidth;

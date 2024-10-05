@@ -2,6 +2,13 @@
 	"code" : 0 ,
 	"data" : [
 	{
+		"title" : "备忘录 使用CF Access管理Pages等受控页面的访问(未绑卡)",
+		"tags" : "cloudflare",
+		"url" : "/blog/2024/10/05/cf-access-policy/"
+		"brief" : "一般情况下，启用AccessPolicy能够控制abc.pages.dev的域名的请求访问，在浏览器进行访问时会需要指定的邮箱验证。但是，想帮它应用到自定义的域名上，需要在ZeroTrust里面进行配置，但是这需要绑卡。我们可以想办法绕过它。"
+	},
+    
+	{
 		"title" : "备忘录 关于Firefox的二三事(二)",
 		"tags" : "浏览器扩展",
 		"url" : "/blog/2024/09/27/sth-about-mozilla-firefox-2/"
