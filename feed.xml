@@ -5,15 +5,34 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 05 Oct 2024 10:26:58 +0800</pubDate>
-    <lastBuildDate>Sat, 05 Oct 2024 10:26:58 +0800</lastBuildDate>
+    <pubDate>Sun, 06 Oct 2024 10:46:09 +0800</pubDate>
+    <lastBuildDate>Sun, 06 Oct 2024 10:46:09 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>备忘录 Serv00 php调用shell脚本</title>
+        <description>最初的起因是母鸡经常重启，但是呢，账号有没有权限设置开机自动运行的脚本。 &lt;br /&gt;
+注意到放到&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/domains/{domain}/public_html&lt;/code&gt;路径下的php是可以直接使用的，遂有了这个想法。&lt;br /&gt;
+在这里先要声明： 虽然这样也能解决问题，但是&lt;strong&gt;最佳方案&lt;/strong&gt;是在Web Panel端建立&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Cron Job&lt;/code&gt;，运行时机为&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;after reboot&lt;/code&gt;，执行你想要的脚本。   &lt;br /&gt;
+本文只讲思路，过程可能略省。
+</description>
+        <pubDate>Sun, 06 Oct 2024 09:59:01 +0800</pubDate>
+        <pubDateFormat>2024-10-06</pubDateFormat>
+        <link>https://nicelee.top/blog/2024/10/06/serv00-php-auth/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2024/10/06/serv00-php-auth/</guid>
+        
+        <category>php</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
     
       <item>
         <title>备忘录 使用CF Access管理Pages等受控页面的访问(未绑卡)</title>
         <description>一般情况下，启用Access Policy能够控制&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;abc.pages.dev&lt;/code&gt;的域名的请求访问，在浏览器进行访问时会需要指定的邮箱验证。&lt;br /&gt;
 &lt;img src=&quot;/sources/archive/2024/10/pages.png&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;
-但是，想帮它应用到自定义的域名上，需要在Zero Trust里面进行配置，但是这需要绑卡。&lt;br /&gt;
+但是，想把它应用到自定义的域名上，就需要在Zero Trust里面进行配置。这个步骤需要绑卡。&lt;br /&gt;
 我们可以想办法绕过它。
 </description>
         <pubDate>Sat, 05 Oct 2024 09:59:01 +0800</pubDate>
@@ -186,23 +205,6 @@ WebRTC是什么不说了。&lt;br /&gt;
         <guid isPermaLink="true">https://nicelee.top/blog/2024/07/29/wechat-push/</guid>
         
         <category>微信</category>
-        
-        
-        <category>工具与资源</category>
-        
-      </item>
-    
-      <item>
-        <title>【资源】关于Cloudflare CDN 优选IP</title>
-        <description>
-最终结论：账号绑卡可以走SaaS回源，不绑卡只能人工设置IP。
-</description>
-        <pubDate>Fri, 26 Jul 2024 09:59:01 +0800</pubDate>
-        <pubDateFormat>2024-07-26</pubDateFormat>
-        <link>https://nicelee.top/blog/2024/07/26/cloudflare-better-ips/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2024/07/26/cloudflare-better-ips/</guid>
-        
-        <category>cloudflare</category>
         
         
         <category>工具与资源</category>

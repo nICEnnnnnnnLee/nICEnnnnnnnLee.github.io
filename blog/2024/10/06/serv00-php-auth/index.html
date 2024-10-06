@@ -7,13 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Java Http/Https代理Demo （上）</title>
-    <meta name="description" content="  上一篇对整个http协议有个大致的了解，是时候进一步尝试做一下代理了。">
+    <title>备忘录 Serv00 php调用shell脚本</title>
+    <meta name="description" content="最初的起因是母鸡经常重启，但是呢，账号有没有权限设置开机自动运行的脚本。 注意到放到~/domains/{domain}/public_html路径下的php是可以直接使用的，遂有了这个想法。在这里先要声明： 虽然这样也能解决问题，但是最佳方案是在Web Panel端建立Cron Job，运行时机为after r...">
 
-    <meta property="og:url" content="https://nicelee.top/blog/2019/02/13/java-proxy-http-server/">
+    <meta property="og:url" content="https://nicelee.top/blog/2024/10/06/serv00-php-auth/">
     <meta property="og:site_name" content="NiceLee的博客">
-    <meta property="og:title" content="Java Http/Https代理Demo （上）">
-    <meta property="og:description" content="  上一篇对整个http协议有个大致的了解，是时候进一步尝试做一下代理了。">
+    <meta property="og:title" content="备忘录 Serv00 php调用shell脚本">
+    <meta property="og:description" content="最初的起因是母鸡经常重启，但是呢，账号有没有权限设置开机自动运行的脚本。 注意到放到~/domains/{domain}/public_html路径下的php是可以直接使用的，遂有了这个想法。在这里先要声明： 虽然这样也能解决问题，但是最佳方案是在Web Panel端建立Cron Job，运行时机为after r...">
     <meta property="og:image" content="https://nicelee.top/favicon.ico?">
     <meta property="og:image:type" content="image/x-icon">
     
@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="/css/font-awesome.min.css ">
     <link rel="stylesheet" href="/css/font-ali.css?v=1.2 ">
     <link rel="stylesheet" href="/css/main.css?v=1.1 ">
-    <link rel="canonical" href="https://nicelee.top/blog/2019/02/13/java-proxy-http-server/">
+    <link rel="canonical" href="https://nicelee.top/blog/2024/10/06/serv00-php-auth/">
     <link rel="alternate" type="application/rss+xml" title="NiceLeeのBlog" href="https://nicelee.top/feed.xml ">
 
 	
@@ -311,11 +311,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>Java Http/Https代理Demo （上）</h1>
+        <h1>备忘录 Serv00 php调用shell脚本</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2019-02-13
+                <i class="fa fa-calendar"></i>2024-10-06
             </div>
 
             <div class="label-card">
@@ -355,14 +355,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a-->
-        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>&nbsp;
-    
-        <!--a href="/blog/tag/#Http" title="Tag: Http" rel="tag">Http</a-->
-        <a href="/blog/tag/#Http" title="Tag: Http" rel="tag">Http</a>&nbsp;
-    
-        <!--a href="/blog/tag/#%E4%BB%A3%E7%90%86" title="Tag: 代理" rel="tag">代理</a-->
-        <a href="/blog/tag/#代理" title="Tag: 代理" rel="tag">代理</a>
+        <!--a href="/blog/tag/#php" title="Tag: php" rel="tag">php</a-->
+        <a href="/blog/tag/#php" title="Tag: php" rel="tag">php</a>
     
   
 
@@ -374,109 +368,82 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#写在前面" id="markdown-toc-写在前面">写在前面</a></li>
-  <li><a href="#思考" id="markdown-toc-思考">思考</a></li>
-  <li><a href="#实现" id="markdown-toc-实现">实现</a></li>
-  <li><a href="#源代码" id="markdown-toc-源代码">源代码</a></li>
+  <li><a href="#php报错没有权限执行proc_open" id="markdown-toc-php报错没有权限执行proc_open">php报错：没有权限执行<code class="language-plaintext highlighter-rouge">proc_open</code></a></li>
+  <li><a href="#php报错没有权限执行目标程序" id="markdown-toc-php报错没有权限执行目标程序">php报错：没有权限执行目标程序</a></li>
+  <li><a href="#ssh无交互登录" id="markdown-toc-ssh无交互登录">ssh无交互登录</a></li>
+  <li><a href="#php模板" id="markdown-toc-php模板">php模板</a></li>
 </ul>
-<blockquote>
-  <p>上一篇对整个http协议有个大致的了解，是时候进一步尝试做一下代理了。</p>
-</blockquote>
+<p>最初的起因是母鸡经常重启，但是呢，账号有没有权限设置开机自动运行的脚本。 <br />
+注意到放到<code class="language-plaintext highlighter-rouge">~/domains/{domain}/public_html</code>路径下的php是可以直接使用的，遂有了这个想法。<br />
+在这里先要声明： 虽然这样也能解决问题，但是<strong>最佳方案</strong>是在Web Panel端建立<code class="language-plaintext highlighter-rouge">Cron Job</code>，运行时机为<code class="language-plaintext highlighter-rouge">after reboot</code>，执行你想要的脚本。   <br />
+本文只讲思路，过程可能略省。</p>
 
-<h2 id="写在前面">写在前面</h2>
-<ul>
-  <li><a href="https://blog.csdn.net/dolphin98629/article/details/54599850/">HTTP 代理原理及实现</a></li>
-  <li>目标是通过<strong>中间人代理</strong>的方式代理普通Http请求， 使用<strong>隧道代理方式</strong>代理Https请求。</li>
-</ul>
+<h2 id="php报错没有权限执行proc_open">php报错：没有权限执行<code class="language-plaintext highlighter-rouge">proc_open</code></h2>
 
-<h2 id="思考">思考</h2>
-<ul>
-  <li>本文先考虑中间人代理方式</li>
-  <li>前面<code class="language-plaintext highlighter-rouge">Http文件服务器Demo - ProxyHttpServer</code>是来了请求直接读取文件内容回复；现在代理的话其实只是换个方式，也就是来了请求，根据请求访问网页，再把得到的内容回复过去。<br />
-这样的话，变动的地方在于要再开一个线程：
-    <ul>
-      <li>本来的线程用来接收客户端的请求、创建到服务器的连接、构造到服务器的数据；</li>
-      <li>新建的线程则专门用来接收服务器的数据，转发给客户端。</li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="实现">实现</h2>
-<p>其实明白了原理，似乎也没啥好bb的。。<br />
-创建到服务器的TCP连接，打开面向服务器的监听线程，专用于转发数据给客户端</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>private void connecToServer(HttpRequest httpRequest) throws IOException {
-    //默认ip：port参数
-    String dstIp = httpRequest.host;
-    int dstPort = 80;
-    // connect方法, 从首行url获取目的参数
-    if (httpRequest.method.toLowerCase().equals("connect")) {
-        dstPort = 443;
-        dstIp = httpRequest.url;
-    }
-    // Get/Post方法，从Host获取目的参数
-    Matcher matcher = HttpResource.patternHost.matcher(dstIp);
-    if (matcher.find()) {
-        dstIp = matcher.group(1);
-        dstPort = Integer.parseInt(matcher.group(2));
-    }
-
-    if (socketServer == null) {
-        socketServer = new Socket();
-        socketServer.connect(new InetSocketAddress(dstIp, dstPort));
-        // 获取服务器之间的输入输出流
-        inFromSever = new StreamReader(monitor, socketServer,
-                new BufferedInputStream(socketServer.getInputStream()));
-        outToServer = new BufferedOutputStream(socketServer.getOutputStream());
-
-        // 打开面向服务器的监听线程,专用于转发数据给客户端
-        ProxyDealer proxyDealer = new ProxyDealer(this);
-        SocketServer.httpProxyThreadPool.execute(proxyDealer);
-    }
-}
+<p>要绕过这一点，需要将<code class="language-plaintext highlighter-rouge">public_html</code>真实位置弄到其它目录，然后再进行链接。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir ~/workspace/public_html
+# 这里直接删除，如果有内容可以按需自行处理
+rm -rf ~/domains/foo.bar/public_html
+ln -fs ~/workspace/public_html ~/domains/foo.bar/public_html
 </code></pre></div></div>
 
-<p>处理客户端的消息，构造Http请求发送给服务器</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>private void doProxyNormal(HttpRequest httpRequest) throws IOException {
-    // TODO do something with the httpRequest. Put 'X-forward...', for example.
-    httpRequest.headers.put("X-Forwarded-For", "123.123.123.123");
+<h2 id="php报错没有权限执行目标程序">php报错：没有权限执行目标程序</h2>
 
-    connecToServer(httpRequest);
-    // 向服务器发送Http请求
-    outToServer.write(String.format("%s %s %s\r\n", httpRequest.method, httpRequest.url, httpRequest.version).getBytes());
-    outToServer.write(String.format("Host: %s\r\n", httpRequest.host).getBytes());
-    for (Entry&lt;String, String&gt; entry : httpRequest.headers.entrySet()) {
-        if (!entry.getKey().toLowerCase().contains("proxy") &amp;&amp; !entry.getKey().toLowerCase().contains("forward")
-                &amp;&amp; !entry.getKey().toLowerCase().contains("authorization")) {
-            outToServer.write((entry.getKey() + ": " + entry.getValue()).getBytes());
-            outToServer.write(HttpResource.BREAK_LINE);
-        }
-    }
-    if (httpRequest.dataLength &gt; 0) {
-        outToServer.write(String.format("Content-Length: %d\r\n", httpRequest.dataLength).getBytes());
-    }
-    outToServer.write(HttpResource.BREAK_LINE);
-    if (httpRequest.dataLength &gt; 0) {
-        int count = 0;
-        int rSize = in.read(in.readBuffer);
-        System.out.println(new String(in.readBuffer, 0, rSize));
-        while (rSize &lt; httpRequest.dataLength - count) {
-            outToServer.write(in.readBuffer, 0, rSize);
-            rSize = in.read(in.readBuffer);
-            count += rSize;
-        }
-        outToServer.write(in.readBuffer, 0, httpRequest.dataLength - count);
-    }
-    outToServer.flush();
-}
+<p>实测只能执行bin目录下已有命令，例如<code class="language-plaintext highlighter-rouge">bash ls ssh curl</code>这种，执行<code class="language-plaintext highlighter-rouge">~/workspace/app</code>这种不太行。</p>
+
+<p>要绕过这一点，我能想到的解决方案是尝试使用<code class="language-plaintext highlighter-rouge">ssh</code>本地登录代传命令。</p>
+
+<h2 id="ssh无交互登录">ssh无交互登录</h2>
+
+<p>可以使用<code class="language-plaintext highlighter-rouge">sshpass</code>，或者使用密钥登录。推荐后者。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 生成密钥对
+ssh-keygen -t rsa
+// 将公钥纳入授权
+cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys
+// 尝试ssh命令
+ssh -t -l {用户名} -P 22 127.0.0.1 "ls -l"
 </code></pre></div></div>
 
-<h2 id="源代码">源代码</h2>
-<ul>
-  <li>预览效果： <a href="https://github.com/nICEnnnnnnnLee/ProxyHttpServer/blob/master/README.md">https://github.com/nICEnnnnnnnLee/ProxyHttpServer/blob/master/README.md</a></li>
-  <li><strong>下载地址</strong>: <a href="https://github.com/nICEnnnnnnnLee/ProxyHttpServer/releases">https://github.com/nICEnnnnnnnLee/ProxyHttpServer/releases</a></li>
-  <li><strong>GitHub</strong>: <a href="https://github.com/nICEnnnnnnnLee/ProxyHttpServer">https://github.com/nICEnnnnnnnLee/ProxyHttpServer</a></li>
-  <li><strong>Gitee码云</strong>: <a href="https://gitee.com/NiceLeee/ProxyHttpServer">https://gitee.com/NiceLeee/ProxyHttpServer</a></li>
-</ul>
+<h2 id="php模板">php模板</h2>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+// https://{domain}/foobar.php?key=value
+<span class="cp">&lt;?php</span>
+<span class="nb">header</span><span class="p">(</span><span class="s1">'Content-Type: text/plain; charset=UTF-8'</span><span class="p">);</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">'key'</span><span class="p">])</span> <span class="o">||</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">'key'</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">'value'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nb">http_response_code</span><span class="p">(</span><span class="mi">403</span><span class="p">);</span>
+    <span class="k">die</span><span class="p">(</span><span class="s1">'Permission denied'</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nv">$descriptorspec</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+   <span class="mi">0</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s2">"pipe"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">),</span>  <span class="c1">// stdin is a pipe that the child will read from</span>
+   <span class="mi">1</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s2">"pipe"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">),</span>  <span class="c1">// stdout is a pipe that the child will write to</span>
+   <span class="mi">2</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s2">"pipe"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span>   <span class="c1">// stderr is a pipe that the child will write to</span>
+<span class="p">);</span>
+
+<span class="nv">$process</span> <span class="o">=</span> <span class="nb">proc_open</span><span class="p">(</span><span class="s1">'ssh -t -l {usename} -P 22 127.0.0.1 "bash ~/workspace/app/start.sh" 2&gt;&amp;1'</span><span class="p">,</span> <span class="nv">$descriptorspec</span><span class="p">,</span> <span class="nv">$pipes</span><span class="p">);</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nb">is_resource</span><span class="p">(</span><span class="nv">$process</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">while</span> <span class="p">((</span><span class="nv">$line</span> <span class="o">=</span> <span class="nb">fgets</span><span class="p">(</span><span class="nv">$pipes</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span> <span class="o">!==</span> <span class="kc">FALSE</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 输出实时获取的命令执行结果</span>
+        <span class="k">echo</span> <span class="nv">$line</span><span class="p">;</span>
+        <span class="nb">ob_flush</span><span class="p">();</span>
+        <span class="nb">flush</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="nb">fclose</span><span class="p">(</span><span class="nv">$pipes</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+    <span class="nb">fclose</span><span class="p">(</span><span class="nv">$pipes</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+    <span class="nb">fclose</span><span class="p">(</span><span class="nv">$pipes</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+    <span class="nb">proc_close</span><span class="p">(</span><span class="nv">$process</span><span class="p">);</span>
+    
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s2">"Failed to execute command.</span><span class="se">\n</span><span class="s2">"</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cp">?&gt;</span>
+</code></pre></div></div>
 
 
         </article>
@@ -489,7 +456,10 @@
                 
                     
                 
-                    
+            
+        
+            
+            
                 
                     
                 
@@ -500,7 +470,7 @@
                 
                     
                 
-                    
+            
                 
                     
                 
@@ -511,7 +481,7 @@
                 
                     
                 
-                    
+            
                 
                     
                 
@@ -522,15 +492,7 @@
                 
                     
                 
-                    
-                
-                    
-                
             
-                
-                    
-                
-                    
                 
                     
                 
@@ -541,15 +503,10 @@
                 
                     
                 
-                    
-                
-                    
-                
             
-                
-                    
-                
-                    
+        
+            
+            
                 
                     
                 
@@ -560,27 +517,10 @@
                 
                     
                 
-                    
-                
-                    
-                
             
-                
-                    
-                
-                    
-                        
-                        <h2 id="similar_posts">相似文章</h2>
-                        <ul>
-                        
-                        <li class="relatedPost">
-                            <a href="/blog/2024/08/21/go-https-client-hello/">Go 如何在http handler中获取client hello的原始数据
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
+        
+            
+            
                 
                     
                 
@@ -591,59 +531,18 @@
                 
                     
                 
-                    
-                
-                    
-                
             
         
-            
-            
-                
-                    
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-                    
-                
-            
-        
-        
-            </ul>
         
 
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/blog/2019/02/12/java-file-http-server/">Java Http文件服务器Demo</a></p>
+        <p><strong>上一篇</strong> <a href="/blog/2024/10/05/cf-access-policy/">备忘录 使用CF Access管理Pages等受控页面的访问(未绑卡)</a></p>
         
     </div>
     <div class="nex">
 
-        
-        <p><strong>下一篇</strong> <a href="/blog/2019/02/13/java-proxy-http-server-2/">Java Http/Https代理Demo （下）</a></p>
         
     </div>
 </div>
@@ -668,8 +567,6 @@
                     内容
                 </div>
                 <ul id="content-side" class="content-ul">
-                    
-                    <li><a href="#similar_posts">相似文章</a></li>
                     
                     <!-- <li><a href="#comments">评论</a></li> -->
                 </ul>

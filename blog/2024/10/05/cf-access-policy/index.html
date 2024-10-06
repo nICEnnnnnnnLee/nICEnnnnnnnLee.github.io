@@ -8,12 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>备忘录 使用CF Access管理Pages等受控页面的访问(未绑卡)</title>
-    <meta name="description" content="一般情况下，启用Access Policy能够控制abc.pages.dev的域名的请求访问，在浏览器进行访问时会需要指定的邮箱验证。但是，想帮它应用到自定义的域名上，需要在Zero Trust里面进行配置，但是这需要绑卡。我们可以想办法绕过它。">
+    <meta name="description" content="一般情况下，启用Access Policy能够控制abc.pages.dev的域名的请求访问，在浏览器进行访问时会需要指定的邮箱验证。但是，想把它应用到自定义的域名上，就需要在Zero Trust里面进行配置。这个步骤需要绑卡。我们可以想办法绕过它。">
 
     <meta property="og:url" content="https://nicelee.top/blog/2024/10/05/cf-access-policy/">
     <meta property="og:site_name" content="NiceLee的博客">
     <meta property="og:title" content="备忘录 使用CF Access管理Pages等受控页面的访问(未绑卡)">
-    <meta property="og:description" content="一般情况下，启用Access Policy能够控制abc.pages.dev的域名的请求访问，在浏览器进行访问时会需要指定的邮箱验证。但是，想帮它应用到自定义的域名上，需要在Zero Trust里面进行配置，但是这需要绑卡。我们可以想办法绕过它。">
+    <meta property="og:description" content="一般情况下，启用Access Policy能够控制abc.pages.dev的域名的请求访问，在浏览器进行访问时会需要指定的邮箱验证。但是，想把它应用到自定义的域名上，就需要在Zero Trust里面进行配置。这个步骤需要绑卡。我们可以想办法绕过它。">
     <meta property="og:image" content="https://nicelee.top/favicon.ico?">
     <meta property="og:image:type" content="image/x-icon">
     
@@ -373,7 +373,7 @@
 </ul>
 <p>一般情况下，启用Access Policy能够控制<code class="language-plaintext highlighter-rouge">abc.pages.dev</code>的域名的请求访问，在浏览器进行访问时会需要指定的邮箱验证。<br />
 <img src="/sources/archive/2024/10/pages.png" alt="" /><br />
-但是，想帮它应用到自定义的域名上，需要在Zero Trust里面进行配置，但是这需要绑卡。<br />
+但是，想把它应用到自定义的域名上，就需要在Zero Trust里面进行配置。这个步骤需要绑卡。<br />
 我们可以想办法绕过它。</p>
 
 <h2 id="在访问路径后添加add">在访问路径后添加<code class="language-plaintext highlighter-rouge">/add</code></h2>
@@ -463,6 +463,13 @@
         <hr>
 
         
+        
+            
+            
+                
+                    
+                
+            
         
             
             
@@ -569,13 +576,6 @@
                 
             
         
-            
-            
-                
-                    
-                
-            
-        
         
             </ul>
         
@@ -588,6 +588,8 @@
     </div>
     <div class="nex">
 
+        
+        <p><strong>下一篇</strong> <a href="/blog/2024/10/06/serv00-php-auth/">备忘录 Serv00 php调用shell脚本</a></p>
         
     </div>
 </div>
