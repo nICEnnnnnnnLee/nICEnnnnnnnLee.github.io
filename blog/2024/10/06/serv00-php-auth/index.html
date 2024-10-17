@@ -379,8 +379,23 @@
 本文只讲思路，过程可能略省。</p>
 
 <h2 id="php报错没有权限执行proc_open">php报错：没有权限执行<code class="language-plaintext highlighter-rouge">proc_open</code></h2>
+<p>2024/10/17 有修改</p>
+<ul>
+  <li>在Web Panel里面启用exec、eval函数:
+    <ul>
+      <li>登录管理面板</li>
+      <li>点击<code class="language-plaintext highlighter-rouge">WWW Websites</code></li>
+      <li>点击<code class="language-plaintext highlighter-rouge">Manage</code>按钮，</li>
+      <li>点击<code class="language-plaintext highlighter-rouge">Details</code></li>
+      <li>开启<code class="language-plaintext highlighter-rouge">Allow PHP eval() function</code></li>
+      <li>开启<code class="language-plaintext highlighter-rouge">Allow PHP exec() function</code></li>
+      <li>点击<code class="language-plaintext highlighter-rouge">Save changes</code>保存</li>
+    </ul>
+  </li>
+</ul>
 
-<p>要绕过这一点，需要将<code class="language-plaintext highlighter-rouge">public_html</code>真实位置弄到其它目录，然后再进行链接。</p>
+<p>下面这些就没有必要了<br />
+要绕过这一点，需要将<code class="language-plaintext highlighter-rouge">public_html</code>真实位置弄到其它目录，然后再进行链接。</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir ~/workspace/public_html
 # 这里直接删除，如果有内容可以按需自行处理
 rm -rf ~/domains/foo.bar/public_html

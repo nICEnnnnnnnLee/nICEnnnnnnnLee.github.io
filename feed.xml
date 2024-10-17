@@ -5,8 +5,8 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 06 Oct 2024 10:46:09 +0800</pubDate>
-    <lastBuildDate>Sun, 06 Oct 2024 10:46:09 +0800</lastBuildDate>
+    <pubDate>Thu, 17 Oct 2024 20:35:31 +0800</pubDate>
+    <lastBuildDate>Thu, 17 Oct 2024 20:35:31 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -63,6 +63,7 @@
     &lt;ul&gt;
       &lt;li&gt;禁用频繁误触的&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;快速查找&lt;/code&gt;&lt;/li&gt;
       &lt;li&gt;推荐插件&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Firefox Multi-Account Containers&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;推荐插件&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CanvasBlocker&lt;/code&gt; 2024/10/17 更新&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
