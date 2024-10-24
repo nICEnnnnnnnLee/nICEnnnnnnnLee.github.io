@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html><head>
+<!-- <base href="https://websim.creation.engine/" /> -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Archery Defense Game</title>
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        user-select: none;
+    }
+    #gameArea {
+        width: 100%;
+        height: 100%;
+        background-color: #87CEEB;
+        position: relative;
+    }
+    #bow {
+        position: absolute;
+        left: calc(15% + 100px);
+        top: 50%;
+        transform: translateY(-50%);
+        width: 33.33px;
+        height: 66.67px;
+        z-index: 10;
+    }
+    #tower {
+        position: absolute;
+        left: 15%;
+        bottom: 20%;
+        width: 100px;
+        height: 200px;
+        background-color: #8B4513;
+        z-index: 5;
+    }
+    #towerTop {
+        position: absolute;
+        left: 0;
+        top: -30px;
+        width: 100%;
+        height: 30px;
+        background-color: #A52A2A;
+        clip-path: polygon(20% 0, 80% 0, 100% 100%, 0 100%);
+    }
+    #string {
+        stroke: #000;
+        stroke-width: 2;
+    }
+    .arrow {
+        position: absolute;
+        width: 20px;
+        height: 1.67px;
+        background-color: #8B4513;
+        transform-origin: left center;
+        z-index: 5;
+    }
+    .arrowhead {
+        width: 0;
+        height: 0;
+        border-left: 3.33px solid #8B4513;
+        border-top: 1.67px solid transparent;
+        border-bottom: 1.67px solid transparent;
+        position: absolute;
+        right: -3.33px;
+        top: -0.83px;
+    }
+    #floor {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 20%;
+        background-color: #4CAF50;
+    }
+    .enemy {
+        position: absolute;
+        width: 16.67px;
+        height: 33.33px;
+        bottom: 20%;
+    }
+    .enemy-body {
+        width: 100%;
+        height: 70%;
+        background-color: #FF0000;
+        position: absolute;
+        bottom: 0;
+    }
+    .enemy-head {
+        width: 80%;
+        height: 30%;
+        background-color: #FFA500;
+        position: absolute;
+        top: 0;
+        left: 10%;
+        border-radius: 50% 50% 0 0;
+    }
+    .enemy-health-bar {
+        width: 100%;
+        height: 5px;
+        background-color: #ccc;
+        position: absolute;
+        top: -10px;
+    }
+    .enemy-health-fill {
+        width: 100%;
+        height: 100%;
+        background-color: #4CAF50;
+    }
+    #healthBar {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        width: 200px;
+        height: 20px;
+        background-color: #ccc;
+    }
+    #healthFill {
+        width: 100%;
+        height: 100%;
+        background-color: #4CAF50;
+    }
+    #cooldownBar {
+        position: absolute;
+        top: 40px;
+        left: 10px;
+        width: 200px;
+        height: 20px;
+        background-color: #ccc;
+    }
+    #cooldownFill {
+        width: 0;
+        height: 100%;
+        background-color: #FFA500;
+    }
+    #moneyCounter {
+        position: absolute;
+        top: 70px;
+        left: 10px;
+        font-size: 18px;
+        color: #FFD700;
+        font-weight: bold;
+        text-shadow: 1px 1px 2px black;
+    }
+    #roundDisplay {
+        position: absolute;
+        top: 100px;
+        left: 10px;
+        font-size: 18px;
+        color: white;
+        font-weight: bold;
+        text-shadow: 1px 1px 2px black;
+    }
+    #enemyCounter {
+        position: absolute;
+        top: 130px;
+        left: 10px;
+        font-size: 18px;
+        color: white;
+        font-weight: bold;
+        text-shadow: 1px 1px 2px black;
+    }
+    #pauseButton {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
+        z-index: 100;
+    }
+    #pauseOverlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 99;
+    }
+    #pauseText {
+        font-size: 48px;
+        color: white;
+        font-weight: bold;
+    }
+    #dragIndicator {
+        position: absolute;
+        pointer-events: none;
+        z-index: 100;
+    }
+    #dragStart {
+        width: 10px;
+        height: 10px;
+        background-color: rgba(255, 255, 0, 0.5);
+        border-radius: 50%;
+        position: absolute;
+    }
+    #dragArrow {
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 20px solid rgba(255, 255, 0, 0.5);
+        transform-origin: 50% 100%;
+    }
+    .damage-text {
+        position: absolute;
+        color: red;
+        font-weight: bold;
+        font-size: 24px;
+        pointer-events: none;
+        z-index: 100;
+        text-shadow: 1px 1px 2px black;
+    }
+    #upgradesOverlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+    #upgradesWindow {
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+    }
+    #upgradesWindow button {
+        display: block;
+        width: 100%;
+        margin: 10px 0;
+        padding: 10px;
+        font-size: 16px;
+    }
+</style>
+</head>
+<body>
+<div id="gameArea">
+    <div id="healthBar"><div id="healthFill"></div></div>
+    <div id="cooldownBar"><div id="cooldownFill"></div></div>
+    <div id="moneyCounter">$0</div>
+    <div id="roundDisplay">Round: 1</div>
+    <div id="enemyCounter">Enemies Left: 10</div>
+    <div id="tower">
+        <div id="towerTop"></div>
+    </div>
+    <svg id="bow" viewBox="0 0 100 200">
+        <path d="M 10 10 Q 90 100 10 190" fill="none" stroke="#8B4513" stroke-width="10"/>
+        <line id="string" x1="10" y1="10" x2="10" y2="190"/>
+    </svg>
+    <div id="floor"></div>
+    <button id="pauseButton">Pause</button>
+    <div id="pauseOverlay">
+        <div id="pauseText">PAUSED</div>
+    </div>
+    <div id="dragIndicator" style="display: none;">
+        <div id="dragStart"></div>
+        <div id="dragArrow"></div>
+    </div>
+    <div id="upgradesOverlay" style="display: none;">
+        <div id="upgradesWindow">
+            <h2>Upgrades</h2>
+            <button id="extraArrowUpgrade">Extra Arrow ($500)</button>
+            <button id="damageUpgrade">+10% Damage ($200)</button>
+            <button id="reloadUpgrade">10% Faster Reloading ($350)</button>
+            <button id="startNextRound">Start Next Round</button>
+        </div>
+    </div>
+    <!-- <audio id="bowSound" src="https://file.garden/ZvNeJ8o8RW_wobQz/bow.mp3" preload="auto"></audio> -->
+    <!-- <audio id="enemyHitSound" src="https://file.garden/ZvNeJ8o8RW_wobQz/off.mp3" preload="auto"></audio> -->
+    <audio id="bowSound" src="bow.mp3" preload="auto"></audio>
+    <audio id="enemyHitSound" src="off.mp3" preload="auto"></audio>
+</div>
+
+<script>
+let currentRound = 1;
+let enemiesPerRound = 10;
+let enemiesSpawned = 0;
+let enemiesKilled = 0;
+let enemiesRemaining = enemiesPerRound;
+let playerHealth = 100;
+const bow = document.getElementById('bow');
+const string = document.getElementById('string');
+const gameArea = document.getElementById('gameArea');
+const healthFill = document.getElementById('healthFill');
+const cooldownFill = document.getElementById('cooldownFill');
+const moneyCounter = document.getElementById('moneyCounter');
+const roundDisplay = document.getElementById('roundDisplay');
+const pauseButton = document.getElementById('pauseButton');
+const pauseOverlay = document.getElementById('pauseOverlay');
+const floor = document.getElementById('floor');
+const dragIndicator = document.getElementById('dragIndicator');
+const dragStart = document.getElementById('dragStart');
+const dragArrow = document.getElementById('dragArrow');
+const upgradesOverlay = document.getElementById('upgradesOverlay');
+const bowSound = document.getElementById('bowSound');
+const enemyHitSound = document.getElementById('enemyHitSound');
+const enemyCounter = document.getElementById('enemyCounter');
+const tower = document.getElementById('tower');
+
+let lastShotTime = 0;
+const cooldownDuration = 1000;
+let isDragging = false;
+let startX, startY;
+let playerMoney = 0;
+let enemies = [];
+let arrows = [];
+let isPaused = false;
+let animationFrameIds = [];
+let extraArrows = 0;
+let damageMultiplier = 1;
+let reloadSpeedMultiplier = 1;
+
+gameArea.addEventListener('mousedown', startDrag);
+gameArea.addEventListener('mousemove', drag);
+gameArea.addEventListener('mouseup', endDrag);
+gameArea.addEventListener('mouseleave', endDrag);
+
+pauseButton.addEventListener('click', togglePause);
+document.getElementById('extraArrowUpgrade').addEventListener('click', () => purchaseUpgrade('extraArrow'));
+document.getElementById('damageUpgrade').addEventListener('click', () => purchaseUpgrade('damage'));
+document.getElementById('reloadUpgrade').addEventListener('click', () => purchaseUpgrade('reload'));
+document.getElementById('startNextRound').addEventListener('click', startNextRound);
+
+function startNewRound() {
+    currentRound++;
+    enemiesPerRound = 10 + currentRound * 3; // Increase enemies per round
+    enemiesSpawned = 0;
+    enemiesKilled = 0;
+    enemiesRemaining = enemiesPerRound;
+    updateRoundDisplay();
+    updateEnemyCounter();
+}
+
+function startNextRound() {
+    hideUpgrades();
+    startNewRound(); // Call startNewRound to set up the new round
+    enemiesSpawned = 0;
+    enemiesKilled = 0;
+    updateEnemyCounter();
+    playerHealth = 100; // Restore player health to full
+    updateHealthBar();
+}
+
+function updateEnemyCounter() {
+    enemyCounter.textContent = `Enemies Left: ${enemiesRemaining}`;
+}
+
+function showUpgrades() {
+    upgradesOverlay.style.display = 'flex';
+}
+
+function hideUpgrades() {
+    upgradesOverlay.style.display = 'none';
+}
+
+function purchaseUpgrade(type) {
+    switch (type) {
+        case 'extraArrow':
+            if (playerMoney >= 500) {
+                playerMoney -= 500;
+                extraArrows++;
+                updateMoneyCounter();
+            }
+            break;
+        case 'damage':
+            if (playerMoney >= 200) {
+                playerMoney -= 200;
+                damageMultiplier *= 1.1;
+                updateMoneyCounter();
+            }
+            break;
+        case 'reload':
+            if (playerMoney >= 350) {
+                playerMoney -= 350;
+                reloadSpeedMultiplier *= 0.9;
+                updateMoneyCounter();
+            }
+            break;
+    }
+}
+
+function updateRoundDisplay() {
+    roundDisplay.textContent = `Round: ${currentRound}`;
+}
+
+function togglePause() {
+    isPaused = !isPaused;
+    if (isPaused) {
+        pauseButton.textContent = 'Resume';
+        pauseOverlay.style.display = 'flex';
+        cancelAllAnimations();
+    } else {
+        pauseButton.textContent = 'Pause';
+        pauseOverlay.style.display = 'none';
+        resumeAllAnimations();
+    }
+}
+
+function cancelAllAnimations() {
+    animationFrameIds.forEach(id => cancelAnimationFrame(id));
+    animationFrameIds = [];
+}
+
+function resumeAllAnimations() {
+    enemies.forEach(enemy => moveEnemy(enemy));
+    arrows.forEach(arrow => animateArrow(arrow));
+}
+
+function updateCooldownBar() {
+    const currentTime = Date.now();
+    const elapsedTime = currentTime - lastShotTime;
+    const cooldownProgress = Math.min(elapsedTime / (cooldownDuration * reloadSpeedMultiplier), 1);
+    cooldownFill.style.width = `${cooldownProgress * 100}%`;
+    
+    if (cooldownProgress < 1) {
+        requestAnimationFrame(updateCooldownBar);
+    }
+}
+
+function updateMoneyCounter() {
+    moneyCounter.textContent = `$${playerMoney}`;
+}
+
+function startDrag(e) {
+    if (isPaused) return;
+    isDragging = true;
+    startX = e.clientX;
+    startY = e.clientY;
+
+    dragIndicator.style.display = 'block';
+    dragStart.style.left = startX + 'px';
+    dragStart.style.top = startY + 'px';
+    updateDragIndicator(e);
+}
+
+function drag(e) {
+    if (isPaused || !isDragging) return;
+
+    let dx = e.clientX - startX;
+    let dy = e.clientY - startY;
+
+    const maxDraw = 100;
+    const drawDistance = Math.min(Math.sqrt(dx * dx + dy * dy), maxDraw);
+    const angle = Math.atan2(dy, dx);
+
+    string.setAttribute('x2', 10 - drawDistance * Math.cos(angle));
+    string.setAttribute('y2', 100 - drawDistance * Math.sin(angle));
+
+    updateDragIndicator(e);
+}
+
+function endDrag(e) {
+    if (isPaused || !isDragging) return;
+    isDragging = false;
+
+    let dx = e.clientX - startX;
+    let dy = e.clientY - startY;
+    const drawDistance = Math.sqrt(dx * dx + dy * dy);
+    const angle = Math.atan2(dy, dx);
+
+    shootArrow(drawDistance, angle);
+
+    string.setAttribute('x2', '10');
+    string.setAttribute('y2', '190');
+
+    dragIndicator.style.display = 'none';
+}
+
+function updateDragIndicator(e) {
+    let dx = e.clientX - startX;
+    let dy = e.clientY - startY;
+    const drawDistance = Math.sqrt(dx * dx + dy * dy);
+    const angle = Math.atan2(dy, dx);
+
+    dragArrow.style.left = (startX + dx / 2 - 10) + 'px';
+    dragArrow.style.top = (startY + dy / 2 - 10) + 'px';
+    dragArrow.style.transform = `rotate(${angle - Math.PI / 2}rad) scale(${drawDistance / 50})`;
+}
+
+function shootArrow(drawDistance, angle) {
+    const currentTime = Date.now();
+    if (currentTime - lastShotTime < cooldownDuration * reloadSpeedMultiplier) {
+        return;
+    }
+    
+    lastShotTime = currentTime;
+    updateCooldownBar();
+
+    bowSound.currentTime = 0;
+    bowSound.play();
+
+    const arrowCount = 1 + extraArrows;
+    const spreadAngle = Math.PI / 6; // 30 degrees
+
+    for (let i = 0; i < arrowCount; i++) {
+        const arrowAngle = angle + (i - (arrowCount - 1) / 2) * spreadAngle / arrowCount;
+        createArrow(drawDistance, arrowAngle);
+    }
+}
+
+function createArrow(drawDistance, angle) {
+    const arrow = document.createElement('div');
+    arrow.className = 'arrow';
+    const arrowhead = document.createElement('div');
+    arrowhead.className = 'arrowhead';
+    arrow.appendChild(arrowhead);
+    gameArea.appendChild(arrow);
+
+    const bowRect = bow.getBoundingClientRect();
+    let arrowX = bowRect.left + bowRect.width / 2;
+    let arrowY = bowRect.top + bowRect.height / 2;
+
+    const initialVelocity = drawDistance * 1.67;
+    let vx = -Math.cos(angle) * initialVelocity;
+    let vy = -Math.sin(angle) * initialVelocity;
+
+    const gravity = 9.81;
+    const timeStep = 1 / 60;
+    let time = 0;
+
+    let arrowAngle = Math.atan2(vy, vx);
+
+    arrow.vx = vx;
+    arrow.vy = vy;
+    arrow.x = arrowX;
+    arrow.y = arrowY;
+    arrow.time = time;
+    arrow.arrowAngle = arrowAngle;
+    arrow.active = true;
+
+    arrows.push(arrow);
+    animateArrow(arrow);
+}
+
+function animateArrow(arrow) {
+    if (isPaused) return;
+
+    if (!arrow.active) {
+        return;
+    }
+
+    const gravity = 9.81;
+    const timeStep = 1 / 60;
+
+    arrow.time += timeStep;
+
+    arrow.x += arrow.vx * timeStep;
+    arrow.y += arrow.vy * timeStep + 0.5 * gravity * arrow.time * arrow.time;
+
+    arrow.vy += gravity * timeStep;
+
+    const targetAngle = Math.PI / 2;
+    const horizontalSpeedThreshold = 250;
+    const currentHorizontalSpeed = Math.abs(arrow.vx);
+    const rotationSpeed = currentHorizontalSpeed < horizontalSpeedThreshold ? Math.max(1, 10 / currentHorizontalSpeed) : 0;
+
+    if (arrow.arrowAngle < targetAngle) {
+        arrow.arrowAngle = Math.min(arrow.arrowAngle + rotationSpeed * timeStep, targetAngle);
+    }
+
+    arrow.style.left = arrow.x + 'px';
+    arrow.style.top = arrow.y + 'px';
+    arrow.style.transform = `rotate(${arrow.arrowAngle}rad)`;
+
+    if (checkCollisions(arrow, arrow.x, arrow.y)) {
+        return;
+    }
+
+    if (arrow.y + arrow.offsetHeight > floor.offsetTop) {
+        arrow.active = false;
+        setTimeout(() => {
+            if (arrow.parentNode === gameArea) {
+                gameArea.removeChild(arrow);
+            }
+            arrows = arrows.filter(a => a !== arrow);
+        }, 30000);
+        return;
+    }
+
+    if (arrow.x > -20 && arrow.x < window.innerWidth && arrow.y < window.innerHeight) {
+        const animationId = requestAnimationFrame(() => animateArrow(arrow));
+        animationFrameIds.push(animationId);
+    } else {
+        if (arrow.parentNode === gameArea) {
+            gameArea.removeChild(arrow);
+        }
+        arrows = arrows.filter(a => a !== arrow);
+    }
+}
+
+function spawnEnemy() {
+    if (isPaused || enemiesSpawned >= enemiesPerRound) return;
+
+    const enemy = document.createElement('div');
+    enemy.className = 'enemy';
+    const enemyBody = document.createElement('div');
+    enemyBody.className = 'enemy-body';
+    const enemyHead = document.createElement('div');
+    enemyHead.className = 'enemy-head';
+    const enemyHealthBar = document.createElement('div');
+    enemyHealthBar.className = 'enemy-health-bar';
+    const enemyHealthFill = document.createElement('div');
+    enemyHealthFill.className = 'enemy-health-fill';
+    enemyHealthBar.appendChild(enemyHealthFill);
+    enemy.appendChild(enemyBody);
+    enemy.appendChild(enemyHead);
+    enemy.appendChild(enemyHealthBar);
+    gameArea.appendChild(enemy);
+
+    const baseHealth = 100; // Double the base health from 50 to 100
+    const healthMultiplier = 1 + (currentRound - 1) * 0.2; // 20% increase per round
+    enemy.health = Math.floor(baseHealth * healthMultiplier);
+    
+    const baseSpeed = 0.165 + Math.random() * 0.335;
+    const speedMultiplier = 1 + (currentRound - 1) * 0.1; // 10% increase per round
+    enemy.speed = baseSpeed * speedMultiplier;
+    
+    enemy.type = 'basic';
+    enemy.x = window.innerWidth;
+    enemy.style.left = enemy.x + 'px';
+
+    enemies.push(enemy);
+    moveEnemy(enemy);
+    
+    enemiesSpawned++;
+    updateEnemyCounter();
+}
+
+function moveEnemy(enemy) {
+    if (isPaused) return;
+
+    if (enemy.health <= 0) {
+        if (enemy.parentNode === gameArea) {
+            gameArea.removeChild(enemy);
+        }
+        enemies = enemies.filter(e => e !== enemy);
+        return;
+    }
+
+    const towerRect = tower.getBoundingClientRect();
+    enemy.x -= enemy.speed;
+    enemy.style.left = enemy.x + 'px';
+
+    if (enemy.x + enemy.offsetWidth < towerRect.right) {
+        if (enemy.parentNode === gameArea) {
+            gameArea.removeChild(enemy);
+        }
+        enemies = enemies.filter(e => e !== enemy);
+        playerHealth -= 10;
+        updateHealthBar();
+        enemiesRemaining--;
+        updateEnemyCounter();
+        
+        // Check if enemies left is 0 after damaging the player
+        if (enemiesRemaining <= 0) {
+            endRound();
+        }
+    } else {
+        const animationId = requestAnimationFrame(() => moveEnemy(enemy));
+        animationFrameIds.push(animationId);
+    }
+}
+
+function endRound() {
+    enemies.forEach(enemy => {
+        if (enemy.parentNode === gameArea) {
+            gameArea.removeChild(enemy);
+        }
+    });
+    enemies = [];
+
+    arrows.forEach(arrow => {
+        if (arrow.parentNode === gameArea) {
+            gameArea.removeChild(arrow);
+        }
+    });
+    arrows = [];
+
+    showUpgrades();
+}
+
+function checkCollisions(arrow, arrowX, arrowY) {
+    if (!arrow.active) return false;
+
+    for (let i = 0; i < enemies.length; i++) {
+        const enemy = enemies[i];
+        if (!enemy.parentNode) continue;
+
+        const enemyRect = enemy.getBoundingClientRect();
+        const headRect = enemy.querySelector('.enemy-head').getBoundingClientRect();
+
+        if (arrowX < enemyRect.right && arrowX + arrow.offsetWidth > enemyRect.left &&
+            arrowY < enemyRect.bottom && arrowY + arrow.offsetHeight > enemyRect.top) {
+            
+            let damage = Math.ceil(50 * damageMultiplier);
+            let isHeadshot = false;
+            if (arrowY < headRect.bottom) {
+                damage *= 2;
+                isHeadshot = true;
+            }
+
+            damage = Math.ceil(damage); // Round up the damage
+
+            enemy.health -= damage;
+            updateEnemyHealthBar(enemy);
+
+            createFloatingDamageText(damage, enemyRect.left, enemyRect.top);
+
+            if (enemy.type === 'basic') {
+                enemyHitSound.currentTime = 0;
+                enemyHitSound.play();
+            }
+
+            if (enemy.health <= 0) {
+                if (enemy.parentNode === gameArea) {
+                    gameArea.removeChild(enemy);
+                }
+                enemies = enemies.filter(e => e !== enemy);
+                enemiesKilled++;
+                enemiesRemaining--;
+                updateEnemyCounter();
+                
+                if (enemiesRemaining <= 0) {
+                    showUpgrades();
+                }
+                
+                let moneyEarned = 20; // Double the base money reward
+                if (isHeadshot) {
+                    moneyEarned *= 1.5;
+                }
+                playerMoney += Math.ceil(moneyEarned); // Round up the money earned
+                updateMoneyCounter();
+            }
+
+            if (arrow.parentNode === gameArea) {
+                gameArea.removeChild(arrow);
+            }
+            arrows = arrows.filter(a => a !== arrow);
+            return true;
+        }
+    }
+    return false;
+}
+
+function createFloatingDamageText(damage, x, y) {
+    const damageText = document.createElement('div');
+    damageText.className = 'damage-text';
+    damageText.textContent = damage;
+    damageText.style.left = `${x - 10}px`;
+    damageText.style.top = `${y - 20}px`;
+    gameArea.appendChild(damageText);
+
+    animateFloatingDamageText(damageText);
+}
+
+function animateFloatingDamageText(damageText) {
+    let opacity = 1;
+    let yOffset = 0;
+    const animationDuration = 1000;
+    const startTime = Date.now();
+
+    function animate() {
+        const currentTime = Date.now();
+        const elapsedTime = currentTime - startTime;
+        const progress = elapsedTime / animationDuration;
+
+        if (progress >= 1) {
+            gameArea.removeChild(damageText);
+            return;
+        }
+
+        opacity = 1 - progress;
+        yOffset = -50 * progress;
+
+        damageText.style.opacity = opacity;
+        damageText.style.transform = `translateY(${yOffset}px)`;
+
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+}
+
+function updateEnemyHealthBar(enemy) {
+    const healthFill = enemy.querySelector('.enemy-health-fill');
+    healthFill.style.width = `${(enemy.health / (100 * (1 + (currentRound - 1) * 0.2))) * 100}%`;
+}
+
+function updateHealthBar() {
+    healthFill.style.width = `${playerHealth}%`;
+    if (playerHealth <= 0) {
+        alert('Game Over!');
+        location.reload();
+    }
+}
+
+let enemySpawnInterval = setInterval(() => {
+    if (!isPaused && enemiesSpawned < enemiesPerRound && enemiesKilled < enemiesPerRound) {
+        spawnEnemy();
+    }
+}, 2000);
+
+updateCooldownBar();
+updateMoneyCounter();
+updateRoundDisplay();
+updateEnemyCounter();
+</script>
+</body>
+</html>

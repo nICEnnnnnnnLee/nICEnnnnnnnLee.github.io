@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html><head>
+<!-- <base href="https://websimcreationengine.example.com/">  -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flappy Penguin Adventure - Main Menu</title>
+<!-- @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Roboto:wght@400;700&display=swap'); -->
+<style>
+    @import url('css2.css?family=Fredoka+One&family=Roboto:wght@400;700&display=swap');
+
+    body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: linear-gradient(135deg, #87CEEB, #E0F6FF, #FFB6C1);
+        font-family: 'Roboto', sans-serif;
+        overflow: hidden;
+    }
+
+    #gameContainer {
+        width: 400px;
+        height: 600px;
+        position: relative;
+        overflow: hidden;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    #mainMenu, #characterSelect, #backgroundSelect, #gameCanvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    #mainMenu, #characterSelect, #backgroundSelect {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+    }
+
+    h1 {
+        font-family: 'Fredoka One', cursive;
+        font-size: 36px;
+        margin-bottom: 30px;
+        color: #333;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 100%;
+    }
+
+    .btn {
+        padding: 12px 24px;
+        font-size: 18px;
+        margin: 10px;
+        cursor: pointer;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 50px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        font-weight: bold;
+    }
+
+    .btn:hover {
+        background-color: #45a049;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    #characterGrid, #backgroundGrid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .character, .background {
+        width: 80px;
+        height: 80px;
+        border: 3px solid #333;
+        border-radius: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background-color: rgba(255, 255, 255, 0.7);
+        font-size: 50px;
+    }
+
+    .character:hover, .background:hover {
+        transform: scale(1.1);
+    }
+
+    .character.selected, .background.selected {
+        border-color: #4CAF50;
+        box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+    }
+
+    .character span, .background span {
+        position: absolute;
+        transition: transform 0.5s ease;
+    }
+
+    #snowflakes {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+    }
+
+    .snowflake {
+        position: absolute;
+        background-color: white;
+        border-radius: 50%;
+        opacity: 0.8;
+        animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+        to {
+            transform: translateY(600px);
+        }
+    }
+
+    #backToMainMenuBtn, #backToMenuFromBgBtn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 10;
+        padding: 8px 16px;
+        font-size: 14px;
+        background-color: rgba(76, 175, 80, 0.7);
+    }
+
+    #backToMainMenuBtn:hover, #backToMenuFromBgBtn:hover {
+        background-color: rgba(69, 160, 73, 0.9);
+    }
+    
+    #backgroundSelect {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+    }
+</style>
+</head>
+<body>
+<div id="gameContainer">
+    <div id="snowflakes"></div>
+    <div id="mainMenu">
+        <h1>Flappy Penguin<br>Adventure</h1>
+        <button id="startBtn" class="btn">Start Game</button>
+        <button id="characterBtn" class="btn">Select Character</button>
+        <button id="backgroundBtn" class="btn">Change Background</button>
+    </div>
+    
+    <div id="characterSelect" style="display: none;">
+        <h1>Select Your Character</h1>
+        <div id="characterGrid">
+            <div class="character selected" data-character="penguin"><span>🐧</span></div>
+            <div class="character" data-character="duck"><span>🦆</span></div>
+            <div class="character" data-character="owl"><span>🦉</span></div>
+            <div class="character" data-character="parrot"><span>🦜</span></div>
+            <div class="character" data-character="flamingo"><span>🦩</span></div>
+            <div class="character" data-character="toucan"><span>🦚</span></div>
+        </div>
+        <button id="backToMenuBtn" class="btn">Back to Menu</button>
+    </div>
+
+    <div id="backgroundSelect" style="display: none;">
+        <h1>Select Background</h1>
+        <div id="backgroundGrid">
+            <div class="background selected" data-background="default"><span>🏞️</span></div>
+            <div class="background" data-background="night"><span>🌃</span></div>
+            <div class="background" data-background="space"><span>🌠</span></div>
+            <div class="background" data-background="underwater"><span>🌊</span></div>
+            <div class="background" data-background="desert"><span>🏜️</span></div>
+            <div class="background" data-background="jungle"><span>🌴</span></div>
+        </div>
+        <button id="backToMenuFromBgBtn" class="btn">Back to Menu</button>
+    </div>
+
+    <canvas id="gameCanvas" width="400" height="600" style="display: none;"></canvas>
+    <button id="backToMainMenuBtn" class="btn" style="display: none;">Menu</button>
+</div>
+
+<script>
+const mainMenu = document.getElementById('mainMenu');
+const characterSelect = document.getElementById('characterSelect');
+const backgroundSelect = document.getElementById('backgroundSelect');
+const gameCanvas = document.getElementById('gameCanvas');
+const startBtn = document.getElementById('startBtn');
+const characterBtn = document.getElementById('characterBtn');
+const backgroundBtn = document.getElementById('backgroundBtn');
+const backToMenuBtn = document.getElementById('backToMenuBtn');
+const backToMainMenuBtn = document.getElementById('backToMainMenuBtn');
+const backToMenuFromBgBtn = document.getElementById('backToMenuFromBgBtn');
+const characterGrid = document.getElementById('characterGrid');
+const backgroundGrid = document.getElementById('backgroundGrid');
+const snowflakesContainer = document.getElementById('snowflakes');
+
+let selectedCharacter = 'penguin';
+let selectedBackground = 'default';
+
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+
+const player = {
+    x: 50,
+    y: 300,
+    width: 40,
+    height: 40,
+    velocity: 0,
+    gravity: 0.1,
+    jump: -3
+};
+
+let obstacles = [];
+let score = 0;
+let gameOver = false;
+
+function createSnowflakes() {
+    for (let i = 0; i < 50; i++) {
+        const snowflake = document.createElement('div');
+        snowflake.classList.add('snowflake');
+        snowflake.style.left = `${Math.random() * 100}%`;
+        snowflake.style.opacity = Math.random();
+        snowflake.style.width = `${Math.random() * 5 + 2}px`;
+        snowflake.style.height = snowflake.style.width;
+        snowflake.style.animationDuration = `${Math.random() * 3 + 2}s`;
+        snowflake.style.animationDelay = `${Math.random() * 2}s`;
+        snowflakesContainer.appendChild(snowflake);
+    }
+}
+
+function animateCharacters() {
+    const characters = document.querySelectorAll('.character span');
+    characters.forEach((char, index) => {
+        switch(index) {
+            case 0: // Penguin
+                char.style.animation = 'float 2s ease-in-out infinite';
+                break;
+            case 1: // Duck
+                char.style.animation = 'bounce 1.5s ease-in-out infinite';
+                break;
+            case 2: // Owl
+                char.style.animation = 'wiggle 2s ease-in-out infinite';
+                break;
+            case 3: // Parrot
+                char.style.animation = 'spin 3s linear infinite';
+                break;
+            case 4: // Flamingo
+                char.style.animation = 'float 1.5s ease-in-out infinite';
+                break;
+            case 5: // Toucan
+                char.style.animation = 'bounce 2s ease-in-out infinite';
+                break;
+        }
+    });
+}
+
+function showMainMenu() {
+    mainMenu.style.display = 'flex';
+    characterSelect.style.display = 'none';
+    backgroundSelect.style.display = 'none';
+    gameCanvas.style.display = 'none';
+    backToMainMenuBtn.style.display = 'none';
+    snowflakesContainer.style.display = 'block';
+}
+
+function showCharacterSelect() {
+    mainMenu.style.display = 'none';
+    characterSelect.style.display = 'flex';
+    backgroundSelect.style.display = 'none';
+    gameCanvas.style.display = 'none';
+    snowflakesContainer.style.display = 'block';
+    animateCharacters();
+}
+
+function showBackgroundSelect() {
+    mainMenu.style.display = 'none';
+    backgroundSelect.style.display = 'flex';
+    gameCanvas.style.display = 'none';
+    snowflakesContainer.style.display = 'block';
+}
+
+function startGame() {
+    mainMenu.style.display = 'none';
+    characterSelect.style.display = 'none';
+    backgroundSelect.style.display = 'none';
+    gameCanvas.style.display = 'block';
+    backToMainMenuBtn.style.display = 'block';
+    snowflakesContainer.style.display = 'none';
+    gameOver = false;
+    score = 0;
+    obstacles = [];
+    player.y = 300;
+    player.velocity = 0;
+    gameLoop();
+}
+
+startBtn.addEventListener('click', startGame);
+characterBtn.addEventListener('click', showCharacterSelect);
+backgroundBtn.addEventListener('click', showBackgroundSelect);
+backToMenuBtn.addEventListener('click', showMainMenu);
+backToMenuFromBgBtn.addEventListener('click', showMainMenu);
+backToMainMenuBtn.addEventListener('click', showMainMenu);
+
+characterGrid.addEventListener('click', (e) => {
+    if (e.target.closest('.character')) {
+        document.querySelector('.character.selected').classList.remove('selected');
+        e.target.closest('.character').classList.add('selected');
+        selectedCharacter = e.target.closest('.character').dataset.character;
+    }
+});
+
+backgroundGrid.addEventListener('click', (e) => {
+    if (e.target.closest('.background')) {
+        document.querySelector('.background.selected').classList.remove('selected');
+        e.target.closest('.background').classList.add('selected');
+        selectedBackground = e.target.closest('.background').dataset.background;
+    }
+});
+
+function drawPlayer() {
+    ctx.fillStyle = '#000000';
+    ctx.font = '40px Arial';
+    let characterEmoji;
+    switch (selectedCharacter) {
+        case 'penguin': characterEmoji = '🐧'; break;
+        case 'duck': characterEmoji = '🦆'; break;
+        case 'owl': characterEmoji = '🦉'; break;
+        case 'parrot': characterEmoji = '🦜'; break;
+        case 'flamingo': characterEmoji = '🦩'; break;
+        case 'toucan': characterEmoji = '🦚'; break;
+        default: characterEmoji = '🐧';
+    }
+    ctx.fillText(characterEmoji, player.x, player.y + 40);
+}
+
+function createObstacle() {
+    const gap = 200;
+    const minHeight = 50;
+    const maxHeight = canvas.height - gap - minHeight;
+    const height = Math.floor(Math.random() * (maxHeight - minHeight + 1)) + minHeight;
+    
+    obstacles.push({
+        x: canvas.width,
+        y: 0,
+        width: 50,
+        height: height,
+        passed: false
+    });
+    
+    obstacles.push({
+        x: canvas.width,
+        y: height + gap,
+        width: 50,
+        height: canvas.height - height - gap,
+        passed: false
+    });
+}
+
+function drawObstacles() {
+    ctx.fillStyle = '#00FF00';
+    obstacles.forEach(obstacle => {
+        ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+    });
+}
+
+function moveObstacles() {
+    obstacles.forEach(obstacle => {
+        obstacle.x -= 1;
+    });
+    
+    if (obstacles.length > 0 && obstacles[0].x < -50) {
+        obstacles.splice(0, 2);
+        score++;
+    }
+    
+    if (obstacles.length === 0 || canvas.width - obstacles[obstacles.length - 1].x > 300) {
+        createObstacle();
+    }
+}
+
+function checkCollision() {
+    const hitbox = {
+        x: player.x + 5,
+        y: player.y + 5,
+        width: player.width - 10,
+        height: player.height - 10
+    };
+    
+    for (let obstacle of obstacles) {
+        if (
+            hitbox.x < obstacle.x + obstacle.width &&
+            hitbox.x + hitbox.width > obstacle.x &&
+            hitbox.y < obstacle.y + obstacle.height &&
+            hitbox.y + hitbox.height > obstacle.y
+        ) {
+            gameOver = true;
+        }
+    }
+    
+    if (player.y + player.height > canvas.height || player.y < 0) {
+        gameOver = true;
+    }
+}
+
+function drawScore() {
+    ctx.fillStyle = '#000000';
+    ctx.font = '24px Arial';
+    ctx.fillText(`Score: ${score}`, 10, 30);
+}
+
+function gameLoop() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+    const bgColor = getBackgroundColor();
+    const colors = bgColor.match(/rgb\(\d+,\s*\d+,\s*\d+\)/g);
+    if (colors) {
+        gradient.addColorStop(0, colors[0]);
+        gradient.addColorStop(1, colors[1]);
+    } else {
+        gradient.addColorStop(0, '#87CEEB');
+        gradient.addColorStop(1, '#E0F6FF');
+    }
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    player.velocity += player.gravity;
+    player.y += player.velocity;
+    
+    player.y += Math.sin(Date.now() / 200) * 0.5;
+    
+    drawPlayer();
+    moveObstacles();
+    drawObstacles();
+    checkCollision();
+    drawScore();
+    
+    if (gameOver) {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#FFFFFF';
+        ctx.font = '48px Arial';
+        ctx.fillText('Game Over!', 100, 300);
+        ctx.font = '24px Arial';
+        ctx.fillText(`Final Score: ${score}`, 130, 350);
+        ctx.fillText('Click to restart', 130, 400);
+        return;
+    }
+    
+    requestAnimationFrame(gameLoop);
+}
+
+function getBackgroundColor() {
+    switch (selectedBackground) {
+        case 'night':
+            return 'linear-gradient(to bottom, #191970, #000033)';
+        case 'space':
+            return 'linear-gradient(to bottom, #000033, #4B0082)';
+        case 'underwater':
+            return 'linear-gradient(to bottom, #00BFFF, #1E90FF)';
+        case 'desert':
+            return 'linear-gradient(to bottom, #FFD700, #FF8C00)';
+        case 'jungle':
+            return 'linear-gradient(to bottom, #228B22, #006400)';
+        default:
+            return 'linear-gradient(to bottom, #87CEEB, #E0F6FF)';
+    }
+}
+
+canvas.addEventListener('click', () => {
+    if (gameOver) {
+        startGame();
+    } else {
+        player.velocity = player.jump;
+    }
+});
+
+canvas.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    if (gameOver) {
+        startGame();
+    } else {
+        player.velocity = player.jump;
+    }
+}, false);
+
+createSnowflakes();
+showMainMenu();
+animateCharacters();
+</script>
+</body></html>

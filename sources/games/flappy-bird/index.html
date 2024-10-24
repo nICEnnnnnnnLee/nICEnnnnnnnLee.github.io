@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html><head>
+<!-- <base href="https://websim.creations" target="_blank"> -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="favicon.ico" type="image/x-icon" sizes="32x32"/>
+<title>Flappy Bird Clone</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #000;
+        font-family: Arial, sans-serif;
+    }
+    #gameCanvas {
+        border: 2px solid #000;
+    }
+</style>
+</head>
+<body>
+<canvas id="gameCanvas" width="288" height="512"></canvas>
+
+<script>
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+
+const images = {
+    background: new Image(),
+    base: new Image(),
+    pipeNorth: new Image(),
+    pipeSouth: new Image(),
+    bird: [new Image(), new Image(), new Image()],
+    gameOver: new Image(),
+    message: new Image(),
+    numbers: Array(10).fill().map(() => new Image())
+};
+
+images.background.src = 'sprites/background-day.png';
+images.base.src = 'sprites/base.png';
+images.pipeNorth.src = 'sprites/pipe-green.png';
+images.pipeSouth.src = 'sprites/pipe-green.png';
+images.bird[0].src = 'sprites/yellowbird-downflap.png';
+images.bird[1].src = 'sprites/yellowbird-midflap.png';
+images.bird[2].src = 'sprites/yellowbird-upflap.png';
+images.gameOver.src = 'sprites/gameover.png';
+images.message.src = 'sprites/message.png';
+
+for (let i = 0; i < 10; i++) {
+    images.numbers[i].src = `sprites/${i}.png`;
+}
+
+const audio = {
+    die: new Audio('audio/die.wav'),
+    hit: new Audio('audio/hit.wav'),
+    point: new Audio('audio/point.wav'),
+    swoosh: new Audio('audio/swoosh.wav'),
+    wing: new Audio('audio/wing.wav')
+};
+
+let bird = {
+    x: 50,
+    y: 200,
+    velocity: 0,
+    gravity: 0.25,
+    jump: -4.6,
+    frame: 0,
+    flapSpeed: 0,
+    flapDelay: 5
+};
+
+let pipes = [];
+let score = 0;
+let gameLoop;
+let gameStarted = false;
+let baseX = 0;
+let gameOver = false;
+
+function drawBird() {
+    ctx.save();
+    ctx.translate(bird.x, bird.y);
+    let angle = bird.velocity * 2;
+    ctx.rotate(angle * Math.PI / 180);
+    ctx.drawImage(images.bird[bird.frame], -17, -12, 34, 24);
+    ctx.restore();
+}
+
+function drawPipes() {
+    pipes.forEach(pipe => {
+        ctx.save();
+        ctx.translate(pipe.x + 26, pipe.top);
+        ctx.scale(1, -1);
+        ctx.drawImage(images.pipeNorth, -26, 0);
+        ctx.restore();
+        
+        ctx.drawImage(images.pipeSouth, pipe.x, pipe.bottom);
+    });
+}
+
+function drawScore() {
+    const scoreStr = score.toString();
+    let xOffset = 10;
+    for (let i = 0; i < scoreStr.length; i++) {
+        const digit = parseInt(scoreStr[i]);
+        ctx.drawImage(images.numbers[digit], canvas.width / 2 - 5 * scoreStr.length + xOffset, 20);
+        xOffset += 25;
+    }
+}
+
+function updateBird() {
+    bird.velocity += bird.gravity;
+    bird.y += bird.velocity;
+
+    bird.flapSpeed++;
+    if (bird.flapSpeed >= bird.flapDelay) {
+        bird.frame = (bird.frame + 1) % 3;
+        bird.flapSpeed = 0;
+    }
+
+    if (bird.y + 12 > canvas.height - 112) {
+        endGame();
+    }
+}
+
+function updatePipes() {
+    if (pipes.length === 0 || pipes[pipes.length - 1].x < canvas.width - 200) {
+        let gap = 120;
+        let topHeight = Math.random() * (canvas.height - gap - 200) + 50;
+        pipes.push({
+            x: canvas.width,
+            top: topHeight,
+            bottom: topHeight + gap,
+            counted: false
+        });
+    }
+
+    pipes.forEach(pipe => {
+        pipe.x -= 2;
+
+        if (pipe.x + 52 < 0) {
+            pipes.shift();
+        }
+
+        if (!pipe.counted && pipe.x < bird.x) {
+            score++;
+            pipe.counted = true;
+            audio.point.play();
+        }
+
+        if (bird.x + 17 > pipe.x && bird.x - 17 < pipe.x + 52 &&
+            (bird.y - 12 < pipe.top || bird.y + 12 > pipe.bottom)) {
+            endGame();
+        }
+    });
+}
+
+function endGame() {
+    if (!gameOver) {
+        audio.hit.play();
+        setTimeout(() => audio.die.play(), 500);
+    }
+    gameOver = true;
+    cancelAnimationFrame(gameLoop);
+}
+
+function gameUpdate() {
+    ctx.drawImage(images.background, 0, 0);
+    
+    updateBird();
+    updatePipes();
+    
+    drawPipes();
+    drawBird();
+    
+    baseX = (baseX - 2) % 48;
+    ctx.drawImage(images.base, baseX, canvas.height - 112);
+    ctx.drawImage(images.base, baseX + 336, canvas.height - 112);
+    
+    drawScore();
+    
+    if (gameOver) {
+        ctx.drawImage(images.gameOver, canvas.width / 2 - 96, canvas.height / 2 - 42);
+    } else {
+        gameLoop = requestAnimationFrame(gameUpdate);
+    }
+}
+
+function jump() {
+    if (gameStarted && !gameOver) {
+        bird.velocity = bird.jump;
+        audio.wing.play();
+    } else if (!gameStarted) {
+        startGame();
+    } else if (gameOver) {
+        resetGame();
+    }
+}
+
+function startGame() {
+    gameStarted = true;
+    gameOver = false;
+    audio.swoosh.play();
+    resetGame();
+}
+
+function resetGame() {
+    bird = {
+        x: 50,
+        y: 200,
+        velocity: 0,
+        gravity: 0.25,
+        jump: -4.6,
+        frame: 0,
+        flapSpeed: 0,
+        flapDelay: 5
+    };
+    pipes = [];
+    score = 0;
+    gameStarted = true;
+    gameOver = false;
+    gameUpdate();
+}
+
+function showStartScreen() {
+    ctx.drawImage(images.background, 0, 0);
+    ctx.drawImage(images.base, 0, canvas.height - 112);
+    ctx.drawImage(images.message, canvas.width / 2 - 92, 100);
+}
+
+canvas.addEventListener('click', jump);
+
+document.addEventListener('keydown', (e) => {
+    if (e.code === 'Space') jump();
+});
+
+let loadedImages = 0;
+const totalImages = Object.values(images).flat().length;
+
+Object.values(images).flat().forEach(img => {
+    img.onload = () => {
+        loadedImages++;
+        if (loadedImages === totalImages) {
+            showStartScreen();
+        }
+    };
+});
+</script>
+</body></html>

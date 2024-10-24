@@ -1,0 +1,1652 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- <base1 href="https://websimcreation.com/snake-game-quests-obstacles/"> -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Snake Game with Quests and Obstacles</title>
+<style>
+body, button {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    cursor: none;
+}
+canvas {
+    display: block;
+}
+#questLog {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    max-width: 300px;
+}
+#gameOverScreen {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+#restartButton {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+#shareButton {
+    background-color: #008CBA;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+#gasPrompt {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 18px;
+    opacity: 1;
+    transition: opacity 1s;
+}
+#creditCardPrompt {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 18px;
+    opacity: 1;
+    transition: opacity 1s;
+}
+#creditCardTimer {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 24px;
+}
+</style>
+</head>
+<body>
+<canvas id="gameCanvas"></canvas>
+<div id="questLog"></div>
+<div id="gameOverScreen">
+    <h2>Game Over</h2>
+    <p>Your score: <span id="finalScore"></span></p>
+    <button id="restartButton">Restart Game</button>
+    <button id="shareButton">Share Score</button>
+</div>
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script> -->
+<script src="gsap.min.js"></script>
+<script>
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+const questLog = document.getElementById('questLog');
+const gameOverScreen = document.getElementById('gameOverScreen');
+const finalScore = document.getElementById('finalScore');
+const restartButton = document.getElementById('restartButton');
+
+let gameStartTime = Date.now();
+let debugMode = false;
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const bodySprite = new Image();
+bodySprite.src = 'imgs/costume1%20(19).png';
+const headSprite = new Image();
+headSprite.src = 'imgs/costume1%20(18).png';
+const appleSprite = new Image();
+appleSprite.src = 'imgs/costume1%20(20).png';
+const obstacleSprite = new Image();
+obstacleSprite.src = 'imgs/costume2%20(5).png';
+const enemySprite = new Image();
+enemySprite.src = 'imgs/costume4.png';
+const gasSprite = new Image();
+gasSprite.src = 'imgs/costume5.png';
+const spilledGasSprite = new Image();
+spilledGasSprite.src = 'imgs/costume6.png';
+const burningOverlaySprite = new Image();
+burningOverlaySprite.src = 'imgs/costume7.png';
+const nukeButtonSprite = new Image();
+nukeButtonSprite.src = 'imgs/costume13.png';
+const nukeSprite = new Image();
+nukeSprite.src = 'imgs/costume14.png';
+const creditCardSprite = new Image();
+creditCardSprite.src = 'imgs/costume9%20(1).png';
+const lootBoxSprite = new Image();
+lootBoxSprite.src = 'imgs/costume10.png';
+const skullSprite = new Image();
+skullSprite.src = 'imgs/costume17%20(2).png';
+const clockSprite = new Image();
+clockSprite.src = 'imgs/costume18%20(1).png';
+
+let bossHead = {
+    open: new Image(),
+    closed: new Image()
+};
+bossHead.open.src = 'imgs/costume12.png';
+bossHead.closed.src = 'imgs/costume11%20(1).png';
+
+let skull = null;
+let clock = null;
+let holdingClock = false;
+let thrownClock = null;
+let throwingClock = false;
+
+let nukeButton = { x: 0, y: 0, visible: false, lastSpawnTime: 0 };
+let nukeActive = false;
+let nukeCooldown = false;
+let creditCard = { x: 0, y: 0, visible: false, collected: false };
+let creditCardTimer = 0;
+let lootBox = { x: 0, y: 0, visible: false };
+let boss = null;
+let bossSpawnInterval = 600000;
+let lastBossSpawnTime = 0;
+
+let snake = [];
+let spilledGas = [];
+let mouseX = 0;
+let mouseY = 0;
+let score = 0;
+const partRadius = 12;
+const partSpacing = partRadius * 1.5;
+let cameraX = 0;
+let cameraY = 0;
+let cameraZoom = 1;
+let apples = [];
+let gasCanisters = [];
+const constantSpeed = 3;
+let obstacles = [];
+let enemies = [];
+let gas = { x: 0, y: 0, collected: false };
+let currentQuest = null;
+let questProgress = 0;
+let totalDistance = 0;
+const MAX_SNAKE_LENGTH = 100;
+
+let survivedTime = 0;
+let obstaclesPassed = 0;
+let currentSpeed = 0;
+
+const checkerSize = 50;
+const lightColor = '#ffffff';
+const darkColor = '#f0f0f0';
+
+let bigGasBottles = [];
+
+class SnakePart {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.targetX = x;
+        this.targetY = y;
+    }
+}
+
+class Obstacle {
+    constructor(x, y, radius) {
+        this.x = x;
+        this.y = y;
+        this.radius = radius;
+        this.scale = 1;
+        this.vx = 0;
+        this.vy = 0;
+    }
+
+    update() {
+        this.x += this.vx;
+        this.y += this.vy;
+    }
+
+    draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.scale(this.scale, this.scale);
+        ctx.drawImage(obstacleSprite, -this.radius, -this.radius, this.radius * 2, this.radius * 2);
+        ctx.restore();
+    }
+}
+
+class Enemy {
+    constructor(x, y, speed) {
+        this.x = x;
+        this.y = y;
+        this.speed = speed;
+        this.radius = 20;
+        this.scale = 1;
+        this.burning = false;
+        this.burnTime = 0;
+        this.dead = false;
+    }
+
+    update(snakeHead) {
+        if (this.dead) return;
+
+        const dx = snakeHead.x - this.x;
+        const dy = snakeHead.y - this.y;
+        const angle = Math.atan2(dy, dx);
+        this.x += Math.cos(angle) * this.speed;
+        this.y += Math.sin(angle) * this.speed;
+
+        for (let gas of spilledGas) {
+            if (Math.hypot(this.x - gas.x, this.y - gas.y) < this.radius + gas.size / 2) {
+                this.burning = true;
+                break;
+            }
+        }
+
+        if (this.burning) {
+            this.burnTime++;
+            if (this.burnTime >= 180) {
+                this.dead = true;
+            }
+        }
+    }
+
+    draw() {
+        if (this.dead) {
+            ctx.save();
+            ctx.translate(this.x, this.y);
+            ctx.scale(this.scale, this.scale);
+            ctx.filter = 'brightness(0%)';
+            ctx.drawImage(enemySprite, -this.radius, -this.radius, this.radius * 2, this.radius * 2);
+            ctx.restore();
+        } else {
+            ctx.save();
+            ctx.translate(this.x, this.y);
+            ctx.scale(this.scale, this.scale);
+            ctx.drawImage(enemySprite, -this.radius, -this.radius, this.radius * 2, this.radius * 2);
+            ctx.restore();
+
+            if (this.burning) {
+                ctx.save();
+                ctx.globalAlpha = 0.5;
+                ctx.drawImage(burningOverlaySprite, this.x - this.radius * 1.5, this.y - this.radius * 1.5, this.radius * 3, this.radius * 3);
+                ctx.restore();
+            }
+        }
+    }
+}
+
+class Boss {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.radius = 60;
+        this.health = 100;
+        this.mouthOpen = false;
+        this.mouthTimer = 0;
+        this.shootTimer = 0;
+        this.speed = constantSpeed * 0.5; // Reduced speed
+    }
+
+    update() {
+        const head = snake[0];
+        const angle = Math.atan2(head.y - this.y, head.x - this.x);
+        
+        this.x += Math.cos(angle) * this.speed;
+        this.y += Math.sin(angle) * this.speed;
+
+        this.mouthTimer++;
+        if (this.mouthTimer >= 30) {
+            this.mouthOpen = !this.mouthOpen;
+            this.mouthTimer = 0;
+        }
+
+        this.shootTimer++;
+        if (this.shootTimer >= 60) {
+            this.shoot();
+            this.shootTimer = 0;
+        }
+    }
+
+    draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.drawImage(this.mouthOpen ? bossHead.open : bossHead.closed, -this.radius, -this.radius, this.radius * 2, this.radius * 2);
+        
+        const barWidth = this.radius * 2;
+        const barHeight = 10;
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+        ctx.fillRect(-barWidth / 2, -this.radius - 20, barWidth, barHeight);
+        ctx.fillStyle = `rgb(${255 * (1 - this.health / 100)}, ${255 * this.health / 100}, 0)`;
+        ctx.fillRect(-barWidth / 2, -this.radius - 20, barWidth * (this.health / 100), barHeight);
+        
+        ctx.restore();
+    }
+
+    shoot() {
+        const head = snake[0];
+        const angle = Math.atan2(head.y - this.y, head.x - this.x);
+        const bulletSpeed = constantSpeed * 1.5;
+        const bullet = new Obstacle(
+            this.x + Math.cos(angle) * this.radius,
+            this.y + Math.sin(angle) * this.radius,
+            40 // Increased bullet size
+        );
+        bullet.vx = Math.cos(angle) * bulletSpeed;
+        bullet.vy = Math.sin(angle) * bulletSpeed;
+        obstacles.push(bullet);
+    }
+
+    takeDamage(amount) {
+        this.health -= amount;
+        if (this.health <= 0) {
+            boss = null;
+        }
+    }
+}
+
+const quests = [
+    { 
+        name: "Apple Harvest", 
+        description: (current) => `Collect ${current + 5} apples`, 
+        goal: (current) => current + 5, 
+        reward: (current) => Math.floor(current / 2) + 1 
+    },
+    { 
+        name: "Growth Spurt", 
+        description: (current) => `Grow to a length of ${current + 5}`, 
+        goal: (current) => current + 5, 
+        reward: (current) => Math.floor(current / 3) + 1 
+    },
+    { 
+        name: "Speed Demon", 
+        description: (current) => `Travel a distance of ${current + 1000}`, 
+        goal: (current) => current + 1000, 
+        reward: (current) => Math.floor(current / 500) + 1 
+    },
+    { 
+        name: "Enemy Evasion", 
+        description: (current) => `Survive for ${current + 30} seconds with enemies present`, 
+        goal: (current) => current + 30, 
+        reward: (current) => Math.floor(current / 15) + 1 
+    },
+    { 
+        name: "Obstacle Course", 
+        description: (current) => `Navigate through ${current + 3} obstacles`, 
+        goal: (current) => current + 3, 
+        reward: (current) => Math.floor(current / 2) + 1 
+    },
+    { 
+        name: "Speed Run", 
+        description: (current) => `Reach a speed of ${current + 2}`, 
+        goal: (current) => current + 2, 
+        reward: (current) => Math.floor(current) + 1 
+    }
+];
+
+snake.push(new SnakePart(0, 0));
+
+canvas.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX / cameraZoom + cameraX - canvas.width / (2 * cameraZoom);
+    mouseY = e.clientY / cameraZoom + cameraY - canvas.height / (2 * cameraZoom);
+});
+
+function triggerDeathTransition(callback) {
+    const deathOverlay = document.createElement('div');
+    deathOverlay.style.position = 'fixed';
+    deathOverlay.style.top = '0';
+    deathOverlay.style.left = '0';
+    deathOverlay.style.width = '100%';
+    deathOverlay.style.height = '100%';
+    deathOverlay.style.backgroundColor = 'red';
+    deathOverlay.style.opacity = '0';
+    deathOverlay.style.transition = 'opacity 0.5s';
+    deathOverlay.style.zIndex = '1000';
+    document.body.appendChild(deathOverlay);
+
+    setTimeout(() => {
+        deathOverlay.style.opacity = '0.7';
+        setTimeout(() => {
+            callback();
+            deathOverlay.style.opacity = '0';
+            setTimeout(() => {
+                document.body.removeChild(deathOverlay);
+            }, 500);
+        }, 1000);
+    }, 100);
+}
+
+function resetSnakePosition() {
+    triggerDeathTransition(() => {
+        const spawnRadius = 200;
+        const spawnAngle = Math.random() * Math.PI * 2;
+        const spawnX = Math.cos(spawnAngle) * spawnRadius;
+        const spawnY = Math.sin(spawnAngle) * spawnRadius;
+
+        snake = [new SnakePart(spawnX, spawnY)];
+        gasCanisters = gasCanisters.filter(gas => !gas.collected);
+        bigGasBottles = bigGasBottles.filter(gas => !gas.collected);
+        creditCard.collected = false;
+        holdingClock = false;
+        cameraX = spawnX;
+        cameraY = spawnY;
+        cameraZoom = 1;
+        apples = [];
+        for (let i = 0; i < 3; i++) {
+            respawnApple();
+            spawnGas();
+        }
+        const clearRadius = 300;
+        obstacles = obstacles.filter(obs => 
+            Math.hypot(obs.x - spawnX, obs.y - spawnY) > clearRadius
+        );
+        enemies = enemies.filter(enemy => 
+            Math.hypot(enemy.x - spawnX, enemy.y - spawnY) > clearRadius
+        );
+        questProgress = 0;
+        updateQuestLog();
+    });
+}
+
+function addBodyPart() {
+    if (snake.length < MAX_SNAKE_LENGTH) {
+        const lastPart = snake[snake.length - 1];
+        const newPart = new SnakePart(lastPart.x, lastPart.y);
+        snake.push(newPart);
+        score++;
+        animateAppleCollect();
+    }
+}
+
+function spawnSkullAndClock() {
+    if (!skull) {
+        const spawnAngle = Math.random() * Math.PI * 2;
+        const spawnDistance = 50 * partSpacing;
+        skull = {
+            x: Math.cos(spawnAngle) * spawnDistance,
+            y: Math.sin(spawnAngle) * spawnDistance,
+            radius: partRadius * 2
+        };
+    }
+
+    if (!clock && !holdingClock && !thrownClock) {
+        const clockAngle = Math.random() * Math.PI * 2;
+        const clockDistance = 50 * partSpacing;
+        clock = {
+            x: Math.cos(clockAngle) * clockDistance,
+            y: Math.sin(clockAngle) * clockDistance
+        };
+    }
+}
+
+function drawSkullAndClock() {
+    if (skull) {
+        ctx.drawImage(skullSprite, skull.x - skull.radius, skull.y - skull.radius, skull.radius * 2, skull.radius * 2);
+    }
+    if (clock && !holdingClock) {
+        ctx.drawImage(clockSprite, clock.x - partRadius, clock.y - partRadius, partRadius * 2, partRadius * 2);
+    }
+    if (thrownClock) {
+        ctx.drawImage(clockSprite, thrownClock.x - partRadius, thrownClock.y - partRadius, partRadius * 2, partRadius * 2);
+    }
+}
+
+function pickUpClock() {
+    if (clock && !holdingClock && !thrownClock) {
+        const head = snake[0];
+        const distance = Math.hypot(head.x - clock.x, head.y - clock.y);
+        if (distance < partRadius * 2) {
+            holdingClock = true;
+            clock = null;
+            showClockPrompt();
+        }
+    }
+}
+
+function showClockPrompt() {
+    const clockPrompt = document.createElement('div');
+    clockPrompt.id = 'clockPrompt';
+    clockPrompt.style.position = 'absolute';
+    clockPrompt.style.bottom = '20px';
+    clockPrompt.style.left = '50%';
+    clockPrompt.style.transform = 'translateX(-50%)';
+    clockPrompt.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+    clockPrompt.style.color = 'white';
+    clockPrompt.style.padding = '10px';
+    clockPrompt.style.borderRadius = '5px';
+    clockPrompt.style.fontFamily = '"Comic Sans MS", cursive, sans-serif';
+    clockPrompt.style.fontSize = '18px';
+    clockPrompt.style.opacity = '1';
+    clockPrompt.style.transition = 'opacity 1s';
+    clockPrompt.textContent = 'Press E to throw the clock';
+    document.body.appendChild(clockPrompt);
+
+    setTimeout(() => {
+        clockPrompt.style.opacity = '0';
+        setTimeout(() => {
+            document.body.removeChild(clockPrompt);
+        }, 1000);
+    }, 5000);
+}
+
+function throwClock() {
+    if (holdingClock) {
+        const head = snake[0];
+        const angle = Math.atan2(mouseY - head.y, mouseX - head.x);
+        const speed = 10;
+        thrownClock = {
+            x: head.x,
+            y: head.y,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed
+        };
+        holdingClock = false;
+        throwingClock = true;
+    }
+}
+
+function updateThrownClock() {
+    if (thrownClock) {
+        thrownClock.x += thrownClock.vx;
+        thrownClock.y += thrownClock.vy;
+
+        if (skull) {
+            const distance = Math.hypot(thrownClock.x - skull.x, thrownClock.y - skull.y);
+            if (distance < skull.radius) {
+                triggerBossSpawn();
+                thrownClock = null;
+                throwingClock = false;
+                return;
+            }
+        }
+
+        thrownClock.vx *= 0.99;
+        thrownClock.vy *= 0.99;
+
+        if (Math.hypot(thrownClock.vx, thrownClock.vy) < 0.1) {
+            clock = {
+                x: thrownClock.x,
+                y: thrownClock.y
+            };
+            thrownClock = null;
+            throwingClock = false;
+        }
+    }
+}
+
+document.addEventListener('keydown', (e) => {
+    if (e.key.toLowerCase() === 'e') {
+        if (gasCanisters.some(gas => gas.collected)) {
+            spillGas();
+        } else if (creditCard.collected) {
+            activateCreditCard();
+        } else if (bigGasBottles.some(gas => gas.collected)) {
+            spillBigGas();
+        } else if (holdingClock) {
+            throwClock();
+        }
+    } else if (e.key === 'PageUp') {
+        toggleDebugMode();
+    } else if (debugMode) {
+        debugActions(e.key.toUpperCase());
+    }
+});
+
+function shakeScreen() {
+    const intensity = 10;
+    const duration = 1000;
+    const start = Date.now();
+
+    function shake() {
+        const elapsed = Date.now() - start;
+        if (elapsed < duration) {
+            const offsetX = Math.random() * intensity * 2 - intensity;
+            const offsetY = Math.random() * intensity * 2 - intensity;
+            ctx.translate(offsetX, offsetY);
+            requestAnimationFrame(shake);
+        }
+    }
+
+    shake();
+}
+
+function fadeToBlack(callback) {
+    const fadeElement = document.createElement('div');
+    fadeElement.style.position = 'fixed';
+    fadeElement.style.top = '0';
+    fadeElement.style.left = '0';
+    fadeElement.style.width = '100%';
+    fadeElement.style.height = '100%';
+    fadeElement.style.backgroundColor = 'black';
+    fadeElement.style.opacity = '0';
+    fadeElement.style.transition = 'opacity 1s';
+    fadeElement.style.zIndex = '1000';
+    document.body.appendChild(fadeElement);
+
+    setTimeout(() => {
+        fadeElement.style.opacity = '1';
+        setTimeout(() => {
+            callback();
+            fadeElement.style.opacity = '0';
+            setTimeout(() => {
+                document.body.removeChild(fadeElement);
+            }, 1000);
+        }, 1000);
+    }, 100);
+}
+
+function triggerBossSpawn() {
+    shakeScreen();
+    fadeToBlack(() => {
+        const head = snake[0];
+        const angle = Math.random() * Math.PI * 2;
+        const distance = 500;
+        const x = head.x + Math.cos(angle) * distance;
+        const y = head.y + Math.sin(angle) * distance;
+        boss = new Boss(x, y);
+        skull = null;
+        clock = null;
+    });
+}
+
+function spillGas() {
+    const collectedGas = gasCanisters.find(gas => gas.collected);
+    if (collectedGas) {
+        const head = snake[0];
+        spilledGas.push({ x: head.x, y: head.y, size: partRadius * 8 });
+        const index = gasCanisters.indexOf(collectedGas);
+        gasCanisters.splice(index, 1);
+
+        if (boss) {
+            const distanceToBoss = Math.hypot(head.x - boss.x, head.y - boss.y);
+            if (distanceToBoss < partRadius * 8 + boss.radius) {
+                boss.takeDamage(10);
+            }
+        }
+    }
+}
+
+function updateSpilledGas() {
+    for (let i = spilledGas.length - 1; i >= 0; i--) {
+        spilledGas[i].size -= 0.2;
+        if (spilledGas[i].size <= 0) {
+            spilledGas.splice(i, 1);
+        }
+    }
+}
+
+function updateEnemies() {
+    const head = snake[0];
+    for (let i = enemies.length - 1; i >= 0; i--) {
+        const enemy = enemies[i];
+        enemy.update(head);
+        
+        if (enemy.dead) {
+            enemies.splice(i, 1);
+            continue;
+        }
+        
+        const distanceToEnemy = Math.hypot(head.x - enemy.x, head.y - enemy.y);
+        if (distanceToEnemy < partRadius + enemy.radius) {
+            resetSnakePosition();
+            return;
+        }
+    }
+}
+
+function toggleDebugMode() {
+    debugMode = !debugMode;
+    console.log("Debug mode:", debugMode ? "ON" : "OFF");
+}
+
+function debugActions(key) {
+    if (key === "G") {
+        for (let i = 0; i < 10; i++) addBodyPart();
+    } else if (key === "B") {
+        spawnBossNow();
+    } else if (key === "N") {
+        activateNuke();
+    }
+}
+
+function spawnBossNow() {
+    if (!boss) {
+        const head = snake[0];
+        const angle = Math.random() * Math.PI * 2;
+        const distance = 500;
+        const x = head.x + Math.cos(angle) * distance;
+        const y = head.y + Math.sin(angle) * distance;
+        boss = new Boss(x, y);
+        lastBossSpawnTime = Date.now();
+    }
+}
+
+function drawCheckerboard() {
+    ctx.save();
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    
+    const visibleWidth = canvas.width / cameraZoom;
+    const visibleHeight = canvas.height / cameraZoom;
+    
+    const startX = Math.floor((cameraX - visibleWidth / 2) / checkerSize) * checkerSize;
+    const startY = Math.floor((cameraY - visibleHeight / 2) / checkerSize) * checkerSize;
+    const endX = Math.ceil((cameraX + visibleWidth / 2) / checkerSize) * checkerSize;
+    const endY = Math.ceil((cameraY + visibleHeight / 2) / checkerSize) * checkerSize;
+
+    for (let x = startX; x < endX; x += checkerSize) {
+        for (let y = startY; y < endY; y += checkerSize) {
+            ctx.fillStyle = ((Math.floor(x / checkerSize) + Math.floor(y / checkerSize)) % 2 === 0) ? lightColor : darkColor;
+            ctx.fillRect(
+                (x - cameraX) * cameraZoom + canvas.width / 2,
+                (y - cameraY) * cameraZoom + canvas.height / 2,
+                checkerSize * cameraZoom + 1,
+                checkerSize * cameraZoom + 1
+            );
+        }
+    }
+    
+    ctx.restore();
+}
+
+function drawSnake() {
+    const visibleParts = Math.ceil(canvas.width / (partSpacing * cameraZoom)) + 1;
+    const partsToDraw = Math.min(snake.length, visibleParts);
+
+    for (let i = partsToDraw - 1; i >= 0; i--) {
+        const part = snake[i];
+        
+        ctx.save();
+        ctx.translate(part.x, part.y);
+        
+        if (i === 0) {
+            const angle = Math.atan2(mouseY - part.y, mouseX - part.x);
+            ctx.rotate(angle);
+            ctx.drawImage(headSprite, -partRadius, -partRadius, partRadius * 2, partRadius * 2);
+        } else {
+            const prevPart = snake[i - 1];
+            const angle = Math.atan2(prevPart.y - part.y, prevPart.x - part.x);
+            ctx.rotate(angle);
+            ctx.drawImage(bodySprite, -partRadius, -partRadius, partRadius * 2, partRadius * 2);
+        }
+        
+        ctx.restore();
+    }
+}
+
+function drawApples() {
+    for (let apple of apples) {
+        ctx.save();
+        ctx.translate(apple.x, apple.y);
+        ctx.scale(apple.scale, apple.scale);
+        ctx.drawImage(appleSprite, -partRadius, -partRadius, partRadius * 2, partRadius * 2);
+        ctx.restore();
+    }
+}
+
+function drawGas() {
+    for (let gas of gasCanisters) {
+        if (!gas.collected) {
+            ctx.save();
+            ctx.translate(gas.x, gas.y);
+            ctx.scale(gas.scale, gas.scale);
+            ctx.drawImage(gasSprite, -partRadius, -partRadius, partRadius * 2, partRadius * 2);
+            ctx.restore();
+        }
+    }
+}
+
+function drawSpilledGas() {
+    spilledGas.forEach(gas => {
+        ctx.drawImage(spilledGasSprite, gas.x - gas.size / 2, gas.y - gas.size / 2, gas.size, gas.size);
+    });
+}
+
+function drawEnemies() {
+    enemies.forEach(enemy => enemy.draw());
+}
+
+function drawBigGasBottles() {
+    for (let gas of bigGasBottles) {
+        if (!gas.collected) {
+            ctx.save();
+            ctx.translate(gas.x, gas.y);
+            ctx.scale(gas.scale, gas.scale);
+            ctx.drawImage(gasSprite, -gas.radius / 2, -gas.radius / 2, gas.radius, gas.radius);
+            ctx.restore();
+        }
+    }
+}
+
+function drawNukeButton() {
+    if (nukeButton.visible) {
+        ctx.drawImage(nukeButtonSprite, nukeButton.x - partRadius, nukeButton.y - partRadius, partRadius * 2, partRadius * 2);
+    }
+}
+
+function drawCreditCard() {
+    if (creditCard.visible) {
+        ctx.drawImage(creditCardSprite, creditCard.x - partRadius, creditCard.y - partRadius, partRadius * 2, partRadius * 2);
+    }
+}
+
+function drawLootBox() {
+    if (lootBox.visible) {
+        ctx.drawImage(lootBoxSprite, lootBox.x - partRadius, lootBox.y - partRadius, partRadius * 2, partRadius * 2);
+    }
+}
+
+function drawBossHealthBar() {
+    if (boss) {
+        const barWidth = 300;
+        const barHeight = 20;
+        const x = 10;
+        const y = 10;
+
+        ctx.save();
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+        ctx.fillRect(x, y, barWidth, barHeight);
+
+        const healthPercentage = boss.health / 100;
+        ctx.fillStyle = `rgb(${255 * (1 - healthPercentage)}, ${255 * healthPercentage}, 0)`;
+        ctx.fillRect(x, y, barWidth * healthPercentage, barHeight);
+
+        ctx.strokeStyle = 'white';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(x, y, barWidth, barHeight);
+
+        ctx.fillStyle = 'white';
+        ctx.font = 'bold 16px "Comic Sans MS", cursive, sans-serif';
+        ctx.textAlign = 'left';
+        ctx.fillText(`ANCIENT GUARD: ${Math.ceil(boss.health)}%`, x + 5, y + barHeight / 2 + 5);
+
+        ctx.restore();
+    }
+}
+
+function drawScore() {
+    ctx.save();
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.fillStyle = 'black';
+    ctx.strokeStyle = 'white';
+    ctx.lineWidth = 3;
+    ctx.font = 'bold 24px "Comic Sans MS", cursive, sans-serif';
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'top';
+    const scoreText = `Score: ${score}`;
+    const x = 10;
+    const y = 10;
+    ctx.strokeText(scoreText, x, y);
+    ctx.fillText(scoreText, x, y);
+    ctx.restore();
+}
+
+function updateSnake() {
+    const head = snake[0];
+    const dx = mouseX - head.x;
+    const dy = mouseY - head.y;
+    const angle = Math.atan2(dy, dx);
+
+    head.targetX = head.x + Math.cos(angle) * constantSpeed;
+    head.targetY = head.y + Math.sin(angle) * constantSpeed;
+
+    head.x = head.targetX;
+    head.y = head.targetY;
+
+    totalDistance += constantSpeed;
+
+    const visibleParts = Math.ceil(canvas.width / (partSpacing * cameraZoom)) + 1;
+    const partsToUpdate = Math.min(snake.length, visibleParts);
+
+    for (let i = 1; i < partsToUpdate; i++) {
+        const part = snake[i];
+        const prevPart = snake[i - 1];
+
+        const dx = prevPart.x - part.x;
+        const dy = prevPart.y - part.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance > partSpacing) {
+            const angle = Math.atan2(dy, dx);
+            part.targetX = prevPart.x - Math.cos(angle) * partSpacing;
+            part.targetY = prevPart.y - Math.sin(angle) * partSpacing;
+            
+            part.x = part.targetX;
+            part.y = part.targetY;
+        } else {
+            part.targetX = part.x;
+            part.targetY = part.y;
+        }
+
+        part.x += (part.targetX - part.x) * 0.3;
+        part.y += (part.targetY - part.y) * 0.3;
+    }
+
+    for (let i = apples.length - 1; i >= 0; i--) {
+        const apple = apples[i];
+        const distanceToApple = Math.hypot(head.x - apple.x, head.y - apple.y);
+        if (distanceToApple < partRadius * 2) {
+            addBodyPart();
+            apples.splice(i, 1);
+            respawnApple();
+        }
+    }
+
+    for (let i = gasCanisters.length - 1; i >= 0; i--) {
+        const gas = gasCanisters[i];
+        if (!gas.collected) {
+            const distanceToGas = Math.hypot(head.x - gas.x, head.y - gas.y);
+            if (distanceToGas < partRadius * 2) {
+                gas.collected = true;
+                animateGasCollect(gas);
+                showGasPrompt();
+            }
+        }
+    }
+
+    if (nukeButton.visible) {
+        const distanceToNukeButton = Math.hypot(head.x - nukeButton.x, head.y - nukeButton.y);
+        if (distanceToNukeButton < partRadius * 2) {
+            activateNuke();
+        }
+    }
+
+    collectCreditCard();
+    pickUpClock();
+
+    for (let obstacle of obstacles) {
+        const distanceToObstacle = Math.hypot(head.x - obstacle.x, head.y - obstacle.y);
+        if (distanceToObstacle < partRadius + obstacle.radius) {
+            resetSnakePosition();
+            return;
+        }
+    }
+
+    for (let i = 5; i < snake.length; i++) {
+        const part = snake[i];
+        const distanceToBodyPart = Math.hypot(head.x - part.x, head.y - part.y);
+        if (distanceToBodyPart < partRadius * 1.5) {
+            resetSnakePosition();
+            return;
+        }
+    }
+
+    updateEnemies();
+    updateQuestProgress();
+    
+    if (boss) {
+        const distanceToBoss = Math.hypot(head.x - boss.x, head.y - boss.y);
+        if (distanceToBoss < partRadius + boss.radius) {
+            resetSnakePosition();
+            return;
+        }
+    }
+
+    collectBigGasBottle();
+}
+
+function collectBigGasBottle() {
+    const head = snake[0];
+    for (let i = bigGasBottles.length - 1; i >= 0; i--) {
+        const gas = bigGasBottles[i];
+        if (!gas.collected) {
+            const distanceToGas = Math.hypot(head.x - gas.x, head.y - gas.y);
+            if (distanceToGas < partRadius + gas.radius) {
+                gas.collected = true;
+                animateGasCollect(gas);
+                showGasPrompt();
+            }
+        }
+    }
+}
+
+function updateCamera() {
+    const head = snake[0];
+    const targetX = head.x;
+    const targetY = head.y;
+
+    cameraX += (targetX - cameraX) * 0.1;
+    cameraY += (targetY - cameraY) * 0.1;
+
+    const targetZoom = Math.max(0.5, 1 / (1 + snake.length * 0.01));
+    cameraZoom += (targetZoom - cameraZoom) * 0.05;
+}
+
+function respawnApple() {
+    const head = snake[0];
+    let newApple = { x: 0, y: 0, scale: 1 };
+    
+    let validPosition = false;
+    while (!validPosition) {
+        const angle = Math.random() * Math.PI * 2;
+        const distance = Math.random() * 300 + 200;
+        newApple.x = head.x + Math.cos(angle) * distance;
+        newApple.y = head.y + Math.sin(angle) * distance;
+        
+        validPosition = true;
+        for (let obstacle of obstacles) {
+            if (Math.hypot(newApple.x - obstacle.x, newApple.y - obstacle.y) < obstacle.radius + partRadius) {
+                validPosition = false;
+                break;
+            }
+        }
+    }
+    
+    apples.push(newApple);
+}
+
+function spawnGas() {
+    if (gasCanisters.length < 3) {
+        const head = snake[0];
+        const angle = Math.random() * Math.PI * 2;
+        const distance = Math.random() * 300 + 200;
+        const newGas = {
+            x: head.x + Math.cos(angle) * distance,
+            y: head.y + Math.sin(angle) * distance,
+            collected: false,
+            scale: 1
+        };
+        gasCanisters.push(newGas);
+    }
+}
+
+// Call this function periodically
+setInterval(spawnGas, 10000);
+
+function spawnObstacle() {
+    const head = snake[0];
+    let validPosition = false;
+    let newObstacle;
+    
+    while (!validPosition) {
+        const angle = Math.random() * Math.PI * 2;
+        const distance = Math.random() * 400 + 300;
+        const x = head.x + Math.cos(angle) * distance;
+        const y = head.y + Math.sin(angle) * distance;
+        const radius = Math.random() * 20 + 20;
+        
+        newObstacle = new Obstacle(x, y, radius);
+        
+        validPosition = true;
+        for (let obstacle of obstacles) {
+            if (Math.hypot(newObstacle.x - obstacle.x, newObstacle.y - obstacle.y) < newObstacle.radius + obstacle.radius) {
+                validPosition = false;
+                break;
+            }
+        }
+    }
+    
+    obstacles.push(newObstacle);
+    animateObstacleSpawn(newObstacle);
+}
+
+function spawnEnemy() {
+    const head = snake[0];
+    const angle = Math.random() * Math.PI * 2;
+    const distance = Math.random() * 400 + 300;
+    const x = head.x + Math.cos(angle) * distance;
+    const y = head.y + Math.sin(angle) * distance;
+    const speed = Math.random() * 0.5 + 0.5;
+    
+    const enemy = new Enemy(x, y, speed);
+    enemies.push(enemy);
+    animateEnemySpawn(enemy);
+}
+
+function resetGame() {
+    resetSnakePosition();
+    score = 0;
+    obstacles = [];
+    enemies = [];
+    boss = null;
+    gasCanisters = [];
+    spilledGas = [];
+    apples = [];
+    bigGasBottles = [];
+    skull = null;
+    clock = null;
+    holdingClock = false;
+    thrownClock = null;
+
+    const spawnX = snake[0].x;
+    const spawnY = snake[0].y;
+
+    for (let i = 0; i < 3; i++) {
+        respawnApple();
+        spawnGas();
+    }
+    selectNewQuest();
+    totalDistance = 0;
+    gameOverScreen.style.display = 'none';
+    gameStartTime = Date.now();
+    spawnSkullAndClock();
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const sharedScore = urlParams.get('score');
+    if (sharedScore) {
+        alert(`Welcome! Someone shared a score of ${sharedScore} with you. Can you beat it?`);
+    }
+
+    if (skull) {
+        const skullAngle = Math.random() * Math.PI * 2;
+        const skullDistance = 50 * partSpacing;
+        skull.x = spawnX + Math.cos(skullAngle) * skullDistance;
+        skull.y = spawnY + Math.sin(skullAngle) * skullDistance;
+    }
+    if (clock) {
+        const clockAngle = Math.random() * Math.PI * 2;
+        const clockDistance = 50 * partSpacing;
+        clock.x = spawnX + Math.cos(clockAngle) * clockDistance;
+        clock.y = spawnY + Math.sin(clockAngle) * clockDistance;
+    }
+}
+
+function selectNewQuest() {
+    const questType = quests[Math.floor(Math.random() * quests.length)];
+    let current;
+    
+    switch (questType.name) {
+        case "Apple Harvest":
+            current = score;
+            break;
+        case "Growth Spurt":
+            current = snake.length;
+            break;
+        case "Speed Demon":
+            current = Math.floor(totalDistance);
+            break;
+        case "Enemy Evasion":
+            current = Math.floor(survivedTime);
+            break;
+        case "Obstacle Course":
+            current = obstacles.length;
+            break;
+        case "Speed Run":
+            current = Math.floor(currentSpeed * 10) / 10;
+            break;
+        default:
+            current = 0;
+    }
+    
+    currentQuest = {
+        name: questType.name,
+        description: questType.description(current),
+        goal: questType.goal(current),
+        reward: questType.reward(current)
+    };
+    
+    questProgress = 0;
+    updateQuestLog();
+}
+
+function updateQuestProgress() {
+    if (!currentQuest) return;
+
+    let newProgress = 0;
+    switch (currentQuest.name) {
+        case "Apple Harvest":
+            newProgress = score;
+            break;
+        case "Growth Spurt":
+            newProgress = snake.length;
+            break;
+        case "Speed Demon":
+            newProgress = Math.floor(totalDistance);
+            break;
+        case "Enemy Evasion":
+            survivedTime += 1 / 60;
+            newProgress = Math.floor(survivedTime);
+            break;
+        case "Obstacle Course":
+            newProgress = obstaclesPassed;
+            break;
+        case "Speed Run":
+            if (snake.length > 1) {
+                currentSpeed = Math.hypot(snake[0].x - snake[1].x, snake[0].y - snake[1].y);
+                newProgress = Math.floor(currentSpeed * 10) / 10;
+            }
+            break;
+    }
+
+    if (newProgress !== questProgress) {
+        questProgress = newProgress;
+        updateQuestLog();
+
+        if (questProgress >= currentQuest.goal) {
+            completeQuest();
+        }
+    }
+}
+
+function completeQuest() {
+    score += currentQuest.reward;
+    for (let i = 0; i < currentQuest.reward && snake.length < MAX_SNAKE_LENGTH; i++) {
+        addBodyPart();
+    }
+    selectNewQuest();
+    animateQuestComplete();
+}
+
+function updateQuestLog() {
+    questLog.innerHTML = `
+        <h3>Current Quest: ${currentQuest.name}</h3>
+        <p>${currentQuest.description}</p>
+        <p>Progress: ${Math.min(questProgress, currentQuest.goal)} / ${currentQuest.goal}</p>
+        <p>Reward: ${currentQuest.reward} body parts</p>
+    `;
+}
+
+function animateAppleCollect() {
+    gsap.to(apples[apples.length - 1], {
+        scale: 1.5,
+        duration: 0.2,
+        yoyo: true,
+        repeat: 1,
+        onComplete: () => {
+            apples[apples.length - 1].scale = 1;
+        }
+    });
+}
+
+function animateGasCollect(gas) {
+    gsap.to(gas, {
+        scale: 1.5,
+        duration: 0.2,
+        yoyo: true,
+        repeat: 1,
+        onComplete: () => {
+            gas.scale = 1;
+        }
+    });
+}
+
+function animateObstacleSpawn(obstacle) {
+    gsap.from(obstacle, {
+        scale: 0,
+        duration: 0.5,
+        ease: "elastic.out(1, 0.3)"
+    });
+}
+
+function animateEnemySpawn(enemy) {
+    gsap.from(enemy, {
+        scale: 0,
+        duration: 0.5,
+        ease: "elastic.out(1, 0.3)"
+    });
+}
+
+function animateQuestComplete() {
+    gsap.to(questLog, {
+        scale: 1.1,
+        duration: 0.2,
+        yoyo: true,
+        repeat: 1
+    });
+}
+
+function showGasPrompt() {
+    const gasPrompt = document.createElement('div');
+    gasPrompt.id = 'gasPrompt';
+    gasPrompt.style.position = 'absolute';
+    gasPrompt.style.bottom = '20px';
+    gasPrompt.style.left = '50%';
+    gasPrompt.style.transform = 'translateX(-50%)';
+    gasPrompt.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+    gasPrompt.style.color = 'white';
+    gasPrompt.style.padding = '10px';
+    gasPrompt.style.borderRadius = '5px';
+    gasPrompt.style.fontFamily = '"Comic Sans MS", cursive, sans-serif';
+    gasPrompt.style.fontSize = '18px';
+    gasPrompt.style.opacity = '1';
+    gasPrompt.style.transition = 'opacity 1s';
+    gasPrompt.textContent = 'Press E to spill the GAS';
+    document.body.appendChild(gasPrompt);
+
+    gasPromptTimeout = setTimeout(() => {
+        gasPrompt.style.opacity = '0';
+        setTimeout(() => {
+            document.body.removeChild(gasPrompt);
+        }, 1000);
+    }, 1000);
+}
+
+function spawnNukeButton() {
+    if (!nukeButton.visible && !nukeCooldown && Date.now() - nukeButton.lastSpawnTime > 300000) {
+        const head = snake[0];
+        const angle = Math.random() * Math.PI * 2;
+        const distance = Math.random() * 300 + 200;
+        nukeButton.x = head.x + Math.cos(angle) * distance;
+        nukeButton.y = head.y + Math.sin(angle) * distance;
+        nukeButton.visible = true;
+        nukeButton.lastSpawnTime = Date.now();
+    }
+}
+
+function activateNuke() {
+    if (nukeButton.visible) {
+        nukeActive = true;
+        nukeButton.visible = false;
+        nukeCooldown = true;
+        setTimeout(() => {
+            nukeCooldown = false;
+        }, 60000);
+
+        const nukeElement = document.createElement('img');
+        nukeElement.src = nukeSprite.src;
+        nukeElement.style.position = 'fixed';
+        nukeElement.style.left = '50%';
+        nukeElement.style.top = '-100px';
+        nukeElement.style.transform = 'translateX(-50%)';
+        nukeElement.style.width = '100px';
+        nukeElement.style.height = 'auto';
+        nukeElement.style.zIndex = '999';
+        document.body.appendChild(nukeElement);
+
+        gsap.to(nukeElement, {
+            top: '100%',
+            duration: 5,
+            ease: "power1.in",
+            onComplete: () => {
+                document.body.removeChild(nukeElement);
+                triggerNukeEffect();
+            }
+        });
+    }
+}
+
+function triggerNukeEffect() {
+    const whiteout = document.createElement('div');
+    whiteout.style.position = 'fixed';
+    whiteout.style.top = '0';
+    whiteout.style.left = '0';
+    whiteout.style.width = '100%';
+    whiteout.style.height = '100%';
+    whiteout.style.backgroundColor = 'white';
+    whiteout.style.opacity = '0';
+    whiteout.style.transition = 'opacity 0.5s';
+    whiteout.style.zIndex = '1000';
+    document.body.appendChild(whiteout);
+
+    setTimeout(() => {
+        whiteout.style.opacity = '1';
+        setTimeout(() => {
+            enemies = [];
+            obstacles = [];
+            if (boss) {
+                boss.takeDamage(50);
+            }
+            whiteout.style.opacity = '0';
+            setTimeout(() => {
+                document.body.removeChild(whiteout);
+                nukeActive = false;
+            }, 500);
+        }, 3000);
+    }, 100);
+}
+
+function spawnCreditCard() {
+    if (!creditCard.visible && !creditCard.collected && Math.random() < 0.01) {
+        const head = snake[0];
+        const angle = Math.random() * Math.PI * 2;
+        const distance = Math.random() * 300 + 200;
+        creditCard.x = head.x + Math.cos(angle) * distance;
+        creditCard.y = head.y + Math.sin(angle) * distance;
+        creditCard.visible = true;
+    }
+}
+
+function collectCreditCard() {
+    if (creditCard.visible && !creditCard.collected) {
+        const head = snake[0];
+        const distance = Math.hypot(head.x - creditCard.x, head.y - creditCard.y);
+        if (distance < partRadius * 2) {
+            creditCard.collected = true;
+            creditCard.visible = false;
+            showCreditCardPrompt();
+        }
+    }
+}
+
+function showCreditCardPrompt() {
+    const prompt = document.createElement('div');
+    prompt.id = 'creditCardPrompt';
+    prompt.style.position = 'absolute';
+    prompt.style.bottom = '20px';
+    prompt.style.left = '50%';
+    prompt.style.transform = 'translateX(-50%)';
+    prompt.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+    prompt.style.color = 'white';
+    prompt.style.padding = '10px';
+    prompt.style.borderRadius = '5px';
+    prompt.style.fontFamily = '"Comic Sans MS", cursive, sans-serif';
+    prompt.style.fontSize = '18px';
+    prompt.style.opacity = '1';
+    prompt.style.transition = 'opacity 1s';
+    prompt.textContent = "Press E to waste mommy's lifesavings";
+    document.body.appendChild(prompt);
+
+    setTimeout(() => {
+        prompt.style.opacity = '0';
+        setTimeout(() => {
+            document.body.removeChild(prompt);
+        }, 1000);
+    }, 5000);
+}
+
+function activateCreditCard() {
+    if (creditCard.collected) {
+        creditCardTimer = 30;
+        const timerDisplay = document.createElement('div');
+        timerDisplay.id = 'creditCardTimer';
+        timerDisplay.style.position = 'absolute';
+        timerDisplay.style.top = '20px';
+        timerDisplay.style.left = '50%';
+        timerDisplay.style.transform = 'translateX(-50%)';
+        timerDisplay.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+        timerDisplay.style.color = 'white';
+        timerDisplay.style.padding = '10px';
+        timerDisplay.style.borderRadius = '5px';
+        timerDisplay.style.fontFamily = '"Comic Sans MS", cursive, sans-serif';
+        timerDisplay.style.fontSize = '24px';
+        document.body.appendChild(timerDisplay);
+
+        const countDown = setInterval(() => {
+            creditCardTimer--;
+            timerDisplay.textContent = `Time left: ${creditCardTimer}s`;
+            if (creditCardTimer <= 0) {
+                clearInterval(countDown);
+                document.body.removeChild(timerDisplay);
+                spawnLootBox();
+            }
+        }, 1000);
+    }
+}
+
+function spawnLootBox() {
+    const head = snake[0];
+    lootBox.x = head.x;
+    lootBox.y = head.y - 300;
+    lootBox.visible = true;
+    gsap.to(lootBox, {
+        y: head.y,
+        duration: 2,
+        ease: "bounce.out",
+        onComplete: () => {
+            spawnLoot();
+            lootBox.visible = false;
+        }
+    });
+}
+
+function spawnLoot() {
+    for (let i = 0; i < 5; i++) {
+        respawnApple();
+    }
+    for (let i = 0; i < 3; i++) {
+        spawnGas();
+    }
+}
+
+function spawnBigGasBottle() {
+    if (boss && bigGasBottles.length < 3) {
+        const angle = Math.random() * Math.PI * 2;
+        const distance = Math.random() * 400 + 300;
+        const newGas = {
+            x: boss.x + Math.cos(angle) * distance,
+            y: boss.y + Math.sin(angle) * distance,
+            collected: false,
+            scale: 2,
+            radius: partRadius * 3
+        };
+        bigGasBottles.push(newGas);
+    }
+}
+
+function drawBigGasBottles() {
+    for (let gas of bigGasBottles) {
+        if (!gas.collected) {
+            ctx.save();
+            ctx.translate(gas.x, gas.y);
+            ctx.scale(gas.scale, gas.scale);
+            ctx.drawImage(gasSprite, -gas.radius / 2, -gas.radius / 2, gas.radius, gas.radius);
+            ctx.restore();
+        }
+    }
+}
+
+function spillBigGas() {
+    const collectedGas = bigGasBottles.find(gas => gas.collected);
+    if (collectedGas) {
+        const head = snake[0];
+        spilledGas.push({ x: head.x, y: head.y, size: partRadius * 16 });
+        const index = bigGasBottles.indexOf(collectedGas);
+        bigGasBottles.splice(index, 1);
+
+        if (boss) {
+            const distanceToBoss = Math.hypot(head.x - boss.x, head.y - boss.y);
+            if (distanceToBoss < partRadius * 16 + boss.radius) {
+                boss.takeDamage(20);
+            }
+        }
+    }
+}
+
+function gameLoop() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    drawCheckerboard();
+    
+    ctx.save();
+    ctx.translate(canvas.width / 2, canvas.height / 2);
+    ctx.scale(cameraZoom, cameraZoom);
+    ctx.translate(-cameraX, -cameraY);
+
+    updateSnake();
+    updateEnemies();
+    updateThrownClock();
+    if (boss) {
+        boss.update();
+        boss.draw();
+        drawBossHealthBar();
+    }
+    updateCamera();
+    updateSpilledGas();
+    drawSnake();
+    drawApples();
+    drawGas();
+    drawSpilledGas();
+    obstacles.forEach(obstacle => {
+        obstacle.update();
+        obstacle.draw();
+    });
+    drawEnemies();
+    drawBigGasBottles();
+    drawNukeButton();
+    drawCreditCard();
+    drawLootBox();
+    drawSkullAndClock();
+    drawScore();
+
+    ctx.restore();
+
+    requestAnimationFrame(gameLoop);
+}
+
+restartButton.addEventListener('click', resetGame);
+
+document.getElementById('shareButton').addEventListener('click', shareScore);
+
+function generateShareableLink(score) {
+    const baseUrl = 'https://websimcreation.com/snake-game-quests-obstacles/';
+    return `${baseUrl}?score=${score}`;
+}
+
+function shareScore() {
+    const score = document.getElementById('finalScore').textContent;
+    const shareableLink = generateShareableLink(score);
+    
+    if (navigator.share) {
+        navigator.share({
+            title: 'Check out my Snake Game score!',
+            text: `I scored ${score} points in the Snake Game with Quests and Obstacles!`,
+            url: shareableLink,
+        })
+        .then(() => console.log('Successful share'))
+        .catch((error) => console.log('Error sharing:', error));
+    } else {
+        prompt('Copy this link to share your score:', shareableLink);
+    }
+}
+
+for (let i = 0; i < 3; i++) {
+    respawnApple();
+    spawnGas();
+}
+selectNewQuest();
+setInterval(spawnObstacle, 10000);
+setInterval(spawnEnemy, 15000);
+setInterval(spawnCreditCard, 5000);
+setInterval(spawnBigGasBottle, 10000);
+spawnSkullAndClock();
+gameLoop();
+
+window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});
+</script>
+</body>
+</html>

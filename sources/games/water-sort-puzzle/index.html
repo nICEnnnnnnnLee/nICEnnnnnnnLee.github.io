@@ -1,0 +1,166 @@
+<html><head><base href="https://watersort.game/"><title>Water Sort Puzzle</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f8ff;
+  }
+  #game-container {
+    display: flex;
+    gap: 20px;
+  }
+  .tube {
+    width: 60px;
+    height: 240px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border: 2px solid #333;
+    border-radius: 0 0 30px 30px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column-reverse;
+    cursor: pointer;
+  }
+  .color-segment {
+    height: 60px;
+    transition: all 0.3s ease;
+  }
+  #controls {
+    margin-top: 20px;
+  }
+  button {
+    font-size: 16px;
+    padding: 10px 20px;
+    margin: 0 10px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+  <h1>Water Sort Puzzle</h1>
+  <div id="game-container"></div>
+  <div id="controls">
+    <button id="reset-btn">Reset Game</button>
+    <button id="undo-btn">Undo Move</button>
+  </div>
+
+<script>
+const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+const tubeCount = 8;
+const tubeCapacity = 4;
+let tubes = [];
+let selectedTube = null;
+let moveHistory = [];
+
+function initGame() {
+  tubes = [];
+  for (let i = 0; i < tubeCount; i++) {
+    tubes.push([]);
+  }
+  
+  const totalSegments = (tubeCount - 2) * tubeCapacity;
+  const colorCounts = colors.map(() => 0);
+  
+  for (let i = 0; i < totalSegments; i++) {
+    let colorIndex;
+    do {
+      colorIndex = Math.floor(Math.random() * colors.length);
+    } while (colorCounts[colorIndex] >= tubeCapacity);
+    
+    colorCounts[colorIndex]++;
+    let tubeIndex;
+    do {
+      tubeIndex = Math.floor(Math.random() * (tubeCount - 2));
+    } while (tubes[tubeIndex].length >= tubeCapacity);
+    
+    tubes[tubeIndex].push(colors[colorIndex]);
+  }
+  
+  renderTubes();
+}
+
+function renderTubes() {
+  const gameContainer = document.getElementById('game-container');
+  gameContainer.innerHTML = '';
+  
+  tubes.forEach((tube, index) => {
+    const tubeElement = document.createElement('div');
+    tubeElement.className = 'tube';
+    tubeElement.addEventListener('click', () => selectTube(index));
+    
+    tube.forEach(color => {
+      const segment = document.createElement('div');
+      segment.className = 'color-segment';
+      segment.style.backgroundColor = color;
+      tubeElement.appendChild(segment);
+    });
+    
+    gameContainer.appendChild(tubeElement);
+  });
+}
+
+function selectTube(index) {
+  if (selectedTube === null) {
+    if (tubes[index].length > 0) {
+      selectedTube = index;
+      document.querySelectorAll('.tube')[index].style.border = '2px solid #ff8c00';
+    }
+  } else {
+    if (selectedTube !== index && canPour(selectedTube, index)) {
+      pourWater(selectedTube, index);
+      moveHistory.push([selectedTube, index]);
+    }
+    document.querySelectorAll('.tube')[selectedTube].style.border = '2px solid #333';
+    selectedTube = null;
+  }
+}
+
+function canPour(from, to) {
+  if (tubes[to].length === tubeCapacity) return false;
+  if (tubes[from].length === 0) return false;
+  if (tubes[to].length === 0) return true;
+  return tubes[from][tubes[from].length - 1] === tubes[to][tubes[to].length - 1];
+}
+
+function pourWater(from, to) {
+  const colorToPour = tubes[from][tubes[from].length - 1];
+  while (tubes[from].length > 0 && tubes[to].length < tubeCapacity && tubes[from][tubes[from].length - 1] === colorToPour) {
+    tubes[to].push(tubes[from].pop());
+  }
+  renderTubes();
+  checkWinCondition();
+}
+
+function checkWinCondition() {
+  const win = tubes.every(tube => tube.length === 0 || (tube.length === tubeCapacity && tube.every(color => color === tube[0])));
+  if (win) {
+    alert('Congratulations! You solved the puzzle!');
+  }
+}
+
+function resetGame() {
+  initGame();
+  moveHistory = [];
+}
+
+function undoMove() {
+  if (moveHistory.length > 0) {
+    const [to, from] = moveHistory.pop();
+    const colorToUndo = tubes[from][tubes[from].length - 1];
+    while (tubes[from].length > 0 && tubes[from][tubes[from].length - 1] === colorToUndo) {
+      tubes[to].push(tubes[from].pop());
+    }
+    renderTubes();
+  }
+}
+
+document.getElementById('reset-btn').addEventListener('click', resetGame);
+document.getElementById('undo-btn').addEventListener('click', undoMove);
+
+initGame();
+</script>
+</body></html>
