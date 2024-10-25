@@ -5,9 +5,31 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 17 Oct 2024 20:35:31 +0800</pubDate>
-    <lastBuildDate>Thu, 17 Oct 2024 20:35:31 +0800</lastBuildDate>
+    <pubDate>Fri, 25 Oct 2024 15:51:57 +0800</pubDate>
+    <lastBuildDate>Fri, 25 Oct 2024 15:51:57 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>备忘录 MTU设置错误导致TCP连接异常</title>
+        <description>背景：有一台公益机器，以前运行一切正常。但是母鸡的服主是个爱折腾的人，经常搞些配置调优什么的。
+突然某一天，HTTP服务失联了。排查了半天，22、80、443端口全都能TCP ping通，SSH也能连接上，但是网页就是访问不了。&lt;br /&gt;
+然后，偶然发现使用HTTP访问443端口能出现nginx报错的页面。&lt;br /&gt;
+以及，在SSH操作过程中，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cat&lt;/code&gt;显示文件信息或者&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vi&lt;/code&gt;进行修改都会使得整个SSH链接“宕机”，只能关闭重来。&lt;br /&gt;
+但使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tail&lt;/code&gt;命令就还好。&lt;br /&gt;
+搜索试了一下，解决了问题（用break不太妥当，尊重事实就不在事后修改了）。&lt;br /&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ssh break when using cat or vi&lt;/code&gt;
+</description>
+        <pubDate>Fri, 25 Oct 2024 09:59:01 +0800</pubDate>
+        <pubDateFormat>2024-10-25</pubDateFormat>
+        <link>https://nicelee.top/blog/2024/10/25/mtp-wrong-size-freeze-my-tcp-connection/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2024/10/25/mtp-wrong-size-freeze-my-tcp-connection/</guid>
+        
+        <category>php</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
     
       <item>
         <title>备忘录 Serv00 php调用shell脚本</title>
@@ -190,25 +212,6 @@ WebRTC是什么不说了。&lt;br /&gt;
         
         
         <category>代码片段</category>
-        
-      </item>
-    
-      <item>
-        <title>【资源】通过注册微信公众测试号推送消息</title>
-        <description>
-想要通过API来给自己推送消息的方法有过很多，比如server酱、pushplus等。
-但是初始阶段的用爱发电之后(或者说推广策略？)，又是实名认证又是进一步限额免费等等，往往糟心事蛮多的。&lt;br /&gt;
-现在，算是有了替代方案，不需要注册公众号，只需要通过微信注册测试号即可。
-</description>
-        <pubDate>Mon, 29 Jul 2024 09:59:01 +0800</pubDate>
-        <pubDateFormat>2024-07-29</pubDateFormat>
-        <link>https://nicelee.top/blog/2024/07/29/wechat-push/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2024/07/29/wechat-push/</guid>
-        
-        <category>微信</category>
-        
-        
-        <category>工具与资源</category>
         
       </item>
     

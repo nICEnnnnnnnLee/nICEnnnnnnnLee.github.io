@@ -2,6 +2,13 @@
 	"code" : 0 ,
 	"data" : [
 	{
+		"title" : "备忘录 MTU设置错误导致TCP连接异常",
+		"tags" : "php",
+		"url" : "/blog/2024/10/25/mtp-wrong-size-freeze-my-tcp-connection/"
+		"brief" : "背景：有一台公益机器，以前运行一切正常。但是母鸡的服主是个爱折腾的人，经常搞些配置调优什么的。突然某一天，HTTP服务失联了。排查了半天，22、80、443端口全都能TCPping通，SSH也能连接上，但是网页就是访问不了。然后，偶然发现使用HTTP访问443端口能出现nginx报错的页面。以及，在SSH操作过程中，cat显示文件信息或者vi进行修改都会使得整个SSH链接“宕机”，只能关闭重来。但使用tail命令就还好。搜索试了一下，解决了问题（用break不太妥当，尊重事实就不在事后修改了）。sshbreakwhenusingcatorvi"
+	},
+    
+	{
 		"title" : "备忘录 Serv00 php调用shell脚本",
 		"tags" : "php",
 		"url" : "/blog/2024/10/06/serv00-php-auth/"
