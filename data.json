@@ -2,8 +2,22 @@
 	"code" : 0 ,
 	"data" : [
 	{
+		"title" : "Windows下通过脚本快速切换时区",
+		"tags" : "Windows",
+		"url" : "/blog/2024/11/04/windows-set-time-zone/"
+		"brief" : "有时候，浏览器插件并不是很管用，我们需要切系统的时区。这里提供一种使用脚本切换时区的方法。"
+	},
+    
+	{
+		"title" : "备忘录 使用svg做favicon时需要注意的",
+		"tags" : "Windows",
+		"url" : "/blog/2024/11/03/svg-with-fonts/"
+		"brief" : "最开始是想把哪吒dashboard的图标换一下，没想到折腾了很久。"
+	},
+    
+	{
 		"title" : "备忘录 MTU设置错误导致TCP连接异常",
-		"tags" : "php",
+		"tags" : "Linux",
 		"url" : "/blog/2024/10/25/mtp-wrong-size-freeze-my-tcp-connection/"
 		"brief" : "背景：有一台公益机器，以前运行一切正常。但是母鸡的服主是个爱折腾的人，经常搞些配置调优什么的。突然某一天，HTTP服务失联了。排查了半天，22、80、443端口全都能TCPping通，SSH也能连接上，但是网页就是访问不了。然后，偶然发现使用HTTP访问443端口能出现nginx报错的页面。以及，在SSH操作过程中，cat显示文件信息或者vi进行修改都会使得整个SSH链接“宕机”，只能关闭重来。但使用tail命令就还好。搜索试了一下，解决了问题（用break不太妥当，尊重事实就不在事后修改了）。sshbreakwhenusingcatorvi"
 	},
