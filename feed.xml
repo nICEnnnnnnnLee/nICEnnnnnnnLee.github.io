@@ -5,9 +5,36 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 04 Nov 2024 21:57:54 +0800</pubDate>
-    <lastBuildDate>Mon, 04 Nov 2024 21:57:54 +0800</lastBuildDate>
+    <pubDate>Wed, 06 Nov 2024 21:11:04 +0800</pubDate>
+    <lastBuildDate>Wed, 06 Nov 2024 21:11:04 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>脚本 简单加密文件，以及Github私密repo的附件的上传下载</title>
+        <description>之所以是脚本，而不是其它，因为省事方便，无需依赖，一(几)行命令可以搞定。
+
+加密文件的思路是：使用一串Base64的字符串为Key，将它转换为二进制数据，和待加密的数据一起，对齐头部，然后逐个字节进行异或操作。&lt;br /&gt;
+因为异或操作进行两遍还是原来的值，所以对着已加密的文件再次进行加密，就相当于解密。 &lt;br /&gt;
+如果是文本数据，因为只改头部，所以最好进行压缩打包然后再来处理。&lt;br /&gt;
+其它二进制文件，根据需要可以适当调整密钥长度。&lt;br /&gt;
+如果不那么考虑数据安全的话，这应该是最快的、最具性价比的防文件扫描处理方法。
+
+而另一个，之所以针对Github private repo的release的附件的上传和下载，而不是在项目内容里，主要是文件大小限制的考虑。&lt;br /&gt;
+同时如果针对项目文件的话，commit记录会一直保留，导致项目体积会不断增大，这也是不太好的。
+</description>
+        <pubDate>Wed, 06 Nov 2024 09:59:01 +0800</pubDate>
+        <pubDateFormat>2024-11-06</pubDateFormat>
+        <link>https://nicelee.top/blog/2024/11/06/scripts-xor-github-up-down/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2024/11/06/scripts-xor-github-up-down/</guid>
+        
+        <category>Linux</category>
+        
+        <category>Windows</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
     
       <item>
         <title>Windows下通过脚本快速切换时区</title>
@@ -187,24 +214,6 @@
         <category>Go</category>
         
         <category>Http</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>备忘录 使用Gpg为git的commit签名</title>
-        <description>
-标题其实还有后半部分，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;并在Github设置Gpg公钥&lt;/code&gt;。 &lt;br /&gt;
-因为难度过低，以及会导致标题过长，遂作罢。
-</description>
-        <pubDate>Mon, 19 Aug 2024 09:59:01 +0800</pubDate>
-        <pubDateFormat>2024-08-19</pubDateFormat>
-        <link>https://nicelee.top/blog/2024/08/19/gpg-sign-git/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2024/08/19/gpg-sign-git/</guid>
-        
-        <category>git</category>
         
         
         <category>技术学习</category>
