@@ -6,7 +6,6 @@ KEY_BASE64="${2:-55yf55qE5pyJ5pKS5aSn6IuP5omT5aSn6IuP5omT5ZWK5ZWK5ZWKYWE=}"
 KEY_FILE="$DATA_FILE.key.tmp"
 
 base64 -d <<< "$KEY_BASE64" > $KEY_FILE
-base64 -d <<< "55yf55qE5pyJ5pKS5aSn6IuP5omT5aSn6IuP5omT5ZWK5ZWK5ZWKYWE=" > temp
 
 # 检查文件是否存在
 if [ ! -f $KEY_FILE ] || [ ! -f $DATA_FILE ]; then
@@ -15,8 +14,11 @@ if [ ! -f $KEY_FILE ] || [ ! -f $DATA_FILE ]; then
 fi
 
 # 获取文件长度
-key_length=$(wc -c < $KEY_FILE)
-raw_length=$(wc -c < $DATA_FILE)
+# key_length=$(wc -c < $KEY_FILE)
+# raw_length=$(wc -c < $DATA_FILE)
+# key_length=$(du -b $KEY_FILE | awk '{print $1}')
+key_length=$(du -b $KEY_FILE | cut -f1)
+raw_length=$(du -b $DATA_FILE | cut -f1)
 
 # 如果 $KEY_FILE 的长度大于 $DATA_FILE 的长度，则只读取 $DATA_FILE 的长度
 if [ $key_length -gt $raw_length ]; then

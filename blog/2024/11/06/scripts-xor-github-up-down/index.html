@@ -418,8 +418,11 @@
 <span class="k">fi</span>
 
 <span class="c"># 获取文件长度</span>
-<span class="nv">key_length</span><span class="o">=</span><span class="si">$(</span><span class="nb">wc</span> <span class="nt">-c</span> &lt; <span class="nv">$KEY_FILE</span><span class="si">)</span>
-<span class="nv">raw_length</span><span class="o">=</span><span class="si">$(</span><span class="nb">wc</span> <span class="nt">-c</span> &lt; <span class="nv">$DATA_FILE</span><span class="si">)</span>
+<span class="c"># key_length=$(wc -c &lt; $KEY_FILE)</span>
+<span class="c"># raw_length=$(wc -c &lt; $DATA_FILE)</span>
+<span class="c"># key_length=$(du -b $KEY_FILE | awk '{print $1}')</span>
+<span class="nv">key_length</span><span class="o">=</span><span class="si">$(</span><span class="nb">du</span> <span class="nt">-b</span> <span class="nv">$KEY_FILE</span> | <span class="nb">cut</span> <span class="nt">-f1</span><span class="si">)</span>
+<span class="nv">raw_length</span><span class="o">=</span><span class="si">$(</span><span class="nb">du</span> <span class="nt">-b</span> <span class="nv">$DATA_FILE</span> | <span class="nb">cut</span> <span class="nt">-f1</span><span class="si">)</span>
 
 <span class="c"># 如果 $KEY_FILE 的长度大于 $DATA_FILE 的长度，则只读取 $DATA_FILE 的长度</span>
 <span class="k">if</span> <span class="o">[</span> <span class="nv">$key_length</span> <span class="nt">-gt</span> <span class="nv">$raw_length</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
