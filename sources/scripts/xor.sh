@@ -32,8 +32,8 @@ key_file=$(mktemp)
 raw_file=$(mktemp)
 result_file=$(mktemp)
 
-dd if=$KEY_FILE of=$key_file bs=1 count=$key_length
-dd if=$DATA_FILE of=$raw_file bs=1 count=$key_length
+dd if=$KEY_FILE of=$key_file bs=$key_length count=1
+dd if=$DATA_FILE of=$raw_file bs=$key_length count=1
 
 # 初始化结果文件
 > $result_file
@@ -52,7 +52,7 @@ while [ $i -lt $key_length ]; do
 done
 
 # 将结果写回 $DATA_FILE
-dd if=$result_file of=$DATA_FILE bs=1 count=$key_length conv=notrunc
+dd if=$result_file of=$DATA_FILE bs=$key_length count=1 conv=notrunc
 
 # 清理临时文件
 rm -f "$key_file" "$raw_file" "$result_file" "$KEY_FILE"

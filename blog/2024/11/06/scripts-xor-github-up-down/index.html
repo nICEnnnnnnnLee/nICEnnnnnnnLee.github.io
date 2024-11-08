@@ -394,7 +394,7 @@
 <p>原以为问AI一下子就可以出来结果，到头来一直跑不通。<br />
 修修补补不断对话反馈，过几轮之后之前打的补丁又漏了。<br />
 真TM智障啊aaaaaaa！<br />
-最后还得是人工检查人工bug修正，好气啊。</p>
+最后还得是人工检查人工bug修正，好气啊a。</p>
 
 <h2 id="xor-加密">XOR 加密</h2>
 <p>根据BASE64字符串加密文件头部。<br />
@@ -436,8 +436,8 @@
 <span class="nv">raw_file</span><span class="o">=</span><span class="si">$(</span><span class="nb">mktemp</span><span class="si">)</span>
 <span class="nv">result_file</span><span class="o">=</span><span class="si">$(</span><span class="nb">mktemp</span><span class="si">)</span>
 
-<span class="nb">dd </span><span class="k">if</span><span class="o">=</span><span class="nv">$KEY_FILE</span> <span class="nv">of</span><span class="o">=</span><span class="nv">$key_file</span> <span class="nv">bs</span><span class="o">=</span>1 <span class="nv">count</span><span class="o">=</span><span class="nv">$key_length</span>
-<span class="nb">dd </span><span class="k">if</span><span class="o">=</span><span class="nv">$DATA_FILE</span> <span class="nv">of</span><span class="o">=</span><span class="nv">$raw_file</span> <span class="nv">bs</span><span class="o">=</span>1 <span class="nv">count</span><span class="o">=</span><span class="nv">$key_length</span>
+<span class="nb">dd </span><span class="k">if</span><span class="o">=</span><span class="nv">$KEY_FILE</span> <span class="nv">of</span><span class="o">=</span><span class="nv">$key_file</span> <span class="nv">bs</span><span class="o">=</span><span class="nv">$key_length</span> <span class="nv">count</span><span class="o">=</span>1
+<span class="nb">dd </span><span class="k">if</span><span class="o">=</span><span class="nv">$DATA_FILE</span> <span class="nv">of</span><span class="o">=</span><span class="nv">$raw_file</span> <span class="nv">bs</span><span class="o">=</span><span class="nv">$key_length</span> <span class="nv">count</span><span class="o">=</span>1
 
 <span class="c"># 初始化结果文件</span>
 <span class="o">&gt;</span> <span class="nv">$result_file</span>
@@ -456,7 +456,7 @@
 <span class="k">done</span>
 
 <span class="c"># 将结果写回 $DATA_FILE</span>
-<span class="nb">dd </span><span class="k">if</span><span class="o">=</span><span class="nv">$result_file</span> <span class="nv">of</span><span class="o">=</span><span class="nv">$DATA_FILE</span> <span class="nv">bs</span><span class="o">=</span>1 <span class="nv">count</span><span class="o">=</span><span class="nv">$key_length</span> <span class="nv">conv</span><span class="o">=</span>notrunc
+<span class="nb">dd </span><span class="k">if</span><span class="o">=</span><span class="nv">$result_file</span> <span class="nv">of</span><span class="o">=</span><span class="nv">$DATA_FILE</span> <span class="nv">bs</span><span class="o">=</span><span class="nv">$key_length</span> <span class="nv">count</span><span class="o">=</span>1 <span class="nv">conv</span><span class="o">=</span>notrunc
 
 <span class="c"># 清理临时文件</span>
 <span class="nb">rm</span> <span class="nt">-f</span> <span class="s2">"</span><span class="nv">$key_file</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$raw_file</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$result_file</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$KEY_FILE</span><span class="s2">"</span>
