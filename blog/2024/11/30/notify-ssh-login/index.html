@@ -7,13 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>备忘录 Docker镜像的使用</title>
-    <meta name="description" content="由于使用不是很频繁，每次基本上都忘了，然后临时搜一下。现在做好笔记。">
+    <title>备忘录 VPS登录推送</title>
+    <meta name="description" content="目的是当VPS在SSH登录时，通过curl推送信息。">
 
-    <meta property="og:url" content="https://nicelee.top/blog/2021/10/10/docker-notes/">
+    <meta property="og:url" content="https://nicelee.top/blog/2024/11/30/notify-ssh-login/">
     <meta property="og:site_name" content="NiceLee的博客">
-    <meta property="og:title" content="备忘录 Docker镜像的使用">
-    <meta property="og:description" content="由于使用不是很频繁，每次基本上都忘了，然后临时搜一下。现在做好笔记。">
+    <meta property="og:title" content="备忘录 VPS登录推送">
+    <meta property="og:description" content="目的是当VPS在SSH登录时，通过curl推送信息。">
     <meta property="og:image" content="https://nicelee.top/favicon.ico?">
     <meta property="og:image:type" content="image/x-icon">
     
@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="/css/font-awesome.min.css ">
     <link rel="stylesheet" href="/css/font-ali.css?v=1.2 ">
     <link rel="stylesheet" href="/css/main.css?v=1.1 ">
-    <link rel="canonical" href="https://nicelee.top/blog/2021/10/10/docker-notes/">
+    <link rel="canonical" href="https://nicelee.top/blog/2024/11/30/notify-ssh-login/">
     <link rel="alternate" type="application/rss+xml" title="NiceLeeのBlog" href="https://nicelee.top/feed.xml ">
 
 	
@@ -313,11 +313,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>备忘录 Docker镜像的使用</h1>
+        <h1>备忘录 VPS登录推送</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2021-10-10
+                <i class="fa fa-calendar"></i>2024-11-30
             </div>
 
             <div class="label-card">
@@ -357,8 +357,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/blog/tag/#Docker" title="Tag: Docker" rel="tag">Docker</a-->
-        <a href="/blog/tag/#Docker" title="Tag: Docker" rel="tag">Docker</a>
+        <!--a href="/blog/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a-->
+        <a href="/blog/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
+    
+        <!--a href="/blog/tag/#VPS" title="Tag: VPS" rel="tag">VPS</a-->
+        <a href="/blog/tag/#VPS" title="Tag: VPS" rel="tag">VPS</a>
     
   
 
@@ -371,187 +374,53 @@
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
   <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
-  <li><a href="#例子" id="markdown-toc-例子">例子</a></li>
-  <li><a href="#关于容器内访问宿主机网络" id="markdown-toc-关于容器内访问宿主机网络">关于容器内访问宿主机网络</a>    <ul>
-      <li><a href="#bridge模式下访问宿主机网络" id="markdown-toc-bridge模式下访问宿主机网络">bridge模式下访问宿主机网络</a></li>
-    </ul>
-  </li>
+  <li><a href="#备忘录" id="markdown-toc-备忘录">备忘录</a></li>
 </ul>
-<p>由于使用不是很频繁，每次基本上都忘了，然后临时搜一下。现在做好笔记。</p>
+<p>目的是当VPS在SSH登录时，通过curl推送信息。</p>
 
 <h2 id="前言">前言</h2>
-<p>将常用的命令放在这儿，再附加一个例子。</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker pull &lt;镜像ID&gt;:&lt;TAG&gt;
-docker run <span class="nt">-d</span> <span class="nt">-w</span> &lt;工作路径&gt; <span class="nt">-v</span> &lt;外部文件/文件夹绝对路径&gt;:&lt;内部挂载路径&gt; <span class="nt">-p</span> &lt;IP&gt;:&lt;外部端口&gt;:&lt;内部端口&gt; <span class="nt">--name</span> &lt;标识名称&gt; &lt;容器ID&gt;:&lt;版本号&gt;
 
-docker start &lt;容器标识名称&gt;
-docker stop &lt;容器标识名称&gt;
-<span class="c"># 检查容器状态</span>
-docker inspect &lt;容器标识名称&gt;
-<span class="c"># 删除容器</span>
-docker <span class="nb">rm</span> <span class="nt">-f</span> &lt;容器标识名称&gt;
-<span class="c"># 清理掉所有处于终止状态的容器。</span>
-docker container prune
+<p>具体实现参考<a href="https://blog.lvcshu.com/2020/09/13/vps-%E7%99%BB%E5%BD%95%E6%8E%A8%E9%80%81/">vps-登录推送</a>。脚本依赖于<code class="language-plaintext highlighter-rouge">curl</code>、<code class="language-plaintext highlighter-rouge">jq</code>。</p>
+
+<p>如果想用微信通知，可以参考<a href="/blog/2024/07/29/wechat-push/">通过微信公众测试号推送消息</a>，通过多个http请求来达到目的。</p>
+
+<p>有机会的话，可以使用<code class="language-plaintext highlighter-rouge">cat</code>命令来替代<code class="language-plaintext highlighter-rouge">echo</code>多行输出，举例如下：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat &lt;&lt;EOFFFFFF &gt; tg.sh
+localip=\$(curl -s ip.sb -4)
+user=\$(whoami)
+logintime=\$(TZ=UTC-8 date "+%Y-%m-%d %H:%M:%S")
+loginip=${localip}
+loginfrom=\$(curl -s https://api.ip.sb/geoip/${loginip} | jq -r .asn_organization)
+...
+EOFFFFFF
 </code></pre></div></div>
 
-<h2 id="例子">例子</h2>
-<ul>
-  <li>下面我们要：
-    <ul>
-      <li>配置好python环境，将一个简单的python web应用挂载到工作目录并运行。</li>
-      <li>这个Web应用会打印以下内容：
-        <ul>
-          <li>当前时间</li>
-          <li>本地连接docker镜像的socket(ip, port)</li>
-          <li>Docker的某个环境变量<br />
-   其代码如下：</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
+<p>另外，<code class="language-plaintext highlighter-rouge">bash tg.sh &amp;</code>一行需要完善，不然总会有一行输出，不太雅观。<br />
+建议改成<code class="language-plaintext highlighter-rouge">(bash tg.sh &gt; /dev/null 2&gt;&amp;1 &amp;)</code></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 位于D:\Workspace\docker\test\index.py
-</span><span class="kn">from</span> <span class="nn">http.server</span> <span class="kn">import</span> <span class="n">BaseHTTPRequestHandler</span><span class="p">,</span> <span class="n">HTTPServer</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="k">class</span> <span class="nc">handler</span><span class="p">(</span><span class="n">BaseHTTPRequestHandler</span><span class="p">):</span>
-  <span class="k">def</span> <span class="nf">do_GET</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="bp">self</span><span class="p">.</span><span class="n">send_response</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
-    <span class="bp">self</span><span class="p">.</span><span class="n">send_header</span><span class="p">(</span><span class="s">'Content-type'</span><span class="p">,</span> <span class="s">'text/plain'</span><span class="p">)</span>
-    <span class="bp">self</span><span class="p">.</span><span class="n">end_headers</span><span class="p">()</span>
-    <span class="bp">self</span><span class="p">.</span><span class="n">wfile</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">().</span><span class="n">strftime</span><span class="p">(</span><span class="s">'%Y-%m-%d %H:%M:%S</span><span class="se">\n</span><span class="s">'</span><span class="p">)).</span><span class="n">encode</span><span class="p">())</span>
-    <span class="bp">self</span><span class="p">.</span><span class="n">wfile</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">client_address</span><span class="p">).</span><span class="n">encode</span><span class="p">())</span>
-    <span class="bp">self</span><span class="p">.</span><span class="n">wfile</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s">'</span><span class="se">\r\n</span><span class="s">'</span><span class="p">)</span>
-    <span class="bp">self</span><span class="p">.</span><span class="n">wfile</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">os</span><span class="p">.</span><span class="n">getenv</span><span class="p">(</span><span class="s">'ENV_TEST'</span><span class="p">)).</span><span class="n">encode</span><span class="p">())</span>
-    <span class="k">return</span>
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
-    <span class="n">http_server</span> <span class="o">=</span> <span class="n">HTTPServer</span><span class="p">((</span><span class="s">''</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="mi">8997</span><span class="p">)),</span> <span class="n">handler</span><span class="p">)</span>
-    <span class="n">http_server</span><span class="p">.</span><span class="n">serve_forever</span><span class="p">()</span> 
+<h2 id="备忘录">备忘录</h2>
+<p>防止源站失联，在这里贴下脚本</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/bin/bash
+
+# /etc/profile.d/login-alarm.sh
+#填入 bot 的 token
+token=
+#填自己的id
+id=
+
+localip=$(who -u am i 2&gt;/dev/null| awk '{print $NF}'|sed -e 's/[()]//g')
+
+echo 'localip=$(curl -s ip.sb -4)' &gt; tg.sh
+echo 'user=$(whoami)' &gt;&gt; tg.sh
+echo 'logintime=$(TZ=UTC-8 date "+%Y-%m-%d %H:%M:%S")' &gt;&gt; tg.sh
+echo 'loginip='${localip} &gt;&gt; tg.sh
+echo 'loginfrom=$(curl -s https://api.ip.sb/geoip/${loginip} | jq -r .asn_organization)' &gt;&gt; tg.sh
+## 下面这里需要自己实现
+echo 'curl -s "https://api.xxx.org/bot'${token}'/sendMessage?chat_id='${id}'" --data-binary "&amp;text=NewLogin:%0AVPS:${user}@${localip}%0ATime: ${logintime}%0ALogin from:%0A${loginip}%0A${loginfrom}" &gt; /dev/null &amp;&amp; rm tg.sh' &gt;&gt; tg.sh
+
+(bash tg.sh &gt; /dev/null 2&gt;&amp;1 &amp;)
 </code></pre></div></div>
-
-<ul>
-  <li>下面我们开始实现</li>
-</ul>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker pull python
-docker run <span class="nt">-d</span> <span class="nt">-v</span> D:/Workspace/docker/test:/home <span class="se">\</span>
-    <span class="nt">-w</span> /home <span class="nt">-p</span> 127.0.0.1:8080:8997 <span class="nt">-e</span> <span class="nv">ENV_TEST</span><span class="o">=</span>1234 <span class="se">\</span>
-    <span class="nt">--name</span> test_web python:latest python index.py
-    
-    <span class="nt">-d</span> : 后台运行
-    <span class="nt">-v</span> ：将D:/Workspace/docker/test目录映射到容器内的/home，python应用就在这个目录下
-    <span class="nt">-w</span> ：将工作目录设为/home，配合后面的命令，就不要再cd目录了
-    <span class="nt">-p</span> ：将本地的8080端口映射到容器内的8997端口<span class="o">(</span>TCP<span class="o">)</span>，127.0.0.1表示不接受外部网络请求
-    <span class="nt">-e</span> ：将环境变量ENV_TEST设为1234
-    <span class="nt">--name</span> ：将名称设为test_web，方便后面调用，而不用记录那一串hash值
-    python:latest ：在容器内运行python镜像
-    python index.py ： 运行web应用
-    
-docker stop test_web    <span class="c">#我停止了容器</span>
-docker start test_web   <span class="c">#我再次启动了容器(这里就没有必要再次docker run...)</span>
-docker inspect test_web <span class="c">#假设出了点问题，我想看看具体情况</span>
-<span class="c"># 还是搞不定，我决定到后台看看情况</span>
-docker <span class="nb">exec </span>test_web /bin/bash
-<span class="c"># 或者</span>
-docker attach test_web          <span class="o">(</span>退出后容器停止<span class="o">)</span>
-<span class="c"># 或者将-d换为-it(交互)，再跑一遍实时看一下情况</span>
-docker run <span class="nt">-it</span> <span class="nt">-v</span> D:/Workspace/docker/test:/home <span class="nt">-w</span> /home <span class="nt">-p</span> 127.0.0.1:8081:8997 <span class="nt">-e</span> <span class="nv">ENV_TEST</span><span class="o">=</span>1234 <span class="nt">--name</span> test_web2 python:latest python index.py
-<span class="c"># 上面那个容器没用了，我想把它删除</span>
-docker <span class="nb">rm</span> <span class="nt">-f</span> test_web2
-<span class="c"># 让我们来看看容器们状态</span>
-docker ps <span class="nt">-a</span>
-<span class="c"># 算了，没用的容器太多，把没在跑的全删掉算了</span>
-docker container prune
-</code></pre></div></div>
-
-<p>运行结果：<br />
-<img src="/sources/archive/2021/10/10.docker.run.jpg" alt="" /></p>
-
-<h2 id="关于容器内访问宿主机网络">关于容器内访问宿主机网络</h2>
-
-<ul>
-  <li>
-    <p>在使用docker run创建Docker容器时，共有<code class="language-plaintext highlighter-rouge">host</code>、<code class="language-plaintext highlighter-rouge">none</code>、<code class="language-plaintext highlighter-rouge">bridge</code>、<code class="language-plaintext highlighter-rouge">overlay</code>、<code class="language-plaintext highlighter-rouge">macvlan</code>等网络模式。<br />
-详见<a href="https://docs.docker.com/network/">https://docs.docker.com/network/</a></p>
-  </li>
-  <li>一般情况下考虑前三种情况即可，当需要多容器之间网络共享时再考虑其它。
-    <ul>
-      <li>host模式：容器与宿主机在相同的网络命名空间下面，共享所有网络接口。模式简单并且性能高。但使用前请思考一下，什么叫容器，为什么使用容器？？</li>
-      <li>none模式：容器不使用网络</li>
-      <li>bridge模式：使用 –net=bridge 指定，默认设置。</li>
-    </ul>
-  </li>
-  <li>使用示例：
-    <ul>
-      <li>
-        <table>
-          <tbody>
-            <tr>
-              <td>docker run -it –net=&lt;host</td>
-              <td>none</td>
-              <td>bridge</td>
-              <td>…&gt; <container></container></td>
-            </tr>
-          </tbody>
-        </table>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="bridge模式下访问宿主机网络">bridge模式下访问宿主机网络</h3>
-<ul>
-  <li>
-    <p>先讲一下大概的思路和原理<br />
-容器与宿主机之间的网络是隔离的，因而localhost肯定访问不成功。<br />
-此时，我们需要知道宿主机的IP。<br />
-在获取到宿主机的IP后，我们实际上就可以在容器内访问宿主机了。
-但这往往还不够，因为相同镜像在不同宿主机的容器内对应的IP可能是不相同的，我们不可能将它硬编码到应用代码里。<br />
-放到配置文件里面是一条可行思路。不过更通用的一种做法是取一个别名，并将别名到IP的映射放到<code class="language-plaintext highlighter-rouge">/etc/hosts</code>文件中。
-通知镜像使用者在运行时配置host： <code class="language-plaintext highlighter-rouge">--add-host=&lt;别名&gt;:&lt;IP&gt;</code></p>
-  </li>
-  <li>
-    <p>如何获取宿主机IP
-Windows下，我们可以使用<code class="language-plaintext highlighter-rouge">ipconfig</code>查看WSL对应的IP地址</p>
-  </li>
-</ul>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>无线局域网适配器 WLAN:
-
-   媒体状态  . . . . . . . . . . . . : 媒体已断开连接
-   连接特定的 DNS 后缀 . . . . . . . :
-
-以太网适配器 以太网:
-
-   连接特定的 DNS 后缀 . . . . . . . :
-   本地链接 IPv6 地址. . . . . . . . : xxxx::xxxx:xxxx:xxxx:xxxx%xx
-   IPv4 地址 . . . . . . . . . . . . : 192.168.1.110
-   子网掩码  . . . . . . . . . . . . : 255.255.255.0
-   默认网关. . . . . . . . . . . . . : 192.168.1.1
-
-以太网适配器 vEthernet (WSL):
-
-   连接特定的 DNS 后缀 . . . . . . . :
-   本地链接 IPv6 地址. . . . . . . . : xxxx::xxxx:xxxx:xxxx:xxxx%xx
-   IPv4 地址 . . . . . . . . . . . . : 172.29.176.1
-   子网掩码  . . . . . . . . . . . . : 255.255.240.0
-   默认网关. . . . . . . . . . . . . :
-</code></pre></div></div>
-
-<p>Linux下，我们可以使用<code class="language-plaintext highlighter-rouge">ifconfig</code>查看docker0对应的IP地址。<br />
-当然使用其它命令也是可以的，比如  <br />
-<code class="language-plaintext highlighter-rouge">ip -4 addr show docker0 | grep -Po 'inet \K[\d.]+'</code></p>
-
-<ul>
-  <li>关于如何配置<br />
-该问题可以转化为docker运行时如何配置容器的host。<br />
-版本较新的docker贴心地提供了配置项，我们可以直接使用<code class="language-plaintext highlighter-rouge">host-gateway</code>而不必自己再去寻找宿主机的IP。如下：</li>
-</ul>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--add-host=host.docker.internal:host-gateway
-</code></pre></div></div>
-
 
         </article>
         <hr>
@@ -562,8 +431,24 @@ Windows下，我们可以使用<code class="language-plaintext highlighter-rouge
             
                 
                     
+                        
+                        <h2 id="similar_posts">相似文章</h2>
+                        <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2024/11/06/scripts-xor-github-up-down/">脚本 简单加密文件，以及Github私密repo的附件的上传下载
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
                 
             
+                
+                    
                 
                     
                 
@@ -574,7 +459,32 @@ Windows下，我们可以使用<code class="language-plaintext highlighter-rouge
                 
                     
                 
+                    
+                
             
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2024/10/25/mtp-wrong-size-freeze-my-tcp-connection/">备忘录 MTU设置错误导致TCP连接异常
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
                 
                     
                 
@@ -585,11 +495,6 @@ Windows下，我们可以使用<code class="language-plaintext highlighter-rouge
                 
                     
                 
-            
-        
-            
-            
-                
                     
                 
             
@@ -598,11 +503,6 @@ Windows下，我们可以使用<code class="language-plaintext highlighter-rouge
             
                 
                     
-                
-            
-        
-            
-            
                 
                     
                 
@@ -613,11 +513,6 @@ Windows下，我们可以使用<code class="language-plaintext highlighter-rouge
                 
                     
                 
-            
-        
-            
-            
-                
                     
                 
             
@@ -627,7 +522,11 @@ Windows下，我们可以使用<code class="language-plaintext highlighter-rouge
                 
                     
                 
+                    
+                
             
+                
+                    
                 
                     
                 
@@ -638,24 +537,43 @@ Windows下，我们可以使用<code class="language-plaintext highlighter-rouge
                 
                     
                 
+                    
+                
             
+                
+                    
                 
                     
                 
             
         
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+        
+            </ul>
         
 
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/blog/2021/09/28/python-douyu-danmu/">Python 关于斗鱼每日荧光棒礼物的领取</a></p>
+        <p><strong>上一篇</strong> <a href="/blog/2024/11/06/scripts-xor-github-up-down/">脚本 简单加密文件，以及Github私密repo的附件的上传下载</a></p>
         
     </div>
     <div class="nex">
 
-        
-        <p><strong>下一篇</strong> <a href="/blog/2021/10/10/docker-notes-2/">备忘录 Docker镜像的修改更新</a></p>
         
     </div>
 </div>
@@ -680,6 +598,8 @@ Windows下，我们可以使用<code class="language-plaintext highlighter-rouge
                     内容
                 </div>
                 <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#similar_posts">相似文章</a></li>
                     
                     <!-- <li><a href="#comments">评论</a></li> -->
                 </ul>

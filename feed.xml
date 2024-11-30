@@ -5,9 +5,27 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 11 Nov 2024 20:57:26 +0800</pubDate>
-    <lastBuildDate>Mon, 11 Nov 2024 20:57:26 +0800</lastBuildDate>
+    <pubDate>Sat, 30 Nov 2024 21:49:08 +0800</pubDate>
+    <lastBuildDate>Sat, 30 Nov 2024 21:49:08 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>备忘录 VPS登录推送</title>
+        <description>目的是当VPS在SSH登录时，通过curl推送信息。
+</description>
+        <pubDate>Sat, 30 Nov 2024 09:59:01 +0800</pubDate>
+        <pubDateFormat>2024-11-30</pubDateFormat>
+        <link>https://nicelee.top/blog/2024/11/30/notify-ssh-login/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2024/11/30/notify-ssh-login/</guid>
+        
+        <category>Linux</category>
+        
+        <category>VPS</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
     
       <item>
         <title>脚本 简单加密文件，以及Github私密repo的附件的上传下载</title>
@@ -195,25 +213,6 @@
         <category>python</category>
         
         <category>cloudflare</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>Go 如何在http handler中获取client hello的原始数据</title>
-        <description>
-主要是实现思路。
-</description>
-        <pubDate>Wed, 21 Aug 2024 09:59:01 +0800</pubDate>
-        <pubDateFormat>2024-08-21</pubDateFormat>
-        <link>https://nicelee.top/blog/2024/08/21/go-https-client-hello/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2024/08/21/go-https-client-hello/</guid>
-        
-        <category>Go</category>
-        
-        <category>Http</category>
         
         
         <category>技术学习</category>
