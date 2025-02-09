@@ -5,9 +5,26 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 05 Jan 2025 16:35:06 +0800</pubDate>
-    <lastBuildDate>Sun, 05 Jan 2025 16:35:06 +0800</lastBuildDate>
+    <pubDate>Sun, 09 Feb 2025 21:08:05 +0800</pubDate>
+    <lastBuildDate>Sun, 09 Feb 2025 21:08:05 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>备忘录 静态博客搬家遇到的一些问题</title>
+        <description>前一阵子吧，有段时间Cloudflare连通性较差，想着将github pages的静态页面搬到serv00上去。&lt;br /&gt;
+本文记录一些遇到的问题。
+</description>
+        <pubDate>Sat, 08 Feb 2025 11:30:01 +0800</pubDate>
+        <pubDateFormat>2025-02-08</pubDateFormat>
+        <link>https://nicelee.top/blog/2025/02/08/serv00-htaccess/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2025/02/08/serv00-htaccess/</guid>
+        
+        <category>知识库</category>
+        
+        
+        <category>小技巧</category>
+        
+      </item>
     
       <item>
         <title>备忘录 自动化申请证书并部署到Gcore</title>
@@ -178,39 +195,6 @@
         <guid isPermaLink="true">https://nicelee.top/blog/2024/10/05/cf-access-policy/</guid>
         
         <category>cloudflare</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>备忘录 关于Firefox的二三事(二)</title>
-        <description>&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;/blog/2022/12/27/sth-about-mozilla-firefox/&quot;&gt;备忘录 关于Firefox的二三事&lt;/a&gt;
-    &lt;ul&gt;
-      &lt;li&gt;使用企业策略，禁用Firefox更新&lt;/li&gt;
-      &lt;li&gt;使用DNS over HTTPS&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;a href=&quot;/blog/2023/08/20/addons-firefox-android/&quot;&gt;如何在Firefox Android上使用扩展插件&lt;/a&gt;
-  &lt;/li&gt;
-  &lt;li&gt;本文
-    &lt;ul&gt;
-      &lt;li&gt;禁用频繁误触的&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;快速查找&lt;/code&gt;&lt;/li&gt;
-      &lt;li&gt;推荐插件&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Firefox Multi-Account Containers&lt;/code&gt;&lt;/li&gt;
-      &lt;li&gt;推荐插件&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CanvasBlocker&lt;/code&gt; 2024/10/17 更新&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Fri, 27 Sep 2024 09:59:01 +0800</pubDate>
-        <pubDateFormat>2024-09-27</pubDateFormat>
-        <link>https://nicelee.top/blog/2024/09/27/sth-about-mozilla-firefox-2/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2024/09/27/sth-about-mozilla-firefox-2/</guid>
-        
-        <category>浏览器扩展</category>
         
         
         <category>技术学习</category>

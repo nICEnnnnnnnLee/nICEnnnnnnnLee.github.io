@@ -2,6 +2,13 @@
 	"code" : 0 ,
 	"data" : [
 	{
+		"title" : "备忘录 静态博客搬家遇到的一些问题",
+		"tags" : "知识库",
+		"url" : "/blog/2025/02/08/serv00-htaccess/"
+		"brief" : "前一阵子吧，有段时间Cloudflare连通性较差，想着将githubpages的静态页面搬到serv00上去。本文记录一些遇到的问题。"
+	},
+    
+	{
 		"title" : "备忘录 自动化申请证书并部署到Gcore",
 		"tags" : "知识库",
 		"url" : "/blog/2024/12/17/gcore-acme-set/"
