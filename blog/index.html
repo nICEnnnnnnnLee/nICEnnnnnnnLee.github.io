@@ -303,6 +303,8 @@
                     
                 
                     
+                
+                    
                 				
 				
             </ul>
@@ -325,6 +327,69 @@
 		</div>
 		<hr>	
         <ul>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/blog/2025/02/13/ssl-cert-cf-kv/" style="overflow:hidden;text-overflow:ellipsis;">备忘录 证书与CF Workers KV Storage</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2025-02-13
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>nIceLee
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/blog/tag/#知识库" title="Tag: 知识库" rel="tag">知识库</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    <p>前情提要： 我在一台机器上部署了<code class="language-plaintext highlighter-rouge">acme.sh</code>脚本，申请通配符证书，确保证书在这台机器上是一直有效的。 <br />
+当机器有多台的时候，我想共用申请的证书，而不是在每一台上都再来一次。 <br />
+这就要有一个存放证书的地方。<br />
+本着不额外花费资源的原则，托管我域名DNS的CF本身似乎是一个挺好的选择。</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/blog/2025/02/13/ssl-cert-cf-kv/"><i class="fa fa-newspaper-o"></i>阅读全文</a>
+                </div>
+                <hr>
+              </li>
             
               <li>
                 <h2>
@@ -766,72 +831,6 @@
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/blog/2024/10/25/mtp-wrong-size-freeze-my-tcp-connection/" style="overflow:hidden;text-overflow:ellipsis;">备忘录 MTU设置错误导致TCP连接异常</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2024-10-25
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>nIceLee
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/blog/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    <p>背景：有一台公益机器，以前运行一切正常。但是母鸡的服主是个爱折腾的人，经常搞些配置调优什么的。
-突然某一天，HTTP服务失联了。排查了半天，22、80、443端口全都能TCP ping通，SSH也能连接上，但是网页就是访问不了。<br />
-然后，偶然发现使用HTTP访问443端口能出现nginx报错的页面。<br />
-以及，在SSH操作过程中，<code class="language-plaintext highlighter-rouge">cat</code>显示文件信息或者<code class="language-plaintext highlighter-rouge">vi</code>进行修改都会使得整个SSH链接“宕机”，只能关闭重来。<br />
-但使用<code class="language-plaintext highlighter-rouge">tail</code>命令就还好。<br />
-搜索试了一下，解决了问题（用break不太妥当，尊重事实就不在事后修改了）。<br />
-<code class="language-plaintext highlighter-rouge">ssh break when using cat or vi</code></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/blog/2024/10/25/mtp-wrong-size-freeze-my-tcp-connection/"><i class="fa fa-newspaper-o"></i>阅读全文</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 		
 
@@ -841,10 +840,10 @@
             <span class="previous disable"><i class="fa fa-angle-double-left"></i></span>
             <span class="previous disable"><i class="fa fa-angle-left"></i></span>
           
-          <span class="page_number ">1/32</span>
+          <span class="page_number ">1/33</span>
           
             <a href="/blog/2" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/blog/32" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/blog/33" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -857,6 +856,8 @@
                     最近上传
                 </div>
                 <ul class="content-ul" recent>
+                    
+                        <li><a href="/blog/2025/02/13/ssl-cert-cf-kv/">备忘录 证书与CF Workers KV Storage</a></li>
                     
                         <li><a href="/blog/2025/02/08/serv00-htaccess/">备忘录 静态博客搬家遇到的一些问题</a></li>
                     
@@ -876,8 +877,6 @@
                     
                         <li><a href="/blog/2024/10/06/serv00-php-auth/">备忘录 Serv00 php调用shell脚本</a></li>
                     
-                        <li><a href="/blog/2024/10/05/cf-access-policy/">备忘录 使用CF Access管理Pages等受控页面的访问(未绑卡)</a></li>
-                    
                 </ul>
             </div>
 
@@ -894,7 +893,7 @@
                             <span class="name">
                                 技术学习
                             </span>
-                            <span class="badge">187</span>
+                            <span class="badge">188</span>
                         </a>
                     </li>
                     

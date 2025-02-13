@@ -5,9 +5,28 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 09 Feb 2025 21:18:35 +0800</pubDate>
-    <lastBuildDate>Sun, 09 Feb 2025 21:18:35 +0800</lastBuildDate>
+    <pubDate>Thu, 13 Feb 2025 20:22:29 +0800</pubDate>
+    <lastBuildDate>Thu, 13 Feb 2025 20:22:29 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>备忘录 证书与CF Workers KV Storage</title>
+        <description>前情提要： 我在一台机器上部署了&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;acme.sh&lt;/code&gt;脚本，申请通配符证书，确保证书在这台机器上是一直有效的。 &lt;br /&gt;
+当机器有多台的时候，我想共用申请的证书，而不是在每一台上都再来一次。 &lt;br /&gt;
+这就要有一个存放证书的地方。&lt;br /&gt;
+本着不额外花费资源的原则，托管我域名DNS的CF本身似乎是一个挺好的选择。
+</description>
+        <pubDate>Thu, 13 Feb 2025 11:30:01 +0800</pubDate>
+        <pubDateFormat>2025-02-13</pubDateFormat>
+        <link>https://nicelee.top/blog/2025/02/13/ssl-cert-cf-kv/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2025/02/13/ssl-cert-cf-kv/</guid>
+        
+        <category>知识库</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
     
       <item>
         <title>备忘录 静态博客搬家遇到的一些问题</title>
@@ -176,25 +195,6 @@
         <guid isPermaLink="true">https://nicelee.top/blog/2024/10/06/serv00-php-auth/</guid>
         
         <category>php</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>备忘录 使用CF Access管理Pages等受控页面的访问(未绑卡)</title>
-        <description>一般情况下，启用Access Policy能够控制&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;abc.pages.dev&lt;/code&gt;的域名的请求访问，在浏览器进行访问时会需要指定的邮箱验证。&lt;br /&gt;
-&lt;img src=&quot;/sources/archive/2024/10/pages.png&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;
-但是，想把它应用到自定义的域名上，就需要在Zero Trust里面进行配置。这个步骤需要绑卡。&lt;br /&gt;
-我们可以想办法绕过它。
-</description>
-        <pubDate>Sat, 05 Oct 2024 09:59:01 +0800</pubDate>
-        <pubDateFormat>2024-10-05</pubDateFormat>
-        <link>https://nicelee.top/blog/2024/10/05/cf-access-policy/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2024/10/05/cf-access-policy/</guid>
-        
-        <category>cloudflare</category>
         
         
         <category>技术学习</category>
