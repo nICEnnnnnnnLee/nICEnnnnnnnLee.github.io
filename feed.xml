@@ -5,9 +5,26 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 13 Feb 2025 21:13:33 +0800</pubDate>
-    <lastBuildDate>Thu, 13 Feb 2025 21:13:33 +0800</lastBuildDate>
+    <pubDate>Sun, 30 Mar 2025 12:27:42 +0800</pubDate>
+    <lastBuildDate>Sun, 30 Mar 2025 12:27:42 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>备忘录 htaccess进一步完善</title>
+        <description>当前出现了一个意料之外的问题：静态网站访问路径对应的是文件夹时，会列出对应的目录文件。&lt;br /&gt;
+我们需要这样的效果：目录中存在 index.html，则允许访问；否则返回404，而不是列出目录。
+</description>
+        <pubDate>Fri, 07 Mar 2025 11:30:01 +0800</pubDate>
+        <pubDateFormat>2025-03-07</pubDateFormat>
+        <link>https://nicelee.top/blog/2025/03/07/htaccess/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2025/03/07/htaccess/</guid>
+        
+        <category>知识库</category>
+        
+        
+        <category>小技巧</category>
+        
+      </item>
     
       <item>
         <title>备忘录 证书与CF Workers KV Storage</title>
@@ -176,25 +193,6 @@
         <guid isPermaLink="true">https://nicelee.top/blog/2024/10/25/mtp-wrong-size-freeze-my-tcp-connection/</guid>
         
         <category>Linux</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>备忘录 Serv00 php调用shell脚本</title>
-        <description>最初的起因是母鸡经常重启，但是呢，账号有没有权限设置开机自动运行的脚本。 &lt;br /&gt;
-注意到放到&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/domains/{domain}/public_html&lt;/code&gt;路径下的php是可以直接使用的，遂有了这个想法。&lt;br /&gt;
-在这里先要声明： 虽然这样也能解决问题，但是&lt;strong&gt;最佳方案&lt;/strong&gt;是在Web Panel端建立&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Cron Job&lt;/code&gt;，运行时机为&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;after reboot&lt;/code&gt;，执行你想要的脚本。   &lt;br /&gt;
-本文只讲思路，过程可能略省。
-</description>
-        <pubDate>Sun, 06 Oct 2024 09:59:01 +0800</pubDate>
-        <pubDateFormat>2024-10-06</pubDateFormat>
-        <link>https://nicelee.top/blog/2024/10/06/serv00-php-auth/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2024/10/06/serv00-php-auth/</guid>
-        
-        <category>php</category>
         
         
         <category>技术学习</category>

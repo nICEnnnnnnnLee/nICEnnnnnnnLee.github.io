@@ -332,6 +332,83 @@
             
               <li>
                 <h2>
+                  <a class="post-link" href="/blog/2024/07/06/jpackage-2-change-jar-path/" style="overflow:hidden;text-overflow:ellipsis;">备忘录 jpackage 修改jar包所在位置(二)</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2024-07-06
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>nIceLee
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/blog/tag/#Java" title="Tag: Java" rel="tag">Java</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>|-- BilibiliDown.exe                         程序入口
+|-- app                                      Windows下，安装包自动生成。告诉`exe`文件如何正确运行
+|   |-- .package                             用于指示程序名称
+|   |-- BilibiliDown.cfg                     用于指示JVM运行的相关配置
+|   |-- launch.jar                           jar包
+|   |-- INeedBiliAV.jar                      jar包
+|-- runtime        
+</code></pre></div></div>
+<p>打包后的目录默认长上面这样，现在需要将jar包抬上来到根目录（下面这样），并确保程序正常运行</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>|-- BilibiliDown.exe                         程序入口
+|-- launch.jar                               jar包
+|-- INeedBiliAV.jar                          jar包
+|-- app                                      Windows下，安装包自动生成。告诉`exe`文件如何正确运行
+|   |-- .package                             用于指示程序名称
+|   |-- BilibiliDown.cfg                     用于指示JVM运行的相关配置
+|-- runtime        
+</code></pre></div></div>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/blog/2024/07/06/jpackage-2-change-jar-path/"><i class="fa fa-newspaper-o"></i>阅读全文</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
                   <a class="post-link" href="/blog/2024/07/05/jpackage-1-intro/" style="overflow:hidden;text-overflow:ellipsis;">备忘录 jpackage 的简单使用(一)</a>
                 </h2>
                 <div class="label">
@@ -768,68 +845,6 @@
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/blog/2023/02/25/cloudflare-cdn-tunnel-warp/" style="overflow:hidden;text-overflow:ellipsis;">关于Cloudflare CDN与 Zero Trust tunnel与 WARP</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2023-02-25
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>nIceLee
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/blog/tag/#cloudflare" title="Tag: cloudflare" rel="tag">cloudflare</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>简单介绍向。<br />
-关键词： 免费、个人用户、拥有域名 + 主机</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/blog/2023/02/25/cloudflare-cdn-tunnel-warp/"><i class="fa fa-newspaper-o"></i>阅读全文</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 		
 
@@ -856,6 +871,8 @@
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/blog/2025/03/07/htaccess/">备忘录 htaccess进一步完善</a></li>
+                    
                         <li><a href="/blog/2025/02/13/ssl-cert-cf-kv/">备忘录 证书与CF Workers KV Storage</a></li>
                     
                         <li><a href="/blog/2025/02/08/serv00-htaccess/">备忘录 静态博客搬家遇到的一些问题</a></li>
@@ -873,8 +890,6 @@
                         <li><a href="/blog/2024/11/03/svg-with-fonts/">备忘录 使用svg做favicon时需要注意的</a></li>
                     
                         <li><a href="/blog/2024/10/25/mtp-wrong-size-freeze-my-tcp-connection/">备忘录 MTU设置错误导致TCP连接异常</a></li>
-                    
-                        <li><a href="/blog/2024/10/06/serv00-php-auth/">备忘录 Serv00 php调用shell脚本</a></li>
                     
                 </ul>
             </div>
@@ -910,7 +925,7 @@
                             <span class="name">
                                 小技巧
                             </span>
-                            <span class="badge">34</span>
+                            <span class="badge">35</span>
                         </a>
                     </li>
                     
