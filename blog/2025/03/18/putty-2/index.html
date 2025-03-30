@@ -7,13 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>备忘录 如何在Firefox Android上使用扩展插件</title>
-    <meta name="description" content="一般来说，手机端的火狐浏览器只能使用官方推荐的扩展，这样很多其它的好东西就没法用了，不太方便。   那么该如何解决这个问题呢？">
+    <title>备忘录 Putty 密钥+代理的自动设置</title>
+    <meta name="description" content="本文是Putty 免密自动登录设置这篇文章的补充。附加需求有两个，即使用指定密钥登录而不是密码登录，以及设置代理。">
 
-    <meta property="og:url" content="https://nicelee.top/blog/2023/08/20/addons-firefox-android/">
+    <meta property="og:url" content="https://nicelee.top/blog/2025/03/18/putty-2/">
     <meta property="og:site_name" content="NiceLee的博客">
-    <meta property="og:title" content="备忘录 如何在Firefox Android上使用扩展插件">
-    <meta property="og:description" content="一般来说，手机端的火狐浏览器只能使用官方推荐的扩展，这样很多其它的好东西就没法用了，不太方便。   那么该如何解决这个问题呢？">
+    <meta property="og:title" content="备忘录 Putty 密钥+代理的自动设置">
+    <meta property="og:description" content="本文是Putty 免密自动登录设置这篇文章的补充。附加需求有两个，即使用指定密钥登录而不是密码登录，以及设置代理。">
     <meta property="og:image" content="https://nicelee.top/favicon.ico?">
     <meta property="og:image:type" content="image/x-icon">
     
@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="/css/font-awesome.min.css ">
     <link rel="stylesheet" href="/css/font-ali.css?v=1.2 ">
     <link rel="stylesheet" href="/css/main.css?v=1.1 ">
-    <link rel="canonical" href="https://nicelee.top/blog/2023/08/20/addons-firefox-android/">
+    <link rel="canonical" href="https://nicelee.top/blog/2025/03/18/putty-2/">
     <link rel="alternate" type="application/rss+xml" title="NiceLeeのBlog" href="https://nicelee.top/feed.xml ">
 
 	
@@ -315,11 +315,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>备忘录 如何在Firefox Android上使用扩展插件</h1>
+        <h1>备忘录 Putty 密钥+代理的自动设置</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2023-08-20
+                <i class="fa fa-calendar"></i>2025-03-18
             </div>
 
             <div class="label-card">
@@ -342,7 +342,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+        <a href="/blog/category/#小技巧" title="Category: 小技巧" rel="category">小技巧</a>
     
   
 
@@ -359,8 +359,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/blog/tag/#%E6%B5%8F%E8%A7%88%E5%99%A8%E6%89%A9%E5%B1%95" title="Tag: 浏览器扩展" rel="tag">浏览器扩展</a-->
-        <a href="/blog/tag/#浏览器扩展" title="Tag: 浏览器扩展" rel="tag">浏览器扩展</a>
+        <!--a href="/blog/tag/#%E7%9F%A5%E8%AF%86%E5%BA%93" title="Tag: 知识库" rel="tag">知识库</a-->
+        <a href="/blog/tag/#知识库" title="Tag: 知识库" rel="tag">知识库</a>
     
   
 
@@ -372,45 +372,65 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
-  <li><a href="#一个简单的概念" id="markdown-toc-一个简单的概念">一个简单的概念</a></li>
-  <li><a href="#如何修改扩展源列表" id="markdown-toc-如何修改扩展源列表">如何修改扩展源列表</a></li>
-  <li><a href="#如何新建自己的扩展源列表" id="markdown-toc-如何新建自己的扩展源列表">如何新建自己的扩展源列表</a></li>
+  <li><a href="#批量转换密钥格式" id="markdown-toc-批量转换密钥格式">批量转换密钥格式</a></li>
+  <li><a href="#指定密钥登录--设置代理" id="markdown-toc-指定密钥登录--设置代理">指定密钥登录 + 设置代理</a></li>
+  <li><a href="#批量生成putty配置" id="markdown-toc-批量生成putty配置">批量生成Putty配置</a></li>
 </ul>
-<p>一般来说，手机端的火狐浏览器只能使用官方推荐的扩展，这样很多其它的好东西就没法用了，不太方便。   <br />
-那么该如何解决这个问题呢？</p>
+<p>本文是<a href="/blog/2018/12/09/putty/">Putty 免密自动登录设置</a>这篇文章的补充。<br />
+附加需求有两个，即使用指定密钥登录而不是密码登录，以及设置代理。</p>
 
-<h2 id="前言">前言</h2>
-<p>相对而言，Firefox Android阉割了许多特性，比如没法打开<code class="language-plaintext highlighter-rouge">about:config</code>进行个性化配置等等。<br />
-一般来说，我们使用<strong>Beta</strong>或者<strong>Nightly</strong>版本。<br />
-对于这篇文章要做的事情来说，这是必须的。</p>
+<h2 id="批量转换密钥格式">批量转换密钥格式</h2>
+<p>常见的OpenSSH密钥并不能被putty识别，需要通过<code class="language-plaintext highlighter-rouge">puttygen.exe</code>进行转换。<br />
+但是该程序只支持图形界面，不支持命令行，量多的时候可能有点麻烦。<br />
+这时候需要用到<code class="language-plaintext highlighter-rouge">winscp.com</code>，该程序请自行搜索。<br />
+这里再贴一个示例代码，批量生成ed25519的密钥(OpenSSH + Putty两种格式)：</p>
+<div class="language-bat highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@echo <span class="na">off</span>
+<span class="kd">set</span> <span class="kd">Path</span><span class="o">=</span><span class="kd">D</span>:\Program <span class="kd">Files</span>\OpenSSL<span class="na">-Win</span><span class="m">64</span>\bin\<span class="o">;</span><span class="nv">%Path%</span>
+<span class="kd">set</span> <span class="kd">Path</span><span class="o">=</span><span class="kd">D</span>:\Program <span class="kd">Files</span>\putty\WinSCP<span class="o">-</span><span class="m">6</span>.3.7<span class="na">-Portable</span>\<span class="o">;</span><span class="nv">%Path%</span>
+<span class="nb">setlocal</span> <span class="na">enabledelayedexpansion</span>
 
-<h2 id="一个简单的概念">一个简单的概念</h2>
-<p>首先我们要明确一下，浏览器安装扩展的流程。</p>
-<ul>
-  <li>浏览器维护一个可用的扩展源列表的url地址，默认的是官方推荐列表</li>
-  <li>新增扩展时，先从扩展源拿到所有可用的扩展</li>
-  <li>选择一个扩展进行安装</li>
-</ul>
+<span class="k">for</span> <span class="vm">%%i</span> <span class="k">in</span> <span class="o">(</span><span class="kd">t1</span> <span class="kd">t2</span> <span class="kd">t3</span><span class="o">)</span> <span class="k">do</span> <span class="o">(</span>
+    <span class="nb">mkdir</span> <span class="vm">%%i</span>
+    <span class="nb">cd</span> <span class="vm">%%i</span>
+    <span class="kd">ssh</span><span class="na">-keygen -t </span><span class="kd">ed25519</span> <span class="na">-f </span><span class="kd">id_ed25519</span> <span class="na">-P </span><span class="s2">""</span> <span class="na">-C </span><span class="s2">"</span><span class="vm">%%i</span><span class="s2">@test.com"</span>
+    <span class="kd">winscp</span>.com <span class="na">/keygen </span><span class="kd">id_ed25519</span> <span class="na">/output</span><span class="o">=</span><span class="kd">id_ed25519</span>.ppk
+    <span class="nb">cd</span> ..
+<span class="o">)</span>
 
-<h2 id="如何修改扩展源列表">如何修改扩展源列表</h2>
-<p>对于小伙伴们来说，Android如何进入开发者模式应该有个概念，经典操作就是连续点击5下。<br />
-而要出现修改扩展源列表的配置，也要进行类似的操作，具体的，参考<a href="https://support.mozilla.org/en-US/kb/extended-add-support">extended-add-support</a></p>
-<ul>
-  <li>点击右上角“三个点”，选择<code class="language-plaintext highlighter-rouge">设置</code></li>
-  <li>点击<code class="language-plaintext highlighter-rouge">关于Firefox Nightly/Beta</code></li>
-  <li>连续点击5下Firefox logo，这时候会出现调试菜单开启的提示</li>
-  <li>返回<code class="language-plaintext highlighter-rouge">设置</code>菜单，会发现定制扩展源的按钮</li>
-</ul>
+<span class="nb">endlocal</span>
 
-<p>现在，你需要知道如何获得<code class="language-plaintext highlighter-rouge">Collection Owner (User ID)</code>和<code class="language-plaintext highlighter-rouge">Collection name</code>。<br />
-举个例子，这是我创建的一个扩展集合，里面只有一个Cookie管理插件。<br />
-<a href="https://addons.mozilla.org/zh-CN/firefox/collections/14567953/test/">https://addons.mozilla.org/zh-CN/firefox/collections/14567953/test/</a><br />
-要使用这个扩展源的话，User ID为<code class="language-plaintext highlighter-rouge">14567953</code>，Collection name为<code class="language-plaintext highlighter-rouge">test</code>。怎么得到的就没必要再细说了。</p>
+<span class="nb">pause</span>
+</code></pre></div></div>
 
-<h2 id="如何新建自己的扩展源列表">如何新建自己的扩展源列表</h2>
-<p>参考<a href="https://support.mozilla.org/en-US/kb/how-use-collections-addonsmozillaorg#">How to use collections on addons.mozilla.org</a><br />
-在<a href="https://addons.mozilla.org">https://addons.mozilla.org</a>登录以后，右上角查看我的收藏集，接下来傻瓜式操作，没啥好说的。</p>
+<h2 id="指定密钥登录--设置代理">指定密钥登录 + 设置代理</h2>
+<p>可以在Putty设置好，保存成指定配置名，使用时通过命令行<code class="language-plaintext highlighter-rouge">-load "配置名"</code>来加载。<br />
+当然，密钥也可以通过<code class="language-plaintext highlighter-rouge">-i "密钥路径"</code>覆盖。</p>
+<div class="language-bat highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@echo <span class="na">off</span>
+<span class="kd">putty</span><span class="err">.exe</span> <span class="na">-load </span><span class="s2">"test"</span> <span class="na">-ssh -l </span><span class="o">{</span>用户名<span class="o">}</span> <span class="na">-P </span><span class="o">{</span>端口<span class="o">}</span> <span class="o">{</span>地址<span class="o">}</span> <span class="na">-i </span><span class="s2">"D:\Path\to\private\key\id_rsa.ppk"</span>
+<span class="c">REM start putty.exe -load "test"</span>
+<span class="nb">pause</span>
+</code></pre></div></div>
+
+<h2 id="批量生成putty配置">批量生成Putty配置</h2>
+<p>人工在Putty界面设置好，再保存配置可能效率有点低。<br />
+若有需要，可以通过修改注册表的方式提高效率。<br />
+若不符合预期，可以与人工保存生成的注册表配置进行对比观察。</p>
+
+<div class="language-bat highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@echo <span class="na">off</span>
+<span class="nb">setlocal</span>
+
+<span class="c">REM 定义会话名称</span>
+<span class="kd">set</span> <span class="s2">"sessionName=test"</span>
+
+<span class="c">REM 定义注册表路径</span>
+<span class="kd">set</span> <span class="s2">"registryPath=HKEY_CURRENT_USER\Software\SimonTatham\PuTTY\Sessions\</span><span class="nv">%sessionName%</span><span class="s2">"</span>
+
+<span class="c">REM 操作举例</span>
+<span class="nb">reg</span> <span class="kd">add</span> <span class="s2">"</span><span class="nv">%registryPath%</span><span class="s2">"</span> <span class="na">/v </span><span class="kd">ProxyType</span> <span class="na">/t </span><span class="kd">REG_DWORD</span> <span class="na">/d </span><span class="m">0</span> <span class="na">/f
+</span><span class="nb">reg</span> <span class="kd">add</span> <span class="s2">"</span><span class="nv">%registryPath%</span><span class="s2">"</span> <span class="na">/v </span><span class="kd">ProxyUsername</span> <span class="na">/t </span><span class="kd">REG_SZ</span> <span class="na">/d </span><span class="s2">"</span><span class="nv">%proxy_username%</span><span class="s2">"</span> <span class="na">/f
+</span><span class="nb">reg</span> <span class="kd">delete</span> <span class="s2">"</span><span class="nv">%registryPath%</span><span class="s2">"</span> <span class="na">/v </span><span class="kd">ProxyHost</span> <span class="na">/f </span><span class="m">2</span><span class="o">&gt;</span><span class="kr">nul</span>
+<span class="nb">echo</span> 代理已关闭。
+</code></pre></div></div>
 
 
         </article>
@@ -422,6 +442,104 @@
             
                 
                     
+                        
+                        <h2 id="similar_posts">相似文章</h2>
+                        <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2025/03/07/htaccess/">备忘录 htaccess进一步完善
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2025/02/13/ssl-cert-cf-kv/">备忘录 证书与CF Workers KV Storage
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2025/02/08/serv00-htaccess/">备忘录 静态博客搬家遇到的一些问题
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2024/12/17/gcore-acme-set/">备忘录 自动化申请证书并部署到Gcore
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2024/12/17/gcore-self-signed-ca/">备忘录 Gcore 信任自签发CA证书
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
                 
             
         
@@ -446,68 +564,18 @@
                 
             
         
-            
-            
-                
-                    
-                
-            
         
-            
-            
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-            
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-            
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-            
-        
+            </ul>
         
 
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/blog/2023/08/10/git-ignore-ssl-cert-err/">备忘录 Git 忽略SSL证书检查</a></p>
+        <p><strong>上一篇</strong> <a href="/blog/2025/03/07/htaccess/">备忘录 htaccess进一步完善</a></p>
         
     </div>
     <div class="nex">
 
-        
-        <p><strong>下一篇</strong> <a href="/blog/2023/11/29/how-explorer-knows-the-website-support-http3/">浏览器是怎样访问支持HTTP3协议的网站的？</a></p>
         
     </div>
 </div>
@@ -532,6 +600,8 @@
                     内容
                 </div>
                 <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#similar_posts">相似文章</a></li>
                     
                     <!-- <li><a href="#comments">评论</a></li> -->
                 </ul>

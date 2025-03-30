@@ -5,9 +5,26 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 30 Mar 2025 12:27:42 +0800</pubDate>
-    <lastBuildDate>Sun, 30 Mar 2025 12:27:42 +0800</lastBuildDate>
+    <pubDate>Sun, 30 Mar 2025 12:46:02 +0800</pubDate>
+    <lastBuildDate>Sun, 30 Mar 2025 12:46:02 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>备忘录 Putty 密钥+代理的自动设置</title>
+        <description>本文是&lt;a href=&quot;/blog/2018/12/09/putty/&quot;&gt;Putty 免密自动登录设置&lt;/a&gt;这篇文章的补充。&lt;br /&gt;
+附加需求有两个，即使用指定密钥登录而不是密码登录，以及设置代理。
+</description>
+        <pubDate>Tue, 18 Mar 2025 11:30:01 +0800</pubDate>
+        <pubDateFormat>2025-03-18</pubDateFormat>
+        <link>https://nicelee.top/blog/2025/03/18/putty-2/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2025/03/18/putty-2/</guid>
+        
+        <category>知识库</category>
+        
+        
+        <category>小技巧</category>
+        
+      </item>
     
       <item>
         <title>备忘录 htaccess进一步完善</title>
@@ -171,28 +188,6 @@
         <guid isPermaLink="true">https://nicelee.top/blog/2024/11/03/svg-with-fonts/</guid>
         
         <category>Windows</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>备忘录 MTU设置错误导致TCP连接异常</title>
-        <description>背景：有一台公益机器，以前运行一切正常。但是母鸡的服主是个爱折腾的人，经常搞些配置调优什么的。
-突然某一天，HTTP服务失联了。排查了半天，22、80、443端口全都能TCP ping通，SSH也能连接上，但是网页就是访问不了。&lt;br /&gt;
-然后，偶然发现使用HTTP访问443端口能出现nginx报错的页面。&lt;br /&gt;
-以及，在SSH操作过程中，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cat&lt;/code&gt;显示文件信息或者&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vi&lt;/code&gt;进行修改都会使得整个SSH链接“宕机”，只能关闭重来。&lt;br /&gt;
-但使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tail&lt;/code&gt;命令就还好。&lt;br /&gt;
-搜索试了一下，解决了问题（用break不太妥当，尊重事实就不在事后修改了）。&lt;br /&gt;
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ssh break when using cat or vi&lt;/code&gt;
-</description>
-        <pubDate>Fri, 25 Oct 2024 09:59:01 +0800</pubDate>
-        <pubDateFormat>2024-10-25</pubDateFormat>
-        <link>https://nicelee.top/blog/2024/10/25/mtp-wrong-size-freeze-my-tcp-connection/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2024/10/25/mtp-wrong-size-freeze-my-tcp-connection/</guid>
-        
-        <category>Linux</category>
         
         
         <category>技术学习</category>
