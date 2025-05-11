@@ -332,6 +332,77 @@
             
               <li>
                 <h2>
+                  <a class="post-link" href="/blog/2024/11/06/scripts-xor-github-up-down/" style="overflow:hidden;text-overflow:ellipsis;">脚本 简单加密文件，以及Github私密repo的附件的上传下载</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2024-11-06
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>nIceLee
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/blog/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
+    
+        <a href="/blog/tag/#Windows" title="Tag: Windows" rel="tag">Windows</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    <p>之所以是脚本，而不是其它，因为省事方便，无需依赖，一(几)行命令可以搞定。</p>
+
+<p>加密文件的思路是：使用一串Base64的字符串为Key，将它转换为二进制数据，和待加密的数据一起，对齐头部，然后逐个字节进行异或操作。<br />
+因为异或操作进行两遍还是原来的值，所以对着已加密的文件再次进行加密，就相当于解密。 <br />
+如果是文本数据，因为只改头部，所以最好进行压缩打包然后再来处理。<br />
+其它二进制文件，根据需要可以适当调整密钥长度。<br />
+如果不那么考虑数据安全的话，这应该是最快的、最具性价比的防文件扫描处理方法。</p>
+
+<p>而另一个，之所以针对Github private repo的release的附件的上传和下载，而不是在项目内容里，主要是文件大小限制的考虑。<br />
+同时如果针对项目文件的话，commit记录会一直保留，导致项目体积会不断增大，这也是不太好的。</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/blog/2024/11/06/scripts-xor-github-up-down/"><i class="fa fa-newspaper-o"></i>阅读全文</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
                   <a class="post-link" href="/blog/2024/11/04/windows-set-time-zone/" style="overflow:hidden;text-overflow:ellipsis;">Windows下通过脚本快速切换时区</a>
                 </h2>
                 <div class="label">
@@ -783,70 +854,6 @@
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/blog/2024/09/16/fail-attempts-on-cf-worker-py/" style="overflow:hidden;text-overflow:ellipsis;">使用CF Worker检测TLS证书的失败尝试(Python篇)</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2024-09-16
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>nIceLee
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/blog/tag/#python" title="Tag: python" rel="tag">python</a>&nbsp;
-    
-        <a href="/blog/tag/#cloudflare" title="Tag: cloudflare" rel="tag">cloudflare</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>事情的起因是发现Cloudflare Worker支持<code class="language-plaintext highlighter-rouge">Python</code>了，虽然还是在Beta，但就是想用来尝试点什么。<br />
-于是就想简单的检测一下证书过期时间。</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/blog/2024/09/16/fail-attempts-on-cf-worker-py/"><i class="fa fa-newspaper-o"></i>阅读全文</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 		
 
@@ -873,6 +880,8 @@
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/blog/2025/04/22/sth-about-mozilla-firefox-3/">备忘录 关于Firefox的二三事(三)</a></li>
+                    
                         <li><a href="/blog/2025/03/18/putty-2/">备忘录 Putty 密钥+代理的自动设置</a></li>
                     
                         <li><a href="/blog/2025/03/07/htaccess/">备忘录 htaccess进一步完善</a></li>
@@ -891,8 +900,6 @@
                     
                         <li><a href="/blog/2024/11/04/windows-set-time-zone/">Windows下通过脚本快速切换时区</a></li>
                     
-                        <li><a href="/blog/2024/11/03/svg-with-fonts/">备忘录 使用svg做favicon时需要注意的</a></li>
-                    
                 </ul>
             </div>
 
@@ -909,7 +916,7 @@
                             <span class="name">
                                 技术学习
                             </span>
-                            <span class="badge">188</span>
+                            <span class="badge">189</span>
                         </a>
                     </li>
                     

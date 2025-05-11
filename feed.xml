@@ -5,9 +5,25 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 30 Mar 2025 12:50:59 +0800</pubDate>
-    <lastBuildDate>Sun, 30 Mar 2025 12:50:59 +0800</lastBuildDate>
+    <pubDate>Sun, 11 May 2025 15:27:22 +0800</pubDate>
+    <lastBuildDate>Sun, 11 May 2025 15:27:22 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>备忘录 关于Firefox的二三事(三)</title>
+        <description>插件&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Firefox Multi-Account Containers&lt;/code&gt;很好用，但是也没有想象的那么好用。
+</description>
+        <pubDate>Tue, 22 Apr 2025 11:30:01 +0800</pubDate>
+        <pubDateFormat>2025-04-22</pubDateFormat>
+        <link>https://nicelee.top/blog/2025/04/22/sth-about-mozilla-firefox-3/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2025/04/22/sth-about-mozilla-firefox-3/</guid>
+        
+        <category>浏览器扩展</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
     
       <item>
         <title>备忘录 Putty 密钥+代理的自动设置</title>
@@ -175,22 +191,6 @@
         
         
         <category>小技巧</category>
-        
-      </item>
-    
-      <item>
-        <title>备忘录 使用svg做favicon时需要注意的</title>
-        <description>最开始是想把哪吒dashboard的图标换一下，没想到折腾了很久。
-</description>
-        <pubDate>Sun, 03 Nov 2024 09:59:01 +0800</pubDate>
-        <pubDateFormat>2024-11-03</pubDateFormat>
-        <link>https://nicelee.top/blog/2024/11/03/svg-with-fonts/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2024/11/03/svg-with-fonts/</guid>
-        
-        <category>Windows</category>
-        
-        
-        <category>技术学习</category>
         
       </item>
     

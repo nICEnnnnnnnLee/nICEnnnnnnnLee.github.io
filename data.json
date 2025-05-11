@@ -2,6 +2,13 @@
 	"code" : 0 ,
 	"data" : [
 	{
+		"title" : "备忘录 关于Firefox的二三事(三)",
+		"tags" : "浏览器扩展",
+		"url" : "/blog/2025/04/22/sth-about-mozilla-firefox-3/"
+		"brief" : "插件FirefoxMulti-AccountContainers很好用，但是也没有想象的那么好用。"
+	},
+    
+	{
 		"title" : "备忘录 Putty 密钥+代理的自动设置",
 		"tags" : "知识库",
 		"url" : "/blog/2025/03/18/putty-2/"
