@@ -5,9 +5,31 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 11 May 2025 15:27:22 +0800</pubDate>
-    <lastBuildDate>Sun, 11 May 2025 15:27:22 +0800</lastBuildDate>
+    <pubDate>Thu, 05 Jun 2025 20:51:51 +0800</pubDate>
+    <lastBuildDate>Thu, 05 Jun 2025 20:51:51 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>备忘录 Location Guard(PC端)快捷使用指南</title>
+        <description>&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Location Guard&lt;/code&gt;应该说是较为常见的插件，一种经典的应用场景是Google搜索然后上报位置拯救宋仲基。
+
+当我有很多隶属于不同位置的小鸡，更改位置时的一般做法是：通过关键词搜索确定大概位置，然后调整具体定位。
+
+但是的话，由于搜索api的Key是所有人共享的，有时候会遇到次数限制，这时候就只能凭感觉盲点了，非常麻烦。
+
+本文记录一种更方便的方法。
+</description>
+        <pubDate>Thu, 22 May 2025 11:30:01 +0800</pubDate>
+        <pubDateFormat>2025-05-22</pubDateFormat>
+        <link>https://nicelee.top/blog/2025/05/22/location-guard-pc-instruction/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2025/05/22/location-guard-pc-instruction/</guid>
+        
+        <category>浏览器扩展</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
     
       <item>
         <title>备忘录 关于Firefox的二三事(三)</title>
@@ -174,23 +196,6 @@
         
         
         <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>Windows下通过脚本快速切换时区</title>
-        <description>有时候，浏览器插件并不是很管用，我们需要切系统的时区。&lt;br /&gt;
-这里提供一种使用脚本切换时区的方法。
-</description>
-        <pubDate>Mon, 04 Nov 2024 09:59:01 +0800</pubDate>
-        <pubDateFormat>2024-11-04</pubDateFormat>
-        <link>https://nicelee.top/blog/2024/11/04/windows-set-time-zone/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2024/11/04/windows-set-time-zone/</guid>
-        
-        <category>Windows</category>
-        
-        
-        <category>小技巧</category>
         
       </item>
     
