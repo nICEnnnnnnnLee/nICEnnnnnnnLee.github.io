@@ -330,6 +330,141 @@
             
               <li>
                 <h2>
+                  <a class="post-link" href="/blog/2025/07/12/tencent-ssl-cert/" style="overflow:hidden;text-overflow:ellipsis;">备忘录 使用脚本通过API上传腾讯证书</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2025-07-12
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>nIceLee
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/blog/tag/#建站" title="Tag: 建站" rel="tag">建站</a>&nbsp;
+    
+        <a href="/blog/tag/#知识库" title="Tag: 知识库" rel="tag">知识库</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    <p>先讲一下心路历程。</p>
+<ul>
+  <li>
+    <p>为什么是主域名来使用腾讯的EdgeOne服务？<br />
+本来打算<code class="language-plaintext highlighter-rouge">edge.nicelee.top</code>使用腾讯服务作博客的镜像站的，也确实是这么做的。奈何完成后才发现Github Pages有些页面301跳转会直接到主站。<br />
+在腾讯这边研究了半天，好像没什么方法将返回的<code class="language-plaintext highlighter-rouge">location</code>字段的<code class="language-plaintext highlighter-rouge">host</code>替换（这点不如Fastly）。  <br />
+没奈何只能主域名了。原先的Serv00迁移到<code class="language-plaintext highlighter-rouge">ser.nicelee.top</code>。</p>
+  </li>
+  <li>
+    <p>为什么使用上传的证书，而不是系统自动申请免费证书？<br />
+腾讯云会验证CNAME，而托管到Cloudflare的域名会自动拉平，验证始终通不过，也就没法自动申请了。</p>
+  </li>
+  <li>
+    <p>如何用脚本实现API的签名校验？<br />
+参考文档<a href="https://cloud.tencent.com/document/product/400/41661">签名方法 v3</a> <br />
+参考<a href="https://github.com/TencentCloud/signature-process-demo/blob/main/signature-v3/bash/signv3.sh">demo</a></p>
+  </li>
+  <li>
+    <p>错误提示：当前为白名单功能，非白名单用户无法使用该功能，请联系SSL证书特殊处理<br />
+这个使用的是API <a href="https://cloud.tencent.com/document/product/400/119791">更新证书内容（证书ID不变）并更新关联的云资源</a>。<br />
+根据工单，这个接口UploadUpdateCertificateInstance目前只能更新CLB资源，建议使用接口UpdateCertificateInstance去更新证书。<br />
+详情可参考<a href="https://cloud.tencent.com/document/product/400/91649">一键更新新旧证书资源</a>。</p>
+  </li>
+  <li>
+    <p>新生成的证书每次证书ID都在变化，那么该如何获取呢？<br />
+通过查询近三个月内的<a href="https://cloud.tencent.com/document/product/400/41672">获取证书操作日志</a>，找到最新的<code class="language-plaintext highlighter-rouge">uploadFromYunAPI</code>操作，就能找到<code class="language-plaintext highlighter-rouge">CertId</code>。<br />
+如果有多个证书，你可以为每个证书分配不同权限，匹配<code class="language-plaintext highlighter-rouge">SubAccountUin</code>即可。<br />
+举例如下：</p>
+  </li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">json_output</span><span class="o">=</span><span class="s1">'
+{
+  "Response": {
+    "AllTotal": 3,
+    "TotalCount": 3,
+    "OperateLogs": [
+      {
+        "Action": "用户[uin: 10001] 上传 证书[id: foo1]",
+        "CreatedOn": "2025-07-12 18:18:18",
+        "Uin": "10001",
+        "SubAccountUin": "10001",
+        "CertId": "foo1",
+        "Type": "uploadFromYunAPI"
+      },
+      {
+        "Action": "用户[uin: 10001]  证书[id: foo0]",
+        "CreatedOn": "2025-07-12 18:18:18",
+        "Uin": "10001",
+        "SubAccountUin": "10001",
+        "CertId": "foo0",
+        "Type": "ignoreExpiringNotice-1"
+      },
+      {
+        "Action": "用户[uin: 10001] 上传 证书[id: foo0]",
+        "CreatedOn": "2025-07-12 16:16:16",
+        "Uin": "10001",
+        "SubAccountUin": "10001",
+        "CertId": "foo0",
+        "Type": "uploadFromYunAPI"
+      }
+    ],
+    "RequestId": "xxx-xxx-xxx-xxx"
+  }
+}'</span>
+
+<span class="nv">latest_cert_id</span><span class="o">=</span><span class="si">$(</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$json_output</span><span class="s2">"</span> | <span class="se">\</span>
+  jq <span class="nt">-r</span> <span class="s1">'.Response.OperateLogs |
+    map(select(.Type == "uploadFromYunAPI")) |
+    sort_by(.CreatedOn) |
+    last |
+    .CertId'</span>
+<span class="si">)</span>
+</code></pre></div></div>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/blog/2025/07/12/tencent-ssl-cert/"><i class="fa fa-newspaper-o"></i>阅读全文</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
                   <a class="post-link" href="/blog/2025/07/12/mirror-compare/" style="overflow:hidden;text-overflow:ellipsis;">本博客镜像TCP ping速度比较</a>
                 </h2>
                 <div class="label">
@@ -770,68 +905,6 @@
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/blog/2024/12/17/gcore-acme-set/" style="overflow:hidden;text-overflow:ellipsis;">备忘录 自动化申请证书并部署到Gcore</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2024-12-17
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>nIceLee
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/blog/category/#小技巧" title="Category: 小技巧" rel="category">小技巧</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/blog/tag/#知识库" title="Tag: 知识库" rel="tag">知识库</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    <p>Gcore CDN在边缘服务器上部署的证书是单/多域名的，这对应于你在CDN部署的域名。 <br />
-但是有时候，我并不想让别人知道某些域名的具体情况，这时候只能自己申请通配符证书，然后替换了。<br />
-既然如此，那么好像也没必要用自签名的证书了，在源端自动化申请部署一条龙服务。</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/blog/2024/12/17/gcore-acme-set/"><i class="fa fa-newspaper-o"></i>阅读全文</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 		
 
@@ -858,6 +931,8 @@
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/blog/2025/07/12/tencent-ssl-cert/">备忘录 使用脚本通过API上传腾讯证书</a></li>
+                    
                         <li><a href="/blog/2025/07/12/mirror-compare/">本博客镜像TCP ping速度比较</a></li>
                     
                         <li><a href="/blog/2025/05/22/location-guard-pc-instruction/">备忘录 Location Guard(PC端)快捷使用指南</a></li>
@@ -876,8 +951,6 @@
                     
                         <li><a href="/blog/2024/12/17/gcore-self-signed-ca/">备忘录 Gcore 信任自签发CA证书</a></li>
                     
-                        <li><a href="/blog/2024/11/30/notify-ssh-login/">备忘录 VPS登录推送</a></li>
-                    
                 </ul>
             </div>
 
@@ -894,7 +967,7 @@
                             <span class="name">
                                 技术学习
                             </span>
-                            <span class="badge">190</span>
+                            <span class="badge">191</span>
                         </a>
                     </li>
                     
@@ -1049,7 +1122,7 @@
                       
                       
                       
-                      <a href="/blog/tag/#建站" style="font-size: 9.5pt; color: #888;">建站</a>
+                      <a href="/blog/tag/#建站" style="font-size: 10pt; color: #888;">建站</a>
                     
                       
                       

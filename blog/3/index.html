@@ -332,6 +332,69 @@
             
               <li>
                 <h2>
+                  <a class="post-link" href="/blog/2024/10/05/cf-access-policy/" style="overflow:hidden;text-overflow:ellipsis;">备忘录 使用CF Access管理Pages等受控页面的访问(未绑卡)</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2024-10-05
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>nIceLee
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/blog/tag/#cloudflare" title="Tag: cloudflare" rel="tag">cloudflare</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    <p>一般情况下，启用Access Policy能够控制<code class="language-plaintext highlighter-rouge">abc.pages.dev</code>的域名的请求访问，在浏览器进行访问时会需要指定的邮箱验证。<br />
+<img src="/sources/archive/2024/10/pages.png" alt="" /><br />
+但是，想把它应用到自定义的域名上，就需要在Zero Trust里面进行配置。这个步骤需要绑卡。<br />
+我们可以想办法绕过它。</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/blog/2024/10/05/cf-access-policy/"><i class="fa fa-newspaper-o"></i>阅读全文</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
                   <a class="post-link" href="/blog/2024/09/27/sth-about-mozilla-firefox-2/" style="overflow:hidden;text-overflow:ellipsis;">备忘录 关于Firefox的二三事(二)</a>
                 </h2>
                 <div class="label">
@@ -784,69 +847,6 @@
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/blog/2024/07/29/wechat-push/" style="overflow:hidden;text-overflow:ellipsis;">【资源】通过注册微信公众测试号推送消息</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2024-07-29
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>nIceLee
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/blog/category/#工具与资源" title="Category: 工具与资源" rel="category">工具与资源</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/blog/tag/#微信" title="Tag: 微信" rel="tag">微信</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>想要通过API来给自己推送消息的方法有过很多，比如server酱、pushplus等。
-但是初始阶段的用爱发电之后(或者说推广策略？)，又是实名认证又是进一步限额免费等等，往往糟心事蛮多的。<br />
-现在，算是有了替代方案，不需要注册公众号，只需要通过微信注册测试号即可。</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/blog/2024/07/29/wechat-push/"><i class="fa fa-newspaper-o"></i>阅读全文</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 		
 
@@ -873,6 +873,8 @@
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/blog/2025/07/12/tencent-ssl-cert/">备忘录 使用脚本通过API上传腾讯证书</a></li>
+                    
                         <li><a href="/blog/2025/07/12/mirror-compare/">本博客镜像TCP ping速度比较</a></li>
                     
                         <li><a href="/blog/2025/05/22/location-guard-pc-instruction/">备忘录 Location Guard(PC端)快捷使用指南</a></li>
@@ -891,8 +893,6 @@
                     
                         <li><a href="/blog/2024/12/17/gcore-self-signed-ca/">备忘录 Gcore 信任自签发CA证书</a></li>
                     
-                        <li><a href="/blog/2024/11/30/notify-ssh-login/">备忘录 VPS登录推送</a></li>
-                    
                 </ul>
             </div>
 
@@ -909,7 +909,7 @@
                             <span class="name">
                                 技术学习
                             </span>
-                            <span class="badge">190</span>
+                            <span class="badge">191</span>
                         </a>
                     </li>
                     
@@ -1064,7 +1064,7 @@
                       
                       
                       
-                      <a href="/blog/tag/#建站" style="font-size: 9.5pt; color: #888;">建站</a>
+                      <a href="/blog/tag/#建站" style="font-size: 10pt; color: #888;">建站</a>
                     
                       
                       

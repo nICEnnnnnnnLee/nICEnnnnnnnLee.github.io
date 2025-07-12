@@ -331,6 +331,52 @@
                 <time>
                 2025-07-12 Sat.
                 </time>
+                <a class="title" href="/blog/2025/07/12/tencent-ssl-cert/">备忘录 使用脚本通过API上传腾讯证书</a>
+				<brief style="display:none">先讲一下心路历程。      为什么是主域名来使用腾讯的EdgeOne服务？本来打算edge.nicelee.top使用腾讯服务作博客的镜像站的，也确实是这么做的。奈何完成后才发现Github Pages有些页面301跳转会直接到主站。在腾讯这边研究了半天，好像没什么方法将返回的location字段的host替换（这点不如Fastly）。  没奈何只能主域名了。原先的Serv00迁移到ser.nicelee.top。        为什么使用上传的证书，而不是系统自动申请免费证书？腾讯云会验证CNAME，而托管到Cloudflare的域名会自动拉平，验证始终通不过，也就没法自动申请了。        如何用脚本实现API的签名校验？参考文档签名方法 v3 参考demo        错误提示：当前为白名单功能，非白名单用户无法使用该功能，请联系SSL证书特殊处理这个使用的是API 更新证书内容（证书ID不变）并更新关联的云资源。根据工单，这个接口UploadUpdateCertificateInstance目前只能更新CLB资源，建议使用接口UpdateCertificateInstance去更新证书。详情可参考一键更新新旧证书资源。        新生成的证书每次证书ID都在变化，那么该如何获取呢？通过查询近三个月内的获取证书操作日志，找到最新的uploadFromYunAPI操作，就能找到CertId。如果有多个证书，你可以为每个证书分配不同权限，匹配SubAccountUin即可。举例如下：  json_output='{  &quot;Response&quot;: {    &quot;AllTotal&quot;: 3,    &quot;TotalCount&quot;: 3,    &quot;OperateLogs&quot;: [      {        &quot;Action&quot;: &quot;用户[uin: 10001] 上传 证书[id: foo1]&quot;,        &quot;CreatedOn&quot;: &quot;2025-07-12 18:18:18&quot;,        &quot;Uin&quot;: &quot;10001&quot;,        &quot;SubAccountUin&quot;: &quot;10001&quot;,        &quot;CertId&quot;: &quot;foo1&quot;,        &quot;Type&quot;: &quot;uploadFromYunAPI&quot;      },      {        &quot;Action&quot;: &quot;用户[uin: 10001]  证书[id: foo0]&quot;,        &quot;CreatedOn&quot;: &quot;2025-07-12 18:18:18&quot;,        &quot;Uin&quot;: &quot;10001&quot;,        &quot;SubAccountUin&quot;: &quot;10001&quot;,        &quot;CertId&quot;: &quot;foo0&quot;,        &quot;Type&quot;: &quot;ignoreExpiringNotice-1&quot;      },      {        &quot;Action&quot;: &quot;用户[uin: 10001] 上传 证书[id: foo0]&quot;,        &quot;CreatedOn&quot;: &quot;2025-07-12 16:16:16&quot;,        &quot;Uin&quot;: &quot;10001&quot;,        &quot;SubAccountUin&quot;: &quot;10001&quot;,        &quot;CertId&quot;: &quot;foo0&quot;,        &quot;Type&quot;: &quot;uploadFromYunAPI&quot;      }    ],    &quot;RequestId&quot;: &quot;xxx-xxx-xxx-xxx&quot;  }}'latest_cert_id=$(echo &quot;$json_output&quot; | \  jq -r '.Response.OperateLogs |    map(select(.Type == &quot;uploadFromYunAPI&quot;)) |    sort_by(.CreatedOn) |    last |    .CertId')</brief>
+                
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/blog/tag/#建站" title="Tag: 建站" rel="tag">建站</a>&nbsp;
+    
+        <a href="/blog/tag/#知识库" title="Tag: 知识库" rel="tag">知识库</a>
+    
+  
+
+</span>
+
+            </li>
+
+          
+
+            
+              
+              
+              
+            
+
+            <li>
+                <time>
+                2025-07-12 Sat.
+                </time>
                 <a class="title" href="/blog/2025/07/12/mirror-compare/">本博客镜像TCP ping速度比较</a>
 				<brief style="display:none">闲得蛋疼搞了很多镜像，通过itdog的TCP ping的方式简陋的比较了一下接入速度。测试时间在2025-07-12 21:20左右，应该算是接近晚高峰了吧？另外ItDog保存的图接近9M且比较长，不好展示，干脆截个图意思意思就算了。理论上比较有说服力的应该是多次HTTP ping取平均，没这条件只能将就一下。  nicelee.top使用了腾讯EdgeOne的服务（全球可用区不含大陆），首次访问都需要拉取Github Pages，有缓存。  blog.nicelee.top采用Vercel的静态托管服务，每次push会触发构建，不需要拉取Github Pages。  oh-my-blog.nicelee.top采用Netlify的静态托管服务，每次push会触发构建，不需要拉取Github Pages。  fastly.nicelee.top使用了Fastly的CDN服务。  ser.nicelee.top使用了Serv00的服务，每次push会在Github生成相应静态文件，通过webhook的方式进行拉取同步。</brief>
                 
@@ -12200,7 +12246,12 @@
                           
                           
                           
-                            <li><a data-scroll href="#y2025">2025 (7)</a></li>
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="#y2025">2025 (8)</a></li>
                             
                           
                         

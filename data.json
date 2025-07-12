@@ -2,6 +2,13 @@
 	"code" : 0 ,
 	"data" : [
 	{
+		"title" : "备忘录 使用脚本通过API上传腾讯证书",
+		"tags" : "建站_知识库",
+		"url" : "/blog/2025/07/12/tencent-ssl-cert/"
+		"brief" : "先讲一下心路历程。为什么是主域名来使用腾讯的EdgeOne服务？本来打算edge.nicelee.top使用腾讯服务作博客的镜像站的，也确实是这么做的。奈何完成后才发现GithubPages有些页面301跳转会直接到主站。在腾讯这边研究了半天，好像没什么方法将返回的location字段的host替换（这点不如Fastly）。没奈何只能主域名了。原先的Serv00迁移到ser.nicelee.top。为什么使用上传的证书，而不是系统自动申请免费证书？腾讯云会验证CNAME，而托管到Cloudflare的域名会自动拉平，验证始终通不过，也就没法自动申请了。如何用脚本实现API的签名校验？参考文档签名方法v3参考demo错误提示：当前为白名单功能，非白名单用户无法使用该功能，请联系SSL证书特殊处理这个使用的是API更新证书内容（证书ID不变）并更新关联的云资源。根据工单，这个接口UploadUpdateCertificateInstance目前只能更新CLB资源，建议使用接口UpdateCertificateInstance去更新证书。详情可参考一键更新新旧证书资源。新生成的证书每次证书ID都在变化，那么该如何获取呢？通过查询近三个月内的获取证书操作日志，找到最新的uploadFromYunAPI操作，就能找到CertId。如果有多个证书，你可以为每个证书分配不同权限，匹配SubAccountUin即可。举例如下：json_output='{Response:{AllTotal:3,TotalCount:3,OperateLogs:[{Action:用户[uin:10001]上传证书[id:foo1],CreatedOn:2025-07-1218:18:18,Uin:10001,SubAccountUin:10001,CertId:foo1,Type:uploadFromYunAPI},{Action:用户[uin:10001]证书[id:foo0],CreatedOn:2025-07-1218:18:18,Uin:10001,SubAccountUin:10001,CertId:foo0,Type:ignoreExpiringNotice-1},{Action:用户[uin:10001]上传证书[id:foo0],CreatedOn:2025-07-1216:16:16,Uin:10001,SubAccountUin:10001,CertId:foo0,Type:uploadFromYunAPI}],RequestId:xxx-xxx-xxx-xxx}}'latest_cert_id=$(echo$json_output|\jq-r'.Response.OperateLogs|map(select(.Type==uploadFromYunAPI))|sort_by(.CreatedOn)|last|.CertId')"
+	},
+    
+	{
 		"title" : "本博客镜像TCP ping速度比较",
 		"tags" : "建站",
 		"url" : "/blog/2025/07/12/mirror-compare/"

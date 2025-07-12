@@ -5,9 +5,100 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 12 Jul 2025 21:53:04 +0800</pubDate>
-    <lastBuildDate>Sat, 12 Jul 2025 21:53:04 +0800</lastBuildDate>
+    <pubDate>Sat, 12 Jul 2025 22:42:43 +0800</pubDate>
+    <lastBuildDate>Sat, 12 Jul 2025 22:42:43 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>备忘录 使用脚本通过API上传腾讯证书</title>
+        <description>先讲一下心路历程。
+&lt;ul&gt;
+  &lt;li&gt;
+    为什么是主域名来使用腾讯的EdgeOne服务？&lt;br /&gt;
+本来打算&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;edge.nicelee.top&lt;/code&gt;使用腾讯服务作博客的镜像站的，也确实是这么做的。奈何完成后才发现Github Pages有些页面301跳转会直接到主站。&lt;br /&gt;
+在腾讯这边研究了半天，好像没什么方法将返回的&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;location&lt;/code&gt;字段的&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;host&lt;/code&gt;替换（这点不如Fastly）。  &lt;br /&gt;
+没奈何只能主域名了。原先的Serv00迁移到&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ser.nicelee.top&lt;/code&gt;。
+  &lt;/li&gt;
+  &lt;li&gt;
+    为什么使用上传的证书，而不是系统自动申请免费证书？&lt;br /&gt;
+腾讯云会验证CNAME，而托管到Cloudflare的域名会自动拉平，验证始终通不过，也就没法自动申请了。
+  &lt;/li&gt;
+  &lt;li&gt;
+    如何用脚本实现API的签名校验？&lt;br /&gt;
+参考文档&lt;a href=&quot;https://cloud.tencent.com/document/product/400/41661&quot;&gt;签名方法 v3&lt;/a&gt; &lt;br /&gt;
+参考&lt;a href=&quot;https://github.com/TencentCloud/signature-process-demo/blob/main/signature-v3/bash/signv3.sh&quot;&gt;demo&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    错误提示：当前为白名单功能，非白名单用户无法使用该功能，请联系SSL证书特殊处理&lt;br /&gt;
+这个使用的是API &lt;a href=&quot;https://cloud.tencent.com/document/product/400/119791&quot;&gt;更新证书内容（证书ID不变）并更新关联的云资源&lt;/a&gt;。&lt;br /&gt;
+根据工单，这个接口UploadUpdateCertificateInstance目前只能更新CLB资源，建议使用接口UpdateCertificateInstance去更新证书。&lt;br /&gt;
+详情可参考&lt;a href=&quot;https://cloud.tencent.com/document/product/400/91649&quot;&gt;一键更新新旧证书资源&lt;/a&gt;。
+  &lt;/li&gt;
+  &lt;li&gt;
+    新生成的证书每次证书ID都在变化，那么该如何获取呢？&lt;br /&gt;
+通过查询近三个月内的&lt;a href=&quot;https://cloud.tencent.com/document/product/400/41672&quot;&gt;获取证书操作日志&lt;/a&gt;，找到最新的&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;uploadFromYunAPI&lt;/code&gt;操作，就能找到&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CertId&lt;/code&gt;。&lt;br /&gt;
+如果有多个证书，你可以为每个证书分配不同权限，匹配&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SubAccountUin&lt;/code&gt;即可。&lt;br /&gt;
+举例如下：
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;json_output&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'
+{
+  &quot;Response&quot;: {
+    &quot;AllTotal&quot;: 3,
+    &quot;TotalCount&quot;: 3,
+    &quot;OperateLogs&quot;: [
+      {
+        &quot;Action&quot;: &quot;用户[uin: 10001] 上传 证书[id: foo1]&quot;,
+        &quot;CreatedOn&quot;: &quot;2025-07-12 18:18:18&quot;,
+        &quot;Uin&quot;: &quot;10001&quot;,
+        &quot;SubAccountUin&quot;: &quot;10001&quot;,
+        &quot;CertId&quot;: &quot;foo1&quot;,
+        &quot;Type&quot;: &quot;uploadFromYunAPI&quot;
+      },
+      {
+        &quot;Action&quot;: &quot;用户[uin: 10001]  证书[id: foo0]&quot;,
+        &quot;CreatedOn&quot;: &quot;2025-07-12 18:18:18&quot;,
+        &quot;Uin&quot;: &quot;10001&quot;,
+        &quot;SubAccountUin&quot;: &quot;10001&quot;,
+        &quot;CertId&quot;: &quot;foo0&quot;,
+        &quot;Type&quot;: &quot;ignoreExpiringNotice-1&quot;
+      },
+      {
+        &quot;Action&quot;: &quot;用户[uin: 10001] 上传 证书[id: foo0]&quot;,
+        &quot;CreatedOn&quot;: &quot;2025-07-12 16:16:16&quot;,
+        &quot;Uin&quot;: &quot;10001&quot;,
+        &quot;SubAccountUin&quot;: &quot;10001&quot;,
+        &quot;CertId&quot;: &quot;foo0&quot;,
+        &quot;Type&quot;: &quot;uploadFromYunAPI&quot;
+      }
+    ],
+    &quot;RequestId&quot;: &quot;xxx-xxx-xxx-xxx&quot;
+  }
+}'&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;latest_cert_id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$json_output&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; | &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  jq &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'.Response.OperateLogs |
+    map(select(.Type == &quot;uploadFromYunAPI&quot;)) |
+    sort_by(.CreatedOn) |
+    last |
+    .CertId'&lt;/span&gt;
+&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Sat, 12 Jul 2025 21:30:01 +0800</pubDate>
+        <pubDateFormat>2025-07-12</pubDateFormat>
+        <link>https://nicelee.top/blog/2025/07/12/tencent-ssl-cert/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2025/07/12/tencent-ssl-cert/</guid>
+        
+        <category>建站</category>
+        
+        <category>知识库</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
     
       <item>
         <title>本博客镜像TCP ping速度比较</title>
@@ -177,24 +268,6 @@
         
         
         <category>小技巧</category>
-        
-      </item>
-    
-      <item>
-        <title>备忘录 VPS登录推送</title>
-        <description>目的是在VPS登录SSH时，通过curl推送信息。
-</description>
-        <pubDate>Sat, 30 Nov 2024 09:59:01 +0800</pubDate>
-        <pubDateFormat>2024-11-30</pubDateFormat>
-        <link>https://nicelee.top/blog/2024/11/30/notify-ssh-login/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2024/11/30/notify-ssh-login/</guid>
-        
-        <category>Linux</category>
-        
-        <category>VPS</category>
-        
-        
-        <category>技术学习</category>
         
       </item>
     
