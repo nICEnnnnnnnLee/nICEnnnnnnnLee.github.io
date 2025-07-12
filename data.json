@@ -2,6 +2,13 @@
 	"code" : 0 ,
 	"data" : [
 	{
+		"title" : "本博客镜像TCP ping速度比较",
+		"tags" : "建站",
+		"url" : "/blog/2025/07/12/mirror-compare/"
+		"brief" : "闲得蛋疼搞了很多镜像，通过itdog的TCPping的方式简陋的比较了一下接入速度。测试时间在2025-07-1221:20左右，应该算是接近晚高峰了吧？另外ItDog保存的图接近9M且比较长，不好展示，干脆截个图意思意思就算了。理论上比较有说服力的应该是多次HTTPping取平均，没这条件只能将就一下。nicelee.top使用了腾讯EdgeOne的服务（全球可用区不含大陆），首次访问都需要拉取GithubPages，有缓存。blog.nicelee.top采用Vercel的静态托管服务，每次push会触发构建，不需要拉取GithubPages。oh-my-blog.nicelee.top采用Netlify的静态托管服务，每次push会触发构建，不需要拉取GithubPages。fastly.nicelee.top使用了Fastly的CDN服务。ser.nicelee.top使用了Serv00的服务，每次push会在Github生成相应静态文件，通过webhook的方式进行拉取同步。"
+	},
+    
+	{
 		"title" : "备忘录 Location Guard(PC端)快捷使用指南",
 		"tags" : "浏览器扩展",
 		"url" : "/blog/2025/05/22/location-guard-pc-instruction/"

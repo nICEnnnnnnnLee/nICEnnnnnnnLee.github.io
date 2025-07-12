@@ -5,9 +5,35 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 05 Jun 2025 21:42:10 +0800</pubDate>
-    <lastBuildDate>Thu, 05 Jun 2025 21:42:10 +0800</lastBuildDate>
+    <pubDate>Sat, 12 Jul 2025 21:53:04 +0800</pubDate>
+    <lastBuildDate>Sat, 12 Jul 2025 21:53:04 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>本博客镜像TCP ping速度比较</title>
+        <description>闲得蛋疼搞了很多镜像，通过itdog的TCP ping的方式简陋的比较了一下接入速度。&lt;br /&gt;
+测试时间在&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;2025-07-12 21:20&lt;/code&gt;左右，应该算是接近晚高峰了吧？另外ItDog保存的图接近9M且比较长，不好展示，干脆截个图意思意思就算了。&lt;br /&gt;
+理论上比较有说服力的应该是多次HTTP ping取平均，没这条件只能将就一下。
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://nicelee.top&quot;&gt;nicelee.top&lt;/a&gt;使用了腾讯EdgeOne的服务（全球可用区不含大陆），首次访问都需要拉取Github Pages，有缓存。&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://blog.nicelee.top&quot;&gt;blog.nicelee.top&lt;/a&gt;采用Vercel的静态托管服务，每次push会触发构建，不需要拉取Github Pages。&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://oh-my-blog.nicelee.top&quot;&gt;oh-my-blog.nicelee.top&lt;/a&gt;采用Netlify的静态托管服务，每次push会触发构建，不需要拉取Github Pages。&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://nicelee.top&quot;&gt;fastly.nicelee.top&lt;/a&gt;使用了Fastly的CDN服务。&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ser.nicelee.top&quot;&gt;ser.nicelee.top&lt;/a&gt;使用了Serv00的服务，每次push会在Github生成相应静态文件，通过webhook的方式进行拉取同步。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sat, 12 Jul 2025 21:25:01 +0800</pubDate>
+        <pubDateFormat>2025-07-12</pubDateFormat>
+        <link>https://nicelee.top/blog/2025/07/12/mirror-compare/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2025/07/12/mirror-compare/</guid>
+        
+        <category>建站</category>
+        
+        
+        <category>杂七杂八</category>
+        
+      </item>
     
       <item>
         <title>备忘录 Location Guard(PC端)快捷使用指南</title>
@@ -166,33 +192,6 @@
         <category>Linux</category>
         
         <category>VPS</category>
-        
-        
-        <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>脚本 简单加密文件，以及Github私密repo的附件的上传下载</title>
-        <description>之所以是脚本，而不是其它，因为省事方便，无需依赖，一(几)行命令可以搞定。
-
-加密文件的思路是：使用一串Base64的字符串为Key，将它转换为二进制数据，和待加密的数据一起，对齐头部，然后逐个字节进行异或操作。&lt;br /&gt;
-因为异或操作进行两遍还是原来的值，所以对着已加密的文件再次进行加密，就相当于解密。 &lt;br /&gt;
-如果是文本数据，因为只改头部，所以最好进行压缩打包然后再来处理。&lt;br /&gt;
-其它二进制文件，根据需要可以适当调整密钥长度。&lt;br /&gt;
-如果不那么考虑数据安全的话，这应该是最快的、最具性价比的防文件扫描处理方法。
-
-而另一个，之所以针对Github private repo的release的附件的上传和下载，而不是在项目内容里，主要是文件大小限制的考虑。&lt;br /&gt;
-同时如果针对项目文件的话，commit记录会一直保留，导致项目体积会不断增大，这也是不太好的。
-</description>
-        <pubDate>Wed, 06 Nov 2024 09:59:01 +0800</pubDate>
-        <pubDateFormat>2024-11-06</pubDateFormat>
-        <link>https://nicelee.top/blog/2024/11/06/scripts-xor-github-up-down/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2024/11/06/scripts-xor-github-up-down/</guid>
-        
-        <category>Linux</category>
-        
-        <category>Windows</category>
         
         
         <category>技术学习</category>
