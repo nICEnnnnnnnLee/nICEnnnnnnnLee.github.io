@@ -5,9 +5,27 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 20 Jul 2025 20:04:23 +0800</pubDate>
-    <lastBuildDate>Sun, 20 Jul 2025 20:04:23 +0800</lastBuildDate>
+    <pubDate>Sun, 20 Jul 2025 20:33:36 +0800</pubDate>
+    <lastBuildDate>Sun, 20 Jul 2025 20:33:36 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>不吐不快的吐槽</title>
+        <description>不当人的生物越来越多了。 &lt;br /&gt;
+始作俑者，其无后乎。&lt;br /&gt;
+很多事情退一步越想越气啊啊啊啊，，，
+</description>
+        <pubDate>Sun, 20 Jul 2025 19:35:01 +0800</pubDate>
+        <pubDateFormat>2025-07-20</pubDateFormat>
+        <link>https://nicelee.top/blog/2025/07/20/complains/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2025/07/20/complains/</guid>
+        
+        <category>生活</category>
+        
+        
+        <category>杂七杂八</category>
+        
+      </item>
     
       <item>
         <title>本博客镜像HTTP ping速度比较</title>
@@ -243,24 +261,6 @@
         <pubDateFormat>2025-02-08</pubDateFormat>
         <link>https://nicelee.top/blog/2025/02/08/serv00-htaccess/</link>
         <guid isPermaLink="true">https://nicelee.top/blog/2025/02/08/serv00-htaccess/</guid>
-        
-        <category>知识库</category>
-        
-        
-        <category>小技巧</category>
-        
-      </item>
-    
-      <item>
-        <title>备忘录 自动化申请证书并部署到Gcore</title>
-        <description>Gcore CDN在边缘服务器上部署的证书是单/多域名的，这对应于你在CDN部署的域名。 &lt;br /&gt;
-但是有时候，我并不想让别人知道某些域名的具体情况，这时候只能自己申请通配符证书，然后替换了。&lt;br /&gt;
-既然如此，那么好像也没必要用自签名的证书了，在源端自动化申请部署一条龙服务。
-</description>
-        <pubDate>Tue, 17 Dec 2024 12:30:01 +0800</pubDate>
-        <pubDateFormat>2024-12-17</pubDateFormat>
-        <link>https://nicelee.top/blog/2024/12/17/gcore-acme-set/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2024/12/17/gcore-acme-set/</guid>
         
         <category>知识库</category>
         

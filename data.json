@@ -2,6 +2,13 @@
 	"code" : 0 ,
 	"data" : [
 	{
+		"title" : "不吐不快的吐槽",
+		"tags" : "生活",
+		"url" : "/blog/2025/07/20/complains/"
+		"brief" : "不当人的生物越来越多了。始作俑者，其无后乎。很多事情退一步越想越气啊啊啊啊，，，"
+	},
+    
+	{
 		"title" : "本博客镜像HTTP ping速度比较",
 		"tags" : "建站",
 		"url" : "/blog/2025/07/20/mirror-compare-http/"

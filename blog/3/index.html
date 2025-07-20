@@ -307,6 +307,8 @@
                     
                 
                     
+                
+                    
                 				
 				
             </ul>
@@ -329,6 +331,72 @@
 		</div>
 		<hr>	
         <ul>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/blog/2024/10/25/mtp-wrong-size-freeze-my-tcp-connection/" style="overflow:hidden;text-overflow:ellipsis;">备忘录 MTU设置错误导致TCP连接异常</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2024-10-25
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>nIceLee
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/blog/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    <p>背景：有一台公益机器，以前运行一切正常。但是母鸡的服主是个爱折腾的人，经常搞些配置调优什么的。
+突然某一天，HTTP服务失联了。排查了半天，22、80、443端口全都能TCP ping通，SSH也能连接上，但是网页就是访问不了。<br />
+然后，偶然发现使用HTTP访问443端口能出现nginx报错的页面。<br />
+以及，在SSH操作过程中，<code class="language-plaintext highlighter-rouge">cat</code>显示文件信息或者<code class="language-plaintext highlighter-rouge">vi</code>进行修改都会使得整个SSH链接“宕机”，只能关闭重来。<br />
+但使用<code class="language-plaintext highlighter-rouge">tail</code>命令就还好。<br />
+搜索试了一下，解决了问题（用break不太妥当，尊重事实就不在事后修改了）。<br />
+<code class="language-plaintext highlighter-rouge">ssh break when using cat or vi</code></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/blog/2024/10/25/mtp-wrong-size-freeze-my-tcp-connection/"><i class="fa fa-newspaper-o"></i>阅读全文</a>
+                </div>
+                <hr>
+              </li>
             
               <li>
                 <h2>
@@ -785,68 +853,6 @@
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/blog/2024/08/18/fastly-mirror-github-pages/" style="overflow:hidden;text-overflow:ellipsis;">备忘录 通过fastly镜像整个Github Pages</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2024-08-18
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>nIceLee
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/blog/category/#代码片段" title="Category: 代码片段" rel="category">代码片段</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/blog/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>现存的Github Page设置CNAME域名为<code class="language-plaintext highlighter-rouge">A</code>，但是访问速度有时候不如人意。<br />
-现在的目标是，在域名<code class="language-plaintext highlighter-rouge">B</code>上提供和<code class="language-plaintext highlighter-rouge">A</code>相同的服务，在<code class="language-plaintext highlighter-rouge">A</code>连接不上时多一个选择。</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/blog/2024/08/18/fastly-mirror-github-pages/"><i class="fa fa-newspaper-o"></i>阅读全文</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 		
 
@@ -856,10 +862,10 @@
             <a href="/blog/" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/blog/2" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">3/33</span>
+          <span class="page_number ">3/34</span>
           
             <a href="/blog/4" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/blog/33" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/blog/34" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -872,6 +878,8 @@
                     最近上传
                 </div>
                 <ul class="content-ul" recent>
+                    
+                        <li><a href="/blog/2025/07/20/complains/">不吐不快的吐槽</a></li>
                     
                         <li><a href="/blog/2025/07/20/mirror-compare-http/">本博客镜像HTTP ping速度比较</a></li>
                     
@@ -890,8 +898,6 @@
                         <li><a href="/blog/2025/02/13/ssl-cert-cf-kv/">备忘录 证书与CF Workers KV Storage</a></li>
                     
                         <li><a href="/blog/2025/02/08/serv00-htaccess/">备忘录 静态博客搬家遇到的一些问题</a></li>
-                    
-                        <li><a href="/blog/2024/12/17/gcore-acme-set/">备忘录 自动化申请证书并部署到Gcore</a></li>
                     
                 </ul>
             </div>
@@ -918,7 +924,7 @@
                             <span class="name">
                                 杂七杂八
                             </span>
-                            <span class="badge">18</span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -1359,6 +1365,13 @@
                       
                       
                       <a href="/blog/tag/#微信" style="font-size: 9pt; color: #999;">微信</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/blog/tag/#生活" style="font-size: 9pt; color: #999;">生活</a>
                     
                 </div>
             </div>
