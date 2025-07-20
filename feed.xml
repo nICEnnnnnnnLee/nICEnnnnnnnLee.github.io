@@ -5,9 +5,26 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 12 Jul 2025 22:42:43 +0800</pubDate>
-    <lastBuildDate>Sat, 12 Jul 2025 22:42:43 +0800</lastBuildDate>
+    <pubDate>Sun, 20 Jul 2025 20:04:23 +0800</pubDate>
+    <lastBuildDate>Sun, 20 Jul 2025 20:04:23 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>本博客镜像HTTP ping速度比较</title>
+        <description>&lt;a href=&quot;/blog/2025/07/12/mirror-compare/&quot;&gt;前文&lt;/a&gt;通过itdog的TCP ping的方式简陋地比较了一下接入速度，现在用http ping的方式再测一遍。&lt;br /&gt;
+测试时间在北京时间&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;2025-07-20 13:25&lt;/code&gt;左右。
+</description>
+        <pubDate>Sun, 20 Jul 2025 19:25:01 +0800</pubDate>
+        <pubDateFormat>2025-07-20</pubDateFormat>
+        <link>https://nicelee.top/blog/2025/07/20/mirror-compare-http/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2025/07/20/mirror-compare-http/</guid>
+        
+        <category>建站</category>
+        
+        
+        <category>杂七杂八</category>
+        
+      </item>
     
       <item>
         <title>备忘录 使用脚本通过API上传腾讯证书</title>
@@ -244,25 +261,6 @@
         <pubDateFormat>2024-12-17</pubDateFormat>
         <link>https://nicelee.top/blog/2024/12/17/gcore-acme-set/</link>
         <guid isPermaLink="true">https://nicelee.top/blog/2024/12/17/gcore-acme-set/</guid>
-        
-        <category>知识库</category>
-        
-        
-        <category>小技巧</category>
-        
-      </item>
-    
-      <item>
-        <title>备忘录 Gcore 信任自签发CA证书</title>
-        <description>自签发证书有一个好处，可以一次签很久很久，手动操作一次后面基本上无需烦心。不需要每隔三个月一次，必须搞自动化。&lt;br /&gt;
-如何自签发证书在很久以前有过&lt;a href=&quot;/blog/2021/03/26/win-openssl-cerl/&quot;&gt;备忘录&lt;/a&gt;，不过只是记的单域名，没有通配符。&lt;br /&gt;
-这里稍微扩展一下，然后的话主要还是记载如何使Gcore信任源端的自签发证书。&lt;br /&gt;
-没有技术含量，仅作备忘。
-</description>
-        <pubDate>Tue, 17 Dec 2024 11:30:01 +0800</pubDate>
-        <pubDateFormat>2024-12-17</pubDateFormat>
-        <link>https://nicelee.top/blog/2024/12/17/gcore-self-signed-ca/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2024/12/17/gcore-self-signed-ca/</guid>
         
         <category>知识库</category>
         

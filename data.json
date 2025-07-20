@@ -2,6 +2,13 @@
 	"code" : 0 ,
 	"data" : [
 	{
+		"title" : "本博客镜像HTTP ping速度比较",
+		"tags" : "建站",
+		"url" : "/blog/2025/07/20/mirror-compare-http/"
+		"brief" : "前文通过itdog的TCPping的方式简陋地比较了一下接入速度，现在用httpping的方式再测一遍。测试时间在北京时间2025-07-2013:25左右。"
+	},
+    
+	{
 		"title" : "备忘录 使用脚本通过API上传腾讯证书",
 		"tags" : "建站_知识库",
 		"url" : "/blog/2025/07/12/tencent-ssl-cert/"
