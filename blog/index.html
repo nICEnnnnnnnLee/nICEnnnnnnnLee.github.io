@@ -332,6 +332,80 @@
             
               <li>
                 <h2>
+                  <a class="post-link" href="/blog/2025/07/24/service-worker/" style="overflow:hidden;text-overflow:ellipsis;">关于Service Worker拦截并替换域名的入门研究与简单实现</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2025-07-24
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>nIceLee
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/blog/tag/#建站" title="Tag: 建站" rel="tag">建站</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    <p>Service Worker到底是个啥东西，具体能做什么呢？<br />
+不说那些佶屈聱牙晦涩难懂的标准回答，不懂看了还是不懂。<br />
+简单说下我的看法。<br />
+它更像一个中间层middleware，可以读取注册路径下的http请求，然后根据这些请求构造回复。<br />
+那么怎么回复的呢？</p>
+<ul>
+  <li>最普遍的，直接原封不动请求，原封不动回复。</li>
+  <li>网上提及最多的，符合条件的http请求，第一次原封不动请求、原封不动回复并缓存；后续命中缓存那么直接构造回复不再有网络请求。</li>
+  <li>对http请求按需进行处理，更改请求头、url的host等。以下是两个经典运用场景：
+    <ul>
+      <li>jsProxy技术，懂的都懂。例如 <code class="language-plaintext highlighter-rouge">https://a.com/xxx/https://www.google.com</code></li>
+      <li>若A域名因为某些原因被阻断，替换为B域名穿透阻挠。例如含中国mjj数量最多的某论坛。<strong>本文研究的就是这个</strong></li>
+    </ul>
+  </li>
+</ul>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/blog/2025/07/24/service-worker/"><i class="fa fa-newspaper-o"></i>阅读全文</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
                   <a class="post-link" href="/blog/2025/07/20/complains/" style="overflow:hidden;text-overflow:ellipsis;">不吐不快的吐槽</a>
                 </h2>
                 <div class="label">
@@ -845,67 +919,6 @@
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/blog/2025/03/07/htaccess/" style="overflow:hidden;text-overflow:ellipsis;">备忘录 htaccess进一步完善</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2025-03-07
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>nIceLee
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/blog/category/#小技巧" title="Category: 小技巧" rel="category">小技巧</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/blog/tag/#知识库" title="Tag: 知识库" rel="tag">知识库</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    <p>当前出现了一个意料之外的问题：静态网站访问路径对应的是文件夹时，会列出对应的目录文件。<br />
-我们需要这样的效果：目录中存在 index.html，则允许访问；否则返回404，而不是列出目录。</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/blog/2025/03/07/htaccess/"><i class="fa fa-newspaper-o"></i>阅读全文</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 		
 
@@ -932,6 +945,8 @@
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/blog/2025/07/24/service-worker/">关于Service Worker拦截并替换域名的入门研究与简单实现</a></li>
+                    
                         <li><a href="/blog/2025/07/20/complains/">不吐不快的吐槽</a></li>
                     
                         <li><a href="/blog/2025/07/20/mirror-compare-http/">本博客镜像HTTP ping速度比较</a></li>
@@ -950,8 +965,6 @@
                     
                         <li><a href="/blog/2025/02/13/ssl-cert-cf-kv/">备忘录 证书与CF Workers KV Storage</a></li>
                     
-                        <li><a href="/blog/2025/02/08/serv00-htaccess/">备忘录 静态博客搬家遇到的一些问题</a></li>
-                    
                 </ul>
             </div>
 
@@ -968,7 +981,7 @@
                             <span class="name">
                                 技术学习
                             </span>
-                            <span class="badge">191</span>
+                            <span class="badge">192</span>
                         </a>
                     </li>
                     

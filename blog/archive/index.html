@@ -331,6 +331,50 @@
 
             <li>
                 <time>
+                2025-07-24 Thu.
+                </time>
+                <a class="title" href="/blog/2025/07/24/service-worker/">关于Service Worker拦截并替换域名的入门研究与简单实现</a>
+				<brief style="display:none">Service Worker到底是个啥东西，具体能做什么呢？不说那些佶屈聱牙晦涩难懂的标准回答，不懂看了还是不懂。简单说下我的看法。它更像一个中间层middleware，可以读取注册路径下的http请求，然后根据这些请求构造回复。那么怎么回复的呢？  最普遍的，直接原封不动请求，原封不动回复。  网上提及最多的，符合条件的http请求，第一次原封不动请求、原封不动回复并缓存；后续命中缓存那么直接构造回复不再有网络请求。  对http请求按需进行处理，更改请求头、url的host等。以下是两个经典运用场景：          jsProxy技术，懂的都懂。例如 https://a.com/xxx/https://www.google.com      若A域名因为某些原因被阻断，替换为B域名穿透阻挠。例如含中国mjj数量最多的某论坛。本文研究的就是这个      </brief>
+                
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/blog/tag/#建站" title="Tag: 建站" rel="tag">建站</a>
+    
+  
+
+</span>
+
+            </li>
+
+          
+
+            
+              
+              
+              
+            
+
+            <li>
+                <time>
                 2025-07-20 Sun.
                 </time>
                 <a class="title" href="/blog/2025/07/20/complains/">不吐不快的吐槽</a>
@@ -12351,7 +12395,12 @@
                           
                           
                           
-                            <li><a data-scroll href="#y2025">2025 (10)</a></li>
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="#y2025">2025 (11)</a></li>
                             
                           
                         

@@ -5,9 +5,39 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 20 Jul 2025 20:33:36 +0800</pubDate>
-    <lastBuildDate>Sun, 20 Jul 2025 20:33:36 +0800</lastBuildDate>
+    <pubDate>Thu, 24 Jul 2025 21:39:07 +0800</pubDate>
+    <lastBuildDate>Thu, 24 Jul 2025 21:39:07 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>关于Service Worker拦截并替换域名的入门研究与简单实现</title>
+        <description>Service Worker到底是个啥东西，具体能做什么呢？&lt;br /&gt;
+不说那些佶屈聱牙晦涩难懂的标准回答，不懂看了还是不懂。&lt;br /&gt;
+简单说下我的看法。&lt;br /&gt;
+它更像一个中间层middleware，可以读取注册路径下的http请求，然后根据这些请求构造回复。&lt;br /&gt;
+那么怎么回复的呢？
+&lt;ul&gt;
+  &lt;li&gt;最普遍的，直接原封不动请求，原封不动回复。&lt;/li&gt;
+  &lt;li&gt;网上提及最多的，符合条件的http请求，第一次原封不动请求、原封不动回复并缓存；后续命中缓存那么直接构造回复不再有网络请求。&lt;/li&gt;
+  &lt;li&gt;对http请求按需进行处理，更改请求头、url的host等。以下是两个经典运用场景：
+    &lt;ul&gt;
+      &lt;li&gt;jsProxy技术，懂的都懂。例如 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://a.com/xxx/https://www.google.com&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;若A域名因为某些原因被阻断，替换为B域名穿透阻挠。例如含中国mjj数量最多的某论坛。&lt;strong&gt;本文研究的就是这个&lt;/strong&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Thu, 24 Jul 2025 19:25:01 +0800</pubDate>
+        <pubDateFormat>2025-07-24</pubDateFormat>
+        <link>https://nicelee.top/blog/2025/07/24/service-worker/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2025/07/24/service-worker/</guid>
+        
+        <category>建站</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
     
       <item>
         <title>不吐不快的吐槽</title>
@@ -249,23 +279,6 @@
         
         
         <category>技术学习</category>
-        
-      </item>
-    
-      <item>
-        <title>备忘录 静态博客搬家遇到的一些问题</title>
-        <description>前一阵子吧，有段时间Cloudflare连通性较差，想着将github pages的静态页面搬到serv00上去。&lt;br /&gt;
-本文记录一些遇到的问题。
-</description>
-        <pubDate>Sat, 08 Feb 2025 11:30:01 +0800</pubDate>
-        <pubDateFormat>2025-02-08</pubDateFormat>
-        <link>https://nicelee.top/blog/2025/02/08/serv00-htaccess/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2025/02/08/serv00-htaccess/</guid>
-        
-        <category>知识库</category>
-        
-        
-        <category>小技巧</category>
         
       </item>
     

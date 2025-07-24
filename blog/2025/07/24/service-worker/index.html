@@ -7,13 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>备忘录 Docker镜像的修改更新</title>
-    <meta name="description" content="在现有的镜像上进行修改。">
+    <title>关于Service Worker拦截并替换域名的入门研究与简单实现</title>
+    <meta name="description" content="Service Worker到底是个啥东西，具体能做什么呢？不说那些佶屈聱牙晦涩难懂的标准回答，不懂看了还是不懂。简单说下我的看法。它更像一个中间层middleware，可以读取注册路径下的http请求，然后根据这些请求构造回复。那么怎么回复的呢？  最普遍的，直接原封不动请求，原封不动回复。  网上提及最多的，...">
 
-    <meta property="og:url" content="https://nicelee.top/blog/2021/10/10/docker-notes-2/">
+    <meta property="og:url" content="https://nicelee.top/blog/2025/07/24/service-worker/">
     <meta property="og:site_name" content="NiceLee的博客">
-    <meta property="og:title" content="备忘录 Docker镜像的修改更新">
-    <meta property="og:description" content="在现有的镜像上进行修改。">
+    <meta property="og:title" content="关于Service Worker拦截并替换域名的入门研究与简单实现">
+    <meta property="og:description" content="Service Worker到底是个啥东西，具体能做什么呢？不说那些佶屈聱牙晦涩难懂的标准回答，不懂看了还是不懂。简单说下我的看法。它更像一个中间层middleware，可以读取注册路径下的http请求，然后根据这些请求构造回复。那么怎么回复的呢？  最普遍的，直接原封不动请求，原封不动回复。  网上提及最多的，...">
     <meta property="og:image" content="https://nicelee.top/favicon.ico?">
     <meta property="og:image:type" content="image/x-icon">
     
@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="/css/font-awesome.min.css ">
     <link rel="stylesheet" href="/css/font-ali.css?v=1.2 ">
     <link rel="stylesheet" href="/css/main.css?v=1.1 ">
-    <link rel="canonical" href="https://nicelee.top/blog/2021/10/10/docker-notes-2/">
+    <link rel="canonical" href="https://nicelee.top/blog/2025/07/24/service-worker/">
     <link rel="alternate" type="application/rss+xml" title="NiceLeeのBlog" href="https://nicelee.top/feed.xml ">
 
 	
@@ -317,11 +317,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>备忘录 Docker镜像的修改更新</h1>
+        <h1>关于Service Worker拦截并替换域名的入门研究与简单实现</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2021-10-10
+                <i class="fa fa-calendar"></i>2025-07-24
             </div>
 
             <div class="label-card">
@@ -361,8 +361,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/blog/tag/#Docker" title="Tag: Docker" rel="tag">Docker</a-->
-        <a href="/blog/tag/#Docker" title="Tag: Docker" rel="tag">Docker</a>
+        <!--a href="/blog/tag/#%E5%BB%BA%E7%AB%99" title="Tag: 建站" rel="tag">建站</a-->
+        <a href="/blog/tag/#建站" title="Tag: 建站" rel="tag">建站</a>
     
   
 
@@ -374,59 +374,130 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
-  <li><a href="#例子" id="markdown-toc-例子">例子</a></li>
+  <li><a href="#前置" id="markdown-toc-前置">前置</a></li>
+  <li><a href="#目标" id="markdown-toc-目标">目标</a></li>
+  <li><a href="#实现" id="markdown-toc-实现">实现</a></li>
+  <li><a href="#扩展" id="markdown-toc-扩展">扩展</a></li>
 </ul>
-<p>在现有的镜像上进行修改。</p>
-
-<h2 id="前言">前言</h2>
-<p>将常用的命令放在这儿，再附加一个例子。</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 将停止的容器固化为镜像</span>
-docker commit <span class="nt">-m</span><span class="o">=</span><span class="s2">"&lt;MSG&gt;"</span> <span class="nt">-a</span><span class="o">=</span><span class="s2">"&lt;AUTHOR&gt;"</span> &lt;容器标识&gt; &lt;REPOSITORY&gt;:&lt;TAG&gt;
-<span class="c"># 为镜像设置标签</span>
-docker tag &lt;镜像标识&gt; &lt;REPOSITORY&gt;:&lt;TAG&gt;
-<span class="c"># 删除镜像</span>
-docker rmi <span class="nt">-f</span> &lt;镜像标识&gt;
-</code></pre></div></div>
-
-<h2 id="例子">例子</h2>
+<p>Service Worker到底是个啥东西，具体能做什么呢？<br />
+不说那些佶屈聱牙晦涩难懂的标准回答，不懂看了还是不懂。<br />
+简单说下我的看法。<br />
+它更像一个中间层middleware，可以读取注册路径下的http请求，然后根据这些请求构造回复。<br />
+那么怎么回复的呢？</p>
 <ul>
-  <li>下面我们要：
+  <li>最普遍的，直接原封不动请求，原封不动回复。</li>
+  <li>网上提及最多的，符合条件的http请求，第一次原封不动请求、原封不动回复并缓存；后续命中缓存那么直接构造回复不再有网络请求。</li>
+  <li>对http请求按需进行处理，更改请求头、url的host等。以下是两个经典运用场景：
     <ul>
-      <li>下载一个Ubuntu镜像，并且在/home下创建一个test.txt文件，并且更新镜像</li>
+      <li>jsProxy技术，懂的都懂。例如 <code class="language-plaintext highlighter-rouge">https://a.com/xxx/https://www.google.com</code></li>
+      <li>若A域名因为某些原因被阻断，替换为B域名穿透阻挠。例如含中国mjj数量最多的某论坛。<strong>本文研究的就是这个</strong></li>
     </ul>
   </li>
-  <li>下面我们开始实现</li>
 </ul>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 下载镜像</span>
-D:<span class="se">\W</span>orkspace<span class="se">\d</span>ocker&gt;docker pull ubuntu
-<span class="c"># 镜像是只读的，为了更新它，只能在容器内让它跑起来</span>
-D:<span class="se">\W</span>orkspace<span class="se">\d</span>ocker&gt;docker run <span class="nt">-it</span> ubuntu /bin/bash
-root@abe6c138d90c:/# <span class="nb">cd</span> /home
-root@abe6c138d90c:/home# <span class="nb">echo </span>haha <span class="o">&gt;</span> test.txt
-root@abe6c138d90c:/home# <span class="nb">exit</span>
-<span class="c"># 看看我们刚刚做了修改的容器</span>
-D:<span class="se">\W</span>orkspace<span class="se">\d</span>ocker&gt;docker ps <span class="nt">-a</span>
-CONTAINER ID   IMAGE        COMMAND           CREATED              STATUS                          PORTS     NAMES
-abe6c138d90c   ubuntu       <span class="s2">"/bin/bash"</span>       About a minute ago   Exited <span class="o">(</span>0<span class="o">)</span> About a minute ago             priceless_hertz
-2f8e98f48ab1   python:3.8   <span class="s2">"python index.py"</span>   About an hour ago    Exited <span class="o">(</span>137<span class="o">)</span> 53 minutes ago               test_web
-<span class="c"># 从刚刚做了修改的容器创建一个新的镜像</span>
-D:<span class="se">\W</span>orkspace<span class="se">\d</span>ocker&gt;docker commit <span class="nt">-m</span><span class="o">=</span><span class="s2">"Test update ubuntu image"</span> <span class="nt">-a</span><span class="o">=</span><span class="s2">"nicelee"</span> abe6c138d90c nicelee/ubuntu:dev
-sha256:xxxxxxxxxxxxxxxxxxx
-<span class="c"># 查看镜像状态，新镜像已经OK</span>
-D:<span class="se">\W</span>orkspace<span class="se">\d</span>ocker&gt;docker images
-REPOSITORY       TAG       IMAGE ID       CREATED          SIZE
-nicelee/ubuntu   dev       ffa2ffd92f89   20 seconds ago   72.8MB
-python           3.8       3030a34758f6   4 days ago       909MB
-ubuntu           latest    597ce1600cf4   9 days ago       72.8MB
-<span class="c"># 为了验证状态，运行新镜像，查看/home/test.txt内容</span>
-D:<span class="se">\W</span>orkspace<span class="se">\d</span>ocker&gt;docker run <span class="nt">-it</span> nicelee/ubuntu:dev
-root@b900d67b0131:/# <span class="nb">cat</span> /home/test.txt
-haha
-root@b900d67b0131:/# <span class="nb">exit</span>
+<h3 id="前置">前置</h3>
+<p>本文的实现需要A、B两个域名的实际控制权。<br />
+其中A域名是浏览器正常输入的域名，B域名是Service Worker工作时，浏览器实际访问的域名。</p>
+
+<h3 id="目标">目标</h3>
+<p>用户在访问A域名注册激活service worker以后，所有访问A域名的HTTP请求实际上是走的B域名。</p>
+
+<h3 id="实现">实现</h3>
+<ul>
+  <li>network.html</li>
+</ul>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;title&gt;</span>Service Worker Example<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;h1&gt;</span>Service Worker Example<span class="nt">&lt;/h1&gt;</span>
+  <span class="nt">&lt;script&gt;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="dl">'</span><span class="s1">serviceWorker</span><span class="dl">'</span> <span class="k">in</span> <span class="nb">navigator</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nb">navigator</span><span class="p">.</span><span class="nx">serviceWorker</span><span class="p">.</span><span class="nx">register</span><span class="p">(</span><span class="dl">'</span><span class="s1">./worker.js</span><span class="dl">'</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">registration</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Service Worker registered with scope:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">registration</span><span class="p">.</span><span class="nx">scope</span><span class="p">);</span>
+        <span class="p">})</span>
+        <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Service Worker registration failed:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
 </code></pre></div></div>
 
+<ul>
+  <li>worker.js</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">ORIGIN_SITE</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">a.com</span><span class="dl">"</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">ALT_SITE</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">b.com</span><span class="dl">"</span><span class="p">;</span>
+<span class="nb">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">install</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">event</span><span class="p">.</span><span class="nx">waitUntil</span><span class="p">(</span><span class="nb">self</span><span class="p">.</span><span class="nx">skipWaiting</span><span class="p">());</span>
+<span class="p">});</span>
+
+<span class="nb">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">activate</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">event</span><span class="p">.</span><span class="nx">waitUntil</span><span class="p">(</span><span class="nb">self</span><span class="p">.</span><span class="nx">clients</span><span class="p">.</span><span class="nx">claim</span><span class="p">());</span>
+<span class="p">});</span>
+
+<span class="nb">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">fetch</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URL</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">);</span>
+
+  <span class="c1">// 拦截 a.com 的请求</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">url</span><span class="p">.</span><span class="nx">hostname</span> <span class="o">===</span> <span class="nx">ORIGIN_SITE</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 构建新的 URL</span>
+    <span class="kd">const</span> <span class="nx">newUrl</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URL</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="nx">ORIGIN_SITE</span><span class="p">,</span> <span class="nx">ALT_SITE</span><span class="p">));</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">newUrl</span><span class="p">);</span>
+    <span class="c1">// 处理请求</span>
+    <span class="nx">event</span><span class="p">.</span><span class="nx">respondWith</span><span class="p">(</span>
+      <span class="p">(</span><span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">try</span> <span class="p">{</span>
+          <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">headers</span><span class="p">);</span>
+          <span class="nx">headers</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="dl">"</span><span class="s2">host</span><span class="dl">"</span><span class="p">,</span> <span class="nx">ALT_SITE</span><span class="p">);</span>
+          <span class="nx">headers</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="dl">"</span><span class="s2">upgrade-insecure-requests</span><span class="dl">"</span><span class="p">);</span>
+          <span class="kd">const</span> <span class="nx">newRequest</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Request</span><span class="p">(</span><span class="nx">newUrl</span><span class="p">,</span> <span class="p">{</span>
+            <span class="na">method</span><span class="p">:</span> <span class="dl">"</span><span class="s2">GET</span><span class="dl">"</span><span class="p">,</span>
+            <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
+            <span class="na">body</span><span class="p">:</span> <span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">body</span><span class="p">,</span> <span class="c1">// 如果是 POST 请求，需要传递 body</span>
+            <span class="na">credentials</span><span class="p">:</span> <span class="dl">"</span><span class="s2">include</span><span class="dl">"</span><span class="p">,</span> <span class="c1">// 避免跨域问题，如果b.com需要凭证，需要根据实际情况调整 omit</span>
+            <span class="na">mode</span><span class="p">:</span> <span class="dl">"</span><span class="s2">cors</span><span class="dl">"</span><span class="p">,</span> <span class="c1">// 根据b.com服务器的CORS配置调整</span>
+            <span class="na">cache</span><span class="p">:</span> <span class="dl">"</span><span class="s2">default</span><span class="dl">"</span><span class="p">,</span> <span class="c1">// 根据需要调整缓存策略</span>
+            <span class="na">redirect</span><span class="p">:</span> <span class="dl">"</span><span class="s2">follow</span><span class="dl">"</span><span class="p">,</span> <span class="c1">// 根据需要调整重定向策略</span>
+          <span class="p">});</span>
+          <span class="c1">// 发起新的请求</span>
+          <span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="nx">newRequest</span><span class="p">);</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
+          <span class="c1">// 检查响应状态码</span>
+          <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">response</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">"</span><span class="s2">Fetch failed with status:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">response</span><span class="p">.</span><span class="nx">status</span><span class="p">);</span>
+            <span class="c1">// 读取响应文本以获取更多信息</span>
+            <span class="kd">const</span> <span class="nx">responseText</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">();</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">"</span><span class="s2">Response Text:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">responseText</span><span class="p">);</span>
+          <span class="p">}</span>
+          <span class="c1">// 如果响应成功，直接返回</span>
+          <span class="k">return</span> <span class="nx">response</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">"</span><span class="s2">Service Worker 拦截请求失败:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+          <span class="c1">// 如果请求失败，返回一个错误响应，或者尝试 fallback</span>
+          <span class="k">return</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="dl">"</span><span class="s2">Network error happened</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span>
+            <span class="na">status</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span>
+            <span class="na">headers</span><span class="p">:</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">text/plain</span><span class="dl">"</span> <span class="p">},</span>
+          <span class="p">});</span>
+        <span class="p">}</span>
+      <span class="p">})()</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h3 id="扩展">扩展</h3>
+<p>一般来说，我们不应将配置写死在静态文件里，这样很容易暴露。<br />
+而且在测试的时候发觉serviceWorker还是有蛮多坑的。<br />
+Talk is cheap, show me the code.<br />
+<a href="https://github.com/nICEnnnnnnnLee/ns-service-worker">https://github.com/nICEnnnnnnnLee/ns-service-worker</a></p>
 
         </article>
         <hr>
@@ -444,6 +515,61 @@ root@b900d67b0131:/# <span class="nb">exit</span>
             
                 
                     
+                        
+                        <h2 id="similar_posts">相似文章</h2>
+                        <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2025/07/20/mirror-compare-http/">本博客镜像HTTP ping速度比较
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2025/07/12/tencent-ssl-cert/">备忘录 使用脚本通过API上传腾讯证书
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2025/07/12/mirror-compare/">本博客镜像TCP ping速度比较
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
                 
             
         
@@ -460,10 +586,6 @@ root@b900d67b0131:/# <span class="nb">exit</span>
                     
                 
             
-                
-                    
-                
-            
         
             
             
@@ -486,39 +608,18 @@ root@b900d67b0131:/# <span class="nb">exit</span>
                 
             
         
-            
-            
-                
-                    
-                
-            
         
-            
-            
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-            
-        
+            </ul>
         
 
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/blog/2021/10/10/docker-notes/">备忘录 Docker镜像的使用</a></p>
+        <p><strong>上一篇</strong> <a href="/blog/2025/07/20/complains/">不吐不快的吐槽</a></p>
         
     </div>
     <div class="nex">
 
-        
-        <p><strong>下一篇</strong> <a href="/blog/2021/10/10/docker-notes-3/">备忘录 根据Dockerfile新建并发布镜像</a></p>
         
     </div>
 </div>
@@ -543,6 +644,8 @@ root@b900d67b0131:/# <span class="nb">exit</span>
                     内容
                 </div>
                 <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#similar_posts">相似文章</a></li>
                     
                     <!-- <li><a href="#comments">评论</a></li> -->
                 </ul>
