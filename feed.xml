@@ -5,9 +5,32 @@
     <description>NiceLee的个人博客</description>
     <link>https://nicelee.top/</link>
     <atom:link href="https://nicelee.top/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 24 Jul 2025 21:39:07 +0800</pubDate>
-    <lastBuildDate>Thu, 24 Jul 2025 21:39:07 +0800</lastBuildDate>
+    <pubDate>Sat, 18 Oct 2025 14:17:32 +0800</pubDate>
+    <lastBuildDate>Sat, 18 Oct 2025 14:17:32 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>备忘录 使用api操纵incus切割nat小机</title>
+        <description>本文尝试通过api的方式，操作incus创建指定配置的nat lxc小机。&lt;br /&gt;
+在Debian系统上进行操作实践。
+&lt;ul&gt;
+  &lt;li&gt;创建/销毁实例&lt;/li&gt;
+  &lt;li&gt;开关机&lt;/li&gt;
+  &lt;li&gt;分配转发端口&lt;/li&gt;
+  &lt;li&gt;内存、核心、存储限制等&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Thu, 16 Oct 2025 19:25:01 +0800</pubDate>
+        <pubDateFormat>2025-10-16</pubDateFormat>
+        <link>https://nicelee.top/blog/2025/10/16/incus-self-manage/</link>
+        <guid isPermaLink="true">https://nicelee.top/blog/2025/10/16/incus-self-manage/</guid>
+        
+        <category>建站</category>
+        
+        
+        <category>技术学习</category>
+        
+      </item>
     
       <item>
         <title>关于Service Worker拦截并替换域名的入门研究与简单实现</title>
@@ -260,25 +283,6 @@
         
         
         <category>小技巧</category>
-        
-      </item>
-    
-      <item>
-        <title>备忘录 证书与CF Workers KV Storage</title>
-        <description>前情提要： 我在一台机器上部署了&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;acme.sh&lt;/code&gt;脚本，申请通配符证书，确保证书在这台机器上是一直有效的。 &lt;br /&gt;
-当机器有多台的时候，我想共用申请的证书，而不是在每一台上都再来一次。 &lt;br /&gt;
-这就要有一个存放证书的地方。&lt;br /&gt;
-本着不额外花费资源的原则，托管我域名DNS的CF本身似乎是一个挺好的选择。
-</description>
-        <pubDate>Thu, 13 Feb 2025 11:30:01 +0800</pubDate>
-        <pubDateFormat>2025-02-13</pubDateFormat>
-        <link>https://nicelee.top/blog/2025/02/13/ssl-cert-cf-kv/</link>
-        <guid isPermaLink="true">https://nicelee.top/blog/2025/02/13/ssl-cert-cf-kv/</guid>
-        
-        <category>知识库</category>
-        
-        
-        <category>技术学习</category>
         
       </item>
     

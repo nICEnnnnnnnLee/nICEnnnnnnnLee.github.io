@@ -2,6 +2,13 @@
 	"code" : 0 ,
 	"data" : [
 	{
+		"title" : "备忘录 使用api操纵incus切割nat小机",
+		"tags" : "建站",
+		"url" : "/blog/2025/10/16/incus-self-manage/"
+		"brief" : "本文尝试通过api的方式，操作incus创建指定配置的natlxc小机。在Debian系统上进行操作实践。创建/销毁实例开关机分配转发端口内存、核心、存储限制等"
+	},
+    
+	{
 		"title" : "关于Service Worker拦截并替换域名的入门研究与简单实现",
 		"tags" : "建站",
 		"url" : "/blog/2025/07/24/service-worker/"

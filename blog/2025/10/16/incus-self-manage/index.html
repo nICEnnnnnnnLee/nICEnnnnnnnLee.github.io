@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>备忘录 使用api操纵incus切割nat小机</title>
+    <meta name="description" content="本文尝试通过api的方式，操作incus创建指定配置的nat lxc小机。在Debian系统上进行操作实践。  创建/销毁实例  开关机  分配转发端口  内存、核心、存储限制等">
+
+    <meta property="og:url" content="https://nicelee.top/blog/2025/10/16/incus-self-manage/">
+    <meta property="og:site_name" content="NiceLee的博客">
+    <meta property="og:title" content="备忘录 使用api操纵incus切割nat小机">
+    <meta property="og:description" content="本文尝试通过api的方式，操作incus创建指定配置的nat lxc小机。在Debian系统上进行操作实践。  创建/销毁实例  开关机  分配转发端口  内存、核心、存储限制等">
+    <meta property="og:image" content="https://nicelee.top/favicon.ico?">
+    <meta property="og:image:type" content="image/x-icon">
+    
+    <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="stylesheet" href="/css/font-awesome.min.css ">
+    <link rel="stylesheet" href="/css/font-ali.css?v=1.2 ">
+    <link rel="stylesheet" href="/css/main.css?v=1.1 ">
+    <link rel="canonical" href="https://nicelee.top/blog/2025/10/16/incus-self-manage/">
+    <link rel="alternate" type="application/rss+xml" title="NiceLeeのBlog" href="https://nicelee.top/feed.xml ">
+
+	
+
+    <script>
+    // 百度统计代码
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?11f780e4e4ccd4e99b101eac776e93e4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script type='text/javascript'>
+  // smartlook统计代码
+  window.smartlook||(function(d) {
+    var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
+    var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
+    c.charset='utf-8';c.src='https://web-sdk.smartlook.com/recorder.js';h.appendChild(c);
+    })(document);
+    smartlook('init', '19ece82e2fc254b6b9cb148c545244ca1fc2ade2', { region: 'eu' });
+</script>
+
+
+
+</head>
+
+    <link rel="stylesheet" href="/sources/live2d/css/live2d.css" />
+  <body>
+	
+		
+		<script type="text/javascript" src="/js/ribbon.min.js "></script>
+		
+	
+	
+    <header id="top">
+    <div class="wrapper">
+        <a href="/blog/" class="brand awsome-font">NiceLeeのBlog</a>
+        <small>用爱发电 bilibili~</small>
+        <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
+        <nav id="headerNav">
+            <ul>
+				<li onclick="showdiv()" >
+                    <a href="#">
+                    <i class="fa fa-search">搜索</i>
+                    </a>
+                </li>
+                <li>
+                    
+                    <a href="/blog/">
+                    
+                        <i class="fa fa-home"></i>主页
+                    </a>
+                </li>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <a href="/blog/archive/">
+                        
+                            <i class="fa fa-archive"></i>归档
+                        </a>
+                    </li>
+                
+                    
+                    <li>
+                        <a href="/ilikemusic/">
+                        
+                            <i class="fa fa-music"></i>音乐
+                        </a>
+                    </li>
+                
+                    
+                    <li>
+                        <a href="/collect/">
+                        
+                            <i class="fa fa-bookmark"></i>收藏
+                        </a>
+                    </li>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <a href="/blog/timeline/">
+                        
+                            <i class="fa fa-clock-o"></i>时间轴
+                        </a>
+                    </li>
+                
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <a href="/about/">
+                        
+                            <i class="fa fa-info-circle"></i>关于
+                        </a>
+                    </li>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                				
+				
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+        <div class="page clearfix" post>
+    <div class="left">
+        <h1>备忘录 使用api操纵incus切割nat小机</h1>
+        <div class="label">
+
+            <div class="label-card">
+                <i class="fa fa-calendar"></i>2025-10-16
+            </div>
+
+            <div class="label-card">
+                <i class="fa fa-user"></i>nIceLee
+                
+            </div>
+            <div class="label-card">
+                <p>阅读：<span id="busuanzi_value_page_pv1"></span></p>
+            </div>
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+            
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/blog/category/#技术学习" title="Category: 技术学习" rel="category">技术学习</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+            </div>
+
+            <div class="label-card">
+            
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <!--a href="/blog/tag/#%E5%BB%BA%E7%AB%99" title="Tag: 建站" rel="tag">建站</a-->
+        <a href="/blog/tag/#建站" title="Tag: 建站" rel="tag">建站</a>
+    
+  
+
+</span>
+
+            </div>
+
+        </div>
+        <hr>
+        <article itemscope itemtype="http://schema.org/BlogPosting">
+        <ul id="markdown-toc">
+  <li><a href="#incus安装和配置" id="markdown-toc-incus安装和配置">incus安装和配置</a>    <ul>
+      <li><a href="#安装incus" id="markdown-toc-安装incus">安装incus</a></li>
+      <li><a href="#安装web管理界面可跳" id="markdown-toc-安装web管理界面可跳">安装web管理界面(可跳)</a></li>
+      <li><a href="#安装btrfs-progs限制存储" id="markdown-toc-安装btrfs-progs限制存储">安装btrfs-progs(限制存储)</a></li>
+      <li><a href="#初始化incus" id="markdown-toc-初始化incus">初始化incus</a></li>
+    </ul>
+  </li>
+  <li><a href="#自定义自己的debian12镜像" id="markdown-toc-自定义自己的debian12镜像">自定义自己的Debian12镜像</a>    <ul>
+      <li><a href="#拉取debian12镜像" id="markdown-toc-拉取debian12镜像">拉取Debian12镜像</a></li>
+      <li><a href="#对镜像进行自定义" id="markdown-toc-对镜像进行自定义">对镜像进行自定义</a></li>
+    </ul>
+  </li>
+  <li><a href="#配置外网访问" id="markdown-toc-配置外网访问">配置外网访问</a></li>
+  <li><a href="#相关api操作" id="markdown-toc-相关api操作">相关API操作</a>    <ul>
+      <li><a href="#实例创建" id="markdown-toc-实例创建">实例创建</a></li>
+      <li><a href="#实例开关机" id="markdown-toc-实例开关机">实例开关机</a></li>
+      <li><a href="#实例删除" id="markdown-toc-实例删除">实例删除</a></li>
+      <li><a href="#实例的其它操作" id="markdown-toc-实例的其它操作">实例的其它操作</a></li>
+    </ul>
+  </li>
+</ul>
+<p>本文尝试通过api的方式，操作incus创建指定配置的nat lxc小机。<br />
+在Debian系统上进行操作实践。</p>
+<ul>
+  <li>创建/销毁实例</li>
+  <li>开关机</li>
+  <li>分配转发端口</li>
+  <li>内存、核心、存储限制等</li>
+</ul>
+
+<h1 id="incus安装和配置">incus安装和配置</h1>
+
+<h3 id="安装incus">安装incus</h3>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt <span class="nb">install </span>incus
+</code></pre></div></div>
+
+<p>如果出现以下问题（Debian12）：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@ohmy:~# apt install incus
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+Some packages could not be installed. This may mean that you have
+requested an impossible situation or if you are using the unstable
+distribution that some required packages have not yet been created
+or been moved out of Incoming.
+The following information may help to resolve the situation:
+
+The following packages have unmet dependencies:
+ incus : Depends: qemu-system-x86 (&gt;= 1:8.0) but 1:7.2+dfsg-7+deb12u16 is to be installed
+E: Unable to correct problems, you have held broken packages.
+root@ohmy:~# 
+</code></pre></div></div>
+
+<p>编辑<code class="language-plaintext highlighter-rouge">/etc/apt/sources.list</code>，添加行</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>deb http://deb.debian.org/debian bookworm-backports main contrib non-free
+</code></pre></div></div>
+<p>然后重新尝试安装</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt update
+apt <span class="nb">install</span> <span class="nt">-t</span> bookworm-backports qemu-system-x86
+apt <span class="nb">install </span>incus
+</code></pre></div></div>
+
+<h3 id="安装web管理界面可跳">安装web管理界面(可跳)</h3>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget <span class="nt">-q</span> <span class="nt">-O</span> - https://pkgs.zabbly.com/key.asc | gpg <span class="nt">--show-keys</span> <span class="nt">--fingerprint</span>
+<span class="nb">mkdir</span> <span class="nt">-p</span> /etc/apt/keyrings/
+wget <span class="nt">-O</span> /etc/apt/keyrings/zabbly.asc https://pkgs.zabbly.com/key.asc
+
+apt <span class="nb">install</span> <span class="nt">-y</span> incus-ui-canonical
+</code></pre></div></div>
+
+<h3 id="安装btrfs-progs限制存储">安装btrfs-progs(限制存储)</h3>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt <span class="nb">install</span> <span class="nt">-y</span> btrfs-progs
+</code></pre></div></div>
+
+<h3 id="初始化incus">初始化incus</h3>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>incus admin init
+</code></pre></div></div>
+
+<p>基本上都是默认，非默认的情况有注解</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@ohmy:~# incus admin init
+Would you like to use clustering? <span class="o">(</span><span class="nb">yes</span>/no<span class="o">)</span> <span class="o">[</span><span class="nv">default</span><span class="o">=</span>no]: 
+Do you want to configure a new storage pool? <span class="o">(</span><span class="nb">yes</span>/no<span class="o">)</span> <span class="o">[</span><span class="nv">default</span><span class="o">=</span><span class="nb">yes</span><span class="o">]</span>: 
+Name of the new storage pool <span class="o">[</span><span class="nv">default</span><span class="o">=</span>default]: 
+Name of the storage backend to use <span class="o">(</span>btrfs, <span class="nb">dir</span><span class="o">)</span> <span class="o">[</span><span class="nv">default</span><span class="o">=</span>btrfs]:        <span class="c"># dir无法限制实例的存储大小</span>
+Create a new BTRFS pool? <span class="o">(</span><span class="nb">yes</span>/no<span class="o">)</span> <span class="o">[</span><span class="nv">default</span><span class="o">=</span><span class="nb">yes</span><span class="o">]</span>: 
+Would you like to use an existing empty block device <span class="o">(</span>e.g. a disk or partition<span class="o">)</span>? <span class="o">(</span><span class="nb">yes</span>/no<span class="o">)</span> <span class="o">[</span><span class="nv">default</span><span class="o">=</span>no]: 
+Size <span class="k">in </span>GiB of the new loop device <span class="o">(</span>1GiB minimum<span class="o">)</span> <span class="o">[</span><span class="nv">default</span><span class="o">=</span>5GiB]: 10GiB
+Would you like to create a new <span class="nb">local </span>network bridge? <span class="o">(</span><span class="nb">yes</span>/no<span class="o">)</span> <span class="o">[</span><span class="nv">default</span><span class="o">=</span><span class="nb">yes</span><span class="o">]</span>: 
+What should the new bridge be called? <span class="o">[</span><span class="nv">default</span><span class="o">=</span>incusbr0]: 
+What IPv4 address should be used? <span class="o">(</span>CIDR subnet notation, “auto” or “none”<span class="o">)</span> <span class="o">[</span><span class="nv">default</span><span class="o">=</span>auto]: 192.168.1.1/24       <span class="c"># 自己控制子网段，有个预期比较好分配</span>
+Would you like to NAT IPv4 traffic on your bridge? <span class="o">[</span><span class="nv">default</span><span class="o">=</span><span class="nb">yes</span><span class="o">]</span>: 
+What IPv6 address should be used? <span class="o">(</span>CIDR subnet notation, “auto” or “none”<span class="o">)</span> <span class="o">[</span><span class="nv">default</span><span class="o">=</span>auto]: none                 <span class="c"># 不分配ipv6</span>
+Would you like the server to be available over the network? <span class="o">(</span><span class="nb">yes</span>/no<span class="o">)</span> <span class="o">[</span><span class="nv">default</span><span class="o">=</span>no]: 
+Would you like stale cached images to be updated automatically? <span class="o">(</span><span class="nb">yes</span>/no<span class="o">)</span> <span class="o">[</span><span class="nv">default</span><span class="o">=</span><span class="nb">yes</span><span class="o">]</span>: no                      <span class="c"># 不自动更新镜像</span>
+Would you like a YAML <span class="s2">"init"</span> preseed to be printed? <span class="o">(</span><span class="nb">yes</span>/no<span class="o">)</span> <span class="o">[</span><span class="nv">default</span><span class="o">=</span>no]: <span class="nb">yes
+</span>config:
+  images.auto_update_interval: <span class="s2">"0"</span>
+networks:
+- config:
+    ipv4.address: 192.168.1.1/24
+    ipv4.nat: <span class="s2">"true"</span>
+    ipv6.address: none
+  description: <span class="s2">""</span>
+  name: incusbr0
+  <span class="nb">type</span>: <span class="s2">""</span>
+  project: default
+storage_pools:
+- config:
+    size: 10GiB
+  description: <span class="s2">""</span>
+  name: default
+  driver: btrfs
+storage_volumes: <span class="o">[]</span>
+profiles:
+- config: <span class="o">{}</span>
+  description: <span class="s2">""</span>
+  devices:
+    eth0:
+      name: eth0
+      network: incusbr0
+      <span class="nb">type</span>: nic
+    root:
+      path: /
+      pool: default
+      <span class="nb">type</span>: disk
+  name: default
+  project: default
+projects: <span class="o">[]</span>
+cluster: null
+</code></pre></div></div>
+
+<h1 id="自定义自己的debian12镜像">自定义自己的Debian12镜像</h1>
+
+<h3 id="拉取debian12镜像">拉取Debian12镜像</h3>
+<p>因为需要<code class="language-plaintext highlighter-rouge">cloud-init</code>，所以拉的是<code class="language-plaintext highlighter-rouge">images:debian/12/cloud</code>，而不是<code class="language-plaintext highlighter-rouge">images:debian/12</code></p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>incus launch images:debian/12/cloud raw
+</code></pre></div></div>
+
+<h3 id="对镜像进行自定义">对镜像进行自定义</h3>
+<p>进入raw镜像</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>incus <span class="nb">exec </span>raw <span class="nt">--</span> bash
+</code></pre></div></div>
+
+<p>安装ssh</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt-get update
+apt <span class="nb">install</span> <span class="nt">-y</span> openssh-server
+systemctl <span class="nb">enable </span>ssh
+systemctl start ssh
+systemctl status ssh
+</code></pre></div></div>
+
+<p>配置ssh</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nano /etc/ssh/sshd_config
+</code></pre></div></div>
+<p>确保以下设置：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PermitRootLogin yes
+PasswordAuthentication yes
+PubkeyAuthentication yes
+AuthorizedKeysFile .ssh/authorized_keys
+</code></pre></div></div>
+
+<p>收尾</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir -p /root/.ssh
+echo "" &gt;&gt; /root/.ssh/authorized_keys
+chmod 700 /root/.ssh
+chmod 600 /root/.ssh/authorized_keys
+apt clean
+rm -rf /var/lib/apt/lists/*
+</code></pre></div></div>
+
+<p>退出</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>exit
+</code></pre></div></div>
+
+<p>停止raw镜像，重新发布为debian12</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>incus stop raw
+incus publish raw <span class="nt">--alias</span> debian12 <span class="nt">--reuse</span>
+</code></pre></div></div>
+
+<h1 id="配置外网访问">配置外网访问</h1>
+<p>理论上可以客户端配个证书，然后进行访问。但是我想转化为验证cookie或者其它header的方式。<br />
+假设nginx已经安装。</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 设置 incus只能本地8443端口访问</span>
+incus config <span class="nb">set </span>core.https_address 127.0.0.1:8443
+
+<span class="c"># 创建证书</span>
+openssl req <span class="nt">-x509</span> <span class="nt">-newkey</span> rsa:4096 <span class="nt">-keyout</span> client.key <span class="nt">-out</span> client.crt <span class="nt">-days</span> 3650 <span class="nt">-nodes</span> <span class="nt">-subj</span> <span class="s2">"/CN=myincus"</span>
+
+<span class="c"># 信任证书</span>
+incus config trust add-certificate client.crt
+<span class="c"># incus config trust list</span>
+
+<span class="c"># 证书挪到指定位置</span>
+<span class="nb">mkdir</span> <span class="nt">-p</span> /etc/nginx/certs
+<span class="nb">cp </span>client.crt /etc/nginx/certs/nginx-client.crt
+<span class="nb">cp </span>client.key /etc/nginx/certs/nginx-client.key
+<span class="nb">chmod </span>600 /etc/nginx/certs/nginx-client.key
+
+<span class="nb">mkdir</span> <span class="nt">-p</span> /etc/nginx/sites-available
+</code></pre></div></div>
+
+<p>编辑 Nginx 配置文件 <code class="language-plaintext highlighter-rouge">/etc/nginx/sites-available/incus.conf</code>，内容示范：<br />
+只有Cookie的<code class="language-plaintext highlighter-rouge">aaa</code>值为<code class="language-plaintext highlighter-rouge">12345677654321</code>才能正常访问。<br />
+访问路径<code class="language-plaintext highlighter-rouge">/woshidashagua</code>可以将Cookie的<code class="language-plaintext highlighter-rouge">aaa</code>值设为<code class="language-plaintext highlighter-rouge">12345677654321</code>。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server {
+    listen 443 ssl;
+    server_name incus.example.com;
+
+    ssl_certificate $NixopsCert;   # 你的证书路径
+    ssl_certificate_key $NixopsKey; # 你的私钥路径
+
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_prefer_server_ciphers on;
+
+
+    location / {
+        if ( $cookie_aaa != "12345677654321"){
+            return 404;
+        }
+        proxy_pass https://127.0.0.1:8443;
+
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        # 如果是web管理界面，需要websocket支持
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        # 使用客户端证书和私钥认证 Incus API
+        proxy_ssl_certificate /etc/nginx/certs/nginx-client.crt;
+        proxy_ssl_certificate_key /etc/nginx/certs/nginx-client.key;
+
+        # 不验证 Incus API 的自签名证书（如果有）
+        proxy_ssl_verify off;
+    }
+    
+    location = /woshidashagua {
+        add_header Set-Cookie 'aaa=12345677654321; domain=$host; path=/';
+        return  302 /;
+    }
+}
+</code></pre></div></div>
+
+<p>启用站点并重启 Nginx</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ln</span> <span class="nt">-s</span> /etc/nginx/sites-available/incus.conf /etc/nginx/sites-enabled/
+nginx <span class="nt">-s</span> reload
+</code></pre></div></div>
+
+<h1 id="相关api操作">相关API操作</h1>
+
+<h3 id="实例创建">实例创建</h3>
+<p>实例名称<code class="language-plaintext highlighter-rouge">nb2</code>,OS镜像<code class="language-plaintext highlighter-rouge">Debian12</code>,配置<code class="language-plaintext highlighter-rouge">1c256M2GB</code>,时区<code class="language-plaintext highlighter-rouge">Asia/Shanghai</code>。 <br />
+用户名<code class="language-plaintext highlighter-rouge">root</code>，密码<code class="language-plaintext highlighter-rouge">kkUkO.4RtYyx</code>。  <br />
+内网ip<code class="language-plaintext highlighter-rouge">192.168.1.2</code>,外网ip<code class="language-plaintext highlighter-rouge">1.2.3.4</code>。  <br />
+内网22端口对应外网59122，内外网59123-59127一一对应。  <br />
+实例创建后自动开机。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -k -X POST https://incus.example.com/1.0/instances \
+    -H "Content-Type: application/json" \
+    -H "Cookie: aaa=12345677654321" \
+    -d '{
+      "name": "nb2",
+      "start": true,
+      "architecture": "x86_64",
+      "profiles": [
+        "default"
+      ],
+      "source": {
+        "type": "image",
+        "alias": "debian12"
+      },
+      "config": {
+        "limits.cpu": "1",
+        "limits.cpu.priority": "0",
+        "limits.cpu.allowance": "50%",
+        "limits.memory": "256MB",
+        "boot.autostart": "true",
+        "user.user-data": "#cloud-config\ntimezone: Asia/Shanghai\nchpasswd:\n  list: |\n    root:kkUkO.4RtYyx\n  expire: False\nssh_pwauth: True\nusers:\n  - name: root\n    lock_passwd: False\n"
+      },
+      "devices": {
+        "root": {
+          "path": "/",
+          "pool": "default",
+          "size": "2GB",
+          "limits.max": "2GB",
+          "limits.read": "5000iops",
+          "limits.write": "5000iops",
+          "type": "disk"
+        },
+        "eth0": {
+          "ipv4.address": "192.168.1.2",
+          "limits.egress": "500Mbit",
+          "limits.ingress": "500Mbit",
+          "limits.max": "500Mbit",
+          "mtu": "1500",
+          "nictype": "bridged",
+          "parent": "incusbr0",
+          "type": "nic"
+        },
+        "proxy-ssh": {
+          "bind": "host",
+          "connect": "tcp:192.168.1.2:22",
+          "listen": "tcp:1.2.3.4:59122",
+          "nat": "true",
+          "type": "proxy"
+        },
+        "proxy-1": {
+          "bind": "host",
+          "connect": "tcp:192.168.1.2:59123-59127",
+          "listen": "tcp:1.2.3.4:59123-59127",
+          "nat": "true",
+          "type": "proxy"
+        }
+      }
+    }'
+</code></pre></div></div>
+
+<h3 id="实例开关机">实例开关机</h3>
+<p>假设实例名称<code class="language-plaintext highlighter-rouge">nb2</code></p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-k</span> <span class="nt">-X</span> PUT https://incus.example.com/1.0/instances/nb2/state <span class="nt">--data</span> <span class="s1">'{"action":"start"}'</span>   <span class="c">#开机</span>
+curl <span class="nt">-k</span> <span class="nt">-X</span> PUT https://incus.example.com/1.0/instances/nb2/state <span class="nt">--data</span> <span class="s1">'{"action":"stop"}'</span>    <span class="c">#关机</span>
+</code></pre></div></div>
+
+<h3 id="实例删除">实例删除</h3>
+<p>假设实例名称<code class="language-plaintext highlighter-rouge">nb2</code></p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-k</span> <span class="nt">-X</span> DELETE  /1.0/instances/nb2    <span class="c">#删机</span>
+</code></pre></div></div>
+
+<h3 id="实例的其它操作">实例的其它操作</h3>
+<p>举个例子，假设实例名称<code class="language-plaintext highlighter-rouge">nb2</code>（已关机），将内存变为<code class="language-plaintext highlighter-rouge">128MB</code>:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -k -X PATCH https://incus.example.com/1.0/instances/nb2 \
+    -H "Content-Type: application/json" \
+    -d '{
+      "config": {
+        "limits.memory": "128MB",
+      }
+    }'
+</code></pre></div></div>
+
+        </article>
+        <hr>
+
+        
+        
+            
+            
+                
+                    
+                        
+                        <h2 id="similar_posts">相似文章</h2>
+                        <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2025/07/24/service-worker/">关于Service Worker拦截并替换域名的入门研究与简单实现
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2025/07/20/mirror-compare-http/">本博客镜像HTTP ping速度比较
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2025/07/12/tencent-ssl-cert/">备忘录 使用脚本通过API上传腾讯证书
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/blog/2025/07/12/mirror-compare/">本博客镜像TCP ping速度比较
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+        
+            </ul>
+        
+
+        <div class="post-recent">
+    <div class="pre">
+        
+        <p><strong>上一篇</strong> <a href="/blog/2025/07/24/service-worker/">关于Service Worker拦截并替换域名的入门研究与简单实现</a></p>
+        
+    </div>
+    <div class="nex">
+
+        
+    </div>
+</div>
+
+
+        <!-- <h2 id="comments">评论</h2>  
+        
+
+
+
+ -->
+
+
+    </div>
+    <button class="anchor"><i class="fa fa-anchor"></i></button>
+    <div class="right">
+        <div class="wrap">
+
+            <!-- Content -->
+            <div class="side content">
+                <div>
+                    内容
+                </div>
+                <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#similar_posts">相似文章</a></li>
+                    
+                    <!-- <li><a href="#comments">评论</a></li> -->
+                </ul>
+            </div>
+			
+            <!-- 其他div框放到这里 -->
+            <!-- <div class="side">bbbb</div> -->
+        </div>
+    </div>
+</div>
+<script>
+/**
+ * target _blank
+ */
+(function() {
+    var aTags = document.querySelectorAll('article a:not([id])')
+    for (var i = 0; i < aTags.length; i++) {
+        aTags[i].setAttribute('target', '_blank')
+    }
+
+}());
+</script>
+<script src="/js/pageContent.js " charset="utf-8"></script>
+
+
+    <footer class="site-footer">
+
+
+    <div class="wrapper">
+        <p class="description">
+             这是一个缺爱的博客(๑‾ ꇴ ‾๑)！ 
+        </p>
+        <p class="contact">
+            联系我: 
+            <a href="https://github.com/nICEnnnnnnnLee" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>         
+			<span onclick="copyToClipboard('https://nicelee.top/feed.xml')"><a href="#">订阅我<i class="fa fa-gg"></i></a></span>
+        </p>
+        <p>
+            总pv:<span id="busuanzi_value_site_pv"></span>，uv:<span id="busuanzi_value_site_uv"></span>，本页pv:<span id="busuanzi_value_page_pv"></span>
+        </p>
+        <p class="power">
+            <span>
+            有用链接：
+                <a href="http://www.bejson.com/" target="_blank">BeJSON</a> &nbsp;&nbsp;
+                <a href="http://site.ip138.com/"  target="_blank">IP或域名查询</a> &nbsp;&nbsp;
+                <a href="http://ping.chinaz.com/"  target="_blank">各地ping</a> &nbsp;&nbsp;
+                <a href="https://tool.lu/"  target="_blank">在线工具</a> &nbsp;&nbsp; 
+                <a href="https://www.aliyun.com/"  target="_blank">阿里云</a> &nbsp;&nbsp; 
+                <a href="http://patorjk.com/software/taag/"  target="_blank">Text转FIGlet</a> &nbsp;&nbsp; 
+                <a href="https://vercel.com/dashboard"  target="_blank">Vercel</a> &nbsp;&nbsp;
+                <a href="https://dash.cloudflare.com/"  target="_blank">Cloudflare</a> &nbsp;&nbsp;
+                <a href="https://www.webfx.com/tools/emoji-cheat-sheet/"  target="_blank">Emoji😳</a> &nbsp;&nbsp;
+                <a href="https://www.color-hex.com/"  target="_blank">Color-hex</a> &nbsp;&nbsp;
+            </span>
+        </p>
+        <p class="power">
+            <span>
+            除非另有注明，否则本网站上的内容可按 <a href="http://creativecommons.org/licenses/by-nc/4.0/"  target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议许可</a> 或更新版本使用。
+            </span>
+        </p>
+        <p class="power">
+            <span>
+                建站声明详见 <a href="/about/#关于个人博客">[关于]</a>. <a href="/sitemap.xml">[站点地图]</a>. 
+            </span>
+            
+        </p>
+        <p class="power beian">
+        </p>
+		<p class="power">
+            <span>
+                Site powered by <a href="https://jekyllrb.com/">Jekyll</a>.
+            </span>
+            <span>
+                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
+            </span>
+        </p>
+        
+		
+    </div>
+</footer>
+
+
+<!-- mask start -->
+<div id="searchBg"></div>
+<div id="searchDiv">
+	<input id="searchContent" type="text" onkeypress="if(event.keyCode==13) { search();return false;}" value=""/></input>
+    <div id="searchBtn" onclick="search();" /><i class="fa fa-search"></i></div>
+	<span onclick="hidediv();" class="close"></span>
+</div>
+<!-- mask end -->
+<!-- live2d begin -->
+<div id="landlord">
+    <div class="message" style="opacity:0"></div>
+    <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+    <div class="hide-button">隐藏</div>
+</div>
+<!-- live2d end -->
+<script type='text/javascript' src='/js/jquery.min.js '></script>
+<script type='text/javascript'>
+function search(){	
+	var str = document.getElementById("searchContent").value;
+	//console.log(str);
+	setLocalStorage("blogSearchKey",str);
+	hidediv();
+	window.location.href="/blog/archive/";
+}
+function showdiv() {
+	//alert("调用了showdiv()函数");
+	document.getElementById("searchBg").style.display ="block";
+	document.getElementById("searchDiv").style.display ="block";
+
+	//$('body').css("overflow", "hidden");
+	document.getElementsByTagName('body')[0].setAttribute("overflow", "hidden");
+}
+function hidediv() {
+	document.getElementById("searchBg").style.display = 'none';
+	document.getElementById("searchDiv").style.display = 'none';
+	//$('body').css("overflow", "auto");
+	document.getElementsByTagName('body')[0].setAttribute("overflow", "hidden");
+}
+////////////////////////////useful function //////////////////////////////////////
+//写cookies
+function setLocalStorage(name,value)
+{
+	localStorage.setItem(name, JSON.stringify(value));
+}
+//读cookies
+function getLocalStorage(name)
+{
+	return JSON.parse(localStorage.getItem(name));
+}
+//删cookies
+function delLocalStorage(name)
+{
+	localStorage.setItem(name, JSON.stringify(""));
+}
+function copyToClipboard (text) {
+    if(text.indexOf('-') !== -1) {
+        var arr = text.split('-');
+        text = arr[0] + arr[1];
+    }
+    var textArea = document.createElement("textarea");
+      textArea.style.position = 'fixed';
+      textArea.style.top = '0';
+      textArea.style.left = '0';
+      textArea.style.width = '2em';
+      textArea.style.height = '2em';
+      textArea.style.padding = '0';
+      textArea.style.border = 'none';
+      textArea.style.outline = 'none';
+      textArea.style.boxShadow = 'none';
+      textArea.style.background = 'transparent';
+      textArea.value = text;
+      document.body.appendChild(textArea);
+      textArea.select();
+	//alert("调用了复制剪贴板函数");
+      try {
+        var successful = document.execCommand('copy');
+        var msg = successful ? 'Rss源已成功复制到剪贴板' : 'RSS源为:https://nicelee.top/feed.xml';
+		//alert(msg);
+		showTips(msg);
+      } catch (err) {
+		//console.log(err);
+        //alert('该浏览器不支持点击复制到剪贴板');
+		showTips('RSS源为:https://nicelee.top/feed.xml');
+      }
+
+      document.body.removeChild(textArea);
+}
+/*
+<!--  版权维护  -->
+function addLink() {
+//alert("!!!");
+    var body_element = document.body;
+    var selection;
+    selection = window.getSelection();
+    if((selection + "").indexOf("/feed.xml") != -1){
+        return;
+    }
+	if(selection == ""){
+		return;
+	}
+    var locationHref=document.location.href;
+    var appendLink="\r\n------------------------------\r\n 原文出自[ NiceLee的个人博客 ] 转载请保留原文链接: <a href='"+locationHref+"'>"+locationHref+"</a>";
+    if (window.clipboardData) { // Internet Explorer
+        //console.log("调用原生函数");
+        var copytext = selection + appendLink;
+        window.clipboardData.setData ("Text", copytext);
+        return false;
+    } else {
+        //console.log("复杂的套路");
+        var copytext = selection + appendLink;
+        var newdiv = document.createElement('div');
+        newdiv.style.position='absolute';
+        newdiv.style.left='-99999px';
+        body_element.appendChild(newdiv);
+        newdiv.innerHTML = "<pre>" +copytext + "</pre>";
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function() {
+        	body_element.removeChild(newdiv);
+        },0);
+    }
+}
+document.oncopy = addLink;
+*/
+
+//contetn为要显示的内容  
+function showTips( content ){  
+	//alert("调用了复制提示消息函数");
+	//alert("内容为"+ content);
+    //窗口的宽度  
+	//alert(content);
+	var width = 250;
+	var x  = $(window).width()/2 - width/2;	
+	var y = $(window).height()/2 -20;
+	var $i = $("<span/>").text(content);
+	$i.css({
+		"z-index": 999999999999999999999999999,
+		"top": y,
+		"left": x,
+		"position": "absolute",
+		"font-weight": "bold",
+		'padding'   : '3px 5px',  
+		'background': '#8FBC8F',  
+		'font-size' : 12 + 'px',  
+		'margin'    : '0 auto',  
+		'text-align': 'center',  
+		'width'     : width + 'px',  
+		'height'    : 'auto',  
+		'color'     : '#fff'
+	});
+	$("body").append($i);
+	$i.animate({
+		"opacity": 0
+	},
+	3000,
+	function() {
+		//console.log($i.css());
+		$i.remove();
+		//alert('');
+	});
+}     
+</script>
+
+<!-- 窗口失去焦点 -- 别走啊 -->
+<!-- 窗口获得焦点 -- 恢复 -->
+<!-- console 打印figlet-->
+<script>
+var titleOnFocus = document.title;
+var titleOnBlur = "...(*￣０￣)ノ[别走啊…]";
+window.onfocus =function(){
+    document.title = titleOnFocus;
+    //console.log(titleOnFocus);
+}
+window.onblur = function(){
+    document.title = titleOnBlur;
+    //console.log(titleOnBlur);
+}
+
+var figlet = "\n" +
+"        _          _            _               \n" +
+"       (_)        | |          | |              \n" +
+"  _ __  _  ___ ___| | ___  ___ | |_ ___  _ __   \n" +
+" | '_ \\| |/ __/ _ \\ |/ _ \\/ _ \\| __/ _ \\| '_ \\  \n" +
+" | | | | | (_|  __/ |  __/  __/| || (_) | |_) | \n" +
+" |_| |_|_|\\___\\___|_|\\___|\\___(_)__\\___/| .__/  \n" +
+"                                        | |     \n" +
+"                                        |_|     \n" ;
+console.log(figlet);
+// console.log("%cline1\nline2", "color:red;font-size: 50px;font-weight:bold;");
+
+/* 防hentai
+document.onkeydown=function(){
+    var e = window.event||arguments[0];
+    if(e.keyCode==123){
+    	alert('请尊重劳动成果！');
+            return false;
+    }else if((e.ctrlKey)&&(e.shiftKey)&&(e.keyCode==73)){
+    	alert('请尊重劳动成果！');
+            return false;
+    }else if((e.ctrlKey)&&(e.keyCode==85)){
+            alert('请尊重劳动成果！');
+            return false;
+    }else if((e.ctrlKey)&&(e.keyCode==83)){
+           alert('请尊重劳动成果！');
+           return false;
+    }
+}
+document.oncontextmenu=function(){
+	alert('请尊重劳动成果！');
+    return false;
+}*/
+</script>
+
+<!-- live2d Begin-->
+<script type="text/javascript">
+    var message_Path = '/sources/live2d/'
+    var home_Path = 'https://nicelee.top/'
+</script>
+<script type="text/javascript" src="/sources/live2d/js/live2d.js"></script>
+<script type="text/javascript" src="/sources/live2d/js/message.js"></script>
+<script type="text/javascript">
+    var modelList = ["kesshouban_v2", "tia", "wanko", "index", "kanna", "koharu", "umaru", 
+	"22.closet.default.v2", 
+	"22.closet.2018.bls-summer", 
+	"22.closet.2019.summer", 
+	"33.closet.2016.xmas", 
+	"33.closet.2017.tomo-bukatsu", 
+	"33.closet.2018.bls-summer", 
+	"33.closet.2018.bls-winter", 
+	"33.closet.default.v2" ];    
+    var model = modelList[12]; 
+    // kesshouban_v2 血小板
+    // tia  小改改
+    // wanko 小狗狗 
+    // index 魔禁-茵蒂克丝
+    // kanna 康娜龙
+    // koharu 卡哇伊的Q版模型
+    // umaru 干物妹小埋 带声音
+    // 22 哔哩哔哩22娘
+    // 22.v2 哔哩哔哩22娘
+    console.log("live2d模型(小部分)来自官网: http://www.live2d.com/usermanual/cubism2_cn/samples.html");
+    console.log("live2d模型(大部分)来自梦象: https://mx-model.ga/");
+    if( window.document.body.offsetWidth >= 666){
+        loadlive2d("live2d", "/sources/live2d/model/"+ model +"/model.json");
+    }else{
+        //loadlive2d("live2d", "/sources/live2d/model/tia/model_tiny.json");
+        loadlive2d("live2d", "/sources/live2d/model/"+ model +"/model_tiny.json");
+    }
+</script>
+<!-- live2d End-->
+
+<script type="text/javascript">
+	var a_idx = 0;
+	jQuery(document).ready(function($) {
+		$("body").click(function(e) {
+			var a = new Array("大吉大利，今晚吃鸡！", "惊不惊喜，意不意外", "还有这种操作？", "小猪佩奇身上纹，掌声送给社会人", "确认过眼神", "皮一下，很开心", "很好很强大", "C位出道", "你若盛开，清风自来", "如果帅也是一种罪，那我已罪无可赦", "别看资料 ，看聊效！", "感动吗，不敢动", "打call", "我是你的超级英雄");
+			var $i = $("<span/>").text(a[a_idx]);
+			a_idx = (a_idx + 1) % a.length;
+			var x = e.pageX,
+			y = e.pageY;
+			$i.css({
+				"z-index": 999999999999999999999999999,
+				"top": y - 20,
+				"left": x,
+				"position": "absolute",
+				"font-weight": "bold",
+				"color": "#dd3333"
+			});
+			$("body").append($i);
+			$i.animate({
+				"top": y - 180,
+				"opacity": 0
+			},
+			1500,
+			function() {
+				$i.remove();
+				//alert('');
+			});
+		});
+	});
+</script>
+
+
+<script async src="/js/busuanzi.pure.mini.js "></script>
+
+
+    <div class="back-to-top">
+    <a href="#top" data-scroll>
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+    <script src="/js/main.js " charset="utf-8"></script>
+    <script src="/js/smooth-scroll.min.js " charset="utf-8"></script>
+    <script type="text/javascript">
+      smoothScroll.init({
+        speed: 500, // Integer. How fast to complete the scroll in milliseconds
+        easing: 'easeInOutCubic', // Easing pattern to use
+        offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
+      });
+      // 为了底部内容不被遮住
+      $(document).ready(function () {
+        resizeBody();
+      });
+      window.onresize = resizeBody;
+      function resizeBody(){
+        //console.log("resizing Body...");
+        if (window.innerWidth <= 770) {
+            var totalHeight = $("header#top").height() + $(".page.clearfix").height() + $("footer.site-footer").height() +80;
+            document.body.style.height = totalHeight + "px";
+        }else{
+            document.body.style.height = "auto";
+        }
+      }
+    </script>
+	
+	
+    <!-- <script src=" /js/scroll.min.js " charset="utf-8"></script> -->
+  </body>
+
+</html>
