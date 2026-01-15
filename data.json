@@ -2,6 +2,13 @@
 	"code" : 0 ,
 	"data" : [
 	{
+		"title" : "备忘录 个人用自建valtwarden小记",
+		"tags" : "Docker",
+		"url" : "/blog/2026/01/15/self-deployed-bitwarden/"
+		"brief" : "某小众邮箱必须要Passkey才能继续使用。没有YubiKey，捣鼓了半天想在浏览器中使用WindowsHello又一直不生效（可能设备/系统老旧），就很烦。问了一圈似乎只有Bitwarden这一个方案，搞不懂为什么必须要有服务器端，多端数据同步有webdav就行了吧。吐槽完毕，以上。"
+	},
+    
+	{
 		"title" : "备忘录 使用api操纵incus切割nat小机",
 		"tags" : "建站",
 		"url" : "/blog/2025/10/16/incus-self-manage/"
